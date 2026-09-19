@@ -24,67 +24,19 @@ export async function NewArrivals() {
           {/* =====================================================
               SECTION HEADER
           ===================================================== */}
-
-
-          <div className="featured-categories__header">
+        <div className="featured-categories__header">
           <p className="featured-categories__eyebrow">
-           New Arrivals
+            New Arrivals
           </p>
 
           <h2 className="featured-categories__title">
             Fresh from{" "}
             <span className="featured-categories__title-accent">
-              Aayesha.
+              AAYESHA.
             </span>
           </h2>
         </div>
-
-          {/*<div className="new-arrivals__header">
-            <div className="new-arrivals__heading-group">
-              <div className="new-arrivals__eyebrow">
-                <span
-                  aria-hidden="false"
-                  className="new-arrivals__eyebrow-line"
-                />
-
-                <p className="new-arrivals__eyebrow-text">
-                  New Arrivals
-                </p>
-              </div>
-
-              <h2 className="new-arrivals__title">
-                Fresh from{" "}
-                <span className="new-arrivals__title-accent">
-                  Aayesha
-                </span>
-              </h2>
-
-              <p className="new-arrivals__description">
-                Discover the latest silhouettes, details and
-                statement pieces curated for the season.
-              </p>
-            </div>
-
-            {/* Desktop CTA */}
-
-            {newArrivals.length > 0 && (
-              <div className="new-arrivals__desktop-cta">
-                <LinkButton
-                  href="/collections/new-arrivals"
-                  variant="secondary"
-                  size="md"
-                  icon={
-                    <ArrowUpRight
-                      size={15}
-                      strokeWidth={1.4}
-                    />
-                  }
-                >
-                  View All
-                </LinkButton>
-              </div>
-            )}
-          </div>*/}
+          
 
           {/* =====================================================
               PRODUCTS
