@@ -10,6 +10,7 @@ import { createPortal } from "react-dom";
 import toast from "react-hot-toast";
 
 import {
+  ArrowUpRight,
   ChevronRight,
   Heart,
   Layers,
@@ -267,15 +268,14 @@ export function MobileMenu({
         group
         relative
         flex
-        h-10
-        w-10
+        h-11
+        w-11
         items-center
         justify-center
         text-[var(--color-text)]
         transition-all
         duration-500
         ease-[var(--ease-luxury)]
-        hover:-translate-y-px
         hover:text-[var(--color-accent-dark)]
         lg:hidden
       "
@@ -284,8 +284,8 @@ export function MobileMenu({
         className="
           relative
           flex
-          h-9
-          w-9
+          h-10
+          w-10
           items-center
           justify-center
         "
@@ -295,8 +295,7 @@ export function MobileMenu({
           className="
             pointer-events-none
             absolute
-            inset-1
-            rounded-full
+            inset-0
             border
             border-transparent
             transition-all
@@ -307,14 +306,20 @@ export function MobileMenu({
 
         {isOpen ? (
           <X
-            size={19}
-            strokeWidth={1.2}
-            className="relative z-10"
+            size={20}
+            strokeWidth={1.15}
+            className="
+              relative
+              z-10
+              transition-transform
+              duration-500
+              group-hover:rotate-90
+            "
           />
         ) : (
           <Menu
-            size={19}
-            strokeWidth={1.2}
+            size={20}
+            strokeWidth={1.15}
             className="
               relative
               z-10
@@ -361,8 +366,8 @@ export function MobileMenu({
           inset-0
           z-0
           cursor-default
-          bg-[rgba(33,31,29,0.50)]
-          backdrop-blur-[5px]
+          bg-[rgba(17,16,15,0.56)]
+          backdrop-blur-[6px]
           transition-opacity
           duration-700
           ease-[var(--ease-luxury)]
@@ -386,14 +391,14 @@ export function MobileMenu({
           z-10
           flex
           h-[100dvh]
-          w-[88vw]
-          max-w-[440px]
+          w-[92vw]
+          max-w-[460px]
           flex-col
           overflow-hidden
           border-r
           border-[var(--color-border)]
-          bg-[#f7f3ee]
-          shadow-[30px_0_100px_rgba(33,31,29,0.20)]
+          bg-white
+          shadow-[30px_0_100px_rgba(17,16,15,0.18)]
           transition-transform
           duration-700
           ease-[var(--ease-luxury)]
@@ -408,6 +413,44 @@ export function MobileMenu({
         aria-label="Mobile navigation"
       >
         {/* =================================================
+            AMBIENT LIGHT
+        ================================================= */}
+
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute
+            right-[-80px]
+            top-[-80px]
+            z-0
+            h-56
+            w-56
+            rounded-full
+            bg-[var(--color-champagne)]
+            opacity-[0.07]
+            blur-[70px]
+          "
+        />
+
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute
+            bottom-[15%]
+            left-[-100px]
+            z-0
+            h-64
+            w-64
+            rounded-full
+            bg-[var(--color-rose)]
+            opacity-[0.035]
+            blur-[80px]
+          "
+        />
+
+        {/* =================================================
             TOP ACCENT
         ================================================= */}
 
@@ -421,9 +464,9 @@ export function MobileMenu({
             h-px
             bg-gradient-to-r
             from-transparent
-            via-[var(--color-accent)]
+            via-[var(--color-champagne)]
             to-transparent
-            opacity-70
+            opacity-80
           "
         />
 
@@ -440,10 +483,11 @@ export function MobileMenu({
             items-center
             justify-between
             border-b
-            border-[var(--color-border)]
-            bg-[#f7f3ee]
+            border-[var(--color-border-light)]
+            bg-white/[0.96]
             px-5
             py-5
+            backdrop-blur-xl
             sm:px-7
           "
         >
@@ -456,35 +500,49 @@ export function MobileMenu({
             <p
               className="
                 font-display
-                text-[30px]
-                font-medium
+                text-[32px]
+                font-normal
                 leading-none
-                tracking-[-0.03em]
+                tracking-[-0.035em]
                 text-[var(--color-text)]
                 transition-all
                 duration-500
-                group-hover:tracking-[-0.02em]
+                group-hover:text-[var(--color-accent-dark)]
               "
             >
               Aayesha
             </p>
 
-            <p
+            <div
               className="
-                mt-1.5
-                font-body
-                text-[7px]
-                font-semibold
-                uppercase
-                tracking-[0.34em]
-                text-[var(--color-text-muted)]
-                transition-colors
-                duration-500
-                group-hover:text-[var(--color-accent)]
+                mt-2
+                flex
+                items-center
+                gap-2
               "
             >
-              Fashion
-            </p>
+              <span
+                aria-hidden="true"
+                className="
+                  h-px
+                  w-5
+                  bg-[var(--color-champagne)]
+                "
+              />
+
+              <p
+                className="
+                  font-body
+                  text-[8px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.34em]
+                  text-[var(--color-text-muted)]
+                "
+              >
+                Fashion
+              </p>
+            </div>
           </Link>
 
           <button
@@ -494,25 +552,24 @@ export function MobileMenu({
             className="
               group
               flex
-              h-9
-              w-9
+              h-10
+              w-10
               items-center
               justify-center
-              rounded-full
               border
               border-[var(--color-border)]
-              bg-transparent
+              bg-white
               text-[var(--color-text-secondary)]
               transition-all
               duration-500
               hover:border-[var(--color-text)]
               hover:bg-[var(--color-text)]
-              hover:text-[var(--color-text-inverse)]
+              hover:text-white
             "
           >
             <X
-              size={16}
-              strokeWidth={1.2}
+              size={17}
+              strokeWidth={1.15}
               className="
                 transition-transform
                 duration-500
@@ -528,66 +585,102 @@ export function MobileMenu({
 
         <div
           className="
+            relative
+            z-10
             min-h-0
             flex-1
             overflow-y-auto
             overscroll-contain
-            bg-[#f7f3ee]
+            bg-white
           "
         >
           {/* =================================================
               ACCOUNT
           ================================================= */}
 
-          <div className="px-5 pt-6 sm:px-7">
+          <div className="px-5 pt-7 sm:px-7">
             {isLoggedIn ? (
               <Link
                 href="/account"
                 onClick={onClose}
                 className="
                   group
+                  relative
                   flex
                   items-center
-                  gap-3.5
+                  gap-4
+                  overflow-hidden
                   border
                   border-[var(--color-border)]
-                  bg-white
+                  bg-[var(--color-bg-subtle)]
                   px-4
                   py-4
                   transition-all
                   duration-500
                   hover:border-[var(--color-accent-soft)]
-                  hover:shadow-[var(--shadow-md)]
+                  hover:bg-[var(--color-bg-warm)]
                 "
               >
                 <span
+                  aria-hidden="true"
                   className="
+                    absolute
+                    right-0
+                    top-0
+                    h-full
+                    w-20
+                    bg-gradient-to-l
+                    from-[var(--color-champagne)]/[0.07]
+                    to-transparent
+                  "
+                />
+
+                <span
+                  className="
+                    relative
                     flex
-                    h-10
-                    w-10
+                    h-12
+                    w-12
                     shrink-0
                     items-center
                     justify-center
-                    rounded-full
                     border
                     border-[var(--color-accent-soft)]
-                    bg-[var(--color-bg-soft)]
+                    bg-white
                     font-display
-                    text-base
-                    font-medium
+                    text-lg
+                    font-normal
+                    text-[var(--color-text)]
                   "
                 >
                   {initials}
                 </span>
 
-                <span className="min-w-0 flex-1">
+                <span className="relative min-w-0 flex-1">
                   <span
                     className="
                       block
-                      truncate
                       font-body
-                      text-[12px]
+                      text-[9px]
                       font-semibold
+                      uppercase
+                      tracking-[0.18em]
+                      text-[var(--color-accent-dark)]
+                    "
+                  >
+                    My Account
+                  </span>
+
+                  <span
+                    className="
+                      mt-1.5
+                      block
+                      truncate
+                      font-display
+                      text-[18px]
+                      leading-tight
+                      tracking-[-0.015em]
+                      text-[var(--color-text)]
                     "
                   >
                     {user.name}
@@ -607,52 +700,92 @@ export function MobileMenu({
                   </span>
                 </span>
 
-                <ChevronRight
-                  size={16}
-                  strokeWidth={1.2}
+                <span
                   className="
-                    text-[var(--color-text-muted)]
-                    transition-transform
-                    duration-500
-                    group-hover:translate-x-1
+                    relative
+                    flex
+                    h-8
+                    w-8
+                    shrink-0
+                    items-center
+                    justify-center
+                    border
+                    border-[var(--color-border)]
+                    bg-white
                   "
-                />
+                >
+                  <ChevronRight
+                    size={15}
+                    strokeWidth={1.15}
+                    className="
+                      transition-transform
+                      duration-500
+                      group-hover:translate-x-1
+                    "
+                  />
+                </span>
               </Link>
             ) : (
-              <div className="space-y-4">
-                <div>
-                  <p
-                    className="
-                      eyebrow
-                      text-[var(--color-accent)]
-                    "
-                  >
-                    Your Account
-                  </p>
+              <div>
+                <div className="flex items-start justify-between gap-5">
+                  <div>
+                    <p
+                      className="
+                        eyebrow
+                        text-[var(--color-accent-dark)]
+                      "
+                    >
+                      Your Account
+                    </p>
 
-                  <p
+                    <h2
+                      className="
+                        mt-3
+                        max-w-[330px]
+                        font-display
+                        text-[28px]
+                        leading-[1.05]
+                        tracking-[-0.025em]
+                        text-[var(--color-text)]
+                      "
+                    >
+                      Welcome to Aayesha.
+                    </h2>
+
+                    <p
+                      className="
+                        mt-3
+                        max-w-[330px]
+                        font-body
+                        text-[11px]
+                        leading-5
+                        text-[var(--color-text-secondary)]
+                      "
+                    >
+                      Sign in or create an account
+                      to manage your orders and
+                      personal details.
+                    </p>
+                  </div>
+
+                  <UserRound
+                    size={20}
+                    strokeWidth={1.1}
                     className="
-                      mt-2
-                      max-w-[330px]
-                      font-body
-                      text-[11px]
-                      leading-5
-                      text-[var(--color-text-secondary)]
+                      mt-1
+                      shrink-0
+                      text-[var(--color-champagne)]
                     "
-                  >
-                    Sign in or create an account
-                    to manage your orders and
-                    personal details.
-                  </p>
+                  />
                 </div>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="mt-5 grid grid-cols-2 gap-2">
                   <Link
                     href="/login"
                     onClick={onClose}
                     className="
                       flex
-                      h-11
+                      h-12
                       items-center
                       justify-center
                       border
@@ -660,11 +793,14 @@ export function MobileMenu({
                       bg-[var(--color-text)]
                       px-4
                       font-body
-                      text-[9px]
+                      text-[10px]
                       font-semibold
                       uppercase
-                      tracking-[0.16em]
+                      tracking-[0.18em]
                       text-white
+                      transition-all
+                      duration-500
+                      hover:bg-[var(--color-charcoal-soft)]
                     "
                   >
                     Sign In
@@ -675,7 +811,7 @@ export function MobileMenu({
                     onClick={onClose}
                     className="
                       flex
-                      h-11
+                      h-12
                       items-center
                       justify-center
                       border
@@ -683,13 +819,17 @@ export function MobileMenu({
                       bg-white
                       px-4
                       font-body
-                      text-[9px]
+                      text-[10px]
                       font-semibold
                       uppercase
-                      tracking-[0.16em]
+                      tracking-[0.18em]
+                      text-[var(--color-text)]
+                      transition-all
+                      duration-500
+                      hover:border-[var(--color-text)]
                     "
                   >
-                    Sign Up
+                    Create Account
                   </Link>
                 </div>
               </div>
@@ -701,8 +841,8 @@ export function MobileMenu({
           ================================================= */}
 
           {isLoggedIn && (
-            <section className="mt-7 px-5 sm:px-7">
-              <div className="mb-3 flex items-end justify-between">
+            <section className="mt-8 px-5 sm:px-7">
+              <div className="mb-4 flex items-end justify-between">
                 <p className="eyebrow">
                   My Account
                 </p>
@@ -711,15 +851,30 @@ export function MobileMenu({
                   href="/account"
                   onClick={onClose}
                   className="
+                    group
+                    flex
+                    items-center
+                    gap-1.5
                     font-body
                     text-[9px]
                     font-semibold
                     uppercase
-                    tracking-[0.12em]
-                    text-[var(--color-accent)]
+                    tracking-[0.14em]
+                    text-[var(--color-accent-dark)]
                   "
                 >
-                  View All
+                  View Account
+
+                  <ArrowUpRight
+                    size={12}
+                    strokeWidth={1.2}
+                    className="
+                      transition-transform
+                      duration-500
+                      group-hover:translate-x-0.5
+                      group-hover:-translate-y-0.5
+                    "
+                  />
                 </Link>
               </div>
 
@@ -746,37 +901,37 @@ export function MobileMenu({
                           items-center
                           gap-3.5
                           border-b
-                          border-[var(--color-border)]
+                          border-[var(--color-border-light)]
                           px-4
                           py-4
                           last:border-b-0
-                          transition-colors
+                          transition-all
                           duration-500
-                          hover:bg-[var(--color-bg-soft)]
+                          hover:bg-[var(--color-bg-warm)]
                         "
                       >
                         <span
                           className="
                             flex
-                            h-9
-                            w-9
+                            h-10
+                            w-10
                             shrink-0
                             items-center
                             justify-center
-                            rounded-full
                             border
                             border-[var(--color-border)]
-                            bg-[var(--color-bg)]
+                            bg-[var(--color-bg-subtle)]
                             text-[var(--color-text-secondary)]
                             transition-all
                             duration-500
                             group-hover:border-[var(--color-accent-soft)]
-                            group-hover:bg-[var(--color-accent-soft)]
+                            group-hover:bg-white
+                            group-hover:text-[var(--color-accent-dark)]
                           "
                         >
                           <Icon
-                            size={15}
-                            strokeWidth={1.3}
+                            size={16}
+                            strokeWidth={1.2}
                           />
                         </span>
 
@@ -785,8 +940,9 @@ export function MobileMenu({
                             className="
                               block
                               font-body
-                              text-[11px]
+                              text-[12px]
                               font-semibold
+                              text-[var(--color-text)]
                             "
                           >
                             {item.label}
@@ -807,13 +963,15 @@ export function MobileMenu({
                         </span>
 
                         <ChevronRight
-                          size={14}
-                          strokeWidth={1.2}
+                          size={15}
+                          strokeWidth={1.15}
                           className="
-                            text-[var(--color-text-muted)]
-                            transition-transform
+                            shrink-0
+                            text-[var(--color-text-faint)]
+                            transition-all
                             duration-500
                             group-hover:translate-x-1
+                            group-hover:text-[var(--color-accent-dark)]
                           "
                         />
                       </Link>
@@ -834,30 +992,34 @@ export function MobileMenu({
                     items-center
                     gap-3.5
                     border-t
-                    border-[var(--color-border)]
+                    border-[var(--color-border-light)]
                     px-4
                     py-4
                     text-left
+                    transition-all
+                    duration-500
+                    hover:bg-[var(--color-bg-warm)]
+                    disabled:cursor-not-allowed
                     disabled:opacity-60
                   "
                 >
                   <span
                     className="
                       flex
-                      h-9
-                      w-9
+                      h-10
+                      w-10
                       shrink-0
                       items-center
                       justify-center
-                      rounded-full
                       border
                       border-[var(--color-border)]
-                      bg-[var(--color-bg)]
+                      bg-[var(--color-bg-subtle)]
+                      text-[var(--color-text-secondary)]
                     "
                   >
                     <LogOut
-                      size={15}
-                      strokeWidth={1.3}
+                      size={16}
+                      strokeWidth={1.2}
                     />
                   </span>
 
@@ -866,8 +1028,9 @@ export function MobileMenu({
                       className="
                         block
                         font-body
-                        text-[11px]
+                        text-[12px]
                         font-semibold
+                        text-[var(--color-text)]
                       "
                     >
                       {isLoggingOut
@@ -897,28 +1060,42 @@ export function MobileMenu({
           ================================================= */}
 
           <nav
-            className="mt-8 px-5 sm:px-7"
+            className="mt-9 px-5 sm:px-7"
             aria-label="Mobile navigation"
           >
-            <div className="mb-4 flex items-end justify-between">
+            <div className="mb-4">
               <p className="eyebrow">
                 Explore
               </p>
 
-              <span
-                aria-hidden="true"
-                className="
-                  h-px
-                  w-12
-                  bg-[var(--color-accent-soft)]
-                "
-              />
+              <div className="mt-3 flex items-center gap-3">
+                <span
+                  aria-hidden="true"
+                  className="
+                    h-px
+                    w-10
+                    bg-[var(--color-champagne)]
+                  "
+                />
+
+                <span
+                  className="
+                    font-body
+                    text-[9px]
+                    uppercase
+                    tracking-[0.18em]
+                    text-[var(--color-text-faint)]
+                  "
+                >
+                  The Collection
+                </span>
+              </div>
             </div>
 
             <div
               className="
                 overflow-hidden
-                border
+                border-y
                 border-[var(--color-border)]
                 bg-white
               "
@@ -944,58 +1121,63 @@ export function MobileMenu({
                       onClick={onClose}
                       className="
                         group
+                        relative
                         flex
                         items-center
-                        gap-3
+                        gap-3.5
                         border-b
-                        border-[var(--color-border)]
-                        px-4
-                        py-4
+                        border-[var(--color-border-light)]
+                        px-1
+                        py-5
                         last:border-b-0
-                        transition-colors
+                        transition-all
                         duration-500
-                        hover:bg-[var(--color-bg-soft)]
+                        hover:px-3
                       "
                     >
                       <span
                         className="
                           flex
                           h-8
-                          w-6
+                          w-7
                           shrink-0
                           items-center
                           justify-center
                           font-body
                           text-[8px]
-                          tracking-[0.08em]
-                          text-[var(--color-text-muted)]
+                          font-medium
+                          tracking-[0.12em]
+                          text-[var(--color-text-faint)]
                         "
                       >
-                        0{index + 1}
+                        {String(index + 1).padStart(
+                          2,
+                          "0",
+                        )}
                       </span>
 
                       <span
                         className="
                           flex
-                          h-9
-                          w-9
+                          h-10
+                          w-10
                           shrink-0
                           items-center
                           justify-center
-                          rounded-full
                           border
                           border-[var(--color-border)]
-                          bg-[var(--color-bg)]
+                          bg-[var(--color-bg-subtle)]
                           text-[var(--color-text-secondary)]
                           transition-all
                           duration-500
                           group-hover:border-[var(--color-accent-soft)]
-                          group-hover:bg-[var(--color-accent-soft)]
+                          group-hover:bg-[var(--color-bg-warm)]
+                          group-hover:text-[var(--color-accent-dark)]
                         "
                       >
                         <Icon
-                          size={15}
-                          strokeWidth={1.25}
+                          size={16}
+                          strokeWidth={1.15}
                         />
                       </span>
 
@@ -1004,9 +1186,10 @@ export function MobileMenu({
                           className="
                             block
                             font-display
-                            text-[18px]
+                            text-[21px]
                             leading-none
-                            tracking-[-0.015em]
+                            tracking-[-0.02em]
+                            text-[var(--color-text)]
                           "
                         >
                           {item.label}
@@ -1014,7 +1197,7 @@ export function MobileMenu({
 
                         <span
                           className="
-                            mt-1.5
+                            mt-2
                             block
                             font-body
                             text-[9px]
@@ -1029,20 +1212,28 @@ export function MobileMenu({
                       <span
                         className="
                           flex
-                          h-8
-                          w-8
+                          h-9
+                          w-9
                           shrink-0
                           items-center
                           justify-center
-                          rounded-full
                           border
-                          border-[var(--color-border)]
-                          bg-[var(--color-bg)]
+                          border-transparent
+                          text-[var(--color-text-faint)]
+                          transition-all
+                          duration-500
+                          group-hover:border-[var(--color-border)]
+                          group-hover:text-[var(--color-accent-dark)]
                         "
                       >
                         <ChevronRight
-                          size={14}
-                          strokeWidth={1.2}
+                          size={16}
+                          strokeWidth={1.15}
+                          className="
+                            transition-transform
+                            duration-500
+                            group-hover:translate-x-1
+                          "
                         />
                       </span>
                     </Link>
@@ -1056,79 +1247,126 @@ export function MobileMenu({
               QUICK ACCESS
           ================================================= */}
 
-          <div className="mt-7 px-5 sm:px-7">
-            <div className="mb-4 flex items-end justify-between">
+          <section className="mt-9 px-5 sm:px-7">
+            <div className="mb-4">
               <p className="eyebrow">
                 Quick Access
               </p>
-
-              <span
-                aria-hidden="true"
-                className="
-                  h-px
-                  w-12
-                  bg-[var(--color-accent-soft)]
-                "
-              />
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-px border border-[var(--color-border)] bg-[var(--color-border)]">
               <Link
                 href="/search"
                 onClick={onClose}
                 className="
+                  group
                   flex
+                  min-h-[72px]
                   items-center
                   gap-3
-                  border
-                  border-[var(--color-border)]
                   bg-white
-                  px-3.5
-                  py-3.5
-                  font-body
-                  text-[10px]
-                  font-medium
+                  px-4
+                  py-3
                   transition-all
                   duration-500
-                  hover:border-[var(--color-text)]
+                  hover:bg-[var(--color-bg-warm)]
                 "
               >
                 <Search
-                  size={15}
-                  strokeWidth={1.2}
-                  className="text-[var(--color-accent)]"
+                  size={17}
+                  strokeWidth={1.15}
+                  className="
+                    text-[var(--color-accent-dark)]
+                    transition-transform
+                    duration-500
+                    group-hover:scale-110
+                  "
                 />
 
-                <span>Search</span>
+                <span>
+                  <span
+                    className="
+                      block
+                      font-body
+                      text-[11px]
+                      font-semibold
+                      text-[var(--color-text)]
+                    "
+                  >
+                    Search
+                  </span>
+
+                  <span
+                    className="
+                      mt-1
+                      block
+                      font-body
+                      text-[8px]
+                      uppercase
+                      tracking-[0.12em]
+                      text-[var(--color-text-muted)]
+                    "
+                  >
+                    Find your style
+                  </span>
+                </span>
               </Link>
 
               <Link
                 href="/wishlist"
                 onClick={onClose}
                 className="
+                  group
                   flex
+                  min-h-[72px]
                   items-center
                   gap-3
-                  border
-                  border-[var(--color-border)]
                   bg-white
-                  px-3.5
-                  py-3.5
-                  font-body
-                  text-[10px]
-                  font-medium
+                  px-4
+                  py-3
                   transition-all
                   duration-500
-                  hover:border-[var(--color-text)]
+                  hover:bg-[var(--color-bg-warm)]
                 "
               >
                 <Heart
-                  size={15}
-                  strokeWidth={1.2}
-                  className="text-[var(--color-accent)]"
+                  size={17}
+                  strokeWidth={1.15}
+                  className="
+                    text-[var(--color-burgundy)]
+                    transition-transform
+                    duration-500
+                    group-hover:scale-110
+                  "
                 />
 
-                <span>Wishlist</span>
+                <span>
+                  <span
+                    className="
+                      block
+                      font-body
+                      text-[11px]
+                      font-semibold
+                      text-[var(--color-text)]
+                    "
+                  >
+                    Wishlist
+                  </span>
+
+                  <span
+                    className="
+                      mt-1
+                      block
+                      font-body
+                      text-[8px]
+                      uppercase
+                      tracking-[0.12em]
+                      text-[var(--color-text-muted)]
+                    "
+                  >
+                    Saved pieces
+                  </span>
+                </span>
               </Link>
 
               <Link
@@ -1139,64 +1377,112 @@ export function MobileMenu({
                 }
                 onClick={onClose}
                 className="
+                  group
                   col-span-2
                   flex
+                  min-h-[66px]
                   items-center
                   justify-between
-                  border
-                  border-[var(--color-border)]
                   bg-white
                   px-4
-                  py-3.5
-                  font-body
-                  text-[10px]
-                  font-medium
+                  py-3
                   transition-all
                   duration-500
-                  hover:border-[var(--color-text)]
+                  hover:bg-[var(--color-bg-warm)]
                 "
               >
                 <span className="flex items-center gap-3">
                   <UserRound
-                    size={15}
-                    strokeWidth={1.2}
-                    className="text-[var(--color-accent)]"
+                    size={17}
+                    strokeWidth={1.15}
+                    className="
+                      text-[var(--color-accent-dark)]
+                      transition-transform
+                      duration-500
+                      group-hover:scale-110
+                    "
                   />
 
                   <span>
-                    {isLoggedIn
-                      ? "My Account"
-                      : "Sign In / Account"}
+                    <span
+                      className="
+                        block
+                        font-body
+                        text-[11px]
+                        font-semibold
+                        text-[var(--color-text)]
+                      "
+                    >
+                      {isLoggedIn
+                        ? "My Account"
+                        : "Sign In / Account"}
+                    </span>
+
+                    <span
+                      className="
+                        mt-1
+                        block
+                        font-body
+                        text-[8px]
+                        uppercase
+                        tracking-[0.12em]
+                        text-[var(--color-text-muted)]
+                      "
+                    >
+                      Personal space
+                    </span>
                   </span>
                 </span>
 
                 <ChevronRight
-                  size={15}
-                  strokeWidth={1.2}
+                  size={16}
+                  strokeWidth={1.15}
+                  className="
+                    text-[var(--color-text-faint)]
+                    transition-transform
+                    duration-500
+                    group-hover:translate-x-1
+                  "
                 />
               </Link>
             </div>
-          </div>
+          </section>
 
           {/* =================================================
-              EDITORIAL
+              EDITORIAL STATEMENT
           ================================================= */}
 
-          <div className="px-5 pb-10 pt-9 sm:px-7">
+          <div className="px-5 pb-10 pt-10 sm:px-7">
             <div
               className="
+                relative
+                overflow-hidden
                 border-t
                 border-[var(--color-border)]
-                pt-6
+                pt-7
               "
             >
+              <span
+                aria-hidden="true"
+                className="
+                  absolute
+                  left-0
+                  top-0
+                  h-px
+                  w-12
+                  bg-[var(--color-champagne)]
+                "
+              />
+
               <p
                 className="
+                  max-w-[330px]
                   font-display
-                  text-[24px]
+                  text-[29px]
                   italic
-                  leading-[1.05]
-                  tracking-[-0.02em]
+                  leading-[1.02]
+                  tracking-[-0.025em]
+                  text-[var(--color-text)]
                 "
               >
                 Made for moments
@@ -1204,18 +1490,29 @@ export function MobileMenu({
                 worth remembering.
               </p>
 
-              <p
-                className="
-                  mt-3
-                  font-body
-                  text-[8px]
-                  uppercase
-                  tracking-[0.16em]
-                  text-[var(--color-text-muted)]
-                "
-              >
-                Aayesha Fashion
-              </p>
+              <div className="mt-5 flex items-center gap-3">
+                <span
+                  aria-hidden="true"
+                  className="
+                    h-px
+                    w-7
+                    bg-[var(--color-champagne)]
+                  "
+                />
+
+                <p
+                  className="
+                    font-body
+                    text-[8px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.2em]
+                    text-[var(--color-text-muted)]
+                  "
+                >
+                  Aayesha Fashion
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -1231,9 +1528,10 @@ export function MobileMenu({
             shrink-0
             border-t
             border-[var(--color-border)]
-            bg-[#f2ede7]
+            bg-[var(--color-charcoal)]
             px-5
             py-4
+            text-white
             sm:px-7
           "
         >
@@ -1246,6 +1544,7 @@ export function MobileMenu({
                     font-body
                     text-[10px]
                     font-semibold
+                    text-white
                   "
                 >
                   Signed in as {user.name}
@@ -1257,7 +1556,7 @@ export function MobileMenu({
                     truncate
                     font-body
                     text-[9px]
-                    text-[var(--color-text-muted)]
+                    text-white/55
                   "
                 >
                   {user.email}
@@ -1269,38 +1568,61 @@ export function MobileMenu({
                 onClick={onClose}
                 aria-label="Open account"
                 className="
+                  group
                   flex
                   h-9
                   w-9
                   shrink-0
                   items-center
                   justify-center
-                  rounded-full
                   border
-                  border-[var(--color-border)]
-                  bg-white
+                  border-white/15
+                  bg-white/[0.06]
+                  transition-all
+                  duration-500
+                  hover:border-[var(--color-champagne)]
+                  hover:bg-[var(--color-champagne)]
+                  hover:text-[var(--color-text)]
                 "
               >
                 <UserRound
                   size={15}
-                  strokeWidth={1.2}
+                  strokeWidth={1.15}
+                  className="
+                    transition-transform
+                    duration-500
+                    group-hover:scale-105
+                  "
                 />
               </Link>
             </div>
           ) : (
-            <p
-              className="
-                max-w-[320px]
-                font-body
-                text-[8px]
-                leading-4
-                uppercase
-                tracking-[0.12em]
-                text-[var(--color-text-muted)]
-              "
-            >
-              {siteConfig.description}
-            </p>
+            <div className="flex items-center justify-between gap-4">
+              <p
+                className="
+                  max-w-[320px]
+                  font-body
+                  text-[8px]
+                  leading-4
+                  uppercase
+                  tracking-[0.12em]
+                  text-white/55
+                "
+              >
+                {siteConfig.description}
+              </p>
+
+              <span
+                aria-hidden="true"
+                className="
+                  h-1.5
+                  w-1.5
+                  shrink-0
+                  rounded-full
+                  bg-[var(--color-champagne)]
+                "
+              />
+            </div>
           )}
         </div>
       </aside>

@@ -49,23 +49,32 @@ export function CartCount() {
 
   return (
     <span
+      aria-label={`${count} item${
+        count === 1 ? "" : "s"
+      } in cart`}
       className="
         absolute
         -right-2
         -top-2
         flex
-        h-4
-        min-w-4
+        h-[19px]
+        min-w-[19px]
         items-center
         justify-center
         rounded-full
+        border
+        border-white
         bg-[var(--color-text)]
         px-1
         font-body
-        text-[8px]
+        text-[9px]
         font-semibold
         leading-none
-        text-[var(--color-text-inverse)]
+        tracking-[-0.01em]
+        text-white
+        shadow-[0_3px_10px_rgba(23,21,20,0.16)]
+        transition-transform
+        duration-300
       "
     >
       {count > 99 ? "99+" : count}

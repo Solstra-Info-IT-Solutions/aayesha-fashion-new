@@ -13,23 +13,32 @@ export function WishlistCount() {
 
   return (
     <span
-      aria-hidden="true"
+      aria-label={`${count} item${
+        count === 1 ? "" : "s"
+      } in wishlist`}
       className="
         absolute
-        right-[3px]
-        top-[3px]
+        -right-2
+        -top-2
         flex
-        h-[14px]
-        min-w-[14px]
+        h-[19px]
+        min-w-[19px]
         items-center
         justify-center
         rounded-full
-        bg-[var(--color-rose)]
-        px-[3px]
-        text-[7px]
-        font-bold
+        border
+        border-white
+        bg-[var(--color-burgundy)]
+        px-1
+        font-body
+        text-[9px]
+        font-semibold
         leading-none
-        text-[var(--color-charcoal)]
+        tracking-[-0.01em]
+        text-white
+        shadow-[0_3px_10px_rgba(103,45,54,0.18)]
+        transition-transform
+        duration-300
       "
     >
       {count > 99 ? "99+" : count}
