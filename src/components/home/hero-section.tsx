@@ -52,7 +52,9 @@ export function HeroSection({
 
   const goToSlide = useCallback(
     (index: number) => {
-      if (totalSlides === 0) return;
+      if (totalSlides === 0) {
+        return;
+      }
 
       setActiveIndex(
         (index + totalSlides) % totalSlides,
@@ -62,7 +64,9 @@ export function HeroSection({
   );
 
   const nextSlide = useCallback(() => {
-    if (totalSlides === 0) return;
+    if (totalSlides === 0) {
+      return;
+    }
 
     setActiveIndex(
       (current) =>
@@ -71,11 +75,14 @@ export function HeroSection({
   }, [totalSlides]);
 
   const previousSlide = useCallback(() => {
-    if (totalSlides === 0) return;
+    if (totalSlides === 0) {
+      return;
+    }
 
     setActiveIndex(
       (current) =>
-        (current - 1 + totalSlides) % totalSlides,
+        (current - 1 + totalSlides) %
+        totalSlides,
     );
   }, [totalSlides]);
 
@@ -214,33 +221,11 @@ export function HeroSection({
 
   return (
     <section
-      aria-label="Ayesha Fashion featured banners"
-      className="
-        relative
-        w-full
-        overflow-hidden
-        bg-white
-      "
+      aria-label="Aayesha Fashion featured banners"
+      className="hero-section"
     >
-      {/* =====================================================
-          HERO
-      ===================================================== */}
-
       <div
-        className="
-          relative
-          h-[78svh]
-          min-h-[560px]
-          max-h-[900px]
-          w-full
-          overflow-hidden
-          bg-[var(--color-bg-soft)]
-          sm:h-[80svh]
-          md:h-[82svh]
-          md:min-h-[620px]
-          lg:h-[84svh]
-          lg:max-h-[920px]
-        "
+        className="hero-section__viewport"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -257,46 +242,37 @@ export function HeroSection({
             <div
               key={slide.id}
               aria-hidden={!isActive}
-              className={[
-                "absolute inset-0",
-                "transition-opacity duration-[1200ms]",
-                "ease-[cubic-bezier(.22,1,.36,1)]",
+              className={`hero-slide ${
                 isActive
-                  ? "z-10 opacity-100"
-                  : "z-0 opacity-0",
-              ].join(" ")}
+                  ? "hero-slide--active"
+                  : ""
+              }`}
             >
-              {/* =============================================
+              {/* =================================================
                   IMAGE
-              ============================================= */}
+              ================================================= */}
 
               <div
-                className={[
-                  "absolute inset-0",
-                  "transition-transform duration-[7000ms]",
-                  "ease-out",
+                className={`hero-slide__image ${
                   isActive
-                    ? "scale-[1.045]"
-                    : "scale-100",
-                ].join(" ")}
+                    ? "hero-slide__image--active"
+                    : ""
+                }`}
               >
                 {/* Desktop */}
-                <div className="absolute inset-0 hidden md:block">
+                <div className="hero-slide__desktop-image">
                   <Image
                     src={slide.image}
                     alt={slide.title}
                     fill
                     priority={index === 0}
                     sizes="100vw"
-                    className="
-                      object-cover
-                      object-center
-                    "
+                    className="hero-slide__image-element"
                   />
                 </div>
 
                 {/* Mobile */}
-                <div className="absolute inset-0 md:hidden">
+                <div className="hero-slide__mobile-image">
                   <Image
                     src={
                       slide.mobileImage ||
@@ -306,129 +282,47 @@ export function HeroSection({
                     fill
                     priority={index === 0}
                     sizes="100vw"
-                    className="
-                      object-cover
-                      object-center
-                    "
+                    className="hero-slide__image-element"
                   />
                 </div>
               </div>
 
-              {/* =============================================
-                  EDITORIAL IMAGE TREATMENT
-              ============================================= */}
+              {/* =================================================
+                  IMAGE TREATMENT
+              ================================================= */}
 
               <div
                 aria-hidden="true"
-                className="
-                  absolute
-                  inset-0
-                  bg-gradient-to-r
-                  from-black/[0.48]
-                  via-black/[0.10]
-                  to-transparent
-                  md:from-black/[0.42]
-                  md:via-black/[0.06]
-                  md:to-transparent
-                "
+                className="hero-slide__overlay hero-slide__overlay--side"
               />
 
               <div
                 aria-hidden="true"
-                className="
-                  absolute
-                  inset-0
-                  bg-gradient-to-t
-                  from-black/[0.42]
-                  via-transparent
-                  to-black/[0.08]
-                "
+                className="hero-slide__overlay hero-slide__overlay--bottom"
               />
-
-              {/* =============================================
-                  SUBTLE IMAGE GRAIN / DEPTH
-              ============================================= */}
 
               <div
                 aria-hidden="true"
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  bg-[radial-gradient(circle_at_75%_25%,rgba(255,255,255,0.14),transparent_30%)]
-                  opacity-60
-                "
+                className="hero-slide__light"
               />
 
-              {/* =============================================
+              {/* =================================================
                   HERO CONTENT
-              ============================================= */}
+              ================================================= */}
 
-              <div
-                className="
-                  absolute
-                  inset-0
-                  z-20
-                  flex
-                  items-end
-                "
-              >
-                <div
-                  className="
-                    mx-auto
-                    w-full
-                    max-w-[1600px]
-                    px-5
-                    pb-24
-                    sm:px-8
-                    sm:pb-28
-                    md:pb-32
-                    lg:px-12
-                    lg:pb-36
-                    xl:px-16
-                    2xl:px-20
-                  "
-                >
-                  <div
-                    className="
-                      max-w-[760px]
-                      text-white
-                    "
-                  >
+              <div className="hero-slide__content">
+                <div className="hero-section__container">
+                  <div className="hero-slide__copy">
                     {/* Eyebrow */}
 
                     {slide.eyebrow && (
-                      <div
-                        className="
-                          mb-5
-                          flex
-                          items-center
-                          gap-3
-                          sm:mb-6
-                        "
-                      >
+                      <div className="hero-slide__eyebrow">
                         <span
                           aria-hidden="true"
-                          className="
-                            h-px
-                            w-8
-                            bg-[var(--color-champagne)]
-                            sm:w-10
-                          "
+                          className="hero-slide__eyebrow-line"
                         />
 
-                        <span
-                          className="
-                            font-body
-                            text-[10px]
-                            font-semibold
-                            uppercase
-                            tracking-[0.22em]
-                            text-white/85
-                            sm:text-[11px]
-                            sm:tracking-[0.28em]
-                          "
-                        >
+                        <span className="hero-slide__eyebrow-text">
                           {slide.eyebrow}
                         </span>
                       </div>
@@ -436,23 +330,7 @@ export function HeroSection({
 
                     {/* Title */}
 
-                    <h1
-                      className="
-                        max-w-[760px]
-                        font-display
-                        text-[3.25rem]
-                        font-normal
-                        leading-[0.94]
-                        tracking-[-0.035em]
-                        text-white
-                        drop-shadow-[0_8px_30px_rgba(0,0,0,0.18)]
-                        sm:text-[4.25rem]
-                        md:text-[5rem]
-                        lg:text-[6rem]
-                        xl:text-[7rem]
-                        2xl:text-[7.5rem]
-                      "
-                    >
+                    <h1 className="hero-slide__title">
                       {slide.title}
                     </h1>
 
@@ -460,21 +338,7 @@ export function HeroSection({
 
                     {(slide.subtitle ||
                       slide.description) && (
-                      <p
-                        className="
-                          mt-5
-                          max-w-[520px]
-                          font-body
-                          text-[14px]
-                          font-normal
-                          leading-[1.65]
-                          tracking-[0.01em]
-                          text-white/85
-                          sm:mt-6
-                          sm:text-[15px]
-                          md:text-[16px]
-                        "
-                      >
+                      <p className="hero-slide__description">
                         {slide.subtitle ||
                           slide.description}
                       </p>
@@ -486,28 +350,7 @@ export function HeroSection({
                       slide.href && (
                         <a
                           href={slide.href}
-                          className="
-                            group
-                            mt-7
-                            inline-flex
-                            items-center
-                            gap-4
-                            border-b
-                            border-white/70
-                            pb-2.5
-                            font-body
-                            text-[11px]
-                            font-semibold
-                            uppercase
-                            tracking-[0.22em]
-                            text-white
-                            transition-all
-                            duration-500
-                            hover:border-[var(--color-champagne)]
-                            hover:text-[var(--color-champagne)]
-                            sm:mt-8
-                            sm:text-[12px]
-                          "
+                          className="hero-slide__cta"
                         >
                           <span>
                             {slide.buttonLabel}
@@ -516,11 +359,7 @@ export function HeroSection({
                           <ArrowRight
                             size={16}
                             strokeWidth={1.2}
-                            className="
-                              transition-transform
-                              duration-500
-                              group-hover:translate-x-2
-                            "
+                            className="hero-slide__cta-icon"
                           />
                         </a>
                       )}
@@ -537,54 +376,19 @@ export function HeroSection({
 
         {totalSlides > 1 && (
           <div
-            className="
-              absolute
-              right-5
-              top-1/2
-              z-30
-              hidden
-              -translate-y-1/2
-              flex-col
-              items-center
-              gap-3
-              md:flex
-              lg:right-8
-              xl:right-12
-            "
+            className="hero-section__counter"
             aria-hidden="true"
           >
-            <span
-              className="
-                font-body
-                text-[10px]
-                font-medium
-                tracking-[0.18em]
-                text-white/90
-              "
-            >
+            <span className="hero-section__counter-current">
               {String(activeIndex + 1).padStart(
                 2,
                 "0",
               )}
             </span>
 
-            <span
-              className="
-                h-10
-                w-px
-                bg-white/30
-              "
-            />
+            <span className="hero-section__counter-line" />
 
-            <span
-              className="
-                font-body
-                text-[10px]
-                font-medium
-                tracking-[0.18em]
-                text-white/50
-              "
-            >
+            <span className="hero-section__counter-total">
               {String(totalSlides).padStart(
                 2,
                 "0",
@@ -602,21 +406,7 @@ export function HeroSection({
             {/* Slide indicators */}
 
             <div
-              className="
-                absolute
-                bottom-7
-                left-5
-                z-30
-                flex
-                items-center
-                gap-2
-                sm:bottom-8
-                sm:left-8
-                lg:bottom-10
-                lg:left-12
-                xl:left-16
-                2xl:left-20
-              "
+              className="hero-section__indicators"
               aria-label="Slide navigation"
             >
               {slides.map(
@@ -639,21 +429,14 @@ export function HeroSection({
                           ? "true"
                           : undefined
                       }
-                      className="
-                        flex
-                        h-6
-                        items-center
-                        px-1
-                      "
+                      className="hero-section__indicator"
                     >
                       <span
-                        className={[
-                          "block h-px",
-                          "transition-all duration-500",
+                        className={`hero-section__indicator-line ${
                           isActive
-                            ? "w-12 bg-white"
-                            : "w-5 bg-white/45",
-                        ].join(" ")}
+                            ? "hero-section__indicator-line--active"
+                            : ""
+                        }`}
                       />
                     </button>
                   );
@@ -663,56 +446,17 @@ export function HeroSection({
 
             {/* Previous / Next */}
 
-            <div
-              className="
-                absolute
-                bottom-6
-                right-5
-                z-30
-                flex
-                items-center
-                gap-2
-                sm:bottom-7
-                sm:right-8
-                lg:bottom-9
-                lg:right-12
-                xl:right-16
-                2xl:right-20
-              "
-            >
+            <div className="hero-section__navigation">
               <button
                 type="button"
                 onClick={previousSlide}
                 aria-label="Previous banner"
-                className="
-                  group
-                  flex
-                  h-11
-                  w-11
-                  items-center
-                  justify-center
-                  border
-                  border-white/45
-                  bg-black/[0.08]
-                  text-white
-                  backdrop-blur-md
-                  transition-all
-                  duration-500
-                  hover:border-white
-                  hover:bg-white
-                  hover:text-[var(--color-text)]
-                  sm:h-12
-                  sm:w-12
-                "
+                className="hero-section__navigation-button"
               >
                 <ArrowLeft
                   size={15}
                   strokeWidth={1.2}
-                  className="
-                    transition-transform
-                    duration-500
-                    group-hover:-translate-x-1
-                  "
+                  className="hero-section__navigation-icon"
                 />
               </button>
 
@@ -720,35 +464,12 @@ export function HeroSection({
                 type="button"
                 onClick={nextSlide}
                 aria-label="Next banner"
-                className="
-                  group
-                  flex
-                  h-11
-                  w-11
-                  items-center
-                  justify-center
-                  border
-                  border-white/45
-                  bg-black/[0.08]
-                  text-white
-                  backdrop-blur-md
-                  transition-all
-                  duration-500
-                  hover:border-white
-                  hover:bg-white
-                  hover:text-[var(--color-text)]
-                  sm:h-12
-                  sm:w-12
-                "
+                className="hero-section__navigation-button"
               >
                 <ArrowRight
                   size={15}
                   strokeWidth={1.2}
-                  className="
-                    transition-transform
-                    duration-500
-                    group-hover:translate-x-1
-                  "
+                  className="hero-section__navigation-icon"
                 />
               </button>
             </div>
@@ -767,19 +488,7 @@ export function HeroSection({
                   ? "Resume banners"
                   : "Pause banners"
               }
-              className="
-                absolute
-                bottom-8
-                left-1/2
-                z-30
-                hidden
-                -translate-x-1/2
-                text-white/65
-                transition-colors
-                duration-300
-                hover:text-white
-                md:block
-              "
+              className="hero-section__pause"
             >
               {isPaused ? (
                 <Play
