@@ -25,11 +25,25 @@ export async function NewArrivals() {
               SECTION HEADER
           ===================================================== */}
 
-          <div className="new-arrivals__header">
+
+          <div className="featured-categories__header">
+          <p className="featured-categories__eyebrow">
+           New Arrivals
+          </p>
+
+          <h2 className="featured-categories__title">
+            Fresh from{" "}
+            <span className="featured-categories__title-accent">
+              Aayesha.
+            </span>
+          </h2>
+        </div>
+
+          {/*<div className="new-arrivals__header">
             <div className="new-arrivals__heading-group">
               <div className="new-arrivals__eyebrow">
                 <span
-                  aria-hidden="true"
+                  aria-hidden="false"
                   className="new-arrivals__eyebrow-line"
                 />
 
@@ -70,7 +84,7 @@ export async function NewArrivals() {
                 </LinkButton>
               </div>
             )}
-          </div>
+          </div>*/}
 
           {/* =====================================================
               PRODUCTS
