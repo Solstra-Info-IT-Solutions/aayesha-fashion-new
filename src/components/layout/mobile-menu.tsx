@@ -277,7 +277,6 @@ export function MobileMenu({
             justify-center
           "
         >
-          {/* Decorative ring */}
           <span
             aria-hidden="true"
             className="
@@ -330,7 +329,7 @@ export function MobileMenu({
         className={`
           fixed
           inset-0
-          z-[var(--z-drawer)]
+          z-[9999]
           lg:hidden
           ${
             isOpen
@@ -352,6 +351,7 @@ export function MobileMenu({
           className={`
             absolute
             inset-0
+            z-0
             bg-[rgba(33,31,29,0.45)]
             backdrop-blur-[5px]
             transition-opacity
@@ -372,6 +372,7 @@ export function MobileMenu({
         <aside
           className={`
             relative
+            z-10
             flex
             h-full
             w-[91vw]
@@ -380,7 +381,7 @@ export function MobileMenu({
             overflow-hidden
             border-r
             border-[var(--color-border)]
-            bg-[var(--color-bg)]
+            bg-[rgba(247,243,238,0.98)]
             shadow-[0_30px_100px_rgba(33,31,29,0.18)]
             transition-transform
             duration-700
@@ -406,6 +407,7 @@ export function MobileMenu({
               absolute
               right-0
               top-0
+              z-20
               h-full
               w-px
               bg-gradient-to-b
@@ -423,12 +425,14 @@ export function MobileMenu({
           <div
             className="
               relative
+              z-10
               flex
               shrink-0
               items-center
               justify-between
               border-b
               border-[var(--color-border)]
+              bg-[rgba(247,243,238,0.98)]
               px-5
               py-5
               sm:px-7
@@ -516,11 +520,14 @@ export function MobileMenu({
 
           <div
             className="
+              relative
+              z-10
               min-h-0
               flex-1
               overflow-y-auto
               overscroll-contain
               scroll-smooth
+              bg-[rgba(247,243,238,0.98)]
             "
           >
             {/* =================================================
@@ -552,7 +559,6 @@ export function MobileMenu({
                     hover:shadow-[var(--shadow-md)]
                   "
                 >
-                  {/* Hover surface */}
                   <span
                     aria-hidden="true"
                     className="
@@ -569,7 +575,6 @@ export function MobileMenu({
                     "
                   />
 
-                  {/* Avatar */}
                   <span
                     className="
                       relative
@@ -593,7 +598,6 @@ export function MobileMenu({
                     {initials}
                   </span>
 
-                  {/* User info */}
                   <span className="relative z-10 min-w-0 flex-1">
                     <span
                       className="
@@ -1026,7 +1030,6 @@ export function MobileMenu({
                           hover:bg-[var(--color-bg-soft)]
                         "
                       >
-                        {/* Hover sweep */}
                         <span
                           aria-hidden="true"
                           className="
@@ -1043,7 +1046,6 @@ export function MobileMenu({
                           "
                         />
 
-                        {/* Number */}
                         <span
                           className="
                             relative
@@ -1067,7 +1069,6 @@ export function MobileMenu({
                           0{index + 1}
                         </span>
 
-                        {/* Icon */}
                         <span
                           className="
                             relative
@@ -1088,7 +1089,6 @@ export function MobileMenu({
                             group-hover:border-[var(--color-accent-soft)]
                             group-hover:bg-[var(--color-accent-soft)]
                             group-hover:text-[var(--color-text)]
-                            group-hover:[transform:translateZ(6px)]
                           "
                         >
                           <Icon
@@ -1097,7 +1097,6 @@ export function MobileMenu({
                           />
                         </span>
 
-                        {/* Title + description */}
                         <span className="relative z-10 min-w-0 flex-1">
                           <span
                             className="
@@ -1129,7 +1128,6 @@ export function MobileMenu({
                           </span>
                         </span>
 
-                        {/* Arrow */}
                         <span
                           className="
                             relative
@@ -1195,8 +1193,6 @@ export function MobileMenu({
               </div>
 
               <div className="grid grid-cols-2 gap-2">
-                {/* SEARCH */}
-
                 <Link
                   href="/search"
                   onClick={onClose}
@@ -1237,8 +1233,6 @@ export function MobileMenu({
                   <span>Search</span>
                 </Link>
 
-                {/* WISHLIST */}
-
                 <Link
                   href="/wishlist"
                   onClick={onClose}
@@ -1278,8 +1272,6 @@ export function MobileMenu({
 
                   <span>Wishlist</span>
                 </Link>
-
-                {/* MY ACCOUNT */}
 
                 <Link
                   href={
@@ -1408,10 +1400,12 @@ export function MobileMenu({
 
           <div
             className="
+              relative
+              z-20
               shrink-0
               border-t
               border-[var(--color-border)]
-              bg-[var(--color-bg-soft)]
+              bg-[rgba(242,237,231,0.98)]
               px-5
               py-4
               sm:px-7
