@@ -117,9 +117,9 @@ const socialLinks = [
     : null,
 ].filter(
   (
-    social
+    social,
   ): social is NonNullable<typeof social> =>
-    social !== null
+    social !== null,
 );
 
 /* ============================================================
@@ -130,178 +130,433 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[var(--color-charcoal)] text-white">
+    <footer
+      className="
+        relative
+        overflow-hidden
+        bg-[var(--color-charcoal)]
+        text-white
+      "
+    >
+      {/* ======================================================
+          AMBIENT BACKGROUND
+      ====================================================== */}
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -right-32
+          -top-32
+          h-[420px]
+          w-[420px]
+          rounded-full
+          bg-[var(--color-accent)]
+          opacity-[0.07]
+          blur-[120px]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -bottom-48
+          left-[-120px]
+          h-[500px]
+          w-[500px]
+          rounded-full
+          bg-[var(--color-rose)]
+          opacity-[0.045]
+          blur-[140px]
+        "
+      />
+
       <Container>
-        <div className="py-16 sm:py-20 lg:py-24">
-          {/* =====================================================
-              MAIN FOOTER
-          ===================================================== */}
+        <div className="relative py-16 sm:py-20 lg:py-24 xl:py-28">
+          {/* ====================================================
+              TOP BRAND STATEMENT
+          ==================================================== */}
 
-          <div className="border-t border-white/15 pt-7 sm:pt-8">
-            <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-              {/* =================================================
-                  BRAND
-              ================================================= */}
-
-              <div className="lg:col-span-5">
-                <Link
-  href="/"
-  aria-label={`${siteConfig.name} home`}
-  className="
-    group
-    inline-flex
-    flex-col
-    items-start
-    leading-none
-  "
->
-  {/* BRAND LOGO IMAGE */}
-  <img
-    src="/images/logo.png"
-    alt="Aayesha Fashion"
-    className="
-      h-10
-      w-auto
-      object-contain
-      opacity-95
-      transition-opacity
-      duration-300
-      group-hover:opacity-80
-    "
-  />
-
-  {/* BRAND NAME */}
-  <span
-    className="
-      mt-3
-      font-[var(--font-display)]
-      text-[3.1rem]
-      font-medium
-      leading-none
-      tracking-[-0.04em]
-      text-white
-      transition-opacity
-      duration-300
-      group-hover:opacity-80
-      sm:text-[3.5rem]
-    "
-  >
-    {siteConfig.name.split(" ")[0]}
-  </span>
-
-  {/* SUB BRAND */}
-  <span
-    className="
-      mt-2
-      pl-[0.32em]
-      text-[7px]
-      font-medium
-      uppercase
-      tracking-[0.42em]
-      text-white/45
-    "
-  >
-    Fashion
-  </span>
-</Link>
-                <p className="mt-7 max-w-[420px] text-[15px] leading-8 text-white/58 sm:text-[16px] sm:leading-8">
-                  {siteConfig.description}
+          <div
+            className="
+              border-t
+              border-white/10
+              pt-7
+              sm:pt-8
+            "
+          >
+            <div
+              className="
+                flex
+                flex-col
+                gap-8
+                lg:flex-row
+                lg:items-end
+                lg:justify-between
+              "
+            >
+              <div className="max-w-[760px]">
+                <p
+                  className="
+                    font-body
+                    text-[8px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.32em]
+                    text-[var(--color-rose-light)]
+                  "
+                >
+                  Aayesha Fashion
                 </p>
 
-                {/* =================================================
-                    SOCIAL
-                ================================================= */}
-
-                {socialLinks.length > 0 && (
-                  <div className="mt-8 flex items-center gap-2.5">
-                    {socialLinks.map((social) => {
-                      const Icon = social.icon;
-
-                      return (
-                        <a
-                          key={social.label}
-                          href={social.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={
-                            social.label
-                          }
-                          className="
-                            flex
-                            h-11
-                            w-11
-                            items-center
-                            justify-center
-                            border
-                            border-white/15
-                            text-white/65
-                            transition-all
-                            duration-300
-                            hover:border-[var(--color-rose)]
-                            hover:bg-[var(--color-rose)]
-                            hover:text-[var(--color-charcoal)]
-                          "
-                        >
-                          <Icon
-                            size={17}
-                            strokeWidth={1.3}
-                          />
-                        </a>
-                      );
-                    })}
-                  </div>
-                )}
+                <h2
+                  className="
+                    mt-5
+                    max-w-[760px]
+                    font-display
+                    text-[clamp(2.8rem,6vw,6.5rem)]
+                    font-light
+                    leading-[0.88]
+                    tracking-[-0.045em]
+                    text-white
+                  "
+                >
+                  Designed for
+                  <br />
+                  <span className="italic text-white/80">
+                    every occasion.
+                  </span>
+                </h2>
               </div>
 
-              {/* =================================================
-                  NAVIGATION
-              ================================================= */}
-
-              <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7 lg:gap-12">
-                <FooterColumn
-                  title="Shop"
-                  links={footerNavigation.shop}
-                />
-
-                <FooterColumn
-                  title="Collections"
-                  links={
-                    footerNavigation.collections
-                  }
-                />
-
-                <FooterColumn
-                  title="Information"
-                  links={
-                    footerNavigation.information
-                  }
-                />
+              <div className="max-w-[320px] lg:pb-2">
+                <p
+                  className="
+                    font-body
+                    text-[12px]
+                    leading-6
+                    text-white/50
+                    sm:text-[13px]
+                    sm:leading-7
+                  "
+                >
+                  {siteConfig.description}
+                </p>
               </div>
             </div>
           </div>
 
-          {/* =====================================================
-              CUSTOMER CARE
-          ===================================================== */}
+          {/* ====================================================
+              BRAND + NAVIGATION
+          ==================================================== */}
 
-          <div className="mt-14 grid border-y border-white/15 sm:grid-cols-2">
+          <div
+            className="
+              mt-16
+              grid
+              gap-14
+              border-y
+              border-white/10
+              py-12
+              sm:mt-20
+              sm:py-14
+              lg:grid-cols-12
+              lg:gap-16
+              lg:py-16
+            "
+          >
+            {/* ==================================================
+                BRAND
+            ================================================== */}
+
+            <div className="lg:col-span-5">
+              <Link
+                href="/"
+                aria-label={`${siteConfig.name} home`}
+                className="
+                  group
+                  inline-flex
+                  flex-col
+                  items-start
+                  leading-none
+                "
+              >
+                {/* Logo */}
+                <span
+                  className="
+                    relative
+                    flex
+                    h-12
+                    w-12
+                    items-center
+                    justify-center
+                  "
+                >
+                  <span
+                    aria-hidden="true"
+                    className="
+                      absolute
+                      inset-0
+                      rounded-full
+                      bg-[var(--color-accent)]
+                      opacity-0
+                      blur-xl
+                      transition-all
+                      duration-700
+                      group-hover:scale-125
+                      group-hover:opacity-20
+                    "
+                  />
+
+                  <img
+                    src="/images/logo.png"
+                    alt="Aayesha Fashion"
+                    className="
+                      relative
+                      z-10
+                      h-10
+                      w-auto
+                      object-contain
+                      opacity-95
+                      transition-all
+                      duration-700
+                      group-hover:scale-105
+                      group-hover:opacity-100
+                    "
+                  />
+                </span>
+
+                {/* Brand */}
+                <span
+                  className="
+                    mt-5
+                    font-display
+                    text-[3.2rem]
+                    font-medium
+                    leading-[0.85]
+                    tracking-[-0.045em]
+                    text-white
+                    transition-all
+                    duration-700
+                    group-hover:tracking-[-0.025em]
+                    sm:text-[3.7rem]
+                  "
+                >
+                  {siteConfig.name.split(" ")[0]}
+                </span>
+
+                {/* Sub brand */}
+                <span
+                  className="
+                    mt-3
+                    pl-[0.32em]
+                    font-body
+                    text-[7px]
+                    font-medium
+                    uppercase
+                    tracking-[0.44em]
+                    text-white/40
+                    transition-colors
+                    duration-500
+                    group-hover:text-[var(--color-rose-light)]
+                  "
+                >
+                  Fashion
+                </span>
+              </Link>
+
+              {/* Social */}
+              {socialLinks.length > 0 && (
+                <div className="mt-9">
+                  <p
+                    className="
+                      font-body
+                      text-[8px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.28em]
+                      text-white/35
+                    "
+                  >
+                    Follow Aayesha
+                  </p>
+
+                  <div className="mt-4 flex items-center gap-2">
+                    {socialLinks.map(
+                      (social) => {
+                        const Icon =
+                          social.icon;
+
+                        return (
+                          <a
+                            key={social.label}
+                            href={social.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={
+                              social.label
+                            }
+                            className="
+                              group
+                              relative
+                              flex
+                              h-11
+                              w-11
+                              items-center
+                              justify-center
+                              overflow-hidden
+                              border
+                              border-white/15
+                              text-white/55
+                              transition-all
+                              duration-500
+                              hover:-translate-y-1
+                              hover:border-[var(--color-rose)]
+                              hover:text-[var(--color-charcoal)]
+                            "
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="
+                                absolute
+                                inset-0
+                                translate-y-full
+                                bg-[var(--color-rose)]
+                                transition-transform
+                                duration-500
+                                ease-[var(--ease-luxury)]
+                                group-hover:translate-y-0
+                              "
+                            />
+
+                            <Icon
+                              size={16}
+                              strokeWidth={1.25}
+                              className="
+                                relative
+                                z-10
+                                transition-transform
+                                duration-500
+                                group-hover:scale-110
+                              "
+                            />
+                          </a>
+                        );
+                      },
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* ==================================================
+                NAVIGATION
+            ================================================== */}
+
+            <div
+              className="
+                grid
+                grid-cols-2
+                gap-x-8
+                gap-y-12
+                sm:grid-cols-3
+                lg:col-span-7
+                lg:gap-12
+              "
+            >
+              <FooterColumn
+                number="01"
+                title="Shop"
+                links={footerNavigation.shop}
+              />
+
+              <FooterColumn
+                number="02"
+                title="Collections"
+                links={
+                  footerNavigation.collections
+                }
+              />
+
+              <FooterColumn
+                number="03"
+                title="Information"
+                links={
+                  footerNavigation.information
+                }
+              />
+            </div>
+          </div>
+
+          {/* ====================================================
+              CUSTOMER CARE
+          ==================================================== */}
+
+          <div
+            className="
+              grid
+              border-b
+              border-white/10
+              sm:grid-cols-2
+            "
+          >
             {/* EMAIL */}
 
             {siteConfig.contact.email && (
-              <div className="border-b border-white/15 py-7 sm:border-b-0 sm:border-r sm:pr-10">
-                <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-white/40">
+              <div
+                className="
+                  border-b
+                  border-white/10
+                  py-7
+                  sm:border-b-0
+                  sm:border-r
+                  sm:pr-10
+                  lg:py-8
+                "
+              >
+                <p
+                  className="
+                    font-body
+                    text-[8px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.28em]
+                    text-white/35
+                  "
+                >
                   Customer Care
                 </p>
 
                 <a
                   href={`mailto:${siteConfig.contact.email}`}
-                  className="mt-3 inline-flex items-center gap-2 text-[14px] text-white/78 transition-colors duration-300 hover:text-[var(--color-rose-light)]"
+                  className="
+                    group
+                    mt-3
+                    inline-flex
+                    items-center
+                    gap-2
+                    font-body
+                    text-[13px]
+                    text-white/70
+                    transition-colors
+                    duration-500
+                    hover:text-white
+                  "
                 >
                   {siteConfig.contact.email}
 
                   <ArrowUpRight
-                    size={15}
-                    strokeWidth={1.3}
+                    size={14}
+                    strokeWidth={1.25}
+                    className="
+                      transition-transform
+                      duration-500
+                      group-hover:translate-x-1
+                      group-hover:-translate-y-0.5
+                    "
                   />
                 </a>
               </div>
@@ -310,13 +565,26 @@ export function Footer() {
             {/* WHATSAPP / PHONE */}
 
             <div
-              className={`py-7 ${
-                siteConfig.contact.email
-                  ? "sm:pl-10"
-                  : "sm:col-span-2"
-              }`}
+              className={`
+                py-7
+                lg:py-8
+                ${
+                  siteConfig.contact.email
+                    ? "sm:pl-10"
+                    : "sm:col-span-2"
+                }
+              `}
             >
-              <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-white/40">
+              <p
+                className="
+                  font-body
+                  text-[8px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.28em]
+                  text-white/35
+                "
+              >
                 WhatsApp
               </p>
 
@@ -327,90 +595,226 @@ export function Footer() {
                   }
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center gap-2 text-[14px] text-white/78 transition-colors duration-300 hover:text-[var(--color-rose-light)]"
+                  className="
+                    group
+                    mt-3
+                    inline-flex
+                    items-center
+                    gap-2
+                    font-body
+                    text-[13px]
+                    text-white/70
+                    transition-colors
+                    duration-500
+                    hover:text-white
+                  "
                 >
                   Chat with us
 
                   <ArrowUpRight
-                    size={15}
-                    strokeWidth={1.3}
+                    size={14}
+                    strokeWidth={1.25}
+                    className="
+                      transition-transform
+                      duration-500
+                      group-hover:translate-x-1
+                      group-hover:-translate-y-0.5
+                    "
                   />
                 </a>
               ) : siteConfig.contact.phone ? (
                 <a
                   href={`tel:+${siteConfig.contact.phone}`}
-                  className="mt-3 inline-flex items-center gap-2 text-[14px] text-white/78 transition-colors duration-300 hover:text-[var(--color-rose-light)]"
+                  className="
+                    group
+                    mt-3
+                    inline-flex
+                    items-center
+                    gap-2
+                    font-body
+                    text-[13px]
+                    text-white/70
+                    transition-colors
+                    duration-500
+                    hover:text-white
+                  "
                 >
                   +{siteConfig.contact.phone}
 
                   <ArrowUpRight
-                    size={15}
-                    strokeWidth={1.3}
+                    size={14}
+                    strokeWidth={1.25}
+                    className="
+                      transition-transform
+                      duration-500
+                      group-hover:translate-x-1
+                      group-hover:-translate-y-0.5
+                    "
                   />
                 </a>
               ) : null}
             </div>
           </div>
 
-          {/* =====================================================
-              NEWSLETTER LINK
-          ===================================================== */}
+          {/* ====================================================
+              NEWSLETTER / EDITORIAL CTA
+          ==================================================== */}
 
-          <div className="mt-11 flex flex-col justify-between gap-6 border-b border-white/15 pb-9 sm:flex-row sm:items-end">
-            <div>
-              <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[var(--color-rose-light)]">
-                Stay in the know
-              </p>
-
-              <p className="mt-3 font-display text-[1.9rem] leading-none text-white sm:text-[2.2rem]">
-                Discover the next Ayesha edit.
-              </p>
-            </div>
-
-            <Link
-              href="#newsletter"
+          <div
+            className="
+              relative
+              mt-12
+              overflow-hidden
+              border
+              border-white/10
+              bg-white/[0.025]
+              px-6
+              py-8
+              sm:px-8
+              sm:py-10
+              lg:px-10
+              lg:py-12
+            "
+          >
+            {/* Decorative glow */}
+            <div
+              aria-hidden="true"
               className="
-                group
-                inline-flex
-                items-center
-                gap-3
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.2em]
-                text-white/65
-                transition-colors
-                duration-300
-                hover:text-white
+                pointer-events-none
+                absolute
+                -right-20
+                -top-24
+                h-64
+                w-64
+                rounded-full
+                bg-[var(--color-rose)]
+                opacity-[0.05]
+                blur-[80px]
+              "
+            />
+
+            <div
+              className="
+                relative
+                flex
+                flex-col
+                justify-between
+                gap-8
+                lg:flex-row
+                lg:items-end
               "
             >
-              Join the newsletter
+              <div>
+                <p
+                  className="
+                    font-body
+                    text-[8px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.28em]
+                    text-[var(--color-rose-light)]
+                  "
+                >
+                  Stay in the know
+                </p>
 
-              <ArrowUpRight
-                size={15}
-                strokeWidth={1.3}
-                className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5"
-              />
-            </Link>
+                <h3
+                  className="
+                    mt-4
+                    max-w-[650px]
+                    font-display
+                    text-[clamp(2rem,4vw,3.6rem)]
+                    font-light
+                    leading-[0.95]
+                    tracking-[-0.035em]
+                    text-white
+                  "
+                >
+                  Discover the next
+                  <br />
+                  <span className="italic text-white/70">
+                    Aayesha edit.
+                  </span>
+                </h3>
+              </div>
+
+              <Link
+                href="#newsletter"
+                className="
+                  group
+                  inline-flex
+                  w-fit
+                  items-center
+                  gap-3
+                  border-b
+                  border-white/25
+                  pb-2
+                  font-body
+                  text-[9px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.2em]
+                  text-white/65
+                  transition-all
+                  duration-500
+                  hover:border-white
+                  hover:text-white
+                "
+              >
+                Join the newsletter
+
+                <ArrowUpRight
+                  size={14}
+                  strokeWidth={1.25}
+                  className="
+                    transition-transform
+                    duration-500
+                    group-hover:translate-x-1
+                    group-hover:-translate-y-0.5
+                  "
+                />
+              </Link>
+            </div>
           </div>
 
-          {/* =====================================================
+          {/* ====================================================
               LEGAL
-          ===================================================== */}
+          ==================================================== */}
 
           <div className="pt-8">
-            <div className="flex flex-col gap-6 text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-white/35">
+            <div
+              className="
+                flex
+                flex-col
+                gap-6
+                font-body
+                text-[8px]
+                font-semibold
+                uppercase
+                tracking-[0.16em]
+                text-white/30
+                sm:flex-row
+                sm:items-center
+                sm:justify-between
+              "
+            >
+              <p>
                 © {currentYear}{" "}
-                {siteConfig.name}. All rights reserved.
+                {siteConfig.name}. All rights
+                reserved.
               </p>
 
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 {legalLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="transition-colors duration-300 hover:text-white"
+                    className="
+                      relative
+                      transition-colors
+                      duration-500
+                      hover:text-white
+                    "
                   >
                     {link.label}
                   </Link>
@@ -429,9 +833,11 @@ export function Footer() {
 ============================================================ */
 
 function FooterColumn({
+  number,
   title,
   links,
 }: {
+  number: string;
   title: string;
   links: readonly {
     label: string;
@@ -440,9 +846,32 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-white/40">
-        {title}
-      </p>
+      <div className="flex items-center gap-2">
+        <span
+          className="
+            font-body
+            text-[7px]
+            tracking-[0.12em]
+            text-[var(--color-rose-light)]
+            opacity-70
+          "
+        >
+          {number}
+        </span>
+
+        <p
+          className="
+            font-body
+            text-[8px]
+            font-semibold
+            uppercase
+            tracking-[0.28em]
+            text-white/35
+          "
+        >
+          {title}
+        </p>
+      </div>
 
       <nav className="mt-6 flex flex-col gap-4">
         {links.map((link) => (
@@ -450,16 +879,36 @@ function FooterColumn({
             key={link.href}
             href={link.href}
             className="
-              text-[13px]
+              group
+              flex
+              w-fit
+              items-center
+              gap-2
+              font-body
+              text-[12px]
               leading-5
-              text-white/68
-              transition-colors
-              duration-300
+              text-white/60
+              transition-all
+              duration-500
+              hover:translate-x-1
               hover:text-white
-              sm:text-[14px]
+              sm:text-[13px]
             "
           >
-            {link.label}
+            <span>{link.label}</span>
+
+            <ArrowUpRight
+              size={12}
+              strokeWidth={1.2}
+              className="
+                opacity-0
+                transition-all
+                duration-500
+                group-hover:translate-x-0.5
+                group-hover:-translate-y-0.5
+                group-hover:opacity-70
+              "
+            />
           </Link>
         ))}
       </nav>
