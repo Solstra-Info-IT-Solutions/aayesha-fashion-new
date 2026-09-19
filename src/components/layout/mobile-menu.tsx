@@ -252,6 +252,7 @@ export function MobileMenu({
         aria-expanded={isOpen}
         className="
           group
+          relative
           flex
           h-10
           w-10
@@ -259,32 +260,63 @@ export function MobileMenu({
           justify-center
           text-[var(--color-text)]
           transition-all
-          duration-[var(--duration-base)]
-          hover:text-[var(--color-accent)]
+          duration-500
+          ease-[var(--ease-luxury)]
+          hover:-translate-y-px
+          hover:text-[var(--color-accent-dark)]
           lg:hidden
         "
       >
         <span
           className="
+            relative
             flex
             h-9
             w-9
             items-center
             justify-center
-            transition-transform
-            duration-[var(--duration-base)]
-            group-hover:scale-[1.04]
           "
         >
+          {/* Decorative ring */}
+          <span
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              inset-1
+              rounded-full
+              border
+              border-transparent
+              transition-all
+              duration-500
+              group-hover:border-[var(--color-accent-soft)]
+            "
+          />
+
           {isOpen ? (
             <X
-              size={20}
-              strokeWidth={1.25}
+              size={19}
+              strokeWidth={1.2}
+              className="
+                relative
+                z-10
+                transition-transform
+                duration-500
+                ease-[var(--ease-luxury)]
+              "
             />
           ) : (
             <Menu
-              size={20}
-              strokeWidth={1.25}
+              size={19}
+              strokeWidth={1.2}
+              className="
+                relative
+                z-10
+                transition-transform
+                duration-500
+                ease-[var(--ease-luxury)]
+                group-hover:scale-105
+              "
             />
           )}
         </span>
@@ -320,10 +352,11 @@ export function MobileMenu({
           className={`
             absolute
             inset-0
-            bg-[rgba(33,31,29,0.38)]
-            backdrop-blur-[2px]
+            bg-[rgba(33,31,29,0.45)]
+            backdrop-blur-[5px]
             transition-opacity
-            duration-[var(--duration-slow)]
+            duration-700
+            ease-[var(--ease-luxury)]
             ${
               isOpen
                 ? "opacity-100"
@@ -341,15 +374,16 @@ export function MobileMenu({
             relative
             flex
             h-full
-            w-[88vw]
-            max-w-[430px]
+            w-[91vw]
+            max-w-[450px]
             flex-col
+            overflow-hidden
             border-r
             border-[var(--color-border)]
             bg-[var(--color-bg)]
-            shadow-[var(--shadow-lg)]
+            shadow-[0_30px_100px_rgba(33,31,29,0.18)]
             transition-transform
-            duration-[var(--duration-luxury)]
+            duration-700
             ease-[var(--ease-luxury)]
             ${
               isOpen
@@ -362,11 +396,33 @@ export function MobileMenu({
           aria-label="Mobile navigation"
         >
           {/* =================================================
+              DECORATIVE EDGE
+          ================================================= */}
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              right-0
+              top-0
+              h-full
+              w-px
+              bg-gradient-to-b
+              from-transparent
+              via-[var(--color-accent-soft)]
+              to-transparent
+              opacity-70
+            "
+          />
+
+          {/* =================================================
               DRAWER HEADER
           ================================================= */}
 
           <div
             className="
+              relative
               flex
               shrink-0
               items-center
@@ -392,9 +448,10 @@ export function MobileMenu({
                   leading-none
                   tracking-[-0.03em]
                   text-[var(--color-text)]
-                  transition-colors
-                  duration-[var(--duration-base)]
-                  group-hover:text-[var(--color-accent)]
+                  transition-all
+                  duration-500
+                  ease-[var(--ease-luxury)]
+                  group-hover:tracking-[-0.02em]
                 "
               >
                 Aayesha
@@ -407,8 +464,11 @@ export function MobileMenu({
                   text-[7px]
                   font-semibold
                   uppercase
-                  tracking-[0.32em]
+                  tracking-[0.34em]
                   text-[var(--color-text-muted)]
+                  transition-colors
+                  duration-500
+                  group-hover:text-[var(--color-accent)]
                 "
               >
                 Fashion
@@ -426,23 +486,24 @@ export function MobileMenu({
                 w-9
                 items-center
                 justify-center
+                rounded-full
                 border
                 border-[var(--color-border)]
                 bg-transparent
                 text-[var(--color-text-secondary)]
                 transition-all
-                duration-[var(--duration-base)]
+                duration-500
                 hover:border-[var(--color-text)]
                 hover:bg-[var(--color-text)]
                 hover:text-[var(--color-text-inverse)]
               "
             >
               <X
-                size={17}
-                strokeWidth={1.25}
+                size={16}
+                strokeWidth={1.2}
                 className="
                   transition-transform
-                  duration-[var(--duration-base)]
+                  duration-500
                   group-hover:rotate-90
                 "
               />
@@ -453,8 +514,15 @@ export function MobileMenu({
               SCROLLABLE CONTENT
           ================================================= */}
 
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-
+          <div
+            className="
+              min-h-0
+              flex-1
+              overflow-y-auto
+              overscroll-contain
+              scroll-smooth
+            "
+          >
             {/* =================================================
                 ACCOUNT / AUTH
             ================================================= */}
@@ -466,30 +534,53 @@ export function MobileMenu({
                   onClick={onClose}
                   className="
                     group
+                    relative
                     flex
                     items-center
                     gap-3.5
+                    overflow-hidden
                     border
                     border-[var(--color-border)]
                     bg-[var(--color-surface)]
                     px-4
                     py-4
                     transition-all
-                    duration-[var(--duration-base)]
-                    hover:border-[var(--color-border-dark)]
-                    hover:shadow-[var(--shadow-sm)]
+                    duration-500
+                    ease-[var(--ease-luxury)]
+                    hover:-translate-y-px
+                    hover:border-[var(--color-accent-soft)]
+                    hover:shadow-[var(--shadow-md)]
                   "
                 >
-                  {/* AVATAR */}
+                  {/* Hover surface */}
+                  <span
+                    aria-hidden="true"
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-y-0
+                      left-0
+                      w-0
+                      bg-[var(--color-bg-soft)]
+                      transition-all
+                      duration-700
+                      ease-[var(--ease-luxury)]
+                      group-hover:w-full
+                    "
+                  />
 
+                  {/* Avatar */}
                   <span
                     className="
+                      relative
+                      z-10
                       flex
                       h-10
                       w-10
                       shrink-0
                       items-center
                       justify-center
+                      rounded-full
                       border
                       border-[var(--color-accent-soft)]
                       bg-[var(--color-bg-soft)]
@@ -502,9 +593,8 @@ export function MobileMenu({
                     {initials}
                   </span>
 
-                  {/* USER INFO */}
-
-                  <span className="min-w-0 flex-1">
+                  {/* User info */}
+                  <span className="relative z-10 min-w-0 flex-1">
                     <span
                       className="
                         block
@@ -534,13 +624,15 @@ export function MobileMenu({
 
                   <ChevronRight
                     size={16}
-                    strokeWidth={1.25}
+                    strokeWidth={1.2}
                     className="
+                      relative
+                      z-10
                       shrink-0
                       text-[var(--color-text-muted)]
                       transition-all
-                      duration-[var(--duration-base)]
-                      group-hover:translate-x-0.5
+                      duration-500
+                      group-hover:translate-x-1
                       group-hover:text-[var(--color-accent)]
                     "
                   />
@@ -548,7 +640,12 @@ export function MobileMenu({
               ) : (
                 <div className="space-y-4">
                   <div>
-                    <p className="eyebrow">
+                    <p
+                      className="
+                        eyebrow
+                        text-[var(--color-accent)]
+                      "
+                    >
                       Your Account
                     </p>
 
@@ -588,9 +685,9 @@ export function MobileMenu({
                         tracking-[0.16em]
                         text-[var(--color-text-inverse)]
                         transition-all
-                        duration-[var(--duration-base)]
-                        hover:bg-[var(--color-accent-dark)]
+                        duration-500
                         hover:border-[var(--color-accent-dark)]
+                        hover:bg-[var(--color-accent-dark)]
                       "
                     >
                       Sign In
@@ -615,7 +712,7 @@ export function MobileMenu({
                         tracking-[0.16em]
                         text-[var(--color-text)]
                         transition-all
-                        duration-[var(--duration-base)]
+                        duration-500
                         hover:border-[var(--color-text)]
                         hover:bg-[var(--color-bg-soft)]
                       "
@@ -682,13 +779,11 @@ export function MobileMenu({
                             px-4
                             py-4
                             last:border-b-0
-                            transition-colors
-                            duration-[var(--duration-base)]
+                            transition-all
+                            duration-500
                             hover:bg-[var(--color-bg-soft)]
                           "
                         >
-                          {/* ICON */}
-
                           <span
                             className="
                               flex
@@ -697,12 +792,13 @@ export function MobileMenu({
                               shrink-0
                               items-center
                               justify-center
+                              rounded-full
                               border
                               border-[var(--color-border)]
                               bg-[var(--color-bg)]
                               text-[var(--color-text-secondary)]
                               transition-all
-                              duration-[var(--duration-base)]
+                              duration-500
                               group-hover:border-[var(--color-accent-soft)]
                               group-hover:bg-[var(--color-accent-soft)]
                               group-hover:text-[var(--color-text)]
@@ -710,11 +806,9 @@ export function MobileMenu({
                           >
                             <Icon
                               size={15}
-                              strokeWidth={1.35}
+                              strokeWidth={1.3}
                             />
                           </span>
-
-                          {/* TEXT */}
 
                           <span className="min-w-0 flex-1">
                             <span
@@ -743,17 +837,15 @@ export function MobileMenu({
                             </span>
                           </span>
 
-                          {/* ARROW */}
-
                           <ChevronRight
                             size={14}
-                            strokeWidth={1.25}
+                            strokeWidth={1.2}
                             className="
                               shrink-0
                               text-[var(--color-text-muted)]
                               transition-all
-                              duration-[var(--duration-base)]
-                              group-hover:translate-x-0.5
+                              duration-500
+                              group-hover:translate-x-1
                               group-hover:text-[var(--color-accent)]
                             "
                           />
@@ -781,8 +873,8 @@ export function MobileMenu({
                       px-4
                       py-4
                       text-left
-                      transition-colors
-                      duration-[var(--duration-base)]
+                      transition-all
+                      duration-500
                       hover:bg-[var(--color-bg-soft)]
                       disabled:cursor-not-allowed
                       disabled:opacity-60
@@ -796,12 +888,13 @@ export function MobileMenu({
                         shrink-0
                         items-center
                         justify-center
+                        rounded-full
                         border
                         border-[var(--color-border)]
                         bg-[var(--color-bg)]
                         text-[var(--color-text-secondary)]
                         transition-all
-                        duration-[var(--duration-base)]
+                        duration-500
                         group-hover:border-[var(--color-accent-soft)]
                         group-hover:bg-[var(--color-accent-soft)]
                         group-hover:text-[var(--color-text)]
@@ -809,7 +902,7 @@ export function MobileMenu({
                     >
                       <LogOut
                         size={15}
-                        strokeWidth={1.35}
+                        strokeWidth={1.3}
                       />
                     </span>
 
@@ -845,13 +938,13 @@ export function MobileMenu({
                     {!isLoggingOut && (
                       <ChevronRight
                         size={14}
-                        strokeWidth={1.25}
+                        strokeWidth={1.2}
                         className="
                           shrink-0
                           text-[var(--color-text-muted)]
                           transition-all
-                          duration-[var(--duration-base)]
-                          group-hover:translate-x-0.5
+                          duration-500
+                          group-hover:translate-x-1
                           group-hover:text-[var(--color-accent)]
                         "
                       />
@@ -869,9 +962,25 @@ export function MobileMenu({
               className="mt-8 px-5 sm:px-7"
               aria-label="Mobile navigation"
             >
-              <p className="eyebrow mb-3">
-                Explore
-              </p>
+              <div className="mb-4 flex items-end justify-between">
+                <p
+                  className="
+                    eyebrow
+                    text-[var(--color-text-muted)]
+                  "
+                >
+                  Explore
+                </p>
+
+                <span
+                  aria-hidden="true"
+                  className="
+                    h-px
+                    w-12
+                    bg-[var(--color-accent-soft)]
+                  "
+                />
+              </div>
 
               <div
                 className="
@@ -882,7 +991,7 @@ export function MobileMenu({
                 "
               >
                 {mainNavigation.map(
-                  (item) => {
+                  (item, index) => {
                     const details =
                       navigationDetails[
                         item.label
@@ -902,38 +1011,84 @@ export function MobileMenu({
                         onClick={onClose}
                         className="
                           group
+                          relative
                           flex
                           items-center
                           gap-3.5
+                          overflow-hidden
                           border-b
                           border-[var(--color-border)]
                           px-4
                           py-4
                           last:border-b-0
-                          transition-colors
-                          duration-[var(--duration-base)]
+                          transition-all
+                          duration-500
                           hover:bg-[var(--color-bg-soft)]
                         "
                       >
-                        {/* ICON */}
+                        {/* Hover sweep */}
+                        <span
+                          aria-hidden="true"
+                          className="
+                            pointer-events-none
+                            absolute
+                            inset-y-0
+                            left-0
+                            w-0
+                            bg-[var(--color-bg-soft)]
+                            transition-all
+                            duration-700
+                            ease-[var(--ease-luxury)]
+                            group-hover:w-full
+                          "
+                        />
 
+                        {/* Number */}
                         <span
                           className="
+                            relative
+                            z-10
+                            flex
+                            h-9
+                            w-7
+                            shrink-0
+                            items-center
+                            justify-center
+                            font-body
+                            text-[8px]
+                            font-medium
+                            tracking-[0.08em]
+                            text-[var(--color-text-muted)]
+                            transition-colors
+                            duration-500
+                            group-hover:text-[var(--color-accent)]
+                          "
+                        >
+                          0{index + 1}
+                        </span>
+
+                        {/* Icon */}
+                        <span
+                          className="
+                            relative
+                            z-10
                             flex
                             h-9
                             w-9
                             shrink-0
                             items-center
                             justify-center
+                            rounded-full
                             border
                             border-[var(--color-border)]
                             bg-[var(--color-bg)]
                             text-[var(--color-text-secondary)]
                             transition-all
-                            duration-[var(--duration-base)]
+                            duration-500
                             group-hover:border-[var(--color-accent-soft)]
                             group-hover:bg-[var(--color-accent-soft)]
                             group-hover:text-[var(--color-text)]
+                            group-hover:[transform:translateZ(6px)]
                           "
                         >
                           <Icon
@@ -942,16 +1097,19 @@ export function MobileMenu({
                           />
                         </span>
 
-                        {/* TITLE + DESCRIPTION */}
-
-                        <span className="min-w-0 flex-1">
+                        {/* Title + description */}
+                        <span className="relative z-10 min-w-0 flex-1">
                           <span
                             className="
                               block
-                              font-body
-                              text-[11px]
-                              font-semibold
+                              font-display
+                              text-[18px]
+                              leading-none
+                              tracking-[-0.015em]
                               text-[var(--color-text)]
+                              transition-all
+                              duration-500
+                              group-hover:translate-x-0.5
                             "
                           >
                             {item.label}
@@ -959,7 +1117,7 @@ export function MobileMenu({
 
                           <span
                             className="
-                              mt-1
+                              mt-1.5
                               block
                               font-body
                               text-[9px]
@@ -971,22 +1129,24 @@ export function MobileMenu({
                           </span>
                         </span>
 
-                        {/* ARROW */}
-
+                        {/* Arrow */}
                         <span
                           className="
+                            relative
+                            z-10
                             flex
                             h-8
                             w-8
                             shrink-0
                             items-center
                             justify-center
+                            rounded-full
                             border
                             border-[var(--color-border)]
                             bg-[var(--color-bg)]
                             text-[var(--color-text-muted)]
                             transition-all
-                            duration-[var(--duration-base)]
+                            duration-500
                             group-hover:border-[var(--color-accent-soft)]
                             group-hover:bg-[var(--color-accent-soft)]
                             group-hover:text-[var(--color-text)]
@@ -994,10 +1154,10 @@ export function MobileMenu({
                         >
                           <ChevronRight
                             size={14}
-                            strokeWidth={1.25}
+                            strokeWidth={1.2}
                             className="
                               transition-transform
-                              duration-[var(--duration-base)]
+                              duration-500
                               group-hover:translate-x-0.5
                             "
                           />
@@ -1014,9 +1174,25 @@ export function MobileMenu({
             ================================================= */}
 
             <div className="mt-7 px-5 sm:px-7">
-              <p className="eyebrow mb-3">
-                Quick Access
-              </p>
+              <div className="mb-4 flex items-end justify-between">
+                <p
+                  className="
+                    eyebrow
+                    text-[var(--color-text-muted)]
+                  "
+                >
+                  Quick Access
+                </p>
+
+                <span
+                  aria-hidden="true"
+                  className="
+                    h-px
+                    w-12
+                    bg-[var(--color-accent-soft)]
+                  "
+                />
+              </div>
 
               <div className="grid grid-cols-2 gap-2">
                 {/* SEARCH */}
@@ -1039,18 +1215,21 @@ export function MobileMenu({
                     font-medium
                     text-[var(--color-text)]
                     transition-all
-                    duration-[var(--duration-base)]
+                    duration-500
+                    hover:-translate-y-px
                     hover:border-[var(--color-text)]
                     hover:bg-[var(--color-bg-soft)]
+                    hover:shadow-[var(--shadow-xs)]
                   "
                 >
                   <Search
                     size={15}
-                    strokeWidth={1.25}
+                    strokeWidth={1.2}
                     className="
                       text-[var(--color-text-secondary)]
-                      transition-colors
-                      duration-[var(--duration-base)]
+                      transition-all
+                      duration-500
+                      group-hover:scale-105
                       group-hover:text-[var(--color-accent)]
                     "
                   />
@@ -1078,18 +1257,21 @@ export function MobileMenu({
                     font-medium
                     text-[var(--color-text)]
                     transition-all
-                    duration-[var(--duration-base)]
+                    duration-500
+                    hover:-translate-y-px
                     hover:border-[var(--color-text)]
                     hover:bg-[var(--color-bg-soft)]
+                    hover:shadow-[var(--shadow-xs)]
                   "
                 >
                   <Heart
                     size={15}
-                    strokeWidth={1.25}
+                    strokeWidth={1.2}
                     className="
                       text-[var(--color-text-secondary)]
-                      transition-colors
-                      duration-[var(--duration-base)]
+                      transition-all
+                      duration-500
+                      group-hover:scale-105
                       group-hover:text-[var(--color-accent)]
                     "
                   />
@@ -1122,19 +1304,21 @@ export function MobileMenu({
                     font-medium
                     text-[var(--color-text)]
                     transition-all
-                    duration-[var(--duration-base)]
+                    duration-500
+                    hover:-translate-y-px
                     hover:border-[var(--color-text)]
                     hover:bg-[var(--color-bg-soft)]
+                    hover:shadow-[var(--shadow-xs)]
                   "
                 >
                   <span className="flex items-center gap-3">
                     <UserRound
                       size={15}
-                      strokeWidth={1.25}
+                      strokeWidth={1.2}
                       className="
                         text-[var(--color-text-secondary)]
                         transition-colors
-                        duration-[var(--duration-base)]
+                        duration-500
                         group-hover:text-[var(--color-accent)]
                       "
                     />
@@ -1148,12 +1332,13 @@ export function MobileMenu({
 
                   <ChevronRight
                     size={15}
-                    strokeWidth={1.25}
+                    strokeWidth={1.2}
                     className="
                       text-[var(--color-text-muted)]
-                      transition-transform
-                      duration-[var(--duration-base)]
-                      group-hover:translate-x-0.5
+                      transition-all
+                      duration-500
+                      group-hover:translate-x-1
+                      group-hover:text-[var(--color-accent)]
                     "
                   />
                 </Link>
@@ -1164,26 +1349,54 @@ export function MobileMenu({
                 EDITORIAL NOTE
             ================================================= */}
 
-            <div className="px-5 pb-8 pt-8 sm:px-7">
+            <div className="px-5 pb-10 pt-9 sm:px-7">
               <div
                 className="
+                  relative
+                  overflow-hidden
                   border-t
                   border-[var(--color-border)]
-                  pt-5
+                  pt-6
                 "
               >
+                <span
+                  aria-hidden="true"
+                  className="
+                    absolute
+                    left-0
+                    top-0
+                    h-px
+                    w-16
+                    bg-[var(--color-accent)]
+                  "
+                />
+
                 <p
                   className="
                     font-display
-                    text-[21px]
+                    text-[24px]
                     italic
-                    leading-tight
+                    leading-[1.05]
+                    tracking-[-0.02em]
                     text-[var(--color-text)]
                   "
                 >
                   Made for moments
                   <br />
                   worth remembering.
+                </p>
+
+                <p
+                  className="
+                    mt-3
+                    font-body
+                    text-[8px]
+                    uppercase
+                    tracking-[0.16em]
+                    text-[var(--color-text-muted)]
+                  "
+                >
+                  Aayesha Fashion
                 </p>
               </div>
             </div>
@@ -1244,12 +1457,13 @@ export function MobileMenu({
                     shrink-0
                     items-center
                     justify-center
+                    rounded-full
                     border
                     border-[var(--color-border)]
                     bg-[var(--color-surface)]
                     text-[var(--color-text-secondary)]
                     transition-all
-                    duration-[var(--duration-base)]
+                    duration-500
                     hover:border-[var(--color-text)]
                     hover:bg-[var(--color-text)]
                     hover:text-[var(--color-text-inverse)]
@@ -1257,7 +1471,7 @@ export function MobileMenu({
                 >
                   <UserRound
                     size={15}
-                    strokeWidth={1.25}
+                    strokeWidth={1.2}
                   />
                 </Link>
               </div>
