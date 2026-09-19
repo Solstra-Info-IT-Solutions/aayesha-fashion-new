@@ -183,15 +183,14 @@ function CategoryCard({
               src={category.image}
               alt={category.name}
               fill
-              sizes="
-                (max-width: 639px) 32vw,
-                (max-width: 1023px) 20vw,
-                150px
-              "
+              sizes="(max-width: 639px) 92px, (max-width: 1023px) 112px, 132px"
               className="category-card__image-element"
             />
           ) : (
-            <div className="category-card__placeholder">
+            <div
+              className="category-card__placeholder"
+              aria-hidden="true"
+            >
               <Sparkles
                 size={18}
                 strokeWidth={1.1}
