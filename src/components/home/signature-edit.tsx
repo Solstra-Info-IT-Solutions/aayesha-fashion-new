@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import { ArrowUpRight } from "lucide-react";
 
 import { getProducts } from "@/lib/api/products";
@@ -19,47 +18,52 @@ export async function SignatureEdit() {
   const signatureProducts = response.products;
 
   return (
-    <section className="bg-[var(--color-ivory)]">
+    <section
+      id="signature-edit"
+      className="signature-edit"
+    >
       <Container>
-        <div className="py-24 sm:py-28 lg:py-32 xl:py-36">
+        <div className="signature-edit__inner">
           {/* =====================================================
               TOP LINE
           ===================================================== */}
 
-          <div className="border-t border-[var(--color-border)] pt-5 sm:pt-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <span className="h-px w-10 bg-[var(--color-rose-dark)]" />
+          <div className="signature-edit__topline">
+            <div className="signature-edit__eyebrow">
+              <span
+                aria-hidden="true"
+                className="signature-edit__eyebrow-line"
+              />
 
-                <p className="text-[8px] font-semibold uppercase tracking-[0.28em] text-[var(--color-text-muted)]">
-                  The Signature Edit
-                </p>
-              </div>
-
-              <span className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
-                {String(signatureProducts.length).padStart(2, "0")} Pieces
-              </span>
+              <p className="signature-edit__eyebrow-text">
+                The Signature Edit
+              </p>
             </div>
+
+            <span className="signature-edit__count">
+              {String(signatureProducts.length).padStart(2, "0")} Pieces
+            </span>
           </div>
 
           {/* =====================================================
               SECTION HEADER
           ===================================================== */}
 
-          <div className="mt-10 grid gap-8 lg:mt-14 lg:grid-cols-[1fr_320px] lg:items-end lg:gap-16">
-            <div>
-              <h2 className="font-display text-[3.8rem] leading-[0.9] tracking-[-0.045em] text-[var(--color-charcoal)] sm:text-7xl lg:text-[5.5rem] xl:text-[6.5rem]">
-                The pieces
-                <span className="block italic text-[var(--color-rose-dark)]">
+          <div className="signature-edit__header">
+            <div className="signature-edit__heading">
+              <h2 className="signature-edit__title">
+                The pieces{" "}
+                <span className="signature-edit__title-accent">
                   we love now.
                 </span>
               </h2>
             </div>
 
-            <div className="border-l border-[var(--color-border)] pl-5 pb-1 sm:pl-6">
-              <p className="text-sm leading-7 text-[var(--color-text-secondary)]">
-                A refined selection of our most considered silhouettes,
-                designed to make every occasion feel unforgettable.
+            <div className="signature-edit__intro">
+              <p>
+                A refined selection of our most considered
+                silhouettes, designed to make every occasion
+                feel unforgettable.
               </p>
             </div>
           </div>
@@ -69,7 +73,7 @@ export async function SignatureEdit() {
           ===================================================== */}
 
           {signatureProducts.length > 0 ? (
-            <div className="mt-14 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-x-7 sm:gap-y-14 lg:mt-20 lg:grid-cols-3 lg:gap-8 xl:gap-10">
+            <div className="signature-edit__products">
               {signatureProducts.map((product, index) => (
                 <ProductCard
                   key={product.id}
@@ -79,12 +83,18 @@ export async function SignatureEdit() {
               ))}
             </div>
           ) : (
-            <div className="mt-14 border-y border-[var(--color-border)] py-16 text-center lg:mt-20">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+            <div className="signature-edit__empty">
+              <div className="signature-edit__empty-mark">
+                <span />
+                <span />
+                <span />
+              </div>
+
+              <p className="signature-edit__empty-eyebrow">
                 The Signature Edit
               </p>
 
-              <p className="mt-3 font-display text-2xl text-[var(--color-charcoal)]">
+              <p className="signature-edit__empty-title">
                 Our signature pieces are being curated.
               </p>
             </div>
@@ -94,18 +104,22 @@ export async function SignatureEdit() {
               BOTTOM CTA
           ===================================================== */}
 
-          <div className="mt-16 flex justify-center border-t border-[var(--color-border)] pt-8 sm:mt-20">
+          <div className="signature-edit__footer">
             <Link
               href="/shop?featured=true"
-              className="group inline-flex items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--color-charcoal)] transition-colors duration-300 hover:text-[var(--color-rose-dark)]"
+              className="signature-edit__cta"
             >
-              Explore the complete collection
+              <span>
+                Explore the complete collection
+              </span>
 
-              <span className="flex h-10 w-10 items-center justify-center border border-[var(--color-charcoal)] transition-all duration-300 group-hover:border-[var(--color-rose-dark)] group-hover:bg-[var(--color-rose-dark)] group-hover:text-white">
+              <span
+                aria-hidden="true"
+                className="signature-edit__cta-icon"
+              >
                 <ArrowUpRight
                   size={16}
-                  strokeWidth={1.3}
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  strokeWidth={1.4}
                 />
               </span>
             </Link>

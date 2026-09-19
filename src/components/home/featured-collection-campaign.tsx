@@ -18,67 +18,60 @@ export async function FeaturedCollectionCampaign() {
   return (
     <section
       id="featured-collection"
-      className="relative overflow-hidden bg-[var(--color-charcoal)]"
+      className="featured-collection"
     >
       {/* Campaign */}
-      <div className="relative min-h-[500px] sm:min-h-[560px] lg:min-h-[650px] xl:min-h-[700px]">
+      <div className="featured-collection__hero">
 
         <Image
           src={data.image}
           alt={data.imageAlt}
           fill
           sizes="100vw"
-          className="object-cover object-center"
+          className="featured-collection__image"
           priority={false}
         />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+        {/* Image Overlay */}
+        <div
+          className="featured-collection__overlay featured-collection__overlay--horizontal"
+          aria-hidden="true"
+        />
+
+        <div
+          className="featured-collection__overlay featured-collection__overlay--vertical"
+          aria-hidden="true"
+        />
 
         {/* Content */}
-        <Container className="relative z-10 h-full">
-          <div className="flex min-h-[500px] flex-col justify-end pb-8 sm:min-h-[560px] sm:pb-10 lg:min-h-[650px] lg:pb-14 xl:min-h-[700px] xl:pb-16">
-
-            <div className="max-w-[580px]">
+        <Container className="featured-collection__container">
+          <div className="featured-collection__content">
+            <div className="featured-collection__content-inner">
 
               {/* Eyebrow */}
-              <div className="flex items-center gap-3">
-                <span className="h-px w-7 bg-[var(--color-rose-light)]" />
+              <div className="featured-collection__eyebrow">
+                <span
+                  className="featured-collection__eyebrow-line"
+                  aria-hidden="true"
+                />
 
-                <p className="text-[8px] font-semibold uppercase tracking-[0.28em] text-white/70 sm:text-[9px]">
+                <p>
                   {data.eyebrow}
                 </p>
               </div>
 
               {/* Heading */}
-              <h2
-                className="
-                  mt-4
-                  max-w-[560px]
-                  font-display
-                  text-[3rem]
-                  font-medium
-                  leading-[0.92]
-                  tracking-[-0.04em]
-                  text-white
-                  sm:mt-5
-                  sm:text-[4rem]
-                  md:text-[4.8rem]
-                  lg:text-[5.5rem]
-                  xl:text-[6rem]
-                "
-              >
+              <h2 className="featured-collection__title">
                 {formatCampaignTitle(data.title)}
               </h2>
 
               {/* Description */}
-              <p className="mt-5 max-w-[420px] text-[13px] leading-6 text-white/70 sm:mt-6 sm:text-sm sm:leading-7">
+              <p className="featured-collection__description">
                 {data.description}
               </p>
 
               {/* CTA */}
-              <div className="mt-6 sm:mt-7">
+              <div className="featured-collection__cta">
                 <LinkButton
                   href={data.ctaHref}
                   variant="darkOutline"
@@ -86,7 +79,7 @@ export async function FeaturedCollectionCampaign() {
                   icon={
                     <span
                       aria-hidden="true"
-                      className="text-base"
+                      className="featured-collection__cta-icon"
                     >
                       ↗
                     </span>
@@ -95,31 +88,35 @@ export async function FeaturedCollectionCampaign() {
                   {data.ctaLabel}
                 </LinkButton>
               </div>
+
             </div>
           </div>
         </Container>
 
         {/* Brand Label */}
-        <div className="absolute right-5 top-5 z-20 hidden sm:block lg:right-8 lg:top-8">
-          <div className="flex items-center gap-3">
-            <span className="text-[8px] font-semibold uppercase tracking-[0.25em] text-white/40">
+        <div className="featured-collection__brand-label">
+          <div className="featured-collection__brand-label-inner">
+            <span>
               {data.brandLabel}
             </span>
 
-            <span className="h-px w-7 bg-white/20" />
+            <span
+              className="featured-collection__brand-line"
+              aria-hidden="true"
+            />
           </div>
         </div>
       </div>
 
       {/* Bottom Strip */}
-      <div className="border-t border-white/10 bg-[var(--color-charcoal)]">
+      <div className="featured-collection__strip">
         <Container>
-          <div className="flex items-center justify-between gap-4 py-4 sm:py-5">
-            <p className="text-[7px] font-semibold uppercase tracking-[0.25em] text-white/40 sm:text-[8px]">
+          <div className="featured-collection__strip-inner">
+            <p className="featured-collection__strip-label">
               {data.bottomLabel}
             </p>
 
-            <p className="text-right font-display text-base italic text-white/70 sm:text-lg">
+            <p className="featured-collection__strip-title">
               {data.bottomTitle}
             </p>
           </div>
@@ -128,6 +125,7 @@ export async function FeaturedCollectionCampaign() {
     </section>
   );
 }
+
 
 /* =========================================================
    TITLE FORMATTER
@@ -138,7 +136,7 @@ function formatCampaignTitle(title: string) {
 
   if (words.length <= 1) {
     return (
-      <span className="italic text-[var(--color-rose-light)]">
+      <span className="featured-collection__title-accent">
         {title}
       </span>
     );
@@ -150,7 +148,7 @@ function formatCampaignTitle(title: string) {
     <>
       {words.join(" ")}
 
-      <span className="block italic text-[var(--color-rose-light)]">
+      <span className="featured-collection__title-accent">
         {lastWord}
       </span>
     </>

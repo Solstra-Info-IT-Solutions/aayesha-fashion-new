@@ -40,90 +40,105 @@ export function WhyChooseUs({
   return (
     <section
       id="why-ayesha"
-      className="bg-[var(--color-ivory)]"
+      className="why-choose-us"
     >
       <Container>
-        <div className="py-6 sm:py-8 lg:py-10">
+        <div className="why-choose-us__inner">
+          {/* =====================================================
+              HEADER
+          ===================================================== */}
 
-          {/* Header */}
-          <div className="text-center">
-            <h2
-              className="
-                font-display
-                text-[2.7rem]
-                font-medium
-                leading-[0.95]
-                tracking-[-0.04em]
-                text-[var(--color-charcoal)]
-                sm:text-[3.5rem]
-                md:text-[4.2rem]
-                lg:text-[4.8rem]
-                xl:text-[5.2rem]
-              "
-            >
+          <div className="why-choose-us__header">
+            <div className="why-choose-us__eyebrow">
+              <span
+                aria-hidden="true"
+                className="why-choose-us__eyebrow-line"
+              />
+
+              <span className="why-choose-us__eyebrow-text">
+                The Aayesha Difference
+              </span>
+
+              <span
+                aria-hidden="true"
+                className="why-choose-us__eyebrow-line"
+              />
+            </div>
+
+            <h2 className="why-choose-us__title">
               {data.title}
             </h2>
 
-            <p className="mx-auto mt-3 max-w-[520px] text-[13px] leading-6 text-[var(--color-text-secondary)] sm:mt-4 sm:text-sm sm:leading-7">
+            <p className="why-choose-us__description">
               {data.description}
             </p>
           </div>
 
-          {/* Values */}
-          {values.length > 0 && (
-            <div className="mt-7 grid gap-7 sm:mt-9 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4 lg:gap-6">
+          {/* =====================================================
+              VALUES
+          ===================================================== */}
 
-              {values.map((value) => {
+          {values.length > 0 && (
+            <div className="why-choose-us__values">
+              {values.map((value, index) => {
                 const Icon = getIcon(value.icon);
 
                 return (
-                  <div
+                  <article
                     key={value.id}
-                    className="flex flex-col items-center px-4 text-center"
+                    className="why-choose-us__value"
                   >
-                    {/* Icon */}
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-rose-dark)]">
-                      <Icon
-                        size={16}
-                        strokeWidth={1.2}
-                      />
+                    {/* NUMBER */}
+                    <span className="why-choose-us__number">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    {/* Title */}
-                    <h3
-                      className="
-                        mt-4
-                        font-display
-                        text-[1.3rem]
-                        font-medium
-                        leading-none
-                        tracking-[-0.02em]
-                        text-[var(--color-charcoal)]
-                        sm:text-[1.45rem]
-                      "
-                    >
-                      {value.title}
-                    </h3>
+                    {/* ICON */}
+                    <div className="why-choose-us__icon">
+                      <Icon
+                        size={19}
+                        strokeWidth={1.2}
+                        aria-hidden="true"
+                      />
+                    </div>
 
-                    {/* Description */}
-                    <p className="mt-2.5 max-w-[230px] text-[11px] leading-5 text-[var(--color-text-secondary)] sm:text-[12px] sm:leading-6">
-                      {value.description}
-                    </p>
-                  </div>
+                    {/* CONTENT */}
+                    <div className="why-choose-us__value-content">
+                      <h3 className="why-choose-us__value-title">
+                        {value.title}
+                      </h3>
+
+                      <p className="why-choose-us__value-description">
+                        {value.description}
+                      </p>
+                    </div>
+                  </article>
                 );
               })}
             </div>
           )}
 
-          {/* Closing Statement */}
+          {/* =====================================================
+              CLOSING STATEMENT
+          ===================================================== */}
+
           {data.closingStatement && (
-            <div className="mt-7 text-center sm:mt-9">
-              <p className="font-display text-[1.25rem] italic leading-[1.1] tracking-[-0.02em] text-[var(--color-charcoal)] sm:text-[1.6rem]">
+            <div className="why-choose-us__closing">
+              <span
+                aria-hidden="true"
+                className="why-choose-us__closing-line"
+              />
+
+              <p className="why-choose-us__closing-text">
                 {data.closingStatement}
               </p>
+
+              <span
+                aria-hidden="true"
+                className="why-choose-us__closing-line"
+              />
             </div>
           )}
-
         </div>
       </Container>
     </section>

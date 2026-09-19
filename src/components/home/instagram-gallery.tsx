@@ -13,127 +13,77 @@ export function InstagramGallery({
 }: InstagramGalleryProps) {
   const posts = data.posts
     .filter((post) => post.isActive)
-    .sort(
-      (a, b) => a.sortOrder - b.sortOrder
-    );
+    .sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (
-    <section
-      id="instagram"
-      className="bg-[var(--color-ivory)]"
-    >
+    <section id="instagram" className="instagram-gallery">
       <Container>
-        <div className="py-7 sm:py-9 lg:py-11">
+        <div className="instagram-gallery__inner">
           {/* HEADER */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-7 bg-[var(--color-rose-dark)]" />
+          <div className="instagram-gallery__top">
+            <div className="instagram-gallery__eyebrow">
+              <span
+                aria-hidden="true"
+                className="instagram-gallery__eyebrow-line"
+              />
 
-              <p className="text-[8px] font-semibold uppercase tracking-[0.28em] text-[var(--color-text-secondary)] sm:text-[9px]">
+              <p className="instagram-gallery__eyebrow-text">
                 {data.eyebrow}
               </p>
             </div>
 
-            <span className="font-display text-sm text-[var(--color-text-muted)] sm:text-base">
+            <span className="instagram-gallery__count">
               {String(posts.length).padStart(2, "0")}
             </span>
           </div>
 
           {/* TITLE */}
-          <div className="mt-7 text-center sm:mt-9">
-            <h2
-              className="
-                font-display
-                text-[2.7rem]
-                font-medium
-                leading-[0.95]
-                tracking-[-0.045em]
-                text-[var(--color-charcoal)]
-                sm:text-[3.6rem]
-                md:text-[4.3rem]
-                lg:text-[4.9rem]
-                xl:text-[5.2rem]
-              "
-            >
+          <div className="instagram-gallery__heading">
+            <h2 className="instagram-gallery__title">
               {data.title.lineOne}{" "}
-              <span className="italic text-[var(--color-rose-dark)]">
+              <span className="instagram-gallery__title-accent">
                 {data.title.lineTwo}
               </span>
             </h2>
 
-            <p className="mt-3 text-[9px] font-semibold uppercase tracking-[0.26em] text-[var(--color-text-muted)] sm:text-[10px]">
+            <p className="instagram-gallery__handle">
               {data.handle}
             </p>
           </div>
 
           {/* INSTAGRAM GRID */}
           {posts.length > 0 && (
-            <div className="mt-7 grid grid-cols-2 gap-2.5 sm:mt-9 sm:grid-cols-3 sm:gap-4 lg:mt-10 lg:gap-5">
+            <div className="instagram-gallery__grid">
               {posts.map((post) => (
                 <a
                   key={post.id}
-                  href={
-                    post.href ||
-                    data.instagramUrl
-                  }
+                  href={post.href || data.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${post.alt} on Instagram`}
-                  className="group relative block overflow-hidden bg-[var(--color-warm-gray)]"
+                  className="instagram-gallery__item"
                 >
-                  <div className="relative aspect-[4/5] overflow-hidden">
+                  <div className="instagram-gallery__image-wrap">
                     <Image
                       src={post.src}
                       alt={post.alt}
                       fill
                       sizes="
-                        (max-width: 639px) 50vw,
-                        (max-width: 1023px) 33vw,
-                        33vw
+                        (max-width: 639px) 44vw,
+                        (max-width: 1023px) 30vw,
+                        22vw
                       "
-                      className="
-                        object-cover
-                        object-center
-                        transition-transform
-                        duration-[1000ms]
-                        ease-out
-                        group-hover:scale-[1.035]
-                      "
+                      className="instagram-gallery__image"
                     />
 
-                    {/* HOVER OVERLAY */}
                     <div
-                      className="
-                        absolute
-                        inset-0
-                        bg-black/0
-                        transition-colors
-                        duration-500
-                        group-hover:bg-black/20
-                      "
+                      aria-hidden="true"
+                      className="instagram-gallery__overlay"
                     />
 
-                    {/* HOVER ICON */}
                     <span
-                      className="
-                        absolute
-                        bottom-3
-                        right-3
-                        flex
-                        h-8
-                        w-8
-                        items-center
-                        justify-center
-                        border
-                        border-white/50
-                        bg-black/10
-                        text-white
-                        opacity-0
-                        backdrop-blur-sm
-                        transition-all
-                        duration-300
-                        group-hover:opacity-100
-                      "
+                      aria-hidden="true"
+                      className="instagram-gallery__icon"
                     >
                       ↗
                     </span>
@@ -145,7 +95,7 @@ export function InstagramGallery({
 
           {/* CTA */}
           {data.instagramUrl && (
-            <div className="mt-7 flex justify-center sm:mt-9">
+            <div className="instagram-gallery__cta">
               <LinkButton
                 href={data.instagramUrl}
                 target="_blank"

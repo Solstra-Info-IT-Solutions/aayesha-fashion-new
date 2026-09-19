@@ -25,8 +25,7 @@ export function Testimonials({
   const testimonials: HomepageTestimonial[] =
     data.testimonials
       .filter(
-        (testimonial) =>
-          testimonial.isActive
+        (testimonial) => testimonial.isActive
       )
       .sort(
         (a, b) =>
@@ -48,7 +47,7 @@ export function Testimonials({
   }, [activeIndex, total]);
 
   function next() {
-    if (total === 0) {
+    if (total <= 1) {
       return;
     }
 
@@ -59,7 +58,7 @@ export function Testimonials({
   }
 
   function previous() {
-    if (total === 0) {
+    if (total <= 1) {
       return;
     }
 
@@ -94,95 +93,82 @@ export function Testimonials({
   return (
     <section
       id="testimonials"
-      className="bg-[var(--color-cream)]"
+      className="testimonials"
     >
       <Container>
-        <div className="py-7 sm:py-9 lg:py-11">
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-7 bg-[var(--color-rose-dark)]" />
+        <div className="testimonials__inner">
+          {/* =====================================================
+              HEADER
+          ===================================================== */}
 
-              <p className="text-[8px] font-semibold uppercase tracking-[0.28em] text-[var(--color-text-secondary)] sm:text-[9px]">
+          <div className="testimonials__header">
+            <div className="testimonials__eyebrow">
+              <span
+                aria-hidden="true"
+                className="testimonials__eyebrow-line"
+              />
+
+              <p className="testimonials__eyebrow-text">
                 Client Stories
               </p>
             </div>
 
-            <span className="font-display text-sm text-[var(--color-text-muted)] sm:text-base">
-              {String(activeIndex + 1).padStart(2, "0")} /{" "}
+            <span className="testimonials__counter">
+              {String(activeIndex + 1).padStart(2, "0")}{" "}
+              /{" "}
               {String(total).padStart(2, "0")}
             </span>
           </div>
 
-          {/* Testimonial */}
-          <div className="mx-auto mt-8 max-w-5xl text-center sm:mt-10 lg:mt-12">
+          {/* =====================================================
+              TESTIMONIAL
+          ===================================================== */}
+
+          <div className="testimonials__content">
             <Quote
-              size={24}
+              aria-hidden="true"
+              className="testimonials__quote-icon"
+              size={26}
               strokeWidth={1}
-              className="mx-auto text-[var(--color-rose-dark)]"
             />
 
             <blockquote
               key={testimonial.id}
-              className="
-                mt-5
-                font-display
-                text-[2rem]
-                font-medium
-                leading-[1.06]
-                tracking-[-0.03em]
-                text-[var(--color-charcoal)]
-                sm:mt-6
-                sm:text-[2.7rem]
-                md:text-[3.2rem]
-                lg:text-[3.8rem]
-                xl:text-[4.2rem]
-              "
+              className="testimonials__quote"
             >
               “{testimonial.quote}”
             </blockquote>
 
-            {/* Customer */}
-            <div className="mt-6 sm:mt-8">
-              <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[var(--color-charcoal)]">
+            <div className="testimonials__author">
+              <p className="testimonials__name">
                 {testimonial.name}
               </p>
 
-              <p className="mt-1.5 text-[8px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+              <p className="testimonials__location">
                 {testimonial.location}
               </p>
             </div>
           </div>
 
-          {/* Controls */}
+          {/* =====================================================
+              CONTROLS
+          ===================================================== */}
+
           {total > 1 && (
-            <div className="mt-8 flex items-center justify-center gap-2.5 sm:mt-10">
+            <div className="testimonials__controls">
               <button
                 type="button"
                 onClick={previous}
                 aria-label="Previous testimonial"
-                className="
-                  flex
-                  h-9
-                  w-9
-                  items-center
-                  justify-center
-                  border
-                  border-[var(--color-border-dark)]
-                  text-[var(--color-charcoal)]
-                  transition-all
-                  duration-300
-                  hover:bg-[var(--color-charcoal)]
-                  hover:text-white
-                "
+                className="testimonials__arrow"
               >
                 <ArrowLeft
-                  size={14}
-                  strokeWidth={1.3}
+                  size={16}
+                  strokeWidth={1.4}
                 />
               </button>
 
-              <div className="flex items-center gap-1.5 px-1">
+              <div className="testimonials__pagination">
                 {testimonials.map(
                   (item, index) => (
                     <button
@@ -197,15 +183,17 @@ export function Testimonials({
                       onClick={() =>
                         setActiveIndex(index)
                       }
-                      className="flex h-5 items-center"
+                      className="testimonials__pagination-button"
                     >
                       <span
                         className={[
-                          "h-px transition-all duration-500",
+                          "testimonials__pagination-line",
                           index === activeIndex
-                            ? "w-7 bg-[var(--color-charcoal)]"
-                            : "w-3.5 bg-[var(--color-border-dark)]",
-                        ].join(" ")}
+                            ? "is-active"
+                            : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
                       />
                     </button>
                   )
@@ -216,35 +204,15 @@ export function Testimonials({
                 type="button"
                 onClick={next}
                 aria-label="Next testimonial"
-                className="
-                  flex
-                  h-9
-                  w-9
-                  items-center
-                  justify-center
-                  border
-                  border-[var(--color-border-dark)]
-                  text-[var(--color-charcoal)]
-                  transition-all
-                  duration-300
-                  hover:bg-[var(--color-charcoal)]
-                  hover:text-white
-                "
+                className="testimonials__arrow"
               >
                 <ArrowRight
-                  size={14}
-                  strokeWidth={1.3}
+                  size={16}
+                  strokeWidth={1.4}
                 />
               </button>
             </div>
           )}
-
-          {/* Closing line */}
-          <div className="mt-7 text-center sm:mt-9">
-            <p className="text-[8px] font-semibold uppercase tracking-[0.26em] text-[var(--color-text-muted)]">
-              Loved by women, worn with confidence
-            </p>
-          </div>
         </div>
       </Container>
     </section>

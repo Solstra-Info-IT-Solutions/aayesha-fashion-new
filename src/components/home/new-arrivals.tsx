@@ -18,186 +18,137 @@ export async function NewArrivals() {
   const newArrivals = response.products;
 
   return (
-    <section
-      id="new-arrivals"
-      className="
-        bg-[var(--color-bg-soft)]
-        py-14
-        sm:py-16
-        lg:py-20
-      "
-    >
+    <section id="new-arrivals" className="new-arrivals">
       <Container>
-        {/* =====================================================
-            SECTION HEADER
-        ===================================================== */}
+        <div className="new-arrivals__inner">
+          {/* =====================================================
+              SECTION HEADER
+          ===================================================== */}
 
-        <div
-          className="
-            flex
-            flex-col
-            gap-4
-            sm:flex-row
-            sm:items-end
-            sm:justify-between
-          "
-        >
-          <div>
-            <p className="eyebrow">
-              New Arrivals
-            </p>
+          <div className="new-arrivals__header">
+            <div className="new-arrivals__heading-group">
+              <div className="new-arrivals__eyebrow">
+                <span
+                  aria-hidden="true"
+                  className="new-arrivals__eyebrow-line"
+                />
 
-            <h2
-              className="
-                mt-3
-                font-display
-                text-3xl
-                leading-tight
-                tracking-[-0.025em]
-                text-[var(--color-text)]
-                sm:text-4xl
-                lg:text-[42px]
-              "
-            >
-              Fresh from Aayesha
-            </h2>
+                <p className="new-arrivals__eyebrow-text">
+                  New Arrivals
+                </p>
+              </div>
+
+              <h2 className="new-arrivals__title">
+                Fresh from{" "}
+                <span className="new-arrivals__title-accent">
+                  Aayesha
+                </span>
+              </h2>
+
+              <p className="new-arrivals__description">
+                Discover the latest silhouettes, details and
+                statement pieces curated for the season.
+              </p>
+            </div>
+
+            {/* Desktop CTA */}
+
+            {newArrivals.length > 0 && (
+              <div className="new-arrivals__desktop-cta">
+                <LinkButton
+                  href="/collections/new-arrivals"
+                  variant="secondary"
+                  size="md"
+                  icon={
+                    <ArrowUpRight
+                      size={15}
+                      strokeWidth={1.4}
+                    />
+                  }
+                >
+                  View All
+                </LinkButton>
+              </div>
+            )}
           </div>
 
-          {/* Desktop CTA */}
+          {/* =====================================================
+              PRODUCTS
+          ===================================================== */}
 
-          {newArrivals.length > 0 && (
-            <div className="hidden sm:block">
-              <LinkButton
-                href="/collections/new-arrivals"
-                variant="secondary"
-                size="md"
-                icon={
-                  <ArrowUpRight
-                    size={15}
-                    strokeWidth={1.25}
-                  />
-                }
-              >
-                View All
-              </LinkButton>
+          {newArrivals.length > 0 ? (
+            <>
+              <div className="new-arrivals__products">
+                <ProductCarousel
+                  products={newArrivals}
+                  ariaLabel="New arrivals products"
+                />
+              </div>
+
+              {/* Mobile CTA */}
+
+              <div className="new-arrivals__mobile-cta">
+                <LinkButton
+                  href="/collections/new-arrivals"
+                  variant="secondary"
+                  size="md"
+                  icon={
+                    <ArrowUpRight
+                      size={15}
+                      strokeWidth={1.4}
+                    />
+                  }
+                >
+                  View All New Arrivals
+                </LinkButton>
+              </div>
+            </>
+          ) : (
+            /* ===================================================
+               COMING SOON
+            =================================================== */
+
+            <div className="new-arrivals__empty">
+              <div className="new-arrivals__empty-inner">
+                <div className="new-arrivals__empty-mark">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+
+                <p className="new-arrivals__empty-eyebrow">
+                  New Arrivals
+                </p>
+
+                <h3 className="new-arrivals__empty-title">
+                  Something new is coming.
+                </h3>
+
+                <p className="new-arrivals__empty-description">
+                  Our latest styles are on their way.
+                  Explore the current collection while
+                  you wait.
+                </p>
+
+                <div className="new-arrivals__empty-cta">
+                  <LinkButton
+                    href="/shop"
+                    variant="secondary"
+                    size="md"
+                    icon={
+                      <ArrowUpRight
+                        size={15}
+                        strokeWidth={1.4}
+                      />
+                    }
+                  >
+                    Explore Shop
+                  </LinkButton>
+                </div>
+              </div>
             </div>
           )}
         </div>
-
-        {/* =====================================================
-            PRODUCTS / COMING SOON
-        ===================================================== */}
-
-        {newArrivals.length > 0 ? (
-          <>
-            <div
-              className="
-                mt-8
-                sm:mt-10
-                lg:mt-12
-              "
-            >
-              <ProductCarousel
-                products={newArrivals}
-                ariaLabel="New arrivals products"
-              />
-            </div>
-
-            {/* Mobile CTA */}
-
-            <div
-              className="
-                mt-8
-                flex
-                justify-center
-                sm:hidden
-              "
-            >
-              <LinkButton
-                href="/collections/new-arrivals"
-                variant="secondary"
-                size="md"
-                icon={
-                  <ArrowUpRight
-                    size={15}
-                    strokeWidth={1.25}
-                  />
-                }
-              >
-                View All New Arrivals
-              </LinkButton>
-            </div>
-          </>
-        ) : (
-          /* ===================================================
-             COMING SOON
-          =================================================== */
-
-          <div
-            className="
-              mt-8
-              border-y
-              border-[var(--color-border)]
-              px-5
-              py-16
-              text-center
-              sm:mt-10
-              sm:px-8
-              sm:py-20
-            "
-          >
-            <p className="eyebrow">
-              New Arrivals
-            </p>
-
-            <h3
-              className="
-                mt-4
-                font-display
-                text-2xl
-                leading-tight
-                tracking-[-0.02em]
-                text-[var(--color-text)]
-                sm:text-3xl
-              "
-            >
-              Coming Soon
-            </h3>
-
-            <p
-              className="
-                mx-auto
-                mt-3
-                max-w-md
-                font-body
-                text-xs
-                leading-6
-                text-[var(--color-text-secondary)]
-                sm:text-sm
-              "
-            >
-              Our latest styles are on their way.
-              Check back soon for new arrivals from
-              Aayesha Fashion.
-            </p>
-
-            <div className="mt-7 flex justify-center">
-              <LinkButton
-                href="/shop"
-                variant="secondary"
-                size="md"
-                icon={
-                  <ArrowUpRight
-                    size={15}
-                    strokeWidth={1.25}
-                  />
-                }
-              >
-                Explore Shop
-              </LinkButton>
-            </div>
-          </div>
-        )}
       </Container>
     </section>
   );
