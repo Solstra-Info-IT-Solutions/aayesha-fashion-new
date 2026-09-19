@@ -26,76 +26,43 @@ export function DesktopNavigation() {
       className="
         flex
         items-center
-        gap-6
-        xl:gap-8
+        gap-7
+        xl:gap-10
+        2xl:gap-12
       "
     >
-      {navigation.map((item, index) => (
+      {navigation.map((item) => (
         <Link
           key={item.href}
           href={item.href}
           className="
             group
             relative
-            flex
+            inline-flex
             items-center
-            gap-2
             whitespace-nowrap
             py-3
             font-body
-            text-[10px]
+            text-[13px]
             font-medium
-            uppercase
-            tracking-[0.16em]
+            tracking-[0.045em]
             text-[var(--color-text)]
             transition-all
-            duration-500
+            duration-300
             ease-[var(--ease-luxury)]
-            hover:-translate-y-px
             hover:text-[var(--color-accent-dark)]
-            xl:text-[10.5px]
+            xl:text-[14px]
           "
         >
-          {/* Editorial index */}
-          <span
-            aria-hidden="true"
-            className="
-              font-body
-              text-[7px]
-              font-medium
-              tracking-[0.08em]
-              text-[var(--color-text-muted)]
-              opacity-50
-              transition-all
-              duration-500
-              ease-[var(--ease-luxury)]
-              group-hover:-translate-y-0.5
-              group-hover:text-[var(--color-accent)]
-              group-hover:opacity-100
-            "
-          >
-            0{index + 1}
-          </span>
-
-          {/* Navigation label */}
-          <span
-            className="
-              relative
-              inline-block
-              transition-all
-              duration-500
-              ease-[var(--ease-luxury)]
-              group-hover:tracking-[0.19em]
-            "
-          >
+          <span className="relative">
             {item.label}
 
-            {/* Primary underline */}
+            {/* Main underline */}
             <span
               aria-hidden="true"
               className="
                 absolute
-                -bottom-1.5
+                -bottom-2
                 left-0
                 h-px
                 w-full
@@ -110,19 +77,18 @@ export function DesktopNavigation() {
               "
             />
 
-            {/* Highlight line */}
+            {/* Secondary underline accent */}
             <span
               aria-hidden="true"
               className="
                 absolute
-                -bottom-1.5
+                -bottom-2
                 left-0
                 h-px
-                w-1/3
+                w-5
                 origin-left
                 scale-x-0
                 bg-[var(--color-text)]
-                opacity-50
                 transition-transform
                 delay-100
                 duration-500
