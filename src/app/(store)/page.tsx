@@ -92,7 +92,7 @@ export default async function HomePage() {
           Source: Marketing API
       =================================================== */}
 
-      {/*<FeaturedCollectionCampaign />*/}
+      <FeaturedCollectionCampaign />
 
       {/* ===================================================
           BEST SELLERS

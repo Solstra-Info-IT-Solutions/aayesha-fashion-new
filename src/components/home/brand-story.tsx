@@ -89,16 +89,6 @@ export function BrandStory({
               </div>
             </div>
           </div>
-
-          {/* Statement */}
-          {data.statement && (
-            <div className="brand-story__statement">
-              <p className="brand-story__statement-text">
-                {data.statement}
-              </p>
-            </div>
-          )}
-
         </div>
       </Container>
     </section>
