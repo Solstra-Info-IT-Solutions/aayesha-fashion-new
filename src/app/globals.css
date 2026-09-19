@@ -3,49 +3,62 @@
 @tailwind utilities;
 
 /* =========================================================
-   AYESHA FASHION — DESIGN SYSTEM
-   Single source of truth for storefront UI
+   AAYESHA FASHION
+   PREMIUM LUXURY DESIGN SYSTEM
+   Visual layer only — business logic untouched
 ========================================================= */
 
 :root {
   /* =======================================================
-     COLORS — LUXURY NEUTRAL PALETTE
+     COLOR SYSTEM
   ======================================================= */
 
-  --color-bg: #f7f3ee;
-  --color-bg-soft: #eee7de;
-  --color-bg-subtle: #f2ede7;
+  --color-bg: #f6f1eb;
+  --color-bg-warm: #f2ebe3;
+  --color-bg-soft: #ebe2d8;
+  --color-bg-subtle: #faf7f3;
 
   --color-surface: #ffffff;
-  --color-surface-soft: #fbf9f6;
+  --color-surface-soft: #fcfaf7;
+  --color-surface-warm: #f8f2ec;
 
-  --color-text: #211f1d;
-  --color-text-secondary: #716b65;
-  --color-text-muted: #99918a;
+  --color-ivory: #f8f4ef;
+  --color-pearl: #fffdfa;
+  --color-cream: #efe5da;
+  --color-champagne: #d9c1a7;
+  --color-nude: #cbb09d;
+
+  --color-text: #1e1a18;
+  --color-text-soft: #302a26;
+  --color-text-secondary: #716861;
+  --color-text-muted: #9a918a;
+  --color-text-faint: #b8afa7;
   --color-text-inverse: #ffffff;
 
-  --color-border: #ddd6ce;
-  --color-border-light: #e9e3dc;
-  --color-border-dark: #cfc6bd;
-
-  /* Brand accent — use sparingly */
-  --color-accent: #9a7564;
-  --color-accent-dark: #79594c;
-  --color-accent-soft: #d9c3b8;
-
-  /* Legacy brand colors
-     Keep these temporarily so existing components
-     do not break during the UI migration. */
+  --color-black: #141210;
   --color-charcoal: #211f1d;
-  --color-charcoal-soft: #302d2a;
+  --color-charcoal-soft: #302c29;
 
-  --color-rose: #d9a0a5;
-  --color-rose-dark: #c7838a;
-  --color-rose-light: #f3e1e2;
+  --color-burgundy: #5a2730;
+  --color-burgundy-soft: #7a444c;
 
-  /* States */
-  --color-success: #3e7154;
-  --color-error: #b94b4b;
+  --color-rose: #c99598;
+  --color-rose-soft: #ead5d3;
+  --color-rose-light: #f4e8e6;
+
+  --color-accent: #9a7564;
+  --color-accent-dark: #765649;
+  --color-accent-soft: #d8c1b5;
+
+  --color-gold: #b49368;
+  --color-gold-soft: #d9c6a9;
+
+  --color-border: #ddd4ca;
+  --color-border-light: #ebe4dc;
+  --color-border-dark: #c8beb4;
+
+  --color-success: #477158;
+  --color-error: #a84b4b;
   --color-warning: #9a6b35;
 
 
@@ -53,30 +66,52 @@
      TYPOGRAPHY
   ======================================================= */
 
-  --font-display: var(--font-cormorant), Georgia, serif;
-  --font-body: var(--font-manrope), Arial, sans-serif;
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-manrope), "Manrope", Arial, sans-serif;
 
 
   /* =======================================================
      TYPE SCALE
   ======================================================= */
 
-  --text-display: clamp(3.5rem, 8vw, 8rem);
-  --text-heading-xl: clamp(2.75rem, 5.5vw, 5.5rem);
-  --text-heading-lg: clamp(2.25rem, 4vw, 4rem);
-  --text-heading-md: clamp(1.75rem, 3vw, 2.75rem);
-  --text-heading-sm: clamp(1.4rem, 2vw, 2rem);
+  --text-display: clamp(3.25rem, 8vw, 8.5rem);
 
+  --text-heading-xl: clamp(
+    2.75rem,
+    5.5vw,
+    5.75rem
+  );
+
+  --text-heading-lg: clamp(
+    2.25rem,
+    4vw,
+    4.25rem
+  );
+
+  --text-heading-md: clamp(
+    1.75rem,
+    3vw,
+    2.8rem
+  );
+
+  --text-heading-sm: clamp(
+    1.35rem,
+    2vw,
+    2rem
+  );
+
+  --text-body-xl: 1.25rem;
   --text-body-lg: 1.125rem;
   --text-body: 1rem;
   --text-body-sm: 0.875rem;
+  --text-body-xs: 0.75rem;
 
   --text-label: 0.6875rem;
   --text-caption: 0.75rem;
 
 
   /* =======================================================
-     TYPOGRAPHY WEIGHTS
+     FONT WEIGHTS
   ======================================================= */
 
   --weight-light: 300;
@@ -90,15 +125,16 @@
      LETTER SPACING
   ======================================================= */
 
-  --tracking-tight: -0.02em;
+  --tracking-tight: -0.025em;
   --tracking-normal: 0;
   --tracking-wide: 0.08em;
   --tracking-wider: 0.14em;
   --tracking-luxury: 0.2em;
+  --tracking-ultra: 0.28em;
 
 
   /* =======================================================
-     LAYOUT
+     CONTAINERS
   ======================================================= */
 
   --container-sm: 640px;
@@ -135,59 +171,115 @@
      SECTION SPACING
   ======================================================= */
 
+  --section-xs: 3rem;
   --section-sm: 4rem;
   --section-md: 6rem;
   --section-lg: 8rem;
   --section-xl: 10rem;
+  --section-2xl: 13rem;
 
 
   /* =======================================================
-     BORDERS & RADIUS
+     RADIUS
   ======================================================= */
 
   --radius-none: 0;
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+  --radius-pill: 999px;
+
+
+  /* =======================================================
+     BORDERS
+  ======================================================= */
+
+  --border-hairline: 1px;
+  --border-thin: 1px;
 
 
   /* =======================================================
      SHADOWS
   ======================================================= */
 
-  --shadow-xs: 0 1px 2px rgba(33, 31, 29, 0.04);
-  --shadow-sm: 0 4px 18px rgba(33, 31, 29, 0.05);
-  --shadow-md: 0 12px 35px rgba(33, 31, 29, 0.07);
-  --shadow-lg: 0 20px 60px rgba(33, 31, 29, 0.09);
+  --shadow-xs:
+    0 1px 2px rgba(30, 26, 24, 0.035);
+
+  --shadow-sm:
+    0 5px 20px rgba(30, 26, 24, 0.045);
+
+  --shadow-md:
+    0 14px 40px rgba(30, 26, 24, 0.07);
+
+  --shadow-lg:
+    0 25px 70px rgba(30, 26, 24, 0.1);
+
+  --shadow-luxury:
+    0 30px 100px rgba(30, 26, 24, 0.12);
 
 
   /* =======================================================
      MOTION
   ======================================================= */
 
+  --duration-instant: 120ms;
   --duration-fast: 180ms;
   --duration-base: 300ms;
-  --duration-slow: 500ms;
-  --duration-luxury: 700ms;
+  --duration-medium: 450ms;
+  --duration-slow: 650ms;
+  --duration-luxury: 900ms;
+  --duration-cinematic: 1200ms;
 
-  --ease-standard: ease;
+  --ease-standard: cubic-bezier(0.2, 0.65, 0.3, 1);
   --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo: cubic-bezier(0.87, 0, 0.13, 1);
 
 
   /* =======================================================
-     Z-INDEX
+     3D / DEPTH
   ======================================================= */
 
+  --perspective-card: 1200px;
+  --perspective-page: 1800px;
+  --perspective-hero: 2400px;
+
+  --depth-near: translateZ(40px);
+  --depth-medium: translateZ(80px);
+  --depth-far: translateZ(140px);
+
+
+  /* =======================================================
+     OVERLAYS / GLASS
+  ======================================================= */
+
+  --overlay-light: rgba(255, 253, 250, 0.72);
+  --overlay-dark: rgba(20, 18, 16, 0.72);
+
+  --blur-soft: 12px;
+  --blur-medium: 20px;
+  --blur-heavy: 32px;
+
+
+  /* =======================================================
+     Z INDEX
+  ======================================================= */
+
+  --z-base: 0;
+  --z-content: 10;
   --z-header: 100;
   --z-dropdown: 200;
   --z-drawer: 300;
   --z-modal: 400;
   --z-toast: 500;
+  --z-cursor: 600;
 }
 
 
 /* =========================================================
-   BASE
+   RESET / BASE
 ========================================================= */
 
 * {
@@ -196,43 +288,41 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--color-bg);
 }
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--color-bg-subtle) 0%,
+      var(--color-bg) 55%,
+      var(--color-bg-warm) 100%
+    );
+
   color: var(--color-text);
+
   font-family: var(--font-body);
   font-weight: var(--weight-regular);
+
   text-rendering: optimizeLegibility;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
 }
 
-
-/* =========================================================
-   GLOBAL TYPOGRAPHY
-========================================================= */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-tight);
+img,
+video {
+  max-width: 100%;
 }
 
-p {
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
+img {
+  display: block;
 }
 
 button,
@@ -246,14 +336,49 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-weight: var(--weight-regular);
+
+  letter-spacing: var(--tracking-tight);
+
+  text-wrap: balance;
+}
+
 
 /* =========================================================
    SELECTION
 ========================================================= */
 
 ::selection {
-  background: var(--color-accent);
+  background: var(--color-burgundy);
   color: var(--color-text-inverse);
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 4px;
 }
 
 
@@ -262,7 +387,7 @@ button {
 ========================================================= */
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -271,11 +396,11 @@ button {
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-border-dark);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-secondary);
+  background: var(--color-accent);
 }
 
 
@@ -284,9 +409,9 @@ button {
 ========================================================= */
 
 @layer utilities {
-  /* -----------------------------------------------
-     Typography
-  ----------------------------------------------- */
+  /* =======================================================
+     TYPOGRAPHY
+  ======================================================= */
 
   .font-display {
     font-family: var(--font-display);
@@ -304,16 +429,26 @@ button {
     text-wrap: pretty;
   }
 
+  .tracking-luxury {
+    letter-spacing: var(--tracking-luxury);
+  }
 
-  /* -----------------------------------------------
-     Container
-  ----------------------------------------------- */
+  .tracking-ultra {
+    letter-spacing: var(--tracking-ultra);
+  }
+
+
+  /* =======================================================
+     CONTAINER
+  ======================================================= */
 
   .container-premium {
     width: 100%;
     max-width: var(--container-2xl);
+
     margin-inline: auto;
-    padding-inline: var(--space-6);
+
+    padding-inline: var(--space-5);
   }
 
   @media (min-width: 640px) {
@@ -335,9 +470,9 @@ button {
   }
 
 
-  /* -----------------------------------------------
-     Section spacing
-  ----------------------------------------------- */
+  /* =======================================================
+     SECTION SPACING
+  ======================================================= */
 
   .section-space {
     padding-block: var(--section-md);
@@ -356,53 +491,71 @@ button {
   }
 
 
-  /* -----------------------------------------------
-     Luxury label
-  ----------------------------------------------- */
+  /* =======================================================
+     LUXURY LABEL
+  ======================================================= */
 
   .eyebrow {
     font-family: var(--font-body);
+
     font-size: var(--text-label);
     font-weight: var(--weight-medium);
+
     letter-spacing: var(--tracking-luxury);
+
+    line-height: 1.4;
+
     text-transform: uppercase;
   }
 
 
-  /* -----------------------------------------------
-     Editorial heading
-  ----------------------------------------------- */
+  /* =======================================================
+     EDITORIAL HEADING
+  ======================================================= */
 
   .heading-editorial {
     font-family: var(--font-display);
+
     font-weight: var(--weight-regular);
+
     letter-spacing: var(--tracking-tight);
+
+    line-height: 0.98;
   }
 
 
-  /* -----------------------------------------------
-     Luxury link
-  ----------------------------------------------- */
+  /* =======================================================
+     LUXURY LINK
+  ======================================================= */
 
   .link-luxury {
     position: relative;
+
     display: inline-flex;
     align-items: center;
+
     width: fit-content;
   }
 
   .link-luxury::after {
     content: "";
+
     position: absolute;
+
     left: 0;
-    bottom: -4px;
+    bottom: -5px;
+
     width: 100%;
     height: 1px;
+
     background: currentColor;
+
     transform: scaleX(0);
     transform-origin: right;
+
     transition:
-      transform var(--duration-base) var(--ease-luxury);
+      transform var(--duration-base)
+      var(--ease-luxury);
   }
 
   .link-luxury:hover::after {
@@ -411,13 +564,14 @@ button {
   }
 
 
-  /* -----------------------------------------------
-     Image hover
-  ----------------------------------------------- */
+  /* =======================================================
+     IMAGE
+  ======================================================= */
 
   .image-luxury {
     transition:
-      transform var(--duration-luxury) var(--ease-luxury);
+      transform var(--duration-luxury)
+      var(--ease-luxury);
   }
 
   .image-luxury:hover {
@@ -425,11 +579,207 @@ button {
   }
 
 
-  /* -----------------------------------------------
-     Hairline border
-  ----------------------------------------------- */
+  /* =======================================================
+     IMAGE CONTAINER
+  ======================================================= */
+
+  .image-depth {
+    overflow: hidden;
+
+    perspective: var(--perspective-card);
+  }
+
+  .image-depth img {
+    transform:
+      translateZ(0)
+      scale(1.001);
+
+    transition:
+      transform var(--duration-luxury)
+      var(--ease-luxury);
+  }
+
+  .image-depth:hover img {
+    transform:
+      translateZ(20px)
+      scale(1.035);
+  }
+
+
+  /* =======================================================
+     3D CARD FOUNDATION
+  ======================================================= */
+
+  .card-3d {
+    transform-style: preserve-3d;
+
+    perspective: var(--perspective-card);
+
+    transition:
+      transform var(--duration-medium)
+      var(--ease-luxury),
+      box-shadow var(--duration-medium)
+      var(--ease-luxury);
+  }
+
+
+  /* =======================================================
+     GLASS SURFACE
+  ======================================================= */
+
+  .surface-glass {
+    background: var(--overlay-light);
+
+    backdrop-filter: blur(var(--blur-medium));
+    -webkit-backdrop-filter: blur(var(--blur-medium));
+
+    border: 1px solid
+      rgba(255, 255, 255, 0.45);
+  }
+
+
+  /* =======================================================
+     HAIRLINE BORDER
+  ======================================================= */
 
   .border-hairline {
     border-color: var(--color-border-light);
+  }
+
+
+  /* =======================================================
+     PREMIUM GRAIN
+  ======================================================= */
+
+  .grain-overlay {
+    position: relative;
+  }
+
+  .grain-overlay::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.035;
+
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+
+    mix-blend-mode: multiply;
+
+    z-index: 2;
+  }
+
+
+  /* =======================================================
+     REVEAL FOUNDATION
+  ======================================================= */
+
+  .reveal-hidden {
+    opacity: 0;
+
+    transform:
+      translateY(24px);
+  }
+
+  .reveal-visible {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+    transition:
+      opacity var(--duration-luxury)
+      var(--ease-luxury),
+      transform var(--duration-luxury)
+      var(--ease-luxury);
+  }
+
+
+  /* =======================================================
+     MAGNETIC FOUNDATION
+  ======================================================= */
+
+  .magnetic {
+    will-change: transform;
+
+    transition:
+      transform var(--duration-base)
+      var(--ease-luxury);
+  }
+
+
+  /* =======================================================
+     CLIP REVEAL
+  ======================================================= */
+
+  .clip-reveal {
+    clip-path: inset(0 0 100% 0);
+
+    transition:
+      clip-path var(--duration-cinematic)
+      var(--ease-expo);
+  }
+
+  .clip-reveal.is-visible {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .image-luxury:hover,
+  .image-depth:hover img {
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+  :root {
+    --section-sm: 3rem;
+    --section-md: 4rem;
+    --section-lg: 5rem;
+    --section-xl: 6rem;
+
+    --space-16: 3.5rem;
+    --space-20: 4rem;
+    --space-24: 5rem;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .image-luxury:hover {
+    transform: none;
+  }
+
+  .image-depth:hover img {
+    transform: none;
   }
 }
