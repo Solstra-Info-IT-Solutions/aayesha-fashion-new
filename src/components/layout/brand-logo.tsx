@@ -2,19 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export function BrandLogo() {
-  const router = useRouter();
-
-  const handleLogoClick = () => {
-    router.push("/");
-  };
-
   return (
     <Link
       href="/"
-      onClick={handleLogoClick}
       aria-label="Aayesha Fashion — Home"
       className="
         group
@@ -25,34 +17,75 @@ export function BrandLogo() {
         justify-center
         leading-none
         text-[var(--color-text)]
-        transition-opacity
-        duration-[var(--duration-fast)]
-        hover:opacity-80
-        cursor-pointer
+        transition-all
+        duration-700
+        ease-[var(--ease-luxury)]
+        hover:-translate-y-px
       "
     >
       {/* =====================================================
           LOGO MARK
       ===================================================== */}
 
-      <Image
-        src="/images/logo.png"
-        alt="Aayesha Fashion"
-        width={46}
-        height={46}
-        priority
+      <span
         className="
-          pointer-events-none
+          relative
+          flex
           h-[36px]
           w-[36px]
           shrink-0
-          object-contain
+          items-center
+          justify-center
           sm:h-[40px]
           sm:w-[40px]
           md:h-[42px]
           md:w-[42px]
         "
-      />
+      >
+        {/* Soft luxury halo */}
+        <span
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            rounded-full
+            bg-[var(--color-accent-soft)]
+            opacity-0
+            blur-xl
+            transition-all
+            duration-700
+            ease-[var(--ease-luxury)]
+            group-hover:scale-125
+            group-hover:opacity-25
+          "
+        />
+
+        <Image
+          src="/images/logo.png"
+          alt="Aayesha Fashion"
+          width={46}
+          height={46}
+          priority
+          className="
+            relative
+            z-10
+            pointer-events-none
+            h-[36px]
+            w-[36px]
+            object-contain
+            transition-transform
+            duration-700
+            ease-[var(--ease-luxury)]
+            group-hover:scale-[1.04]
+            group-hover:[transform:translateZ(8px)_rotate(-1deg)]
+            sm:h-[40px]
+            sm:w-[40px]
+            md:h-[42px]
+            md:w-[42px]
+          "
+        />
+      </span>
 
       {/* =====================================================
           BRAND WORDMARK
@@ -79,6 +112,10 @@ export function BrandLogo() {
             leading-[0.88]
             tracking-[-0.035em]
             text-[var(--color-text)]
+            transition-all
+            duration-700
+            ease-[var(--ease-luxury)]
+            group-hover:tracking-[-0.02em]
             sm:text-[28px]
             md:text-[30px]
           "
@@ -90,6 +127,7 @@ export function BrandLogo() {
 
         <span
           className="
+            relative
             mt-[5px]
             pl-[0.2em]
             font-body
@@ -99,10 +137,32 @@ export function BrandLogo() {
             leading-none
             tracking-[0.42em]
             text-[var(--color-text-muted)]
+            transition-all
+            duration-700
+            ease-[var(--ease-luxury)]
+            group-hover:text-[var(--color-accent-dark)]
+            group-hover:tracking-[0.48em]
             sm:text-[6.5px]
           "
         >
           Fashion
+
+          {/* Editorial accent line */}
+          <span
+            aria-hidden="true"
+            className="
+              absolute
+              -bottom-2
+              left-[0.2em]
+              h-px
+              w-0
+              bg-[var(--color-accent)]
+              transition-all
+              duration-700
+              ease-[var(--ease-luxury)]
+              group-hover:w-[calc(100%-0.2em)]
+            "
+          />
         </span>
       </span>
     </Link>
