@@ -116,17 +116,10 @@ export function ProductCard({
       return;
     }
 
-    /*
-     * Do not make an authentication decision before
-     * the auth store has finished initializing.
-     */
     if (!isInitialized) {
       return;
     }
 
-    /*
-     * Login is required before adding to cart.
-     */
     if (!isAuthenticated) {
       setShowLoginPopup(true);
       return;
@@ -148,44 +141,17 @@ export function ProductCard({
 
   return (
     <>
-      <article
-        className="
-          group
-          w-full
-          overflow-hidden
-          border
-          border-[var(--color-border)]
-          bg-[var(--color-bg)]
-          transition-all
-          duration-[var(--duration-base)]
-          hover:border-[var(--color-accent)]
-        "
-      >
+      <article className="product-card">
         {/* =====================================================
-            IMAGE
+            PRODUCT IMAGE
         ===================================================== */}
 
-        <div
-          className="
-            relative
-            mx-2
-            mt-2
-            overflow-hidden
-            bg-[var(--color-bg-soft)]
-          "
-        >
+        <div className="product-card__media">
           <Link
             href={`/products/${product._id}`}
             aria-label={`View ${product.name}`}
-            className="
-              relative
-              block
-              aspect-[4/5]
-              overflow-hidden
-            "
+            className="product-card__image-link"
           >
-            {/* PRIMARY IMAGE */}
-
             <Image
               src={primaryMedia.src}
               alt={
@@ -195,23 +161,14 @@ export function ProductCard({
               fill
               priority={priority}
               sizes="
-                (max-width: 639px) 42vw,
-                (max-width: 767px) 42vw,
-                (max-width: 1023px) 29vw,
+                (max-width: 639px) 44vw,
+                (max-width: 767px) 44vw,
+                (max-width: 1023px) 30vw,
                 (max-width: 1279px) 23vw,
                 21vw
               "
-              className="
-                object-cover
-                object-center
-                transition-transform
-                duration-[var(--duration-luxury)]
-                ease-[var(--ease-luxury)]
-                group-hover:scale-[1.025]
-              "
+              className="product-card__image"
             />
-
-            {/* SECONDARY IMAGE */}
 
             {secondaryMedia && (
               <Image
@@ -222,139 +179,46 @@ export function ProductCard({
                 }
                 fill
                 sizes="
-                  (max-width: 639px) 42vw,
-                  (max-width: 767px) 42vw,
-                  (max-width: 1023px) 29vw,
+                  (max-width: 639px) 44vw,
+                  (max-width: 767px) 44vw,
+                  (max-width: 1023px) 30vw,
                   (max-width: 1279px) 23vw,
                   21vw
                 "
-                className="
-                  pointer-events-none
-                  object-cover
-                  object-center
-                  opacity-0
-                  transition-all
-                  duration-[var(--duration-luxury)]
-                  ease-[var(--ease-luxury)]
-                  group-hover:scale-[1.025]
-                  group-hover:opacity-100
-                "
+                className="product-card__image product-card__image--secondary"
               />
             )}
 
-            {/* IMAGE VEIL */}
-
             <span
               aria-hidden="true"
-              className="
-                pointer-events-none
-                absolute
-                inset-0
-                bg-transparent
-                transition-colors
-                duration-[var(--duration-slow)]
-                group-hover:bg-[rgba(33,31,29,0.02)]
-              "
+              className="product-card__image-overlay"
             />
           </Link>
 
-          {/* ===================================================
-              BADGE
-          =================================================== */}
+          {/* BADGE */}
 
           {hasBadge && (
-            <div
-              className="
-                pointer-events-none
-                absolute
-                left-2
-                top-2
-                z-10
-                sm:left-3
-                sm:top-3
-              "
-            >
-              <span
-                className="
-                  inline-flex
-                  items-center
-                  border
-                  border-[var(--color-border-light)]
-                  bg-[rgba(255,255,255,0.95)]
-                  px-2.5
-                  py-1.5
-                  font-body
-                  text-[7px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.16em]
-                  text-[var(--color-text)]
-                  shadow-[var(--shadow-xs)]
-                  backdrop-blur-sm
-                  sm:text-[8px]
-                "
-              >
-                {formatBadge(
-                  product.merchandising
-                    .badges[0],
-                )}
-              </span>
+            <div className="product-card__badge">
+              {formatBadge(
+                product.merchandising.badges[0],
+              )}
             </div>
           )}
 
-          {/* ===================================================
-              WISHLIST
-          =================================================== */}
+          {/* WISHLIST */}
 
-          <div
-            className="
-              absolute
-              right-2
-              top-2
-              z-10
-              sm:right-3
-              sm:top-3
-            "
-          >
+          <div className="product-card__wishlist">
             <WishlistButton
               productId={product._id}
               productName={product.name}
             />
           </div>
 
-          {/* ===================================================
-              SOLD OUT
-          =================================================== */}
+          {/* SOLD OUT */}
 
           {availability.isSoldOut && (
-            <div
-              className="
-                absolute
-                inset-x-0
-                bottom-0
-                z-10
-                border-t
-                border-white/10
-                bg-[rgba(33,31,29,0.92)]
-                px-3
-                py-2
-                text-center
-                backdrop-blur-sm
-              "
-            >
-              <span
-                className="
-                  font-body
-                  text-[7px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.18em]
-                  text-[var(--color-text-inverse)]
-                  sm:text-[8px]
-                "
-              >
-                Sold Out
-              </span>
+            <div className="product-card__sold-out">
+              <span>Sold Out</span>
             </div>
           )}
         </div>
@@ -363,29 +227,10 @@ export function ProductCard({
             PRODUCT INFORMATION
         ===================================================== */}
 
-        <div
-          className="
-            px-3
-            pb-3
-            pt-3
-            sm:px-4
-            sm:pb-4
-            sm:pt-4
-          "
-        >
+        <div className="product-card__content">
           {/* CATEGORY */}
 
-          <p
-            className="
-              font-body
-              text-[7px]
-              font-semibold
-              uppercase
-              tracking-[0.18em]
-              text-[var(--color-accent)]
-              sm:text-[8px]
-            "
-          >
+          <p className="product-card__category">
             {formatCategory(
               product.categoryId,
             )}
@@ -395,52 +240,17 @@ export function ProductCard({
 
           <Link
             href={`/products/${product._id}`}
-            className="group/title block"
+            className="product-card__title-link"
           >
-            <h3
-              className="
-                mt-1.5
-                line-clamp-2
-                min-h-[34px]
-                font-display
-                text-[14px]
-                font-medium
-                leading-[1.2]
-                tracking-[-0.01em]
-                text-[var(--color-text)]
-                transition-colors
-                duration-[var(--duration-base)]
-                group-hover/title:text-[var(--color-accent)]
-                sm:text-[15px]
-              "
-            >
+            <h3 className="product-card__title">
               {product.name}
             </h3>
           </Link>
 
-          {/* ===================================================
-              PRICE
-          =================================================== */}
+          {/* PRICE */}
 
-          <div
-            className="
-              mt-2
-              flex
-              flex-wrap
-              items-center
-              gap-x-2
-              gap-y-1
-            "
-          >
-            <span
-              className="
-                font-body
-                text-[12px]
-                font-semibold
-                text-[var(--color-text)]
-                sm:text-[13px]
-              "
-            >
+          <div className="product-card__pricing">
+            <span className="product-card__selling-price">
               {formatPrice(
                 product.pricing.sellingPrice,
               )}
@@ -448,68 +258,26 @@ export function ProductCard({
 
             {discount > 0 && (
               <>
-                <span
-                  className="
-                    font-body
-                    text-[9px]
-                    font-medium
-                    text-[var(--color-text-muted)]
-                    line-through
-                    sm:text-[10px]
-                  "
-                >
+                <span className="product-card__mrp">
                   {formatPrice(
                     product.pricing.mrp,
                   )}
                 </span>
 
-                <span
-                  className="
-                    font-body
-                    text-[8px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.04em]
-                    text-[var(--color-accent-dark)]
-                    sm:text-[9px]
-                  "
-                >
+                <span className="product-card__discount">
                   {discount}% OFF
                 </span>
               </>
             )}
           </div>
 
-          {/* ===================================================
-              AVAILABILITY
-          =================================================== */}
+          {/* AVAILABILITY */}
 
           {!availability.isSoldOut && (
-            <div
-              className="
-                mt-2
-                flex
-                items-center
-                gap-1.5
-              "
-            >
-              <span
-                className="
-                  h-1.5
-                  w-1.5
-                  rounded-full
-                  bg-[var(--color-accent)]
-                "
-              />
+            <div className="product-card__availability">
+              <span className="product-card__availability-dot" />
 
-              <span
-                className="
-                  font-body
-                  text-[8px]
-                  font-medium
-                  text-[var(--color-text-secondary)]
-                "
-              >
+              <span>
                 {availability.isLowStock
                   ? "Only a few left"
                   : "In Stock"}
@@ -517,9 +285,7 @@ export function ProductCard({
             </div>
           )}
 
-          {/* ===================================================
-              ADD TO BAG
-          =================================================== */}
+          {/* ADD TO BAG */}
 
           <button
             type="button"
@@ -529,53 +295,25 @@ export function ProductCard({
               isAdding ||
               !isInitialized
             }
-            className="
-              mt-3
-              flex
-              w-full
-              items-center
-              justify-center
-              gap-2
-              border
-              border-[var(--color-text)]
-              bg-[var(--color-text)]
-              px-3
-              py-2.5
-              font-body
-              text-[8px]
-              font-semibold
-              uppercase
-              tracking-[0.16em]
-              text-[var(--color-text-inverse)]
-              transition-all
-              duration-[var(--duration-base)]
-              hover:border-[var(--color-accent)]
-              hover:bg-[var(--color-accent)]
-              disabled:cursor-not-allowed
-              disabled:border-[var(--color-border)]
-              disabled:bg-[var(--color-bg-soft)]
-              disabled:text-[var(--color-text-muted)]
-              sm:py-3
-              sm:text-[9px]
-            "
+            className="product-card__button"
           >
             <ShoppingBag
-              size={13}
-              strokeWidth={1.5}
+              size={16}
+              strokeWidth={1.6}
             />
 
-            {availability.isSoldOut
-              ? "Sold Out"
-              : isAdding
-                ? "Adding..."
-                : "Add to Bag"}
+            <span>
+              {availability.isSoldOut
+                ? "Sold Out"
+                : isAdding
+                  ? "Adding..."
+                  : "Add to Bag"}
+            </span>
           </button>
         </div>
       </article>
 
-      {/* =====================================================
-          LOGIN REQUIRED POPUP
-      ===================================================== */}
+      {/* LOGIN POPUP */}
 
       <LoginRequiredPopup
         open={showLoginPopup}
