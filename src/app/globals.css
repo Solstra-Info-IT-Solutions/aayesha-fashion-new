@@ -463,7 +463,361 @@ h6 {
 
 @layer components {
 
-  
+  /* =========================================================
+   BEST SELLERS
+   BALANCED LUXURY EDITORIAL
+========================================================= */
+
+:root {
+  --best-sellers-bg: var(--color-cream);
+
+  --best-sellers-section-padding-mobile: var(--section-md);
+  --best-sellers-section-padding-tablet: var(--section-lg);
+  --best-sellers-section-padding-desktop: var(--section-xl);
+
+  --best-sellers-header-max-width: 620px;
+
+  --best-sellers-eyebrow-size: var(--text-label);
+
+  --best-sellers-title-size-mobile: clamp(
+    2rem,
+    7vw,
+    2.7rem
+  );
+
+  --best-sellers-title-size-tablet: clamp(
+    2.5rem,
+    4.5vw,
+    3.4rem
+  );
+
+  --best-sellers-title-size-desktop: clamp(
+    3rem,
+    4vw,
+    4rem
+  );
+
+  --best-sellers-title-line: var(--line-heading-tight);
+
+  --best-sellers-description-size: var(--text-body);
+  --best-sellers-description-max-width: 460px;
+
+  --best-sellers-products-gap-mobile: var(--space-6);
+  --best-sellers-products-gap-desktop: var(--space-8);
+
+  --best-sellers-empty-padding-mobile: var(--space-8);
+  --best-sellers-empty-padding-desktop: var(--space-12);
+
+  --best-sellers-empty-eyebrow-size: var(--text-label);
+  --best-sellers-empty-title-size: var(--text-product-title);
+
+  --best-sellers-cta-margin-mobile: var(--space-8);
+  --best-sellers-cta-margin-desktop: var(--space-10);
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.best-sellers {
+  width: 100%;
+
+  background: var(--best-sellers-bg);
+
+  padding-block:
+    var(--best-sellers-section-padding-mobile);
+}
+
+
+/* =========================================================
+   INNER
+========================================================= */
+
+.best-sellers__inner {
+  width: 100%;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.best-sellers__header {
+  width: 100%;
+
+  padding-top: var(--space-4);
+
+  border-top:
+    var(--border-thin)
+    solid
+    var(--color-border);
+}
+
+.best-sellers__heading-group {
+  width: 100%;
+  max-width: var(--best-sellers-header-max-width);
+
+  margin-inline: auto;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.best-sellers__eyebrow {
+  font-family: var(--font-body);
+
+  font-size:
+    var(--best-sellers-eyebrow-size);
+
+  font-weight: var(--weight-semibold);
+
+  line-height: var(--line-label);
+
+  text-transform: uppercase;
+
+  letter-spacing: var(--tracking-luxury);
+
+  color: var(--color-text-secondary);
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.best-sellers__title {
+  margin-top: var(--space-3);
+
+  font-family: var(--font-display);
+
+  font-size:
+    var(--best-sellers-title-size-mobile);
+
+  font-weight: var(--weight-regular);
+
+  line-height:
+    var(--best-sellers-title-line);
+
+  letter-spacing:
+    var(--tracking-tight);
+
+  color: var(--color-text);
+}
+
+.best-sellers__title-accent {
+  font-style: italic;
+
+  color: var(--color-rose);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.best-sellers__description {
+  width: 100%;
+  max-width:
+    var(--best-sellers-description-max-width);
+
+  margin-inline: auto;
+  margin-top: var(--space-4);
+
+  font-family: var(--font-body);
+
+  font-size:
+    var(--best-sellers-description-size);
+
+  font-weight: var(--weight-regular);
+
+  line-height: var(--line-body);
+
+  color: var(--color-text-secondary);
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+.best-sellers__products {
+  margin-top: var(--best-sellers-products-gap-mobile);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.best-sellers__empty {
+  margin-top: var(--best-sellers-products-gap-mobile);
+
+  padding:
+    var(--best-sellers-empty-padding-mobile)
+    var(--space-5);
+
+  border-top:
+    var(--border-thin)
+    solid
+    var(--color-border);
+
+  border-bottom:
+    var(--border-thin)
+    solid
+    var(--color-border);
+
+  text-align: center;
+
+  background:
+    var(--color-surface);
+}
+
+.best-sellers__empty-eyebrow {
+  font-family: var(--font-body);
+
+  font-size:
+    var(--best-sellers-empty-eyebrow-size);
+
+  font-weight: var(--weight-semibold);
+
+  line-height: var(--line-label);
+
+  text-transform: uppercase;
+
+  letter-spacing: var(--tracking-luxury);
+
+  color: var(--color-text-muted);
+}
+
+.best-sellers__empty-title {
+  margin-top: var(--space-3);
+
+  font-family: var(--font-display);
+
+  font-size:
+    var(--best-sellers-empty-title-size);
+
+  font-weight: var(--weight-regular);
+
+  line-height: var(--line-heading);
+
+  letter-spacing: var(--tracking-tight);
+
+  color: var(--color-text);
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.best-sellers__cta {
+  display: flex;
+
+  justify-content: center;
+
+  margin-top:
+    var(--best-sellers-cta-margin-mobile);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 640px) {
+  .best-sellers {
+    padding-block:
+      var(--best-sellers-section-padding-tablet);
+  }
+
+  .best-sellers__header {
+    padding-top: var(--space-5);
+  }
+
+  .best-sellers__title {
+    font-size:
+      var(--best-sellers-title-size-tablet);
+  }
+
+  .best-sellers__products {
+    margin-top:
+      var(--best-sellers-products-gap-desktop);
+  }
+
+  .best-sellers__empty {
+    margin-top:
+      var(--best-sellers-products-gap-desktop);
+
+    padding:
+      var(--best-sellers-empty-padding-desktop)
+      var(--space-8);
+  }
+
+  .best-sellers__cta {
+    margin-top:
+      var(--best-sellers-cta-margin-desktop);
+  }
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 1024px) {
+  .best-sellers {
+    padding-block:
+      var(--best-sellers-section-padding-desktop);
+  }
+
+  .best-sellers__title {
+    font-size:
+      var(--best-sellers-title-size-desktop);
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 479px) {
+  .best-sellers {
+    padding-block: var(--section-sm);
+  }
+
+  .best-sellers__header {
+    padding-top: var(--space-3);
+  }
+
+  .best-sellers__title {
+    font-size:
+      clamp(2rem, 9vw, 2.5rem);
+  }
+
+  .best-sellers__description {
+    max-width: 340px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .best-sellers,
+  .best-sellers__title,
+  .best-sellers__description {
+    transition: none;
+  }
+}
 
 
 

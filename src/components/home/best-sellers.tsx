@@ -20,79 +20,76 @@ export async function BestSellers() {
   return (
     <section
       id="best-sellers"
-      className="bg-[var(--color-cream)]"
+      className="best-sellers"
     >
       <Container>
-        <div className="py-5 sm:py-6 lg:py-8">
+        <div className="best-sellers__inner">
+          {/* =====================================================
+              SECTION HEADER
+          ===================================================== */}
 
-          {/* Section Header */}
-          <div className="border-t border-[var(--color-border)] pt-3 sm:pt-4">
+          <div className="best-sellers__header">
+            <div className="best-sellers__heading-group">
+              <p className="best-sellers__eyebrow">
+                Curated Selection
+              </p>
 
-            <div className="text-center">
-              <h2
-                className="
-                  font-display
-                  text-[2.5rem]
-                  font-medium
-                  leading-[0.95]
-                  tracking-[-0.045em]
-                  text-[var(--color-charcoal)]
-                  sm:text-[3.3rem]
-                  md:text-[4rem]
-                  lg:text-[4.7rem]
-                  xl:text-[5.2rem]
-                "
-              >
+              <h2 className="best-sellers__title">
                 Best{" "}
-                <span className="italic text-[var(--color-rose-dark)]">
+                <span className="best-sellers__title-accent">
                   Sellers.
                 </span>
               </h2>
 
-              <p className="mx-auto mt-2 max-w-lg text-[12px] leading-5 text-[var(--color-text-secondary)] sm:mt-3 sm:text-sm sm:leading-6">
+              <p className="best-sellers__description">
                 Discover the silhouettes our customers return
                 to time and again.
               </p>
             </div>
           </div>
 
-          {/* Product Carousel */}
+          {/* =====================================================
+              PRODUCT CAROUSEL
+          ===================================================== */}
+
           {bestSellers.length > 0 ? (
-            <div className="mt-6 sm:mt-8 lg:mt-9">
+            <div className="best-sellers__products">
               <ProductCarousel
                 products={bestSellers}
                 ariaLabel="Best selling products"
               />
             </div>
           ) : (
-            <div className="mt-6 border-y border-[var(--color-border)] py-8 text-center sm:py-10">
-              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
+            <div className="best-sellers__empty">
+              <p className="best-sellers__empty-eyebrow">
                 Coming soon
               </p>
 
-              <p className="mt-2 font-display text-lg text-[var(--color-charcoal)] sm:text-xl">
+              <p className="best-sellers__empty-title">
                 Our most-loved edit is being curated.
               </p>
             </div>
           )}
 
-          {/* CTA */}
-          <div className="mt-5 flex justify-center sm:mt-6">
+          {/* =====================================================
+              CTA
+          ===================================================== */}
+
+          <div className="best-sellers__cta">
             <LinkButton
               href="/collections/best-sellers"
               variant="secondary"
               size="md"
               icon={
                 <ArrowUpRight
-                  size={15}
-                  strokeWidth={1.4}
+                  size={16}
+                  strokeWidth={1.5}
                 />
               }
             >
               View All Best Sellers
             </LinkButton>
           </div>
-
         </div>
       </Container>
     </section>
