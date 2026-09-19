@@ -216,6 +216,7 @@
   --button-padding-x-sm: 18px;
   --button-padding-x: 24px;
   --button-padding-x-lg: 30px;
+  --button-letter-spacing: 0.01em;
 
   /* Inputs */
   --input-height: 46px;
@@ -461,6 +462,12 @@ h6 {
 ========================================================= */
 
 @layer components {
+
+  
+
+
+
+  
 
   /* =======================================================
    ANNOUNCEMENT BAR
@@ -7212,7 +7219,8 @@ h6 {
     font-size: var(--text-button);
     font-weight: var(--weight-semibold);
 
-    line-height: 1;
+    line-height: 1.2;
+    letter-spacing: var(--button-letter-spacing);
 
     border: var(--border-thin) solid transparent;
 
@@ -7226,6 +7234,12 @@ h6 {
       color var(--duration-base) var(--ease-luxury),
       transform var(--duration-base) var(--ease-luxury),
       box-shadow var(--duration-base) var(--ease-luxury);
+  }
+
+  .button:disabled,
+  .button[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 
   .button-primary {
@@ -7303,6 +7317,24 @@ h6 {
     color: var(--color-accent-dark);
     border-color: var(--color-border);
     background: var(--color-bg-warm);
+  }
+
+
+  /* =======================================================
+     BUTTON RESPONSIVE GUARANTEE
+
+     Button typography remains 14px on every breakpoint.
+     Mobile changes dimensions only, never text scale.
+  ======================================================= */
+
+  @media (max-width: 767px) {
+    .button {
+      min-height: var(--button-height);
+      padding-inline: var(--button-padding-x);
+      font-size: var(--text-button);
+      line-height: 1.2;
+      letter-spacing: var(--button-letter-spacing);
+    }
   }
 
 
