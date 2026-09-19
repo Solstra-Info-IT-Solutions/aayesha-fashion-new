@@ -174,12 +174,9 @@ function CategoryCard({
     <Link
       href={`/${category.slug}`}
       className="category-card"
+      aria-label={`Shop ${category.name}`}
     >
       <article className="category-card__surface">
-        {/* =================================================
-            IMAGE
-        ================================================= */}
-
         <div className="category-card__image">
           {category.image ? (
             <Image
@@ -187,62 +184,25 @@ function CategoryCard({
               alt={category.name}
               fill
               sizes="
-                (max-width: 639px) 50vw,
-                (max-width: 1023px) 25vw,
-                25vw
+                (max-width: 639px) 32vw,
+                (max-width: 1023px) 20vw,
+                150px
               "
               className="category-card__image-element"
             />
           ) : (
             <div className="category-card__placeholder">
               <Sparkles
-                size={22}
+                size={18}
                 strokeWidth={1.1}
               />
             </div>
           )}
-
-          {/* =================================================
-              OVERLAY
-          ================================================= */}
-
-          <div className="category-card__overlay" />
-
-          {/* =================================================
-              CONTENT
-          ================================================= */}
-
-          <div className="category-card__content">
-            <p className="category-card__eyebrow">
-              Collection
-            </p>
-
-            <h3 className="category-card__title">
-              {category.name}
-            </h3>
-
-            <span className="category-card__link">
-              <span>
-                Shop Now
-              </span>
-
-              <ArrowUpRight
-                size={14}
-                strokeWidth={1.25}
-                className="category-card__link-icon"
-              />
-            </span>
-          </div>
-
-          {/* =================================================
-              EDITORIAL CORNER
-          ================================================= */}
-
-          <span
-            aria-hidden="true"
-            className="category-card__corner"
-          />
         </div>
+
+        <h3 className="category-card__title">
+          {category.name}
+        </h3>
       </article>
     </Link>
   );
