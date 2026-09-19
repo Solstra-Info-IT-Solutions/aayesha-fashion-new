@@ -199,7 +199,15 @@ export function HeaderActions() {
           HEADER ACTIONS
       =================================================== */}
 
-      <div className="flex items-center gap-0.5 sm:gap-1">
+      <div
+        className="
+          flex
+          items-center
+          gap-0.5
+          sm:gap-1
+          lg:gap-1.5
+        "
+      >
         {/* =================================================
             SEARCH
         ================================================= */}
@@ -211,8 +219,8 @@ export function HeaderActions() {
           className="hidden lg:flex"
         >
           <Search
-            size={18}
-            strokeWidth={1.25}
+            size={20}
+            strokeWidth={1.45}
           />
         </HeaderActionButton>
 
@@ -236,8 +244,8 @@ export function HeaderActions() {
             hasPopup={isInitialized}
           >
             <UserRound
-              size={18}
-              strokeWidth={1.25}
+              size={20}
+              strokeWidth={1.45}
             />
 
             {isInitialized && loggedIn && (
@@ -252,7 +260,7 @@ export function HeaderActions() {
                   rounded-full
                   bg-[var(--color-accent)]
                   ring-2
-                  ring-[var(--color-bg)]
+                  ring-white
                 "
               />
             )}
@@ -286,13 +294,13 @@ export function HeaderActions() {
             group
             relative
             hidden
-            h-10
-            w-10
+            h-11
+            w-11
             items-center
             justify-center
             text-[var(--color-text)]
             transition-all
-            duration-500
+            duration-300
             ease-[var(--ease-luxury)]
             hover:-translate-y-px
             hover:text-[var(--color-accent-dark)]
@@ -300,11 +308,11 @@ export function HeaderActions() {
           "
         >
           <Heart
-            size={18}
-            strokeWidth={1.25}
+            size={20}
+            strokeWidth={1.45}
             className="
               transition-transform
-              duration-500
+              duration-300
               ease-[var(--ease-luxury)]
               group-hover:scale-[1.06]
             "
@@ -322,11 +330,11 @@ export function HeaderActions() {
               h-px
               w-0
               -translate-x-1/2
-              bg-[var(--color-accent)]
+              bg-[var(--color-champagne)]
               transition-all
-              duration-500
+              duration-400
               ease-[var(--ease-luxury)]
-              group-hover:w-3
+              group-hover:w-4
             "
           />
         </Link>
@@ -343,26 +351,24 @@ export function HeaderActions() {
             group
             relative
             flex
-            h-9
-            w-9
+            h-11
+            w-11
             items-center
             justify-center
             text-[var(--color-text)]
             transition-all
-            duration-500
+            duration-300
             ease-[var(--ease-luxury)]
             hover:-translate-y-px
             hover:text-[var(--color-accent-dark)]
-            sm:h-10
-            sm:w-10
           "
         >
           <ShoppingBag
-            size={18}
-            strokeWidth={1.25}
+            size={20}
+            strokeWidth={1.45}
             className="
               transition-transform
-              duration-500
+              duration-300
               ease-[var(--ease-luxury)]
               group-hover:scale-[1.06]
             "
@@ -375,16 +381,16 @@ export function HeaderActions() {
             className="
               pointer-events-none
               absolute
-              bottom-0.5
+              bottom-1
               left-1/2
               h-px
               w-0
               -translate-x-1/2
-              bg-[var(--color-accent)]
+              bg-[var(--color-champagne)]
               transition-all
-              duration-500
+              duration-400
               ease-[var(--ease-luxury)]
-              group-hover:w-3
+              group-hover:w-4
             "
           />
         </Link>
@@ -397,6 +403,7 @@ export function HeaderActions() {
       {searchOpen && (
         <>
           {/* Backdrop */}
+
           <button
             type="button"
             aria-label="Close search"
@@ -406,33 +413,34 @@ export function HeaderActions() {
               inset-0
               z-[55]
               cursor-default
-              bg-[rgba(33,31,29,0.18)]
-              backdrop-blur-[3px]
+              bg-[rgba(17,16,15,0.16)]
+              backdrop-blur-[4px]
               animate-[fade-in_300ms_ease-out]
             "
           />
 
           {/* Search Drawer */}
+
           <div
             className="
               fixed
               inset-x-0
-              top-[76px]
+              top-[72px]
               z-[70]
               overflow-hidden
               border-b
-              border-[var(--color-border)]
-              bg-[rgba(247,243,238,0.96)]
-              shadow-[0_24px_70px_rgba(33,31,29,0.10)]
+              border-[var(--color-border-light)]
+              bg-[rgba(255,255,255,0.98)]
+              shadow-[0_24px_70px_rgba(23,21,20,0.10)]
               backdrop-blur-xl
               animate-[slide-down_500ms_cubic-bezier(.22,1,.36,1)]
-              sm:top-[80px]
-              md:top-[84px]
+              sm:top-[76px]
               lg:absolute
               lg:top-full
             "
           >
-            {/* Decorative line */}
+            {/* Champagne accent */}
+
             <div
               aria-hidden="true"
               className="
@@ -442,8 +450,9 @@ export function HeaderActions() {
                 h-px
                 bg-gradient-to-r
                 from-transparent
-                via-[var(--color-accent-soft)]
+                via-[var(--color-champagne)]
                 to-transparent
+                opacity-70
               "
             />
 
@@ -460,9 +469,9 @@ export function HeaderActions() {
             >
               <div
                 className="
-                  py-6
-                  sm:py-7
-                  md:py-8
+                  py-7
+                  sm:py-8
+                  md:py-10
                 "
               >
                 <div className="flex items-center gap-5">
@@ -474,23 +483,20 @@ export function HeaderActions() {
                       <div
                         className="
                           flex
-                          h-10
-                          w-10
+                          h-11
+                          w-11
                           shrink-0
                           items-center
                           justify-center
-                          rounded-full
                           border
                           border-[var(--color-border)]
-                          bg-[var(--color-surface)]
+                          bg-[var(--color-bg-subtle)]
+                          text-[var(--color-text-secondary)]
                         "
                       >
                         <Search
-                          size={17}
-                          strokeWidth={1.2}
-                          className="
-                            text-[var(--color-text-secondary)]
-                          "
+                          size={19}
+                          strokeWidth={1.35}
                         />
                       </div>
 
@@ -512,13 +518,14 @@ export function HeaderActions() {
                           p-0
                           font-display
                           text-2xl
-                          leading-none
+                          leading-tight
                           tracking-[-0.02em]
                           text-[var(--color-text)]
                           outline-none
                           placeholder:text-[var(--color-text-muted)]
                           sm:text-3xl
                           md:text-4xl
+                          lg:text-[42px]
                         "
                       />
 
@@ -531,10 +538,10 @@ export function HeaderActions() {
                             items-center
                             gap-2
                             font-body
-                            text-[9px]
-                            font-medium
+                            text-[12px]
+                            font-semibold
                             uppercase
-                            tracking-[0.18em]
+                            tracking-[0.12em]
                             text-[var(--color-text)]
                             transition-colors
                             duration-300
@@ -543,9 +550,10 @@ export function HeaderActions() {
                           "
                         >
                           Search
+
                           <ArrowUpRight
-                            size={14}
-                            strokeWidth={1.25}
+                            size={16}
+                            strokeWidth={1.35}
                           />
                         </button>
                       )}
@@ -553,7 +561,7 @@ export function HeaderActions() {
 
                     <div
                       className="
-                        mt-5
+                        mt-6
                         h-px
                         origin-left
                         bg-[var(--color-border)]
@@ -568,28 +576,27 @@ export function HeaderActions() {
                     className="
                       group
                       flex
-                      h-10
-                      w-10
+                      h-11
+                      w-11
                       shrink-0
                       items-center
                       justify-center
-                      rounded-full
                       border
                       border-[var(--color-border)]
                       text-[var(--color-text-secondary)]
                       transition-all
-                      duration-500
+                      duration-300
                       hover:border-[var(--color-text)]
                       hover:bg-[var(--color-text)]
-                      hover:text-[var(--color-text-inverse)]
+                      hover:text-white
                     "
                   >
                     <X
-                      size={17}
-                      strokeWidth={1.25}
+                      size={18}
+                      strokeWidth={1.35}
                       className="
                         transition-transform
-                        duration-500
+                        duration-400
                         group-hover:rotate-90
                       "
                     />
@@ -598,7 +605,7 @@ export function HeaderActions() {
 
                 <div
                   className="
-                    mt-5
+                    mt-6
                     hidden
                     items-center
                     justify-between
@@ -609,9 +616,10 @@ export function HeaderActions() {
                   <p
                     className="
                       font-body
-                      text-[9px]
+                      text-[12px]
+                      font-medium
                       uppercase
-                      tracking-[0.18em]
+                      tracking-[0.12em]
                       text-[var(--color-text-muted)]
                     "
                   >
@@ -621,9 +629,9 @@ export function HeaderActions() {
                   <p
                     className="
                       font-body
-                      text-[9px]
+                      text-[12px]
                       uppercase
-                      tracking-[0.14em]
+                      tracking-[0.1em]
                       text-[var(--color-text-muted)]
                     "
                   >
@@ -670,13 +678,13 @@ function HeaderActionButton({
       className={`
         group
         relative
-        h-10
-        w-10
+        h-11
+        w-11
         items-center
         justify-center
         text-[var(--color-text)]
         transition-all
-        duration-500
+        duration-300
         ease-[var(--ease-luxury)]
         hover:-translate-y-px
         hover:text-[var(--color-accent-dark)]
@@ -691,7 +699,7 @@ function HeaderActionButton({
           items-center
           justify-center
           transition-transform
-          duration-500
+          duration-300
           ease-[var(--ease-luxury)]
           group-hover:scale-[1.04]
           ${active ? "text-[var(--color-accent-dark)]" : ""}
@@ -709,14 +717,14 @@ function HeaderActionButton({
           left-1/2
           h-px
           -translate-x-1/2
-          bg-[var(--color-accent)]
+          bg-[var(--color-champagne)]
           transition-all
-          duration-500
+          duration-300
           ease-[var(--ease-luxury)]
           ${
             active
-              ? "w-3"
-              : "w-0 group-hover:w-3"
+              ? "w-4"
+              : "w-0 group-hover:w-4"
           }
         `}
       />
@@ -740,7 +748,7 @@ function GuestAccountPopup({
         right-0
         top-[calc(100%+14px)]
         z-[100]
-        w-[340px]
+        w-[360px]
         max-w-[calc(100vw-24px)]
         animate-[slide-down_400ms_cubic-bezier(.22,1,.36,1)]
       "
@@ -750,21 +758,21 @@ function GuestAccountPopup({
           overflow-hidden
           border
           border-[var(--color-border)]
-          bg-[rgba(247,243,238,0.97)]
-          shadow-[0_24px_70px_rgba(33,31,29,0.12)]
-          backdrop-blur-xl
+          bg-white
+          shadow-[0_24px_70px_rgba(23,21,20,0.12)]
         "
       >
-        {/* Top accent */}
+        {/* Champagne accent */}
+
         <div
           aria-hidden="true"
           className="
             h-px
             bg-gradient-to-r
             from-transparent
-            via-[var(--color-accent)]
+            via-[var(--color-champagne)]
             to-transparent
-            opacity-70
+            opacity-80
           "
         />
 
@@ -772,10 +780,9 @@ function GuestAccountPopup({
           className="
             relative
             border-b
-            border-[var(--color-border)]
-            bg-[var(--color-surface)]
-            px-6
-            py-6
+            border-[var(--color-border-light)]
+            px-7
+            py-7
           "
         >
           <button
@@ -785,23 +792,25 @@ function GuestAccountPopup({
             className="
               group
               absolute
-              right-4
-              top-4
+              right-5
+              top-5
               flex
-              h-8
-              w-8
+              h-9
+              w-9
               items-center
               justify-center
-              rounded-full
+              border
+              border-[var(--color-border)]
               text-[var(--color-text-secondary)]
               transition-all
               duration-300
+              hover:border-[var(--color-text)]
               hover:bg-[var(--color-text)]
-              hover:text-[var(--color-text-inverse)]
+              hover:text-white
             "
           >
             <X
-              size={15}
+              size={16}
               strokeWidth={1.3}
               className="
                 transition-transform
@@ -814,7 +823,7 @@ function GuestAccountPopup({
           <p
             className="
               eyebrow
-              text-[var(--color-accent)]
+              text-[var(--color-accent-dark)]
             "
           >
             Your Account
@@ -822,10 +831,10 @@ function GuestAccountPopup({
 
           <h3
             className="
-              mt-3
+              mt-4
               font-display
-              text-3xl
-              leading-none
+              text-[34px]
+              leading-[0.98]
               tracking-[-0.025em]
               text-[var(--color-text)]
             "
@@ -836,10 +845,10 @@ function GuestAccountPopup({
           <p
             className="
               mt-4
-              max-w-[280px]
+              max-w-[290px]
               font-body
-              text-xs
-              leading-5
+              text-[14px]
+              leading-6
               text-[var(--color-text-secondary)]
             "
           >
@@ -850,44 +859,45 @@ function GuestAccountPopup({
         </div>
 
         {/* Auth actions */}
+
         <div
           className="
             border-b
-            border-[var(--color-border)]
-            p-5
+            border-[var(--color-border-light)]
+            p-6
           "
         >
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             <Link
               href="/login"
               onClick={onClose}
               className="
                 group
                 flex
-                h-11
+                h-12
                 items-center
                 justify-center
                 gap-2
                 bg-[var(--color-text)]
                 font-body
-                text-[9px]
-                font-medium
+                text-[12px]
+                font-semibold
                 uppercase
-                tracking-[0.18em]
-                text-[var(--color-text-inverse)]
+                tracking-[0.1em]
+                text-white
                 transition-all
-                duration-500
+                duration-300
                 hover:bg-[var(--color-accent-dark)]
               "
             >
               Sign In
 
               <ArrowUpRight
-                size={13}
-                strokeWidth={1.25}
+                size={15}
+                strokeWidth={1.35}
                 className="
                   transition-transform
-                  duration-500
+                  duration-300
                   group-hover:translate-x-0.5
                   group-hover:-translate-y-0.5
                 "
@@ -899,21 +909,21 @@ function GuestAccountPopup({
               onClick={onClose}
               className="
                 flex
-                h-11
+                h-12
                 items-center
                 justify-center
                 border
                 border-[var(--color-border)]
                 font-body
-                text-[9px]
-                font-medium
+                text-[12px]
+                font-semibold
                 uppercase
-                tracking-[0.18em]
+                tracking-[0.1em]
                 text-[var(--color-text)]
                 transition-all
-                duration-500
+                duration-300
                 hover:border-[var(--color-text)]
-                hover:bg-[var(--color-surface)]
+                hover:bg-[var(--color-bg-subtle)]
               "
             >
               Sign Up
@@ -922,7 +932,8 @@ function GuestAccountPopup({
         </div>
 
         {/* Benefits */}
-        <div className="px-6 py-6">
+
+        <div className="px-7 py-7">
           <p
             className="
               eyebrow
@@ -932,7 +943,7 @@ function GuestAccountPopup({
             With an account
           </p>
 
-          <div className="mt-5 space-y-4">
+          <div className="mt-5 space-y-5">
             <GuestBenefit
               title="Track your orders"
               description="View order status and history."
@@ -969,12 +980,12 @@ function GuestBenefit({
     <div className="group flex items-start gap-3">
       <span
         className="
-          mt-1.5
+          mt-[7px]
           h-1.5
           w-1.5
           shrink-0
           rounded-full
-          bg-[var(--color-accent)]
+          bg-[var(--color-champagne)]
           transition-transform
           duration-300
           group-hover:scale-125
@@ -985,8 +996,8 @@ function GuestBenefit({
         <p
           className="
             font-body
-            text-[11px]
-            font-medium
+            text-[13px]
+            font-semibold
             text-[var(--color-text)]
           "
         >
@@ -997,7 +1008,7 @@ function GuestBenefit({
           className="
             mt-1
             font-body
-            text-[10px]
+            text-[12px]
             leading-5
             text-[var(--color-text-secondary)]
           "
