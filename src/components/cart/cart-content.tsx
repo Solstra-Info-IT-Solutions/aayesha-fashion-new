@@ -20,10 +20,6 @@ import {
   type Cart,
 } from "@/services/cart.service";
 
-/* ============================================================
-   COMPONENT
-============================================================ */
-
 export function CartContent() {
   const [cart, setCart] = useState<Cart | null>(null);
 
@@ -36,10 +32,6 @@ export function CartContent() {
     useState<string | null>(null);
 
   const [isClearing, setIsClearing] = useState(false);
-
-  /* ==========================================================
-     LOAD CART
-  ========================================================== */
 
   useEffect(() => {
     let cancelled = false;
@@ -75,15 +67,7 @@ export function CartContent() {
     };
   }, []);
 
-  /* ==========================================================
-     CART ITEMS
-  ========================================================== */
-
   const cartItems = cart?.items ?? [];
-
-  /* ==========================================================
-     SUMMARY
-  ========================================================== */
 
   const summary = useMemo(() => {
     return cartItems.reduce(
@@ -95,20 +79,12 @@ export function CartContent() {
         }
 
         const quantity = item.quantity;
-
-        const sellingPrice =
-          product.pricing.sellingPrice;
-
-        const mrp =
-          product.pricing.mrp;
+        const sellingPrice = product.pricing.sellingPrice;
+        const mrp = product.pricing.mrp;
 
         result.itemCount += quantity;
-
-        result.subtotal +=
-          sellingPrice * quantity;
-
-        result.mrpTotal +=
-          mrp * quantity;
+        result.subtotal += sellingPrice * quantity;
+        result.mrpTotal += mrp * quantity;
 
         return result;
       },
@@ -128,10 +104,6 @@ export function CartContent() {
   const formatPrice = (value: number) =>
     `₹${value.toLocaleString("en-IN")}`;
 
-  /* ==========================================================
-     UPDATE QUANTITY
-  ========================================================== */
-
   const handleUpdateQuantity = async (
     productId: string,
     quantity: number,
@@ -143,20 +115,16 @@ export function CartContent() {
     try {
       setUpdatingProductId(productId);
 
-      const response =
-        await updateCartItem(
-          productId,
-          quantity,
-        );
+      const response = await updateCartItem(
+        productId,
+        quantity,
+      );
 
       setCart(response);
 
       toast.success("Cart updated.");
     } catch (error) {
-      console.error(
-        "UPDATE CART ERROR:",
-        error,
-      );
+      console.error("UPDATE CART ERROR:", error);
 
       toast.error(
         error instanceof Error
@@ -167,10 +135,6 @@ export function CartContent() {
       setUpdatingProductId(null);
     }
   };
-
-  /* ==========================================================
-     REMOVE ITEM
-  ========================================================== */
 
   const handleRemoveItem = async (
     productId: string,
@@ -200,10 +164,6 @@ export function CartContent() {
     }
   };
 
-  /* ==========================================================
-     CLEAR CART
-  ========================================================== */
-
   const handleClearCart = async () => {
     try {
       setIsClearing(true);
@@ -212,14 +172,9 @@ export function CartContent() {
 
       setCart(response);
 
-      toast.success(
-        "Your bag has been cleared.",
-      );
+      toast.success("Your bag has been cleared.");
     } catch (error) {
-      console.error(
-        "CLEAR CART ERROR:",
-        error,
-      );
+      console.error("CLEAR CART ERROR:", error);
 
       toast.error(
         error instanceof Error
@@ -231,118 +186,69 @@ export function CartContent() {
     }
   };
 
-  /* ==========================================================
-     LOADING
-  ========================================================== */
-
   if (isLoading) {
     return (
-      <section className="min-h-screen bg-[var(--color-bg)]">
-        <div className="mx-auto max-w-[1600px] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
-          <div className="border-b border-[var(--color-border-light)] pb-7">
-            <div className="h-3 w-28 animate-pulse bg-[var(--color-bg-soft)]" />
-
-            <div className="mt-6 h-12 w-52 animate-pulse bg-[var(--color-bg-soft)]" />
+      <section className="cart-page cart-page--loading">
+        <div className="cart-page__container">
+          <div className="cart-page__loading-header">
+            <div className="cart-skeleton cart-skeleton--eyebrow" />
+            <div className="cart-skeleton cart-skeleton--title" />
           </div>
 
-          <div className="mt-9 grid gap-10 lg:grid-cols-[minmax(0,1fr)_390px] lg:gap-16">
-            <div className="border-y border-[var(--color-border-light)]">
+          <div className="cart-page__loading-layout">
+            <div className="cart-page__loading-items">
               {[1, 2].map((item) => (
                 <div
                   key={item}
-                  className="grid grid-cols-[100px_minmax(0,1fr)] gap-4 border-b border-[var(--color-border-light)] py-6 last:border-b-0 sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-6"
+                  className="cart-loading-item"
                 >
-                  <div className="aspect-[3/4] animate-pulse bg-[var(--color-bg-soft)]" />
+                  <div className="cart-skeleton cart-skeleton--image" />
 
-                  <div>
-                    <div className="h-3 w-20 animate-pulse bg-[var(--color-bg-soft)]" />
-
-                    <div className="mt-3 h-8 w-52 max-w-full animate-pulse bg-[var(--color-bg-soft)]" />
-
-                    <div className="mt-5 h-4 w-40 animate-pulse bg-[var(--color-bg-soft)]" />
-
-                    <div className="mt-5 h-5 w-28 animate-pulse bg-[var(--color-bg-soft)]" />
-
-                    <div className="mt-6 h-10 w-28 animate-pulse bg-[var(--color-bg-soft)]" />
+                  <div className="cart-loading-item__content">
+                    <div className="cart-skeleton cart-skeleton--small" />
+                    <div className="cart-skeleton cart-skeleton--product-title" />
+                    <div className="cart-skeleton cart-skeleton--meta" />
+                    <div className="cart-skeleton cart-skeleton--price" />
+                    <div className="cart-skeleton cart-skeleton--quantity" />
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="h-[360px] animate-pulse border border-[var(--color-border-light)] bg-[var(--color-surface)]" />
+            <div className="cart-skeleton cart-skeleton--summary" />
           </div>
         </div>
       </section>
     );
   }
 
-  /* ==========================================================
-     EMPTY CART
-  ========================================================== */
-
   if (!cartItems.length) {
     return (
-      <section className="min-h-[70vh] bg-[var(--color-bg)]">
-        <div className="mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6">
-          <div className="flex h-16 w-16 items-center justify-center border border-[var(--color-border)]">
+      <section className="cart-page cart-page--empty">
+        <div className="cart-empty">
+          <div className="cart-empty__icon">
             <ShoppingBag
-              size={22}
+              size={24}
               strokeWidth={1.25}
-              className="text-[var(--color-text)]"
             />
           </div>
 
-          <p className="eyebrow mt-7 text-[var(--color-accent)]">
+          <p className="cart-eyebrow">
             Your Aayesha edit
           </p>
 
-          <h1
-            className="
-              mt-3
-              font-display
-              text-[var(--text-heading-lg)]
-              font-medium
-              leading-[0.95]
-              tracking-[var(--tracking-tight)]
-              text-[var(--color-text)]
-            "
-          >
+          <h1 className="cart-empty__title">
             Your bag is empty.
           </h1>
 
-          <p className="mt-5 max-w-md font-body text-sm leading-7 text-[var(--color-text-secondary)]">
-            Discover thoughtfully designed pieces from the
-            latest Aayesha collection.
+          <p className="cart-empty__description">
+            Discover thoughtfully designed pieces from
+            the latest Aayesha collection.
           </p>
 
           <Link
             href="/shop"
-            className="
-              mt-8
-              inline-flex
-              min-h-12
-              items-center
-              justify-center
-              border
-              border-[var(--color-text)]
-              bg-[var(--color-text)]
-              px-7
-              py-3.5
-              font-body
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[var(--tracking-wider)]
-              text-[var(--color-text-inverse)]
-              transition-all
-              duration-[var(--duration-base)]
-              hover:border-[var(--color-accent-dark)]
-              hover:bg-[var(--color-accent-dark)]
-              focus:outline-none
-              focus:ring-2
-              focus:ring-[var(--color-accent)]
-              focus:ring-offset-2
-            "
+            className="cart-button cart-button--primary"
           >
             Explore Collection
           </Link>
@@ -351,64 +257,37 @@ export function CartContent() {
     );
   }
 
-  /* ==========================================================
-     CART
-  ========================================================== */
-
   return (
-    <main className="min-h-screen bg-[var(--color-bg)]">
-      <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+    <main className="cart-page">
+      <div className="cart-page__container">
         {/* HEADER */}
 
-        <div className="border-b border-[var(--color-border-light)] pb-7">
+        <header className="cart-header">
           <Link
             href="/shop"
-            className="
-              link-luxury
-              inline-flex
-              items-center
-              gap-1
-              font-body
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[var(--tracking-wider)]
-              text-[var(--color-text-muted)]
-              transition-colors
-              hover:text-[var(--color-text)]
-            "
+            className="cart-header__back"
           >
             <ChevronLeft
-              size={14}
+              size={16}
               strokeWidth={1.4}
             />
 
-            Continue Shopping
+            <span>Continue Shopping</span>
           </Link>
 
-          <div className="mt-7 flex items-end justify-between gap-6">
+          <div className="cart-header__main">
             <div>
-              <p className="eyebrow text-[var(--color-accent)]">
+              <p className="cart-eyebrow">
                 Aayesha Fashion
               </p>
 
-              <h1
-                className="
-                  mt-3
-                  font-display
-                  text-[var(--text-heading-lg)]
-                  font-medium
-                  leading-[0.9]
-                  tracking-[var(--tracking-tight)]
-                  text-[var(--color-text)]
-                "
-              >
+              <h1 className="cart-header__title">
                 Your Bag
               </h1>
             </div>
 
-            <div className="text-right">
-              <p className="font-body text-xs text-[var(--color-text-muted)]">
+            <div className="cart-header__meta">
+              <p>
                 {summary.itemCount}{" "}
                 {summary.itemCount === 1
                   ? "item"
@@ -416,21 +295,21 @@ export function CartContent() {
               </p>
 
               {savings > 0 && (
-                <p className="mt-1 font-body text-[10px] font-semibold text-[var(--color-success)]">
+                <span>
                   You save {formatPrice(savings)}
-                </p>
+                </span>
               )}
             </div>
           </div>
-        </div>
+        </header>
 
         {/* MAIN */}
 
-        <div className="mt-9 grid gap-10 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-start lg:gap-16">
+        <div className="cart-layout">
           {/* ITEMS */}
 
-          <section>
-            <div className="border-y border-[var(--color-border)]">
+          <section className="cart-items">
+            <div className="cart-items__list">
               {cartItems.map((item) => {
                 const product = item.product;
 
@@ -447,8 +326,7 @@ export function CartContent() {
                 const price =
                   product.pricing.sellingPrice;
 
-                const mrp =
-                  product.pricing.mrp;
+                const mrp = product.pricing.mrp;
 
                 const discount =
                   mrp > 0
@@ -478,30 +356,13 @@ export function CartContent() {
                 return (
                   <article
                     key={item.productId}
-                    className="
-                      grid
-                      grid-cols-[100px_minmax(0,1fr)]
-                      gap-4
-                      border-b
-                      border-[var(--color-border-light)]
-                      py-7
-                      last:border-b-0
-                      sm:grid-cols-[140px_minmax(0,1fr)]
-                      sm:gap-6
-                      lg:py-8
-                    "
+                    className="cart-item"
                   >
                     {/* IMAGE */}
 
                     <Link
                       href={`/products/${product._id}`}
-                      className="
-                        group
-                        relative
-                        aspect-[3/4]
-                        overflow-hidden
-                        bg-[var(--color-bg-soft)]
-                      "
+                      className="cart-item__image"
                     >
                       {media?.url ? (
                         <Image
@@ -511,17 +372,11 @@ export function CartContent() {
                             product.name
                           }
                           fill
-                          className="
-                            object-cover
-                            transition-transform
-                            duration-700
-                            ease-[cubic-bezier(0.22,1,0.36,1)]
-                            group-hover:scale-[1.025]
-                          "
-                          sizes="(max-width: 640px) 100px, 140px"
+                          sizes="(max-width: 639px) 112px, (max-width: 1023px) 150px, 180px"
+                          className="cart-item__image-element"
                         />
                       ) : (
-                        <div className="flex h-full items-center justify-center px-2 text-center font-body text-[9px] uppercase tracking-[0.1em] text-[var(--color-text-muted)]">
+                        <div className="cart-item__image-placeholder">
                           No image
                         </div>
                       )}
@@ -529,28 +384,16 @@ export function CartContent() {
 
                     {/* DETAILS */}
 
-                    <div className="min-w-0">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="min-w-0">
-                          <p className="font-body text-[9px] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-muted)]">
+                    <div className="cart-item__details">
+                      <div className="cart-item__top">
+                        <div className="cart-item__identity">
+                          <p className="cart-item__label">
                             Product
                           </p>
 
                           <Link
                             href={`/products/${product._id}`}
-                            className="
-                              mt-1
-                              block
-                              font-display
-                              text-[25px]
-                              font-medium
-                              leading-tight
-                              tracking-[var(--tracking-tight)]
-                              text-[var(--color-text)]
-                              transition-colors
-                              duration-[var(--duration-base)]
-                              hover:text-[var(--color-accent-dark)]
-                            "
+                            className="cart-item__name"
                           >
                             {product.name}
                           </Link>
@@ -563,59 +406,34 @@ export function CartContent() {
                               item.productId,
                             )
                           }
-                          disabled={
-                            isRemoving
-                          }
+                          disabled={isRemoving}
                           aria-label={`Remove ${product.name}`}
-                          className="
-                            flex
-                            h-9
-                            w-9
-                            shrink-0
-                            items-center
-                            justify-center
-                            border
-                            border-transparent
-                            text-[var(--color-text-muted)]
-                            transition-all
-                            duration-[var(--duration-base)]
-                            hover:border-[var(--color-border)]
-                            hover:text-[var(--color-error)]
-                            focus:outline-none
-                            focus:ring-2
-                            focus:ring-[var(--color-accent)]
-                            disabled:cursor-not-allowed
-                            disabled:opacity-40
-                          "
+                          className="cart-item__remove"
                         >
                           <Trash2
-                            size={15}
+                            size={17}
                             strokeWidth={1.35}
                           />
                         </button>
                       </div>
 
-                      {/* SKU */}
-
-                      <p className="mt-4 font-body text-[10px] text-[var(--color-text-muted)]">
+                      <p className="cart-item__sku">
                         SKU: {product.id}
                       </p>
 
-                      {/* PRICE */}
-
-                      <div className="mt-5 flex flex-wrap items-baseline gap-2">
-                        <span className="font-body text-sm font-semibold text-[var(--color-text)]">
+                      <div className="cart-item__pricing">
+                        <span className="cart-item__price">
                           {formatPrice(price)}
                         </span>
 
                         {mrp > price && (
                           <>
-                            <span className="font-body text-xs text-[var(--color-text-muted)] line-through">
+                            <span className="cart-item__mrp">
                               {formatPrice(mrp)}
                             </span>
 
                             {discount > 0 && (
-                              <span className="font-body text-[10px] font-semibold uppercase tracking-wide text-[var(--color-accent-dark)]">
+                              <span className="cart-item__discount">
                                 {discount}% Off
                               </span>
                             )}
@@ -623,15 +441,13 @@ export function CartContent() {
                         )}
                       </div>
 
-                      {/* QUANTITY */}
-
-                      <div className="mt-7 flex flex-wrap items-end justify-between gap-5">
-                        <div>
-                          <p className="mb-2 font-body text-[9px] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-muted)]">
+                      <div className="cart-item__bottom">
+                        <div className="cart-item__quantity">
+                          <p className="cart-item__label">
                             Quantity
                           </p>
 
-                          <div className="flex h-11 border border-[var(--color-border-dark)]">
+                          <div className="cart-quantity">
                             <button
                               type="button"
                               onClick={() =>
@@ -647,30 +463,16 @@ export function CartContent() {
                                 isUpdating ||
                                 isRemoving
                               }
-                              className="
-                                flex
-                                w-10
-                                items-center
-                                justify-center
-                                transition-colors
-                                duration-[var(--duration-fast)]
-                                hover:bg-[var(--color-bg-soft)]
-                                disabled:cursor-not-allowed
-                                disabled:opacity-25
-                                focus:outline-none
-                                focus:ring-2
-                                focus:ring-inset
-                                focus:ring-[var(--color-accent)]
-                              "
                               aria-label="Decrease quantity"
+                              className="cart-quantity__button"
                             >
                               <Minus
-                                size={13}
+                                size={14}
                                 strokeWidth={1.4}
                               />
                             </button>
 
-                            <span className="flex w-10 items-center justify-center border-x border-[var(--color-border-dark)] font-body text-xs font-semibold text-[var(--color-text)]">
+                            <span className="cart-quantity__value">
                               {isUpdating
                                 ? "..."
                                 : item.quantity}
@@ -691,59 +493,39 @@ export function CartContent() {
                                 isUpdating ||
                                 isRemoving
                               }
-                              className="
-                                flex
-                                w-10
-                                items-center
-                                justify-center
-                                transition-colors
-                                duration-[var(--duration-fast)]
-                                hover:bg-[var(--color-bg-soft)]
-                                disabled:cursor-not-allowed
-                                disabled:opacity-25
-                                focus:outline-none
-                                focus:ring-2
-                                focus:ring-inset
-                                focus:ring-[var(--color-accent)]
-                              "
                               aria-label="Increase quantity"
+                              className="cart-quantity__button"
                             >
                               <Plus
-                                size={13}
+                                size={14}
                                 strokeWidth={1.4}
                               />
                             </button>
                           </div>
                         </div>
 
-                        {/* TOTAL */}
-
-                        <div className="text-right">
-                          <p className="font-body text-[9px] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-muted)]">
+                        <div className="cart-item__total">
+                          <p className="cart-item__label">
                             Item Total
                           </p>
 
-                          <p className="mt-1 font-body text-sm font-semibold text-[var(--color-text)]">
-                            {formatPrice(
-                              itemTotal,
-                            )}
+                          <p>
+                            {formatPrice(itemTotal)}
                           </p>
                         </div>
                       </div>
-
-                      {/* STOCK */}
 
                       {availableStock > 0 &&
                         availableStock <=
                           product.inventory
                             .lowStockThreshold && (
-                          <p className="mt-4 font-body text-[10px] font-semibold text-[var(--color-warning)]">
+                          <p className="cart-item__notice cart-item__notice--warning">
                             Only {availableStock} left
                           </p>
                         )}
 
                       {availableStock === 0 && (
-                        <p className="mt-4 font-body text-[10px] font-semibold text-[var(--color-error)]">
+                        <p className="cart-item__notice cart-item__notice--error">
                           This product is currently
                           unavailable.
                         </p>
@@ -752,7 +534,7 @@ export function CartContent() {
                       {item.quantity >
                         availableStock &&
                         availableStock > 0 && (
-                          <p className="mt-4 font-body text-[10px] font-semibold text-[var(--color-error)]">
+                          <p className="cart-item__notice cart-item__notice--error">
                             Only {availableStock} units are
                             currently available. Please
                             reduce the quantity.
@@ -764,33 +546,13 @@ export function CartContent() {
               })}
             </div>
 
-            {/* CLEAR */}
-
             <button
               type="button"
               onClick={() =>
                 void handleClearCart()
               }
               disabled={isClearing}
-              className="
-                mt-6
-                font-body
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[var(--tracking-wider)]
-                text-[var(--color-text-muted)]
-                underline
-                underline-offset-4
-                transition-colors
-                duration-[var(--duration-base)]
-                hover:text-[var(--color-error)]
-                focus:outline-none
-                focus:ring-2
-                focus:ring-[var(--color-accent)]
-                disabled:cursor-not-allowed
-                disabled:opacity-40
-              "
+              className="cart-clear"
             >
               {isClearing
                 ? "Clearing..."
@@ -800,13 +562,17 @@ export function CartContent() {
 
           {/* SUMMARY */}
 
-          <aside className="lg:sticky lg:top-24">
-            <div className="border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-7">
-              <p className="eyebrow text-[var(--color-accent)]">
-                Order Summary
-              </p>
+          <aside className="cart-summary">
+            <div className="cart-summary__card">
+              <div className="cart-summary__heading">
+                <p className="cart-eyebrow">
+                  Order Summary
+                </p>
 
-              <div className="mt-6 space-y-4 border-b border-[var(--color-border-light)] pb-6">
+                <h2>Review your selection</h2>
+              </div>
+
+              <div className="cart-summary__rows">
                 <SummaryRow
                   label="MRP Total"
                   value={formatPrice(
@@ -817,83 +583,56 @@ export function CartContent() {
                 {savings > 0 && (
                   <SummaryRow
                     label="Product Discount"
-                    value={`- ${formatPrice(savings)}`}
-                    valueClassName="font-semibold text-[var(--color-success)]"
+                    value={`- ${formatPrice(
+                      savings,
+                    )}`}
+                    valueClassName="cart-summary__value--success"
                   />
                 )}
 
                 <SummaryRow
                   label="Shipping"
                   value="Calculated at checkout"
-                  valueClassName="text-[var(--color-text-muted)]"
+                  valueClassName="cart-summary__value--muted"
                 />
               </div>
 
-              <div className="flex items-end justify-between gap-5 py-6">
+              <div className="cart-summary__total">
                 <div>
-                  <p className="font-body text-[10px] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-muted)]">
-                    Subtotal
-                  </p>
+                  <p>Subtotal</p>
 
-                  <p className="mt-1 max-w-[180px] font-body text-[10px] leading-5 text-[var(--color-text-muted)]">
+                  <span>
                     Inclusive of applicable taxes
-                  </p>
+                  </span>
                 </div>
 
-                <p className="font-body text-xl font-semibold text-[var(--color-text)]">
+                <strong>
                   {formatPrice(summary.subtotal)}
-                </p>
+                </strong>
               </div>
 
               <Link
                 href="/checkout"
-                className="
-                  flex
-                  min-h-[54px]
-                  w-full
-                  items-center
-                  justify-center
-                  border
-                  border-[var(--color-text)]
-                  bg-[var(--color-text)]
-                  px-6
-                  py-3.5
-                  font-body
-                  text-[10px]
-                  font-semibold
-                  uppercase
-                  tracking-[var(--tracking-wider)]
-                  text-[var(--color-text-inverse)]
-                  transition-all
-                  duration-[var(--duration-base)]
-                  hover:border-[var(--color-accent-dark)]
-                  hover:bg-[var(--color-accent-dark)]
-                  focus:outline-none
-                  focus:ring-2
-                  focus:ring-[var(--color-accent)]
-                  focus:ring-offset-2
-                "
+                className="cart-button cart-button--checkout"
               >
                 Proceed to Checkout
               </Link>
 
-              <p className="mt-4 text-center font-body text-[10px] leading-5 text-[var(--color-text-muted)]">
+              <p className="cart-summary__secure">
                 Secure checkout · Payment and delivery
                 options available at checkout
               </p>
             </div>
 
-            {/* CARE */}
-
-            <div className="mt-4 border border-[var(--color-border-light)] bg-[var(--color-bg-soft)] p-5">
-              <p className="font-body text-[10px] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text)]">
+            <div className="cart-care">
+              <p className="cart-care__title">
                 Aayesha Care
               </p>
 
-              <p className="mt-2 font-body text-xs leading-6 text-[var(--color-text-secondary)]">
-                Your selected product is preserved in your
-                bag. Final inventory availability is confirmed
-                before order placement.
+              <p className="cart-care__description">
+                Your selected product is preserved in
+                your bag. Final inventory availability is
+                confirmed before order placement.
               </p>
             </div>
           </aside>
@@ -902,10 +641,6 @@ export function CartContent() {
     </main>
   );
 }
-
-/* ============================================================
-   SUMMARY ROW
-============================================================ */
 
 function SummaryRow({
   label,
@@ -917,14 +652,12 @@ function SummaryRow({
   valueClassName?: string;
 }) {
   return (
-    <div className="flex items-center justify-between gap-5 font-body text-sm">
-      <span className="text-[var(--color-text-secondary)]">
-        {label}
-      </span>
+    <div className="cart-summary__row">
+      <span>{label}</span>
 
-      <span className={valueClassName}>
+      <strong className={valueClassName}>
         {value}
-      </span>
+      </strong>
     </div>
   );
 }
