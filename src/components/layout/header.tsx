@@ -29,77 +29,26 @@ export function Header() {
 
   return (
     <header
-      className={`
-        fixed
-        inset-x-0
-        top-0
-        z-[var(--z-header)]
-        w-full
-        border-b
-        transition-all
-        duration-500
-        ease-[cubic-bezier(.22,1,.36,1)]
-        ${
-          isScrolled
-            ? `
-              border-[var(--color-border-light)]
-              bg-[rgba(255,255,255,0.94)]
-              shadow-[0_8px_30px_rgba(23,21,20,0.06)]
-              backdrop-blur-xl
-            `
-            : `
-              border-[rgba(23,21,20,0.06)]
-              bg-[rgba(255,255,255,0.88)]
-              backdrop-blur-lg
-            `
-        }
-      `}
+      className={`site-header ${
+        isScrolled ? "site-header--scrolled" : ""
+      }`}
     >
-      {/* Refined champagne accent */}
-      <div
+      {/* Champagne accent */}
+      <span
         aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-x-0
-          bottom-0
-          h-px
-          bg-gradient-to-r
-          from-transparent
-          via-[var(--color-champagne)]
-          to-transparent
-          opacity-50
-        "
+        className="site-header__accent"
       />
 
       <div
-        className={`
-          relative
-          mx-auto
-          flex
-          w-full
-          max-w-[1600px]
-          items-center
-          px-5
-          transition-[height]
-          duration-500
-          ease-[cubic-bezier(.22,1,.36,1)]
-          sm:px-8
-          md:px-10
-          lg:px-12
-          xl:px-16
-          ${
-            isScrolled
-              ? "h-[72px] sm:h-[74px] lg:h-[76px]"
-              : "h-[82px] sm:h-[86px] lg:h-[90px]"
-          }
-        `}
+        className={`site-header__inner ${
+          isScrolled ? "site-header__inner--scrolled" : ""
+        }`}
       >
         {/* =====================================================
             MOBILE MENU
         ====================================================== */}
 
-        <div className="relative z-[120] lg:hidden">
+        <div className="site-header__mobile-menu">
           <MobileMenu
             isOpen={mobileMenuOpen}
             onOpen={() => setMobileMenuOpen(true)}
@@ -111,39 +60,19 @@ export function Header() {
             DESKTOP NAVIGATION
         ====================================================== */}
 
-        <div
-          className="
-            hidden
-            lg:flex
-            lg:items-center
-          "
+        <nav
+          aria-label="Main navigation"
+          className="site-header__navigation"
         >
           <DesktopNavigation />
-        </div>
+        </nav>
 
         {/* =====================================================
             CENTER BRAND
         ====================================================== */}
 
-        <div
-          className="
-            pointer-events-none
-            absolute
-            left-1/2
-            top-1/2
-            z-[10]
-            -translate-x-1/2
-            -translate-y-1/2
-          "
-        >
-          <div
-            className="
-              transform-gpu
-              transition-transform
-              duration-500
-              ease-[cubic-bezier(.22,1,.36,1)]
-            "
-          >
+        <div className="site-header__brand">
+          <div className="site-header__brand-inner">
             <BrandLogo />
           </div>
         </div>
@@ -152,15 +81,7 @@ export function Header() {
             HEADER ACTIONS
         ====================================================== */}
 
-        <div
-          className="
-            relative
-            z-[20]
-            ml-auto
-            flex
-            items-center
-          "
-        >
+        <div className="site-header__actions">
           <HeaderActions />
         </div>
       </div>

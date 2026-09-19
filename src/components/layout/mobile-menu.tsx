@@ -1,10 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
 import toast from "react-hot-toast";
@@ -30,19 +27,11 @@ import { mainNavigation } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { useAuthStore } from "@/store/auth-store";
 
-/* =========================================================
-   TYPES
-========================================================= */
-
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   onOpen: () => void;
 }
-
-/* =========================================================
-   ACCOUNT LINKS
-========================================================= */
 
 const accountLinks = [
   {
@@ -70,10 +59,6 @@ const accountLinks = [
     icon: UserCog,
   },
 ];
-
-/* =========================================================
-   NAVIGATION DETAILS
-========================================================= */
 
 const navigationDetails: Record<
   string,
@@ -103,10 +88,6 @@ const navigationDetails: Record<
   },
 };
 
-/* =========================================================
-   COMPONENT
-========================================================= */
-
 export function MobileMenu({
   isOpen,
   onClose,
@@ -119,10 +100,6 @@ export function MobileMenu({
 
   const [mounted, setMounted] =
     useState(false);
-
-  /* =======================================================
-     AUTH
-  ======================================================= */
 
   const user = useAuthStore(
     (state) => state.user,
@@ -145,17 +122,9 @@ export function MobileMenu({
     isAuthenticated &&
     !!user;
 
-  /* =======================================================
-     PORTAL MOUNT
-  ======================================================= */
-
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  /* =======================================================
-     BODY SCROLL LOCK
-  ======================================================= */
 
   useEffect(() => {
     if (!isOpen) {
@@ -172,10 +141,6 @@ export function MobileMenu({
         previousOverflow;
     };
   }, [isOpen]);
-
-  /* =======================================================
-     ESCAPE KEY
-  ======================================================= */
 
   useEffect(() => {
     if (!isOpen) {
@@ -203,10 +168,6 @@ export function MobileMenu({
     };
   }, [isOpen, onClose]);
 
-  /* =======================================================
-     INITIALS
-  ======================================================= */
-
   const initials =
     user?.name
       ?.trim()
@@ -216,10 +177,6 @@ export function MobileMenu({
         part.charAt(0).toUpperCase(),
       )
       .join("") || "A";
-
-  /* =======================================================
-     LOGOUT
-  ======================================================= */
 
   const handleLogout = async () => {
     if (isLoggingOut) {
@@ -248,10 +205,6 @@ export function MobileMenu({
     }
   };
 
-  /* =======================================================
-     HAMBURGER
-  ======================================================= */
-
   const hamburger = (
     <button
       type="button"
@@ -264,504 +217,162 @@ export function MobileMenu({
           : "Open navigation menu"
       }
       aria-expanded={isOpen}
-      className="
-        group
-        relative
-        flex
-        h-11
-        w-11
-        items-center
-        justify-center
-        text-[var(--color-text)]
-        transition-all
-        duration-500
-        ease-[var(--ease-luxury)]
-        hover:text-[var(--color-accent-dark)]
-        lg:hidden
-      "
+      className="mobile-menu-trigger"
     >
-      <span
-        className="
-          relative
-          flex
-          h-10
-          w-10
-          items-center
-          justify-center
-        "
-      >
+      <span className="mobile-menu-trigger__inner">
         <span
           aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            border
-            border-transparent
-            transition-all
-            duration-500
-            group-hover:border-[var(--color-accent-soft)]
-          "
+          className="mobile-menu-trigger__frame"
         />
 
         {isOpen ? (
           <X
             size={20}
             strokeWidth={1.15}
-            className="
-              relative
-              z-10
-              transition-transform
-              duration-500
-              group-hover:rotate-90
-            "
+            className="mobile-menu-trigger__icon mobile-menu-trigger__icon--close"
           />
         ) : (
           <Menu
             size={20}
             strokeWidth={1.15}
-            className="
-              relative
-              z-10
-              transition-transform
-              duration-500
-              group-hover:scale-105
-            "
+            className="mobile-menu-trigger__icon"
           />
         )}
       </span>
     </button>
   );
 
-  /* =======================================================
-     DRAWER
-  ======================================================= */
-
   const drawer = (
     <div
-      className={`
-        fixed
-        inset-0
-        z-[999999]
-        lg:hidden
-        ${
-          isOpen
-            ? "pointer-events-auto"
-            : "pointer-events-none"
-        }
-      `}
+      className={`mobile-menu ${
+        isOpen
+          ? "mobile-menu--open"
+          : "mobile-menu--closed"
+      }`}
       aria-hidden={!isOpen}
     >
-      {/* =================================================
-          BACKDROP
-      ================================================= */}
-
+      {/* Backdrop */}
       <button
         type="button"
         aria-label="Close navigation"
         onClick={onClose}
         tabIndex={isOpen ? 0 : -1}
-        className={`
-          absolute
-          inset-0
-          z-0
-          cursor-default
-          bg-[rgba(17,16,15,0.56)]
-          backdrop-blur-[6px]
-          transition-opacity
-          duration-700
-          ease-[var(--ease-luxury)]
-          ${
-            isOpen
-              ? "opacity-100"
-              : "opacity-0"
-          }
-        `}
+        className="mobile-menu__backdrop"
       />
 
-      {/* =================================================
-          DRAWER
-      ================================================= */}
-
+      {/* Drawer */}
       <aside
-        className={`
-          absolute
-          left-0
-          top-0
-          z-10
-          flex
-          h-[100dvh]
-          w-[92vw]
-          max-w-[460px]
-          flex-col
-          overflow-hidden
-          border-r
-          border-[var(--color-border)]
-          bg-white
-          shadow-[30px_0_100px_rgba(17,16,15,0.18)]
-          transition-transform
-          duration-700
-          ease-[var(--ease-luxury)]
-          ${
-            isOpen
-              ? "translate-x-0"
-              : "-translate-x-full"
-          }
-        `}
+        className="mobile-menu__drawer"
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
       >
-        {/* =================================================
-            AMBIENT LIGHT
-        ================================================= */}
-
+        {/* Ambient light */}
         <div
           aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            right-[-80px]
-            top-[-80px]
-            z-0
-            h-56
-            w-56
-            rounded-full
-            bg-[var(--color-champagne)]
-            opacity-[0.07]
-            blur-[70px]
-          "
+          className="mobile-menu__ambient mobile-menu__ambient--top"
         />
 
         <div
           aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            bottom-[15%]
-            left-[-100px]
-            z-0
-            h-64
-            w-64
-            rounded-full
-            bg-[var(--color-rose)]
-            opacity-[0.035]
-            blur-[80px]
-          "
+          className="mobile-menu__ambient mobile-menu__ambient--bottom"
         />
-
-        {/* =================================================
-            TOP ACCENT
-        ================================================= */}
 
         <div
           aria-hidden="true"
-          className="
-            absolute
-            inset-x-0
-            top-0
-            z-30
-            h-px
-            bg-gradient-to-r
-            from-transparent
-            via-[var(--color-champagne)]
-            to-transparent
-            opacity-80
-          "
+          className="mobile-menu__top-accent"
         />
 
-        {/* =================================================
-            HEADER
-        ================================================= */}
-
-        <div
-          className="
-            relative
-            z-20
-            flex
-            shrink-0
-            items-center
-            justify-between
-            border-b
-            border-[var(--color-border-light)]
-            bg-white/[0.96]
-            px-5
-            py-5
-            backdrop-blur-xl
-            sm:px-7
-          "
-        >
+        {/* Header */}
+        <div className="mobile-menu__header">
           <Link
             href="/"
             onClick={onClose}
-            className="group block"
+            className="mobile-menu__brand"
             aria-label="Aayesha Fashion home"
           >
-            <p
-              className="
-                font-display
-                text-[32px]
-                font-normal
-                leading-none
-                tracking-[-0.035em]
-                text-[var(--color-text)]
-                transition-all
-                duration-500
-                group-hover:text-[var(--color-accent-dark)]
-              "
-            >
+            <span className="mobile-menu__brand-name">
               Aayesha
-            </p>
+            </span>
 
-            <div
-              className="
-                mt-2
-                flex
-                items-center
-                gap-2
-              "
-            >
+            <span className="mobile-menu__brand-subline">
               <span
                 aria-hidden="true"
-                className="
-                  h-px
-                  w-5
-                  bg-[var(--color-champagne)]
-                "
+                className="mobile-menu__brand-line"
               />
 
-              <p
-                className="
-                  font-body
-                  text-[8px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.34em]
-                  text-[var(--color-text-muted)]
-                "
-              >
+              <span className="mobile-menu__brand-tagline">
                 Fashion
-              </p>
-            </div>
+              </span>
+            </span>
           </Link>
 
           <button
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="
-              group
-              flex
-              h-10
-              w-10
-              items-center
-              justify-center
-              border
-              border-[var(--color-border)]
-              bg-white
-              text-[var(--color-text-secondary)]
-              transition-all
-              duration-500
-              hover:border-[var(--color-text)]
-              hover:bg-[var(--color-text)]
-              hover:text-white
-            "
+            className="mobile-menu__close"
           >
             <X
               size={17}
               strokeWidth={1.15}
-              className="
-                transition-transform
-                duration-500
-                group-hover:rotate-90
-              "
             />
           </button>
         </div>
 
-        {/* =================================================
-            SCROLLABLE CONTENT
-        ================================================= */}
-
-        <div
-          className="
-            relative
-            z-10
-            min-h-0
-            flex-1
-            overflow-y-auto
-            overscroll-contain
-            bg-white
-          "
-        >
-          {/* =================================================
-              ACCOUNT
-          ================================================= */}
-
-          <div className="px-5 pt-7 sm:px-7">
+        {/* Scrollable content */}
+        <div className="mobile-menu__content">
+          {/* Account */}
+          <div className="mobile-menu__account">
             {isLoggedIn ? (
               <Link
                 href="/account"
                 onClick={onClose}
-                className="
-                  group
-                  relative
-                  flex
-                  items-center
-                  gap-4
-                  overflow-hidden
-                  border
-                  border-[var(--color-border)]
-                  bg-[var(--color-bg-subtle)]
-                  px-4
-                  py-4
-                  transition-all
-                  duration-500
-                  hover:border-[var(--color-accent-soft)]
-                  hover:bg-[var(--color-bg-warm)]
-                "
+                className="mobile-account-card"
               >
                 <span
                   aria-hidden="true"
-                  className="
-                    absolute
-                    right-0
-                    top-0
-                    h-full
-                    w-20
-                    bg-gradient-to-l
-                    from-[var(--color-champagne)]/[0.07]
-                    to-transparent
-                  "
+                  className="mobile-account-card__glow"
                 />
 
-                <span
-                  className="
-                    relative
-                    flex
-                    h-12
-                    w-12
-                    shrink-0
-                    items-center
-                    justify-center
-                    border
-                    border-[var(--color-accent-soft)]
-                    bg-white
-                    font-display
-                    text-lg
-                    font-normal
-                    text-[var(--color-text)]
-                  "
-                >
+                <span className="mobile-account-card__avatar">
                   {initials}
                 </span>
 
-                <span className="relative min-w-0 flex-1">
-                  <span
-                    className="
-                      block
-                      font-body
-                      text-[9px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.18em]
-                      text-[var(--color-accent-dark)]
-                    "
-                  >
+                <span className="mobile-account-card__identity">
+                  <span className="mobile-account-card__eyebrow">
                     My Account
                   </span>
 
-                  <span
-                    className="
-                      mt-1.5
-                      block
-                      truncate
-                      font-display
-                      text-[18px]
-                      leading-tight
-                      tracking-[-0.015em]
-                      text-[var(--color-text)]
-                    "
-                  >
+                  <span className="mobile-account-card__name">
                     {user.name}
                   </span>
 
-                  <span
-                    className="
-                      mt-1
-                      block
-                      truncate
-                      font-body
-                      text-[10px]
-                      text-[var(--color-text-secondary)]
-                    "
-                  >
+                  <span className="mobile-account-card__email">
                     {user.email}
                   </span>
                 </span>
 
-                <span
-                  className="
-                    relative
-                    flex
-                    h-8
-                    w-8
-                    shrink-0
-                    items-center
-                    justify-center
-                    border
-                    border-[var(--color-border)]
-                    bg-white
-                  "
-                >
+                <span className="mobile-account-card__arrow">
                   <ChevronRight
                     size={15}
                     strokeWidth={1.15}
-                    className="
-                      transition-transform
-                      duration-500
-                      group-hover:translate-x-1
-                    "
                   />
                 </span>
               </Link>
             ) : (
-              <div>
-                <div className="flex items-start justify-between gap-5">
+              <div className="mobile-guest-account">
+                <div className="mobile-guest-account__heading">
                   <div>
-                    <p
-                      className="
-                        eyebrow
-                        text-[var(--color-accent-dark)]
-                      "
-                    >
+                    <p className="eyebrow mobile-guest-account__eyebrow">
                       Your Account
                     </p>
 
-                    <h2
-                      className="
-                        mt-3
-                        max-w-[330px]
-                        font-display
-                        text-[28px]
-                        leading-[1.05]
-                        tracking-[-0.025em]
-                        text-[var(--color-text)]
-                      "
-                    >
+                    <h2 className="mobile-guest-account__title">
                       Welcome to Aayesha.
                     </h2>
 
-                    <p
-                      className="
-                        mt-3
-                        max-w-[330px]
-                        font-body
-                        text-[11px]
-                        leading-5
-                        text-[var(--color-text-secondary)]
-                      "
-                    >
+                    <p className="mobile-guest-account__description">
                       Sign in or create an account
                       to manage your orders and
                       personal details.
@@ -771,37 +382,15 @@ export function MobileMenu({
                   <UserRound
                     size={20}
                     strokeWidth={1.1}
-                    className="
-                      mt-1
-                      shrink-0
-                      text-[var(--color-champagne)]
-                    "
+                    className="mobile-guest-account__icon"
                   />
                 </div>
 
-                <div className="mt-5 grid grid-cols-2 gap-2">
+                <div className="mobile-guest-account__actions">
                   <Link
                     href="/login"
                     onClick={onClose}
-                    className="
-                      flex
-                      h-12
-                      items-center
-                      justify-center
-                      border
-                      border-[var(--color-text)]
-                      bg-[var(--color-text)]
-                      px-4
-                      font-body
-                      text-[10px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.18em]
-                      text-white
-                      transition-all
-                      duration-500
-                      hover:bg-[var(--color-charcoal-soft)]
-                    "
+                    className="button button-primary mobile-guest-account__button"
                   >
                     Sign In
                   </Link>
@@ -809,25 +398,7 @@ export function MobileMenu({
                   <Link
                     href="/register"
                     onClick={onClose}
-                    className="
-                      flex
-                      h-12
-                      items-center
-                      justify-center
-                      border
-                      border-[var(--color-border)]
-                      bg-white
-                      px-4
-                      font-body
-                      text-[10px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.18em]
-                      text-[var(--color-text)]
-                      transition-all
-                      duration-500
-                      hover:border-[var(--color-text)]
-                    "
+                    className="button button-secondary mobile-guest-account__button"
                   >
                     Create Account
                   </Link>
@@ -836,13 +407,10 @@ export function MobileMenu({
             )}
           </div>
 
-          {/* =================================================
-              ACCOUNT LINKS
-          ================================================= */}
-
+          {/* Account links */}
           {isLoggedIn && (
-            <section className="mt-8 px-5 sm:px-7">
-              <div className="mb-4 flex items-end justify-between">
+            <section className="mobile-menu__section mobile-menu__section--account-links">
+              <div className="mobile-menu__section-heading">
                 <p className="eyebrow">
                   My Account
                 </p>
@@ -850,134 +418,53 @@ export function MobileMenu({
                 <Link
                   href="/account"
                   onClick={onClose}
-                  className="
-                    group
-                    flex
-                    items-center
-                    gap-1.5
-                    font-body
-                    text-[9px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.14em]
-                    text-[var(--color-accent-dark)]
-                  "
+                  className="mobile-menu__view-account"
                 >
                   View Account
 
                   <ArrowUpRight
                     size={12}
                     strokeWidth={1.2}
-                    className="
-                      transition-transform
-                      duration-500
-                      group-hover:translate-x-0.5
-                      group-hover:-translate-y-0.5
-                    "
                   />
                 </Link>
               </div>
 
-              <div
-                className="
-                  overflow-hidden
-                  border
-                  border-[var(--color-border)]
-                  bg-white
-                "
-              >
-                {accountLinks.map(
-                  (item) => {
-                    const Icon = item.icon;
+              <div className="mobile-account-links">
+                {accountLinks.map((item) => {
+                  const Icon = item.icon;
 
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={onClose}
-                        className="
-                          group
-                          flex
-                          items-center
-                          gap-3.5
-                          border-b
-                          border-[var(--color-border-light)]
-                          px-4
-                          py-4
-                          last:border-b-0
-                          transition-all
-                          duration-500
-                          hover:bg-[var(--color-bg-warm)]
-                        "
-                      >
-                        <span
-                          className="
-                            flex
-                            h-10
-                            w-10
-                            shrink-0
-                            items-center
-                            justify-center
-                            border
-                            border-[var(--color-border)]
-                            bg-[var(--color-bg-subtle)]
-                            text-[var(--color-text-secondary)]
-                            transition-all
-                            duration-500
-                            group-hover:border-[var(--color-accent-soft)]
-                            group-hover:bg-white
-                            group-hover:text-[var(--color-accent-dark)]
-                          "
-                        >
-                          <Icon
-                            size={16}
-                            strokeWidth={1.2}
-                          />
-                        </span>
-
-                        <span className="min-w-0 flex-1">
-                          <span
-                            className="
-                              block
-                              font-body
-                              text-[12px]
-                              font-semibold
-                              text-[var(--color-text)]
-                            "
-                          >
-                            {item.label}
-                          </span>
-
-                          <span
-                            className="
-                              mt-1
-                              block
-                              font-body
-                              text-[9px]
-                              leading-4
-                              text-[var(--color-text-muted)]
-                            "
-                          >
-                            {item.description}
-                          </span>
-                        </span>
-
-                        <ChevronRight
-                          size={15}
-                          strokeWidth={1.15}
-                          className="
-                            shrink-0
-                            text-[var(--color-text-faint)]
-                            transition-all
-                            duration-500
-                            group-hover:translate-x-1
-                            group-hover:text-[var(--color-accent-dark)]
-                          "
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={onClose}
+                      className="mobile-account-link"
+                    >
+                      <span className="mobile-account-link__icon">
+                        <Icon
+                          size={16}
+                          strokeWidth={1.2}
                         />
-                      </Link>
-                    );
-                  },
-                )}
+                      </span>
+
+                      <span className="mobile-account-link__content">
+                        <span className="mobile-account-link__title">
+                          {item.label}
+                        </span>
+
+                        <span className="mobile-account-link__description">
+                          {item.description}
+                        </span>
+                      </span>
+
+                      <ChevronRight
+                        size={15}
+                        strokeWidth={1.15}
+                        className="mobile-account-link__arrow"
+                      />
+                    </Link>
+                  );
+                })}
 
                 <button
                   type="button"
@@ -985,68 +472,23 @@ export function MobileMenu({
                     void handleLogout();
                   }}
                   disabled={isLoggingOut}
-                  className="
-                    group
-                    flex
-                    w-full
-                    items-center
-                    gap-3.5
-                    border-t
-                    border-[var(--color-border-light)]
-                    px-4
-                    py-4
-                    text-left
-                    transition-all
-                    duration-500
-                    hover:bg-[var(--color-bg-warm)]
-                    disabled:cursor-not-allowed
-                    disabled:opacity-60
-                  "
+                  className="mobile-account-link mobile-account-link--logout"
                 >
-                  <span
-                    className="
-                      flex
-                      h-10
-                      w-10
-                      shrink-0
-                      items-center
-                      justify-center
-                      border
-                      border-[var(--color-border)]
-                      bg-[var(--color-bg-subtle)]
-                      text-[var(--color-text-secondary)]
-                    "
-                  >
+                  <span className="mobile-account-link__icon">
                     <LogOut
                       size={16}
                       strokeWidth={1.2}
                     />
                   </span>
 
-                  <span className="min-w-0 flex-1">
-                    <span
-                      className="
-                        block
-                        font-body
-                        text-[12px]
-                        font-semibold
-                        text-[var(--color-text)]
-                      "
-                    >
+                  <span className="mobile-account-link__content">
+                    <span className="mobile-account-link__title">
                       {isLoggingOut
                         ? "Signing Out..."
                         : "Sign Out"}
                     </span>
 
-                    <span
-                      className="
-                        mt-1
-                        block
-                        font-body
-                        text-[9px]
-                        text-[var(--color-text-muted)]
-                      "
-                    >
+                    <span className="mobile-account-link__description">
                       Sign out from this device
                     </span>
                   </span>
@@ -1055,51 +497,31 @@ export function MobileMenu({
             </section>
           )}
 
-          {/* =================================================
-              MAIN NAVIGATION
-          ================================================= */}
-
+          {/* Main navigation */}
           <nav
-            className="mt-9 px-5 sm:px-7"
+            className="mobile-menu__section mobile-menu__navigation"
             aria-label="Mobile navigation"
           >
-            <div className="mb-4">
-              <p className="eyebrow">
-                Explore
-              </p>
+            <div className="mobile-menu__section-heading mobile-menu__section-heading--navigation">
+              <div>
+                <p className="eyebrow">
+                  Explore
+                </p>
 
-              <div className="mt-3 flex items-center gap-3">
-                <span
-                  aria-hidden="true"
-                  className="
-                    h-px
-                    w-10
-                    bg-[var(--color-champagne)]
-                  "
-                />
+                <div className="mobile-menu__collection-label">
+                  <span
+                    aria-hidden="true"
+                    className="mobile-menu__collection-line"
+                  />
 
-                <span
-                  className="
-                    font-body
-                    text-[9px]
-                    uppercase
-                    tracking-[0.18em]
-                    text-[var(--color-text-faint)]
-                  "
-                >
-                  The Collection
-                </span>
+                  <span>
+                    The Collection
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div
-              className="
-                overflow-hidden
-                border-y
-                border-[var(--color-border)]
-                bg-white
-              "
-            >
+            <div className="mobile-navigation-list">
               {mainNavigation.map(
                 (item, index) => {
                   const details =
@@ -1119,121 +541,36 @@ export function MobileMenu({
                       key={item.href}
                       href={item.href}
                       onClick={onClose}
-                      className="
-                        group
-                        relative
-                        flex
-                        items-center
-                        gap-3.5
-                        border-b
-                        border-[var(--color-border-light)]
-                        px-1
-                        py-5
-                        last:border-b-0
-                        transition-all
-                        duration-500
-                        hover:px-3
-                      "
+                      className="mobile-navigation-item"
                     >
-                      <span
-                        className="
-                          flex
-                          h-8
-                          w-7
-                          shrink-0
-                          items-center
-                          justify-center
-                          font-body
-                          text-[8px]
-                          font-medium
-                          tracking-[0.12em]
-                          text-[var(--color-text-faint)]
-                        "
-                      >
+                      <span className="mobile-navigation-item__number">
                         {String(index + 1).padStart(
                           2,
                           "0",
                         )}
                       </span>
 
-                      <span
-                        className="
-                          flex
-                          h-10
-                          w-10
-                          shrink-0
-                          items-center
-                          justify-center
-                          border
-                          border-[var(--color-border)]
-                          bg-[var(--color-bg-subtle)]
-                          text-[var(--color-text-secondary)]
-                          transition-all
-                          duration-500
-                          group-hover:border-[var(--color-accent-soft)]
-                          group-hover:bg-[var(--color-bg-warm)]
-                          group-hover:text-[var(--color-accent-dark)]
-                        "
-                      >
+                      <span className="mobile-navigation-item__icon">
                         <Icon
                           size={16}
                           strokeWidth={1.15}
                         />
                       </span>
 
-                      <span className="min-w-0 flex-1">
-                        <span
-                          className="
-                            block
-                            font-display
-                            text-[21px]
-                            leading-none
-                            tracking-[-0.02em]
-                            text-[var(--color-text)]
-                          "
-                        >
+                      <span className="mobile-navigation-item__content">
+                        <span className="mobile-navigation-item__title">
                           {item.label}
                         </span>
 
-                        <span
-                          className="
-                            mt-2
-                            block
-                            font-body
-                            text-[9px]
-                            leading-4
-                            text-[var(--color-text-muted)]
-                          "
-                        >
+                        <span className="mobile-navigation-item__description">
                           {details.description}
                         </span>
                       </span>
 
-                      <span
-                        className="
-                          flex
-                          h-9
-                          w-9
-                          shrink-0
-                          items-center
-                          justify-center
-                          border
-                          border-transparent
-                          text-[var(--color-text-faint)]
-                          transition-all
-                          duration-500
-                          group-hover:border-[var(--color-border)]
-                          group-hover:text-[var(--color-accent-dark)]
-                        "
-                      >
+                      <span className="mobile-navigation-item__arrow">
                         <ChevronRight
                           size={16}
                           strokeWidth={1.15}
-                          className="
-                            transition-transform
-                            duration-500
-                            group-hover:translate-x-1
-                          "
                         />
                       </span>
                     </Link>
@@ -1243,70 +580,32 @@ export function MobileMenu({
             </div>
           </nav>
 
-          {/* =================================================
-              QUICK ACCESS
-          ================================================= */}
-
-          <section className="mt-9 px-5 sm:px-7">
-            <div className="mb-4">
+          {/* Quick access */}
+          <section className="mobile-menu__section mobile-menu__quick-access">
+            <div className="mobile-menu__section-heading">
               <p className="eyebrow">
                 Quick Access
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-px border border-[var(--color-border)] bg-[var(--color-border)]">
+            <div className="mobile-quick-grid">
               <Link
                 href="/search"
                 onClick={onClose}
-                className="
-                  group
-                  flex
-                  min-h-[72px]
-                  items-center
-                  gap-3
-                  bg-white
-                  px-4
-                  py-3
-                  transition-all
-                  duration-500
-                  hover:bg-[var(--color-bg-warm)]
-                "
+                className="mobile-quick-item"
               >
                 <Search
                   size={17}
                   strokeWidth={1.15}
-                  className="
-                    text-[var(--color-accent-dark)]
-                    transition-transform
-                    duration-500
-                    group-hover:scale-110
-                  "
+                  className="mobile-quick-item__icon"
                 />
 
-                <span>
-                  <span
-                    className="
-                      block
-                      font-body
-                      text-[11px]
-                      font-semibold
-                      text-[var(--color-text)]
-                    "
-                  >
+                <span className="mobile-quick-item__content">
+                  <span className="mobile-quick-item__title">
                     Search
                   </span>
 
-                  <span
-                    className="
-                      mt-1
-                      block
-                      font-body
-                      text-[8px]
-                      uppercase
-                      tracking-[0.12em]
-                      text-[var(--color-text-muted)]
-                    "
-                  >
+                  <span className="mobile-quick-item__description">
                     Find your style
                   </span>
                 </span>
@@ -1315,55 +614,20 @@ export function MobileMenu({
               <Link
                 href="/wishlist"
                 onClick={onClose}
-                className="
-                  group
-                  flex
-                  min-h-[72px]
-                  items-center
-                  gap-3
-                  bg-white
-                  px-4
-                  py-3
-                  transition-all
-                  duration-500
-                  hover:bg-[var(--color-bg-warm)]
-                "
+                className="mobile-quick-item mobile-quick-item--wishlist"
               >
                 <Heart
                   size={17}
                   strokeWidth={1.15}
-                  className="
-                    text-[var(--color-burgundy)]
-                    transition-transform
-                    duration-500
-                    group-hover:scale-110
-                  "
+                  className="mobile-quick-item__icon"
                 />
 
-                <span>
-                  <span
-                    className="
-                      block
-                      font-body
-                      text-[11px]
-                      font-semibold
-                      text-[var(--color-text)]
-                    "
-                  >
+                <span className="mobile-quick-item__content">
+                  <span className="mobile-quick-item__title">
                     Wishlist
                   </span>
 
-                  <span
-                    className="
-                      mt-1
-                      block
-                      font-body
-                      text-[8px]
-                      uppercase
-                      tracking-[0.12em]
-                      text-[var(--color-text-muted)]
-                    "
-                  >
+                  <span className="mobile-quick-item__description">
                     Saved pieces
                   </span>
                 </span>
@@ -1376,59 +640,23 @@ export function MobileMenu({
                     : "/login"
                 }
                 onClick={onClose}
-                className="
-                  group
-                  col-span-2
-                  flex
-                  min-h-[66px]
-                  items-center
-                  justify-between
-                  bg-white
-                  px-4
-                  py-3
-                  transition-all
-                  duration-500
-                  hover:bg-[var(--color-bg-warm)]
-                "
+                className="mobile-quick-item mobile-quick-item--account"
               >
-                <span className="flex items-center gap-3">
+                <span className="mobile-quick-item__main">
                   <UserRound
                     size={17}
                     strokeWidth={1.15}
-                    className="
-                      text-[var(--color-accent-dark)]
-                      transition-transform
-                      duration-500
-                      group-hover:scale-110
-                    "
+                    className="mobile-quick-item__icon"
                   />
 
-                  <span>
-                    <span
-                      className="
-                        block
-                        font-body
-                        text-[11px]
-                        font-semibold
-                        text-[var(--color-text)]
-                      "
-                    >
+                  <span className="mobile-quick-item__content">
+                    <span className="mobile-quick-item__title">
                       {isLoggedIn
                         ? "My Account"
                         : "Sign In / Account"}
                     </span>
 
-                    <span
-                      className="
-                        mt-1
-                        block
-                        font-body
-                        text-[8px]
-                        uppercase
-                        tracking-[0.12em]
-                        text-[var(--color-text-muted)]
-                      "
-                    >
+                    <span className="mobile-quick-item__description">
                       Personal space
                     </span>
                   </span>
@@ -1437,128 +665,50 @@ export function MobileMenu({
                 <ChevronRight
                   size={16}
                   strokeWidth={1.15}
-                  className="
-                    text-[var(--color-text-faint)]
-                    transition-transform
-                    duration-500
-                    group-hover:translate-x-1
-                  "
+                  className="mobile-quick-item__arrow"
                 />
               </Link>
             </div>
           </section>
 
-          {/* =================================================
-              EDITORIAL STATEMENT
-          ================================================= */}
-
-          <div className="px-5 pb-10 pt-10 sm:px-7">
-            <div
-              className="
-                relative
-                overflow-hidden
-                border-t
-                border-[var(--color-border)]
-                pt-7
-              "
-            >
+          {/* Editorial statement */}
+          <div className="mobile-menu__editorial">
+            <div className="mobile-menu__editorial-rule">
               <span
                 aria-hidden="true"
-                className="
-                  absolute
-                  left-0
-                  top-0
-                  h-px
-                  w-12
-                  bg-[var(--color-champagne)]
-                "
+                className="mobile-menu__editorial-accent"
+              />
+            </div>
+
+            <p className="mobile-menu__editorial-title">
+              Made for moments
+              <br />
+              worth remembering.
+            </p>
+
+            <div className="mobile-menu__editorial-signature">
+              <span
+                aria-hidden="true"
+                className="mobile-menu__editorial-signature-line"
               />
 
-              <p
-                className="
-                  max-w-[330px]
-                  font-display
-                  text-[29px]
-                  italic
-                  leading-[1.02]
-                  tracking-[-0.025em]
-                  text-[var(--color-text)]
-                "
-              >
-                Made for moments
-                <br />
-                worth remembering.
+              <p>
+                Aayesha Fashion
               </p>
-
-              <div className="mt-5 flex items-center gap-3">
-                <span
-                  aria-hidden="true"
-                  className="
-                    h-px
-                    w-7
-                    bg-[var(--color-champagne)]
-                  "
-                />
-
-                <p
-                  className="
-                    font-body
-                    text-[8px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.2em]
-                    text-[var(--color-text-muted)]
-                  "
-                >
-                  Aayesha Fashion
-                </p>
-              </div>
             </div>
           </div>
         </div>
 
-        {/* =================================================
-            FOOTER
-        ================================================= */}
-
-        <div
-          className="
-            relative
-            z-20
-            shrink-0
-            border-t
-            border-[var(--color-border)]
-            bg-[var(--color-charcoal)]
-            px-5
-            py-4
-            text-white
-            sm:px-7
-          "
-        >
+        {/* Footer */}
+        <div className="mobile-menu__footer">
           {isLoggedIn ? (
-            <div className="flex items-center justify-between gap-4">
-              <div className="min-w-0">
-                <p
-                  className="
-                    truncate
-                    font-body
-                    text-[10px]
-                    font-semibold
-                    text-white
-                  "
-                >
+            <div className="mobile-menu__footer-account">
+              <div className="mobile-menu__footer-identity">
+                <p className="mobile-menu__footer-name">
                   Signed in as {user.name}
                 </p>
 
-                <p
-                  className="
-                    mt-1
-                    truncate
-                    font-body
-                    text-[9px]
-                    text-white/55
-                  "
-                >
+                <p className="mobile-menu__footer-email">
                   {user.email}
                 </p>
               </div>
@@ -1567,60 +717,23 @@ export function MobileMenu({
                 href="/account"
                 onClick={onClose}
                 aria-label="Open account"
-                className="
-                  group
-                  flex
-                  h-9
-                  w-9
-                  shrink-0
-                  items-center
-                  justify-center
-                  border
-                  border-white/15
-                  bg-white/[0.06]
-                  transition-all
-                  duration-500
-                  hover:border-[var(--color-champagne)]
-                  hover:bg-[var(--color-champagne)]
-                  hover:text-[var(--color-text)]
-                "
+                className="mobile-menu__footer-action"
               >
                 <UserRound
                   size={15}
                   strokeWidth={1.15}
-                  className="
-                    transition-transform
-                    duration-500
-                    group-hover:scale-105
-                  "
                 />
               </Link>
             </div>
           ) : (
-            <div className="flex items-center justify-between gap-4">
-              <p
-                className="
-                  max-w-[320px]
-                  font-body
-                  text-[8px]
-                  leading-4
-                  uppercase
-                  tracking-[0.12em]
-                  text-white/55
-                "
-              >
+            <div className="mobile-menu__footer-guest">
+              <p>
                 {siteConfig.description}
               </p>
 
               <span
                 aria-hidden="true"
-                className="
-                  h-1.5
-                  w-1.5
-                  shrink-0
-                  rounded-full
-                  bg-[var(--color-champagne)]
-                "
+                className="mobile-menu__footer-dot"
               />
             </div>
           )}

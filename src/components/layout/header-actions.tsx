@@ -23,10 +23,6 @@ import { AccountPopup } from "./account-popup";
 
 import { useAuthStore } from "@/store/auth-store";
 
-/* =========================================================
-   COMPONENT
-========================================================= */
-
 export function HeaderActions() {
   const router = useRouter();
 
@@ -58,6 +54,7 @@ export function HeaderActions() {
   const [query, setQuery] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
+
   const accountWrapperRef =
     useRef<HTMLDivElement>(null);
 
@@ -66,7 +63,9 @@ export function HeaderActions() {
   ======================================================= */
 
   useEffect(() => {
-    if (!searchOpen) return;
+    if (!searchOpen) {
+      return;
+    }
 
     const timer = window.setTimeout(() => {
       inputRef.current?.focus();
@@ -113,7 +112,9 @@ export function HeaderActions() {
   ======================================================= */
 
   useEffect(() => {
-    if (!accountOpen) return;
+    if (!accountOpen) {
+      return;
+    }
 
     function handlePointerDown(event: MouseEvent) {
       const target = event.target as Node;
@@ -199,24 +200,14 @@ export function HeaderActions() {
           HEADER ACTIONS
       =================================================== */}
 
-      <div
-        className="
-          flex
-          items-center
-          gap-0.5
-          sm:gap-1
-          lg:gap-1.5
-        "
-      >
-        {/* =================================================
-            SEARCH
-        ================================================= */}
+      <div className="header-actions">
+        {/* Search */}
 
         <HeaderActionButton
           label="Search"
           onClick={openSearch}
           active={searchOpen}
-          className="hidden lg:flex"
+          className="header-action--search"
         >
           <Search
             size={20}
@@ -224,13 +215,11 @@ export function HeaderActions() {
           />
         </HeaderActionButton>
 
-        {/* =================================================
-            ACCOUNT
-        ================================================= */}
+        {/* Account */}
 
         <div
           ref={accountWrapperRef}
-          className="relative hidden lg:block"
+          className="header-action-account"
         >
           <HeaderActionButton
             label={accountLabel}
@@ -251,17 +240,7 @@ export function HeaderActions() {
             {isInitialized && loggedIn && (
               <span
                 aria-hidden="true"
-                className="
-                  absolute
-                  right-[5px]
-                  top-[5px]
-                  h-1.5
-                  w-1.5
-                  rounded-full
-                  bg-[var(--color-accent)]
-                  ring-2
-                  ring-white
-                "
+                className="header-account-status"
               />
             )}
           </HeaderActionButton>
@@ -282,116 +261,47 @@ export function HeaderActions() {
             )}
         </div>
 
-        {/* =================================================
-            WISHLIST
-        ================================================= */}
+        {/* Wishlist */}
 
         <Link
           href="/wishlist"
           aria-label="Wishlist"
           onClick={() => setAccountOpen(false)}
-          className="
-            group
-            relative
-            hidden
-            h-11
-            w-11
-            items-center
-            justify-center
-            text-[var(--color-text)]
-            transition-all
-            duration-300
-            ease-[var(--ease-luxury)]
-            hover:-translate-y-px
-            hover:text-[var(--color-accent-dark)]
-            lg:flex
-          "
+          className="header-action-link header-action--wishlist"
         >
           <Heart
             size={20}
             strokeWidth={1.45}
-            className="
-              transition-transform
-              duration-300
-              ease-[var(--ease-luxury)]
-              group-hover:scale-[1.06]
-            "
+            className="header-action-icon"
           />
 
           <WishlistCount />
 
           <span
             aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              bottom-1
-              left-1/2
-              h-px
-              w-0
-              -translate-x-1/2
-              bg-[var(--color-champagne)]
-              transition-all
-              duration-400
-              ease-[var(--ease-luxury)]
-              group-hover:w-4
-            "
+            className="header-action-underline"
           />
         </Link>
 
-        {/* =================================================
-            SHOPPING BAG
-        ================================================= */}
+        {/* Shopping bag */}
 
         <Link
           href="/cart"
           aria-label="Shopping bag"
           onClick={() => setAccountOpen(false)}
-          className="
-            group
-            relative
-            flex
-            h-11
-            w-11
-            items-center
-            justify-center
-            text-[var(--color-text)]
-            transition-all
-            duration-300
-            ease-[var(--ease-luxury)]
-            hover:-translate-y-px
-            hover:text-[var(--color-accent-dark)]
-          "
+          className="header-action-link"
         >
           <ShoppingBag
             size={20}
             strokeWidth={1.45}
-            className="
-              transition-transform
-              duration-300
-              ease-[var(--ease-luxury)]
-              group-hover:scale-[1.06]
-            "
+            className="header-action-icon"
           />
 
           <CartCount />
 
           <span
             aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              bottom-1
-              left-1/2
-              h-px
-              w-0
-              -translate-x-1/2
-              bg-[var(--color-champagne)]
-              transition-all
-              duration-400
-              ease-[var(--ease-luxury)]
-              group-hover:w-4
-            "
+            className="header-action-underline"
           />
         </Link>
       </div>
@@ -402,103 +312,36 @@ export function HeaderActions() {
 
       {searchOpen && (
         <>
-          {/* Backdrop */}
-
           <button
             type="button"
             aria-label="Close search"
             onClick={closeSearch}
-            className="
-              fixed
-              inset-0
-              z-[55]
-              cursor-default
-              bg-[rgba(17,16,15,0.16)]
-              backdrop-blur-[4px]
-              animate-[fade-in_300ms_ease-out]
-            "
+            className="header-search-backdrop"
           />
 
-          {/* Search Drawer */}
-
-          <div
-            className="
-              fixed
-              inset-x-0
-              top-[72px]
-              z-[70]
-              overflow-hidden
-              border-b
-              border-[var(--color-border-light)]
-              bg-[rgba(255,255,255,0.98)]
-              shadow-[0_24px_70px_rgba(23,21,20,0.10)]
-              backdrop-blur-xl
-              animate-[slide-down_500ms_cubic-bezier(.22,1,.36,1)]
-              sm:top-[76px]
-              lg:absolute
-              lg:top-full
-            "
-          >
-            {/* Champagne accent */}
-
-            <div
+          <div className="header-search-panel">
+            <span
               aria-hidden="true"
-              className="
-                absolute
-                inset-x-0
-                top-0
-                h-px
-                bg-gradient-to-r
-                from-transparent
-                via-[var(--color-champagne)]
-                to-transparent
-                opacity-70
-              "
+              className="header-search-accent"
             />
 
-            <div
-              className="
-                mx-auto
-                max-w-[1600px]
-                px-5
-                sm:px-8
-                md:px-10
-                lg:px-12
-                xl:px-16
-              "
-            >
-              <div
-                className="
-                  py-7
-                  sm:py-8
-                  md:py-10
-                "
-              >
-                <div className="flex items-center gap-5">
+            <div className="header-search-container">
+              <div className="header-search-content">
+                <div className="header-search-row">
                   <form
                     onSubmit={handleSearchSubmit}
-                    className="min-w-0 flex-1"
+                    className="header-search-form"
                   >
-                    <div className="flex items-center gap-4">
-                      <div
-                        className="
-                          flex
-                          h-11
-                          w-11
-                          shrink-0
-                          items-center
-                          justify-center
-                          border
-                          border-[var(--color-border)]
-                          bg-[var(--color-bg-subtle)]
-                          text-[var(--color-text-secondary)]
-                        "
+                    <div className="header-search-input-row">
+                      <span
+                        aria-hidden="true"
+                        className="header-search-icon"
                       >
                         <Search
                           size={19}
                           strokeWidth={1.35}
                         />
-                      </div>
+                      </span>
 
                       <input
                         ref={inputRef}
@@ -510,44 +353,13 @@ export function HeaderActions() {
                         placeholder="What are you looking for?"
                         aria-label="Search products"
                         autoComplete="off"
-                        className="
-                          min-w-0
-                          flex-1
-                          border-0
-                          bg-transparent
-                          p-0
-                          font-display
-                          text-2xl
-                          leading-tight
-                          tracking-[-0.02em]
-                          text-[var(--color-text)]
-                          outline-none
-                          placeholder:text-[var(--color-text-muted)]
-                          sm:text-3xl
-                          md:text-4xl
-                          lg:text-[42px]
-                        "
+                        className="header-search-input"
                       />
 
                       {query.trim() && (
                         <button
                           type="submit"
-                          className="
-                            hidden
-                            shrink-0
-                            items-center
-                            gap-2
-                            font-body
-                            text-[12px]
-                            font-semibold
-                            uppercase
-                            tracking-[0.12em]
-                            text-[var(--color-text)]
-                            transition-colors
-                            duration-300
-                            hover:text-[var(--color-accent-dark)]
-                            sm:inline-flex
-                          "
+                          className="header-search-submit"
                         >
                           Search
 
@@ -559,82 +371,28 @@ export function HeaderActions() {
                       )}
                     </div>
 
-                    <div
-                      className="
-                        mt-6
-                        h-px
-                        origin-left
-                        bg-[var(--color-border)]
-                      "
-                    />
+                    <div className="header-search-line" />
                   </form>
 
                   <button
                     type="button"
                     onClick={closeSearch}
                     aria-label="Close search"
-                    className="
-                      group
-                      flex
-                      h-11
-                      w-11
-                      shrink-0
-                      items-center
-                      justify-center
-                      border
-                      border-[var(--color-border)]
-                      text-[var(--color-text-secondary)]
-                      transition-all
-                      duration-300
-                      hover:border-[var(--color-text)]
-                      hover:bg-[var(--color-text)]
-                      hover:text-white
-                    "
+                    className="header-search-close"
                   >
                     <X
                       size={18}
                       strokeWidth={1.35}
-                      className="
-                        transition-transform
-                        duration-400
-                        group-hover:rotate-90
-                      "
                     />
                   </button>
                 </div>
 
-                <div
-                  className="
-                    mt-6
-                    hidden
-                    items-center
-                    justify-between
-                    gap-4
-                    sm:flex
-                  "
-                >
-                  <p
-                    className="
-                      font-body
-                      text-[12px]
-                      font-medium
-                      uppercase
-                      tracking-[0.12em]
-                      text-[var(--color-text-muted)]
-                    "
-                  >
+                <div className="header-search-meta">
+                  <p className="text-caption">
                     Search Aayesha Fashion
                   </p>
 
-                  <p
-                    className="
-                      font-body
-                      text-[12px]
-                      uppercase
-                      tracking-[0.1em]
-                      text-[var(--color-text-muted)]
-                    "
-                  >
+                  <p className="text-caption">
                     Press ESC to close
                   </p>
                 </div>
@@ -646,6 +404,7 @@ export function HeaderActions() {
     </>
   );
 }
+
 
 /* =========================================================
    HEADER ACTION BUTTON
@@ -675,62 +434,24 @@ function HeaderActionButton({
       aria-label={label}
       aria-expanded={expanded}
       aria-haspopup={hasPopup ? "menu" : undefined}
-      className={`
-        group
-        relative
-        h-11
-        w-11
-        items-center
-        justify-center
-        text-[var(--color-text)]
-        transition-all
-        duration-300
-        ease-[var(--ease-luxury)]
-        hover:-translate-y-px
-        hover:text-[var(--color-accent-dark)]
-        ${className}
-      `}
+      className={`header-action-button ${
+        active
+          ? "header-action-button--active"
+          : ""
+      } ${className}`}
     >
-      <span
-        className={`
-          flex
-          h-full
-          w-full
-          items-center
-          justify-center
-          transition-transform
-          duration-300
-          ease-[var(--ease-luxury)]
-          group-hover:scale-[1.04]
-          ${active ? "text-[var(--color-accent-dark)]" : ""}
-        `}
-      >
+      <span className="header-action-button__icon">
         {children}
       </span>
 
       <span
         aria-hidden="true"
-        className={`
-          pointer-events-none
-          absolute
-          bottom-1
-          left-1/2
-          h-px
-          -translate-x-1/2
-          bg-[var(--color-champagne)]
-          transition-all
-          duration-300
-          ease-[var(--ease-luxury)]
-          ${
-            active
-              ? "w-4"
-              : "w-0 group-hover:w-4"
-          }
-        `}
+        className="header-action-button__underline"
       />
     </button>
   );
 }
+
 
 /* =========================================================
    GUEST ACCOUNT POPUP
@@ -742,116 +463,35 @@ function GuestAccountPopup({
   onClose: () => void;
 }) {
   return (
-    <div
-      className="
-        absolute
-        right-0
-        top-[calc(100%+14px)]
-        z-[100]
-        w-[360px]
-        max-w-[calc(100vw-24px)]
-        animate-[slide-down_400ms_cubic-bezier(.22,1,.36,1)]
-      "
-    >
-      <div
-        className="
-          overflow-hidden
-          border
-          border-[var(--color-border)]
-          bg-white
-          shadow-[0_24px_70px_rgba(23,21,20,0.12)]
-        "
-      >
-        {/* Champagne accent */}
-
-        <div
+    <div className="guest-account-popup">
+      <div className="guest-account-popup__surface">
+        <span
           aria-hidden="true"
-          className="
-            h-px
-            bg-gradient-to-r
-            from-transparent
-            via-[var(--color-champagne)]
-            to-transparent
-            opacity-80
-          "
+          className="guest-account-popup__accent"
         />
 
-        <div
-          className="
-            relative
-            border-b
-            border-[var(--color-border-light)]
-            px-7
-            py-7
-          "
-        >
+        <div className="guest-account-popup__intro">
           <button
             type="button"
             onClick={onClose}
             aria-label="Close account menu"
-            className="
-              group
-              absolute
-              right-5
-              top-5
-              flex
-              h-9
-              w-9
-              items-center
-              justify-center
-              border
-              border-[var(--color-border)]
-              text-[var(--color-text-secondary)]
-              transition-all
-              duration-300
-              hover:border-[var(--color-text)]
-              hover:bg-[var(--color-text)]
-              hover:text-white
-            "
+            className="guest-account-popup__close"
           >
             <X
               size={16}
               strokeWidth={1.3}
-              className="
-                transition-transform
-                duration-300
-                group-hover:rotate-90
-              "
             />
           </button>
 
-          <p
-            className="
-              eyebrow
-              text-[var(--color-accent-dark)]
-            "
-          >
+          <p className="eyebrow guest-account-popup__eyebrow">
             Your Account
           </p>
 
-          <h3
-            className="
-              mt-4
-              font-display
-              text-[34px]
-              leading-[0.98]
-              tracking-[-0.025em]
-              text-[var(--color-text)]
-            "
-          >
+          <h3 className="guest-account-popup__title">
             Welcome to Aayesha
           </h3>
 
-          <p
-            className="
-              mt-4
-              max-w-[290px]
-              font-body
-              text-[14px]
-              leading-6
-              text-[var(--color-text-secondary)]
-            "
-          >
+          <p className="guest-account-popup__description">
             Sign in or create an account
             to manage your orders and
             details.
@@ -860,71 +500,25 @@ function GuestAccountPopup({
 
         {/* Auth actions */}
 
-        <div
-          className="
-            border-b
-            border-[var(--color-border-light)]
-            p-6
-          "
-        >
-          <div className="grid grid-cols-2 gap-3">
+        <div className="guest-account-popup__actions">
+          <div className="guest-account-popup__buttons">
             <Link
               href="/login"
               onClick={onClose}
-              className="
-                group
-                flex
-                h-12
-                items-center
-                justify-center
-                gap-2
-                bg-[var(--color-text)]
-                font-body
-                text-[12px]
-                font-semibold
-                uppercase
-                tracking-[0.1em]
-                text-white
-                transition-all
-                duration-300
-                hover:bg-[var(--color-accent-dark)]
-              "
+              className="button button-primary guest-account-popup__button"
             >
               Sign In
 
               <ArrowUpRight
                 size={15}
                 strokeWidth={1.35}
-                className="
-                  transition-transform
-                  duration-300
-                  group-hover:translate-x-0.5
-                  group-hover:-translate-y-0.5
-                "
               />
             </Link>
 
             <Link
               href="/register"
               onClick={onClose}
-              className="
-                flex
-                h-12
-                items-center
-                justify-center
-                border
-                border-[var(--color-border)]
-                font-body
-                text-[12px]
-                font-semibold
-                uppercase
-                tracking-[0.1em]
-                text-[var(--color-text)]
-                transition-all
-                duration-300
-                hover:border-[var(--color-text)]
-                hover:bg-[var(--color-bg-subtle)]
-              "
+              className="button button-secondary guest-account-popup__button"
             >
               Sign Up
             </Link>
@@ -933,17 +527,12 @@ function GuestAccountPopup({
 
         {/* Benefits */}
 
-        <div className="px-7 py-7">
-          <p
-            className="
-              eyebrow
-              text-[var(--color-text-muted)]
-            "
-          >
+        <div className="guest-account-popup__benefits">
+          <p className="eyebrow">
             With an account
           </p>
 
-          <div className="mt-5 space-y-5">
+          <div className="guest-account-popup__benefit-list">
             <GuestBenefit
               title="Track your orders"
               description="View order status and history."
@@ -965,6 +554,7 @@ function GuestAccountPopup({
   );
 }
 
+
 /* =========================================================
    GUEST BENEFIT
 ========================================================= */
@@ -977,42 +567,18 @@ function GuestBenefit({
   description: string;
 }) {
   return (
-    <div className="group flex items-start gap-3">
+    <div className="guest-benefit">
       <span
-        className="
-          mt-[7px]
-          h-1.5
-          w-1.5
-          shrink-0
-          rounded-full
-          bg-[var(--color-champagne)]
-          transition-transform
-          duration-300
-          group-hover:scale-125
-        "
+        aria-hidden="true"
+        className="guest-benefit__dot"
       />
 
-      <div>
-        <p
-          className="
-            font-body
-            text-[13px]
-            font-semibold
-            text-[var(--color-text)]
-          "
-        >
+      <div className="guest-benefit__content">
+        <p className="guest-benefit__title">
           {title}
         </p>
 
-        <p
-          className="
-            mt-1
-            font-body
-            text-[12px]
-            leading-5
-            text-[var(--color-text-secondary)]
-          "
-        >
+        <p className="guest-benefit__description">
           {description}
         </p>
       </div>

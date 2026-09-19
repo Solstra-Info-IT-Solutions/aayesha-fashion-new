@@ -23,82 +23,29 @@ export function DesktopNavigation() {
   return (
     <nav
       aria-label="Primary navigation"
-      className="
-        flex
-        items-center
-        gap-7
-        xl:gap-10
-        2xl:gap-12
-      "
+      className="desktop-navigation"
     >
       {navigation.map((item) => (
         <Link
           key={item.href}
           href={item.href}
-          className="
-            group
-            relative
-            inline-flex
-            items-center
-            whitespace-nowrap
-            py-3
-            font-body
-            text-[13px]
-            font-medium
-            tracking-[0.045em]
-            text-[var(--color-text)]
-            transition-all
-            duration-300
-            ease-[var(--ease-luxury)]
-            hover:text-[var(--color-accent-dark)]
-            xl:text-[14px]
-          "
+          className="desktop-navigation__link"
         >
-          <span className="relative">
+          <span className="desktop-navigation__label">
             {item.label}
 
-            {/* Main underline */}
             <span
               aria-hidden="true"
-              className="
-                absolute
-                -bottom-2
-                left-0
-                h-px
-                w-full
-                origin-right
-                scale-x-0
-                bg-[var(--color-accent)]
-                transition-transform
-                duration-500
-                ease-[var(--ease-luxury)]
-                group-hover:origin-left
-                group-hover:scale-x-100
-              "
+              className="desktop-navigation__underline"
             />
 
-            {/* Secondary underline accent */}
             <span
               aria-hidden="true"
-              className="
-                absolute
-                -bottom-2
-                left-0
-                h-px
-                w-5
-                origin-left
-                scale-x-0
-                bg-[var(--color-text)]
-                transition-transform
-                delay-100
-                duration-500
-                ease-[var(--ease-luxury)]
-                group-hover:scale-x-100
-              "
+              className="desktop-navigation__underline-accent"
             />
           </span>
         </Link>
       ))}
     </nav>
   );
-}
+} 

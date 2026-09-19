@@ -148,9 +148,7 @@ export function AccountPopup({
     setIsProcessing(true);
 
     try {
-      await deleteCustomerAccount(
-        accessToken,
-      );
+      await deleteCustomerAccount(accessToken);
 
       /*
        * The delete API has already invalidated
@@ -172,10 +170,7 @@ export function AccountPopup({
       setConfirmType(null);
       onClose();
 
-      router.push(
-        "/?accountDeleted=1",
-      );
-
+      router.push("/?accountDeleted=1");
       router.refresh();
     } catch (error) {
       const message =
@@ -193,156 +188,56 @@ export function AccountPopup({
     <>
       {/* =====================================================
           ACCOUNT POPUP
-      ===================================================== */}
+      ====================================================== */}
 
-      <div
-        className="
-          absolute
-          right-0
-          top-[calc(100%+16px)]
-          z-[100]
-          w-[390px]
-          max-w-[calc(100vw-24px)]
-        "
-      >
-        <div
-          className="
-            relative
-            overflow-hidden
-            border
-            border-[var(--color-border)]
-            bg-white
-            shadow-[0_28px_80px_rgba(23,21,20,0.14)]
-          "
-        >
+      <div className="account-popup">
+        <div className="account-popup__surface">
           {/* Luxury accent */}
 
           <span
             aria-hidden="true"
-            className="
-              absolute
-              left-1/2
-              top-0
-              h-px
-              w-20
-              -translate-x-1/2
-              bg-gradient-to-r
-              from-transparent
-              via-[var(--color-champagne)]
-              to-transparent
-            "
+            className="account-popup__accent"
           />
 
           {/* =================================================
               PROFILE HEADER
           ================================================= */}
 
-          <div
-            className="
-              relative
-              border-b
-              border-[var(--color-border-light)]
-              px-6
-              pb-6
-              pt-7
-            "
-          >
+          <div className="account-popup__profile">
             {/* Close */}
 
             <button
               type="button"
               onClick={onClose}
               aria-label="Close account menu"
-              className="
-                group
-                absolute
-                right-5
-                top-5
-                flex
-                h-9
-                w-9
-                items-center
-                justify-center
-                border
-                border-transparent
-                text-[var(--color-text-muted)]
-                transition-all
-                duration-500
-                hover:border-[var(--color-border)]
-                hover:bg-[var(--color-bg-warm)]
-                hover:text-[var(--color-text)]
-              "
+              className="account-popup__close"
             >
               <X
                 size={16}
                 strokeWidth={1.25}
-                className="
-                  transition-transform
-                  duration-500
-                  group-hover:rotate-90
-                "
               />
             </button>
 
             {/* Profile */}
 
-            <div className="flex items-center gap-4 pr-10">
-              <div
-                className="
-                  relative
-                  flex
-                  h-14
-                  w-14
-                  shrink-0
-                  items-center
-                  justify-center
-                  overflow-hidden
-                  border
-                  border-[var(--color-accent-soft)]
-                  bg-[var(--color-bg-warm)]
-                  font-display
-                  text-xl
-                  font-normal
-                  text-[var(--color-text)]
-                "
-              >
+            <div className="account-popup__identity">
+              <div className="account-popup__avatar">
                 <span
                   aria-hidden="true"
-                  className="
-                    absolute
-                    inset-0
-                    bg-[radial-gradient(circle_at_30%_20%,rgba(200,170,122,0.16),transparent_60%)]
-                  "
+                  className="account-popup__avatar-glow"
                 />
 
-                <span className="relative">
+                <span className="account-popup__initials">
                   {initials}
                 </span>
               </div>
 
-              <div className="min-w-0">
-                <p
-                  className="
-                    truncate
-                    font-display
-                    text-[21px]
-                    leading-tight
-                    tracking-[-0.02em]
-                    text-[var(--color-text)]
-                  "
-                >
+              <div className="account-popup__user">
+                <p className="account-popup__name">
                   {user.name}
                 </p>
 
-                <p
-                  className="
-                    mt-1.5
-                    truncate
-                    font-body
-                    text-[12px]
-                    text-[var(--color-text-secondary)]
-                  "
-                >
+                <p className="account-popup__email">
                   {user.email}
                 </p>
               </div>
@@ -353,74 +248,22 @@ export function AccountPopup({
             <Link
               href="/account"
               onClick={onClose}
-              className="
-                group
-                mt-6
-                flex
-                items-center
-                justify-between
-                border
-                border-[var(--color-border)]
-                bg-[var(--color-bg-subtle)]
-                px-4
-                py-3.5
-                transition-all
-                duration-500
-                hover:border-[var(--color-accent-soft)]
-                hover:bg-[var(--color-bg-warm)]
-              "
+              className="account-popup__cta"
             >
               <span>
-                <span
-                  className="
-                    block
-                    font-body
-                    text-[9px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.18em]
-                    text-[var(--color-accent-dark)]
-                  "
-                >
+                <span className="account-popup__cta-label">
                   My Account
                 </span>
 
-                <span
-                  className="
-                    mt-1.5
-                    block
-                    font-body
-                    text-[12px]
-                    text-[var(--color-text)]
-                  "
-                >
+                <span className="account-popup__cta-text">
                   View your account
                 </span>
               </span>
 
-              <span
-                className="
-                  flex
-                  h-8
-                  w-8
-                  items-center
-                  justify-center
-                  border
-                  border-[var(--color-border)]
-                  bg-white
-                  transition-all
-                  duration-500
-                  group-hover:border-[var(--color-accent-soft)]
-                "
-              >
+              <span className="account-popup__cta-icon">
                 <ChevronRight
                   size={15}
                   strokeWidth={1.2}
-                  className="
-                    transition-transform
-                    duration-500
-                    group-hover:translate-x-1
-                  "
                 />
               </span>
             </Link>
@@ -430,14 +273,7 @@ export function AccountPopup({
               ACCOUNT NAVIGATION
           ================================================= */}
 
-          <div
-            className="
-              border-b
-              border-[var(--color-border-light)]
-              bg-white
-              p-2.5
-            "
-          >
+          <div className="account-popup__navigation">
             {accountLinks.map((item) => {
               const Icon = item.icon;
 
@@ -453,83 +289,33 @@ export function AccountPopup({
                   key={item.href}
                   href={item.href}
                   onClick={onClose}
-                  className={[
-                    "group flex items-center gap-3.5 px-3.5 py-3.5",
-                    "transition-all duration-500",
+                  className={`account-popup__nav-item ${
                     isActive
-                      ? "bg-[var(--color-bg-warm)]"
-                      : "hover:bg-[var(--color-bg-subtle)]",
-                  ].join(" ")}
+                      ? "account-popup__nav-item--active"
+                      : ""
+                  }`}
                 >
-                  {/* Icon */}
-
-                  <span
-                    className={[
-                      "flex h-10 w-10 shrink-0 items-center justify-center border",
-                      "transition-all duration-500",
-                      isActive
-                        ? "border-[var(--color-accent-soft)] bg-white text-[var(--color-accent-dark)]"
-                        : "border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-[var(--color-text-secondary)] group-hover:border-[var(--color-accent-soft)] group-hover:text-[var(--color-accent-dark)]",
-                    ].join(" ")}
-                  >
+                  <span className="account-popup__nav-icon">
                     <Icon
                       size={16}
                       strokeWidth={1.25}
                     />
                   </span>
 
-                  {/* Text */}
-
-                  <span className="min-w-0 flex-1">
-                    <span
-                      className={[
-                        "block font-body text-[12px]",
-                        isActive
-                          ? "font-semibold text-[var(--color-text)]"
-                          : "font-medium text-[var(--color-text-soft)]",
-                      ].join(" ")}
-                    >
+                  <span className="account-popup__nav-content">
+                    <span className="account-popup__nav-title">
                       {item.label}
                     </span>
 
-                    <span
-                      className="
-                        mt-1
-                        block
-                        font-body
-                        text-[10px]
-                        leading-4
-                        text-[var(--color-text-muted)]
-                      "
-                    >
+                    <span className="account-popup__nav-description">
                       {item.description}
                     </span>
                   </span>
 
-                  {/* Arrow */}
-
-                  <span
-                    className="
-                      flex
-                      h-7
-                      w-7
-                      shrink-0
-                      items-center
-                      justify-center
-                      text-[var(--color-text-faint)]
-                      transition-all
-                      duration-500
-                      group-hover:text-[var(--color-accent-dark)]
-                    "
-                  >
+                  <span className="account-popup__nav-arrow">
                     <ChevronRight
                       size={15}
                       strokeWidth={1.2}
-                      className="
-                        transition-transform
-                        duration-500
-                        group-hover:translate-x-1
-                      "
                     />
                   </span>
                 </Link>
@@ -541,12 +327,7 @@ export function AccountPopup({
               ACCOUNT ACTIONS
           ================================================= */}
 
-          <div
-            className="
-              bg-[var(--color-bg-subtle)]
-              p-2.5
-            "
-          >
+          <div className="account-popup__actions">
             {/* Delete */}
 
             <button
@@ -555,68 +336,21 @@ export function AccountPopup({
                 setConfirmType("delete")
               }
               disabled={isProcessing}
-              className="
-                group
-                flex
-                w-full
-                items-center
-                gap-3.5
-                px-3.5
-                py-3.5
-                text-left
-                transition-all
-                duration-500
-                hover:bg-[var(--color-rose-light)]
-                disabled:cursor-not-allowed
-                disabled:opacity-60
-              "
+              className="account-popup__action account-popup__action--delete"
             >
-              <span
-                className="
-                  flex
-                  h-10
-                  w-10
-                  shrink-0
-                  items-center
-                  justify-center
-                  border
-                  border-[var(--color-border)]
-                  bg-white
-                  text-[var(--color-burgundy)]
-                  transition-colors
-                  duration-500
-                  group-hover:border-[var(--color-rose-soft)]
-                "
-              >
+              <span className="account-popup__action-icon">
                 <Trash2
                   size={16}
                   strokeWidth={1.25}
                 />
               </span>
 
-              <span className="flex-1">
-                <span
-                  className="
-                    block
-                    font-body
-                    text-[12px]
-                    font-semibold
-                    text-[var(--color-burgundy)]
-                  "
-                >
+              <span className="account-popup__action-content">
+                <span className="account-popup__action-title">
                   Delete Account
                 </span>
 
-                <span
-                  className="
-                    mt-1
-                    block
-                    font-body
-                    text-[10px]
-                    leading-4
-                    text-[var(--color-text-muted)]
-                  "
-                >
+                <span className="account-popup__action-description">
                   Permanently remove your account
                 </span>
               </span>
@@ -630,69 +364,21 @@ export function AccountPopup({
                 setConfirmType("logout")
               }
               disabled={isProcessing}
-              className="
-                group
-                mt-1
-                flex
-                w-full
-                items-center
-                gap-3.5
-                px-3.5
-                py-3.5
-                text-left
-                transition-all
-                duration-500
-                hover:bg-[var(--color-bg-warm)]
-                disabled:cursor-not-allowed
-                disabled:opacity-60
-              "
+              className="account-popup__action account-popup__action--logout"
             >
-              <span
-                className="
-                  flex
-                  h-10
-                  w-10
-                  shrink-0
-                  items-center
-                  justify-center
-                  border
-                  border-[var(--color-border)]
-                  bg-white
-                  text-[var(--color-text-secondary)]
-                  transition-colors
-                  duration-500
-                  group-hover:border-[var(--color-border-dark)]
-                "
-              >
+              <span className="account-popup__action-icon">
                 <LogOut
                   size={16}
                   strokeWidth={1.25}
                 />
               </span>
 
-              <span className="flex-1">
-                <span
-                  className="
-                    block
-                    font-body
-                    text-[12px]
-                    font-semibold
-                    text-[var(--color-text-soft)]
-                  "
-                >
+              <span className="account-popup__action-content">
+                <span className="account-popup__action-title">
                   Sign Out
                 </span>
 
-                <span
-                  className="
-                    mt-1
-                    block
-                    font-body
-                    text-[10px]
-                    leading-4
-                    text-[var(--color-text-muted)]
-                  "
-                >
+                <span className="account-popup__action-description">
                   Sign out from this device
                 </span>
               </span>
@@ -703,7 +389,7 @@ export function AccountPopup({
 
       {/* =====================================================
           CONFIRMATION DIALOG
-      ===================================================== */}
+      ====================================================== */}
 
       <AccountConfirmDialog
         open={confirmType !== null}
