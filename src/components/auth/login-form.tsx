@@ -7,19 +7,18 @@ import {
 } from "react";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+
 import {
   ArrowRight,
   Eye,
   EyeOff,
   Loader2,
+  Mail,
 } from "lucide-react";
 
 import { ApiError } from "@/lib/api";
-
 import { useAuthStore } from "@/store/auth-store";
-
-import { useRouter } from "next/navigation";
 
 /* =========================================================
    COMPONENT
@@ -27,7 +26,6 @@ import { useRouter } from "next/navigation";
 
 export function LoginForm() {
   const router = useRouter();
-
   const searchParams = useSearchParams();
 
   const verified = searchParams.get("verified");
@@ -56,23 +54,12 @@ export function LoginForm() {
      FORM STATE
   ======================================================= */
 
-  const [email, setEmail] =
-    useState("");
-
-  const [password, setPassword] =
-    useState("");
-
-  const [rememberMe, setRememberMe] =
-    useState(false);
-
-  const [showPassword, setShowPassword] =
-    useState(false);
-
-  const [localError, setLocalError] =
-    useState("");
-
-  const [successMessage, setSuccessMessage] =
-    useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [localError, setLocalError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   /* =======================================================
      VERIFIED MESSAGE
@@ -116,64 +103,32 @@ export function LoginForm() {
     event.preventDefault();
 
     clearError();
-
     setLocalError("");
 
-    const validationError =
-      validate();
+    const validationError = validate();
 
     if (validationError) {
-      setLocalError(
-        validationError,
-      );
-
+      setLocalError(validationError);
       return;
     }
 
     try {
-      /*
-       * login() updates Zustand immediately:
-       *
-       * user
-       * accessToken
-       * isAuthenticated
-       */
       await login(
         email.trim(),
         password,
         rememberMe,
       );
 
-      /*
-       * IMPORTANT:
-       *
-       * Do not use window.location.href here.
-       *
-       * That performs a full browser reload and clears
-       * the memory-only access token before the new page
-       * can consume it.
-       *
-       * Client-side navigation keeps the authenticated
-       * Zustand state alive.
-       */
       router.replace("/");
 
-      /*
-       * Ensure the new route starts from the top.
-       */
       window.scrollTo({
         top: 0,
         behavior: "auto",
       });
     } catch (error) {
-      /*
-       * Backend says credentials are valid but email
-       * still needs verification.
-       */
       if (
         error instanceof ApiError &&
-        error.code ===
-          "EMAIL_NOT_VERIFIED"
+        error.code === "EMAIL_NOT_VERIFIED"
       ) {
         router.replace(
           `/verify-email?email=${encodeURIComponent(
@@ -183,17 +138,8 @@ export function LoginForm() {
 
         return;
       }
-
-      /*
-       * Other API errors are already stored inside
-       * the auth store.
-       */
     }
   };
-
-  /* =======================================================
-     ERROR
-  ======================================================= */
 
   const errorMessage =
     localError || storeError;
@@ -206,7 +152,7 @@ export function LoginForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="space-y-[13px]"
+      className="login-form"
     >
       {/* ===================================================
           SUCCESS
@@ -215,9 +161,13 @@ export function LoginForm() {
       {successMessage ? (
         <div
           role="status"
-          className="border border-[#cfdacf] bg-[#f5f8f4] px-4 py-3 text-[12px] leading-5 text-[var(--color-charcoal)]"
+          className="login-form__success"
         >
-          {successMessage}
+          <span className="login-form__success-mark">
+            ✓
+          </span>
+
+          <p>{successMessage}</p>
         </div>
       ) : null}
 
@@ -225,53 +175,63 @@ export function LoginForm() {
           EMAIL
       =================================================== */}
 
-      <label className="block">
-        <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
+      <div className="login-form__field">
+        <label
+          htmlFor="login-email"
+          className="login-form__label"
+        >
           Email address
-        </span>
+        </label>
 
-        <input
-          type="email"
-          value={email}
-          placeholder="you@example.com"
-          autoComplete="email"
-          onChange={(event) => {
-            setEmail(
-              event.target.value,
-            );
+        <div className="login-form__input-wrap">
+          <Mail
+            aria-hidden="true"
+            className="login-form__input-icon"
+          />
 
-            if (localError) {
-              setLocalError("");
-            }
+          <input
+            id="login-email"
+            type="email"
+            value={email}
+            placeholder="you@example.com"
+            autoComplete="email"
+            inputMode="email"
+            onChange={(event) => {
+              setEmail(event.target.value);
 
-            clearError();
-          }}
-          className="h-12 w-full rounded-none border border-[var(--color-border)] bg-white px-4 text-[13px] text-[var(--color-charcoal)] outline-none transition placeholder:text-[#aaa] focus:border-[var(--color-charcoal)]"
-        />
-      </label>
+              if (localError) {
+                setLocalError("");
+              }
+
+              clearError();
+            }}
+            className="login-form__input"
+          />
+        </div>
+      </div>
 
       {/* ===================================================
           PASSWORD
       =================================================== */}
 
-      <div>
-        <div className="mb-2 flex items-center justify-between">
+      <div className="login-form__field">
+        <div className="login-form__field-header">
           <label
             htmlFor="login-password"
-            className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]"
+            className="login-form__label"
           >
             Password
           </label>
 
           <Link
             href="/forgot-password"
-            className="text-[11px] text-[var(--color-secondary)] underline underline-offset-4 transition hover:text-[var(--color-charcoal)]"
+            className="login-form__forgot-link"
           >
             Forgot password?
           </Link>
         </div>
 
-        <div className="relative">
+        <div className="login-form__input-wrap">
           <input
             id="login-password"
             type={
@@ -283,9 +243,7 @@ export function LoginForm() {
             placeholder="Enter your password"
             autoComplete="current-password"
             onChange={(event) => {
-              setPassword(
-                event.target.value,
-              );
+              setPassword(event.target.value);
 
               if (localError) {
                 setLocalError("");
@@ -293,7 +251,7 @@ export function LoginForm() {
 
               clearError();
             }}
-            className="h-12 w-full rounded-none border border-[var(--color-border)] bg-white px-4 pr-12 text-[13px] text-[var(--color-charcoal)] outline-none transition placeholder:text-[#aaa] focus:border-[var(--color-charcoal)]"
+            className="login-form__input login-form__input--password"
           />
 
           <button
@@ -303,23 +261,23 @@ export function LoginForm() {
                 ? "Hide password"
                 : "Show password"
             }
+            aria-pressed={showPassword}
             onClick={() =>
               setShowPassword(
-                (current) =>
-                  !current,
+                (current) => !current,
               )
             }
-            className="absolute right-0 top-0 flex h-12 w-12 items-center justify-center text-[var(--color-secondary)] transition hover:text-[var(--color-charcoal)]"
+            className="login-form__password-toggle"
           >
             {showPassword ? (
               <EyeOff
-                size={17}
-                strokeWidth={1.6}
+                aria-hidden="true"
+                className="login-form__password-icon"
               />
             ) : (
               <Eye
-                size={17}
-                strokeWidth={1.6}
+                aria-hidden="true"
+                className="login-form__password-icon"
               />
             )}
           </button>
@@ -330,7 +288,7 @@ export function LoginForm() {
           REMEMBER ME
       =================================================== */}
 
-      <label className="flex cursor-pointer items-center gap-2.5 pt-0.5">
+      <label className="login-form__remember">
         <input
           type="checkbox"
           checked={rememberMe}
@@ -339,10 +297,10 @@ export function LoginForm() {
               event.target.checked,
             )
           }
-          className="h-3.5 w-3.5 rounded-none border-[var(--color-border)] accent-[var(--color-charcoal)]"
+          className="login-form__checkbox"
         />
 
-        <span className="text-[11px] text-[var(--color-secondary)]">
+        <span className="login-form__remember-text">
           Keep me signed in
         </span>
       </label>
@@ -354,9 +312,13 @@ export function LoginForm() {
       {errorMessage ? (
         <div
           role="alert"
-          className="border border-[var(--color-rose-dark)] bg-[var(--color-rose-light)] px-4 py-3 text-[12px] leading-5 text-[var(--color-charcoal)]"
+          className="login-form__error"
         >
-          {errorMessage}
+          <span className="login-form__error-mark">
+            !
+          </span>
+
+          <p>{errorMessage}</p>
         </div>
       ) : null}
 
@@ -367,26 +329,24 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="flex h-12 w-full items-center justify-center gap-2 bg-[var(--color-charcoal)] px-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-60"
+        className="login-form__submit"
       >
+        <span className="login-form__submit-label">
+          {isLoading
+            ? "Signing in"
+            : "Sign in"}
+        </span>
+
         {isLoading ? (
-          <>
-            <Loader2
-              size={16}
-              className="animate-spin"
-            />
-
-            Signing in
-          </>
+          <Loader2
+            aria-hidden="true"
+            className="login-form__submit-icon login-form__submit-icon--loading"
+          />
         ) : (
-          <>
-            Sign in
-
-            <ArrowRight
-              size={15}
-              strokeWidth={1.7}
-            />
-          </>
+          <ArrowRight
+            aria-hidden="true"
+            className="login-form__submit-icon"
+          />
         )}
       </button>
 
@@ -394,15 +354,22 @@ export function LoginForm() {
           REGISTER
       =================================================== */}
 
-      <p className="pt-1 text-center text-[12px] text-[var(--color-secondary)]">
-        New to Aayesha Fashion?{" "}
+      <div className="login-form__register">
+        <p className="login-form__register-text">
+          New to Aayesha Fashion?
+        </p>
+
         <Link
           href="/register"
-          className="font-medium text-[var(--color-charcoal)] underline underline-offset-4 transition hover:opacity-60"
+          className="login-form__register-link"
         >
           Create an account
+          <ArrowRight
+            aria-hidden="true"
+            className="login-form__register-icon"
+          />
         </Link>
-      </p>
+      </div>
     </form>
   );
 }

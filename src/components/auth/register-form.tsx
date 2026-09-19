@@ -8,6 +8,10 @@ import {
 import {
   Eye,
   EyeOff,
+  UserRound,
+  Mail,
+  Phone,
+  Check,
 } from "lucide-react";
 
 import {
@@ -24,6 +28,8 @@ type InputFieldProps = {
   placeholder: string;
   type?: string;
   autoComplete?: string;
+  inputMode?: "text" | "email" | "tel" | "numeric";
+  icon?: "user" | "mail" | "phone";
   onChange: (value: string) => void;
 };
 
@@ -33,49 +39,51 @@ function InputField({
   placeholder,
   type = "text",
   autoComplete,
+  inputMode,
+  icon,
   onChange,
 }: InputFieldProps) {
+  const Icon =
+    icon === "user"
+      ? UserRound
+      : icon === "mail"
+        ? Mail
+        : icon === "phone"
+          ? Phone
+          : null;
+
   return (
-    <div>
+    <div className="register-form__field">
       <label
-        className="
-          mb-2
-          block
-          text-[10px]
-          font-semibold
-          uppercase
-          tracking-[0.18em]
-          text-[var(--color-text-secondary)]
-        "
+        className="register-form__label"
       >
         {label}
       </label>
 
-      <input
-        type={type}
-        value={value}
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        onChange={(event) =>
-          onChange(event.target.value)
-        }
-        className="
-          h-11
-          w-full
-          border
-          border-[var(--color-border)]
-          bg-[var(--color-surface)]
-          px-4
-          text-[13px]
-          text-[var(--color-text)]
-          outline-none
-          transition-colors
-          duration-[var(--duration-base)]
-          placeholder:text-[var(--color-text-muted)]
-          hover:border-[var(--color-border-dark)]
-          focus:border-[var(--color-accent-dark)]
-        "
-      />
+      <div className="register-form__input-wrap">
+        {Icon ? (
+          <Icon
+            aria-hidden="true"
+            className="register-form__input-icon"
+          />
+        ) : null}
+
+        <input
+          type={type}
+          value={value}
+          placeholder={placeholder}
+          autoComplete={autoComplete}
+          inputMode={inputMode}
+          onChange={(event) =>
+            onChange(event.target.value)
+          }
+          className={`register-form__input ${
+            Icon
+              ? "register-form__input--with-icon"
+              : ""
+          }`}
+        />
+      </div>
     </div>
   );
 }
@@ -103,22 +111,14 @@ function PasswordField({
     useState(false);
 
   return (
-    <div>
+    <div className="register-form__field">
       <label
-        className="
-          mb-2
-          block
-          text-[10px]
-          font-semibold
-          uppercase
-          tracking-[0.18em]
-          text-[var(--color-text-secondary)]
-        "
+        className="register-form__label"
       >
         {label}
       </label>
 
-      <div className="relative">
+      <div className="register-form__input-wrap">
         <input
           type={
             showPassword
@@ -131,23 +131,7 @@ function PasswordField({
           onChange={(event) =>
             onChange(event.target.value)
           }
-          className="
-            h-11
-            w-full
-            border
-            border-[var(--color-border)]
-            bg-[var(--color-surface)]
-            px-4
-            pr-11
-            text-[13px]
-            text-[var(--color-text)]
-            outline-none
-            transition-colors
-            duration-[var(--duration-base)]
-            placeholder:text-[var(--color-text-muted)]
-            hover:border-[var(--color-border-dark)]
-            focus:border-[var(--color-accent-dark)]
-          "
+          className="register-form__input register-form__input--password"
         />
 
         <button
@@ -157,35 +141,23 @@ function PasswordField({
               ? "Hide password"
               : "Show password"
           }
+          aria-pressed={showPassword}
           onClick={() =>
             setShowPassword(
               (current) => !current,
             )
           }
-          className="
-            absolute
-            right-0
-            top-0
-            flex
-            h-11
-            w-11
-            items-center
-            justify-center
-            text-[var(--color-text-secondary)]
-            transition-colors
-            duration-[var(--duration-fast)]
-            hover:text-[var(--color-text)]
-          "
+          className="register-form__password-toggle"
         >
           {showPassword ? (
             <EyeOff
-              size={17}
-              strokeWidth={1.6}
+              aria-hidden="true"
+              className="register-form__password-icon"
             />
           ) : (
             <Eye
-              size={17}
-              strokeWidth={1.6}
+              aria-hidden="true"
+              className="register-form__password-icon"
             />
           )}
         </button>
@@ -231,41 +203,36 @@ function PasswordRules({
   ];
 
   return (
-    <div className="mt-3 space-y-1.5">
-      {rules.map((rule) => (
-        <div
-          key={rule.label}
-          className={`
-            flex
-            items-center
-            gap-2
-            text-[10px]
-            ${
-              rule.valid
-                ? "text-[var(--color-success)]"
-                : "text-[var(--color-text-muted)]"
-            }
-          `}
-        >
-          <span
-            className={`
-              h-1.5
-              w-1.5
-              shrink-0
-              rounded-full
-              ${
-                rule.valid
-                  ? "bg-[var(--color-success)]"
-                  : "bg-[var(--color-border-dark)]"
-              }
-            `}
-          />
+    <div className="register-form__rules">
+      <span className="register-form__rules-title">
+        Password requirements
+      </span>
 
-          <span>
-            {rule.label}
-          </span>
-        </div>
-      ))}
+      <div className="register-form__rules-grid">
+        {rules.map((rule) => (
+          <div
+            key={rule.label}
+            className={`register-form__rule ${
+              rule.valid
+                ? "register-form__rule--valid"
+                : ""
+            }`}
+          >
+            <span className="register-form__rule-icon">
+              {rule.valid ? (
+                <Check
+                  aria-hidden="true"
+                  className="register-form__rule-check"
+                />
+              ) : null}
+            </span>
+
+            <span className="register-form__rule-label">
+              {rule.label}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -275,64 +242,38 @@ function PasswordRules({
 ========================================================= */
 
 export function RegisterForm() {
-  const register =
-    useAuthStore(
-      (state) => state.register,
-    );
+  const register = useAuthStore(
+    (state) => state.register,
+  );
 
-  const storeError =
-    useAuthStore(
-      (state) => state.error,
-    );
+  const storeError = useAuthStore(
+    (state) => state.error,
+  );
 
-  const isLoading =
-    useAuthStore(
-      (state) => state.isLoading,
-    );
+  const isLoading = useAuthStore(
+    (state) => state.isLoading,
+  );
 
-  const clearError =
-    useAuthStore(
-      (state) => state.clearError,
-    );
+  const clearError = useAuthStore(
+    (state) => state.clearError,
+  );
 
-  const [
-    name,
-    setName,
-  ] = useState("");
-
-  const [
-    email,
-    setEmail,
-  ] = useState("");
-
-  const [
-    phone,
-    setPhone,
-  ] = useState("");
-
-  const [
-    password,
-    setPassword,
-  ] = useState("");
-
-  const [
-    confirmPassword,
-    setConfirmPassword,
-  ] = useState("");
-
-  const [
-    localError,
-    setLocalError,
-  ] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] =
+    useState("");
+  const [confirmPassword, setConfirmPassword] =
+    useState("");
+  const [localError, setLocalError] =
+    useState("");
 
   /* =======================================================
      VALIDATION
   ======================================================= */
 
   const validate = () => {
-    if (
-      name.trim().length < 2
-    ) {
+    if (name.trim().length < 2) {
       return "Please enter your full name.";
     }
 
@@ -352,27 +293,19 @@ export function RegisterForm() {
       return "Please enter a valid Indian mobile number.";
     }
 
-    if (
-      password.length < 8
-    ) {
+    if (password.length < 8) {
       return "Password must contain at least 8 characters.";
     }
 
-    if (
-      password.length > 72
-    ) {
+    if (password.length > 72) {
       return "Password cannot exceed 72 characters.";
     }
 
-    if (
-      !/[A-Z]/.test(password)
-    ) {
+    if (!/[A-Z]/.test(password)) {
       return "Password must contain at least one uppercase letter.";
     }
 
-    if (
-      !/[a-z]/.test(password)
-    ) {
+    if (!/[a-z]/.test(password)) {
       return "Password must contain at least one lowercase letter.";
     }
 
@@ -381,21 +314,35 @@ export function RegisterForm() {
     }
 
     if (
-      !/[^A-Za-z0-9]/.test(
-        password,
-      )
+      !/[^A-Za-z0-9]/.test(password)
     ) {
       return "Password must contain at least one special character.";
     }
 
     if (
-      password !==
-      confirmPassword
+      password !== confirmPassword
     ) {
       return "Passwords do not match.";
     }
 
     return "";
+  };
+
+  /* =======================================================
+     FIELD CHANGE
+  ======================================================= */
+
+  const handleFieldChange = (
+    setter: (value: string) => void,
+    value: string,
+  ) => {
+    setter(value);
+
+    if (localError) {
+      setLocalError("");
+    }
+
+    clearError();
   };
 
   /* =======================================================
@@ -414,10 +361,7 @@ export function RegisterForm() {
       validate();
 
     if (validationError) {
-      setLocalError(
-        validationError,
-      );
-
+      setLocalError(validationError);
       return;
     }
 
@@ -443,122 +387,139 @@ export function RegisterForm() {
   };
 
   const errorMessage =
-    localError ||
-    storeError;
+    localError || storeError;
 
   return (
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="space-y-4"
+      className="register-form"
     >
       {/* ===================================================
-          NAME
+          PERSONAL INFORMATION
       =================================================== */}
 
-      <InputField
-        label="Full name"
-        value={name}
-        placeholder="Your full name"
-        autoComplete="name"
-        onChange={(value) => {
-          setName(value);
+      <div className="register-form__section">
+        <div className="register-form__section-heading">
+          <span className="register-form__section-number">
+            01
+          </span>
 
-          if (localError) {
-            setLocalError("");
-          }
+          <div>
+            <span className="register-form__section-eyebrow">
+              Your details
+            </span>
 
-          clearError();
-        }}
-      />
+            <h2 className="register-form__section-title">
+              Personal information
+            </h2>
+          </div>
+        </div>
 
-      {/* ===================================================
-          EMAIL
-      =================================================== */}
-
-      <InputField
-        label="Email address"
-        type="email"
-        value={email}
-        placeholder="you@example.com"
-        autoComplete="email"
-        onChange={(value) => {
-          setEmail(value);
-
-          if (localError) {
-            setLocalError("");
-          }
-
-          clearError();
-        }}
-      />
-
-      {/* ===================================================
-          PHONE
-      =================================================== */}
-
-      <InputField
-        label="Mobile number"
-        type="tel"
-        value={phone}
-        placeholder="9876543210"
-        autoComplete="tel"
-        onChange={(value) => {
-          setPhone(value);
-
-          if (localError) {
-            setLocalError("");
-          }
-
-          clearError();
-        }}
-      />
-
-      {/* ===================================================
-          PASSWORD
-      =================================================== */}
-
-      <div>
-        <PasswordField
-          label="Password"
-          value={password}
-          placeholder="Create a secure password"
-          autoComplete="new-password"
-          onChange={(value) => {
-            setPassword(value);
-
-            if (localError) {
-              setLocalError("");
+        <div className="register-form__fields">
+          <InputField
+            label="Full name"
+            value={name}
+            placeholder="Your full name"
+            autoComplete="name"
+            icon="user"
+            onChange={(value) =>
+              handleFieldChange(
+                setName,
+                value,
+              )
             }
+          />
 
-            clearError();
-          }}
-        />
+          <InputField
+            label="Email address"
+            type="email"
+            value={email}
+            placeholder="you@example.com"
+            autoComplete="email"
+            inputMode="email"
+            icon="mail"
+            onChange={(value) =>
+              handleFieldChange(
+                setEmail,
+                value,
+              )
+            }
+          />
 
-        <PasswordRules
-          password={password}
-        />
+          <InputField
+            label="Mobile number"
+            type="tel"
+            value={phone}
+            placeholder="9876543210"
+            autoComplete="tel"
+            inputMode="tel"
+            icon="phone"
+            onChange={(value) =>
+              handleFieldChange(
+                setPhone,
+                value,
+              )
+            }
+          />
+        </div>
       </div>
 
       {/* ===================================================
-          CONFIRM PASSWORD
+          SECURITY
       =================================================== */}
 
-      <PasswordField
-        label="Confirm password"
-        value={confirmPassword}
-        placeholder="Re-enter your password"
-        autoComplete="new-password"
-        onChange={(value) => {
-          setConfirmPassword(value);
+      <div className="register-form__section">
+        <div className="register-form__section-heading">
+          <span className="register-form__section-number">
+            02
+          </span>
 
-          if (localError) {
-            setLocalError("");
-          }
+          <div>
+            <span className="register-form__section-eyebrow">
+              Account security
+            </span>
 
-          clearError();
-        }}
-      />
+            <h2 className="register-form__section-title">
+              Create your password
+            </h2>
+          </div>
+        </div>
+
+        <div className="register-form__fields">
+          <div>
+            <PasswordField
+              label="Password"
+              value={password}
+              placeholder="Create a secure password"
+              autoComplete="new-password"
+              onChange={(value) =>
+                handleFieldChange(
+                  setPassword,
+                  value,
+                )
+              }
+            />
+
+            <PasswordRules
+              password={password}
+            />
+          </div>
+
+          <PasswordField
+            label="Confirm password"
+            value={confirmPassword}
+            placeholder="Re-enter your password"
+            autoComplete="new-password"
+            onChange={(value) =>
+              handleFieldChange(
+                setConfirmPassword,
+                value,
+              )
+            }
+          />
+        </div>
+      </div>
 
       {/* ===================================================
           ERROR
@@ -567,18 +528,13 @@ export function RegisterForm() {
       {errorMessage ? (
         <div
           role="alert"
-          className="
-            border
-            border-[var(--color-error)]
-            bg-[var(--color-surface-soft)]
-            px-4
-            py-3
-            text-[12px]
-            leading-5
-            text-[var(--color-error)]
-          "
+          className="register-form__error"
         >
-          {errorMessage}
+          <span className="register-form__error-mark">
+            !
+          </span>
+
+          <p>{errorMessage}</p>
         </div>
       ) : null}
 
@@ -586,16 +542,9 @@ export function RegisterForm() {
           TERMS
       =================================================== */}
 
-      <p
-        className="
-          text-[11px]
-          leading-5
-          text-[var(--color-text-secondary)]
-        "
-      >
-        By creating an account, you
-        agree to our terms and
-        acknowledge our privacy
+      <p className="register-form__terms">
+        By creating an account, you agree to
+        our terms and acknowledge our privacy
         practices.
       </p>
 
@@ -606,25 +555,7 @@ export function RegisterForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="
-          h-11
-          w-full
-          border
-          border-[var(--color-text)]
-          bg-[var(--color-text)]
-          px-6
-          text-[10px]
-          font-semibold
-          uppercase
-          tracking-[0.2em]
-          text-[var(--color-text-inverse)]
-          transition-all
-          duration-[var(--duration-base)]
-          hover:border-[var(--color-accent-dark)]
-          hover:bg-[var(--color-accent-dark)]
-          disabled:cursor-not-allowed
-          disabled:opacity-60
-        "
+        className="register-form__submit"
       >
         {isLoading
           ? "Creating account..."

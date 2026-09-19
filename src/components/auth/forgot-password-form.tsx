@@ -1,55 +1,34 @@
 "use client";
 
-import {
-  useState,
-  type FormEvent,
-} from "react";
-
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { ArrowRight, Loader2, Mail } from "lucide-react";
 
-import {
-  ArrowRight,
-  Loader2,
-} from "lucide-react";
-
-import {
-  useAuthStore,
-} from "@/store/auth-store";
+import { useAuthStore } from "@/store/auth-store";
 
 /* =========================================================
    COMPONENT
 ========================================================= */
 
 export function ForgotPasswordForm() {
-  const forgotPassword =
-    useAuthStore(
-      (state) =>
-        state.forgotPassword,
-    );
+  const forgotPassword = useAuthStore(
+    (state) => state.forgotPassword,
+  );
 
-  const isLoading =
-    useAuthStore(
-      (state) =>
-        state.isLoading,
-    );
+  const isLoading = useAuthStore(
+    (state) => state.isLoading,
+  );
 
-  const storeError =
-    useAuthStore(
-      (state) =>
-        state.error,
-    );
+  const storeError = useAuthStore(
+    (state) => state.error,
+  );
 
-  const clearError =
-    useAuthStore(
-      (state) =>
-        state.clearError,
-    );
+  const clearError = useAuthStore(
+    (state) => state.clearError,
+  );
 
-  const [email, setEmail] =
-    useState("");
-
-  const [localError, setLocalError] =
-    useState("");
+  const [email, setEmail] = useState("");
+  const [localError, setLocalError] = useState("");
 
   /* =======================================================
      SUBMIT
@@ -63,8 +42,7 @@ export function ForgotPasswordForm() {
     clearError();
     setLocalError("");
 
-    const normalizedEmail =
-      email.trim();
+    const normalizedEmail = email.trim();
 
     if (
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
@@ -79,9 +57,7 @@ export function ForgotPasswordForm() {
     }
 
     try {
-      await forgotPassword(
-        normalizedEmail,
-      );
+      await forgotPassword(normalizedEmail);
 
       window.location.href =
         `/reset-password?email=${encodeURIComponent(
@@ -95,9 +71,7 @@ export function ForgotPasswordForm() {
     }
   };
 
-  const errorMessage =
-    localError ||
-    storeError;
+  const errorMessage = localError || storeError;
 
   /* =======================================================
      RENDER
@@ -107,76 +81,67 @@ export function ForgotPasswordForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="space-y-4"
+      className="forgot-password-form"
     >
       {/* ===================================================
-          DESCRIPTION
+          INTRODUCTION
       =================================================== */}
 
-      <div
-        className="
-          border-l-2
-          border-[var(--color-accent)]
-          bg-[var(--color-surface-soft)]
-          px-4
-          py-3
-        "
-      >
-        <p className="text-sm leading-6 text-[var(--color-text-secondary)]">
-          Enter the email address associated
-          with your account. We&apos;ll send
-          you a secure password reset code.
-        </p>
+      <div className="forgot-password-form__intro">
+        <div className="forgot-password-form__intro-icon">
+          <Mail
+            aria-hidden="true"
+            className="forgot-password-form__intro-icon-svg"
+          />
+        </div>
+
+        <div className="forgot-password-form__intro-copy">
+          <span className="forgot-password-form__intro-label">
+            Password recovery
+          </span>
+
+          <p className="forgot-password-form__intro-text">
+            Enter the email address associated with your
+            account. We&apos;ll send you a secure password
+            reset code.
+          </p>
+        </div>
       </div>
 
       {/* ===================================================
           EMAIL
       =================================================== */}
 
-      <label className="block pt-1">
-        <span
-          className="
-            mb-2
-            block
-            text-[10px]
-            font-semibold
-            uppercase
-            tracking-[0.16em]
-            text-[var(--color-text-secondary)]
-          "
+      <div className="forgot-password-form__field">
+        <label
+          htmlFor="forgot-password-email"
+          className="forgot-password-form__label"
         >
           Email address
-        </span>
+        </label>
 
-        <input
-          type="email"
-          value={email}
-          placeholder="you@example.com"
-          autoComplete="email"
-          onChange={(event) => {
-            setEmail(event.target.value);
+        <div className="forgot-password-form__input-wrap">
+          <Mail
+            aria-hidden="true"
+            className="forgot-password-form__input-icon"
+          />
 
-            setLocalError("");
-            clearError();
-          }}
-          className="
-            h-11
-            w-full
-            border
-            border-[var(--color-border)]
-            bg-[var(--color-surface)]
-            px-4
-            text-sm
-            text-[var(--color-text)]
-            outline-none
-            transition-colors
-            duration-[var(--duration-base)]
-            placeholder:text-[var(--color-text-muted)]
-            hover:border-[var(--color-border-dark)]
-            focus:border-[var(--color-accent-dark)]
-          "
-        />
-      </label>
+          <input
+            id="forgot-password-email"
+            type="email"
+            value={email}
+            placeholder="you@example.com"
+            autoComplete="email"
+            inputMode="email"
+            onChange={(event) => {
+              setEmail(event.target.value);
+              setLocalError("");
+              clearError();
+            }}
+            className="forgot-password-form__input"
+          />
+        </div>
+      </div>
 
       {/* ===================================================
           ERROR
@@ -185,18 +150,13 @@ export function ForgotPasswordForm() {
       {errorMessage ? (
         <div
           role="alert"
-          className="
-            border
-            border-[var(--color-error)]
-            bg-[var(--color-surface-soft)]
-            px-4
-            py-3
-            text-sm
-            leading-5
-            text-[var(--color-error)]
-          "
+          className="forgot-password-form__error"
         >
-          {errorMessage}
+          <span className="forgot-password-form__error-mark">
+            !
+          </span>
+
+          <p>{errorMessage}</p>
         </div>
       ) : null}
 
@@ -207,55 +167,22 @@ export function ForgotPasswordForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="
-          group
-          flex
-          h-11
-          w-full
-          items-center
-          justify-center
-          gap-2
-          border
-          border-[var(--color-text)]
-          bg-[var(--color-text)]
-          px-5
-          text-[10px]
-          font-semibold
-          uppercase
-          tracking-[0.2em]
-          text-[var(--color-text-inverse)]
-          transition-all
-          duration-[var(--duration-base)]
-          hover:bg-[var(--color-accent-dark)]
-          hover:border-[var(--color-accent-dark)]
-          disabled:cursor-not-allowed
-          disabled:opacity-60
-        "
+        className="forgot-password-form__submit"
       >
+        <span className="forgot-password-form__submit-label">
+          {isLoading ? "Sending code" : "Send reset code"}
+        </span>
+
         {isLoading ? (
-          <>
-            <Loader2
-              size={15}
-              strokeWidth={1.7}
-              className="animate-spin"
-            />
-
-            Sending code
-          </>
+          <Loader2
+            aria-hidden="true"
+            className="forgot-password-form__submit-icon forgot-password-form__submit-icon--loading"
+          />
         ) : (
-          <>
-            Send reset code
-
-            <ArrowRight
-              size={15}
-              strokeWidth={1.7}
-              className="
-                transition-transform
-                duration-[var(--duration-base)]
-                group-hover:translate-x-0.5
-              "
-            />
-          </>
+          <ArrowRight
+            aria-hidden="true"
+            className="forgot-password-form__submit-icon"
+          />
         )}
       </button>
 
@@ -263,32 +190,21 @@ export function ForgotPasswordForm() {
           BACK TO LOGIN
       =================================================== */}
 
-      <div
-        className="
-          mt-3
-          border-t
-          border-[var(--color-border-light)]
-          pt-5
-          text-center
-        "
-      >
-        <p className="text-sm text-[var(--color-text-secondary)]">
-          Remember your password?{" "}
-          <Link
-            href="/login"
-            className="
-              font-semibold
-              text-[var(--color-text)]
-              underline
-              underline-offset-4
-              transition-opacity
-              duration-[var(--duration-fast)]
-              hover:opacity-60
-            "
-          >
-            Sign in
-          </Link>
+      <div className="forgot-password-form__login">
+        <p className="forgot-password-form__login-text">
+          Remember your password?
         </p>
+
+        <Link
+          href="/login"
+          className="forgot-password-form__login-link"
+        >
+          Sign in
+          <ArrowRight
+            aria-hidden="true"
+            className="forgot-password-form__login-icon"
+          />
+        </Link>
       </div>
     </form>
   );

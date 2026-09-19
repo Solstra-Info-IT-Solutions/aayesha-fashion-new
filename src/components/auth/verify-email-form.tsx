@@ -11,59 +11,50 @@ import { useSearchParams } from "next/navigation";
 
 import {
   ArrowRight,
+  CheckCircle2,
   Loader2,
+  Mail,
+  RefreshCw,
+  ShieldCheck,
 } from "lucide-react";
 
-import {
-  useAuthStore,
-} from "@/store/auth-store";
+import { useAuthStore } from "@/store/auth-store";
 
 /* =========================================================
    COMPONENT
 ========================================================= */
 
 export function VerifyEmailForm() {
-  const searchParams =
-    useSearchParams();
+  const searchParams = useSearchParams();
 
   const emailFromUrl =
     searchParams.get("email") ?? "";
 
-  const verifyEmail =
-    useAuthStore(
-      (state) =>
-        state.verifyEmail,
-    );
+  const verifyEmail = useAuthStore(
+    (state) => state.verifyEmail,
+  );
 
   const resendVerification =
     useAuthStore(
-      (state) =>
-        state.resendVerification,
+      (state) => state.resendVerification,
     );
 
-  const isLoading =
-    useAuthStore(
-      (state) =>
-        state.isLoading,
-    );
+  const isLoading = useAuthStore(
+    (state) => state.isLoading,
+  );
 
-  const storeError =
-    useAuthStore(
-      (state) =>
-        state.error,
-    );
+  const storeError = useAuthStore(
+    (state) => state.error,
+  );
 
-  const clearError =
-    useAuthStore(
-      (state) =>
-        state.clearError,
-    );
+  const clearError = useAuthStore(
+    (state) => state.clearError,
+  );
 
   const [email, setEmail] =
     useState(emailFromUrl);
 
-  const [otp, setOtp] =
-    useState("");
+  const [otp, setOtp] = useState("");
 
   const [localError, setLocalError] =
     useState("");
@@ -103,21 +94,14 @@ export function VerifyEmailForm() {
       return;
     }
 
-    const timer =
-      window.setInterval(() => {
-        setResendSeconds(
-          (current) =>
-            Math.max(
-              0,
-              current - 1,
-            ),
-        );
-      }, 1000);
+    const timer = window.setInterval(() => {
+      setResendSeconds((current) =>
+        Math.max(0, current - 1),
+      );
+    }, 1000);
 
     return () =>
-      window.clearInterval(
-        timer,
-      );
+      window.clearInterval(timer);
   }, [resendSeconds]);
 
   /* =======================================================
@@ -133,9 +117,7 @@ export function VerifyEmailForm() {
       return "Please enter a valid email address.";
     }
 
-    if (
-      !/^\d{6}$/.test(otp)
-    ) {
+    if (!/^\d{6}$/.test(otp)) {
       return "Please enter the 6-digit verification code.";
     }
 
@@ -152,18 +134,13 @@ export function VerifyEmailForm() {
     event.preventDefault();
 
     clearError();
-
     setLocalError("");
     setSuccessMessage("");
 
-    const validationError =
-      validate();
+    const validationError = validate();
 
     if (validationError) {
-      setLocalError(
-        validationError,
-      );
-
+      setLocalError(validationError);
       return;
     }
 
@@ -196,7 +173,6 @@ export function VerifyEmailForm() {
     }
 
     clearError();
-
     setLocalError("");
     setSuccessMessage("");
 
@@ -220,33 +196,37 @@ export function VerifyEmailForm() {
   };
 
   const errorMessage =
-    localError ||
-    storeError;
+    localError || storeError;
 
   /* =======================================================
      RENDER
   ======================================================= */
 
   return (
-    <div className="space-y-4">
+    <div className="verify-email-form">
       {/* ===================================================
           INTRO
       =================================================== */}
 
-      <div
-        className="
-          border-l-2
-          border-[var(--color-accent)]
-          bg-[var(--color-surface-soft)]
-          px-4
-          py-3
-        "
-      >
-        <p className="text-sm leading-6 text-[var(--color-text-secondary)]">
-          Enter the 6-digit code sent to your
-          email address to verify your Aayesha
-          Fashion account.
-        </p>
+      <div className="verify-email-form__intro">
+        <div className="verify-email-form__intro-icon">
+          <ShieldCheck
+            aria-hidden="true"
+            className="verify-email-form__intro-icon-svg"
+          />
+        </div>
+
+        <div className="verify-email-form__intro-copy">
+          <span className="verify-email-form__intro-label">
+            Secure verification
+          </span>
+
+          <p className="verify-email-form__intro-text">
+            Enter the 6-digit code sent to your
+            email address to verify your Aayesha
+            Fashion account.
+          </p>
+        </div>
       </div>
 
       {/* ===================================================
@@ -256,79 +236,57 @@ export function VerifyEmailForm() {
       <form
         onSubmit={handleSubmit}
         noValidate
-        className="space-y-4"
+        className="verify-email-form__fields"
       >
         {/* =================================================
             EMAIL
         ================================================= */}
 
-        <label className="block">
-          <span
-            className="
-              mb-2
-              block
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.18em]
-              text-[var(--color-text-secondary)]
-            "
+        <div className="verify-email-form__field">
+          <label
+            htmlFor="verify-email-address"
+            className="verify-email-form__label"
           >
             Email address
-          </span>
+          </label>
 
-          <input
-            type="email"
-            value={email}
-            placeholder="you@example.com"
-            autoComplete="email"
-            onChange={(event) => {
-              setEmail(
-                event.target.value,
-              );
+          <div className="verify-email-form__input-wrap">
+            <Mail
+              aria-hidden="true"
+              className="verify-email-form__input-icon"
+            />
 
-              setLocalError("");
-              clearError();
-            }}
-            className="
-              h-11
-              w-full
-              border
-              border-[var(--color-border)]
-              bg-[var(--color-surface)]
-              px-4
-              text-sm
-              text-[var(--color-text)]
-              outline-none
-              transition-colors
-              duration-[var(--duration-base)]
-              placeholder:text-[var(--color-text-muted)]
-              hover:border-[var(--color-border-dark)]
-              focus:border-[var(--color-accent-dark)]
-            "
-          />
-        </label>
+            <input
+              id="verify-email-address"
+              type="email"
+              value={email}
+              placeholder="you@example.com"
+              autoComplete="email"
+              inputMode="email"
+              onChange={(event) => {
+                setEmail(event.target.value);
+                setLocalError("");
+                clearError();
+              }}
+              className="verify-email-form__input verify-email-form__input--with-icon"
+            />
+          </div>
+        </div>
 
         {/* =================================================
             OTP
         ================================================= */}
 
-        <label className="block">
-          <span
-            className="
-              mb-2
-              block
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.18em]
-              text-[var(--color-text-secondary)]
-            "
+        <div className="verify-email-form__field">
+          <label
+            htmlFor="verify-email-otp"
+            className="verify-email-form__label"
           >
             Verification code
-          </span>
+          </label>
 
           <input
+            id="verify-email-otp"
             type="text"
             inputMode="numeric"
             autoComplete="one-time-code"
@@ -342,38 +300,22 @@ export function VerifyEmailForm() {
                   "",
                 );
 
-              setOtp(
-                value.slice(
-                  0,
-                  6,
-                ),
-              );
-
+              setOtp(value.slice(0, 6));
               setLocalError("");
               clearError();
             }}
-            className="
-              h-12
-              w-full
-              border
-              border-[var(--color-border)]
-              bg-[var(--color-surface)]
-              px-4
-              text-center
-              font-mono
-              text-lg
-              tracking-[0.4em]
-              text-[var(--color-text)]
-              outline-none
-              transition-colors
-              duration-[var(--duration-base)]
-              placeholder:text-[var(--color-text-muted)]
-              placeholder:tracking-[0.3em]
-              hover:border-[var(--color-border-dark)]
-              focus:border-[var(--color-accent-dark)]
-            "
+            className="verify-email-form__otp"
+            aria-describedby="verify-email-otp-help"
           />
-        </label>
+
+          <p
+            id="verify-email-otp-help"
+            className="verify-email-form__hint"
+          >
+            Enter the 6-digit code from your
+            email.
+          </p>
+        </div>
 
         {/* =================================================
             ERROR
@@ -382,18 +324,13 @@ export function VerifyEmailForm() {
         {errorMessage ? (
           <div
             role="alert"
-            className="
-              border
-              border-[var(--color-error)]
-              bg-[var(--color-surface-soft)]
-              px-4
-              py-3
-              text-[12px]
-              leading-5
-              text-[var(--color-error)]
-            "
+            className="verify-email-form__error"
           >
-            {errorMessage}
+            <span className="verify-email-form__message-icon">
+              !
+            </span>
+
+            <p>{errorMessage}</p>
           </div>
         ) : null}
 
@@ -404,18 +341,14 @@ export function VerifyEmailForm() {
         {successMessage ? (
           <div
             role="status"
-            className="
-              border
-              border-[var(--color-success)]
-              bg-[var(--color-surface-soft)]
-              px-4
-              py-3
-              text-[12px]
-              leading-5
-              text-[var(--color-success)]
-            "
+            className="verify-email-form__success"
           >
-            {successMessage}
+            <CheckCircle2
+              aria-hidden="true"
+              className="verify-email-form__success-icon"
+            />
+
+            <p>{successMessage}</p>
           </div>
         ) : null}
 
@@ -429,55 +362,24 @@ export function VerifyEmailForm() {
             isLoading ||
             otp.length !== 6
           }
-          className="
-            group
-            flex
-            h-11
-            w-full
-            items-center
-            justify-center
-            gap-2
-            border
-            border-[var(--color-text)]
-            bg-[var(--color-text)]
-            px-5
-            text-[10px]
-            font-semibold
-            uppercase
-            tracking-[0.2em]
-            text-[var(--color-text-inverse)]
-            transition-all
-            duration-[var(--duration-base)]
-            hover:border-[var(--color-accent-dark)]
-            hover:bg-[var(--color-accent-dark)]
-            disabled:cursor-not-allowed
-            disabled:opacity-60
-          "
+          className="verify-email-form__submit"
         >
+          <span>
+            {isLoading
+              ? "Verifying"
+              : "Verify email"}
+          </span>
+
           {isLoading ? (
-            <>
-              <Loader2
-                size={15}
-                strokeWidth={1.7}
-                className="animate-spin"
-              />
-
-              Verifying
-            </>
+            <Loader2
+              aria-hidden="true"
+              className="verify-email-form__submit-icon verify-email-form__submit-icon--loading"
+            />
           ) : (
-            <>
-              Verify email
-
-              <ArrowRight
-                size={15}
-                strokeWidth={1.7}
-                className="
-                  transition-transform
-                  duration-[var(--duration-base)]
-                  group-hover:translate-x-0.5
-                "
-              />
-            </>
+            <ArrowRight
+              aria-hidden="true"
+              className="verify-email-form__submit-icon"
+            />
           )}
         </button>
       </form>
@@ -486,16 +388,8 @@ export function VerifyEmailForm() {
           RESEND
       =================================================== */}
 
-      <div
-        className="
-          mt-3
-          border-t
-          border-[var(--color-border-light)]
-          pt-5
-          text-center
-        "
-      >
-        <p className="text-sm text-[var(--color-text-secondary)]">
+      <div className="verify-email-form__resend">
+        <p className="verify-email-form__resend-text">
           Didn&apos;t receive the code?
         </p>
 
@@ -506,23 +400,18 @@ export function VerifyEmailForm() {
             isLoading
           }
           onClick={handleResend}
-          className="
-            mt-2
-            text-sm
-            font-semibold
-            text-[var(--color-text)]
-            underline
-            underline-offset-4
-            transition-opacity
-            duration-[var(--duration-fast)]
-            hover:opacity-60
-            disabled:cursor-not-allowed
-            disabled:opacity-40
-          "
+          className="verify-email-form__resend-button"
         >
-          {resendAvailable
-            ? "Resend code"
-            : `Resend in ${resendSeconds}s`}
+          <RefreshCw
+            aria-hidden="true"
+            className="verify-email-form__resend-icon"
+          />
+
+          <span>
+            {resendAvailable
+              ? "Resend code"
+              : `Resend in ${resendSeconds}s`}
+          </span>
         </button>
       </div>
 
@@ -530,19 +419,11 @@ export function VerifyEmailForm() {
           CHANGE EMAIL
       =================================================== */}
 
-      <p className="text-center text-sm text-[var(--color-text-secondary)]">
+      <p className="verify-email-form__change-email">
         Entered the wrong email?{" "}
         <Link
           href="/register"
-          className="
-            font-semibold
-            text-[var(--color-text)]
-            underline
-            underline-offset-4
-            transition-opacity
-            duration-[var(--duration-fast)]
-            hover:opacity-60
-          "
+          className="verify-email-form__register-link"
         >
           Create your account again
         </Link>

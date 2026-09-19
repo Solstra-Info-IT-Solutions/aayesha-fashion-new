@@ -13041,6 +13041,2705 @@ h6 {
   }
 }
 
+/* =========================================================
+   AUTH SHELL
+   Aayesha Fashion — Premium Editorial Authentication
+========================================================= */
+
+.auth-shell {
+  --auth-background: var(--site-background, #ffffff);
+  --auth-surface: var(--site-surface, #ffffff);
+  --auth-header: var(--site-header-background, #f8f5f0);
+  --auth-text: var(--site-text-primary, #171514);
+  --auth-secondary: var(--site-text-secondary, #625c57);
+  --auth-muted: var(--site-text-muted, #817a74);
+  --auth-border: var(--site-border, #e8e2dc);
+  --auth-accent: var(--site-accent, #c8aa7a);
+  --auth-dark: var(--site-footer-background, #171514);
+
+  min-height: 100vh;
+  background: var(--auth-background);
+  color: var(--auth-text);
+}
+
+.auth-shell__layout {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: minmax(0, 1.05fr) minmax(30rem, 0.95fr);
+}
+
+/* =========================================================
+   BRAND PANEL
+========================================================= */
+
+.auth-shell__brand-panel {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--auth-dark);
+  color: #ffffff;
+}
+
+.auth-shell__brand-frame {
+  position: absolute;
+  inset: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.auth-shell__brand-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3.5rem 4rem;
+}
+
+.auth-shell__brand-logo {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.8rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.auth-shell__brand-logo img {
+  max-width: 10rem;
+}
+
+/* =========================================================
+   BRAND COPY
+========================================================= */
+
+.auth-shell__brand-copy {
+  width: min(100%, 34rem);
+  padding-block: 4rem;
+}
+
+.auth-shell__eyebrow,
+.auth-shell__content-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.auth-shell__eyebrow-line,
+.auth-shell__content-eyebrow-line {
+  display: block;
+  width: 2rem;
+  height: 1px;
+  flex: 0 0 auto;
+  background: var(--auth-accent);
+}
+
+.auth-shell__eyebrow-text,
+.auth-shell__content-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-label, 0.75rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.auth-shell__brand-title {
+  margin: 1.5rem 0 0;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+.auth-shell__brand-rule {
+  width: 4rem;
+  height: 1px;
+  margin-top: 2rem;
+  background: var(--auth-accent);
+}
+
+.auth-shell__brand-description {
+  max-width: 30rem;
+  margin: 1.75rem 0 0;
+  color: rgba(255, 255, 255, 0.64);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.75;
+}
+
+/* =========================================================
+   BRAND FOOTER
+========================================================= */
+
+.auth-shell__brand-footer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.auth-shell__copyright {
+  color: rgba(255, 255, 255, 0.42);
+  font-family: var(--font-body);
+  font-size: var(--text-caption, 0.6875rem);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.auth-shell__footer-line {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================================
+   CONTENT PANEL
+========================================================= */
+
+.auth-shell__content-panel {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background: var(--auth-background);
+}
+
+.auth-shell__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 5.25rem;
+  padding: 1.25rem 3rem;
+  border-bottom: 1px solid var(--auth-border);
+}
+
+.auth-shell__back-link {
+  display: inline-flex;
+  min-height: 2.875rem;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--auth-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.auth-shell__back-link:hover {
+  color: var(--auth-text);
+}
+
+.auth-shell__back-link:hover .auth-shell__back-icon {
+  transform: translateX(-0.2rem);
+}
+
+.auth-shell__back-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  stroke-width: 1.6;
+  transition: transform 180ms ease;
+}
+
+.auth-shell__mobile-logo {
+  display: none;
+}
+
+/* =========================================================
+   AUTH CONTENT
+========================================================= */
+
+.auth-shell__content {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 3rem;
+}
+
+.auth-shell__content-inner {
+  width: 100%;
+  max-width: 32.5rem;
+}
+
+.auth-shell__heading {
+  margin-bottom: 2.5rem;
+}
+
+.auth-shell__content-eyebrow {
+  color: var(--auth-secondary);
+}
+
+.auth-shell__title {
+  margin: 1rem 0 0;
+  color: var(--auth-text);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+
+.auth-shell__subtitle {
+  max-width: 30rem;
+  margin: 1rem 0 0;
+  color: var(--auth-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.7;
+}
+
+.auth-shell__form {
+  width: 100%;
+}
+
+.auth-shell__footer {
+  margin-top: 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--auth-border);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1023px) {
+  .auth-shell__layout {
+    display: block;
+  }
+
+  .auth-shell__brand-panel {
+    display: none;
+  }
+
+  .auth-shell__content-panel {
+    min-height: 100vh;
+  }
+
+  .auth-shell__header {
+    background: var(--auth-header);
+    padding-inline: 2rem;
+  }
+
+  .auth-shell__mobile-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .auth-shell__mobile-logo img {
+    max-width: 8.5rem;
+  }
+
+  .auth-shell__content {
+    padding: 3.5rem 2rem;
+  }
+
+  .auth-shell__content-inner {
+    max-width: 34rem;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 639px) {
+  .auth-shell__header {
+    min-height: 4.5rem;
+    padding: 0.85rem 1.25rem;
+  }
+
+  .auth-shell__back-link {
+    font-size: var(--text-button, 0.875rem);
+  }
+
+  .auth-shell__mobile-logo img {
+    max-width: 7.5rem;
+  }
+
+  .auth-shell__content {
+    align-items: flex-start;
+    padding: 2.5rem 1.25rem 3rem;
+  }
+
+  .auth-shell__content-inner {
+    max-width: none;
+  }
+
+  .auth-shell__heading {
+    margin-bottom: 2rem;
+  }
+
+  .auth-shell__title {
+    font-size: clamp(2.25rem, 10vw, 2.75rem);
+    line-height: 1.05;
+  }
+
+  .auth-shell__subtitle {
+    font-size: var(--text-body, 0.875rem);
+    line-height: 1.65;
+  }
+
+  .auth-shell__footer {
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .auth-shell__header {
+    padding-inline: 1rem;
+  }
+
+  .auth-shell__content {
+    padding-inline: 1rem;
+  }
+
+  .auth-shell__back-link {
+    gap: 0.45rem;
+  }
+
+  .auth-shell__mobile-logo img {
+    max-width: 6.75rem;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.auth-shell__back-link:focus-visible {
+  outline: 2px solid var(--auth-accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-shell__back-link,
+  .auth-shell__back-icon {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   FORGOT PASSWORD FORM
+   Aayesha Fashion — Premium Editorial Auth
+========================================================= */
+
+.forgot-password-form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  --forgot-text: var(--site-text-primary, #171514);
+  --forgot-secondary: var(--site-text-secondary, #625c57);
+  --forgot-muted: var(--site-text-muted, #817a74);
+  --forgot-border: var(--site-border, #e8e2dc);
+  --forgot-border-strong: #d8d0c8;
+  --forgot-surface: var(--site-surface, #ffffff);
+  --forgot-ivory: var(--site-header-background, #f8f5f0);
+  --forgot-accent: var(--site-accent, #c8aa7a);
+  --forgot-error: var(--color-error, #a34f55);
+  --forgot-error-border: #ead4d6;
+  --forgot-error-surface: #fffafa;
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.forgot-password-form__intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--forgot-border);
+  background: var(--forgot-ivory);
+}
+
+.forgot-password-form__intro-icon {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(200, 170, 122, 0.45);
+  border-radius: 50%;
+  background: var(--forgot-surface);
+  color: var(--forgot-accent);
+}
+
+.forgot-password-form__intro-icon-svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.5;
+}
+
+.forgot-password-form__intro-copy {
+  min-width: 0;
+}
+
+.forgot-password-form__intro-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--forgot-text);
+  font-family: var(--font-body);
+  font-size: var(--text-label, 0.75rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.forgot-password-form__intro-text {
+  margin: 0;
+  color: var(--forgot-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.65;
+}
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.forgot-password-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding-top: 0.25rem;
+}
+
+.forgot-password-form__label {
+  color: var(--forgot-text);
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.forgot-password-form__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.forgot-password-form__input-icon {
+  position: absolute;
+  left: 1rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--forgot-muted);
+  pointer-events: none;
+  stroke-width: 1.5;
+  transition: color 180ms ease;
+}
+
+.forgot-password-form__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem 0.75rem 2.9rem;
+  border: 1px solid var(--forgot-border);
+  border-radius: 0;
+  outline: none;
+  background: var(--forgot-surface);
+  color: var(--forgot-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.forgot-password-form__input::placeholder {
+  color: var(--forgot-muted);
+}
+
+.forgot-password-form__input:hover {
+  border-color: var(--forgot-border-strong);
+}
+
+.forgot-password-form__input:focus {
+  border-color: var(--forgot-accent);
+  box-shadow: 0 0 0 3px rgba(200, 170, 122, 0.12);
+}
+
+.forgot-password-form__input:focus
+  + .forgot-password-form__input-icon {
+  color: var(--forgot-accent);
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.forgot-password-form__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--forgot-error-border);
+  background: var(--forgot-error-surface);
+  color: var(--forgot-error);
+}
+
+.forgot-password-form__error-mark {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.forgot-password-form__error p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.forgot-password-form__submit {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--forgot-text);
+  border-radius: 0;
+  background: var(--forgot-text);
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.forgot-password-form__submit:hover:not(:disabled) {
+  border-color: var(--forgot-accent);
+  background: var(--forgot-accent);
+}
+
+.forgot-password-form__submit:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.forgot-password-form__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.forgot-password-form__submit:focus-visible {
+  outline: 2px solid var(--forgot-accent);
+  outline-offset: 3px;
+}
+
+.forgot-password-form__submit-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  stroke-width: 1.7;
+  transition: transform 180ms ease;
+}
+
+.forgot-password-form__submit:hover:not(:disabled)
+  .forgot-password-form__submit-icon {
+  transform: translateX(0.2rem);
+}
+
+.forgot-password-form__submit-icon--loading {
+  animation: forgot-password-spin 0.9s linear infinite;
+}
+
+@keyframes forgot-password-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   LOGIN LINK
+========================================================= */
+
+.forgot-password-form__login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--forgot-border);
+}
+
+.forgot-password-form__login-text {
+  margin: 0;
+  color: var(--forgot-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+}
+
+.forgot-password-form__login-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--forgot-text);
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    gap 180ms ease;
+}
+
+.forgot-password-form__login-link:hover {
+  color: var(--forgot-accent);
+  gap: 0.45rem;
+}
+
+.forgot-password-form__login-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  stroke-width: 1.7;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 639px) {
+  .forgot-password-form {
+    gap: 1.1rem;
+  }
+
+  .forgot-password-form__intro {
+    padding: 0.9rem;
+  }
+
+  .forgot-password-form__intro-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .forgot-password-form__intro-text {
+    font-size: var(--text-body, 0.875rem);
+    line-height: 1.6;
+  }
+
+  .forgot-password-form__input {
+    min-height: 3rem;
+  }
+
+  .forgot-password-form__submit {
+    min-height: 3rem;
+    font-size: var(--text-button, 0.875rem);
+  }
+
+  .forgot-password-form__login {
+    flex-wrap: wrap;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .forgot-password-form__input,
+  .forgot-password-form__input-icon,
+  .forgot-password-form__submit,
+  .forgot-password-form__submit-icon,
+  .forgot-password-form__login-link {
+    transition: none;
+  }
+
+  .forgot-password-form__submit-icon--loading {
+    animation-duration: 1.5s;
+  }
+}
+
+/* =========================================================
+   LOGIN FORM
+   Aayesha Fashion — Premium Editorial Auth
+========================================================= */
+
+.login-form {
+  --login-text: var(--site-text-primary, #171514);
+  --login-secondary: var(--site-text-secondary, #625c57);
+  --login-muted: var(--site-text-muted, #817a74);
+  --login-border: var(--site-border, #e8e2dc);
+  --login-border-strong: #d8d0c8;
+  --login-surface: var(--site-surface, #ffffff);
+  --login-accent: var(--site-accent, #c8aa7a);
+
+  --login-success: #52745d;
+  --login-success-border: #d2dfd4;
+  --login-success-surface: #f6f9f6;
+
+  --login-error: #9a4f55;
+  --login-error-border: #ead4d6;
+  --login-error-surface: #fffafa;
+
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.login-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.login-form__field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.login-form__label {
+  color: var(--login-text);
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.login-form__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-form__input-icon {
+  position: absolute;
+  left: 1rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--login-muted);
+  pointer-events: none;
+  stroke-width: 1.5;
+  transition: color 180ms ease;
+}
+
+.login-form__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem 0.75rem 2.9rem;
+  border: 1px solid var(--login-border);
+  border-radius: 0;
+  outline: none;
+  background: var(--login-surface);
+  color: var(--login-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.login-form__input--password {
+  padding-right: 3.25rem;
+  padding-left: 1rem;
+}
+
+.login-form__input::placeholder {
+  color: var(--login-muted);
+}
+
+.login-form__input:hover {
+  border-color: var(--login-border-strong);
+}
+
+.login-form__input:focus {
+  border-color: var(--login-accent);
+  box-shadow: 0 0 0 3px rgba(200, 170, 122, 0.12);
+}
+
+.login-form__input-wrap:focus-within
+  .login-form__input-icon {
+  color: var(--login-accent);
+}
+
+/* =========================================================
+   PASSWORD TOGGLE
+========================================================= */
+
+.login-form__password-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--login-secondary);
+  cursor: pointer;
+}
+
+.login-form__password-toggle:hover {
+  color: var(--login-text);
+}
+
+.login-form__password-toggle:focus-visible {
+  outline: 2px solid var(--login-accent);
+  outline-offset: -3px;
+}
+
+.login-form__password-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  stroke-width: 1.5;
+}
+
+/* =========================================================
+   FORGOT PASSWORD
+========================================================= */
+
+.login-form__forgot-link {
+  color: var(--login-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25rem;
+  transition: color 180ms ease;
+}
+
+.login-form__forgot-link:hover {
+  color: var(--login-text);
+}
+
+/* =========================================================
+   REMEMBER ME
+========================================================= */
+
+.login-form__remember {
+  display: flex;
+  min-height: 1.5rem;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+}
+
+.login-form__checkbox {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--login-border-strong);
+  border-radius: 0;
+  accent-color: var(--login-text);
+  cursor: pointer;
+}
+
+.login-form__checkbox:focus-visible {
+  outline: 2px solid var(--login-accent);
+  outline-offset: 2px;
+}
+
+.login-form__remember-text {
+  color: var(--login-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.login-form__success {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--login-success-border);
+  background: var(--login-success-surface);
+  color: var(--login-success);
+}
+
+.login-form__success-mark {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.login-form__success p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.55;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.login-form__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--login-error-border);
+  background: var(--login-error-surface);
+  color: var(--login-error);
+}
+
+.login-form__error-mark {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.login-form__error p {
+  margin: 0;
+  color: var(--login-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.55;
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.login-form__submit {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--login-text);
+  border-radius: 0;
+  background: var(--login-text);
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.login-form__submit:hover:not(:disabled) {
+  border-color: var(--login-accent);
+  background: var(--login-accent);
+}
+
+.login-form__submit:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.login-form__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.login-form__submit:focus-visible {
+  outline: 2px solid var(--login-accent);
+  outline-offset: 3px;
+}
+
+.login-form__submit-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  stroke-width: 1.7;
+  transition: transform 180ms ease;
+}
+
+.login-form__submit:hover:not(:disabled)
+  .login-form__submit-icon {
+  transform: translateX(0.2rem);
+}
+
+.login-form__submit-icon--loading {
+  animation: login-form-spin 0.9s linear infinite;
+}
+
+@keyframes login-form-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+.login-form__register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--login-border);
+}
+
+.login-form__register-text {
+  margin: 0;
+  color: var(--login-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+}
+
+.login-form__register-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--login-text);
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25rem;
+  transition:
+    color 180ms ease,
+    gap 180ms ease;
+}
+
+.login-form__register-link:hover {
+  color: var(--login-accent);
+  gap: 0.45rem;
+}
+
+.login-form__register-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  stroke-width: 1.7;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 639px) {
+  .login-form {
+    gap: 1.1rem;
+  }
+
+  .login-form__field-header {
+    align-items: flex-end;
+  }
+
+  .login-form__forgot-link {
+    font-size: var(--text-body, 0.875rem);
+  }
+
+  .login-form__input {
+    min-height: 3rem;
+  }
+
+  .login-form__password-toggle {
+    height: 3rem;
+  }
+
+  .login-form__submit {
+    min-height: 3rem;
+    font-size: var(--text-button, 0.875rem);
+  }
+
+  .login-form__register {
+    margin-top: 0;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .login-form__input,
+  .login-form__input-icon,
+  .login-form__submit,
+  .login-form__submit-icon,
+  .login-form__forgot-link,
+  .login-form__register-link {
+    transition: none;
+  }
+
+  .login-form__submit-icon--loading {
+    animation-duration: 1.5s;
+  }
+}
+
+/* =========================================================
+   REGISTER FORM
+   Aayesha Fashion — Premium Editorial Auth
+========================================================= */
+
+.register-form {
+  --register-text: var(--site-text-primary, #171514);
+  --register-secondary: var(--site-text-secondary, #625c57);
+  --register-muted: var(--site-text-muted, #817a74);
+  --register-border: var(--site-border, #e8e2dc);
+  --register-border-strong: #d8d0c8;
+  --register-surface: var(--site-surface, #ffffff);
+  --register-ivory: var(--site-header-background, #f8f5f0);
+  --register-accent: var(--site-accent, #c8aa7a);
+
+  --register-success: #52745d;
+  --register-success-surface: #f6f9f6;
+
+  --register-error: #9a4f55;
+  --register-error-border: #ead4d6;
+  --register-error-surface: #fffafa;
+
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.register-form__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.register-form__section + .register-form__section {
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--register-border);
+}
+
+.register-form__section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.register-form__section-number {
+  display: inline-flex;
+  width: 1.9rem;
+  height: 1.9rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--register-border);
+  border-radius: 50%;
+  color: var(--register-accent);
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+.register-form__section-eyebrow {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--register-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-label, 0.75rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.register-form__section-title {
+  margin: 0;
+  color: var(--register-text);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* =========================================================
+   FIELDS
+========================================================= */
+
+.register-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.register-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.register-form__label {
+  color: var(--register-text);
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.register-form__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.register-form__input-icon {
+  position: absolute;
+  left: 1rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--register-muted);
+  pointer-events: none;
+  stroke-width: 1.5;
+  transition: color 180ms ease;
+}
+
+.register-form__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--register-border);
+  border-radius: 0;
+  outline: none;
+  background: var(--register-surface);
+  color: var(--register-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.register-form__input--with-icon {
+  padding-left: 2.9rem;
+}
+
+.register-form__input--password {
+  padding-right: 3.25rem;
+}
+
+.register-form__input::placeholder {
+  color: var(--register-muted);
+}
+
+.register-form__input:hover {
+  border-color: var(--register-border-strong);
+}
+
+.register-form__input:focus {
+  border-color: var(--register-accent);
+  box-shadow: 0 0 0 3px rgba(200, 170, 122, 0.12);
+}
+
+.register-form__input-wrap:focus-within
+  .register-form__input-icon {
+  color: var(--register-accent);
+}
+
+/* =========================================================
+   PASSWORD TOGGLE
+========================================================= */
+
+.register-form__password-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--register-secondary);
+  cursor: pointer;
+}
+
+.register-form__password-toggle:hover {
+  color: var(--register-text);
+}
+
+.register-form__password-toggle:focus-visible {
+  outline: 2px solid var(--register-accent);
+  outline-offset: -3px;
+}
+
+.register-form__password-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  stroke-width: 1.5;
+}
+
+/* =========================================================
+   PASSWORD RULES
+========================================================= */
+
+.register-form__rules {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.8rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--register-border);
+  background: var(--register-ivory);
+}
+
+.register-form__rules-title {
+  color: var(--register-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-label, 0.75rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.register-form__rules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 1rem;
+}
+
+.register-form__rule {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--register-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.45;
+}
+
+.register-form__rule--valid {
+  color: var(--register-success);
+}
+
+.register-form__rule-icon {
+  display: flex;
+  width: 0.9rem;
+  height: 0.9rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--register-border-strong);
+  border-radius: 50%;
+}
+
+.register-form__rule--valid
+  .register-form__rule-icon {
+  border-color: var(--register-success);
+  background: var(--register-success);
+  color: #ffffff;
+}
+
+.register-form__rule-check {
+  width: 0.6rem;
+  height: 0.6rem;
+  stroke-width: 2.2;
+}
+
+.register-form__rule-label {
+  min-width: 0;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.register-form__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--register-error-border);
+  background: var(--register-error-surface);
+  color: var(--register-error);
+}
+
+.register-form__error-mark {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.register-form__error p {
+  margin: 0;
+  color: var(--register-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.55;
+}
+
+/* =========================================================
+   TERMS
+========================================================= */
+
+.register-form__terms {
+  margin: -0.4rem 0 0;
+  color: var(--register-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.65;
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.register-form__submit {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--register-text);
+  border-radius: 0;
+  background: var(--register-text);
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.register-form__submit:hover:not(:disabled) {
+  border-color: var(--register-accent);
+  background: var(--register-accent);
+}
+
+.register-form__submit:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.register-form__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.register-form__submit:focus-visible {
+  outline: 2px solid var(--register-accent);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 639px) {
+  .register-form {
+    gap: 1.5rem;
+  }
+
+  .register-form__section + .register-form__section {
+    padding-top: 1.5rem;
+  }
+
+  .register-form__rules-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .register-form__rule {
+    font-size: var(--text-body, 0.875rem);
+  }
+
+  .register-form__submit {
+    min-height: 3rem;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .register-form__section-heading {
+    gap: 0.7rem;
+  }
+
+  .register-form__section-title {
+    font-size: 1.2rem;
+  }
+
+  .register-form__rules {
+    padding: 0.8rem;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .register-form__input,
+  .register-form__input-icon,
+  .register-form__submit {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   RESET PASSWORD FORM
+   Aayesha Fashion — Premium Editorial Auth
+========================================================= */
+
+.reset-password-form {
+  --reset-text: var(--site-text-primary, #171514);
+  --reset-secondary: var(--site-text-secondary, #625c57);
+  --reset-muted: var(--site-text-muted, #817a74);
+  --reset-border: var(--site-border, #e8e2dc);
+  --reset-border-strong: #d8d0c8;
+  --reset-surface: var(--site-surface, #ffffff);
+  --reset-ivory: var(--site-header-background, #f8f5f0);
+  --reset-accent: var(--site-accent, #c8aa7a);
+
+  --reset-success: #52745d;
+  --reset-success-border: #d2dfd4;
+  --reset-success-surface: #f6f9f6;
+
+  --reset-error: #9a4f55;
+  --reset-error-border: #ead4d6;
+  --reset-error-surface: #fffafa;
+
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.reset-password-form__intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--reset-border);
+  background: var(--reset-ivory);
+}
+
+.reset-password-form__intro-icon {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(200, 170, 122, 0.45);
+  border-radius: 50%;
+  background: var(--reset-surface);
+  color: var(--reset-accent);
+}
+
+.reset-password-form__intro-icon-svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.5;
+}
+
+.reset-password-form__intro-copy {
+  min-width: 0;
+}
+
+.reset-password-form__intro-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--reset-text);
+  font-family: var(--font-body);
+  font-size: var(--text-label, 0.75rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reset-password-form__intro-text {
+  margin: 0;
+  color: var(--reset-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.65;
+}
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.reset-password-form__field,
+.reset-password-form__password-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.reset-password-form__label {
+  color: var(--reset-text);
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.reset-password-form__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* =========================================================
+   TEXT INPUT
+========================================================= */
+
+.reset-password-form__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--reset-border);
+  border-radius: 0;
+  outline: none;
+  background: var(--reset-surface);
+  color: var(--reset-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.reset-password-form__input--with-icon {
+  padding-left: 2.9rem;
+}
+
+.reset-password-form__input--password {
+  padding-right: 3.25rem;
+}
+
+.reset-password-form__input-icon {
+  position: absolute;
+  left: 1rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--reset-muted);
+  pointer-events: none;
+  stroke-width: 1.5;
+  transition: color 180ms ease;
+}
+
+.reset-password-form__input::placeholder {
+  color: var(--reset-muted);
+}
+
+.reset-password-form__input:hover {
+  border-color: var(--reset-border-strong);
+}
+
+.reset-password-form__input:focus {
+  border-color: var(--reset-accent);
+  box-shadow: 0 0 0 3px rgba(200, 170, 122, 0.12);
+}
+
+.reset-password-form__input-wrap:focus-within
+  .reset-password-form__input-icon {
+  color: var(--reset-accent);
+}
+
+/* =========================================================
+   OTP
+========================================================= */
+
+.reset-password-form__otp {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--reset-border);
+  border-radius: 0;
+  outline: none;
+  background: var(--reset-surface);
+  color: var(--reset-text);
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.45em;
+  text-align: center;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.reset-password-form__otp::placeholder {
+  color: var(--reset-muted);
+  font-weight: 400;
+  letter-spacing: 0.35em;
+}
+
+.reset-password-form__otp:hover {
+  border-color: var(--reset-border-strong);
+}
+
+.reset-password-form__otp:focus {
+  border-color: var(--reset-accent);
+  box-shadow: 0 0 0 3px rgba(200, 170, 122, 0.12);
+}
+
+.reset-password-form__field-hint {
+  margin: 0;
+  color: var(--reset-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-label, 0.75rem);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   PASSWORD TOGGLE
+========================================================= */
+
+.reset-password-form__password-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--reset-secondary);
+  cursor: pointer;
+}
+
+.reset-password-form__password-toggle:hover {
+  color: var(--reset-text);
+}
+
+.reset-password-form__password-toggle:focus-visible {
+  outline: 2px solid var(--reset-accent);
+  outline-offset: -3px;
+}
+
+.reset-password-form__password-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  stroke-width: 1.5;
+}
+
+/* =========================================================
+   PASSWORD RULES
+========================================================= */
+
+.reset-password-form__rules {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--reset-border);
+  background: var(--reset-ivory);
+}
+
+.reset-password-form__rules-title {
+  color: var(--reset-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-label, 0.75rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.reset-password-form__rules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 1rem;
+}
+
+.reset-password-form__rule {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--reset-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.45;
+}
+
+.reset-password-form__rule--valid {
+  color: var(--reset-success);
+}
+
+.reset-password-form__rule-icon {
+  display: flex;
+  width: 0.9rem;
+  height: 0.9rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--reset-border-strong);
+  border-radius: 50%;
+  font-size: 0.6rem;
+  line-height: 1;
+}
+
+.reset-password-form__rule--valid
+  .reset-password-form__rule-icon {
+  border-color: var(--reset-success);
+  background: var(--reset-success);
+  color: #ffffff;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.reset-password-form__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--reset-error-border);
+  background: var(--reset-error-surface);
+  color: var(--reset-error);
+}
+
+.reset-password-form__error-mark,
+.reset-password-form__success-mark {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.reset-password-form__error p,
+.reset-password-form__success p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.55;
+}
+
+.reset-password-form__error p {
+  color: var(--reset-text);
+}
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.reset-password-form__success {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--reset-success-border);
+  background: var(--reset-success-surface);
+  color: var(--reset-success);
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.reset-password-form__submit {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--reset-text);
+  border-radius: 0;
+  background: var(--reset-text);
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.reset-password-form__submit:hover:not(:disabled) {
+  border-color: var(--reset-accent);
+  background: var(--reset-accent);
+}
+
+.reset-password-form__submit:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.reset-password-form__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.reset-password-form__submit:focus-visible {
+  outline: 2px solid var(--reset-accent);
+  outline-offset: 3px;
+}
+
+.reset-password-form__submit-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  stroke-width: 1.7;
+  transition: transform 180ms ease;
+}
+
+.reset-password-form__submit:hover:not(:disabled)
+  .reset-password-form__submit-icon {
+  transform: translateX(0.2rem);
+}
+
+.reset-password-form__submit-icon--loading {
+  animation: reset-password-spin 0.9s linear infinite;
+}
+
+@keyframes reset-password-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.reset-password-form__login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--reset-border);
+}
+
+.reset-password-form__login-text {
+  margin: 0;
+  color: var(--reset-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+}
+
+.reset-password-form__login-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--reset-text);
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25rem;
+  transition:
+    color 180ms ease,
+    gap 180ms ease;
+}
+
+.reset-password-form__login-link:hover {
+  color: var(--reset-accent);
+  gap: 0.45rem;
+}
+
+.reset-password-form__login-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  stroke-width: 1.7;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 639px) {
+  .reset-password-form {
+    gap: 1.1rem;
+  }
+
+  .reset-password-form__intro {
+    padding: 0.9rem;
+  }
+
+  .reset-password-form__intro-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .reset-password-form__rules-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reset-password-form__otp {
+    min-height: 3.25rem;
+    font-size: 1.15rem;
+    letter-spacing: 0.35em;
+  }
+
+  .reset-password-form__submit {
+    min-height: 3rem;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .reset-password-form__intro-text {
+    font-size: var(--text-body, 0.875rem);
+  }
+
+  .reset-password-form__rules {
+    padding: 0.8rem;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .reset-password-form__input,
+  .reset-password-form__otp,
+  .reset-password-form__input-icon,
+  .reset-password-form__submit,
+  .reset-password-form__submit-icon,
+  .reset-password-form__login-link {
+    transition: none;
+  }
+
+  .reset-password-form__submit-icon--loading {
+    animation-duration: 1.5s;
+  }
+}
+
+/* =========================================================
+   VERIFY EMAIL FORM
+   Aayesha Fashion — Premium Editorial Auth
+========================================================= */
+
+.verify-email-form {
+  --verify-text: var(--site-text-primary, #171514);
+  --verify-secondary: var(--site-text-secondary, #625c57);
+  --verify-muted: var(--site-text-muted, #817a74);
+  --verify-border: var(--site-border, #e8e2dc);
+  --verify-border-strong: #d8d0c8;
+  --verify-surface: var(--site-surface, #ffffff);
+  --verify-ivory: var(--site-header-background, #f8f5f0);
+  --verify-accent: var(--site-accent, #c8aa7a);
+
+  --verify-success: #52745d;
+  --verify-success-border: #d2dfd4;
+  --verify-success-surface: #f6f9f6;
+
+  --verify-error: #9a4f55;
+  --verify-error-border: #ead4d6;
+  --verify-error-surface: #fffafa;
+
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.verify-email-form__intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--verify-border);
+  background: var(--verify-ivory);
+}
+
+.verify-email-form__intro-icon {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(200, 170, 122, 0.45);
+  border-radius: 50%;
+  background: var(--verify-surface);
+  color: var(--verify-accent);
+}
+
+.verify-email-form__intro-icon-svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.5;
+}
+
+.verify-email-form__intro-copy {
+  min-width: 0;
+}
+
+.verify-email-form__intro-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--verify-text);
+  font-family: var(--font-body);
+  font-size: var(--text-label, 0.75rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.verify-email-form__intro-text {
+  margin: 0;
+  color: var(--verify-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.65;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.verify-email-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.verify-email-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.verify-email-form__label {
+  color: var(--verify-text);
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   EMAIL INPUT
+========================================================= */
+
+.verify-email-form__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.verify-email-form__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--verify-border);
+  border-radius: 0;
+  outline: none;
+  background: var(--verify-surface);
+  color: var(--verify-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.verify-email-form__input--with-icon {
+  padding-left: 2.9rem;
+}
+
+.verify-email-form__input-icon {
+  position: absolute;
+  left: 1rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--verify-muted);
+  pointer-events: none;
+  stroke-width: 1.5;
+  transition: color 180ms ease;
+}
+
+.verify-email-form__input::placeholder {
+  color: var(--verify-muted);
+}
+
+.verify-email-form__input:hover {
+  border-color: var(--verify-border-strong);
+}
+
+.verify-email-form__input:focus {
+  border-color: var(--verify-accent);
+  box-shadow: 0 0 0 3px rgba(200, 170, 122, 0.12);
+}
+
+.verify-email-form__input-wrap:focus-within
+  .verify-email-form__input-icon {
+  color: var(--verify-accent);
+}
+
+/* =========================================================
+   OTP
+========================================================= */
+
+.verify-email-form__otp {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--verify-border);
+  border-radius: 0;
+  outline: none;
+  background: var(--verify-surface);
+  color: var(--verify-text);
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.45em;
+  text-align: center;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.verify-email-form__otp::placeholder {
+  color: var(--verify-muted);
+  font-weight: 400;
+  letter-spacing: 0.35em;
+}
+
+.verify-email-form__otp:hover {
+  border-color: var(--verify-border-strong);
+}
+
+.verify-email-form__otp:focus {
+  border-color: var(--verify-accent);
+  box-shadow: 0 0 0 3px rgba(200, 170, 122, 0.12);
+}
+
+.verify-email-form__hint {
+  margin: 0;
+  color: var(--verify-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-label, 0.75rem);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.verify-email-form__error,
+.verify-email-form__success {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 0.95rem;
+}
+
+.verify-email-form__error {
+  border: 1px solid var(--verify-error-border);
+  background: var(--verify-error-surface);
+  color: var(--verify-error);
+}
+
+.verify-email-form__success {
+  border: 1px solid var(--verify-success-border);
+  background: var(--verify-success-surface);
+  color: var(--verify-success);
+}
+
+.verify-email-form__message-icon {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.verify-email-form__error p,
+.verify-email-form__success p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.55;
+}
+
+.verify-email-form__error p {
+  color: var(--verify-text);
+}
+
+.verify-email-form__success-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  stroke-width: 1.6;
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.verify-email-form__submit {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--verify-text);
+  border-radius: 0;
+  background: var(--verify-text);
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.verify-email-form__submit:hover:not(:disabled) {
+  border-color: var(--verify-accent);
+  background: var(--verify-accent);
+}
+
+.verify-email-form__submit:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.verify-email-form__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.verify-email-form__submit:focus-visible {
+  outline: 2px solid var(--verify-accent);
+  outline-offset: 3px;
+}
+
+.verify-email-form__submit-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  stroke-width: 1.7;
+  transition: transform 180ms ease;
+}
+
+.verify-email-form__submit:hover:not(:disabled)
+  .verify-email-form__submit-icon {
+  transform: translateX(0.2rem);
+}
+
+.verify-email-form__submit-icon--loading {
+  animation: verify-email-spin 0.9s linear infinite;
+}
+
+@keyframes verify-email-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   RESEND
+========================================================= */
+
+.verify-email-form__resend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--verify-border);
+}
+
+.verify-email-form__resend-text {
+  margin: 0;
+  color: var(--verify-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+}
+
+.verify-email-form__resend-button {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--verify-text);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-button, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25rem;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
+}
+
+.verify-email-form__resend-button:hover:not(:disabled) {
+  color: var(--verify-accent);
+}
+
+.verify-email-form__resend-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.verify-email-form__resend-button:focus-visible {
+  outline: 2px solid var(--verify-accent);
+  outline-offset: 3px;
+}
+
+.verify-email-form__resend-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  stroke-width: 1.7;
+}
+
+/* =========================================================
+   CHANGE EMAIL
+========================================================= */
+
+.verify-email-form__change-email {
+  margin: 0;
+  color: var(--verify-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-body, 0.875rem);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.verify-email-form__register-link {
+  color: var(--verify-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25rem;
+  transition: color 180ms ease;
+}
+
+.verify-email-form__register-link:hover {
+  color: var(--verify-accent);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 639px) {
+  .verify-email-form {
+    gap: 1.1rem;
+  }
+
+  .verify-email-form__intro {
+    padding: 0.9rem;
+  }
+
+  .verify-email-form__intro-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .verify-email-form__otp {
+    min-height: 3.25rem;
+    font-size: 1.15rem;
+    letter-spacing: 0.35em;
+  }
+
+  .verify-email-form__submit {
+    min-height: 3rem;
+  }
+
+  .verify-email-form__resend {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .verify-email-form__intro-text {
+    font-size: var(--text-body, 0.875rem);
+  }
+
+  .verify-email-form__otp {
+    letter-spacing: 0.3em;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .verify-email-form__input,
+  .verify-email-form__otp,
+  .verify-email-form__input-icon,
+  .verify-email-form__submit,
+  .verify-email-form__submit-icon,
+  .verify-email-form__resend-button,
+  .verify-email-form__register-link {
+    transition: none;
+  }
+
+  .verify-email-form__submit-icon--loading {
+    animation-duration: 1.5s;
+  }
+}
+
 
 
 /* =========================================================

@@ -14,11 +14,11 @@ import {
   Eye,
   EyeOff,
   Loader2,
+  Mail,
+  ShieldCheck,
 } from "lucide-react";
 
-import {
-  useAuthStore,
-} from "@/store/auth-store";
+import { useAuthStore } from "@/store/auth-store";
 
 /* =========================================================
    PASSWORD FIELD
@@ -37,57 +37,24 @@ function PasswordField({
   autoComplete: string;
   onChange: (value: string) => void;
 }) {
-  const [visible, setVisible] =
-    useState(false);
+  const [visible, setVisible] = useState(false);
 
   return (
-    <label className="block">
-      <span
-        className="
-          mb-2
-          block
-          text-[10px]
-          font-semibold
-          uppercase
-          tracking-[0.18em]
-          text-[var(--color-text-secondary)]
-        "
-      >
+    <div className="reset-password-form__field">
+      <label className="reset-password-form__label">
         {label}
-      </span>
+      </label>
 
-      <div className="relative">
+      <div className="reset-password-form__input-wrap">
         <input
-          type={
-            visible
-              ? "text"
-              : "password"
-          }
+          type={visible ? "text" : "password"}
           value={value}
           placeholder={placeholder}
           autoComplete={autoComplete}
           onChange={(event) =>
-            onChange(
-              event.target.value,
-            )
+            onChange(event.target.value)
           }
-          className="
-            h-11
-            w-full
-            border
-            border-[var(--color-border)]
-            bg-[var(--color-surface)]
-            px-4
-            pr-11
-            text-sm
-            text-[var(--color-text)]
-            outline-none
-            transition-colors
-            duration-[var(--duration-base)]
-            placeholder:text-[var(--color-text-muted)]
-            hover:border-[var(--color-border-dark)]
-            focus:border-[var(--color-accent-dark)]
-          "
+          className="reset-password-form__input reset-password-form__input--password"
         />
 
         <button
@@ -97,41 +64,26 @@ function PasswordField({
               ? "Hide password"
               : "Show password"
           }
+          aria-pressed={visible}
           onClick={() =>
-            setVisible(
-              (current) =>
-                !current,
-            )
+            setVisible((current) => !current)
           }
-          className="
-            absolute
-            right-0
-            top-0
-            flex
-            h-11
-            w-11
-            items-center
-            justify-center
-            text-[var(--color-text-secondary)]
-            transition-colors
-            duration-[var(--duration-fast)]
-            hover:text-[var(--color-text)]
-          "
+          className="reset-password-form__password-toggle"
         >
           {visible ? (
             <EyeOff
-              size={17}
-              strokeWidth={1.7}
+              aria-hidden="true"
+              className="reset-password-form__password-icon"
             />
           ) : (
             <Eye
-              size={17}
-              strokeWidth={1.7}
+              aria-hidden="true"
+              className="reset-password-form__password-icon"
             />
           )}
         </button>
       </div>
-    </label>
+    </div>
   );
 }
 
@@ -153,51 +105,46 @@ function PasswordRules({
     },
     {
       label: "One uppercase letter",
-      valid:
-        /[A-Z]/.test(password),
+      valid: /[A-Z]/.test(password),
     },
     {
       label: "One lowercase letter",
-      valid:
-        /[a-z]/.test(password),
+      valid: /[a-z]/.test(password),
     },
     {
       label: "One number",
-      valid:
-        /\d/.test(password),
+      valid: /\d/.test(password),
     },
     {
       label: "One special character",
-      valid:
-        /[^A-Za-z0-9]/.test(
-          password,
-        ),
+      valid: /[^A-Za-z0-9]/.test(password),
     },
   ];
 
   return (
-    <div className="mt-3 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
-      {rules.map((rule) => (
-        <p
-          key={rule.label}
-          className={`
-            text-[11px]
-            ${
-              rule.valid
-                ? "text-[var(--color-success)]"
-                : "text-[var(--color-text-muted)]"
-            }
-          `}
-        >
-          <span className="mr-1.5">
-            {rule.valid
-              ? "✓"
-              : "•"}
-          </span>
+    <div className="reset-password-form__rules">
+      <span className="reset-password-form__rules-title">
+        Password requirements
+      </span>
 
-          {rule.label}
-        </p>
-      ))}
+      <div className="reset-password-form__rules-grid">
+        {rules.map((rule) => (
+          <div
+            key={rule.label}
+            className={`reset-password-form__rule ${
+              rule.valid
+                ? "reset-password-form__rule--valid"
+                : ""
+            }`}
+          >
+            <span className="reset-password-form__rule-icon">
+              {rule.valid ? "✓" : ""}
+            </span>
+
+            <span>{rule.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -207,59 +154,43 @@ function PasswordRules({
 ========================================================= */
 
 export function ResetPasswordForm() {
-  const searchParams =
-    useSearchParams();
+  const searchParams = useSearchParams();
 
   const emailFromUrl =
-    searchParams.get(
-      "email",
-    ) ?? "";
+    searchParams.get("email") ?? "";
 
-  const resetPassword =
-    useAuthStore(
-      (state) =>
-        state.resetPassword,
-    );
+  const resetPassword = useAuthStore(
+    (state) => state.resetPassword,
+  );
 
-  const isLoading =
-    useAuthStore(
-      (state) =>
-        state.isLoading,
-    );
+  const isLoading = useAuthStore(
+    (state) => state.isLoading,
+  );
 
-  const storeError =
-    useAuthStore(
-      (state) =>
-        state.error,
-    );
+  const storeError = useAuthStore(
+    (state) => state.error,
+  );
 
-  const clearError =
-    useAuthStore(
-      (state) =>
-        state.clearError,
-    );
+  const clearError = useAuthStore(
+    (state) => state.clearError,
+  );
 
   const [email, setEmail] =
     useState(emailFromUrl);
 
-  const [otp, setOtp] =
-    useState("");
+  const [otp, setOtp] = useState("");
 
   const [password, setPassword] =
     useState("");
 
-  const [
-    confirmPassword,
-    setConfirmPassword,
-  ] = useState("");
+  const [confirmPassword, setConfirmPassword] =
+    useState("");
 
   const [localError, setLocalError] =
     useState("");
 
-  const [
-    successMessage,
-    setSuccessMessage,
-  ] = useState("");
+  const [successMessage, setSuccessMessage] =
+    useState("");
 
   /* =======================================================
      SYNC EMAIL
@@ -284,54 +215,35 @@ export function ResetPasswordForm() {
       return "Please enter a valid email address.";
     }
 
-    if (
-      !/^\d{6}$/.test(otp)
-    ) {
+    if (!/^\d{6}$/.test(otp)) {
       return "Please enter the 6-digit reset code.";
     }
 
-    if (
-      password.length < 8
-    ) {
+    if (password.length < 8) {
       return "Password must contain at least 8 characters.";
     }
 
-    if (
-      password.length > 72
-    ) {
+    if (password.length > 72) {
       return "Password cannot exceed 72 characters.";
     }
 
-    if (
-      !/[A-Z]/.test(password)
-    ) {
+    if (!/[A-Z]/.test(password)) {
       return "Password must contain at least one uppercase letter.";
     }
 
-    if (
-      !/[a-z]/.test(password)
-    ) {
+    if (!/[a-z]/.test(password)) {
       return "Password must contain at least one lowercase letter.";
     }
 
-    if (
-      !/\d/.test(password)
-    ) {
+    if (!/\d/.test(password)) {
       return "Password must contain at least one number.";
     }
 
-    if (
-      !/[^A-Za-z0-9]/.test(
-        password,
-      )
-    ) {
+    if (!/[^A-Za-z0-9]/.test(password)) {
       return "Password must contain at least one special character.";
     }
 
-    if (
-      password !==
-      confirmPassword
-    ) {
+    if (password !== confirmPassword) {
       return "Passwords do not match.";
     }
 
@@ -348,18 +260,13 @@ export function ResetPasswordForm() {
     event.preventDefault();
 
     clearError();
-
     setLocalError("");
     setSuccessMessage("");
 
-    const validationError =
-      validate();
+    const validationError = validate();
 
     if (validationError) {
-      setLocalError(
-        validationError,
-      );
-
+      setLocalError(validationError);
       return;
     }
 
@@ -376,8 +283,7 @@ export function ResetPasswordForm() {
       );
 
       window.setTimeout(() => {
-        window.location.href =
-          "/login";
+        window.location.href = "/login";
       }, 900);
     } catch {
       /*
@@ -388,8 +294,7 @@ export function ResetPasswordForm() {
   };
 
   const errorMessage =
-    localError ||
-    storeError;
+    localError || storeError;
 
   /* =======================================================
      RENDER
@@ -399,79 +304,82 @@ export function ResetPasswordForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="space-y-4"
+      className="reset-password-form"
     >
+      {/* ===================================================
+          INTRO
+      =================================================== */}
+
+      <div className="reset-password-form__intro">
+        <div className="reset-password-form__intro-icon">
+          <ShieldCheck
+            aria-hidden="true"
+            className="reset-password-form__intro-icon-svg"
+          />
+        </div>
+
+        <div className="reset-password-form__intro-copy">
+          <span className="reset-password-form__intro-label">
+            Secure password reset
+          </span>
+
+          <p className="reset-password-form__intro-text">
+            Enter the reset code sent to your
+            email, then create a new secure
+            password for your account.
+          </p>
+        </div>
+      </div>
+
       {/* ===================================================
           EMAIL
       =================================================== */}
 
-      <label className="block">
-        <span
-          className="
-            mb-2
-            block
-            text-[10px]
-            font-semibold
-            uppercase
-            tracking-[0.18em]
-            text-[var(--color-text-secondary)]
-          "
+      <div className="reset-password-form__field">
+        <label
+          htmlFor="reset-password-email"
+          className="reset-password-form__label"
         >
           Email address
-        </span>
+        </label>
 
-        <input
-          type="email"
-          value={email}
-          placeholder="you@example.com"
-          autoComplete="email"
-          onChange={(event) => {
-            setEmail(
-              event.target.value,
-            );
+        <div className="reset-password-form__input-wrap">
+          <Mail
+            aria-hidden="true"
+            className="reset-password-form__input-icon"
+          />
 
-            setLocalError("");
-            clearError();
-          }}
-          className="
-            h-11
-            w-full
-            border
-            border-[var(--color-border)]
-            bg-[var(--color-surface)]
-            px-4
-            text-sm
-            text-[var(--color-text)]
-            outline-none
-            transition-colors
-            duration-[var(--duration-base)]
-            placeholder:text-[var(--color-text-muted)]
-            hover:border-[var(--color-border-dark)]
-            focus:border-[var(--color-accent-dark)]
-          "
-        />
-      </label>
+          <input
+            id="reset-password-email"
+            type="email"
+            value={email}
+            placeholder="you@example.com"
+            autoComplete="email"
+            inputMode="email"
+            onChange={(event) => {
+              setEmail(event.target.value);
+              setLocalError("");
+              clearError();
+            }}
+            className="reset-password-form__input reset-password-form__input--with-icon"
+          />
+        </div>
+      </div>
 
       {/* ===================================================
           OTP
       =================================================== */}
 
-      <label className="block">
-        <span
-          className="
-            mb-2
-            block
-            text-[10px]
-            font-semibold
-            uppercase
-            tracking-[0.18em]
-            text-[var(--color-text-secondary)]
-          "
+      <div className="reset-password-form__field">
+        <label
+          htmlFor="reset-password-otp"
+          className="reset-password-form__label"
         >
           Reset code
-        </span>
+        </label>
 
         <input
+          id="reset-password-otp"
           type="text"
           inputMode="numeric"
           autoComplete="one-time-code"
@@ -485,44 +393,28 @@ export function ResetPasswordForm() {
                 "",
               );
 
-            setOtp(
-              value.slice(
-                0,
-                6,
-              ),
-            );
-
+            setOtp(value.slice(0, 6));
             setLocalError("");
             clearError();
           }}
-          className="
-            h-12
-            w-full
-            border
-            border-[var(--color-border)]
-            bg-[var(--color-surface)]
-            px-4
-            text-center
-            font-mono
-            text-lg
-            tracking-[0.4em]
-            text-[var(--color-text)]
-            outline-none
-            transition-colors
-            duration-[var(--duration-base)]
-            placeholder:text-[var(--color-text-muted)]
-            placeholder:tracking-[0.3em]
-            hover:border-[var(--color-border-dark)]
-            focus:border-[var(--color-accent-dark)]
-          "
+          className="reset-password-form__otp"
+          aria-describedby="reset-password-otp-help"
         />
-      </label>
+
+        <p
+          id="reset-password-otp-help"
+          className="reset-password-form__field-hint"
+        >
+          Enter the 6-digit code sent to your
+          email address.
+        </p>
+      </div>
 
       {/* ===================================================
           NEW PASSWORD
       =================================================== */}
 
-      <div>
+      <div className="reset-password-form__password-section">
         <PasswordField
           label="New password"
           value={password}
@@ -530,15 +422,12 @@ export function ResetPasswordForm() {
           autoComplete="new-password"
           onChange={(value) => {
             setPassword(value);
-
             setLocalError("");
             clearError();
           }}
         />
 
-        <PasswordRules
-          password={password}
-        />
+        <PasswordRules password={password} />
       </div>
 
       {/* ===================================================
@@ -551,10 +440,7 @@ export function ResetPasswordForm() {
         placeholder="Re-enter your new password"
         autoComplete="new-password"
         onChange={(value) => {
-          setConfirmPassword(
-            value,
-          );
-
+          setConfirmPassword(value);
           setLocalError("");
           clearError();
         }}
@@ -567,18 +453,13 @@ export function ResetPasswordForm() {
       {errorMessage ? (
         <div
           role="alert"
-          className="
-            border
-            border-[var(--color-error)]
-            bg-[var(--color-surface-soft)]
-            px-4
-            py-3
-            text-[12px]
-            leading-5
-            text-[var(--color-error)]
-          "
+          className="reset-password-form__error"
         >
-          {errorMessage}
+          <span className="reset-password-form__error-mark">
+            !
+          </span>
+
+          <p>{errorMessage}</p>
         </div>
       ) : null}
 
@@ -589,18 +470,13 @@ export function ResetPasswordForm() {
       {successMessage ? (
         <div
           role="status"
-          className="
-            border
-            border-[var(--color-success)]
-            bg-[var(--color-surface-soft)]
-            px-4
-            py-3
-            text-[12px]
-            leading-5
-            text-[var(--color-success)]
-          "
+          className="reset-password-form__success"
         >
-          {successMessage}
+          <span className="reset-password-form__success-mark">
+            ✓
+          </span>
+
+          <p>{successMessage}</p>
         </div>
       ) : null}
 
@@ -614,55 +490,24 @@ export function ResetPasswordForm() {
           isLoading ||
           otp.length !== 6
         }
-        className="
-          group
-          flex
-          h-11
-          w-full
-          items-center
-          justify-center
-          gap-2
-          border
-          border-[var(--color-text)]
-          bg-[var(--color-text)]
-          px-5
-          text-[10px]
-          font-semibold
-          uppercase
-          tracking-[0.2em]
-          text-[var(--color-text-inverse)]
-          transition-all
-          duration-[var(--duration-base)]
-          hover:border-[var(--color-accent-dark)]
-          hover:bg-[var(--color-accent-dark)]
-          disabled:cursor-not-allowed
-          disabled:opacity-60
-        "
+        className="reset-password-form__submit"
       >
+        <span>
+          {isLoading
+            ? "Resetting password"
+            : "Reset password"}
+        </span>
+
         {isLoading ? (
-          <>
-            <Loader2
-              size={15}
-              strokeWidth={1.7}
-              className="animate-spin"
-            />
-
-            Resetting password
-          </>
+          <Loader2
+            aria-hidden="true"
+            className="reset-password-form__submit-icon reset-password-form__submit-icon--loading"
+          />
         ) : (
-          <>
-            Reset password
-
-            <ArrowRight
-              size={15}
-              strokeWidth={1.7}
-              className="
-                transition-transform
-                duration-[var(--duration-base)]
-                group-hover:translate-x-0.5
-              "
-            />
-          </>
+          <ArrowRight
+            aria-hidden="true"
+            className="reset-password-form__submit-icon"
+          />
         )}
       </button>
 
@@ -670,32 +515,21 @@ export function ResetPasswordForm() {
           BACK TO LOGIN
       =================================================== */}
 
-      <div
-        className="
-          mt-3
-          border-t
-          border-[var(--color-border-light)]
-          pt-5
-          text-center
-        "
-      >
-        <p className="text-sm text-[var(--color-text-secondary)]">
-          Remember your password?{" "}
-          <Link
-            href="/login"
-            className="
-              font-semibold
-              text-[var(--color-text)]
-              underline
-              underline-offset-4
-              transition-opacity
-              duration-[var(--duration-fast)]
-              hover:opacity-60
-            "
-          >
-            Sign in
-          </Link>
+      <div className="reset-password-form__login">
+        <p className="reset-password-form__login-text">
+          Remember your password?
         </p>
+
+        <Link
+          href="/login"
+          className="reset-password-form__login-link"
+        >
+          Sign in
+          <ArrowRight
+            aria-hidden="true"
+            className="reset-password-form__login-icon"
+          />
+        </Link>
       </div>
     </form>
   );

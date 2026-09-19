@@ -32,154 +32,105 @@ export function AuthShell({
   footer,
 }: AuthShellProps) {
   return (
-    <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
-      <div className="grid min-h-screen lg:grid-cols-[minmax(0,1.05fr)_minmax(460px,0.95fr)]">
+    <main className="auth-shell">
+      <div className="auth-shell__layout">
         {/* =====================================================
-            BRAND SIDE
+            EDITORIAL BRAND PANEL
         ===================================================== */}
 
-        <section className="relative hidden min-h-screen overflow-hidden bg-[var(--color-text)] lg:flex">
-          {/* Editorial background */}
-          <div className="absolute inset-0 bg-[var(--color-text)]" />
+        <section className="auth-shell__brand-panel" aria-label="Aayesha Fashion">
+          <div className="auth-shell__brand-frame" />
 
-          {/* Subtle texture / framing */}
-          <div className="absolute inset-8 border border-white/10 xl:inset-10" />
-
-          <div className="relative z-10 flex min-h-screen w-full flex-col justify-between px-12 py-12 xl:px-16 xl:py-14">
-            {/* =================================================
-                TOP
-            ================================================= */}
-
-            <div className="w-fit border border-white/10 bg-[var(--color-surface)] px-5 py-3">
-              <BrandLogo />
+          <div className="auth-shell__brand-content">
+            {/* Top */}
+            <div className="auth-shell__brand-top">
+              <div className="auth-shell__brand-logo">
+                <BrandLogo />
+              </div>
             </div>
 
-            {/* =================================================
-                CENTER
-            ================================================= */}
+            {/* Center */}
+            <div className="auth-shell__brand-copy">
+              <div className="auth-shell__eyebrow">
+                <span className="auth-shell__eyebrow-line" />
+                <span className="auth-shell__eyebrow-text">
+                  Aayesha Fashion
+                </span>
+              </div>
 
-            <div className="max-w-xl py-16">
-              <p className="eyebrow mb-5 text-[var(--color-accent-soft)]">
-                AAYESHA FASHION
-              </p>
-
-              <h2 className="font-display text-5xl font-normal leading-[0.9] tracking-tight text-white xl:text-7xl">
+              <h2 className="auth-shell__brand-title">
                 Elegance,
                 <br />
                 made personal.
               </h2>
 
-              <div className="mt-7 h-px w-16 bg-[var(--color-accent)]" />
+              <div className="auth-shell__brand-rule" />
 
-              <p className="mt-7 max-w-md text-sm leading-7 text-white/60">
-                Discover timeless Indian fashion crafted for
-                confidence, celebration, and everyday beauty.
+              <p className="auth-shell__brand-description">
+                Discover timeless Indian fashion crafted for confidence,
+                celebration, and everyday beauty.
               </p>
             </div>
 
-            {/* =================================================
-                BOTTOM
-            ================================================= */}
-
-            <div className="flex items-center justify-between gap-6">
-              <p className="text-[10px] uppercase tracking-[0.16em] text-white/35">
+            {/* Bottom */}
+            <div className="auth-shell__brand-footer">
+              <span className="auth-shell__copyright">
                 © {new Date().getFullYear()} Aayesha Fashion
-              </p>
+              </span>
 
-              <span className="hidden h-px flex-1 bg-white/10 sm:block" />
+              <span className="auth-shell__footer-line" aria-hidden="true" />
             </div>
           </div>
         </section>
 
         {/* =====================================================
-            FORM SIDE
+            AUTH CONTENT PANEL
         ===================================================== */}
 
-        <section className="flex min-h-screen flex-col bg-[var(--color-bg)]">
-          {/* =================================================
-              HEADER
-          ================================================= */}
-
-          <header className="flex items-center justify-between border-b border-[var(--color-border-light)] px-5 py-5 sm:px-8 sm:py-6 lg:border-b-0 lg:px-12 lg:py-8">
+        <section className="auth-shell__content-panel">
+          {/* Header */}
+          <header className="auth-shell__header">
             <Link
               href={backHref}
-              className="
-                group
-                inline-flex
-                min-h-10
-                items-center
-                gap-2
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.16em]
-                text-[var(--color-text-secondary)]
-                transition-colors
-                duration-[var(--duration-base)]
-                hover:text-[var(--color-text)]
-              "
+              className="auth-shell__back-link"
+              aria-label={backLabel}
             >
               <ArrowLeft
-                size={15}
-                strokeWidth={1.6}
-                className="
-                  transition-transform
-                  duration-[var(--duration-base)]
-                  group-hover:-translate-x-0.5
-                "
+                className="auth-shell__back-icon"
+                aria-hidden="true"
               />
 
-              {backLabel}
+              <span>{backLabel}</span>
             </Link>
 
-            {/* Mobile logo */}
-            <div className="lg:hidden">
+            <div className="auth-shell__mobile-logo">
               <BrandLogo />
             </div>
           </header>
 
-          {/* =================================================
-              CONTENT
-          ================================================= */}
+          {/* Content */}
+          <div className="auth-shell__content">
+            <div className="auth-shell__content-inner">
+              {/* Heading */}
+              <div className="auth-shell__heading">
+                <div className="auth-shell__content-eyebrow">
+                  <span className="auth-shell__content-eyebrow-line" />
+                  <span>Aayesha Fashion</span>
+                </div>
 
-          <div className="mx-auto flex w-full max-w-[520px] flex-1 items-center px-5 pb-10 pt-8 sm:px-8 lg:px-12 lg:py-12">
-            <div className="w-full">
-              {/* =================================================
-                  HEADING
-              ================================================= */}
-
-              <div className="mb-9">
-                <p className="eyebrow mb-4 text-[var(--color-accent-dark)]">
-                  AAYESHA FASHION
-                </p>
-
-                <h1 className="font-display text-[40px] font-normal leading-[0.94] tracking-tight text-[var(--color-text)] sm:text-[50px]">
-                  {title}
-                </h1>
+                <h1 className="auth-shell__title">{title}</h1>
 
                 {subtitle ? (
-                  <p className="mt-4 max-w-md text-[13px] leading-6 text-[var(--color-text-secondary)] sm:text-sm">
-                    {subtitle}
-                  </p>
+                  <p className="auth-shell__subtitle">{subtitle}</p>
                 ) : null}
               </div>
 
-              {/* =================================================
-                  FORM
-              ================================================= */}
+              {/* Form */}
+              <div className="auth-shell__form">{children}</div>
 
-              <div className="w-full">
-                {children}
-              </div>
-
-              {/* =================================================
-                  FOOTER
-              ================================================= */}
-
+              {/* Footer */}
               {footer ? (
-                <div className="mt-8 border-t border-[var(--color-border-light)] pt-7">
-                  {footer}
-                </div>
+                <div className="auth-shell__footer">{footer}</div>
               ) : null}
             </div>
           </div>
