@@ -240,13 +240,6 @@ export function ProductCard({
         ===================================================== */}
 
         <div className="product-card__content">
-          {/* CATEGORY */}
-
-          <p className="product-card__category">
-            {formatCategory(
-              product.categoryId,
-            )}
-          </p>
 
           {/* PRODUCT NAME */}
 
