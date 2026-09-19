@@ -1627,32 +1627,32 @@ h6 {
      Hero typography
   ------------------------------------------------------- */
 
-  --hero-eyebrow-size: 11px;
+  --hero-eyebrow-size: 10px;
   --hero-description-size: 14px;
-  --hero-cta-size: 12px;
+  --hero-cta-size: 11px;
 
   --hero-title-size-mobile: clamp(
-    2.45rem,
-    9vw,
-    3.4rem
+    2rem,
+    7vw,
+    2.7rem
   );
 
   --hero-title-size-tablet: clamp(
-    3.25rem,
-    6vw,
-    4.75rem
+    2.5rem,
+    4.5vw,
+    3.4rem
   );
 
   --hero-title-size-desktop: clamp(
-    4rem,
-    5.2vw,
-    5.75rem
+    3rem,
+    4vw,
+    4rem
   );
 
   --hero-title-size-wide: clamp(
-    4.5rem,
-    5vw,
-    6.25rem
+    3.4rem,
+    4vw,
+    4.4rem
   );
 
   --hero-title-max-width: 720px;
@@ -1941,17 +1941,17 @@ h6 {
 
   font-weight: var(--weight-regular);
 
-  line-height: 0.98;
+  line-height: 1.02;
 
-  letter-spacing: -0.035em;
+  letter-spacing: -0.025em;
 
   color: var(--color-text-inverse);
 
   text-wrap: balance;
 
   text-shadow:
-    0 8px 30px
-    rgba(0, 0, 0, 0.18);
+    0 6px 24px
+    rgba(0, 0, 0, 0.16);
 }
 
 
@@ -2437,12 +2437,13 @@ h6 {
 
 @media (max-width: 767px) {
   .hero-slide__title {
-    max-width: 92%;
+    max-width: 88%;
 
     font-size:
       var(--hero-title-size-mobile);
 
-    line-height: 0.98;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
   }
 
   .hero-slide__description {
@@ -2454,19 +2455,19 @@ h6 {
   }
 
   .hero-slide__eyebrow {
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
 
   .hero-slide__eyebrow-text {
-    font-size: 10px;
+    font-size: 9px;
 
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
   }
 
   .hero-slide__cta {
-    margin-top: 22px;
+    margin-top: 20px;
 
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .hero-section__counter {
@@ -2499,12 +2500,12 @@ h6 {
 @media (max-width: 479px) {
   :root {
     --hero-title-size-mobile: clamp(
-      2.25rem,
-      10vw,
-      3rem
+      1.9rem,
+      7.5vw,
+      2.5rem
     );
 
-    --hero-content-bottom-mobile: 82px;
+    --hero-content-bottom-mobile: 78px;
   }
 
   .hero-section__container {
@@ -2512,11 +2513,11 @@ h6 {
   }
 
   .hero-slide__title {
-    max-width: 94%;
+    max-width: 90%;
   }
 
   .hero-slide__description {
-    max-width: 90%;
+    max-width: 88%;
   }
 
   .hero-section__indicators {
