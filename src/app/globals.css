@@ -885,49 +885,138 @@ h6 {
 
 
 /* =======================================================
-   MOBILE HEADER LAYOUT
-
-   Mobile order:
-   Hamburger — centered brand — cart
+   MOBILE HEADER — BALANCED 3-COLUMN LAYOUT
 ======================================================= */
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .site-header__inner {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
     align-items: center;
-    min-height: 72px;
-    padding-inline: var(--space-4);
-  }
 
-  .site-header__inner--scrolled {
     min-height: 64px;
+    height: 64px;
+
+    padding-inline: 12px;
   }
 
   .site-header__mobile-menu {
-    grid-column: 1;
-    justify-self: start;
+    position: relative;
+    z-index: var(--z-content);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 48px;
   }
 
   .site-header__brand {
-    grid-column: 2;
-    justify-self: center;
+    position: static;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-width: 0;
+
+    transform: none;
+  }
+
+  .site-header__brand-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    max-width: 100%;
   }
 
   .site-header__actions {
-    grid-column: 3;
-    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 48px;
     margin-left: 0;
   }
 
-  .site-header__actions .header-action--search,
-  .site-header__actions .header-action-account,
-  .site-header__actions .header-action--wishlist {
+  /* Mobile logo */
+  .brand-logo {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .brand-logo__mark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-logo__image {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-logo__wordmark {
+    margin-left: 7px;
+    min-width: 0;
+  }
+
+  .brand-logo__name {
+    font-size: 22px;
+    line-height: 0.9;
+    white-space: nowrap;
+    letter-spacing: -0.035em;
+  }
+
+  .brand-logo__tagline {
+    margin-top: 3px;
+    font-size: 6px;
+    letter-spacing: 0.3em;
+    white-space: nowrap;
+  }
+
+  /* Header action */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 0;
+    width: 100%;
+  }
+
+  .header-action-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Hide everything except cart on mobile */
+  .header-action--search,
+  .header-action-account,
+  .header-action--wishlist {
     display: none;
   }
 
-  .site-header__actions .header-action--cart {
+  .header-action--cart {
     display: inline-flex;
+
+    width: 36px;
+    height: 36px;
+  }
+
+  .header-action--cart .header-action-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .header-action--cart .header-action-underline {
+    display: none;
+  }
+
+  .cart-count {
+    transform: translate(5px, -5px);
   }
 }
 
@@ -1172,10 +1261,11 @@ h6 {
 
 @media (max-width: 767px) {
   :root {
-    --logo-mark-size: 40px;
-    --logo-wordmark-gap: 10px;
-    --logo-name-size: 28px;
-    --logo-tagline-size: 7.5px;
+    --logo-mark-size: 32px;
+    --logo-wordmark-gap: 7px;
+    --logo-name-size: 22px;
+    --logo-tagline-size: 6px;
+    --logo-tagline-gap: 3px;
   }
 }
 

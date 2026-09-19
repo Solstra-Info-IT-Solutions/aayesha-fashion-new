@@ -289,7 +289,7 @@ export function HeaderActions() {
           href="/cart"
           aria-label="Shopping bag"
           onClick={() => setAccountOpen(false)}
-          className="header-action-link"
+           className="header-action-link header-action--cart"
         >
           <ShoppingBag
             size={20}
