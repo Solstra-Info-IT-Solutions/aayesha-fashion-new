@@ -7,10 +7,7 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
-import {
-  useMemo,
-  useState,
-} from "react";
+import { useMemo, useState } from "react";
 
 type CustomCalendarProps = {
   value: string;
@@ -25,16 +22,12 @@ type CalendarDay = {
   currentMonth: boolean;
 };
 
-function parseDateValue(
-  value: string,
-): Date | null {
+function parseDateValue(value: string): Date | null {
   if (!value) {
     return null;
   }
 
-  const date = new Date(
-    `${value}T00:00:00`,
-  );
+  const date = new Date(`${value}T00:00:00`);
 
   if (Number.isNaN(date.getTime())) {
     return null;
@@ -43,57 +36,45 @@ function parseDateValue(
   return date;
 }
 
-function formatDateValue(
-  date: Date,
-): string {
+function formatDateValue(date: Date): string {
   return `${date.getFullYear()}-${String(
     date.getMonth() + 1,
-  ).padStart(2, "0")}-${String(
-    date.getDate(),
-  ).padStart(2, "0")}`;
+  ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
-function formatDisplayDate(
-  value: string,
-): string {
+function formatDisplayDate(value: string): string {
   const date = parseDateValue(value);
 
   if (!date) {
     return "";
   }
 
-  return new Intl.DateTimeFormat(
-    "en-IN",
-    {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    },
-  ).format(date);
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(date);
 }
 
 function isSameDay(
   first: Date | null,
   second: Date,
-) {
+): boolean {
   if (!first) {
     return false;
   }
 
   return (
-    first.getFullYear() ===
-      second.getFullYear() &&
-    first.getMonth() ===
-      second.getMonth() &&
-    first.getDate() ===
-      second.getDate()
+    first.getFullYear() === second.getFullYear() &&
+    first.getMonth() === second.getMonth() &&
+    first.getDate() === second.getDate()
   );
 }
 
 function isDateBefore(
   date: Date,
   boundary: Date | null,
-) {
+): boolean {
   if (!boundary) {
     return false;
   }
@@ -104,12 +85,11 @@ function isDateBefore(
     date.getDate(),
   );
 
-  const normalizedBoundary =
-    new Date(
-      boundary.getFullYear(),
-      boundary.getMonth(),
-      boundary.getDate(),
-    );
+  const normalizedBoundary = new Date(
+    boundary.getFullYear(),
+    boundary.getMonth(),
+    boundary.getDate(),
+  );
 
   return normalizedDate < normalizedBoundary;
 }
@@ -117,7 +97,7 @@ function isDateBefore(
 function isDateAfter(
   date: Date,
   boundary: Date | null,
-) {
+): boolean {
   if (!boundary) {
     return false;
   }
@@ -128,12 +108,11 @@ function isDateAfter(
     date.getDate(),
   );
 
-  const normalizedBoundary =
-    new Date(
-      boundary.getFullYear(),
-      boundary.getMonth(),
-      boundary.getDate(),
-    );
+  const normalizedBoundary = new Date(
+    boundary.getFullYear(),
+    boundary.getMonth(),
+    boundary.getDate(),
+  );
 
   return normalizedDate > normalizedBoundary;
 }
@@ -145,18 +124,10 @@ export function CustomCalendar({
   minDate,
   maxDate,
 }: CustomCalendarProps) {
-  const selectedDate =
-    parseDateValue(value);
+  const selectedDate = parseDateValue(value);
 
-  const minDateObject =
-    parseDateValue(
-      minDate ?? "",
-    );
-
-  const maxDateObject =
-    parseDateValue(
-      maxDate ?? "",
-    );
+  const minDateObject = parseDateValue(minDate ?? "");
+  const maxDateObject = parseDateValue(maxDate ?? "");
 
   const [visibleMonth, setVisibleMonth] =
     useState<Date>(() => {
@@ -167,41 +138,32 @@ export function CustomCalendar({
       );
     });
 
-  const calendarDays = useMemo<
-    CalendarDay[]
-  >(() => {
-    const year =
-      visibleMonth.getFullYear();
+  const calendarDays = useMemo<CalendarDay[]>(() => {
+    const year = visibleMonth.getFullYear();
+    const month = visibleMonth.getMonth();
 
-    const month =
-      visibleMonth.getMonth();
+    const firstDayOfMonth = new Date(
+      year,
+      month,
+      1,
+    ).getDay();
 
-    const firstDayOfMonth =
-      new Date(
-        year,
-        month,
-        1,
-      ).getDay();
+    const daysInMonth = new Date(
+      year,
+      month + 1,
+      0,
+    ).getDate();
 
-    const daysInMonth =
-      new Date(
-        year,
-        month + 1,
-        0,
-      ).getDate();
-
-    const daysInPreviousMonth =
-      new Date(
-        year,
-        month,
-        0,
-      ).getDate();
+    const daysInPreviousMonth = new Date(
+      year,
+      month,
+      0,
+    ).getDate();
 
     const days: CalendarDay[] = [];
 
     for (
-      let index =
-        firstDayOfMonth - 1;
+      let index = firstDayOfMonth - 1;
       index >= 0;
       index--
     ) {
@@ -209,8 +171,7 @@ export function CustomCalendar({
         date: new Date(
           year,
           month - 1,
-          daysInPreviousMonth -
-            index,
+          daysInPreviousMonth - index,
         ),
         currentMonth: false,
       });
@@ -222,11 +183,7 @@ export function CustomCalendar({
       day++
     ) {
       days.push({
-        date: new Date(
-          year,
-          month,
-          day,
-        ),
+        date: new Date(year, month, day),
         currentMonth: true,
       });
     }
@@ -247,47 +204,42 @@ export function CustomCalendar({
     return days;
   }, [visibleMonth]);
 
-  const monthLabel =
-    new Intl.DateTimeFormat(
-      "en-IN",
-      {
-        month: "long",
-        year: "numeric",
-      },
-    ).format(visibleMonth);
+  const monthLabel = new Intl.DateTimeFormat(
+    "en-IN",
+    {
+      month: "long",
+      year: "numeric",
+    },
+  ).format(visibleMonth);
 
   const today = new Date();
+  const todayValue = formatDateValue(today);
 
-  const todayValue =
-    formatDateValue(today);
+  const canGoPrevious = minDateObject
+    ? new Date(
+        visibleMonth.getFullYear(),
+        visibleMonth.getMonth(),
+        1,
+      ) >
+      new Date(
+        minDateObject.getFullYear(),
+        minDateObject.getMonth(),
+        1,
+      )
+    : true;
 
-  const canGoPrevious =
-    minDateObject
-      ? new Date(
-          visibleMonth.getFullYear(),
-          visibleMonth.getMonth(),
-          1,
-        ) >
-        new Date(
-          minDateObject.getFullYear(),
-          minDateObject.getMonth(),
-          1,
-        )
-      : true;
-
-  const canGoNext =
-    maxDateObject
-      ? new Date(
-          visibleMonth.getFullYear(),
-          visibleMonth.getMonth(),
-          1,
-        ) <
-        new Date(
-          maxDateObject.getFullYear(),
-          maxDateObject.getMonth(),
-          1,
-        )
-      : true;
+  const canGoNext = maxDateObject
+    ? new Date(
+        visibleMonth.getFullYear(),
+        visibleMonth.getMonth(),
+        1,
+      ) <
+      new Date(
+        maxDateObject.getFullYear(),
+        maxDateObject.getMonth(),
+        1,
+      )
+    : true;
 
   const goPreviousMonth = () => {
     if (!canGoPrevious) {
@@ -319,39 +271,22 @@ export function CustomCalendar({
     );
   };
 
-  const selectDate = (
-    date: Date,
-  ) => {
+  const selectDate = (date: Date) => {
     if (
-      isDateBefore(
-        date,
-        minDateObject,
-      ) ||
-      isDateAfter(
-        date,
-        maxDateObject,
-      )
+      isDateBefore(date, minDateObject) ||
+      isDateAfter(date, maxDateObject)
     ) {
       return;
     }
 
-    onChange(
-      formatDateValue(date),
-    );
-
+    onChange(formatDateValue(date));
     onClose?.();
   };
 
   const goToToday = () => {
     if (
-      isDateBefore(
-        today,
-        minDateObject,
-      ) ||
-      isDateAfter(
-        today,
-        maxDateObject,
-      )
+      isDateBefore(today, minDateObject) ||
+      isDateAfter(today, maxDateObject)
     ) {
       return;
     }
@@ -374,32 +309,28 @@ export function CustomCalendar({
   };
 
   return (
-    <div className="w-full overflow-hidden border border-[var(--color-border)] bg-white shadow-[0_20px_55px_rgba(23,23,23,0.12)] sm:w-[348px]">
-      {/* =====================================================
-          CALENDAR HEADER
-      ====================================================== */}
-
-      <div className="border-b border-[var(--color-border)] bg-[var(--color-ivory)] px-4 py-4">
-        <div className="flex items-center justify-between">
+    <div className="custom-calendar">
+      <div className="custom-calendar__header">
+        <div className="custom-calendar__navigation">
           <button
             type="button"
             onClick={goPreviousMonth}
             disabled={!canGoPrevious}
             aria-label="Previous month"
-            className="grid h-9 w-9 place-items-center border border-transparent text-[var(--color-secondary)] transition hover:border-[var(--color-border)] hover:bg-white hover:text-[var(--color-ink)] disabled:cursor-not-allowed disabled:opacity-25"
+            className="custom-calendar__nav-button"
           >
             <ChevronLeft
-              size={16}
-              strokeWidth={1.8}
+              size={17}
+              strokeWidth={1.7}
             />
           </button>
 
-          <div className="text-center">
-            <p className="font-display text-[23px] leading-tight text-[var(--color-ink)]">
+          <div className="custom-calendar__month">
+            <p className="custom-calendar__month-label">
               {monthLabel}
             </p>
 
-            <p className="mt-1 text-[9px] font-medium uppercase tracking-[0.16em] text-[var(--color-muted)]">
+            <p className="custom-calendar__month-caption">
               Select date
             </p>
           </div>
@@ -409,53 +340,52 @@ export function CustomCalendar({
             onClick={goNextMonth}
             disabled={!canGoNext}
             aria-label="Next month"
-            className="grid h-9 w-9 place-items-center border border-transparent text-[var(--color-secondary)] transition hover:border-[var(--color-border)] hover:bg-white hover:text-[var(--color-ink)] disabled:cursor-not-allowed disabled:opacity-25"
+            className="custom-calendar__nav-button"
           >
             <ChevronRight
-              size={16}
-              strokeWidth={1.8}
+              size={17}
+              strokeWidth={1.7}
             />
           </button>
         </div>
 
-        {/* Selected date */}
-
-        <div className="mt-4 flex items-center justify-between border-t border-[var(--color-border)] pt-3">
-          <div className="flex items-center gap-2">
-            <CalendarDays
-              size={14}
-              strokeWidth={1.7}
-              className="text-[var(--color-rose-dark)]"
-            />
-
-            <span className="text-xs text-[var(--color-secondary)]">
-              {value
-                ? formatDisplayDate(
-                    value,
-                  )
-                : "No date selected"}
+        <div className="custom-calendar__selected">
+          <div className="custom-calendar__selected-info">
+            <span className="custom-calendar__selected-icon">
+              <CalendarDays
+                size={15}
+                strokeWidth={1.6}
+              />
             </span>
+
+            <div>
+              <span className="custom-calendar__selected-label">
+                Selected date
+              </span>
+
+              <span className="custom-calendar__selected-value">
+                {value
+                  ? formatDisplayDate(value)
+                  : "No date selected"}
+              </span>
+            </div>
           </div>
 
           {value && (
             <button
               type="button"
               onClick={clearDate}
-              className="grid h-7 w-7 place-items-center text-[var(--color-muted)] transition hover:bg-white hover:text-[var(--color-ink)]"
-              aria-label="Clear date"
+              className="custom-calendar__clear-button"
+              aria-label="Clear selected date"
             >
-              <X size={14} />
+              <X size={15} strokeWidth={1.7} />
             </button>
           )}
         </div>
       </div>
 
-      {/* =====================================================
-          WEEK DAYS
-      ====================================================== */}
-
-      <div className="px-4 pt-4">
-        <div className="grid grid-cols-7">
+      <div className="custom-calendar__body">
+        <div className="custom-calendar__weekdays">
           {[
             "S",
             "M",
@@ -464,41 +394,26 @@ export function CustomCalendar({
             "T",
             "F",
             "S",
-          ].map(
-            (
-              day,
-              index,
-            ) => (
-              <div
-                key={`${day}-${index}`}
-                className="py-2 text-center text-[9px] font-semibold uppercase tracking-[0.08em] text-[var(--color-muted)]"
-              >
-                {day}
-              </div>
-            ),
-          )}
+          ].map((day, index) => (
+            <div
+              key={`${day}-${index}`}
+              className="custom-calendar__weekday"
+            >
+              {day}
+            </div>
+          ))}
         </div>
-      </div>
 
-      {/* =====================================================
-          DAYS
-      ====================================================== */}
-
-      <div className="px-4 pb-3">
-        <div className="grid grid-cols-7 gap-1">
+        <div className="custom-calendar__days">
           {calendarDays.map(
-            ({
-              date,
-              currentMonth,
-            }) => {
+            ({ date, currentMonth }) => {
               const dateValue =
                 formatDateValue(date);
 
-              const selected =
-                isSameDay(
-                  selectedDate,
-                  date,
-                );
+              const selected = isSameDay(
+                selectedDate,
+                date,
+              );
 
               const outsideRange =
                 isDateBefore(
@@ -511,41 +426,64 @@ export function CustomCalendar({
                 );
 
               const todayDate =
-                dateValue ===
-                todayValue;
+                dateValue === todayValue;
 
               return (
                 <button
                   key={dateValue}
                   type="button"
                   disabled={outsideRange}
-                  onClick={() => {
-                    selectDate(date);
-                  }}
-                  className={`relative grid h-10 place-items-center text-xs transition ${
+                  onClick={() =>
+                    selectDate(date)
+                  }
+                  aria-label={new Intl.DateTimeFormat(
+                    "en-IN",
+                    {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    },
+                  ).format(date)}
+                  aria-current={
+                    todayDate
+                      ? "date"
+                      : undefined
+                  }
+                  aria-pressed={selected}
+                  className={[
+                    "custom-calendar__day",
+                    currentMonth
+                      ? "custom-calendar__day--current"
+                      : "custom-calendar__day--outside",
                     selected
-                      ? "bg-[var(--color-ink)] font-semibold text-white"
-                      : outsideRange
-                        ? "cursor-not-allowed text-[var(--color-muted)]/25"
-                        : currentMonth
-                          ? "text-[var(--color-ink)] hover:bg-[var(--color-rose-light)]"
-                          : "text-[var(--color-muted)]/40 hover:bg-[var(--color-ivory)]"
-                  }`}
+                      ? "custom-calendar__day--selected"
+                      : "",
+                    outsideRange
+                      ? "custom-calendar__day--disabled"
+                      : "",
+                    todayDate
+                      ? "custom-calendar__day--today"
+                      : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                 >
-                  {date.getDate()}
+                  <span>
+                    {date.getDate()}
+                  </span>
 
                   {selected && (
                     <Check
-                      size={9}
-                      strokeWidth={2.3}
-                      className="absolute bottom-1"
+                      size={10}
+                      strokeWidth={2.4}
+                      className="custom-calendar__selected-mark"
                     />
                   )}
 
                   {todayDate &&
                     !selected &&
                     !outsideRange && (
-                      <span className="absolute bottom-1 h-1 w-1 rounded-full bg-[var(--color-rose-dark)]" />
+                      <span className="custom-calendar__today-dot" />
                     )}
                 </button>
               );
@@ -554,15 +492,11 @@ export function CustomCalendar({
         </div>
       </div>
 
-      {/* =====================================================
-          FOOTER
-      ====================================================== */}
-
-      <div className="flex items-center justify-between border-t border-[var(--color-border)] bg-[var(--color-ivory)] px-4 py-3">
+      <div className="custom-calendar__footer">
         <button
           type="button"
           onClick={clearDate}
-          className="text-[10px] font-medium uppercase tracking-[0.12em] text-[var(--color-secondary)] transition hover:text-[var(--color-ink)]"
+          className="custom-calendar__footer-button"
         >
           Clear
         </button>
@@ -580,7 +514,7 @@ export function CustomCalendar({
               maxDateObject,
             )
           }
-          className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-rose-dark)] transition hover:text-[var(--color-ink)] disabled:cursor-not-allowed disabled:opacity-30"
+          className="custom-calendar__footer-button custom-calendar__footer-button--accent"
         >
           Today
         </button>

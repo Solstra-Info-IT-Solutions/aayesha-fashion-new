@@ -20,14 +20,12 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-
 import {
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from "react";
-
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
@@ -35,9 +33,7 @@ import {
   getCustomerProfile,
   updateCustomerProfile,
 } from "@/lib/api/customer";
-
 import { deleteCustomerAccount } from "@/lib/customer-api";
-
 import { useAuthStore } from "@/store/auth-store";
 
 import {
@@ -147,9 +143,9 @@ function getInitials(name: string) {
       .toUpperCase();
   }
 
-  return `${parts[0][0]}${parts[
-    parts.length - 1
-  ][0]}`.toUpperCase();
+  return `${parts[0][0]}${
+    parts[parts.length - 1][0]
+  }`.toUpperCase();
 }
 
 function formatDate(value: string | null) {
@@ -178,7 +174,7 @@ export function ProfileDetails() {
   const router = useRouter();
 
   /* =======================================================
-     AUTH STATE
+     AUTH
   ======================================================= */
 
   const accessToken = useAuthStore(
@@ -218,17 +214,15 @@ export function ProfileDetails() {
   const [showSuccess, setShowSuccess] =
     useState(false);
 
-  /* =======================================================
-     ACCOUNT ACTION STATE
-  ======================================================= */
-
   const [confirmType, setConfirmType] =
     useState<"delete" | "logout" | null>(
       null,
     );
 
-  const [isProcessingAccountAction, setIsProcessingAccountAction] =
-    useState(false);
+  const [
+    isProcessingAccountAction,
+    setIsProcessingAccountAction,
+  ] = useState(false);
 
   /* =======================================================
      LOAD PROFILE
@@ -251,7 +245,6 @@ export function ProfileDetails() {
           );
 
         setProfile(response);
-
         setForm(
           createFormState(response),
         );
@@ -358,7 +351,7 @@ export function ProfileDetails() {
   };
 
   /* =======================================================
-     SAVE PROFILE
+     SAVE
   ======================================================= */
 
   const handleSave = async () => {
@@ -380,7 +373,6 @@ export function ProfileDetails() {
       setErrorMessage(
         "Please enter your full name.",
       );
-
       return;
     }
 
@@ -392,35 +384,35 @@ export function ProfileDetails() {
       setErrorMessage(
         "Please enter a valid Indian phone number.",
       );
-
       return;
     }
 
     setIsSaving(true);
 
-    const payload: UpdateCustomerProfilePayload = {
-      name,
-      phone,
-      avatarUrl:
-        form.avatarUrl.trim(),
-      dateOfBirth:
-        form.dateOfBirth
-          ? new Date(
-              `${form.dateOfBirth}T00:00:00`,
-            ).toISOString()
-          : null,
-      gender: form.gender,
-      preferredSizes: [
-        ...form.preferredSizes,
-      ],
-      preferredColors: [
-        ...form.preferredColors,
-      ],
-      marketingEmails:
-        form.marketingEmails,
-      marketingWhatsapp:
-        form.marketingWhatsapp,
-    };
+    const payload: UpdateCustomerProfilePayload =
+      {
+        name,
+        phone,
+        avatarUrl:
+          form.avatarUrl.trim(),
+        dateOfBirth:
+          form.dateOfBirth
+            ? new Date(
+                `${form.dateOfBirth}T00:00:00`,
+              ).toISOString()
+            : null,
+        gender: form.gender,
+        preferredSizes: [
+          ...form.preferredSizes,
+        ],
+        preferredColors: [
+          ...form.preferredColors,
+        ],
+        marketingEmails:
+          form.marketingEmails,
+        marketingWhatsapp:
+          form.marketingWhatsapp,
+      };
 
     try {
       const response =
@@ -430,7 +422,6 @@ export function ProfileDetails() {
         );
 
       setProfile(response);
-
       setForm(
         createFormState(response),
       );
@@ -448,7 +439,6 @@ export function ProfileDetails() {
           : "Unable to update your profile.";
 
       setErrorMessage(message);
-
       toast.error(message);
     } finally {
       setIsSaving(false);
@@ -456,7 +446,7 @@ export function ProfileDetails() {
   };
 
   /* =======================================================
-     CANCEL EDIT
+     CANCEL
   ======================================================= */
 
   const handleCancel = () => {
@@ -474,7 +464,7 @@ export function ProfileDetails() {
   };
 
   /* =======================================================
-     ACCOUNT CONFIRM DIALOG
+     ACCOUNT CONFIRM
   ======================================================= */
 
   const closeConfirmDialog = () => {
@@ -505,11 +495,7 @@ export function ProfileDetails() {
 
       setConfirmType(null);
 
-      /*
-       * Mandatory home-page redirect.
-       */
       router.replace("/");
-
       router.refresh();
     } catch {
       toast.error(
@@ -535,7 +521,6 @@ export function ProfileDetails() {
       );
 
       setConfirmType(null);
-
       router.replace("/login");
 
       return;
@@ -544,25 +529,14 @@ export function ProfileDetails() {
     setIsProcessingAccountAction(true);
 
     try {
-      /*
-       * Delete the customer account first.
-       */
       await deleteCustomerAccount(
         accessToken,
       );
 
-      /*
-       * The delete endpoint invalidates the
-       * account/session. We still clear the
-       * frontend auth state.
-       */
       try {
         await logout();
       } catch {
-        /*
-         * Ignore logout failure because account
-         * deletion has already succeeded.
-         */
+        // Account deletion already succeeded.
       }
 
       toast.success(
@@ -571,11 +545,9 @@ export function ProfileDetails() {
 
       setConfirmType(null);
 
-      /*
-       * Mandatory home-page redirect after
-       * successful account deletion.
-       */
-      router.replace("/?accountDeleted=1");
+      router.replace(
+        "/?accountDeleted=1",
+      );
 
       router.refresh();
     } catch (error) {
@@ -591,7 +563,7 @@ export function ProfileDetails() {
   };
 
   /* =======================================================
-     DERIVED VALUES
+     DERIVED
   ======================================================= */
 
   const initials = useMemo(
@@ -608,80 +580,44 @@ export function ProfileDetails() {
 
   if (!isAuthenticated) {
     return (
-      <section className="min-h-[70vh] bg-[var(--color-bg)]">
-        <div className="mx-auto flex min-h-[70vh] max-w-[720px] items-center justify-center px-5 py-16 text-center">
-          <div>
-            <div className="mx-auto flex h-14 w-14 items-center justify-center border border-[var(--color-border)] bg-[var(--color-surface)]">
-              <UserRound
-                size={21}
-                strokeWidth={1.4}
-                className="text-[var(--color-text-secondary)]"
-              />
-            </div>
+      <section className="profile-details profile-details--state">
+        <div className="profile-details__state-inner">
+          <div className="profile-details__state-icon">
+            <UserRound
+              size={22}
+              strokeWidth={1.4}
+            />
+          </div>
 
-            <p className="mt-6 text-[9px] font-semibold uppercase tracking-[0.24em] text-[var(--color-accent-dark)]">
-              My Account
-            </p>
+          <p className="profile-details__eyebrow">
+            My Account
+          </p>
 
-            <h1 className="mt-3 font-[var(--font-display)] text-[38px] leading-none tracking-[-0.025em] text-[var(--color-text)]">
-              Sign in to view your account
-            </h1>
+          <h1 className="profile-details__state-title">
+            Sign in to view your account
+          </h1>
 
-            <p className="mx-auto mt-4 max-w-md text-sm leading-7 text-[var(--color-text-secondary)]">
-              Please sign in to access your profile,
-              preferences and account settings.
-            </p>
+          <p className="profile-details__state-copy">
+            Please sign in to access your
+            profile, preferences and account
+            settings.
+          </p>
 
-            <div className="mt-7 flex flex-col justify-center gap-2 sm:flex-row">
-              <Link
-                href="/login?callbackUrl=/account"
-                className="
-                  inline-flex
-                  h-11
-                  items-center
-                  justify-center
-                  border
-                  border-[var(--color-text)]
-                  bg-[var(--color-text)]
-                  px-6
-                  text-[10px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.16em]
-                  text-white
-                  transition-colors
-                  hover:bg-[var(--color-text-secondary)]
-                "
-              >
-                Sign In
-              </Link>
+          <div className="profile-details__state-actions">
+            <Link
+              href="/login?callbackUrl=/account"
+              className="profile-details__button profile-details__button--primary"
+            >
+              Sign In
+            </Link>
 
-              <Link
-                href="/"
-                className="
-                  inline-flex
-                  h-11
-                  items-center
-                  justify-center
-                  gap-2
-                  border
-                  border-[var(--color-border)]
-                  bg-[var(--color-surface)]
-                  px-6
-                  text-[10px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.16em]
-                  text-[var(--color-text)]
-                  transition-colors
-                  hover:bg-[var(--color-surface-soft)]
-                "
-              >
-                <Home size={14} />
-
-                Back to Home
-              </Link>
-            </div>
+            <Link
+              href="/"
+              className="profile-details__button profile-details__button--secondary"
+            >
+              <Home size={15} />
+              Back to Home
+            </Link>
           </div>
         </div>
       </section>
@@ -694,18 +630,16 @@ export function ProfileDetails() {
 
   if (isLoading) {
     return (
-      <section className="min-h-screen bg-[var(--color-bg)]">
-        <div className="mx-auto flex min-h-[70vh] max-w-[1280px] items-center justify-center px-5">
-          <div className="flex items-center gap-3 text-sm text-[var(--color-text-secondary)]">
-            <Loader2
-              size={18}
-              className="animate-spin"
-            />
+      <section className="profile-details profile-details--state">
+        <div className="profile-details__loading">
+          <Loader2
+            size={19}
+            className="profile-details__spin"
+          />
 
-            <span>
-              Loading your profile...
-            </span>
-          </div>
+          <span>
+            Loading your profile...
+          </span>
         </div>
       </section>
     );
@@ -717,81 +651,46 @@ export function ProfileDetails() {
 
   if (!profile || !form) {
     return (
-      <section className="min-h-[70vh] bg-[var(--color-bg)]">
-        <div className="mx-auto flex min-h-[70vh] max-w-[720px] items-center justify-center px-5 text-center">
-          <div>
-            <div className="mx-auto flex h-14 w-14 items-center justify-center border border-[var(--color-border)] bg-[var(--color-surface)]">
-              <UserRound
-                size={21}
-                strokeWidth={1.4}
-                className="text-[var(--color-text-secondary)]"
-              />
-            </div>
+      <section className="profile-details profile-details--state">
+        <div className="profile-details__state-inner">
+          <div className="profile-details__state-icon">
+            <UserRound
+              size={22}
+              strokeWidth={1.4}
+            />
+          </div>
 
-            <p className="mt-6 text-[9px] font-semibold uppercase tracking-[0.24em] text-[var(--color-accent-dark)]">
-              My Account
-            </p>
+          <p className="profile-details__eyebrow">
+            My Account
+          </p>
 
-            <h1 className="mt-3 font-[var(--font-display)] text-[36px] leading-none text-[var(--color-text)]">
-              Profile unavailable
-            </h1>
+          <h1 className="profile-details__state-title">
+            Profile unavailable
+          </h1>
 
-            <p className="mt-4 text-sm leading-7 text-[var(--color-text-secondary)]">
-              {errorMessage ||
-                "We could not load your account details."}
-            </p>
+          <p className="profile-details__state-copy">
+            {errorMessage ||
+              "We could not load your account details."}
+          </p>
 
-            <div className="mt-7 flex flex-col justify-center gap-2 sm:flex-row">
-              <button
-                type="button"
-                onClick={() => {
-                  void loadProfile();
-                }}
-                className="
-                  inline-flex
-                  h-11
-                  items-center
-                  justify-center
-                  border
-                  border-[var(--color-text)]
-                  bg-[var(--color-text)]
-                  px-6
-                  text-[10px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.15em]
-                  text-white
-                "
-              >
-                Try Again
-              </button>
+          <div className="profile-details__state-actions">
+            <button
+              type="button"
+              onClick={() => {
+                void loadProfile();
+              }}
+              className="profile-details__button profile-details__button--primary"
+            >
+              Try Again
+            </button>
 
-              <Link
-                href="/"
-                className="
-                  inline-flex
-                  h-11
-                  items-center
-                  justify-center
-                  gap-2
-                  border
-                  border-[var(--color-border)]
-                  bg-[var(--color-surface)]
-                  px-6
-                  text-[10px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.15em]
-                  text-[var(--color-text)]
-                  transition-colors
-                  hover:bg-[var(--color-surface-soft)]
-                "
-              >
-                <Home size={14} />
-
-                Back to Home
-              </Link>
-            </div>
+            <Link
+              href="/"
+              className="profile-details__button profile-details__button--secondary"
+            >
+              <Home size={15} />
+              Back to Home
+            </Link>
           </div>
         </div>
       </section>
@@ -804,232 +703,123 @@ export function ProfileDetails() {
 
   return (
     <>
-      <section className="min-h-screen bg-[var(--color-bg)]">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-8 sm:px-8 lg:px-10 lg:py-12">
-          {/* =================================================
-              TOP NAVIGATION
-          ================================================== */}
+      <section className="profile-details">
+        <div className="profile-details__container">
+          {/* TOP NAV */}
 
-          <div className="mb-7 flex items-center justify-between gap-4 border-b border-[var(--color-border)] pb-5">
+          <div className="profile-details__topbar">
             <Link
               href="/"
-              className="
-                group
-                inline-flex
-                items-center
-                gap-2
-                text-[9px]
-                font-semibold
-                uppercase
-                tracking-[0.18em]
-                text-[var(--color-text-secondary)]
-                transition-colors
-                hover:text-[var(--color-text)]
-              "
+              className="profile-details__back-link"
             >
-              <Home
-                size={14}
-                strokeWidth={1.35}
-              />
-
+              <Home size={15} />
               <span>Back to Home</span>
             </Link>
 
             <Link
               href="/account"
-              className="
-                hidden
-                text-[9px]
-                font-semibold
-                uppercase
-                tracking-[0.18em]
-                text-[var(--color-accent-dark)]
-                sm:inline-flex
-              "
+              className="profile-details__overview-link"
             >
               Account Overview
             </Link>
           </div>
 
-          {/* =================================================
-              PAGE HEADER
-          ================================================== */}
+          {/* HEADER */}
 
-          <div className="border-b border-[var(--color-border)] pb-8">
-            <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--color-accent-dark)]">
-              My Account
-            </p>
+          <header className="profile-details__header">
+            <div>
+              <p className="profile-details__eyebrow">
+                My Account
+              </p>
 
-            <div className="mt-3 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-              <div>
-                <h1 className="font-[var(--font-display)] text-[38px] leading-none tracking-[-0.025em] text-[var(--color-text)] sm:text-[46px]">
-                  Profile Details
-                </h1>
+              <h1 className="profile-details__page-title">
+                Profile Details
+              </h1>
 
-                <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--color-text-secondary)]">
-                  Manage your personal details,
-                  style preferences and communication
-                  settings from one place.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {!isEditing ? (
-                  <Link
-                    href="/account/edit"
-                    className="
-                      inline-flex
-                      h-11
-                      items-center
-                      justify-center
-                      gap-2
-                      border
-                      border-[var(--color-text)]
-                      bg-[var(--color-text)]
-                      px-5
-                      text-[10px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.14em]
-                      text-white
-                      transition-colors
-                      duration-200
-                      hover:bg-[var(--color-text-secondary)]
-                    "
-                  >
-                    <Edit3
-                      size={15}
-                      strokeWidth={1.7}
-                    />
-
-                    Edit Profile
-                  </Link>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      onClick={handleCancel}
-                      disabled={isSaving}
-                      className="
-                        inline-flex
-                        h-11
-                        items-center
-                        justify-center
-                        gap-2
-                        border
-                        border-[var(--color-border)]
-                        bg-[var(--color-surface)]
-                        px-5
-                        text-xs
-                        font-semibold
-                        uppercase
-                        tracking-[0.12em]
-                        text-[var(--color-text)]
-                        transition
-                        hover:border-[var(--color-text)]
-                        disabled:cursor-not-allowed
-                        disabled:opacity-50
-                      "
-                    >
-                      <X size={15} />
-
-                      Cancel
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        void handleSave();
-                      }}
-                      disabled={isSaving}
-                      className="
-                        inline-flex
-                        h-11
-                        items-center
-                        justify-center
-                        gap-2
-                        border
-                        border-[var(--color-text)]
-                        bg-[var(--color-text)]
-                        px-5
-                        text-xs
-                        font-semibold
-                        uppercase
-                        tracking-[0.12em]
-                        text-white
-                        transition
-                        hover:bg-[var(--color-text-secondary)]
-                        disabled:cursor-not-allowed
-                        disabled:opacity-60
-                      "
-                    >
-                      {isSaving ? (
-                        <Loader2
-                          size={15}
-                          className="animate-spin"
-                        />
-                      ) : (
-                        <Save size={15} />
-                      )}
-
-                      {isSaving
-                        ? "Saving..."
-                        : "Save Changes"}
-                    </button>
-                  </>
-                )}
-              </div>
+              <p className="profile-details__page-copy">
+                Manage your personal details,
+                style preferences and communication
+                settings from one place.
+              </p>
             </div>
-          </div>
 
-          {/* =================================================
-              FEEDBACK
-          ================================================== */}
+            <div className="profile-details__header-actions">
+              {!isEditing ? (
+                <Link
+                  href="/account/edit"
+                  className="profile-details__button profile-details__button--primary"
+                >
+                  <Edit3 size={15} />
+                  Edit Profile
+                </Link>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={handleCancel}
+                    disabled={isSaving}
+                    className="profile-details__button profile-details__button--secondary"
+                  >
+                    <X size={15} />
+                    Cancel
+                  </button>
 
-          {errorMessage && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      void handleSave();
+                    }}
+                    disabled={isSaving}
+                    className="profile-details__button profile-details__button--primary"
+                  >
+                    {isSaving ? (
+                      <Loader2
+                        size={15}
+                        className="profile-details__spin"
+                      />
+                    ) : (
+                      <Save size={15} />
+                    )}
+
+                    {isSaving
+                      ? "Saving..."
+                      : "Save Changes"}
+                  </button>
+                </>
+              )}
+            </div>
+          </header>
+
+          {/* FEEDBACK */}
+
+          {errorMessage ? (
             <div
               role="alert"
-              className="
-                mt-6
-                border
-                border-red-200
-                bg-red-50
-                px-5
-                py-4
-                text-sm
-                leading-6
-                text-red-700
-              "
+              className="profile-details__feedback profile-details__feedback--error"
             >
-              {errorMessage}
+              <span>{errorMessage}</span>
             </div>
-          )}
+          ) : null}
 
-          {showSuccess && (
-            <div className="mt-6 flex items-center gap-2 border border-[var(--color-accent)] bg-[var(--color-accent-light)] px-5 py-4 text-sm text-[var(--color-text)]">
-              <Check
-                size={17}
-                className="text-[var(--color-accent-dark)]"
-              />
-
-              Your profile has been updated
-              successfully.
+          {showSuccess ? (
+            <div className="profile-details__feedback profile-details__feedback--success">
+              <Check size={17} />
+              <span>
+                Your profile has been updated
+                successfully.
+              </span>
             </div>
-          )}
+          ) : null}
 
-          {/* =================================================
-              MAIN GRID
-          ================================================== */}
+          {/* CONTENT GRID */}
 
-          <div className="mt-10 grid gap-7 lg:grid-cols-[300px_minmax(0,1fr)]">
-            {/* =================================================
-                ACCOUNT SUMMARY
-            ================================================== */}
+          <div className="profile-details__layout">
+            {/* ACCOUNT SUMMARY */}
 
-            <aside className="h-fit border border-[var(--color-border)] bg-[var(--color-surface)]">
-              <div className="p-7">
-                <div className="flex items-center gap-5">
-                  <div className="grid h-[74px] w-[74px] shrink-0 place-items-center overflow-hidden border border-[var(--color-accent)] bg-[var(--color-accent-light)] font-[var(--font-display)] text-2xl text-[var(--color-text)]">
+            <aside className="profile-details__sidebar">
+              <div className="profile-details__summary">
+                <div className="profile-details__profile-head">
+                  <div className="profile-details__avatar">
                     {form.avatarUrl ? (
                       <img
                         src={form.avatarUrl}
@@ -1037,71 +827,59 @@ export function ProfileDetails() {
                           profile.user.name ||
                           "Profile"
                         }
-                        className="h-full w-full object-cover"
                       />
                     ) : (
                       initials
                     )}
                   </div>
 
-                  <div className="min-w-0">
-                    <h2 className="truncate font-[var(--font-display)] text-[27px] leading-tight text-[var(--color-text)]">
+                  <div className="profile-details__profile-identity">
+                    <h2>
                       {profile.user.name ||
                         "Your Account"}
                     </h2>
 
-                    <p className="mt-1 truncate text-sm text-[var(--color-text-secondary)]">
+                    <p>
                       {profile.user.email}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-7 border-t border-[var(--color-border)] pt-6">
-                  <div className="flex items-start gap-3">
-                    <Mail
-                      size={17}
-                      strokeWidth={1.7}
-                      className="mt-0.5 text-[var(--color-text-secondary)]"
-                    />
+                <div className="profile-details__summary-details">
+                  <div className="profile-details__summary-item">
+                    <Mail size={17} />
 
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--color-text-muted)]">
+                    <div>
+                      <span className="profile-details__meta-label">
                         Email
-                      </p>
+                      </span>
 
-                      <p className="mt-1 break-all text-sm text-[var(--color-text)]">
+                      <span className="profile-details__meta-value">
                         {profile.user.email}
-                      </p>
+                      </span>
                     </div>
                   </div>
 
-                  <div className="mt-5 flex items-start gap-3">
-                    <Phone
-                      size={17}
-                      strokeWidth={1.7}
-                      className="mt-0.5 text-[var(--color-text-secondary)]"
-                    />
+                  <div className="profile-details__summary-item">
+                    <Phone size={17} />
 
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--color-text-muted)]">
+                    <div>
+                      <span className="profile-details__meta-label">
                         Phone
-                      </p>
+                      </span>
 
-                      <p className="mt-1 text-sm text-[var(--color-text)]">
+                      <span className="profile-details__meta-value">
                         {profile.user.phone ||
                           profile.customer.phone ||
                           "Not added"}
-                      </p>
+                      </span>
                     </div>
                   </div>
 
-                  <div className="mt-5 flex items-center gap-2 text-[var(--color-accent-dark)]">
-                    <BadgeCheck
-                      size={17}
-                      strokeWidth={1.8}
-                    />
+                  <div className="profile-details__verification">
+                    <BadgeCheck size={17} />
 
-                    <span className="text-xs font-medium">
+                    <span>
                       {profile.user.emailVerified
                         ? "Email verified"
                         : "Email not verified"}
@@ -1110,220 +888,124 @@ export function ProfileDetails() {
                 </div>
               </div>
 
-              {/* =================================================
-                  ACCOUNT QUICK ACTIONS
-              ================================================== */}
-
-              <div className="border-t border-[var(--color-border)] bg-[var(--color-surface-soft)] p-3">
+              <div className="profile-details__quick-links">
                 <Link
                   href="/account/orders"
-                  className="
-                    flex
-                    items-center
-                    gap-3
-                    px-3
-                    py-3
-                    text-left
-                    transition-colors
-                    hover:bg-[var(--color-surface)]
-                  "
+                  className="profile-details__quick-link"
                 >
                   <ShoppingBagIcon />
 
-                  <span className="flex-1">
-                    <span className="block text-xs font-semibold text-[var(--color-text)]">
-                      Your Orders
-                    </span>
-
-                    <span className="mt-0.5 block text-[10px] text-[var(--color-text-muted)]">
+                  <span>
+                    <strong>Your Orders</strong>
+                    <small>
                       View and track your orders
-                    </span>
+                    </small>
                   </span>
 
-                  <ChevronRight
-                    size={14}
-                    className="text-[var(--color-text-secondary)]"
-                  />
+                  <ChevronRight size={16} />
                 </Link>
 
                 <Link
                   href="/account/addresses"
-                  className="
-                    flex
-                    items-center
-                    gap-3
-                    px-3
-                    py-3
-                    text-left
-                    transition-colors
-                    hover:bg-[var(--color-surface)]
-                  "
+                  className="profile-details__quick-link"
                 >
-                  <MapPin
-                    size={15}
-                    strokeWidth={1.6}
-                    className="text-[var(--color-text-secondary)]"
-                  />
-
-                  <span className="flex-1">
-                    <span className="block text-xs font-semibold text-[var(--color-text)]">
-                      Saved Addresses
-                    </span>
-
-                    <span className="mt-0.5 block text-[10px] text-[var(--color-text-muted)]">
-                      Manage delivery addresses
-                    </span>
+                  <span className="profile-details__quick-icon">
+                    <MapPin size={15} />
                   </span>
 
-                  <ChevronRight
-                    size={14}
-                    className="text-[var(--color-text-secondary)]"
-                  />
+                  <span>
+                    <strong>
+                      Saved Addresses
+                    </strong>
+                    <small>
+                      Manage delivery addresses
+                    </small>
+                  </span>
+
+                  <ChevronRight size={16} />
                 </Link>
               </div>
             </aside>
 
-            {/* =================================================
-                DETAILS
-            ================================================== */}
+            {/* DETAILS */}
 
-            <div className="space-y-7">
-              {/* =================================================
-                  PERSONAL INFORMATION
-              ================================================== */}
+            <div className="profile-details__content">
+              {/* PERSONAL INFORMATION */}
 
-              <section className="border border-[var(--color-border)] bg-[var(--color-surface)]">
-                <div className="flex items-center justify-between border-b border-[var(--color-border)] px-6 py-5 sm:px-7">
-                  <div>
-                    <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--color-accent-dark)]">
-                      Account
-                    </p>
+              <section className="profile-details__section">
+                <SectionHeader
+                  eyebrow="Account"
+                  title="Personal Information"
+                  icon={
+                    <UserRound size={20} />
+                  }
+                />
 
-                    <h2 className="mt-1 font-[var(--font-display)] text-[28px] text-[var(--color-text)]">
-                      Personal Information
-                    </h2>
-                  </div>
-
-                  <UserRound
-                    size={20}
-                    strokeWidth={1.6}
-                    className="text-[var(--color-text-secondary)]"
-                  />
-                </div>
-
-                <div className="grid gap-x-7 gap-y-6 p-6 sm:grid-cols-2 sm:p-7">
-                  {/* NAME */}
-
-                  <div>
-                    <label className="mb-2.5 block text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-                      Full Name
-                    </label>
-
-                    {isEditing ? (
+                <div className="profile-details__fields">
+                  <ProfileField
+                    label="Full Name"
+                    editing={isEditing}
+                    value={
+                      profile.user.name ||
+                      "Not added"
+                    }
+                    input={
                       <input
                         value={form.name}
-                        onChange={(event) => {
+                        onChange={(event) =>
                           updateForm(
                             "name",
                             event.target.value,
-                          );
-                        }}
+                          )
+                        }
                         autoComplete="name"
-                        className="
-                          h-11
-                          w-full
-                          border-b
-                          border-[var(--color-border)]
-                          bg-transparent
-                          text-sm
-                          text-[var(--color-text)]
-                          outline-none
-                          transition
-                          focus:border-[var(--color-accent-dark)]
-                        "
                       />
-                    ) : (
-                      <div className="flex min-h-11 items-center border-b border-[var(--color-border)] text-sm text-[var(--color-text)]">
-                        {profile.user.name ||
-                          "Not added"}
-                      </div>
-                    )}
-                  </div>
+                    }
+                  />
 
-                  {/* EMAIL */}
+                  <ProfileField
+                    label="Email Address"
+                    value={profile.user.email}
+                    suffix={
+                      profile.user.emailVerified
+                        ? "Verified"
+                        : "Unverified"
+                    }
+                    help="Email address is managed separately from profile editing."
+                  />
 
-                  <div>
-                    <label className="mb-2.5 block text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-                      Email Address
-                    </label>
-
-                    <div className="flex min-h-11 items-center justify-between gap-4 border-b border-[var(--color-border)] text-sm text-[var(--color-text)]">
-                      <span className="break-all">
-                        {profile.user.email}
-                      </span>
-
-                      <span className="shrink-0 text-[10px] font-medium uppercase tracking-[0.1em] text-[var(--color-text-muted)]">
-                        {profile.user.emailVerified
-                          ? "Verified"
-                          : "Unverified"}
-                      </span>
-                    </div>
-
-                    <p className="mt-2 text-[11px] leading-5 text-[var(--color-text-muted)]">
-                      Email address is managed
-                      separately from profile editing.
-                    </p>
-                  </div>
-
-                  {/* PHONE */}
-
-                  <div>
-                    <label className="mb-2.5 block text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-                      Phone Number
-                    </label>
-
-                    {isEditing ? (
+                  <ProfileField
+                    label="Phone Number"
+                    editing={isEditing}
+                    value={
+                      profile.user.phone ||
+                      profile.customer.phone ||
+                      "Not added"
+                    }
+                    input={
                       <input
                         value={form.phone}
-                        onChange={(event) => {
+                        onChange={(event) =>
                           updateForm(
                             "phone",
                             event.target.value,
-                          );
-                        }}
+                          )
+                        }
                         inputMode="tel"
                         autoComplete="tel"
-                        className="
-                          h-11
-                          w-full
-                          border-b
-                          border-[var(--color-border)]
-                          bg-transparent
-                          text-sm
-                          text-[var(--color-text)]
-                          outline-none
-                          transition
-                          focus:border-[var(--color-accent-dark)]
-                        "
                       />
-                    ) : (
-                      <div className="flex min-h-11 items-center border-b border-[var(--color-border)] text-sm text-[var(--color-text)]">
-                        {profile.user.phone ||
-                          profile.customer.phone ||
-                          "Not added"}
-                      </div>
-                    )}
-                  </div>
+                    }
+                  />
 
-                  {/* GENDER */}
-
-                  <div>
-                    <label className="mb-2.5 block text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-                      Gender
-                    </label>
-
-                    {isEditing ? (
-                      <div className="relative">
+                  <ProfileField
+                    label="Gender"
+                    editing={isEditing}
+                    value={
+                      profile.customer.gender ||
+                      "Not added"
+                    }
+                    input={
+                      <div className="profile-details__select-wrap">
                         <select
                           value={
                             form.gender ?? ""
@@ -1340,759 +1022,304 @@ export function ProfileDetails() {
                                 : (value as CustomerGender),
                             );
                           }}
-                          className="
-                            h-11
-                            w-full
-                            appearance-none
-                            border-b
-                            border-[var(--color-border)]
-                            bg-transparent
-                            pr-8
-                            text-sm
-                            text-[var(--color-text)]
-                            outline-none
-                            focus:border-[var(--color-accent-dark)]
-                          "
                         >
                           <option value="">
                             Prefer not to say
                           </option>
-
                           <option value="female">
                             Female
                           </option>
-
                           <option value="male">
                             Male
                           </option>
-
                           <option value="other">
                             Other
                           </option>
                         </select>
 
-                        <ChevronDown
-                          size={16}
-                          className="
-                            pointer-events-none
-                            absolute
-                            right-0
-                            top-1/2
-                            -translate-y-1/2
-                            text-[var(--color-text-secondary)]
-                          "
-                        />
+                        <ChevronDown size={16} />
                       </div>
-                    ) : (
-                      <div className="flex min-h-11 items-center border-b border-[var(--color-border)] text-sm capitalize text-[var(--color-text)]">
-                        {profile.customer.gender ||
-                          "Not added"}
-                      </div>
+                    }
+                  />
+
+                  <ProfileField
+                    label="Date of Birth"
+                    editing={isEditing}
+                    value={formatDate(
+                      profile.customer
+                        .dateOfBirth,
                     )}
-                  </div>
-
-                  {/* DOB */}
-
-                  <div>
-                    <label className="mb-2.5 block text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-                      Date of Birth
-                    </label>
-
-                    {isEditing ? (
-                      <div className="relative">
+                    input={
+                      <div className="profile-details__date-wrap">
                         <input
                           type="date"
                           value={
                             form.dateOfBirth
                           }
-                          onChange={(event) => {
+                          onChange={(event) =>
                             updateForm(
                               "dateOfBirth",
                               event.target.value,
-                            );
-                          }}
-                          className="
-                            h-11
-                            w-full
-                            border-b
-                            border-[var(--color-border)]
-                            bg-transparent
-                            text-sm
-                            text-[var(--color-text)]
-                            outline-none
-                            focus:border-[var(--color-accent-dark)]
-                          "
+                            )
+                          }
                         />
 
                         <CalendarDays
                           size={16}
-                          className="
-                            pointer-events-none
-                            absolute
-                            right-0
-                            top-1/2
-                            -translate-y-1/2
-                            text-[var(--color-text-secondary)]
-                          "
                         />
                       </div>
-                    ) : (
-                      <div className="flex min-h-11 items-center justify-between border-b border-[var(--color-border)] text-sm text-[var(--color-text)]">
-                        <span>
-                          {formatDate(
-                            profile.customer
-                              .dateOfBirth,
-                          )}
-                        </span>
-
-                        <CalendarDays
-                          size={16}
-                          strokeWidth={1.7}
-                          className="text-[var(--color-text-secondary)]"
-                        />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* STATUS */}
-
-                  <div>
-                    <label className="mb-2.5 block text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-                      Account Status
-                    </label>
-
-                    <div className="flex min-h-11 items-center border-b border-[var(--color-border)]">
-                      <span className="inline-flex items-center gap-2 text-sm capitalize text-[var(--color-text)]">
-                        <span className="h-2 w-2 rounded-full bg-[var(--color-accent-dark)]" />
-
-                        {profile.user.status}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* =================================================
-                  STYLE PREFERENCES
-              ================================================== */}
-
-              <section className="border border-[var(--color-border)] bg-[var(--color-surface)]">
-                <div className="border-b border-[var(--color-border)] px-6 py-5 sm:px-7">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--color-accent-dark)]">
-                    Personalisation
-                  </p>
-
-                  <h2 className="mt-1 font-[var(--font-display)] text-[28px] text-[var(--color-text)]">
-                    Style Preferences
-                  </h2>
-
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">
-                    Choose your preferred sizes and
-                    colours. These preferences are
-                    saved to your account.
-                  </p>
-                </div>
-
-                <div className="p-6 sm:p-7">
-                  {/* SIZES */}
-
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <Ruler
+                    }
+                    icon={
+                      <CalendarDays
                         size={16}
-                        strokeWidth={1.7}
-                        className="text-[var(--color-text-secondary)]"
                       />
+                    }
+                  />
 
-                      <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
-                        Preferred Sizes
-                      </p>
-                    </div>
-
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {availableSizes.map(
-                        (size) => {
-                          const selected =
-                            form.preferredSizes.includes(
-                              size,
-                            );
-
-                          return (
-                            <button
-                              key={size}
-                              type="button"
-                              disabled={!isEditing}
-                              onClick={() => {
-                                toggleSize(size);
-                              }}
-                              className={`
-                                min-w-12
-                                border
-                                px-4
-                                py-3
-                                text-xs
-                                font-medium
-                                tracking-[0.08em]
-                                transition
-                                ${
-                                  selected
-                                    ? "border-[var(--color-text)] bg-[var(--color-text)] text-white"
-                                    : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)]"
-                                }
-                                ${
-                                  isEditing
-                                    ? "hover:border-[var(--color-accent-dark)]"
-                                    : "cursor-default"
-                                }
-                              `}
-                            >
-                              {size}
-                            </button>
-                          );
-                        },
-                      )}
-                    </div>
-                  </div>
-
-                  {/* COLOURS */}
-
-                  <div className="mt-8 border-t border-[var(--color-border)] pt-7">
-                    <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
-                      Preferred Colours
-                    </p>
-
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {availableColors.map(
-                        (color) => {
-                          const selected =
-                            form.preferredColors.includes(
-                              color,
-                            );
-
-                          return (
-                            <button
-                              key={color}
-                              type="button"
-                              disabled={!isEditing}
-                              onClick={() => {
-                                toggleColor(color);
-                              }}
-                              className={`
-                                border
-                                px-4
-                                py-3
-                                text-xs
-                                transition
-                                ${
-                                  selected
-                                    ? "border-[var(--color-text)] bg-[var(--color-text)] text-white"
-                                    : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)]"
-                                }
-                                ${
-                                  isEditing
-                                    ? "hover:border-[var(--color-accent-dark)]"
-                                    : "cursor-default"
-                                }
-                              `}
-                            >
-                              {color}
-                            </button>
-                          );
-                        },
-                      )}
-                    </div>
-                  </div>
+                  <ProfileField
+                    label="Account Status"
+                    value={profile.user.status}
+                    status
+                  />
                 </div>
               </section>
 
-              {/* =================================================
-                  COMMUNICATION
-              ================================================== */}
+              {/* STYLE PREFERENCES */}
 
-              <section className="border border-[var(--color-border)] bg-[var(--color-surface)]">
-                <div className="border-b border-[var(--color-border)] px-6 py-5 sm:px-7">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--color-accent-dark)]">
-                    Communication
-                  </p>
+              <section className="profile-details__section">
+                <SectionHeader
+                  eyebrow="Personalisation"
+                  title="Style Preferences"
+                  description="Choose your preferred sizes and colours. These preferences are saved to your account."
+                  icon={<Ruler size={20} />}
+                />
 
-                  <h2 className="mt-1 font-[var(--font-display)] text-[28px] text-[var(--color-text)]">
-                    Communication Preferences
-                  </h2>
-
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">
-                    Control which brand communications
-                    you would like to receive.
-                  </p>
-                </div>
-
-                <div className="grid gap-4 p-6 sm:grid-cols-2 sm:p-7">
-                  {/* EMAIL */}
-
-                  <button
-                    type="button"
+                <div className="profile-details__preference-body">
+                  <PreferenceGroup
+                    label="Preferred Sizes"
+                    items={availableSizes}
+                    selected={
+                      form.preferredSizes
+                    }
                     disabled={!isEditing}
-                    onClick={() => {
+                    onToggle={toggleSize}
+                  />
+
+                  <PreferenceGroup
+                    label="Preferred Colours"
+                    items={availableColors}
+                    selected={
+                      form.preferredColors
+                    }
+                    disabled={!isEditing}
+                    onToggle={toggleColor}
+                  />
+                </div>
+              </section>
+
+              {/* COMMUNICATION */}
+
+              <section className="profile-details__section">
+                <SectionHeader
+                  eyebrow="Communication"
+                  title="Communication Preferences"
+                  description="Control which brand communications you would like to receive."
+                />
+
+                <div className="profile-details__communication-grid">
+                  <PreferenceToggle
+                    title="Email Updates"
+                    description="Collection launches, offers and account updates."
+                    checked={
+                      form.marketingEmails
+                    }
+                    disabled={!isEditing}
+                    onChange={() =>
                       updateForm(
                         "marketingEmails",
                         !form.marketingEmails,
-                      );
-                    }}
-                    className={`
-                      flex
-                      min-h-[92px]
-                      items-center
-                      justify-between
-                      border
-                      px-5
-                      py-4
-                      text-left
-                      transition
-                      ${
-                        form.marketingEmails
-                          ? "border-[var(--color-accent-dark)] bg-[var(--color-accent-light)]"
-                          : "border-[var(--color-border)] bg-[var(--color-surface)]"
-                      }
-                      ${
-                        isEditing
-                          ? "cursor-pointer hover:border-[var(--color-accent-dark)]"
-                          : "cursor-default"
-                      }
-                    `}
-                  >
-                    <div className="pr-4">
-                      <p className="text-sm font-medium text-[var(--color-text)]">
-                        Email Updates
-                      </p>
+                      )
+                    }
+                  />
 
-                      <p className="mt-1 text-xs leading-5 text-[var(--color-text-secondary)]">
-                        Collection launches, offers and
-                        account updates.
-                      </p>
-                    </div>
-
-                    <div
-                      className={`
-                        flex
-                        h-5
-                        w-9
-                        shrink-0
-                        items-center
-                        rounded-full
-                        p-0.5
-                        transition
-                        ${
-                          form.marketingEmails
-                            ? "bg-[var(--color-text)]"
-                            : "bg-[var(--color-border)]"
-                        }
-                      `}
-                    >
-                      <span
-                        className={`
-                          h-4
-                          w-4
-                          rounded-full
-                          bg-[var(--color-surface)]
-                          transition-transform
-                          ${
-                            form.marketingEmails
-                              ? "translate-x-4"
-                              : "translate-x-0"
-                          }
-                        `}
-                      />
-                    </div>
-                  </button>
-
-                  {/* WHATSAPP */}
-
-                  <button
-                    type="button"
+                  <PreferenceToggle
+                    title="WhatsApp Updates"
+                    description="Selected brand communication and important updates."
+                    checked={
+                      form.marketingWhatsapp
+                    }
                     disabled={!isEditing}
-                    onClick={() => {
+                    onChange={() =>
                       updateForm(
                         "marketingWhatsapp",
                         !form.marketingWhatsapp,
-                      );
-                    }}
-                    className={`
-                      flex
-                      min-h-[92px]
-                      items-center
-                      justify-between
-                      border
-                      px-5
-                      py-4
-                      text-left
-                      transition
-                      ${
-                        form.marketingWhatsapp
-                          ? "border-[var(--color-accent-dark)] bg-[var(--color-accent-light)]"
-                          : "border-[var(--color-border)] bg-[var(--color-surface)]"
-                      }
-                      ${
-                        isEditing
-                          ? "cursor-pointer hover:border-[var(--color-accent-dark)]"
-                          : "cursor-default"
-                      }
-                    `}
-                  >
-                    <div className="pr-4">
-                      <p className="text-sm font-medium text-[var(--color-text)]">
-                        WhatsApp Updates
-                      </p>
-
-                      <p className="mt-1 text-xs leading-5 text-[var(--color-text-secondary)]">
-                        Selected brand communication and
-                        important updates.
-                      </p>
-                    </div>
-
-                    <div
-                      className={`
-                        flex
-                        h-5
-                        w-9
-                        shrink-0
-                        items-center
-                        rounded-full
-                        p-0.5
-                        transition
-                        ${
-                          form.marketingWhatsapp
-                            ? "bg-[var(--color-text)]"
-                            : "bg-[var(--color-border)]"
-                        }
-                      `}
-                    >
-                      <span
-                        className={`
-                          h-4
-                          w-4
-                          rounded-full
-                          bg-[var(--color-surface)]
-                          transition-transform
-                          ${
-                            form.marketingWhatsapp
-                              ? "translate-x-4"
-                              : "translate-x-0"
-                          }
-                        `}
-                      />
-                    </div>
-                  </button>
+                      )
+                    }
+                  />
                 </div>
               </section>
 
-              {/* =================================================
-                  ACCOUNT SECURITY / DANGER ZONE
-              ================================================== */}
+              {/* ACCOUNT ACTIONS */}
 
-              <section className="border border-[var(--color-border)] bg-[var(--color-surface)]">
-                <div className="border-b border-[var(--color-border)] px-6 py-5 sm:px-7">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--color-accent-dark)]">
-                    Account Management
-                  </p>
+              <section className="profile-details__section profile-details__section--actions">
+                <SectionHeader
+                  eyebrow="Account Management"
+                  title="Account Actions"
+                  description="Manage your active session or permanently remove your Aayesha Fashion account."
+                />
 
-                  <h2 className="mt-1 font-[var(--font-display)] text-[28px] text-[var(--color-text)]">
-                    Account Actions
-                  </h2>
-
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">
-                    Manage your active session or permanently
-                    remove your Aayesha Fashion account.
-                  </p>
-                </div>
-
-                <div className="grid gap-3 p-6 sm:p-7 md:grid-cols-2">
-                  {/* SIGN OUT */}
-
+                <div className="profile-details__account-actions">
                   <button
                     type="button"
                     onClick={() =>
-                      setConfirmType("logout")
+                      setConfirmType(
+                        "logout",
+                      )
                     }
                     disabled={
                       isProcessingAccountAction
                     }
-                    className="
-                      group
-                      flex
-                      min-h-[88px]
-                      items-center
-                      gap-4
-                      border
-                      border-[var(--color-border)]
-                      bg-[var(--color-bg)]
-                      px-5
-                      py-4
-                      text-left
-                      transition-colors
-                      duration-300
-                      hover:border-[var(--color-text)]
-                      hover:bg-[var(--color-surface-soft)]
-                      disabled:cursor-not-allowed
-                      disabled:opacity-60
-                    "
+                    className="profile-details__account-action"
                   >
-                    <span
-                      className="
-                        flex
-                        h-10
-                        w-10
-                        shrink-0
-                        items-center
-                        justify-center
-                        border
-                        border-[var(--color-border)]
-                        bg-[var(--color-surface)]
-                        text-[var(--color-text-secondary)]
-                        transition-colors
-                        group-hover:border-[var(--color-text)]
-                        group-hover:text-[var(--color-text)]
-                      "
-                    >
+                    <span className="profile-details__account-action-icon">
                       {isProcessingAccountAction &&
                       confirmType ===
                         "logout" ? (
                         <Loader2
-                          size={16}
-                          className="animate-spin"
+                          size={17}
+                          className="profile-details__spin"
                         />
                       ) : (
-                        <LogOut
-                          size={16}
-                          strokeWidth={1.6}
-                        />
+                        <LogOut size={17} />
                       )}
                     </span>
 
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-semibold text-[var(--color-text)]">
+                    <span>
+                      <strong>
                         {isProcessingAccountAction &&
-                        confirmType === "logout"
+                        confirmType ===
+                          "logout"
                           ? "Signing Out..."
                           : "Sign Out"}
-                      </span>
+                      </strong>
 
-                      <span className="mt-1 block text-[10px] leading-5 text-[var(--color-text-muted)]">
-                        Sign out from this device and return
-                        to the home page.
-                      </span>
+                      <small>
+                        Sign out from this device
+                        and return to the home
+                        page.
+                      </small>
                     </span>
 
-                    <ChevronRight
-                      size={15}
-                      strokeWidth={1.4}
-                      className="shrink-0 text-[var(--color-text-secondary)]"
-                    />
+                    <ChevronRight size={16} />
                   </button>
-
-                  {/* DELETE ACCOUNT */}
 
                   <button
                     type="button"
                     onClick={() =>
-                      setConfirmType("delete")
+                      setConfirmType(
+                        "delete",
+                      )
                     }
                     disabled={
                       isProcessingAccountAction
                     }
-                    className="
-                      group
-                      flex
-                      min-h-[88px]
-                      items-center
-                      gap-4
-                      border
-                      border-[#ead4d6]
-                      bg-[#fffafa]
-                      px-5
-                      py-4
-                      text-left
-                      transition-colors
-                      duration-300
-                      hover:border-[#c98f95]
-                      hover:bg-[var(--color-accent-light)]
-                      disabled:cursor-not-allowed
-                      disabled:opacity-60
-                    "
+                    className="profile-details__account-action profile-details__account-action--danger"
                   >
-                    <span
-                      className="
-                        flex
-                        h-10
-                        w-10
-                        shrink-0
-                        items-center
-                        justify-center
-                        border
-                        border-[#ead4d6]
-                        bg-[var(--color-surface)]
-                        text-[#7f4a50]
-                      "
-                    >
+                    <span className="profile-details__account-action-icon">
                       {isProcessingAccountAction &&
                       confirmType ===
                         "delete" ? (
                         <Loader2
-                          size={16}
-                          className="animate-spin"
+                          size={17}
+                          className="profile-details__spin"
                         />
                       ) : (
-                        <Trash2
-                          size={16}
-                          strokeWidth={1.6}
-                        />
+                        <Trash2 size={17} />
                       )}
                     </span>
 
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-semibold text-[#7f4a50]">
+                    <span>
+                      <strong>
                         {isProcessingAccountAction &&
-                        confirmType === "delete"
+                        confirmType ===
+                          "delete"
                           ? "Deleting Account..."
                           : "Delete Account"}
-                      </span>
+                      </strong>
 
-                      <span className="mt-1 block text-[10px] leading-5 text-[var(--color-text-muted)]">
-                        Permanently remove your account and
-                        associated customer profile.
-                      </span>
+                      <small>
+                        Permanently remove your
+                        account and associated
+                        customer profile.
+                      </small>
                     </span>
 
-                    <ChevronRight
-                      size={15}
-                      strokeWidth={1.4}
-                      className="shrink-0 text-[#9c6a70]"
-                    />
+                    <ChevronRight size={16} />
                   </button>
                 </div>
               </section>
 
-              {/* =================================================
-                  BOTTOM ACTIONS
-              ================================================== */}
+              {/* BOTTOM ACTIONS */}
 
-              <div className="border-t border-[var(--color-border)] pt-7">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-xs font-medium text-[var(--color-text)]">
-                      Aayesha Fashion Account
-                    </p>
+              <div className="profile-details__footer-actions">
+                <div>
+                  <p>
+                    Aayesha Fashion Account
+                  </p>
 
-                    <p className="mt-1 text-[10px] leading-5 text-[var(--color-text-muted)]">
-                      Keep your information current for a
-                      smoother shopping experience.
-                    </p>
-                  </div>
+                  <span>
+                    Keep your information current
+                    for a smoother shopping
+                    experience.
+                  </span>
+                </div>
 
-                  <div className="flex flex-wrap gap-2">
+                <div className="profile-details__footer-buttons">
+                  <Link
+                    href="/"
+                    className="profile-details__button profile-details__button--secondary"
+                  >
+                    <Home size={15} />
+                    Back to Home
+                  </Link>
+
+                  {!isEditing ? (
                     <Link
-                      href="/"
-                      className="
-                        inline-flex
-                        h-11
-                        items-center
-                        justify-center
-                        gap-2
-                        border
-                        border-[var(--color-border)]
-                        bg-[var(--color-surface)]
-                        px-5
-                        text-[10px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.15em]
-                        text-[var(--color-text)]
-                        transition-colors
-                        hover:bg-[var(--color-surface-soft)]
-                      "
+                      href="/account/edit"
+                      className="profile-details__button profile-details__button--primary"
                     >
-                      <Home size={14} />
-
-                      Back to Home
+                      <Edit3 size={15} />
+                      Edit Account
                     </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        void handleSave();
+                      }}
+                      disabled={isSaving}
+                      className="profile-details__button profile-details__button--primary"
+                    >
+                      {isSaving ? (
+                        <Loader2
+                          size={15}
+                          className="profile-details__spin"
+                        />
+                      ) : (
+                        <Save size={15} />
+                      )}
 
-                    {!isEditing ? (
-                      <Link
-                        href="/account/edit"
-                        className="
-                          inline-flex
-                          h-11
-                          items-center
-                          justify-center
-                          gap-2
-                          border
-                          border-[var(--color-text)]
-                          bg-[var(--color-text)]
-                          px-6
-                          text-[10px]
-                          font-semibold
-                          uppercase
-                          tracking-[0.15em]
-                          text-white
-                          transition-colors
-                          hover:bg-[var(--color-text-secondary)]
-                        "
-                      >
-                        <Edit3 size={14} />
-
-                        Edit Account
-                      </Link>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          void handleSave();
-                        }}
-                        disabled={isSaving}
-                        className="
-                          inline-flex
-                          h-11
-                          items-center
-                          justify-center
-                          gap-2
-                          border
-                          border-[var(--color-text)]
-                          bg-[var(--color-text)]
-                          px-6
-                          text-[10px]
-                          font-semibold
-                          uppercase
-                          tracking-[0.15em]
-                          text-white
-                          transition
-                          hover:bg-[var(--color-text-secondary)]
-                          disabled:cursor-not-allowed
-                          disabled:opacity-60
-                        "
-                      >
-                        {isSaving ? (
-                          <Loader2
-                            size={14}
-                            className="animate-spin"
-                          />
-                        ) : (
-                          <Save size={14} />
-                        )}
-
-                        {isSaving
-                          ? "Saving..."
-                          : "Save Changes"}
-                      </button>
-                    )}
-                  </div>
+                      {isSaving
+                        ? "Saving..."
+                        : "Save Changes"}
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* =====================================================
-          CONFIRMATION DIALOG
-      ===================================================== */}
 
       <AccountConfirmDialog
         open={confirmType !== null}
@@ -2127,31 +1354,225 @@ export function ProfileDetails() {
 }
 
 /* =========================================================
-   SMALL ICON COMPONENT
+   SECTION HEADER
+========================================================= */
+
+function SectionHeader({
+  eyebrow,
+  title,
+  description,
+  icon,
+}: {
+  eyebrow: string;
+  title: string;
+  description?: string;
+  icon?: React.ReactNode;
+}) {
+  return (
+    <div className="profile-details__section-header">
+      <div>
+        <p className="profile-details__section-eyebrow">
+          {eyebrow}
+        </p>
+
+        <h2 className="profile-details__section-title">
+          {title}
+        </h2>
+
+        {description ? (
+          <p className="profile-details__section-description">
+            {description}
+          </p>
+        ) : null}
+      </div>
+
+      {icon ? (
+        <span className="profile-details__section-icon">
+          {icon}
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+/* =========================================================
+   PROFILE FIELD
+========================================================= */
+
+function ProfileField({
+  label,
+  value,
+  editing = false,
+  input,
+  suffix,
+  help,
+  status = false,
+  icon,
+}: {
+  label: string;
+  value: string;
+  editing?: boolean;
+  input?: React.ReactNode;
+  suffix?: string;
+  help?: string;
+  status?: boolean;
+  icon?: React.ReactNode;
+}) {
+  return (
+    <div className="profile-details__field">
+      <label>
+        {label}
+      </label>
+
+      {editing && input ? (
+        <div className="profile-details__field-control">
+          {input}
+        </div>
+      ) : (
+        <div className="profile-details__field-value">
+          {status ? (
+            <span className="profile-details__status">
+              <span />
+              {value}
+            </span>
+          ) : (
+            <>
+              <span className="profile-details__field-text">
+                {value}
+              </span>
+
+              {suffix ? (
+                <span className="profile-details__field-suffix">
+                  {suffix}
+                </span>
+              ) : null}
+
+              {icon}
+            </>
+          )}
+        </div>
+      )}
+
+      {help ? (
+        <p className="profile-details__field-help">
+          {help}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+/* =========================================================
+   PREFERENCE GROUP
+========================================================= */
+
+function PreferenceGroup({
+  label,
+  items,
+  selected,
+  disabled,
+  onToggle,
+}: {
+  label: string;
+  items: string[];
+  selected: string[];
+  disabled: boolean;
+  onToggle: (value: string) => void;
+}) {
+  return (
+    <div className="profile-details__preference-group">
+      <p className="profile-details__preference-label">
+        {label}
+      </p>
+
+      <div className="profile-details__preference-options">
+        {items.map((item) => {
+          const isSelected =
+            selected.includes(item);
+
+          return (
+            <button
+              key={item}
+              type="button"
+              disabled={disabled}
+              onClick={() =>
+                onToggle(item)
+              }
+              className={`profile-details__preference-option ${
+                isSelected
+                  ? "profile-details__preference-option--selected"
+                  : ""
+              }`}
+            >
+              {item}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+function PreferenceToggle({
+  title,
+  description,
+  checked,
+  disabled,
+  onChange,
+}: {
+  title: string;
+  description: string;
+  checked: boolean;
+  disabled: boolean;
+  onChange: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onChange}
+      className={`profile-details__toggle-card ${
+        checked
+          ? "profile-details__toggle-card--active"
+          : ""
+      }`}
+    >
+      <span className="profile-details__toggle-copy">
+        <strong>{title}</strong>
+        <small>{description}</small>
+      </span>
+
+      <span
+        className={`profile-details__switch ${
+          checked
+            ? "profile-details__switch--active"
+            : ""
+        }`}
+        aria-hidden="true"
+      >
+        <span />
+      </span>
+    </button>
+  );
+}
+
+/* =========================================================
+   SHOPPING BAG ICON
 ========================================================= */
 
 function ShoppingBagIcon() {
   return (
-    <span
-      className="
-        flex
-        h-9
-        w-9
-        shrink-0
-        items-center
-        justify-center
-        border
-        border-[var(--color-border)]
-        bg-[var(--color-surface)]
-        text-[var(--color-text-secondary)]
-      "
-    >
+    <span className="profile-details__quick-icon">
       <svg
-        width="15"
-        height="15"
+        width="16"
+        height="16"
         viewBox="0 0 24 24"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
         <path
           d="M6 8H18L19 21H5L6 8Z"

@@ -37,91 +37,68 @@ import type {
 ========================================================= */
 
 export function SavedAddresses() {
-  const accessToken =
-    useAuthStore(
-      (state) =>
-        state.accessToken,
-    );
-
-  const isAuthenticated =
-    useAuthStore(
-      (state) =>
-        state.isAuthenticated,
-    );
-
-  const isInitialized =
-    useAuthStore(
-      (state) =>
-        state.isInitialized,
-    );
-
-  const [
-    addresses,
-    setAddresses,
-  ] = useState<CustomerAddress[]>(
-    [],
+  const accessToken = useAuthStore(
+    (state) => state.accessToken,
   );
 
-  const [
-    isLoading,
-    setIsLoading,
-  ] = useState(true);
-
-  const [
-    deletingId,
-    setDeletingId,
-  ] = useState<string | null>(
-    null,
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated,
   );
 
-  const [
-    defaultId,
-    setDefaultId,
-  ] = useState<string | null>(
-    null,
+  const isInitialized = useAuthStore(
+    (state) => state.isInitialized,
   );
 
-  const [
-    errorMessage,
-    setErrorMessage,
-  ] = useState("");
+  const [addresses, setAddresses] =
+    useState<CustomerAddress[]>([]);
+
+  const [isLoading, setIsLoading] =
+    useState(true);
+
+  const [deletingId, setDeletingId] =
+    useState<string | null>(null);
+
+  const [defaultId, setDefaultId] =
+    useState<string | null>(null);
+
+  const [errorMessage, setErrorMessage] =
+    useState("");
 
   /* =======================================================
      LOAD ADDRESSES
   ======================================================= */
 
-  const loadAddresses =
-    useCallback(
-      async () => {
-        if (!accessToken) {
-          setAddresses([]);
-          setIsLoading(false);
-          return;
-        }
+  const loadAddresses = useCallback(
+    async () => {
+      if (!accessToken) {
+        setAddresses([]);
+        setIsLoading(false);
+        return;
+      }
 
-        setIsLoading(true);
-        setErrorMessage("");
+      setIsLoading(true);
+      setErrorMessage("");
 
-        try {
-          const data =
-            await getCustomerAddresses(
-              accessToken,
-            );
+      try {
+        const data =
+          await getCustomerAddresses(
+            accessToken,
+          );
 
-          setAddresses(data);
-        } catch (error) {
-          const message =
-            error instanceof Error
-              ? error.message
-              : "Unable to load your saved addresses.";
+        setAddresses(data);
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : "Unable to load your saved addresses.";
 
-          setErrorMessage(message);
-        } finally {
-          setIsLoading(false);
-        }
-      },
-      [accessToken],
-    );
+        setErrorMessage(message);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [accessToken],
+  );
 
   /* =======================================================
      INITIAL LOAD
@@ -153,118 +130,105 @@ export function SavedAddresses() {
      SET DEFAULT
   ======================================================= */
 
-  const handleSetDefault =
-    async (
-      addressId: string,
-    ) => {
-      if (
-        !accessToken ||
-        defaultId
-      ) {
-        return;
-      }
+  const handleSetDefault = async (
+    addressId: string,
+  ) => {
+    if (
+      !accessToken ||
+      defaultId
+    ) {
+      return;
+    }
 
-      setDefaultId(addressId);
-      setErrorMessage("");
+    setDefaultId(addressId);
+    setErrorMessage("");
 
-      try {
-        const updatedAddress =
-          await setCustomerDefaultAddress(
-            accessToken,
-            addressId,
-          );
-
-        setAddresses(
-          (current) =>
-            current.map(
-              (address) => ({
-                ...address,
-                isDefault:
-                  address.id ===
-                  updatedAddress.id,
-              }),
-            ),
+    try {
+      const updatedAddress =
+        await setCustomerDefaultAddress(
+          accessToken,
+          addressId,
         );
 
-        toast.success(
-          "Default address updated.",
-        );
-      } catch (error) {
-        const message =
-          error instanceof Error
-            ? error.message
-            : "Unable to update the default address.";
+      setAddresses((current) =>
+        current.map((address) => ({
+          ...address,
+          isDefault:
+            address.id ===
+            updatedAddress.id,
+        })),
+      );
 
-        setErrorMessage(
-          message,
-        );
+      toast.success(
+        "Default address updated.",
+      );
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to update the default address.";
 
-        toast.error(message);
-      } finally {
-        setDefaultId(null);
-      }
-    };
+      setErrorMessage(message);
+      toast.error(message);
+    } finally {
+      setDefaultId(null);
+    }
+  };
 
   /* =======================================================
      DELETE ADDRESS
   ======================================================= */
 
-  const handleDelete =
-    async (
-      address: CustomerAddress,
-    ) => {
-      if (
-        !accessToken ||
-        deletingId
-      ) {
-        return;
-      }
+  const handleDelete = async (
+    address: CustomerAddress,
+  ) => {
+    if (
+      !accessToken ||
+      deletingId
+    ) {
+      return;
+    }
 
-      const confirmed =
-        window.confirm(
-          `Delete the saved address for ${address.name}?`,
-        );
+    const confirmed =
+      window.confirm(
+        `Delete the saved address for ${address.name}?`,
+      );
 
-      if (!confirmed) {
-        return;
-      }
+    if (!confirmed) {
+      return;
+    }
 
-      setDeletingId(address.id);
-      setErrorMessage("");
+    setDeletingId(address.id);
+    setErrorMessage("");
 
-      try {
-        await deleteCustomerAddress(
-          accessToken,
-          address.id,
-        );
+    try {
+      await deleteCustomerAddress(
+        accessToken,
+        address.id,
+      );
 
-        setAddresses(
-          (current) =>
-            current.filter(
-              (item) =>
-                item.id !==
-                address.id,
-            ),
-        );
+      setAddresses((current) =>
+        current.filter(
+          (item) =>
+            item.id !== address.id,
+        ),
+      );
 
-        toast.success(
-          "Address deleted successfully.",
-        );
-      } catch (error) {
-        const message =
-          error instanceof Error
-            ? error.message
-            : "Unable to delete the address.";
+      toast.success(
+        "Address deleted successfully.",
+      );
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to delete the address.";
 
-        setErrorMessage(
-          message,
-        );
-
-        toast.error(message);
-      } finally {
-        setDeletingId(null);
-      }
-    };
+      setErrorMessage(message);
+      toast.error(message);
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   /* =======================================================
      LOADING
@@ -275,28 +239,30 @@ export function SavedAddresses() {
     isLoading
   ) {
     return (
-      <section className="border border-[var(--color-border-light)] bg-white">
-        <div className="border-b border-[var(--color-border-light)] px-6 py-6 sm:px-8">
-          <div className="h-7 w-52 animate-pulse bg-[var(--color-bg-subtle)]" />
+      <section className="saved-addresses saved-addresses--loading">
+        <div className="saved-addresses__header saved-addresses__header--loading">
+          <div className="saved-addresses__skeleton saved-addresses__skeleton--title" />
 
-          <div className="mt-3 h-4 w-80 max-w-full animate-pulse bg-[var(--color-bg-subtle)]" />
+          <div className="saved-addresses__skeleton saved-addresses__skeleton--description" />
         </div>
 
-        <div className="grid gap-5 p-6 sm:p-8 lg:grid-cols-2">
-          {[1, 2].map(
-            (item) => (
-              <div
-                key={item}
-                className="
-                  h-64
-                  animate-pulse
-                  border
-                  border-[var(--color-border-light)]
-                  bg-[var(--color-surface-soft)]
-                "
-              />
-            ),
-          )}
+        <div className="saved-addresses__grid">
+          {[1, 2].map((item) => (
+            <div
+              key={item}
+              className="saved-addresses__card-skeleton"
+            >
+              <div className="saved-addresses__skeleton saved-addresses__skeleton--card-title" />
+
+              <div className="saved-addresses__skeleton saved-addresses__skeleton--line" />
+
+              <div className="saved-addresses__skeleton saved-addresses__skeleton--line saved-addresses__skeleton--line-short" />
+
+              <div className="saved-addresses__skeleton saved-addresses__skeleton--line" />
+
+              <div className="saved-addresses__skeleton saved-addresses__skeleton--line saved-addresses__skeleton--line-short" />
+            </div>
+          ))}
         </div>
       </section>
     );
@@ -311,42 +277,30 @@ export function SavedAddresses() {
     !accessToken
   ) {
     return (
-      <section className="border border-[var(--color-border-light)] bg-white px-6 py-16 text-center sm:px-8">
-        <MapPin
-          size={28}
-          strokeWidth={1.5}
-          className="mx-auto text-[var(--color-text-secondary)]"
-        />
+      <section className="saved-addresses saved-addresses--auth">
+        <div className="saved-addresses__state-icon">
+          <MapPin
+            size={24}
+            strokeWidth={1.4}
+          />
+        </div>
 
-        <h1 className="mt-5 font-[var(--font-display)] text-3xl text-[var(--color-text)]">
+        <p className="saved-addresses__eyebrow">
+          Delivery
+        </p>
+
+        <h1 className="saved-addresses__state-title">
           Saved Addresses
         </h1>
 
-        <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[var(--color-text-secondary)]">
-          Sign in to save and manage your delivery addresses.
+        <p className="saved-addresses__state-description">
+          Sign in to save and manage your
+          delivery addresses.
         </p>
 
         <Link
           href="/login?callbackUrl=/account/addresses"
-          className="
-            mt-7
-            inline-flex
-            h-11
-            items-center
-            justify-center
-            border
-            border-[var(--color-text)]
-            bg-[var(--color-text)]
-            px-6
-            text-[11px]
-            font-semibold
-            uppercase
-            tracking-[0.14em]
-            text-white
-            transition-colors
-            duration-200
-            hover:bg-[var(--color-charcoal-soft)]
-          "
+          className="saved-addresses__button saved-addresses__button--primary"
         >
           Sign In
         </Link>
@@ -359,97 +313,65 @@ export function SavedAddresses() {
   ======================================================= */
 
   return (
-    <section className="border border-[var(--color-border-light)] bg-white">
+    <section className="saved-addresses">
       {/* =====================================================
           HEADER
       ===================================================== */}
 
-      <div className="flex flex-col gap-5 border-b border-[var(--color-border-light)] px-6 py-6 sm:px-8 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
-            Delivery
-          </p>
+      <header className="saved-addresses__header">
+        <div className="saved-addresses__heading">
+          <div className="saved-addresses__eyebrow-row">
+            <span className="saved-addresses__eyebrow-line" />
 
-          <h1 className="mt-2 font-[var(--font-display)] text-3xl leading-none text-[var(--color-text)] sm:text-4xl">
+            <p className="saved-addresses__eyebrow">
+              Delivery
+            </p>
+          </div>
+
+          <h1 className="saved-addresses__title">
             Saved Addresses
           </h1>
 
-          <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">
-            Manage the addresses you use for your Aayesha Fashion
-            orders.
+          <p className="saved-addresses__description">
+            Manage the addresses you use for
+            your Aayesha Fashion orders.
           </p>
         </div>
 
         <Link
           href="/account/addresses/new"
-          className="
-            inline-flex
-            h-11
-            w-fit
-            shrink-0
-            items-center
-            justify-center
-            gap-2
-            border
-            border-[var(--color-text)]
-            bg-[var(--color-text)]
-            px-5
-            text-[11px]
-            font-semibold
-            uppercase
-            tracking-[0.14em]
-            text-white
-            transition-colors
-            duration-200
-            hover:bg-[var(--color-charcoal-soft)]
-          "
+          className="saved-addresses__button saved-addresses__button--primary"
         >
           <Plus
-            size={15}
+            size={16}
             strokeWidth={1.8}
           />
 
-          Add New Address
+          <span>Add New Address</span>
         </Link>
-      </div>
+      </header>
 
       {/* =====================================================
           ERROR
       ===================================================== */}
 
       {errorMessage ? (
-        <div className="border-b border-[var(--color-border-light)] bg-[var(--color-surface-soft)] px-6 py-4 sm:px-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-[var(--color-error)]">
-              {errorMessage}
-            </p>
+        <div className="saved-addresses__feedback">
+          <div className="saved-addresses__feedback-content">
+            <span className="saved-addresses__feedback-dot" />
 
-            <button
-              type="button"
-              onClick={() =>
-                void loadAddresses()
-              }
-              className="
-                inline-flex
-                h-9
-                items-center
-                justify-center
-                border
-                border-[var(--color-border)]
-                bg-white
-                px-4
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.14em]
-                text-[var(--color-text)]
-                transition-colors
-                hover:border-[var(--color-text)]
-              "
-            >
-              Try Again
-            </button>
+            <p>{errorMessage}</p>
           </div>
+
+          <button
+            type="button"
+            onClick={() =>
+              void loadAddresses()
+            }
+            className="saved-addresses__button saved-addresses__button--secondary saved-addresses__button--small"
+          >
+            Try Again
+          </button>
         </div>
       ) : null}
 
@@ -458,53 +380,38 @@ export function SavedAddresses() {
       ===================================================== */}
 
       {addresses.length === 0 ? (
-        <div className="px-6 py-20 text-center sm:px-8">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center border border-[var(--color-border-light)] bg-[var(--color-surface-soft)]">
+        <div className="saved-addresses__empty">
+          <div className="saved-addresses__empty-icon">
             <MapPin
               size={24}
-              strokeWidth={1.5}
-              className="text-[var(--color-text-secondary)]"
+              strokeWidth={1.4}
             />
           </div>
 
-          <h2 className="mt-6 font-[var(--font-display)] text-3xl text-[var(--color-text)]">
+          <p className="saved-addresses__eyebrow">
+            Your delivery book
+          </p>
+
+          <h2 className="saved-addresses__empty-title">
             No saved addresses
           </h2>
 
-          <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[var(--color-text-secondary)]">
-            Add your preferred delivery address to make checkout
-            faster and easier.
+          <p className="saved-addresses__empty-description">
+            Add your preferred delivery
+            address to make checkout faster
+            and easier.
           </p>
 
           <Link
             href="/account/addresses/new"
-            className="
-              mt-7
-              inline-flex
-              h-11
-              items-center
-              justify-center
-              gap-2
-              border
-              border-[var(--color-text)]
-              bg-[var(--color-text)]
-              px-6
-              text-[11px]
-              font-semibold
-              uppercase
-              tracking-[0.14em]
-              text-white
-              transition-colors
-              duration-200
-              hover:bg-[var(--color-charcoal-soft)]
-            "
+            className="saved-addresses__button saved-addresses__button--primary"
           >
             <Plus
-              size={15}
+              size={16}
               strokeWidth={1.8}
             />
 
-            Add Address
+            <span>Add Address</span>
           </Link>
         </div>
       ) : (
@@ -512,237 +419,161 @@ export function SavedAddresses() {
            ADDRESS GRID
         =================================================== */
 
-        <div className="grid gap-5 p-6 sm:p-8 lg:grid-cols-2">
-          {addresses.map(
-            (address) => {
-              const isDeleting =
-                deletingId ===
-                address.id;
+        <div className="saved-addresses__grid">
+          {addresses.map((address) => {
+            const isDeleting =
+              deletingId === address.id;
 
-              const isSettingDefault =
-                defaultId ===
-                address.id;
+            const isSettingDefault =
+              defaultId === address.id;
 
-              return (
-                <article
-                  key={
-                    address.id
-                  }
-                  className="
-                    group
-                    border
-                    border-[var(--color-border-light)]
-                    bg-[var(--color-surface-soft)]
-                    transition-colors
-                    duration-200
-                    hover:border-[var(--color-border)]
-                  "
-                >
-                  {/* ADDRESS HEADER */}
+            return (
+              <article
+                key={address.id}
+                className={`saved-address-card ${
+                  address.isDefault
+                    ? "saved-address-card--default"
+                    : ""
+                }`}
+              >
+                {/* ADDRESS HEADER */}
 
-                  <div className="flex items-start justify-between gap-5 border-b border-[var(--color-border-light)] px-5 py-5">
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <h2 className="text-sm font-semibold text-[var(--color-text)]">
-                          {address.name}
-                        </h2>
+                <div className="saved-address-card__header">
+                  <div className="saved-address-card__identity">
+                    <div className="saved-address-card__name-row">
+                      <h2 className="saved-address-card__name">
+                        {address.name}
+                      </h2>
 
-                        {address.isDefault ? (
-                          <span className="inline-flex items-center gap-1 border border-[color:var(--color-accent-soft)] bg-[var(--color-rose-light)] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text)]">
-                            <Star
-                              size={10}
-                              fill="currentColor"
-                              strokeWidth={1.5}
-                            />
+                      {address.isDefault ? (
+                        <span className="saved-address-card__default-badge">
+                          <Star
+                            size={11}
+                            fill="currentColor"
+                            strokeWidth={1.5}
+                          />
 
-                            Default
-                          </span>
-                        ) : null}
-                      </div>
-
-                      <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
-                        +91{" "}
-                        {address.phone}
-                      </p>
+                          Default
+                        </span>
+                      ) : null}
                     </div>
 
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-[var(--color-border-light)] bg-white text-[var(--color-text-secondary)]">
-                      <MapPin
+                    <p className="saved-address-card__phone">
+                      +91 {address.phone}
+                    </p>
+                  </div>
+
+                  <div className="saved-address-card__location-icon">
+                    <MapPin
+                      size={16}
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                </div>
+
+                {/* ADDRESS DETAILS */}
+
+                <div className="saved-address-card__body">
+                  <address className="saved-address-card__address">
+                    <span>
+                      {address.addressLine}
+                    </span>
+
+                    <span>
+                      {address.city},{" "}
+                      {address.state}
+                    </span>
+
+                    <span className="saved-address-card__pincode">
+                      {address.pincode}
+                    </span>
+
+                    {address.landmark ? (
+                      <span className="saved-address-card__landmark">
+                        Landmark:{" "}
+                        {address.landmark}
+                      </span>
+                    ) : null}
+                  </address>
+                </div>
+
+                {/* ACTIONS */}
+
+                <div className="saved-address-card__actions">
+                  <Link
+                    href={`/account/addresses/edit?id=${encodeURIComponent(
+                      address.id,
+                    )}`}
+                    className="saved-address-card__action"
+                  >
+                    <Edit3
+                      size={15}
+                      strokeWidth={1.6}
+                    />
+
+                    <span>Edit</span>
+                  </Link>
+
+                  <button
+                    type="button"
+                    disabled={
+                      address.isDefault ||
+                      Boolean(defaultId) ||
+                      isDeleting
+                    }
+                    onClick={() =>
+                      void handleSetDefault(
+                        address.id,
+                      )
+                    }
+                    className="saved-address-card__action"
+                  >
+                    {isSettingDefault ? (
+                      <span className="saved-address-card__spinner" />
+                    ) : address.isDefault ? (
+                      <Check
+                        size={15}
+                        strokeWidth={1.8}
+                      />
+                    ) : (
+                      <Star
                         size={15}
                         strokeWidth={1.6}
                       />
-                    </span>
-                  </div>
+                    )}
 
-                  {/* ADDRESS DETAILS */}
-
-                  <div className="px-5 py-5">
-                    <address className="not-italic text-sm leading-6 text-[var(--color-text-secondary)]">
-                      <span className="block">
-                        {
-                          address.addressLine
-                        }
-                      </span>
-
-                      <span className="block">
-                        {
-                          address.city
-                        }
-                        ,{" "}
-                        {
-                          address.state
-                        }
-                      </span>
-
-                      <span className="block font-medium text-[var(--color-text)]">
-                        {
-                          address.pincode
-                        }
-                      </span>
-
-                      {address.landmark ? (
-                        <span className="mt-2 block text-xs text-[var(--color-text-secondary)]">
-                          Landmark:{" "}
-                          {
-                            address.landmark
-                          }
-                        </span>
-                      ) : null}
-                    </address>
-                  </div>
-
-                  {/* ACTIONS */}
-
-                  <div className="grid border-t border-[var(--color-border-light)] sm:grid-cols-3">
-                    <Link
-                      href={`/account/addresses/edit?id=${encodeURIComponent(
-                        address.id,
-                      )}`}
-                      className="
-                        inline-flex
-                        h-11
-                        items-center
-                        justify-center
-                        gap-2
-                        border-b
-                        border-[var(--color-border-light)]
-                        text-[10px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.12em]
-                        text-[var(--color-text)]
-                        transition-colors
-                        hover:bg-[var(--color-bg-subtle)]
-                        sm:border-b-0
-                        sm:border-r
-                      "
-                    >
-                      <Edit3
-                        size={14}
-                        strokeWidth={1.7}
-                      />
-
-                      Edit
-                    </Link>
-
-                    <button
-                      type="button"
-                      disabled={
-                        address.isDefault ||
-                        Boolean(
-                          defaultId,
-                        ) ||
-                        isDeleting
-                      }
-                      onClick={() =>
-                        void handleSetDefault(
-                          address.id,
-                        )
-                      }
-                      className="
-                        inline-flex
-                        h-11
-                        items-center
-                        justify-center
-                        gap-2
-                        border-b
-                        border-[var(--color-border-light)]
-                        px-3
-                        text-[10px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.12em]
-                        text-[var(--color-text)]
-                        transition-colors
-                        hover:bg-[var(--color-bg-subtle)]
-                        disabled:cursor-not-allowed
-                        disabled:opacity-40
-                        sm:border-b-0
-                        sm:border-r
-                      "
-                    >
-                      {isSettingDefault ? (
-                        <span className="h-3.5 w-3.5 animate-spin rounded-full border border-[var(--color-text)] border-t-transparent" />
-                      ) : address.isDefault ? (
-                        <Check
-                          size={14}
-                          strokeWidth={1.8}
-                        />
-                      ) : (
-                        <Star
-                          size={14}
-                          strokeWidth={1.7}
-                        />
-                      )}
-
+                    <span>
                       {address.isDefault
                         ? "Default"
                         : "Set Default"}
-                    </button>
+                    </span>
+                  </button>
 
-                    <button
-                      type="button"
-                      disabled={
-                        isDeleting
-                      }
-                      onClick={() =>
-                        void handleDelete(
-                          address,
-                        )
-                      }
-                      className="
-                        inline-flex
-                        h-11
-                        items-center
-                        justify-center
-                        gap-2
-                        text-[10px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.12em]
-                        text-[var(--color-error)]
-                        transition-colors
-                        hover:bg-[var(--color-rose-light)]
-                        disabled:cursor-not-allowed
-                        disabled:opacity-40
-                      "
-                    >
-                      {isDeleting ? (
-                        <span className="h-3.5 w-3.5 animate-spin rounded-full border border-[var(--color-error)] border-t-transparent" />
-                      ) : (
-                        <Trash2
-                          size={14}
-                          strokeWidth={1.7}
-                        />
-                      )}
+                  <button
+                    type="button"
+                    disabled={isDeleting}
+                    onClick={() =>
+                      void handleDelete(
+                        address,
+                      )
+                    }
+                    className="saved-address-card__action saved-address-card__action--danger"
+                  >
+                    {isDeleting ? (
+                      <span className="saved-address-card__spinner saved-address-card__spinner--danger" />
+                    ) : (
+                      <Trash2
+                        size={15}
+                        strokeWidth={1.6}
+                      />
+                    )}
 
-                      Delete
-                    </button>
-                  </div>
-                </article>
-              );
-            },
-          )}
+                    <span>Delete</span>
+                  </button>
+                </div>
+              </article>
+            );
+          })}
         </div>
       )}
 
@@ -751,27 +582,16 @@ export function SavedAddresses() {
       ===================================================== */}
 
       {addresses.length > 0 ? (
-        <div className="border-t border-[var(--color-border-light)] px-6 py-5 sm:px-8">
+        <div className="saved-addresses__footer">
           <Link
             href="/account"
-            className="
-              inline-flex
-              items-center
-              gap-2
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.14em]
-              text-[var(--color-text-secondary)]
-              transition-colors
-              hover:text-[var(--color-text)]
-            "
+            className="saved-addresses__back-link"
           >
-            Back to Account
+            <span>Back to Account</span>
 
             <ChevronRight
-              size={14}
-              strokeWidth={1.6}
+              size={15}
+              strokeWidth={1.5}
             />
           </Link>
         </div>

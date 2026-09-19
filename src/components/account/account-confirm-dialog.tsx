@@ -31,58 +31,81 @@ export function AccountConfirmDialog({
 
   return (
     <div
-      className="fixed inset-0 z-[var(--z-modal)] flex items-center justify-center bg-[rgba(33,31,29,0.42)] px-4 py-6 backdrop-blur-[3px]"
+      className="account-dialog"
       role="dialog"
       aria-modal="true"
       aria-labelledby="account-confirm-title"
     >
-      {/* Backdrop */}
+      {/* =====================================================
+          BACKDROP
+      ===================================================== */}
 
       <button
         type="button"
         aria-label="Close dialog"
         onClick={onCancel}
         disabled={loading}
-        className="absolute inset-0 cursor-default"
+        className="account-dialog__backdrop"
       />
 
-      {/* Dialog */}
+      {/* =====================================================
+          DIALOG
+      ===================================================== */}
 
-      <div className="relative z-10 w-full max-w-[460px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)]">
-        {/* =====================================================
+      <div
+        className={`account-dialog__panel ${
+          isDelete
+            ? "account-dialog__panel--delete"
+            : "account-dialog__panel--logout"
+        }`}
+      >
+        {/* ===================================================
+            TOP ACCENT
+        =================================================== */}
+
+        <div
+          className={`account-dialog__accent ${
+            isDelete
+              ? "account-dialog__accent--delete"
+              : "account-dialog__accent--default"
+          }`}
+          aria-hidden="true"
+        />
+
+        {/* ===================================================
             HEADER
-        ===================================================== */}
+        =================================================== */}
 
-        <div className="flex items-start justify-between border-b border-[var(--color-border-light)] px-6 py-6 sm:px-7">
-          <div className="flex min-w-0 items-center gap-4">
+        <div className="account-dialog__header">
+          <div className="account-dialog__heading">
             <div
-              className={
+              className={`account-dialog__icon ${
                 isDelete
-                  ? "flex h-11 w-11 shrink-0 items-center justify-center border border-[var(--color-error)]/25 bg-[var(--color-error)]/5 text-[var(--color-error)]"
-                  : "flex h-11 w-11 shrink-0 items-center justify-center border border-[var(--color-border)] bg-[var(--color-bg-soft)] text-[var(--color-text)]"
-              }
+                  ? "account-dialog__icon--danger"
+                  : "account-dialog__icon--default"
+              }`}
             >
               {isDelete ? (
                 <Trash2
-                  size={18}
-                  strokeWidth={1.5}
+                  size={21}
+                  strokeWidth={1.35}
                 />
               ) : (
                 <LogOut
-                  size={18}
-                  strokeWidth={1.5}
+                  size={21}
+                  strokeWidth={1.35}
                 />
               )}
             </div>
 
-            <div className="min-w-0">
-              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                Account
-              </p>
+            <div className="account-dialog__heading-content">
+              <span className="account-dialog__eyebrow">
+                Aayesha Fashion
+              </span>
 
               <h2
                 id="account-confirm-title"
-                className="mt-1 font-[var(--font-display)] text-3xl leading-none tracking-[-0.02em] text-[var(--color-text)]"
+                className="account-dialog__title"
               >
                 {isDelete
                   ? "Delete Account"
@@ -91,78 +114,108 @@ export function AccountConfirmDialog({
             </div>
           </div>
 
-          {/* Close */}
+          {/* CLOSE */}
 
           <button
             type="button"
             onClick={onCancel}
             disabled={loading}
             aria-label="Close"
-            className="flex h-8 w-8 shrink-0 items-center justify-center text-[var(--color-text-muted)] transition duration-200 hover:bg-[var(--color-bg-soft)] hover:text-[var(--color-text)] disabled:cursor-not-allowed disabled:opacity-40"
+            className="account-dialog__close"
           >
             <X
-              size={16}
-              strokeWidth={1.6}
+              size={18}
+              strokeWidth={1.4}
             />
           </button>
         </div>
 
-        {/* =====================================================
+        {/* ===================================================
             CONTENT
-        ===================================================== */}
+        =================================================== */}
 
-        <div className="px-6 py-7 sm:px-7">
+        <div className="account-dialog__content">
+          {/* STATUS */}
+
+          <div
+            className={`account-dialog__status ${
+              isDelete
+                ? "account-dialog__status--danger"
+                : "account-dialog__status--default"
+            }`}
+          >
+            <span className="account-dialog__status-dot" />
+
+            <span>
+              {isDelete
+                ? "Permanent action"
+                : "Account session"}
+            </span>
+          </div>
+
           {isDelete ? (
             <>
-              <div className="border border-[var(--color-error)]/20 bg-[var(--color-error)]/[0.035] p-4">
-                <div className="flex items-start gap-3">
-                  <AlertTriangle
-                    size={17}
-                    strokeWidth={1.6}
-                    className="mt-0.5 shrink-0 text-[var(--color-error)]"
-                  />
+              <div className="account-dialog__message">
+                <h3 className="account-dialog__message-title">
+                  Are you sure you want to
+                  continue?
+                </h3>
 
-                  <p className="text-xs leading-6 text-[var(--color-text-secondary)]">
-                    This action is permanent. Your
-                    profile and saved addresses will be
-                    removed from active use. Existing order
-                    records will be retained where required
-                    for order history.
-                  </p>
-                </div>
+                <p className="account-dialog__description">
+                  This action is permanent. Your
+                  profile and saved addresses will
+                  be removed from active use.
+                  Existing order records will be
+                  retained where required for order
+                  history.
+                </p>
               </div>
 
-              <p className="mt-5 text-sm leading-7 text-[var(--color-text-secondary)]">
-                After deletion, you will be signed out
-                automatically and your account will no
-                longer be available for login.
-              </p>
+              <div className="account-dialog__warning">
+                <AlertTriangle
+                  size={18}
+                  strokeWidth={1.5}
+                  className="account-dialog__warning-icon"
+                />
+
+                <p>
+                  After deletion, you will be signed
+                  out automatically and your account
+                  will no longer be available for
+                  login.
+                </p>
+              </div>
             </>
           ) : (
-            <>
-              <p className="text-sm leading-7 text-[var(--color-text-secondary)]">
-                Are you sure you want to sign out of your
-                Aayesha Fashion account on this device?
+            <div className="account-dialog__message">
+              <h3 className="account-dialog__message-title">
+                Ready to sign out?
+              </h3>
+
+              <p className="account-dialog__description">
+                Are you sure you want to sign out of
+                your Aayesha Fashion account on this
+                device?
               </p>
 
-              <p className="mt-3 text-xs leading-6 text-[var(--color-text-muted)]">
-                Your account, orders and saved information
-                will remain safe.
+              <p className="account-dialog__note">
+                Your account, orders and saved
+                information will remain safe.
               </p>
-            </>
+            </div>
           )}
         </div>
 
-        {/* =====================================================
+        {/* ===================================================
             ACTIONS
-        ===================================================== */}
+        =================================================== */}
 
-        <div className="flex flex-col-reverse gap-3 border-t border-[var(--color-border-light)] bg-[var(--color-bg-subtle)] px-6 py-5 sm:flex-row sm:justify-end sm:px-7">
+        <div className="account-dialog__actions">
           <button
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="inline-flex h-11 items-center justify-center border border-[var(--color-border)] bg-[var(--color-surface)] px-6 text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text)] transition duration-300 hover:border-[var(--color-text)] hover:bg-[var(--color-bg-soft)] disabled:cursor-not-allowed disabled:opacity-50"
+            className="account-dialog__button account-dialog__button--cancel"
           >
             Cancel
           </button>
@@ -171,39 +224,39 @@ export function AccountConfirmDialog({
             type="button"
             onClick={onConfirm}
             disabled={loading}
-            className={
+            className={`account-dialog__button ${
               isDelete
-                ? "inline-flex h-11 items-center justify-center gap-2 border border-[var(--color-error)] bg-[var(--color-error)] px-6 text-[9px] font-semibold uppercase tracking-[0.16em] text-white transition duration-300 hover:brightness-90 disabled:cursor-not-allowed disabled:opacity-60"
-                : "inline-flex h-11 items-center justify-center gap-2 bg-[var(--color-text)] px-6 text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-inverse)] transition duration-300 hover:bg-[var(--color-accent-dark)] disabled:cursor-not-allowed disabled:opacity-60"
-            }
+                ? "account-dialog__button--delete"
+                : "account-dialog__button--confirm"
+            }`}
           >
             {loading ? (
               <>
                 <Loader2
-                  size={15}
+                  size={16}
                   className="animate-spin"
-                  strokeWidth={1.6}
+                  strokeWidth={1.5}
                 />
 
-                Processing...
+                <span>Processing...</span>
               </>
             ) : isDelete ? (
               <>
                 <Trash2
-                  size={15}
-                  strokeWidth={1.6}
+                  size={16}
+                  strokeWidth={1.5}
                 />
 
-                Delete Account
+                <span>Delete Account</span>
               </>
             ) : (
               <>
                 <LogOut
-                  size={15}
-                  strokeWidth={1.6}
+                  size={16}
+                  strokeWidth={1.5}
                 />
 
-                Sign Out
+                <span>Sign Out</span>
               </>
             )}
           </button>

@@ -252,17 +252,14 @@ export function EditAccountForm() {
       {
         name,
         phone,
-
         avatarUrl:
           form.avatarUrl.trim(),
-
         dateOfBirth:
           form.dateOfBirth
             ? new Date(
                 `${form.dateOfBirth}T00:00:00`,
               ).toISOString()
             : null,
-
         gender: form.gender,
       };
 
@@ -303,30 +300,30 @@ export function EditAccountForm() {
   };
 
   /* =========================================================
-     AUTH
+     AUTH STATE
   ========================================================= */
 
   if (!isAuthenticated) {
     return (
-      <section className="min-h-[60vh] bg-[var(--color-bg)]">
-        <div className="mx-auto flex min-h-[60vh] max-w-[720px] items-center justify-center px-5 text-center">
-          <div>
-            <p className="eyebrow text-[var(--color-text-muted)]">
+      <section className="edit-account">
+        <div className="edit-account__state">
+          <div className="edit-account__state-content">
+            <p className="edit-account__eyebrow">
               Account
             </p>
 
-            <h1 className="mt-3 font-display text-4xl leading-none text-[var(--color-text)] sm:text-5xl">
+            <h1 className="edit-account__state-title">
               Sign in to edit your account
             </h1>
 
-            <p className="mx-auto mt-4 max-w-md text-sm leading-6 text-[var(--color-text-secondary)]">
+            <p className="edit-account__state-description">
               Please sign in before changing your
               account details.
             </p>
 
             <Link
               href="/login?callbackUrl=/account/edit"
-              className="mt-7 inline-flex h-11 items-center justify-center border border-[var(--color-text)] bg-[var(--color-text)] px-7 text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-inverse)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-accent-dark)]"
+              className="edit-account__primary-button"
             >
               Sign In
             </Link>
@@ -342,16 +339,18 @@ export function EditAccountForm() {
 
   if (isLoading) {
     return (
-      <section className="min-h-[70vh] bg-[var(--color-bg)]">
-        <div className="mx-auto flex min-h-[70vh] max-w-[720px] items-center justify-center px-5">
-          <div className="flex items-center gap-3 text-sm text-[var(--color-text-secondary)]">
+      <section className="edit-account">
+        <div className="edit-account__state">
+          <div className="edit-account__loading">
             <Loader2
-              size={18}
+              size={19}
               strokeWidth={1.7}
-              className="animate-spin"
+              className="edit-account__loading-icon"
             />
 
-            Loading your account...
+            <span>
+              Loading your account...
+            </span>
           </div>
         </div>
       </section>
@@ -364,18 +363,18 @@ export function EditAccountForm() {
 
   if (!profile || !form) {
     return (
-      <section className="min-h-[60vh] bg-[var(--color-bg)]">
-        <div className="mx-auto flex min-h-[60vh] max-w-[720px] items-center justify-center px-5 text-center">
-          <div>
-            <p className="eyebrow text-[var(--color-text-muted)]">
+      <section className="edit-account">
+        <div className="edit-account__state">
+          <div className="edit-account__state-content">
+            <p className="edit-account__eyebrow">
               Account
             </p>
 
-            <h1 className="mt-3 font-display text-4xl leading-none text-[var(--color-text)]">
+            <h1 className="edit-account__state-title">
               Unable to load account
             </h1>
 
-            <p className="mx-auto mt-4 max-w-md text-sm leading-6 text-[var(--color-text-secondary)]">
+            <p className="edit-account__state-description">
               {errorMessage ||
                 "Something went wrong while loading your account."}
             </p>
@@ -385,7 +384,7 @@ export function EditAccountForm() {
               onClick={() => {
                 void loadProfile();
               }}
-              className="mt-7 inline-flex h-11 items-center justify-center border border-[var(--color-text)] bg-[var(--color-text)] px-7 text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-inverse)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-accent-dark)]"
+              className="edit-account__primary-button"
             >
               Try Again
             </button>
@@ -400,44 +399,44 @@ export function EditAccountForm() {
   );
 
   return (
-    <section className="min-h-screen bg-[var(--color-bg)]">
-      <div className="mx-auto w-full max-w-[1080px] px-5 py-10 sm:px-8 lg:py-14">
+    <section className="edit-account">
+      <div className="edit-account__container">
         {/* =====================================================
             BACK
         ====================================================== */}
 
         <Link
           href="/account"
-          className="inline-flex items-center gap-2 text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text)]"
+          className="edit-account__back"
         >
           <ArrowLeft
-            size={14}
+            size={15}
             strokeWidth={1.7}
           />
 
-          Back to Account
+          <span>Back to Account</span>
         </Link>
 
         {/* =====================================================
             HEADER
         ====================================================== */}
 
-        <div className="mt-7 border-b border-[var(--color-border)] pb-8">
-          <p className="eyebrow text-[var(--color-accent)]">
-            Account Settings
-          </p>
+        <header className="edit-account__header">
+          <div>
+            <p className="edit-account__eyebrow">
+              Account Settings
+            </p>
 
-          <div className="mt-3">
-            <h1 className="font-display text-[42px] leading-[0.95] text-[var(--color-text)] sm:text-[52px]">
+            <h1 className="edit-account__title">
               Edit Account
             </h1>
 
-            <p className="mt-4 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">
+            <p className="edit-account__description">
               Update your personal information and
               keep your account details current.
             </p>
           </div>
-        </div>
+        </header>
 
         {/* =====================================================
             ERROR
@@ -446,9 +445,9 @@ export function EditAccountForm() {
         {errorMessage && (
           <div
             role="alert"
-            className="mt-6 border border-[var(--color-error)] bg-[var(--color-surface-soft)] px-5 py-4 text-sm leading-6 text-[var(--color-error)]"
+            className="edit-account__error"
           >
-            {errorMessage}
+            <span>{errorMessage}</span>
           </div>
         )}
 
@@ -458,500 +457,491 @@ export function EditAccountForm() {
 
         <form
           onSubmit={handleSubmit}
-          className="mt-8"
+          className="edit-account__form"
         >
-          <div className="border border-[var(--color-border)] bg-[var(--color-surface)]">
-            {/* =================================================
-                PROFILE HEADER
-            ================================================== */}
+          {/* ===================================================
+              PROFILE SUMMARY
+          ==================================================== */}
 
-            <div className="border-b border-[var(--color-border)] px-6 py-7 sm:px-8">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-                <div className="grid h-20 w-20 shrink-0 place-items-center overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-soft)] font-display text-2xl text-[var(--color-text)]">
-                  {form.avatarUrl ? (
-                    <img
-                      src={form.avatarUrl}
-                      alt={
-                        profile.user.name ||
-                        "Profile"
-                      }
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    initials
-                  )}
-                </div>
+          <div className="edit-account__profile">
+            <div className="edit-account__avatar">
+              {form.avatarUrl ? (
+                <img
+                  src={form.avatarUrl}
+                  alt={
+                    profile.user.name ||
+                    "Profile"
+                  }
+                  className="edit-account__avatar-image"
+                />
+              ) : (
+                <span>
+                  {initials}
+                </span>
+              )}
+            </div>
 
-                <div>
-                  <p className="eyebrow text-[var(--color-text-muted)]">
-                    Profile
-                  </p>
+            <div className="edit-account__profile-info">
+              <p className="edit-account__section-eyebrow">
+                Profile
+              </p>
 
-                  <h2 className="mt-2 font-display text-3xl leading-none text-[var(--color-text)]">
-                    {profile.user.name}
-                  </h2>
+              <h2 className="edit-account__profile-name">
+                {profile.user.name}
+              </h2>
 
-                  <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-                    {profile.user.email}
-                  </p>
-                </div>
+              <p className="edit-account__profile-email">
+                {profile.user.email}
+              </p>
+            </div>
+          </div>
+
+          {/* ===================================================
+              PERSONAL DETAILS
+          ==================================================== */}
+
+          <div className="edit-account__details">
+            <div className="edit-account__section-heading">
+              <div className="edit-account__section-icon">
+                <UserRound
+                  size={17}
+                  strokeWidth={1.6}
+                />
+              </div>
+
+              <div>
+                <p className="edit-account__section-eyebrow">
+                  Personal Details
+                </p>
+
+                <h2 className="edit-account__section-title">
+                  Account Information
+                </h2>
               </div>
             </div>
 
-            {/* =================================================
-                PERSONAL DETAILS
-            ================================================== */}
+            <div className="edit-account__fields">
+              {/* =================================================
+                  FULL NAME
+              ================================================== */}
 
-            <div className="p-6 sm:p-8">
-              <div className="flex items-center gap-3 border-b border-[var(--color-border)] pb-5">
-                <div className="flex h-9 w-9 items-center justify-center border border-[var(--color-border-light)] bg-[var(--color-surface-soft)]">
+              <div className="edit-account__field">
+                <label
+                  htmlFor="account-name"
+                  className="edit-account__label"
+                >
+                  Full Name
+                </label>
+
+                <div className="edit-account__input-wrap">
                   <UserRound
-                    size={17}
-                    strokeWidth={1.6}
-                    className="text-[var(--color-accent)]"
+                    size={16}
+                    strokeWidth={1.7}
+                    className="edit-account__input-icon"
                   />
-                </div>
-
-                <div>
-                  <p className="eyebrow text-[var(--color-text-muted)]">
-                    Personal Details
-                  </p>
-
-                  <h2 className="mt-1 font-display text-[27px] leading-none text-[var(--color-text)]">
-                    Account Information
-                  </h2>
-                </div>
-              </div>
-
-              <div className="mt-8 grid gap-x-8 gap-y-7 sm:grid-cols-2">
-                {/* =================================================
-                    FULL NAME
-                ================================================== */}
-
-                <div>
-                  <label
-                    htmlFor="account-name"
-                    className="mb-2 block text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-secondary)]"
-                  >
-                    Full Name
-                  </label>
-
-                  <div className="relative">
-                    <UserRound
-                      size={15}
-                      strokeWidth={1.7}
-                      className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]"
-                    />
-
-                    <input
-                      id="account-name"
-                      name="name"
-                      type="text"
-                      value={form.name}
-                      onChange={(event) => {
-                        updateField(
-                          "name",
-                          event.target.value,
-                        );
-                      }}
-                      autoComplete="name"
-                      className="h-11 w-full border-b border-[var(--color-border)] bg-transparent pl-7 pr-2 text-sm text-[var(--color-text)] outline-none transition-colors duration-[var(--duration-base)] placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-accent)]"
-                    />
-                  </div>
-                </div>
-
-                {/* =================================================
-                    EMAIL
-                ================================================== */}
-
-                <div>
-                  <label
-                    htmlFor="account-email"
-                    className="mb-2 block text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-secondary)]"
-                  >
-                    Email Address
-                  </label>
-
-                  <div className="relative">
-                    <Mail
-                      size={15}
-                      strokeWidth={1.7}
-                      className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]"
-                    />
-
-                    <input
-                      id="account-email"
-                      type="email"
-                      value={
-                        profile.user.email
-                      }
-                      readOnly
-                      className="h-11 w-full cursor-not-allowed border-b border-[var(--color-border-light)] bg-transparent pl-7 pr-2 text-sm text-[var(--color-text-secondary)] outline-none"
-                    />
-                  </div>
-
-                  <p className="mt-2 text-[11px] leading-5 text-[var(--color-text-muted)]">
-                    Email changes require a separate
-                    verification flow.
-                  </p>
-                </div>
-
-                {/* =================================================
-                    PHONE
-                ================================================== */}
-
-                <div>
-                  <label
-                    htmlFor="account-phone"
-                    className="mb-2 block text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-secondary)]"
-                  >
-                    Phone Number
-                  </label>
-
-                  <div className="relative">
-                    <Phone
-                      size={15}
-                      strokeWidth={1.7}
-                      className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]"
-                    />
-
-                    <input
-                      id="account-phone"
-                      name="phone"
-                      type="tel"
-                      value={form.phone}
-                      onChange={(event) => {
-                        updateField(
-                          "phone",
-                          event.target.value,
-                        );
-                      }}
-                      inputMode="tel"
-                      autoComplete="tel"
-                      placeholder="+91 9876543210"
-                      className="h-11 w-full border-b border-[var(--color-border)] bg-transparent pl-7 pr-2 text-sm text-[var(--color-text)] outline-none transition-colors duration-[var(--duration-base)] placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-accent)]"
-                    />
-                  </div>
-                </div>
-
-                {/* =================================================
-                    GENDER
-                ================================================== */}
-
-                <div className="relative">
-                  <label className="mb-2 block text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-secondary)]">
-                    Gender
-                  </label>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setGenderOpen(
-                        (current) =>
-                          !current,
-                      );
-
-                      setCalendarOpen(false);
-                    }}
-                    className={`flex h-11 w-full items-center justify-between border-b bg-transparent text-left text-sm outline-none transition-colors duration-[var(--duration-base)] ${
-                      genderOpen
-                        ? "border-[var(--color-accent)]"
-                        : "border-[var(--color-border)] hover:border-[var(--color-text)]"
-                    }`}
-                  >
-                    <span
-                      className={
-                        form.gender
-                          ? "text-[var(--color-text)]"
-                          : "text-[var(--color-text-muted)]"
-                      }
-                    >
-                      {form.gender ===
-                      "female"
-                        ? "Female"
-                        : form.gender ===
-                            "male"
-                          ? "Male"
-                          : form.gender ===
-                              "other"
-                            ? "Other"
-                            : "Prefer not to say"}
-                    </span>
-
-                    <ChevronDown
-                      size={15}
-                      strokeWidth={1.7}
-                      className={`text-[var(--color-text-secondary)] transition-transform duration-200 ${
-                        genderOpen
-                          ? "rotate-180"
-                          : ""
-                      }`}
-                    />
-                  </button>
-
-                  {genderOpen && (
-                    <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-[var(--z-dropdown)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)]">
-                      <div className="border-b border-[var(--color-border-light)] bg-[var(--color-surface-soft)] px-4 py-3">
-                        <p className="text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-muted)]">
-                          Select preference
-                        </p>
-                      </div>
-
-                      <div className="p-1.5">
-                        {[
-                          {
-                            value: null,
-                            label:
-                              "Prefer not to say",
-                          },
-                          {
-                            value:
-                              "female" as const,
-                            label:
-                              "Female",
-                          },
-                          {
-                            value:
-                              "male" as const,
-                            label:
-                              "Male",
-                          },
-                          {
-                            value:
-                              "other" as const,
-                            label:
-                              "Other",
-                          },
-                        ].map(
-                          (
-                            option,
-                          ) => {
-                            const selected =
-                              form.gender ===
-                              option.value;
-
-                            return (
-                              <button
-                                key={
-                                  option.value ??
-                                  "none"
-                                }
-                                type="button"
-                                onClick={() => {
-                                  updateField(
-                                    "gender",
-                                    option.value,
-                                  );
-
-                                  setGenderOpen(
-                                    false,
-                                  );
-                                }}
-                                className={`flex w-full items-center justify-between px-4 py-3 text-sm transition-colors duration-150 ${
-                                  selected
-                                    ? "bg-[var(--color-bg-soft)] text-[var(--color-text)]"
-                                    : "text-[var(--color-text)] hover:bg-[var(--color-surface-soft)]"
-                                }`}
-                              >
-                                <span>
-                                  {
-                                    option.label
-                                  }
-                                </span>
-
-                                {selected && (
-                                  <Check
-                                    size={15}
-                                    strokeWidth={
-                                      1.8
-                                    }
-                                    className="text-[var(--color-accent)]"
-                                  />
-                                )}
-                              </button>
-                            );
-                          },
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* =================================================
-                    DATE OF BIRTH
-                ================================================== */}
-
-                <div className="relative">
-                  <label className="mb-2 block text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-secondary)]">
-                    Date of Birth
-                  </label>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setCalendarOpen(
-                        (current) =>
-                          !current,
-                      );
-
-                      setGenderOpen(false);
-                    }}
-                    className={`flex h-11 w-full items-center justify-between border-b bg-transparent text-left outline-none transition-colors duration-[var(--duration-base)] ${
-                      calendarOpen
-                        ? "border-[var(--color-accent)]"
-                        : "border-[var(--color-border)] hover:border-[var(--color-text)]"
-                    }`}
-                  >
-                    <span
-                      className={
-                        form.dateOfBirth
-                          ? "text-sm text-[var(--color-text)]"
-                          : "text-sm text-[var(--color-text-muted)]"
-                      }
-                    >
-                      {form.dateOfBirth
-                        ? new Intl.DateTimeFormat(
-                            "en-IN",
-                            {
-                              day: "2-digit",
-                              month: "short",
-                              year: "numeric",
-                            },
-                          ).format(
-                            new Date(
-                              `${form.dateOfBirth}T00:00:00`,
-                            ),
-                          )
-                        : "Select date of birth"}
-                    </span>
-
-                    <CalendarDays
-                      size={16}
-                      strokeWidth={1.7}
-                      className="text-[var(--color-text-secondary)]"
-                    />
-                  </button>
-
-                  {calendarOpen && (
-                    <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-[var(--z-dropdown)] sm:left-auto sm:right-auto">
-                      <CustomCalendar
-                        value={
-                          form.dateOfBirth
-                        }
-                        onChange={(
-                          value,
-                        ) => {
-                          updateField(
-                            "dateOfBirth",
-                            value,
-                          );
-                        }}
-                        onClose={() => {
-                          setCalendarOpen(
-                            false,
-                          );
-                        }}
-                        maxDate={new Date()
-                          .toISOString()
-                          .slice(0, 10)}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                {/* =================================================
-                    AVATAR URL
-                ================================================== */}
-
-                <div>
-                  <label
-                    htmlFor="account-avatar"
-                    className="mb-2 block text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-secondary)]"
-                  >
-                    Profile Image URL
-                  </label>
 
                   <input
-                    id="account-avatar"
-                    name="avatarUrl"
-                    type="url"
-                    value={
-                      form.avatarUrl
-                    }
+                    id="account-name"
+                    name="name"
+                    type="text"
+                    value={form.name}
                     onChange={(event) => {
                       updateField(
-                        "avatarUrl",
+                        "name",
                         event.target.value,
                       );
                     }}
-                    placeholder="https://..."
-                    className="h-11 w-full border-b border-[var(--color-border)] bg-transparent text-sm text-[var(--color-text)] outline-none transition-colors duration-[var(--duration-base)] placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-accent)]"
+                    autoComplete="name"
+                    className="edit-account__input"
                   />
-
-                  <p className="mt-2 text-[11px] leading-5 text-[var(--color-text-muted)]">
-                    Enter a publicly accessible image
-                    URL.
-                  </p>
                 </div>
               </div>
 
               {/* =================================================
-                  ACTIONS
+                  EMAIL
               ================================================== */}
 
-              <div className="mt-10 flex flex-col gap-3 border-t border-[var(--color-border)] pt-7 sm:flex-row sm:justify-end">
-                <Link
-                  href="/account"
-                  className="inline-flex h-11 items-center justify-center border border-[var(--color-border)] bg-[var(--color-surface)] px-7 text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text)] transition-all duration-[var(--duration-base)] hover:border-[var(--color-text)]"
+              <div className="edit-account__field">
+                <label
+                  htmlFor="account-email"
+                  className="edit-account__label"
                 >
-                  Cancel
-                </Link>
+                  Email Address
+                </label>
+
+                <div className="edit-account__input-wrap edit-account__input-wrap--readonly">
+                  <Mail
+                    size={16}
+                    strokeWidth={1.7}
+                    className="edit-account__input-icon"
+                  />
+
+                  <input
+                    id="account-email"
+                    type="email"
+                    value={
+                      profile.user.email
+                    }
+                    readOnly
+                    className="edit-account__input edit-account__input--readonly"
+                  />
+                </div>
+
+                <p className="edit-account__help">
+                  Email changes require a separate
+                  verification flow.
+                </p>
+              </div>
+
+              {/* =================================================
+                  PHONE
+              ================================================== */}
+
+              <div className="edit-account__field">
+                <label
+                  htmlFor="account-phone"
+                  className="edit-account__label"
+                >
+                  Phone Number
+                </label>
+
+                <div className="edit-account__input-wrap">
+                  <Phone
+                    size={16}
+                    strokeWidth={1.7}
+                    className="edit-account__input-icon"
+                  />
+
+                  <input
+                    id="account-phone"
+                    name="phone"
+                    type="tel"
+                    value={form.phone}
+                    onChange={(event) => {
+                      updateField(
+                        "phone",
+                        event.target.value,
+                      );
+                    }}
+                    inputMode="tel"
+                    autoComplete="tel"
+                    placeholder="+91 9876543210"
+                    className="edit-account__input"
+                  />
+                </div>
+              </div>
+
+              {/* =================================================
+                  GENDER
+              ================================================== */}
+
+              <div className="edit-account__field edit-account__field--dropdown">
+                <label className="edit-account__label">
+                  Gender
+                </label>
 
                 <button
-                  type="submit"
-                  disabled={isSaving}
-                  className="inline-flex h-11 items-center justify-center gap-2 border border-[var(--color-text)] bg-[var(--color-text)] px-7 text-[var(--text-label)] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-inverse)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-accent-dark)] disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {isSaving ? (
-                    <Loader2
-                      size={15}
-                      strokeWidth={1.8}
-                      className="animate-spin"
-                    />
-                  ) : (
-                    <Save
-                      size={15}
-                      strokeWidth={1.8}
-                    />
-                  )}
+                  type="button"
+                  onClick={() => {
+                    setGenderOpen(
+                      (current) =>
+                        !current,
+                    );
 
+                    setCalendarOpen(false);
+                  }}
+                  className={`edit-account__select ${
+                    genderOpen
+                      ? "edit-account__select--open"
+                      : ""
+                  }`}
+                >
+                  <span
+                    className={
+                      form.gender
+                        ? "edit-account__select-value"
+                        : "edit-account__select-placeholder"
+                    }
+                  >
+                    {form.gender ===
+                    "female"
+                      ? "Female"
+                      : form.gender ===
+                          "male"
+                        ? "Male"
+                        : form.gender ===
+                            "other"
+                          ? "Other"
+                          : "Prefer not to say"}
+                  </span>
+
+                  <ChevronDown
+                    size={16}
+                    strokeWidth={1.7}
+                    className={`edit-account__select-icon ${
+                      genderOpen
+                        ? "edit-account__select-icon--open"
+                        : ""
+                    }`}
+                  />
+                </button>
+
+                {genderOpen && (
+                  <div className="edit-account__dropdown">
+                    <div className="edit-account__dropdown-header">
+                      Select preference
+                    </div>
+
+                    <div className="edit-account__dropdown-options">
+                      {[
+                        {
+                          value: null,
+                          label:
+                            "Prefer not to say",
+                        },
+                        {
+                          value:
+                            "female" as const,
+                          label:
+                            "Female",
+                        },
+                        {
+                          value:
+                            "male" as const,
+                          label:
+                            "Male",
+                        },
+                        {
+                          value:
+                            "other" as const,
+                          label:
+                            "Other",
+                        },
+                      ].map(
+                        (option) => {
+                          const selected =
+                            form.gender ===
+                            option.value;
+
+                          return (
+                            <button
+                              key={
+                                option.value ??
+                                "none"
+                              }
+                              type="button"
+                              onClick={() => {
+                                updateField(
+                                  "gender",
+                                  option.value,
+                                );
+
+                                setGenderOpen(
+                                  false,
+                                );
+                              }}
+                              className={`edit-account__dropdown-option ${
+                                selected
+                                  ? "edit-account__dropdown-option--selected"
+                                  : ""
+                              }`}
+                            >
+                              <span>
+                                {
+                                  option.label
+                                }
+                              </span>
+
+                              {selected && (
+                                <Check
+                                  size={15}
+                                  strokeWidth={
+                                    1.8
+                                  }
+                                />
+                              )}
+                            </button>
+                          );
+                        },
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* =================================================
+                  DATE OF BIRTH
+              ================================================== */}
+
+              <div className="edit-account__field edit-account__field--calendar">
+                <label className="edit-account__label">
+                  Date of Birth
+                </label>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCalendarOpen(
+                      (current) =>
+                        !current,
+                    );
+
+                    setGenderOpen(false);
+                  }}
+                  className={`edit-account__select ${
+                    calendarOpen
+                      ? "edit-account__select--open"
+                      : ""
+                  }`}
+                >
+                  <span
+                    className={
+                      form.dateOfBirth
+                        ? "edit-account__select-value"
+                        : "edit-account__select-placeholder"
+                    }
+                  >
+                    {form.dateOfBirth
+                      ? new Intl.DateTimeFormat(
+                          "en-IN",
+                          {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          },
+                        ).format(
+                          new Date(
+                            `${form.dateOfBirth}T00:00:00`,
+                          ),
+                        )
+                      : "Select date of birth"}
+                  </span>
+
+                  <CalendarDays
+                    size={16}
+                    strokeWidth={1.7}
+                    className="edit-account__select-icon"
+                  />
+                </button>
+
+                {calendarOpen && (
+                  <div className="edit-account__calendar">
+                    <CustomCalendar
+                      value={
+                        form.dateOfBirth
+                      }
+                      onChange={(value) => {
+                        updateField(
+                          "dateOfBirth",
+                          value,
+                        );
+                      }}
+                      onClose={() => {
+                        setCalendarOpen(
+                          false,
+                        );
+                      }}
+                      maxDate={new Date()
+                        .toISOString()
+                        .slice(0, 10)}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* =================================================
+                  AVATAR URL
+              ================================================== */}
+
+              <div className="edit-account__field">
+                <label
+                  htmlFor="account-avatar"
+                  className="edit-account__label"
+                >
+                  Profile Image URL
+                </label>
+
+                <input
+                  id="account-avatar"
+                  name="avatarUrl"
+                  type="url"
+                  value={form.avatarUrl}
+                  onChange={(event) => {
+                    updateField(
+                      "avatarUrl",
+                      event.target.value,
+                    );
+                  }}
+                  placeholder="https://..."
+                  className="edit-account__input edit-account__input--standalone"
+                />
+
+                <p className="edit-account__help">
+                  Enter a publicly accessible image
+                  URL.
+                </p>
+              </div>
+            </div>
+
+            {/* =================================================
+                ACTIONS
+            ================================================== */}
+
+            <div className="edit-account__actions">
+              <Link
+                href="/account"
+                className="edit-account__secondary-button"
+              >
+                Cancel
+              </Link>
+
+              <button
+                type="submit"
+                disabled={isSaving}
+                className="edit-account__primary-button edit-account__save-button"
+              >
+                {isSaving ? (
+                  <Loader2
+                    size={16}
+                    strokeWidth={1.8}
+                    className="edit-account__button-icon edit-account__button-icon--loading"
+                  />
+                ) : (
+                  <Save
+                    size={16}
+                    strokeWidth={1.8}
+                    className="edit-account__button-icon"
+                  />
+                )}
+
+                <span>
                   {isSaving
                     ? "Saving..."
                     : "Save Changes"}
-                </button>
-              </div>
+                </span>
+              </button>
             </div>
           </div>
-
-          {/* =====================================================
-              NOTE
-          ====================================================== */}
-
-          <div className="mt-5 flex gap-3 border-l-2 border-[var(--color-accent-soft)] pl-4">
-            <Check
-              size={16}
-              strokeWidth={1.8}
-              className="mt-0.5 shrink-0 text-[var(--color-accent)]"
-            />
-
-            <p className="text-xs leading-5 text-[var(--color-text-secondary)]">
-              Your account information is securely
-              saved to your Aayesha Fashion customer
-              profile. Changes take effect after you
-              save your account.
-            </p>
-          </div>
         </form>
+
+        {/* =====================================================
+            SECURITY NOTE
+        ====================================================== */}
+
+        <div className="edit-account__note">
+          <Check
+            size={17}
+            strokeWidth={1.8}
+            className="edit-account__note-icon"
+          />
+
+          <p>
+            Your account information is securely
+            saved to your Aayesha Fashion customer
+            profile. Changes take effect after you
+            save your account.
+          </p>
+        </div>
       </div>
     </section>
   );
