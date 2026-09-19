@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 import { useRouter } from "next/navigation";
+import { createPortal } from "react-dom";
 import toast from "react-hot-toast";
 
 import {
@@ -112,8 +116,11 @@ export function MobileMenu({
   const [isLoggingOut, setIsLoggingOut] =
     useState(false);
 
+  const [mounted, setMounted] =
+    useState(false);
+
   /* =======================================================
-     AUTH STATE
+     AUTH
   ======================================================= */
 
   const user = useAuthStore(
@@ -138,12 +145,19 @@ export function MobileMenu({
     !!user;
 
   /* =======================================================
+     PORTAL MOUNT
+  ======================================================= */
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  /* =======================================================
      BODY SCROLL LOCK
   ======================================================= */
 
   useEffect(() => {
     if (!isOpen) {
-      document.body.style.overflow = "";
       return;
     }
 
@@ -233,757 +247,480 @@ export function MobileMenu({
     }
   };
 
-  return (
-    <>
-      {/* =====================================================
-          HAMBURGER BUTTON
-      ===================================================== */}
+  /* =======================================================
+     HAMBURGER
+  ======================================================= */
 
-      <button
-        type="button"
-        onClick={
-          isOpen ? onClose : onOpen
-        }
-        aria-label={
-          isOpen
-            ? "Close navigation menu"
-            : "Open navigation menu"
-        }
-        aria-expanded={isOpen}
+  const hamburger = (
+    <button
+      type="button"
+      onClick={
+        isOpen ? onClose : onOpen
+      }
+      aria-label={
+        isOpen
+          ? "Close navigation menu"
+          : "Open navigation menu"
+      }
+      aria-expanded={isOpen}
+      className="
+        group
+        relative
+        flex
+        h-10
+        w-10
+        items-center
+        justify-center
+        text-[var(--color-text)]
+        transition-all
+        duration-500
+        ease-[var(--ease-luxury)]
+        hover:-translate-y-px
+        hover:text-[var(--color-accent-dark)]
+        lg:hidden
+      "
+    >
+      <span
         className="
-          group
           relative
           flex
-          h-10
-          w-10
+          h-9
+          w-9
           items-center
           justify-center
-          text-[var(--color-text)]
-          transition-all
-          duration-500
-          ease-[var(--ease-luxury)]
-          hover:-translate-y-px
-          hover:text-[var(--color-accent-dark)]
-          lg:hidden
         "
       >
         <span
+          aria-hidden="true"
           className="
-            relative
-            flex
-            h-9
-            w-9
-            items-center
-            justify-center
-          "
-        >
-          <span
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              inset-1
-              rounded-full
-              border
-              border-transparent
-              transition-all
-              duration-500
-              group-hover:border-[var(--color-accent-soft)]
-            "
-          />
-
-          {isOpen ? (
-            <X
-              size={19}
-              strokeWidth={1.2}
-              className="
-                relative
-                z-10
-                transition-transform
-                duration-500
-                ease-[var(--ease-luxury)]
-              "
-            />
-          ) : (
-            <Menu
-              size={19}
-              strokeWidth={1.2}
-              className="
-                relative
-                z-10
-                transition-transform
-                duration-500
-                ease-[var(--ease-luxury)]
-                group-hover:scale-105
-              "
-            />
-          )}
-        </span>
-      </button>
-
-      {/* =====================================================
-          MOBILE DRAWER
-      ===================================================== */}
-
-      <div
-        className={`
-          fixed
-          inset-0
-          z-[9999]
-          lg:hidden
-          ${
-            isOpen
-              ? "pointer-events-auto"
-              : "pointer-events-none"
-          }
-        `}
-        aria-hidden={!isOpen}
-      >
-        {/* ===================================================
-            BACKDROP
-        =================================================== */}
-
-        <button
-          type="button"
-          aria-label="Close navigation"
-          onClick={onClose}
-          tabIndex={isOpen ? 0 : -1}
-          className={`
+            pointer-events-none
             absolute
-            inset-0
-            z-0
-            bg-[rgba(33,31,29,0.45)]
-            backdrop-blur-[5px]
-            transition-opacity
-            duration-700
-            ease-[var(--ease-luxury)]
-            ${
-              isOpen
-                ? "opacity-100"
-                : "opacity-0"
-            }
-          `}
+            inset-1
+            rounded-full
+            border
+            border-transparent
+            transition-all
+            duration-500
+            group-hover:border-[var(--color-accent-soft)]
+          "
         />
 
-        {/* ===================================================
-            DRAWER
-        =================================================== */}
-
-        <aside
-          className={`
-            relative
-            z-10
-            flex
-            h-full
-            w-[91vw]
-            max-w-[450px]
-            flex-col
-            overflow-hidden
-            border-r
-            border-[var(--color-border)]
-            bg-[rgba(247,243,238,0.98)]
-            shadow-[0_30px_100px_rgba(33,31,29,0.18)]
-            transition-transform
-            duration-700
-            ease-[var(--ease-luxury)]
-            ${
-              isOpen
-                ? "translate-x-0"
-                : "-translate-x-full"
-            }
-          `}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile navigation"
-        >
-          {/* =================================================
-              DECORATIVE EDGE
-          ================================================= */}
-
-          <div
-            aria-hidden="true"
+        {isOpen ? (
+          <X
+            size={19}
+            strokeWidth={1.2}
+            className="relative z-10"
+          />
+        ) : (
+          <Menu
+            size={19}
+            strokeWidth={1.2}
             className="
-              pointer-events-none
-              absolute
-              right-0
-              top-0
-              z-20
-              h-full
-              w-px
-              bg-gradient-to-b
-              from-transparent
-              via-[var(--color-accent-soft)]
-              to-transparent
-              opacity-70
+              relative
+              z-10
+              transition-transform
+              duration-500
+              group-hover:scale-105
             "
           />
+        )}
+      </span>
+    </button>
+  );
 
-          {/* =================================================
-              DRAWER HEADER
-          ================================================= */}
+  /* =======================================================
+     DRAWER
+  ======================================================= */
 
-          <div
-            className="
-              relative
-              z-10
-              flex
-              shrink-0
-              items-center
-              justify-between
-              border-b
-              border-[var(--color-border)]
-              bg-[rgba(247,243,238,0.98)]
-              px-5
-              py-5
-              sm:px-7
-            "
+  const drawer = (
+    <div
+      className={`
+        fixed
+        inset-0
+        z-[999999]
+        lg:hidden
+        ${
+          isOpen
+            ? "pointer-events-auto"
+            : "pointer-events-none"
+        }
+      `}
+      aria-hidden={!isOpen}
+    >
+      {/* =================================================
+          BACKDROP
+      ================================================= */}
+
+      <button
+        type="button"
+        aria-label="Close navigation"
+        onClick={onClose}
+        tabIndex={isOpen ? 0 : -1}
+        className={`
+          absolute
+          inset-0
+          z-0
+          cursor-default
+          bg-[rgba(33,31,29,0.50)]
+          backdrop-blur-[5px]
+          transition-opacity
+          duration-700
+          ease-[var(--ease-luxury)]
+          ${
+            isOpen
+              ? "opacity-100"
+              : "opacity-0"
+          }
+        `}
+      />
+
+      {/* =================================================
+          DRAWER
+      ================================================= */}
+
+      <aside
+        className={`
+          absolute
+          left-0
+          top-0
+          z-10
+          flex
+          h-[100dvh]
+          w-[88vw]
+          max-w-[440px]
+          flex-col
+          overflow-hidden
+          border-r
+          border-[var(--color-border)]
+          bg-[#f7f3ee]
+          shadow-[30px_0_100px_rgba(33,31,29,0.20)]
+          transition-transform
+          duration-700
+          ease-[var(--ease-luxury)]
+          ${
+            isOpen
+              ? "translate-x-0"
+              : "-translate-x-full"
+          }
+        `}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+      >
+        {/* =================================================
+            TOP ACCENT
+        ================================================= */}
+
+        <div
+          aria-hidden="true"
+          className="
+            absolute
+            inset-x-0
+            top-0
+            z-30
+            h-px
+            bg-gradient-to-r
+            from-transparent
+            via-[var(--color-accent)]
+            to-transparent
+            opacity-70
+          "
+        />
+
+        {/* =================================================
+            HEADER
+        ================================================= */}
+
+        <div
+          className="
+            relative
+            z-20
+            flex
+            shrink-0
+            items-center
+            justify-between
+            border-b
+            border-[var(--color-border)]
+            bg-[#f7f3ee]
+            px-5
+            py-5
+            sm:px-7
+          "
+        >
+          <Link
+            href="/"
+            onClick={onClose}
+            className="group block"
+            aria-label="Aayesha Fashion home"
           >
-            <Link
-              href="/"
-              onClick={onClose}
-              className="group block"
-              aria-label="Aayesha Fashion home"
-            >
-              <p
-                className="
-                  font-display
-                  text-[30px]
-                  font-medium
-                  leading-none
-                  tracking-[-0.03em]
-                  text-[var(--color-text)]
-                  transition-all
-                  duration-500
-                  ease-[var(--ease-luxury)]
-                  group-hover:tracking-[-0.02em]
-                "
-              >
-                Aayesha
-              </p>
-
-              <p
-                className="
-                  mt-1.5
-                  font-body
-                  text-[7px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.34em]
-                  text-[var(--color-text-muted)]
-                  transition-colors
-                  duration-500
-                  group-hover:text-[var(--color-accent)]
-                "
-              >
-                Fashion
-              </p>
-            </Link>
-
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close menu"
+            <p
               className="
-                group
-                flex
-                h-9
-                w-9
-                items-center
-                justify-center
-                rounded-full
-                border
-                border-[var(--color-border)]
-                bg-transparent
-                text-[var(--color-text-secondary)]
+                font-display
+                text-[30px]
+                font-medium
+                leading-none
+                tracking-[-0.03em]
+                text-[var(--color-text)]
                 transition-all
                 duration-500
-                hover:border-[var(--color-text)]
-                hover:bg-[var(--color-text)]
-                hover:text-[var(--color-text-inverse)]
+                group-hover:tracking-[-0.02em]
               "
             >
-              <X
-                size={16}
-                strokeWidth={1.2}
-                className="
-                  transition-transform
-                  duration-500
-                  group-hover:rotate-90
-                "
-              />
-            </button>
-          </div>
+              Aayesha
+            </p>
 
-          {/* =================================================
-              SCROLLABLE CONTENT
-          ================================================= */}
+            <p
+              className="
+                mt-1.5
+                font-body
+                text-[7px]
+                font-semibold
+                uppercase
+                tracking-[0.34em]
+                text-[var(--color-text-muted)]
+                transition-colors
+                duration-500
+                group-hover:text-[var(--color-accent)]
+              "
+            >
+              Fashion
+            </p>
+          </Link>
 
-          <div
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close menu"
             className="
-              relative
-              z-10
-              min-h-0
-              flex-1
-              overflow-y-auto
-              overscroll-contain
-              scroll-smooth
-              bg-[rgba(247,243,238,0.98)]
+              group
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-[var(--color-border)]
+              bg-transparent
+              text-[var(--color-text-secondary)]
+              transition-all
+              duration-500
+              hover:border-[var(--color-text)]
+              hover:bg-[var(--color-text)]
+              hover:text-[var(--color-text-inverse)]
             "
           >
-            {/* =================================================
-                ACCOUNT / AUTH
-            ================================================= */}
+            <X
+              size={16}
+              strokeWidth={1.2}
+              className="
+                transition-transform
+                duration-500
+                group-hover:rotate-90
+              "
+            />
+          </button>
+        </div>
 
-            <div className="px-5 pt-6 sm:px-7">
-              {isLoggedIn ? (
-                <Link
-                  href="/account"
-                  onClick={onClose}
+        {/* =================================================
+            SCROLLABLE CONTENT
+        ================================================= */}
+
+        <div
+          className="
+            min-h-0
+            flex-1
+            overflow-y-auto
+            overscroll-contain
+            bg-[#f7f3ee]
+          "
+        >
+          {/* =================================================
+              ACCOUNT
+          ================================================= */}
+
+          <div className="px-5 pt-6 sm:px-7">
+            {isLoggedIn ? (
+              <Link
+                href="/account"
+                onClick={onClose}
+                className="
+                  group
+                  flex
+                  items-center
+                  gap-3.5
+                  border
+                  border-[var(--color-border)]
+                  bg-white
+                  px-4
+                  py-4
+                  transition-all
+                  duration-500
+                  hover:border-[var(--color-accent-soft)]
+                  hover:shadow-[var(--shadow-md)]
+                "
+              >
+                <span
                   className="
-                    group
-                    relative
                     flex
+                    h-10
+                    w-10
+                    shrink-0
                     items-center
-                    gap-3.5
-                    overflow-hidden
+                    justify-center
+                    rounded-full
                     border
-                    border-[var(--color-border)]
-                    bg-[var(--color-surface)]
-                    px-4
-                    py-4
-                    transition-all
-                    duration-500
-                    ease-[var(--ease-luxury)]
-                    hover:-translate-y-px
-                    hover:border-[var(--color-accent-soft)]
-                    hover:shadow-[var(--shadow-md)]
+                    border-[var(--color-accent-soft)]
+                    bg-[var(--color-bg-soft)]
+                    font-display
+                    text-base
+                    font-medium
                   "
                 >
-                  <span
-                    aria-hidden="true"
-                    className="
-                      pointer-events-none
-                      absolute
-                      inset-y-0
-                      left-0
-                      w-0
-                      bg-[var(--color-bg-soft)]
-                      transition-all
-                      duration-700
-                      ease-[var(--ease-luxury)]
-                      group-hover:w-full
-                    "
-                  />
+                  {initials}
+                </span>
 
+                <span className="min-w-0 flex-1">
                   <span
                     className="
-                      relative
-                      z-10
-                      flex
-                      h-10
-                      w-10
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-full
-                      border
-                      border-[var(--color-accent-soft)]
-                      bg-[var(--color-bg-soft)]
-                      font-display
-                      text-base
-                      font-medium
-                      text-[var(--color-text)]
+                      block
+                      truncate
+                      font-body
+                      text-[12px]
+                      font-semibold
                     "
                   >
-                    {initials}
+                    {user.name}
                   </span>
 
-                  <span className="relative z-10 min-w-0 flex-1">
-                    <span
-                      className="
-                        block
-                        truncate
-                        font-body
-                        text-[12px]
-                        font-semibold
-                        text-[var(--color-text)]
-                      "
-                    >
-                      {user.name}
-                    </span>
-
-                    <span
-                      className="
-                        mt-1
-                        block
-                        truncate
-                        font-body
-                        text-[10px]
-                        text-[var(--color-text-secondary)]
-                      "
-                    >
-                      {user.email}
-                    </span>
-                  </span>
-
-                  <ChevronRight
-                    size={16}
-                    strokeWidth={1.2}
+                  <span
                     className="
-                      relative
-                      z-10
-                      shrink-0
-                      text-[var(--color-text-muted)]
-                      transition-all
-                      duration-500
-                      group-hover:translate-x-1
-                      group-hover:text-[var(--color-accent)]
+                      mt-1
+                      block
+                      truncate
+                      font-body
+                      text-[10px]
+                      text-[var(--color-text-secondary)]
                     "
-                  />
-                </Link>
-              ) : (
-                <div className="space-y-4">
-                  <div>
-                    <p
-                      className="
-                        eyebrow
-                        text-[var(--color-accent)]
-                      "
-                    >
-                      Your Account
-                    </p>
+                  >
+                    {user.email}
+                  </span>
+                </span>
 
-                    <p
-                      className="
-                        mt-2
-                        max-w-[330px]
-                        font-body
-                        text-[11px]
-                        leading-5
-                        text-[var(--color-text-secondary)]
-                      "
-                    >
-                      Sign in or create an account
-                      to manage your orders and
-                      personal details.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    <Link
-                      href="/login"
-                      onClick={onClose}
-                      className="
-                        flex
-                        h-11
-                        items-center
-                        justify-center
-                        border
-                        border-[var(--color-text)]
-                        bg-[var(--color-text)]
-                        px-4
-                        font-body
-                        text-[9px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.16em]
-                        text-[var(--color-text-inverse)]
-                        transition-all
-                        duration-500
-                        hover:border-[var(--color-accent-dark)]
-                        hover:bg-[var(--color-accent-dark)]
-                      "
-                    >
-                      Sign In
-                    </Link>
-
-                    <Link
-                      href="/register"
-                      onClick={onClose}
-                      className="
-                        flex
-                        h-11
-                        items-center
-                        justify-center
-                        border
-                        border-[var(--color-border)]
-                        bg-[var(--color-surface)]
-                        px-4
-                        font-body
-                        text-[9px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.16em]
-                        text-[var(--color-text)]
-                        transition-all
-                        duration-500
-                        hover:border-[var(--color-text)]
-                        hover:bg-[var(--color-bg-soft)]
-                      "
-                    >
-                      Sign Up
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* =================================================
-                ACCOUNT NAVIGATION
-            ================================================= */}
-
-            {isLoggedIn && (
-              <section className="mt-7 px-5 sm:px-7">
-                <div className="mb-3 flex items-end justify-between">
-                  <p className="eyebrow">
-                    My Account
+                <ChevronRight
+                  size={16}
+                  strokeWidth={1.2}
+                  className="
+                    text-[var(--color-text-muted)]
+                    transition-transform
+                    duration-500
+                    group-hover:translate-x-1
+                  "
+                />
+              </Link>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <p
+                    className="
+                      eyebrow
+                      text-[var(--color-accent)]
+                    "
+                  >
+                    Your Account
                   </p>
 
+                  <p
+                    className="
+                      mt-2
+                      max-w-[330px]
+                      font-body
+                      text-[11px]
+                      leading-5
+                      text-[var(--color-text-secondary)]
+                    "
+                  >
+                    Sign in or create an account
+                    to manage your orders and
+                    personal details.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
                   <Link
-                    href="/account"
+                    href="/login"
                     onClick={onClose}
                     className="
-                      link-luxury
+                      flex
+                      h-11
+                      items-center
+                      justify-center
+                      border
+                      border-[var(--color-text)]
+                      bg-[var(--color-text)]
+                      px-4
                       font-body
                       text-[9px]
                       font-semibold
                       uppercase
-                      tracking-[0.12em]
-                      text-[var(--color-accent)]
+                      tracking-[0.16em]
+                      text-white
                     "
                   >
-                    View All
+                    Sign In
+                  </Link>
+
+                  <Link
+                    href="/register"
+                    onClick={onClose}
+                    className="
+                      flex
+                      h-11
+                      items-center
+                      justify-center
+                      border
+                      border-[var(--color-border)]
+                      bg-white
+                      px-4
+                      font-body
+                      text-[9px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.16em]
+                    "
+                  >
+                    Sign Up
                   </Link>
                 </div>
-
-                <div
-                  className="
-                    overflow-hidden
-                    border
-                    border-[var(--color-border)]
-                    bg-[var(--color-surface)]
-                  "
-                >
-                  {accountLinks.map(
-                    (item) => {
-                      const Icon = item.icon;
-
-                      return (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          onClick={onClose}
-                          className="
-                            group
-                            flex
-                            items-center
-                            gap-3.5
-                            border-b
-                            border-[var(--color-border)]
-                            px-4
-                            py-4
-                            last:border-b-0
-                            transition-all
-                            duration-500
-                            hover:bg-[var(--color-bg-soft)]
-                          "
-                        >
-                          <span
-                            className="
-                              flex
-                              h-9
-                              w-9
-                              shrink-0
-                              items-center
-                              justify-center
-                              rounded-full
-                              border
-                              border-[var(--color-border)]
-                              bg-[var(--color-bg)]
-                              text-[var(--color-text-secondary)]
-                              transition-all
-                              duration-500
-                              group-hover:border-[var(--color-accent-soft)]
-                              group-hover:bg-[var(--color-accent-soft)]
-                              group-hover:text-[var(--color-text)]
-                            "
-                          >
-                            <Icon
-                              size={15}
-                              strokeWidth={1.3}
-                            />
-                          </span>
-
-                          <span className="min-w-0 flex-1">
-                            <span
-                              className="
-                                block
-                                font-body
-                                text-[11px]
-                                font-semibold
-                                text-[var(--color-text)]
-                              "
-                            >
-                              {item.label}
-                            </span>
-
-                            <span
-                              className="
-                                mt-1
-                                block
-                                font-body
-                                text-[9px]
-                                leading-4
-                                text-[var(--color-text-muted)]
-                              "
-                            >
-                              {item.description}
-                            </span>
-                          </span>
-
-                          <ChevronRight
-                            size={14}
-                            strokeWidth={1.2}
-                            className="
-                              shrink-0
-                              text-[var(--color-text-muted)]
-                              transition-all
-                              duration-500
-                              group-hover:translate-x-1
-                              group-hover:text-[var(--color-accent)]
-                            "
-                          />
-                        </Link>
-                      );
-                    },
-                  )}
-
-                  {/* SIGN OUT */}
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      void handleLogout();
-                    }}
-                    disabled={isLoggingOut}
-                    className="
-                      group
-                      flex
-                      w-full
-                      items-center
-                      gap-3.5
-                      border-t
-                      border-[var(--color-border)]
-                      px-4
-                      py-4
-                      text-left
-                      transition-all
-                      duration-500
-                      hover:bg-[var(--color-bg-soft)]
-                      disabled:cursor-not-allowed
-                      disabled:opacity-60
-                    "
-                  >
-                    <span
-                      className="
-                        flex
-                        h-9
-                        w-9
-                        shrink-0
-                        items-center
-                        justify-center
-                        rounded-full
-                        border
-                        border-[var(--color-border)]
-                        bg-[var(--color-bg)]
-                        text-[var(--color-text-secondary)]
-                        transition-all
-                        duration-500
-                        group-hover:border-[var(--color-accent-soft)]
-                        group-hover:bg-[var(--color-accent-soft)]
-                        group-hover:text-[var(--color-text)]
-                      "
-                    >
-                      <LogOut
-                        size={15}
-                        strokeWidth={1.3}
-                      />
-                    </span>
-
-                    <span className="min-w-0 flex-1">
-                      <span
-                        className="
-                          block
-                          font-body
-                          text-[11px]
-                          font-semibold
-                          text-[var(--color-text)]
-                        "
-                      >
-                        {isLoggingOut
-                          ? "Signing Out..."
-                          : "Sign Out"}
-                      </span>
-
-                      <span
-                        className="
-                          mt-1
-                          block
-                          font-body
-                          text-[9px]
-                          leading-4
-                          text-[var(--color-text-muted)]
-                        "
-                      >
-                        Sign out from this device
-                      </span>
-                    </span>
-
-                    {!isLoggingOut && (
-                      <ChevronRight
-                        size={14}
-                        strokeWidth={1.2}
-                        className="
-                          shrink-0
-                          text-[var(--color-text-muted)]
-                          transition-all
-                          duration-500
-                          group-hover:translate-x-1
-                          group-hover:text-[var(--color-accent)]
-                        "
-                      />
-                    )}
-                  </button>
-                </div>
-              </section>
+              </div>
             )}
+          </div>
 
-            {/* =================================================
-                MAIN NAVIGATION
-            ================================================= */}
+          {/* =================================================
+              ACCOUNT LINKS
+          ================================================= */}
 
-            <nav
-              className="mt-8 px-5 sm:px-7"
-              aria-label="Mobile navigation"
-            >
-              <div className="mb-4 flex items-end justify-between">
-                <p
-                  className="
-                    eyebrow
-                    text-[var(--color-text-muted)]
-                  "
-                >
-                  Explore
+          {isLoggedIn && (
+            <section className="mt-7 px-5 sm:px-7">
+              <div className="mb-3 flex items-end justify-between">
+                <p className="eyebrow">
+                  My Account
                 </p>
 
-                <span
-                  aria-hidden="true"
+                <Link
+                  href="/account"
+                  onClick={onClose}
                   className="
-                    h-px
-                    w-12
-                    bg-[var(--color-accent-soft)]
+                    font-body
+                    text-[9px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.12em]
+                    text-[var(--color-accent)]
                   "
-                />
+                >
+                  View All
+                </Link>
               </div>
 
               <div
@@ -991,22 +728,12 @@ export function MobileMenu({
                   overflow-hidden
                   border
                   border-[var(--color-border)]
-                  bg-[var(--color-surface)]
+                  bg-white
                 "
               >
-                {mainNavigation.map(
-                  (item, index) => {
-                    const details =
-                      navigationDetails[
-                        item.label
-                      ] ?? {
-                        description:
-                          "Explore Aayesha Fashion",
-                        icon: ChevronRight,
-                      };
-
-                    const Icon =
-                      details.icon;
+                {accountLinks.map(
+                  (item) => {
+                    const Icon = item.icon;
 
                     return (
                       <Link
@@ -1015,64 +742,21 @@ export function MobileMenu({
                         onClick={onClose}
                         className="
                           group
-                          relative
                           flex
                           items-center
                           gap-3.5
-                          overflow-hidden
                           border-b
                           border-[var(--color-border)]
                           px-4
                           py-4
                           last:border-b-0
-                          transition-all
+                          transition-colors
                           duration-500
                           hover:bg-[var(--color-bg-soft)]
                         "
                       >
                         <span
-                          aria-hidden="true"
                           className="
-                            pointer-events-none
-                            absolute
-                            inset-y-0
-                            left-0
-                            w-0
-                            bg-[var(--color-bg-soft)]
-                            transition-all
-                            duration-700
-                            ease-[var(--ease-luxury)]
-                            group-hover:w-full
-                          "
-                        />
-
-                        <span
-                          className="
-                            relative
-                            z-10
-                            flex
-                            h-9
-                            w-7
-                            shrink-0
-                            items-center
-                            justify-center
-                            font-body
-                            text-[8px]
-                            font-medium
-                            tracking-[0.08em]
-                            text-[var(--color-text-muted)]
-                            transition-colors
-                            duration-500
-                            group-hover:text-[var(--color-accent)]
-                          "
-                        >
-                          0{index + 1}
-                        </span>
-
-                        <span
-                          className="
-                            relative
-                            z-10
                             flex
                             h-9
                             w-9
@@ -1088,27 +772,21 @@ export function MobileMenu({
                             duration-500
                             group-hover:border-[var(--color-accent-soft)]
                             group-hover:bg-[var(--color-accent-soft)]
-                            group-hover:text-[var(--color-text)]
                           "
                         >
                           <Icon
                             size={15}
-                            strokeWidth={1.25}
+                            strokeWidth={1.3}
                           />
                         </span>
 
-                        <span className="relative z-10 min-w-0 flex-1">
+                        <span className="min-w-0 flex-1">
                           <span
                             className="
                               block
-                              font-display
-                              text-[18px]
-                              leading-none
-                              tracking-[-0.015em]
-                              text-[var(--color-text)]
-                              transition-all
-                              duration-500
-                              group-hover:translate-x-0.5
+                              font-body
+                              text-[11px]
+                              font-semibold
                             "
                           >
                             {item.label}
@@ -1116,7 +794,7 @@ export function MobileMenu({
 
                           <span
                             className="
-                              mt-1.5
+                              mt-1
                               block
                               font-body
                               text-[9px]
@@ -1124,369 +802,520 @@ export function MobileMenu({
                               text-[var(--color-text-muted)]
                             "
                           >
-                            {details.description}
+                            {item.description}
                           </span>
                         </span>
 
-                        <span
+                        <ChevronRight
+                          size={14}
+                          strokeWidth={1.2}
                           className="
-                            relative
-                            z-10
-                            flex
-                            h-8
-                            w-8
-                            shrink-0
-                            items-center
-                            justify-center
-                            rounded-full
-                            border
-                            border-[var(--color-border)]
-                            bg-[var(--color-bg)]
                             text-[var(--color-text-muted)]
-                            transition-all
+                            transition-transform
                             duration-500
-                            group-hover:border-[var(--color-accent-soft)]
-                            group-hover:bg-[var(--color-accent-soft)]
-                            group-hover:text-[var(--color-text)]
+                            group-hover:translate-x-1
                           "
-                        >
-                          <ChevronRight
-                            size={14}
-                            strokeWidth={1.2}
-                            className="
-                              transition-transform
-                              duration-500
-                              group-hover:translate-x-0.5
-                            "
-                          />
-                        </span>
+                        />
                       </Link>
                     );
                   },
                 )}
-              </div>
-            </nav>
 
-            {/* =================================================
-                QUICK ACCESS
-            ================================================= */}
-
-            <div className="mt-7 px-5 sm:px-7">
-              <div className="mb-4 flex items-end justify-between">
-                <p
-                  className="
-                    eyebrow
-                    text-[var(--color-text-muted)]
-                  "
-                >
-                  Quick Access
-                </p>
-
-                <span
-                  aria-hidden="true"
-                  className="
-                    h-px
-                    w-12
-                    bg-[var(--color-accent-soft)]
-                  "
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-2">
-                <Link
-                  href="/search"
-                  onClick={onClose}
+                <button
+                  type="button"
+                  onClick={() => {
+                    void handleLogout();
+                  }}
+                  disabled={isLoggingOut}
                   className="
                     group
                     flex
+                    w-full
                     items-center
-                    gap-3
-                    border
+                    gap-3.5
+                    border-t
                     border-[var(--color-border)]
-                    bg-[var(--color-surface)]
-                    px-3.5
-                    py-3.5
-                    font-body
-                    text-[10px]
-                    font-medium
-                    text-[var(--color-text)]
-                    transition-all
-                    duration-500
-                    hover:-translate-y-px
-                    hover:border-[var(--color-text)]
-                    hover:bg-[var(--color-bg-soft)]
-                    hover:shadow-[var(--shadow-xs)]
-                  "
-                >
-                  <Search
-                    size={15}
-                    strokeWidth={1.2}
-                    className="
-                      text-[var(--color-text-secondary)]
-                      transition-all
-                      duration-500
-                      group-hover:scale-105
-                      group-hover:text-[var(--color-accent)]
-                    "
-                  />
-
-                  <span>Search</span>
-                </Link>
-
-                <Link
-                  href="/wishlist"
-                  onClick={onClose}
-                  className="
-                    group
-                    flex
-                    items-center
-                    gap-3
-                    border
-                    border-[var(--color-border)]
-                    bg-[var(--color-surface)]
-                    px-3.5
-                    py-3.5
-                    font-body
-                    text-[10px]
-                    font-medium
-                    text-[var(--color-text)]
-                    transition-all
-                    duration-500
-                    hover:-translate-y-px
-                    hover:border-[var(--color-text)]
-                    hover:bg-[var(--color-bg-soft)]
-                    hover:shadow-[var(--shadow-xs)]
-                  "
-                >
-                  <Heart
-                    size={15}
-                    strokeWidth={1.2}
-                    className="
-                      text-[var(--color-text-secondary)]
-                      transition-all
-                      duration-500
-                      group-hover:scale-105
-                      group-hover:text-[var(--color-accent)]
-                    "
-                  />
-
-                  <span>Wishlist</span>
-                </Link>
-
-                <Link
-                  href={
-                    isLoggedIn
-                      ? "/account"
-                      : "/login"
-                  }
-                  onClick={onClose}
-                  className="
-                    group
-                    col-span-2
-                    flex
-                    items-center
-                    justify-between
-                    border
-                    border-[var(--color-border)]
-                    bg-[var(--color-surface)]
                     px-4
-                    py-3.5
-                    font-body
-                    text-[10px]
-                    font-medium
-                    text-[var(--color-text)]
-                    transition-all
-                    duration-500
-                    hover:-translate-y-px
-                    hover:border-[var(--color-text)]
-                    hover:bg-[var(--color-bg-soft)]
-                    hover:shadow-[var(--shadow-xs)]
+                    py-4
+                    text-left
+                    disabled:opacity-60
                   "
                 >
-                  <span className="flex items-center gap-3">
-                    <UserRound
+                  <span
+                    className="
+                      flex
+                      h-9
+                      w-9
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-[var(--color-border)]
+                      bg-[var(--color-bg)]
+                    "
+                  >
+                    <LogOut
                       size={15}
-                      strokeWidth={1.2}
-                      className="
-                        text-[var(--color-text-secondary)]
-                        transition-colors
-                        duration-500
-                        group-hover:text-[var(--color-accent)]
-                      "
+                      strokeWidth={1.3}
                     />
-
-                    <span>
-                      {isLoggedIn
-                        ? "My Account"
-                        : "Sign In / Account"}
-                    </span>
                   </span>
 
-                  <ChevronRight
-                    size={15}
-                    strokeWidth={1.2}
-                    className="
-                      text-[var(--color-text-muted)]
-                      transition-all
-                      duration-500
-                      group-hover:translate-x-1
-                      group-hover:text-[var(--color-accent)]
-                    "
-                  />
-                </Link>
+                  <span className="min-w-0 flex-1">
+                    <span
+                      className="
+                        block
+                        font-body
+                        text-[11px]
+                        font-semibold
+                      "
+                    >
+                      {isLoggingOut
+                        ? "Signing Out..."
+                        : "Sign Out"}
+                    </span>
+
+                    <span
+                      className="
+                        mt-1
+                        block
+                        font-body
+                        text-[9px]
+                        text-[var(--color-text-muted)]
+                      "
+                    >
+                      Sign out from this device
+                    </span>
+                  </span>
+                </button>
               </div>
+            </section>
+          )}
+
+          {/* =================================================
+              MAIN NAVIGATION
+          ================================================= */}
+
+          <nav
+            className="mt-8 px-5 sm:px-7"
+            aria-label="Mobile navigation"
+          >
+            <div className="mb-4 flex items-end justify-between">
+              <p className="eyebrow">
+                Explore
+              </p>
+
+              <span
+                aria-hidden="true"
+                className="
+                  h-px
+                  w-12
+                  bg-[var(--color-accent-soft)]
+                "
+              />
             </div>
 
-            {/* =================================================
-                EDITORIAL NOTE
-            ================================================= */}
+            <div
+              className="
+                overflow-hidden
+                border
+                border-[var(--color-border)]
+                bg-white
+              "
+            >
+              {mainNavigation.map(
+                (item, index) => {
+                  const details =
+                    navigationDetails[
+                      item.label
+                    ] ?? {
+                      description:
+                        "Explore Aayesha Fashion",
+                      icon: ChevronRight,
+                    };
 
-            <div className="px-5 pb-10 pt-9 sm:px-7">
-              <div
+                  const Icon =
+                    details.icon;
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={onClose}
+                      className="
+                        group
+                        flex
+                        items-center
+                        gap-3
+                        border-b
+                        border-[var(--color-border)]
+                        px-4
+                        py-4
+                        last:border-b-0
+                        transition-colors
+                        duration-500
+                        hover:bg-[var(--color-bg-soft)]
+                      "
+                    >
+                      <span
+                        className="
+                          flex
+                          h-8
+                          w-6
+                          shrink-0
+                          items-center
+                          justify-center
+                          font-body
+                          text-[8px]
+                          tracking-[0.08em]
+                          text-[var(--color-text-muted)]
+                        "
+                      >
+                        0{index + 1}
+                      </span>
+
+                      <span
+                        className="
+                          flex
+                          h-9
+                          w-9
+                          shrink-0
+                          items-center
+                          justify-center
+                          rounded-full
+                          border
+                          border-[var(--color-border)]
+                          bg-[var(--color-bg)]
+                          text-[var(--color-text-secondary)]
+                          transition-all
+                          duration-500
+                          group-hover:border-[var(--color-accent-soft)]
+                          group-hover:bg-[var(--color-accent-soft)]
+                        "
+                      >
+                        <Icon
+                          size={15}
+                          strokeWidth={1.25}
+                        />
+                      </span>
+
+                      <span className="min-w-0 flex-1">
+                        <span
+                          className="
+                            block
+                            font-display
+                            text-[18px]
+                            leading-none
+                            tracking-[-0.015em]
+                          "
+                        >
+                          {item.label}
+                        </span>
+
+                        <span
+                          className="
+                            mt-1.5
+                            block
+                            font-body
+                            text-[9px]
+                            leading-4
+                            text-[var(--color-text-muted)]
+                          "
+                        >
+                          {details.description}
+                        </span>
+                      </span>
+
+                      <span
+                        className="
+                          flex
+                          h-8
+                          w-8
+                          shrink-0
+                          items-center
+                          justify-center
+                          rounded-full
+                          border
+                          border-[var(--color-border)]
+                          bg-[var(--color-bg)]
+                        "
+                      >
+                        <ChevronRight
+                          size={14}
+                          strokeWidth={1.2}
+                        />
+                      </span>
+                    </Link>
+                  );
+                },
+              )}
+            </div>
+          </nav>
+
+          {/* =================================================
+              QUICK ACCESS
+          ================================================= */}
+
+          <div className="mt-7 px-5 sm:px-7">
+            <div className="mb-4 flex items-end justify-between">
+              <p className="eyebrow">
+                Quick Access
+              </p>
+
+              <span
+                aria-hidden="true"
                 className="
-                  relative
-                  overflow-hidden
-                  border-t
+                  h-px
+                  w-12
+                  bg-[var(--color-accent-soft)]
+                "
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <Link
+                href="/search"
+                onClick={onClose}
+                className="
+                  flex
+                  items-center
+                  gap-3
+                  border
                   border-[var(--color-border)]
-                  pt-6
+                  bg-white
+                  px-3.5
+                  py-3.5
+                  font-body
+                  text-[10px]
+                  font-medium
+                  transition-all
+                  duration-500
+                  hover:border-[var(--color-text)]
                 "
               >
-                <span
-                  aria-hidden="true"
-                  className="
-                    absolute
-                    left-0
-                    top-0
-                    h-px
-                    w-16
-                    bg-[var(--color-accent)]
-                  "
+                <Search
+                  size={15}
+                  strokeWidth={1.2}
+                  className="text-[var(--color-accent)]"
                 />
 
-                <p
-                  className="
-                    font-display
-                    text-[24px]
-                    italic
-                    leading-[1.05]
-                    tracking-[-0.02em]
-                    text-[var(--color-text)]
-                  "
-                >
-                  Made for moments
-                  <br />
-                  worth remembering.
-                </p>
+                <span>Search</span>
+              </Link>
 
-                <p
-                  className="
-                    mt-3
-                    font-body
-                    text-[8px]
-                    uppercase
-                    tracking-[0.16em]
-                    text-[var(--color-text-muted)]
-                  "
-                >
-                  Aayesha Fashion
-                </p>
-              </div>
+              <Link
+                href="/wishlist"
+                onClick={onClose}
+                className="
+                  flex
+                  items-center
+                  gap-3
+                  border
+                  border-[var(--color-border)]
+                  bg-white
+                  px-3.5
+                  py-3.5
+                  font-body
+                  text-[10px]
+                  font-medium
+                  transition-all
+                  duration-500
+                  hover:border-[var(--color-text)]
+                "
+              >
+                <Heart
+                  size={15}
+                  strokeWidth={1.2}
+                  className="text-[var(--color-accent)]"
+                />
+
+                <span>Wishlist</span>
+              </Link>
+
+              <Link
+                href={
+                  isLoggedIn
+                    ? "/account"
+                    : "/login"
+                }
+                onClick={onClose}
+                className="
+                  col-span-2
+                  flex
+                  items-center
+                  justify-between
+                  border
+                  border-[var(--color-border)]
+                  bg-white
+                  px-4
+                  py-3.5
+                  font-body
+                  text-[10px]
+                  font-medium
+                  transition-all
+                  duration-500
+                  hover:border-[var(--color-text)]
+                "
+              >
+                <span className="flex items-center gap-3">
+                  <UserRound
+                    size={15}
+                    strokeWidth={1.2}
+                    className="text-[var(--color-accent)]"
+                  />
+
+                  <span>
+                    {isLoggedIn
+                      ? "My Account"
+                      : "Sign In / Account"}
+                  </span>
+                </span>
+
+                <ChevronRight
+                  size={15}
+                  strokeWidth={1.2}
+                />
+              </Link>
             </div>
           </div>
 
           {/* =================================================
-              BOTTOM
+              EDITORIAL
           ================================================= */}
 
-          <div
-            className="
-              relative
-              z-20
-              shrink-0
-              border-t
-              border-[var(--color-border)]
-              bg-[rgba(242,237,231,0.98)]
-              px-5
-              py-4
-              sm:px-7
-            "
-          >
-            {isLoggedIn ? (
-              <div className="flex items-center justify-between gap-4">
-                <div className="min-w-0">
-                  <p
-                    className="
-                      truncate
-                      font-body
-                      text-[10px]
-                      font-semibold
-                      text-[var(--color-text)]
-                    "
-                  >
-                    Signed in as {user.name}
-                  </p>
-
-                  <p
-                    className="
-                      mt-1
-                      truncate
-                      font-body
-                      text-[9px]
-                      text-[var(--color-text-muted)]
-                    "
-                  >
-                    {user.email}
-                  </p>
-                </div>
-
-                <Link
-                  href="/account"
-                  onClick={onClose}
-                  aria-label="Open account"
-                  className="
-                    group
-                    flex
-                    h-9
-                    w-9
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    border
-                    border-[var(--color-border)]
-                    bg-[var(--color-surface)]
-                    text-[var(--color-text-secondary)]
-                    transition-all
-                    duration-500
-                    hover:border-[var(--color-text)]
-                    hover:bg-[var(--color-text)]
-                    hover:text-[var(--color-text-inverse)]
-                  "
-                >
-                  <UserRound
-                    size={15}
-                    strokeWidth={1.2}
-                  />
-                </Link>
-              </div>
-            ) : (
+          <div className="px-5 pb-10 pt-9 sm:px-7">
+            <div
+              className="
+                border-t
+                border-[var(--color-border)]
+                pt-6
+              "
+            >
               <p
                 className="
-                  max-w-[320px]
+                  font-display
+                  text-[24px]
+                  italic
+                  leading-[1.05]
+                  tracking-[-0.02em]
+                "
+              >
+                Made for moments
+                <br />
+                worth remembering.
+              </p>
+
+              <p
+                className="
+                  mt-3
                   font-body
                   text-[8px]
-                  leading-4
                   uppercase
-                  tracking-[0.12em]
+                  tracking-[0.16em]
                   text-[var(--color-text-muted)]
                 "
               >
-                {siteConfig.description}
+                Aayesha Fashion
               </p>
-            )}
+            </div>
           </div>
-        </aside>
-      </div>
+        </div>
+
+        {/* =================================================
+            FOOTER
+        ================================================= */}
+
+        <div
+          className="
+            relative
+            z-20
+            shrink-0
+            border-t
+            border-[var(--color-border)]
+            bg-[#f2ede7]
+            px-5
+            py-4
+            sm:px-7
+          "
+        >
+          {isLoggedIn ? (
+            <div className="flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <p
+                  className="
+                    truncate
+                    font-body
+                    text-[10px]
+                    font-semibold
+                  "
+                >
+                  Signed in as {user.name}
+                </p>
+
+                <p
+                  className="
+                    mt-1
+                    truncate
+                    font-body
+                    text-[9px]
+                    text-[var(--color-text-muted)]
+                  "
+                >
+                  {user.email}
+                </p>
+              </div>
+
+              <Link
+                href="/account"
+                onClick={onClose}
+                aria-label="Open account"
+                className="
+                  flex
+                  h-9
+                  w-9
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-[var(--color-border)]
+                  bg-white
+                "
+              >
+                <UserRound
+                  size={15}
+                  strokeWidth={1.2}
+                />
+              </Link>
+            </div>
+          ) : (
+            <p
+              className="
+                max-w-[320px]
+                font-body
+                text-[8px]
+                leading-4
+                uppercase
+                tracking-[0.12em]
+                text-[var(--color-text-muted)]
+              "
+            >
+              {siteConfig.description}
+            </p>
+          )}
+        </div>
+      </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {hamburger}
+
+      {mounted &&
+        createPortal(
+          drawer,
+          document.body,
+        )}
     </>
   );
 }
