@@ -1,7 +1,4 @@
-import {
-  ArrowRight,
-  Truck,
-} from "lucide-react";
+import { ArrowRight, Truck } from "lucide-react";
 
 export function AnnouncementBar() {
   return (
@@ -11,15 +8,12 @@ export function AnnouncementBar() {
         z-[var(--z-header)]
         overflow-hidden
         border-b
-        border-white/10
+        border-white/[0.08]
         bg-[var(--color-charcoal)]
         text-white
       "
     >
-      {/* =====================================================
-          AMBIENT LIGHT
-      ===================================================== */}
-
+      {/* Ambient light */}
       <div
         aria-hidden="true"
         className="
@@ -27,103 +21,120 @@ export function AnnouncementBar() {
           absolute
           left-1/2
           top-1/2
-          h-20
-          w-56
+          h-16
+          w-64
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
-          bg-[var(--color-accent)]
+          bg-[var(--color-champagne)]
           opacity-[0.08]
-          blur-[45px]
+          blur-[50px]
         "
       />
 
-      {/* =====================================================
-          CONTENT
-      ===================================================== */}
+      {/* Subtle side glow */}
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          left-0
+          top-0
+          h-full
+          w-32
+          bg-gradient-to-r
+          from-[var(--color-champagne)]/[0.04]
+          to-transparent
+        "
+      />
 
       <div
         className="
           container-premium
           relative
           flex
-          min-h-9
+          min-h-10
           items-center
           justify-center
-          gap-2.5
+          gap-3
+          px-4
           py-2
           text-center
-          sm:min-h-10
-          sm:gap-3
+          sm:min-h-11
+          sm:gap-3.5
+          sm:px-6
         "
       >
-        {/* Shipping icon */}
-
+        {/* Truck icon */}
         <span
+          aria-hidden="true"
           className="
             flex
-            h-5
-            w-5
+            h-6
+            w-6
             shrink-0
             items-center
             justify-center
             rounded-full
             border
-            border-white/15
+            border-[var(--color-champagne)]/25
             bg-white/[0.04]
-            text-[var(--color-accent-soft)]
-            transition-transform
+            text-[var(--color-champagne)]
+            transition-all
             duration-500
-            hover:scale-110
+            hover:border-[var(--color-champagne)]/50
+            hover:bg-[var(--color-champagne)]/[0.08]
+            hover:scale-105
           "
         >
           <Truck
-            size={12}
-            strokeWidth={1.5}
-            aria-hidden="true"
+            size={13}
+            strokeWidth={1.35}
           />
         </span>
 
         {/* Message */}
-
         <p
           className="
             font-body
-            text-[8px]
+            text-[10px]
             font-medium
             uppercase
             leading-none
-            tracking-[0.14em]
-            text-white/75
-            sm:text-[9px]
-            sm:tracking-[0.18em]
-            md:text-[10px]
+            tracking-[0.12em]
+            text-white/90
+            sm:text-[10.5px]
+            sm:tracking-[0.15em]
+            md:text-[11px]
+            md:tracking-[0.17em]
           "
         >
           Complimentary shipping on orders above ₹2,999
         </p>
 
-        {/* Decorative arrow */}
-
-        <ArrowRight
-          size={12}
-          strokeWidth={1.2}
+        {/* Arrow */}
+        <span
           aria-hidden="true"
           className="
+            flex
             shrink-0
-            text-[var(--color-accent-soft)]
-            opacity-70
+            items-center
+            justify-center
+            text-[var(--color-champagne)]
+            opacity-80
             transition-transform
             duration-500
             hover:translate-x-1
           "
-        />
+        >
+          <ArrowRight
+            size={14}
+            strokeWidth={1.25}
+          />
+        </span>
       </div>
 
-      {/* =====================================================
-          BOTTOM ACCENT LINE
-      ===================================================== */}
-
+      {/* Luxury accent line */}
       <span
         aria-hidden="true"
         className="
@@ -131,10 +142,13 @@ export function AnnouncementBar() {
           bottom-0
           left-1/2
           h-px
-          w-16
+          w-20
           -translate-x-1/2
-          bg-[var(--color-accent)]
-          opacity-60
+          bg-gradient-to-r
+          from-transparent
+          via-[var(--color-champagne)]
+          to-transparent
+          opacity-70
         "
       />
     </div>
