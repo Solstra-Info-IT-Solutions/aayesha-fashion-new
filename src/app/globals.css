@@ -754,7 +754,7 @@ h6 {
 }
 
 .site-header__inner--scrolled {
-  min-height: 72px;
+  min-height: var(--mobile-menu-quick-item-height);
 }
 
 
@@ -883,6 +883,53 @@ h6 {
   }
 }
 
+
+/* =======================================================
+   MOBILE HEADER LAYOUT
+
+   Mobile order:
+   Hamburger — centered brand — cart
+======================================================= */
+
+@media (max-width: 1023px) {
+  .site-header__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    min-height: 72px;
+    padding-inline: var(--space-4);
+  }
+
+  .site-header__inner--scrolled {
+    min-height: 64px;
+  }
+
+  .site-header__mobile-menu {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .site-header__brand {
+    grid-column: 2;
+    justify-self: center;
+  }
+
+  .site-header__actions {
+    grid-column: 3;
+    justify-self: end;
+    margin-left: 0;
+  }
+
+  .site-header__actions .header-action--search,
+  .site-header__actions .header-action-account,
+  .site-header__actions .header-action--wishlist {
+    display: none;
+  }
+
+  .site-header__actions .header-action--cart {
+    display: inline-flex;
+  }
+}
 
 /* =======================================================
    BRAND LOGO
@@ -2734,25 +2781,33 @@ h6 {
   --mobile-menu-trigger-size: 44px;
   --mobile-menu-trigger-inner-size: 40px;
 
-  --mobile-menu-header-padding-x: 20px;
-  --mobile-menu-header-padding-y: 20px;
+  --mobile-menu-header-padding-x: 16px;
+  --mobile-menu-header-padding-y: 16px;
 
-  --mobile-menu-content-padding-x: 20px;
+  --mobile-menu-content-padding-x: 16px;
 
-  --mobile-menu-section-gap: 36px;
+  --mobile-menu-section-gap: 28px;
 
-  --mobile-menu-brand-size: 32px;
-  --mobile-menu-brand-tagline-size: 8px;
+  --mobile-menu-brand-size: 28px;
+  --mobile-menu-brand-tagline-size: 7px;
 
-  --mobile-menu-guest-title-size: 30px;
-  --mobile-menu-account-name-size: 20px;
+  --mobile-menu-guest-title-size: 24px;
+  --mobile-menu-account-name-size: 17px;
 
-  --mobile-menu-navigation-title-size: 21px;
+  --mobile-menu-navigation-title-size: 18px;
 
-  --mobile-menu-editorial-size: 32px;
+  --mobile-menu-editorial-size: 26px;
 
-  --mobile-menu-item-icon-size: 40px;
-  --mobile-menu-item-height: 72px;
+  --mobile-menu-item-icon-size: 36px;
+  --mobile-menu-item-height: 62px;
+  --mobile-menu-avatar-size: 16px;
+  --mobile-menu-arrow-size: 30px;
+  --mobile-menu-quick-item-height: 60px;
+  --mobile-menu-quick-title-size: 13px;
+  --mobile-menu-quick-description-size: 10px;
+  --mobile-menu-account-title-size: 13px;
+  --mobile-menu-account-description-size: 10px;
+  --mobile-menu-footer-text-size: 10px;
 
   --mobile-menu-shadow:
     30px 0 100px rgba(17, 16, 15, 0.18);
@@ -2760,8 +2815,8 @@ h6 {
   --mobile-menu-backdrop:
     rgba(17, 16, 15, 0.56);
 
-  --mobile-menu-ambient-top-opacity: 0.07;
-  --mobile-menu-ambient-bottom-opacity: 0.035;
+  --mobile-menu-ambient-top-opacity: 0.055;
+  --mobile-menu-ambient-bottom-opacity: 0.025;
 }
 
 .mobile-menu-trigger {
@@ -3252,7 +3307,7 @@ h6 {
 
   font-family: var(--font-display);
 
-  font-size: 18px;
+  font-size: var(--mobile-menu-avatar-size);
 
   font-weight: var(--weight-regular);
 
@@ -3332,8 +3387,8 @@ h6 {
 
   display: flex;
 
-  width: 32px;
-  height: 32px;
+  width: var(--mobile-menu-arrow-size);
+  height: var(--mobile-menu-arrow-size);
 
   flex-shrink: 0;
 
@@ -3613,7 +3668,7 @@ h6 {
 
   font-family: var(--font-body);
 
-  font-size: var(--text-body);
+  font-size: var(--mobile-menu-account-title-size);
 
   font-weight: var(--weight-semibold);
 
@@ -3629,7 +3684,7 @@ h6 {
 
   font-family: var(--font-body);
 
-  font-size: var(--text-body-xs);
+  font-size: var(--mobile-menu-account-description-size);
 
   line-height: var(--line-body-tight);
 
@@ -3937,7 +3992,7 @@ h6 {
 
   font-family: var(--font-body);
 
-  font-size: var(--text-body-sm);
+  font-size: var(--mobile-menu-quick-title-size);
 
   font-weight: var(--weight-semibold);
 
@@ -3953,7 +4008,7 @@ h6 {
 
   font-family: var(--font-body);
 
-  font-size: var(--text-body-xs);
+  font-size: var(--mobile-menu-quick-description-size);
 
   line-height: 1.3;
 
@@ -4110,7 +4165,7 @@ h6 {
 
   font-family: var(--font-body);
 
-  font-size: var(--text-body-xs);
+  font-size: var(--mobile-menu-footer-text-size);
 
   font-weight: var(--weight-semibold);
 
@@ -4209,12 +4264,12 @@ h6 {
 
 @media (min-width: 640px) {
   :root {
-    --mobile-menu-header-padding-x: 28px;
-    --mobile-menu-content-padding-x: 28px;
+    --mobile-menu-header-padding-x: 22px;
+    --mobile-menu-content-padding-x: 22px;
 
-    --mobile-menu-brand-size: 34px;
-    --mobile-menu-guest-title-size: 32px;
-    --mobile-menu-navigation-title-size: 22px;
+    --mobile-menu-brand-size: 30px;
+    --mobile-menu-guest-title-size: 26px;
+    --mobile-menu-navigation-title-size: 19px;
   }
 }
 
@@ -4235,6 +4290,65 @@ h6 {
 /* =========================================================
    REDUCED MOTION
 ========================================================= */
+
+@media (max-width: 767px) {
+  :root {
+    --mobile-menu-header-padding-x: 16px;
+    --mobile-menu-header-padding-y: 14px;
+    --mobile-menu-content-padding-x: 16px;
+    --mobile-menu-section-gap: 24px;
+
+    --mobile-menu-brand-size: 26px;
+    --mobile-menu-brand-tagline-size: 6.5px;
+    --mobile-menu-guest-title-size: 22px;
+    --mobile-menu-account-name-size: 16px;
+    --mobile-menu-navigation-title-size: 17px;
+    --mobile-menu-editorial-size: 24px;
+    --mobile-menu-item-icon-size: 34px;
+    --mobile-menu-item-height: 58px;
+    --mobile-menu-avatar-size: 15px;
+    --mobile-menu-arrow-size: 28px;
+    --mobile-menu-quick-item-height: 58px;
+    --mobile-menu-quick-title-size: 12px;
+    --mobile-menu-quick-description-size: 9px;
+    --mobile-menu-account-title-size: 12px;
+    --mobile-menu-account-description-size: 9px;
+    --mobile-menu-footer-text-size: 9px;
+    --logo-mark-size: 38px;
+    --logo-wordmark-gap: 8px;
+    --logo-name-size: 25px;
+    --logo-tagline-size: 6.5px;
+  }
+
+  .mobile-menu__account {
+    padding-top: 20px;
+  }
+
+  .mobile-menu__editorial {
+    padding-top: 36px;
+    padding-bottom: 44px;
+  }
+
+  .mobile-menu__editorial-rule {
+    margin-bottom: 20px;
+  }
+
+  .mobile-account-link {
+    padding-block: 12px;
+  }
+
+  .mobile-navigation-item {
+    padding-block: 12px;
+  }
+
+  .mobile-navigation-item__description {
+    margin-top: 5px;
+  }
+
+  .mobile-menu__collection-label {
+    margin-top: 8px;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .mobile-menu__drawer,
