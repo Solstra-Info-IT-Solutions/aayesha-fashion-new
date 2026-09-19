@@ -35,28 +35,27 @@ export function Header() {
         top-0
         z-[var(--z-header)]
         w-full
+        border-b
         transition-all
-        duration-700
+        duration-500
         ease-[cubic-bezier(.22,1,.36,1)]
         ${
           isScrolled
             ? `
-              border-b
               border-[var(--color-border-light)]
-              bg-[rgba(247,243,238,0.82)]
-              shadow-[0_12px_40px_rgba(33,31,29,0.06)]
+              bg-[rgba(255,255,255,0.94)]
+              shadow-[0_8px_30px_rgba(23,21,20,0.06)]
               backdrop-blur-xl
             `
             : `
-              border-b
-              border-transparent
-              bg-[rgba(247,243,238,0.35)]
-              backdrop-blur-md
+              border-[rgba(23,21,20,0.06)]
+              bg-[rgba(255,255,255,0.88)]
+              backdrop-blur-lg
             `
         }
       `}
     >
-      {/* Subtle luxury highlight */}
+      {/* Refined champagne accent */}
       <div
         aria-hidden="true"
         className="
@@ -67,9 +66,9 @@ export function Header() {
           h-px
           bg-gradient-to-r
           from-transparent
-          via-[var(--color-accent-soft)]
+          via-[var(--color-champagne)]
           to-transparent
-          opacity-60
+          opacity-50
         "
       />
 
@@ -82,8 +81,8 @@ export function Header() {
           max-w-[1600px]
           items-center
           px-5
-          transition-all
-          duration-700
+          transition-[height]
+          duration-500
           ease-[cubic-bezier(.22,1,.36,1)]
           sm:px-8
           md:px-10
@@ -91,12 +90,15 @@ export function Header() {
           xl:px-16
           ${
             isScrolled
-              ? "h-[68px] sm:h-[72px] md:h-[76px]"
-              : "h-[76px] sm:h-[80px] md:h-[84px]"
+              ? "h-[72px] sm:h-[74px] lg:h-[76px]"
+              : "h-[82px] sm:h-[86px] lg:h-[90px]"
           }
         `}
       >
-        {/* Mobile Menu */}
+        {/* =====================================================
+            MOBILE MENU
+        ====================================================== */}
+
         <div className="relative z-[120] lg:hidden">
           <MobileMenu
             isOpen={mobileMenuOpen}
@@ -105,41 +107,51 @@ export function Header() {
           />
         </div>
 
-        {/* Desktop Navigation */}
+        {/* =====================================================
+            DESKTOP NAVIGATION
+        ====================================================== */}
+
         <div
           className="
             hidden
-            lg:block
+            lg:flex
+            lg:items-center
           "
         >
           <DesktopNavigation />
         </div>
 
-        {/* Center Logo */}
+        {/* =====================================================
+            CENTER BRAND
+        ====================================================== */}
+
         <div
           className="
             pointer-events-none
             absolute
             left-1/2
+            top-1/2
             z-[10]
             -translate-x-1/2
-            [perspective:1000px]
+            -translate-y-1/2
           "
         >
           <div
             className="
               transform-gpu
-              transition-all
-              duration-700
+              transition-transform
+              duration-500
               ease-[cubic-bezier(.22,1,.36,1)]
-              hover:[transform:translateZ(8px)]
             "
           >
             <BrandLogo />
           </div>
         </div>
 
-        {/* Header Actions */}
+        {/* =====================================================
+            HEADER ACTIONS
+        ====================================================== */}
+
         <div
           className="
             relative
