@@ -141,7 +141,13 @@ export function ProductCard({
 
   return (
     <>
-      <article className="product-card">
+      <article
+        className={`product-card ${
+          availability.isSoldOut
+            ? "product-card--sold-out"
+            : ""
+        }`}
+      >
         {/* =====================================================
             PRODUCT IMAGE
         ===================================================== */}
@@ -195,7 +201,9 @@ export function ProductCard({
             />
           </Link>
 
-          {/* BADGE */}
+          {/* ===================================================
+              BADGE
+          =================================================== */}
 
           {hasBadge && (
             <div className="product-card__badge">
@@ -205,7 +213,9 @@ export function ProductCard({
             </div>
           )}
 
-          {/* WISHLIST */}
+          {/* ===================================================
+              WISHLIST
+          =================================================== */}
 
           <div className="product-card__wishlist">
             <WishlistButton
@@ -214,11 +224,13 @@ export function ProductCard({
             />
           </div>
 
-          {/* SOLD OUT */}
+          {/* ===================================================
+              SOLD OUT IMAGE LABEL
+          =================================================== */}
 
           {availability.isSoldOut && (
-            <div className="product-card__sold-out">
-              <span>Sold Out</span>
+            <div className="product-card__sold-out-label">
+              Sold Out
             </div>
           )}
         </div>
@@ -271,21 +283,9 @@ export function ProductCard({
             )}
           </div>
 
-          {/* AVAILABILITY */}
-
-          {!availability.isSoldOut && (
-            <div className="product-card__availability">
-              <span className="product-card__availability-dot" />
-
-              <span>
-                {availability.isLowStock
-                  ? "Only a few left"
-                  : "In Stock"}
-              </span>
-            </div>
-          )}
-
-          {/* ADD TO BAG */}
+          {/* ===================================================
+              ADD TO BAG
+          =================================================== */}
 
           <button
             type="button"
@@ -295,7 +295,11 @@ export function ProductCard({
               isAdding ||
               !isInitialized
             }
-            className="product-card__button"
+            className={`product-card__button ${
+              availability.isSoldOut
+                ? "product-card__button--sold-out"
+                : ""
+            }`}
           >
             <ShoppingBag
               size={16}
@@ -313,7 +317,9 @@ export function ProductCard({
         </div>
       </article>
 
-      {/* LOGIN POPUP */}
+      {/* =====================================================
+          LOGIN REQUIRED POPUP
+      ===================================================== */}
 
       <LoginRequiredPopup
         open={showLoginPopup}

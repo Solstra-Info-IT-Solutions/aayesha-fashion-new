@@ -5751,12 +5751,15 @@ h6 {
 
 .product-card {
   --product-card-radius: 18px;
-  --product-card-media-radius: 16px;
+  --product-card-media-radius: 15px;
 
   position: relative;
+
   display: flex;
   width: 100%;
+
   flex-direction: column;
+
   overflow: hidden;
 
   border: 1px solid var(--site-border);
@@ -5765,28 +5768,28 @@ h6 {
   background: var(--site-surface);
 
   box-shadow:
-    0 2px 6px rgb(23 21 20 / 3%),
-    0 10px 30px rgb(23 21 20 / 5%);
+    0 2px 5px rgb(23 21 20 / 3%),
+    0 8px 22px rgb(23 21 20 / 4%);
 
   transition:
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 320ms ease,
-    box-shadow 320ms ease;
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease,
+    box-shadow 350ms ease;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
 
-  border-color: rgb(200 170 122 / 55%);
+  border-color: rgb(200 170 122 / 48%);
 
   box-shadow:
     0 4px 10px rgb(23 21 20 / 4%),
-    0 18px 42px rgb(23 21 20 / 10%);
+    0 16px 36px rgb(23 21 20 / 9%);
 }
 
 
 /* =========================================================
-   PRODUCT MEDIA
+   MEDIA
 ========================================================= */
 
 .product-card__media {
@@ -5823,7 +5826,7 @@ h6 {
   object-position: center;
 
   transition:
-    transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
     opacity 500ms ease;
 }
 
@@ -5856,9 +5859,9 @@ h6 {
   background:
     linear-gradient(
       to bottom,
-      rgb(23 21 20 / 3%),
-      transparent 25%,
-      transparent 75%,
+      rgb(23 21 20 / 2%),
+      transparent 28%,
+      transparent 72%,
       rgb(23 21 20 / 5%)
     );
 }
@@ -5883,12 +5886,12 @@ h6 {
   align-items: center;
   justify-content: center;
 
-  padding: 5px 10px;
+  padding: 5px 11px;
 
   border: 1px solid rgb(232 226 220 / 90%);
   border-radius: 999px;
 
-  background: rgb(255 255 255 / 94%);
+  background: rgb(255 255 255 / 95%);
 
   color: var(--site-text-primary);
 
@@ -5920,8 +5923,8 @@ h6 {
 
   display: flex;
 
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
 
   align-items: center;
   justify-content: center;
@@ -5929,20 +5932,31 @@ h6 {
   border: 1px solid rgb(232 226 220 / 90%);
   border-radius: 50%;
 
-  background: rgb(255 255 255 / 94%);
+  background: rgb(255 255 255 / 95%);
 
   box-shadow:
-    0 3px 12px rgb(23 21 20 / 7%);
+    0 4px 14px rgb(23 21 20 / 8%);
 
   backdrop-filter: blur(10px);
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.product-card__wishlist:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 18px rgb(23 21 20 / 12%);
 }
 
 
 /* =========================================================
-   SOLD OUT
+   SOLD OUT IMAGE LABEL
 ========================================================= */
 
-.product-card__sold-out {
+.product-card__sold-out-label {
   position: absolute;
 
   right: 0;
@@ -5958,7 +5972,7 @@ h6 {
   align-items: center;
   justify-content: center;
 
-  border-top: 1px solid rgb(255 255 255 / 12%);
+  border-top: 1px solid rgb(255 255 255 / 15%);
 
   background: rgb(23 21 20 / 88%);
 
@@ -5988,7 +6002,7 @@ h6 {
 
   flex-direction: column;
 
-  padding: 16px 16px 18px;
+  padding: 17px 17px 18px;
 }
 
 
@@ -6011,7 +6025,7 @@ h6 {
 
 
 /* =========================================================
-   PRODUCT TITLE
+   TITLE
 ========================================================= */
 
 .product-card__title-link {
@@ -6064,7 +6078,7 @@ h6 {
 
   align-items: baseline;
 
-  gap: 7px;
+  gap: 8px;
 
   margin-top: 12px;
 }
@@ -6101,39 +6115,6 @@ h6 {
 
 
 /* =========================================================
-   AVAILABILITY
-========================================================= */
-
-.product-card__availability {
-  display: flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  margin-top: 9px;
-
-  color: var(--site-text-secondary);
-
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.product-card__availability-dot {
-  width: 7px;
-  height: 7px;
-
-  flex: 0 0 7px;
-
-  border-radius: 50%;
-
-  background: var(--site-accent);
-}
-
-
-/* =========================================================
    ADD TO BAG
 ========================================================= */
 
@@ -6148,7 +6129,7 @@ h6 {
 
   gap: 8px;
 
-  margin-top: 16px;
+  margin-top: 18px;
 
   border: 1px solid var(--site-text-primary);
   border-radius: 10px;
@@ -6166,26 +6147,60 @@ h6 {
   cursor: pointer;
 
   transition:
+    transform 220ms ease,
     background 220ms ease,
     border-color 220ms ease,
-    transform 220ms ease,
     box-shadow 220ms ease;
 }
 
 .product-card__button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
   border-color: var(--site-accent);
 
   background: var(--site-accent);
 
   box-shadow:
-    0 6px 18px rgb(200 170 122 / 20%);
+    0 7px 18px rgb(200 170 122 / 20%);
 }
 
 .product-card__button:active:not(:disabled) {
-  transform: translateY(1px);
+  transform: translateY(0);
 }
 
-.product-card__button:disabled {
+
+/* =========================================================
+   SOLD OUT BUTTON
+========================================================= */
+
+.product-card__button--sold-out {
+  border-color: #b42318;
+
+  background: #b42318;
+
+  color: #ffffff;
+
+  cursor: not-allowed;
+}
+
+.product-card__button--sold-out:hover {
+  transform: none;
+
+  border-color: #b42318;
+
+  background: #b42318;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   DISABLED / INITIALIZING
+========================================================= */
+
+.product-card__button:disabled:not(
+  .product-card__button--sold-out
+) {
   border-color: var(--site-border);
 
   background: var(--site-header-background);
@@ -6203,12 +6218,12 @@ h6 {
 ========================================================= */
 
 @media (max-width: 1023px) {
-  .product-card__title {
-    font-size: 18px;
-  }
-
   .product-card__content {
     padding: 15px 14px 16px;
+  }
+
+  .product-card__title {
+    font-size: 18px;
   }
 }
 
@@ -6258,7 +6273,7 @@ h6 {
     height: 34px;
   }
 
-  .product-card__sold-out {
+  .product-card__sold-out-label {
     min-height: 38px;
 
     font-size: 11px;
@@ -6299,23 +6314,10 @@ h6 {
     font-size: 11px;
   }
 
-  .product-card__availability {
-    margin-top: 8px;
-
-    font-size: 11px;
-  }
-
-  .product-card__availability-dot {
-    width: 6px;
-    height: 6px;
-
-    flex-basis: 6px;
-  }
-
   .product-card__button {
     min-height: 44px;
 
-    margin-top: 13px;
+    margin-top: 14px;
 
     border-radius: 9px;
 
@@ -6340,7 +6342,6 @@ h6 {
     transform: none;
   }
 }
-
 
 
 /* =========================================================
