@@ -326,7 +326,7 @@ export function ProductCard({
       <AddToBagPopup
         open={showAddedPopup}
         product={product}
-        image={primaryMedia.url}
+        image={primaryMedia.src}
         onClose={() => setShowAddedPopup(false)}
       />
     </>
