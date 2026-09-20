@@ -117,10 +117,8 @@ export function CheckoutCoupon() {
 
         const items = cart.items.map(
           (item) => ({
-            productId:
-              item.productId,
-            quantity:
-              item.quantity,
+            productId: item.productId,
+            quantity: item.quantity,
           }),
         );
 
@@ -129,10 +127,8 @@ export function CheckoutCoupon() {
         for (const item of cart.items) {
           calculatedSubtotal +=
             Number(
-              item.product.pricing
-                .sellingPrice,
-            ) *
-            item.quantity;
+              item.product.pricing.sellingPrice,
+            ) * item.quantity;
         }
 
         setCartItems(items);
@@ -294,22 +290,29 @@ export function CheckoutCoupon() {
   ========================================================= */
 
   return (
-    <section className="overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
+    <section className="checkout-coupon">
       {/* HEADER */}
 
-      <div className="flex items-start justify-between gap-4 border-b border-[var(--color-border-light)] px-5 py-5 sm:px-6 sm:py-6">
-        <div>
-          <p className="eyebrow text-[var(--color-text-muted)]">
-            Offers
-          </p>
+      <header className="checkout-coupon__header">
+        <div className="checkout-coupon__heading">
+          <div className="checkout-coupon__step">
+            04
+          </div>
 
-          <h2 className="mt-2 font-[var(--font-display)] text-2xl font-medium leading-none text-[var(--color-text)] sm:text-3xl">
-            Have a coupon?
-          </h2>
+          <div className="checkout-coupon__heading-content">
+            <p className="checkout-coupon__eyebrow">
+              Offers
+            </p>
 
-          <p className="mt-2 text-[11px] leading-5 text-[var(--color-text-secondary)]">
-            Apply an available offer to your order.
-          </p>
+            <h2 className="checkout-coupon__title">
+              Have a coupon?
+            </h2>
+
+            <p className="checkout-coupon__description">
+              Apply an available offer to your
+              order.
+            </p>
+          </div>
         </div>
 
         {couponCode ? (
@@ -317,40 +320,51 @@ export function CheckoutCoupon() {
             type="button"
             onClick={clearCoupon}
             disabled={applying}
-            className="shrink-0 pt-1 text-[10px] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)] disabled:cursor-not-allowed disabled:opacity-50"
+            className="checkout-coupon__remove"
           >
             Remove
           </button>
         ) : null}
-      </div>
+      </header>
 
       {/* COUPON FORM */}
 
-      <div className="px-5 py-6 sm:px-6 sm:py-7">
-        <div className="flex">
-          <input
-            value={input}
-            onChange={(event) =>
-              setInput(
-                event.target.value
-                  .toUpperCase()
-                  .slice(0, 40),
-              )
-            }
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                event.preventDefault();
-                void applyCoupon();
+      <div className="checkout-coupon__content">
+        <div className="checkout-coupon__form">
+          <div className="checkout-coupon__input-wrap">
+            <label
+              htmlFor="checkout-coupon-code"
+              className="checkout-coupon__label"
+            >
+              Coupon code
+            </label>
+
+            <input
+              id="checkout-coupon-code"
+              value={input}
+              onChange={(event) =>
+                setInput(
+                  event.target.value
+                    .toUpperCase()
+                    .slice(0, 40),
+                )
               }
-            }}
-            disabled={
-              applying ||
-              loadingCart
-            }
-            placeholder="Enter code"
-            aria-label="Coupon code"
-            className="h-12 min-w-0 flex-1 border border-r-0 border-[var(--color-border-dark)] bg-[var(--color-surface-soft)] px-4 text-xs font-medium uppercase tracking-[0.06em] text-[var(--color-text)] outline-none transition-colors placeholder:normal-case placeholder:tracking-normal placeholder:text-[var(--color-text-muted)] hover:border-[var(--color-accent-soft)] focus:border-[var(--color-accent)] disabled:cursor-not-allowed disabled:opacity-60"
-          />
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  void applyCoupon();
+                }
+              }}
+              disabled={
+                applying ||
+                loadingCart
+              }
+              placeholder="Enter code"
+              aria-label="Coupon code"
+              autoComplete="off"
+              className="checkout-coupon__input"
+            />
+          </div>
 
           <button
             type="button"
@@ -361,56 +375,67 @@ export function CheckoutCoupon() {
               applying ||
               loadingCart
             }
-            className="h-12 min-w-[90px] bg-[var(--color-text)] px-5 text-[10px] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-inverse)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-accent-dark)] disabled:cursor-not-allowed disabled:opacity-50"
+            className="checkout-coupon__apply"
           >
-            {applying
-              ? "Applying..."
-              : "Apply"}
+            <span>
+              {applying
+                ? "Applying..."
+                : "Apply"}
+            </span>
           </button>
         </div>
 
         {/* APPLIED COUPON */}
 
         {couponCode ? (
-          <div className="mt-4 border border-[var(--color-accent-soft)] bg-[var(--color-bg-subtle)] px-4 py-3">
-            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-              <div className="flex items-center gap-2">
-                <span className="flex h-5 w-5 items-center justify-center bg-[var(--color-accent)] text-[var(--color-text-inverse)]">
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    className="h-3 w-3"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M5 10.5L8.2 13.5L15 6.5"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+          <div
+            className="checkout-coupon__applied"
+            role="status"
+            aria-live="polite"
+          >
+            <div className="checkout-coupon__applied-main">
+              <span className="checkout-coupon__success-icon">
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 10.5L8.2 13.5L15 6.5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <div className="checkout-coupon__applied-copy">
+                <span className="checkout-coupon__applied-label">
+                  Coupon applied
                 </span>
 
-                <p className="text-[10px] font-semibold uppercase tracking-[var(--tracking-wide)] text-[var(--color-success)]">
-                  {couponCode} applied
-                </p>
+                <strong>
+                  {couponCode}
+                </strong>
               </div>
+            </div>
 
+            <div className="checkout-coupon__benefits">
               {couponDiscount > 0 ? (
-                <p className="text-[10px] font-semibold text-[var(--color-success)]">
+                <span className="checkout-coupon__benefit">
                   Save ₹
                   {couponDiscount.toLocaleString(
                     "en-IN",
                   )}
-                </p>
+                </span>
               ) : null}
 
               {couponShippingDiscount >
               0 ? (
-                <p className="text-[10px] font-semibold uppercase tracking-[var(--tracking-wide)] text-[var(--color-success)]">
+                <span className="checkout-coupon__benefit">
                   Free shipping
-                </p>
+                </span>
               ) : null}
             </div>
           </div>
@@ -419,9 +444,10 @@ export function CheckoutCoupon() {
         {/* SUPPORTING NOTE */}
 
         {!couponCode ? (
-          <p className="mt-4 text-[10px] leading-5 text-[var(--color-text-muted)]">
-            Coupon eligibility is checked against your
-            current bag, delivery method and account details.
+          <p className="checkout-coupon__note">
+            Coupon eligibility is checked against
+            your current bag, delivery method and
+            account details.
           </p>
         ) : null}
       </div>
