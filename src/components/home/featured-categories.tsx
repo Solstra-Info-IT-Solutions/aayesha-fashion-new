@@ -17,6 +17,8 @@ import { LinkButton } from "@/components/ui/button";
 import { getCategories } from "@/services/category.service";
 import type { Category } from "@/types/category";
 
+import "./FeaturedCategories.css";
+
 /* =========================================================
    COMPONENT
 ========================================================= */
@@ -76,31 +78,45 @@ export function FeaturedCategories() {
   }, []);
 
   return (
-    <section className="featured-categories">
+    <section
+      className="featured-categories"
+      aria-labelledby="featured-categories-title"
+    >
       <Container>
         {/* =================================================
-            SECTION HEADER
+            SECTION INTRO
         ================================================= */}
 
-        <div className="featured-categories__header">
-          <p className="featured-categories__eyebrow">
-            Featured Categories
-          </p>
+        <header className="featured-categories__header">
+          <div className="featured-categories__heading">
+            <p className="featured-categories__eyebrow">
+              Discover Aayesha
+            </p>
 
-          <h2 className="featured-categories__title">
-            Explore our{" "}
-            <span className="featured-categories__title-accent">
-              collections.
-            </span>
-          </h2>
-        </div>
+            <h2
+              id="featured-categories-title"
+              className="featured-categories__title"
+            >
+              Explore the
+              <span>
+                collections.
+              </span>
+            </h2>
+          </div>
+
+          <p className="featured-categories__intro">
+            Curated silhouettes,
+            contemporary details and
+            timeless Indian craftsmanship.
+          </p>
+        </header>
 
         {/* =================================================
             LOADING
         ================================================= */}
 
         {loading && (
-          <div className="featured-categories__grid">
+          <div className="featured-categories__grid featured-categories__grid--loading">
             {Array.from({
               length: 4,
             }).map((_, index) => (
@@ -120,10 +136,11 @@ export function FeaturedCategories() {
             <>
               <div className="featured-categories__grid">
                 {categories.map(
-                  (category) => (
+                  (category, index) => (
                     <CategoryCard
                       key={category.id}
                       category={category}
+                      index={index}
                     />
                   ),
                 )}
@@ -131,19 +148,26 @@ export function FeaturedCategories() {
 
               {/* CTA */}
 
-              <div className="featured-categories__cta">
-                <LinkButton
+              <div className="featured-categories__footer">
+                <div className="featured-categories__footer-line" />
+
+                <Link
                   href="/categories"
-                  variant="secondary"
-                  size="lg"
-                  icon={
+                  className="featured-categories__all-link"
+                >
+                  <span>
+                    Explore all categories
+                  </span>
+
+                  <span className="featured-categories__all-icon">
                     <ArrowUpRight
                       size={15}
+                      strokeWidth={1.3}
                     />
-                  }
-                >
-                  Explore All Categories
-                </LinkButton>
+                  </span>
+                </Link>
+
+                <div className="featured-categories__footer-line" />
               </div>
             </>
           )}
@@ -167,8 +191,10 @@ export function FeaturedCategories() {
 
 function CategoryCard({
   category,
+  index,
 }: {
   category: Category;
+  index: number;
 }) {
   return (
     <Link
@@ -177,13 +203,19 @@ function CategoryCard({
       aria-label={`Shop ${category.name}`}
     >
       <article className="category-card__surface">
+        {/* IMAGE */}
+
         <div className="category-card__image">
           {category.image ? (
             <Image
               src={category.image}
               alt={category.name}
               fill
-              sizes="(max-width: 639px) 92px, (max-width: 1023px) 112px, 132px"
+              sizes="
+                (max-width: 639px) 50vw,
+                (max-width: 1023px) 50vw,
+                25vw
+              "
               className="category-card__image-element"
             />
           ) : (
@@ -192,16 +224,45 @@ function CategoryCard({
               aria-hidden="true"
             >
               <Sparkles
-                size={18}
-                strokeWidth={1.1}
+                size={20}
+                strokeWidth={1}
               />
             </div>
           )}
-        </div>
 
-        <h3 className="category-card__title">
-          {category.name}
-        </h3>
+          <div className="category-card__shade" />
+
+          {/* NUMBER */}
+
+          <span className="category-card__number">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+
+          {/* ARROW */}
+
+          <span className="category-card__arrow">
+            <ArrowUpRight
+              size={18}
+              strokeWidth={1.2}
+            />
+          </span>
+
+          {/* CATEGORY NAME */}
+
+          <div className="category-card__overlay-content">
+            <span className="category-card__label">
+              Collection
+            </span>
+
+            <h3 className="category-card__title">
+              {category.name}
+            </h3>
+
+            <span className="category-card__shop">
+              Shop collection
+            </span>
+          </div>
+        </div>
       </article>
     </Link>
   );
@@ -215,8 +276,6 @@ function ComingSoon() {
   return (
     <div className="categories-coming-soon">
       <div className="categories-coming-soon__content">
-        {/* ICON */}
-
         <div className="categories-coming-soon__icon">
           <Sparkles
             size={18}
@@ -224,22 +283,16 @@ function ComingSoon() {
           />
         </div>
 
-        {/* LABEL */}
-
         <p className="categories-coming-soon__eyebrow">
           Coming Soon
         </p>
 
-        {/* TITLE */}
-
         <h3 className="categories-coming-soon__title">
           Something special
-          <span className="categories-coming-soon__title-accent">
+          <span>
             is being curated.
           </span>
         </h3>
-
-        {/* DESCRIPTION */}
 
         <p className="categories-coming-soon__description">
           Our featured collections are
@@ -247,8 +300,6 @@ function ComingSoon() {
           back soon for the latest from
           Aayesha Fashion.
         </p>
-
-        {/* CTA */}
 
         <div className="categories-coming-soon__cta">
           <LinkButton
@@ -277,6 +328,10 @@ function CategorySkeleton() {
   return (
     <div className="category-skeleton">
       <div className="category-skeleton__image" />
+      <div className="category-skeleton__meta">
+        <span />
+        <span />
+      </div>
     </div>
   );
 }
