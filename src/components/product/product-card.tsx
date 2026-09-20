@@ -9,6 +9,7 @@ import type { Product } from "@/types/product";
 
 import { WishlistButton } from "@/components/product/wishlist-button";
 import { LoginRequiredPopup } from "@/components/product/login-required-popup";
+import { AddToBagPopup } from "@/components/product/add-to-bag-popup";
 
 import {
   getDiscountPercentage,
@@ -59,6 +60,8 @@ export function ProductCard({
     useState(false);
 
   const [isAdding, setIsAdding] = useState(false);
+
+  const [showAddedPopup, setShowAddedPopup] = useState(false);
 
   const isAuthenticated = useAuthStore(
     (state) => state.isAuthenticated,
@@ -123,6 +126,7 @@ export function ProductCard({
       setIsAdding(true);
 
       await addToCart(product._id, 1);
+       setShowAddedPopup(true);
     } catch (error) {
       console.error("ADD TO CART ERROR:", error);
     } finally {
@@ -316,6 +320,14 @@ export function ProductCard({
       <LoginRequiredPopup
         open={showLoginPopup}
         onClose={() => setShowLoginPopup(false)}
+      />
+
+
+      <AddToBagPopup
+        open={showAddedPopup}
+        product={product}
+        image={primaryMedia.url}
+        onClose={() => setShowAddedPopup(false)}
       />
     </>
   );
