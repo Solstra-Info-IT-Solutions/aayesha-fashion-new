@@ -21,56 +21,53 @@ export async function BestSellers() {
   return (
     <section id="best-sellers" className="best-sellers">
       <Container className="best-sellers__container">
-        <div className="best-sellers__header">
+        <header className="best-sellers__header">
           <div className="best-sellers__heading">
             <span className="best-sellers__eyebrow">
               Best Sellers
             </span>
 
             <h2 className="best-sellers__title">
-              Best Sellers<span>.</span>
+              Loved by our customers<span>.</span>
             </h2>
           </div>
 
           <p className="best-sellers__description">
-            Discover the silhouettes our customers return to
+            Discover the pieces our customers return to
             time and again.
           </p>
-        </div>
+        </header>
 
         {bestSellers.length > 0 ? (
-          <ProductCarousel products={bestSellers} />
+          <div className="best-sellers__products">
+            <ProductCarousel products={bestSellers} />
+          </div>
         ) : (
           <div className="best-sellers__empty">
-            <span className="best-sellers__empty-mark">A</span>
+            <span className="best-sellers__empty-letter">A</span>
 
-            <h3>Our best sellers are coming soon.</h3>
+            <h3>Best sellers coming soon.</h3>
 
             <p>
-              We are preparing a curated selection of our most
-              loved pieces.
+              Our most-loved pieces will appear here.
             </p>
           </div>
         )}
 
-        <div className="best-sellers__footer">
-          <span className="best-sellers__line" />
-
+        <div className="best-sellers__bottom">
           <Link
             href="/collections/best-sellers"
-            className="best-sellers__link"
+            className="best-sellers__view-all"
           >
             <span>View all best sellers</span>
 
-            <span className="best-sellers__arrow">
+            <span className="best-sellers__view-icon">
               <ArrowUpRight
-                size={17}
+                size={16}
                 strokeWidth={1.5}
               />
             </span>
           </Link>
-
-          <span className="best-sellers__line" />
         </div>
       </Container>
     </section>
