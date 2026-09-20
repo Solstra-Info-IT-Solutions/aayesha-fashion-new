@@ -6,6 +6,8 @@ import { ProductCarousel } from "@/components/product/product-carousel";
 import { Container } from "@/components/shared/container";
 import { LinkButton } from "@/components/ui/button";
 
+import "./NewArrivals.css";
+
 export async function NewArrivals() {
   const response = await getProducts({
     page: 1,
@@ -18,25 +20,38 @@ export async function NewArrivals() {
   const newArrivals = response.products;
 
   return (
-    <section id="new-arrivals" className="new-arrivals">
+    <section
+      id="new-arrivals"
+      className="new-arrivals"
+      aria-labelledby="new-arrivals-title"
+    >
       <Container>
         <div className="new-arrivals__inner">
           {/* =====================================================
               SECTION HEADER
           ===================================================== */}
-        <div className="featured-categories__header">
-          <p className="featured-categories__eyebrow">
-            New Arrivals
-          </p>
 
-          <h2 className="featured-categories__title">
-            Fresh from{" "}
-            <span className="featured-categories__title-accent">
-              AAYESHA.
-            </span>
-          </h2>
-        </div>
-          
+          <header className="new-arrivals__header">
+            <div className="new-arrivals__heading">
+              <p className="new-arrivals__eyebrow">
+                New Arrivals
+              </p>
+
+              <h2
+                id="new-arrivals-title"
+                className="new-arrivals__title"
+              >
+                Fresh from{" "}
+                <span>AAYESHA.</span>
+              </h2>
+            </div>
+
+            <p className="new-arrivals__intro">
+              Discover the latest silhouettes,
+              textures and details newly added
+              to the AAYESHA collection.
+            </p>
+          </header>
 
           {/* =====================================================
               PRODUCTS
@@ -51,7 +66,9 @@ export async function NewArrivals() {
                 />
               </div>
 
-              {/* Mobile CTA */}
+              {/* =================================================
+                  MOBILE CTA
+              ================================================= */}
 
               <div className="new-arrivals__mobile-cta">
                 <LinkButton
@@ -76,7 +93,10 @@ export async function NewArrivals() {
 
             <div className="new-arrivals__empty">
               <div className="new-arrivals__empty-inner">
-                <div className="new-arrivals__empty-mark">
+                <div
+                  className="new-arrivals__empty-mark"
+                  aria-hidden="true"
+                >
                   <span />
                   <span />
                   <span />
@@ -91,9 +111,9 @@ export async function NewArrivals() {
                 </h3>
 
                 <p className="new-arrivals__empty-description">
-                  Our latest styles are on their way.
-                  Explore the current collection while
-                  you wait.
+                  Our latest styles are on their
+                  way. Explore the current
+                  collection while you wait.
                 </p>
 
                 <div className="new-arrivals__empty-cta">
