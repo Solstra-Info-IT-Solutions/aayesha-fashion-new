@@ -556,45 +556,103 @@
   }
 
   .aayesha-header__inner {
+    position: relative;
+
     width: calc(100% - 24px);
 
-    display: grid;
-
-    grid-template-columns: 40px 1fr 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
+
+  /* -----------------------------------------
+     Hamburger
+     ----------------------------------------- */
 
   .aayesha-header__mobile-menu {
-    display: inline-flex;
-  }
+    position: relative;
+    z-index: 2;
 
-  .aayesha-header__logo {
-    justify-self: center;
+    display: inline-flex;
 
     align-items: center;
+    justify-content: center;
+
+    flex: 0 0 40px;
+
+    width: 40px;
+    height: 40px;
+  }
+
+  /* -----------------------------------------
+     TRUE CENTER LOGO
+     ----------------------------------------- */
+
+  .aayesha-header__logo {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    z-index: 1;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transform: translate(-50%, -50%);
+
+    width: max-content;
 
     text-align: center;
   }
 
   .aayesha-header__logo-main {
-    font-size: 19px;
+    font-family: var(--font-display);
+
+    font-size: 21px;
+
+    font-weight: 500;
+
+    line-height: 0.82;
+
+    letter-spacing: 0.075em;
+
+    white-space: nowrap;
   }
 
   .aayesha-header__logo-sub {
     margin-top: 5px;
 
+    font-family: var(--font-body);
+
     font-size: 6px;
 
-    letter-spacing: 0.18em;
+    font-weight: 600;
+
+    line-height: 1;
+
+    letter-spacing: 0.2em;
+
+    white-space: nowrap;
   }
 
-  .aayesha-header__nav {
-    display: none;
-  }
+  /* -----------------------------------------
+     RIGHT ACTIONS
+     ----------------------------------------- */
 
   .aayesha-header__actions {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
     gap: 0;
 
-    justify-self: end;
+    margin-left: auto;
   }
 
   .aayesha-header__action {
@@ -609,6 +667,14 @@
   .aayesha-header__cart-count {
     top: 3px;
     right: 1px;
+  }
+
+  /* -----------------------------------------
+     DESKTOP NAV HIDDEN
+     ----------------------------------------- */
+
+  .aayesha-header__nav {
+    display: none;
   }
 }
 
