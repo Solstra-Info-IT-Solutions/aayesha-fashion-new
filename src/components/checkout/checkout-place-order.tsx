@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import {
   useEffect,
   useRef,
@@ -9,16 +11,16 @@ import {
 import { useRouter } from "next/navigation";
 
 import {
+  Check,
   CheckCircle2,
+  ChevronRight,
   LockKeyhole,
   ShoppingBag,
 } from "lucide-react";
 
 import toast from "react-hot-toast";
 
-import {
-  getCart,
-} from "@/services/cart.service";
+import { getCart } from "@/services/cart.service";
 
 import {
   createOrder,
@@ -111,25 +113,18 @@ export function CheckoutPlaceOrder() {
      LOCAL STATE
   ======================================================== */
 
-  const [
-    items,
-    setItems,
-  ] = useState<CheckoutCartItem[]>([]);
+  const [items, setItems] = useState<
+    CheckoutCartItem[]
+  >([]);
 
-  const [
-    subtotal,
-    setSubtotal,
-  ] = useState(0);
+  const [subtotal, setSubtotal] =
+    useState(0);
 
-  const [
-    loadingCart,
-    setLoadingCart,
-  ] = useState(true);
+  const [loadingCart, setLoadingCart] =
+    useState(true);
 
-  const [
-    placingOrder,
-    setPlacingOrder,
-  ] = useState(false);
+  const [placingOrder, setPlacingOrder] =
+    useState(false);
 
   /*
    * Keep the same idempotency key during one
@@ -215,11 +210,6 @@ export function CheckoutPlaceOrder() {
         ? 0
         : 99;
 
-  /*
-   * Coupon values come from the server-validated
-   * coupon stored in the checkout store.
-   */
-
   const shipping = Math.max(
     0,
     baseShipping -
@@ -246,17 +236,16 @@ export function CheckoutPlaceOrder() {
       .join(" ");
   };
 
-  const createIdempotencyKey =
-    () => {
-      if (
-        !idempotencyKeyRef.current
-      ) {
-        idempotencyKeyRef.current =
-          crypto.randomUUID();
-      }
+  const createIdempotencyKey = () => {
+    if (
+      !idempotencyKeyRef.current
+    ) {
+      idempotencyKeyRef.current =
+        crypto.randomUUID();
+    }
 
-      return idempotencyKeyRef.current;
-    };
+    return idempotencyKeyRef.current;
+  };
 
   /* ==========================================================
      SAVE ADDRESS FOR FUTURE ORDERS
@@ -443,25 +432,22 @@ export function CheckoutPlaceOrder() {
       return false;
     }
 
-const hasInvalidProductId = items.some(
-  (item) =>
-    !item.productId ||
-    !/^[a-fA-F0-9]{24}$/.test(
-      item.productId,
-    ),
-);
+    const hasInvalidProductId =
+      items.some(
+        (item) =>
+          !item.productId ||
+          !/^[a-fA-F0-9]{24}$/.test(
+            item.productId,
+          ),
+      );
 
-if (hasInvalidProductId) {
-  toast.error(
-    "One or more products in your cart are invalid. Please refresh your cart.",
-  );
+    if (hasInvalidProductId) {
+      toast.error(
+        "One or more products in your cart are invalid. Please refresh your cart.",
+      );
 
-  return false;
-}
-
-
-
-    
+      return false;
+    }
 
     /*
      * Current backend supports COD only.
@@ -656,10 +642,6 @@ if (hasInvalidProductId) {
            CLEAR BACKEND CART
         ---------------------------------------------------- */
 
-        /*
-         * The cart is now stored in the backend.
-         * Do NOT use Zustand clearCart().
-         */
         try {
           const { clearCart } =
             await import(
@@ -716,164 +698,162 @@ if (hasInvalidProductId) {
     };
 
   /* ==========================================================
-     RENDER
+     DISPLAY
   ========================================================== */
 
+  const isOrderDisabled =
+    placingOrder ||
+    loadingCart ||
+    !items.length ||
+    payment !== "cod";
+
+  const paymentLabel =
+    payment === "cod"
+      ? "Cash on Delivery"
+      : "Online Payment";
+
+  const deliveryLabel =
+    delivery === "express"
+      ? "Express Delivery"
+      : "Standard Delivery";
+
   return (
-    <section className="overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
-      {/* HEADER / SECURITY */}
+    <section className="checkout-place-order">
+      {/* ======================================================
+          HEADER
+      ====================================================== */}
 
-      <div className="border-b border-[var(--color-border-light)] px-5 py-6 sm:px-7 sm:py-7">
-        <div className="flex items-start gap-4">
-          <span className="mt-0.5 font-[var(--font-display)] text-lg text-[var(--color-accent)]">
+      <header className="checkout-place-order__header">
+        <div className="checkout-place-order__heading">
+          <div className="checkout-place-order__step">
             05
-          </span>
+          </div>
 
-          <div>
-            <p className="eyebrow text-[var(--color-text-muted)]">
+          <div className="checkout-place-order__heading-content">
+            <p className="checkout-place-order__eyebrow">
               Complete Order
             </p>
 
-            <h2 className="mt-2 font-[var(--font-display)] text-3xl font-medium leading-none tracking-[var(--tracking-tight)] text-[var(--color-text)] sm:text-4xl">
+            <h2 className="checkout-place-order__title">
               Review &amp; place order
             </h2>
 
-            <p className="mt-3 max-w-lg text-xs leading-5 text-[var(--color-text-secondary)] sm:text-sm">
-              Review your selections before completing your
-              purchase.
+            <p className="checkout-place-order__description">
+              Review your selections before completing
+              your purchase.
             </p>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="p-5 sm:p-7">
-        {/* SECURITY */}
+      <div className="checkout-place-order__content">
+        {/* ====================================================
+            SECURITY PANEL
+        ==================================================== */}
 
-        <div className="flex gap-3 border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-4 py-4 sm:px-5">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center bg-[var(--color-surface)] text-[var(--color-accent)]">
-            <LockKeyhole
-              size={16}
-              strokeWidth={1.5}
-            />
+        <div className="checkout-place-order__security">
+          <div className="checkout-place-order__security-icon">
+            <LockKeyhole />
           </div>
 
-          <div>
-            <p className="text-xs font-semibold text-[var(--color-text)]">
+          <div className="checkout-place-order__security-copy">
+            <p className="checkout-place-order__security-title">
               Secure order placement
             </p>
 
-            <p className="mt-1 text-[10px] leading-5 text-[var(--color-text-secondary)]">
-              Your order information is handled securely and
-              your final amount is verified by our server.
+            <p>
+              Your order information is handled securely
+              and the final amount is verified by our
+              server.
             </p>
           </div>
+
+          <CheckCircle2 className="checkout-place-order__security-check" />
         </div>
 
-        {/* PAYMENT + DELIVERY */}
+        {/* ====================================================
+            ORDER METHOD SNAPSHOT
+        ==================================================== */}
 
-        <div className="mt-6 border-y border-[var(--color-border-light)] py-5">
-          <div className="flex items-center justify-between gap-5">
-            <div>
-              <p className="eyebrow text-[var(--color-text-muted)]">
-                Payment Method
-              </p>
+        <div className="checkout-place-order__details">
+          <ReviewRow
+            label="Payment method"
+            value={paymentLabel}
+            icon={
+              <CheckCircle2 />
+            }
+            success
+          />
 
-              <p className="mt-1 text-sm font-medium text-[var(--color-text)]">
-                {payment === "cod"
-                  ? "Cash on Delivery"
-                  : "Online Payment"}
-              </p>
-            </div>
-
-            <CheckCircle2
-              size={17}
-              className="text-[var(--color-success)]"
-            />
-          </div>
-
-          <div className="mt-5 flex items-center justify-between gap-5">
-            <div>
-              <p className="eyebrow text-[var(--color-text-muted)]">
-                Delivery
-              </p>
-
-              <p className="mt-1 text-sm font-medium text-[var(--color-text)]">
-                {delivery ===
-                "express"
-                  ? "Express Delivery"
-                  : "Standard Delivery"}
-              </p>
-            </div>
-
-            <span className="text-xs font-semibold text-[var(--color-text)]">
-              {shipping === 0
-                ? "FREE"
-                : `₹${shipping}`}
-            </span>
-          </div>
+          <ReviewRow
+            label="Delivery"
+            value={deliveryLabel}
+            meta={
+              shipping === 0
+                ? "Free"
+                : `₹${shipping}`
+            }
+          />
         </div>
 
-        {/* COUPON */}
+        {/* ====================================================
+            COUPON
+        ==================================================== */}
 
         {couponCode ? (
-          <div className="border-b border-[var(--color-border-light)] py-5">
-            <div className="flex items-center justify-between gap-4">
-              <span className="eyebrow text-[var(--color-text-muted)]">
-                Coupon
+          <div className="checkout-place-order__coupon">
+            <div className="checkout-place-order__coupon-main">
+              <span className="checkout-place-order__coupon-icon">
+                <Check />
               </span>
 
-              <span className="text-xs font-semibold uppercase tracking-[var(--tracking-wide)] text-[var(--color-success)]">
-                {couponCode}
-              </span>
+              <div>
+                <p className="checkout-place-order__coupon-label">
+                  Coupon applied
+                </p>
+
+                <p className="checkout-place-order__coupon-code">
+                  {couponCode}
+                </p>
+              </div>
             </div>
 
-            {couponDiscount > 0 ? (
-              <div className="mt-3 flex items-center justify-between gap-4">
-                <span className="text-[10px] text-[var(--color-text-muted)]">
-                  Coupon Discount
-                </span>
-
-                <span className="text-[10px] font-semibold text-[var(--color-success)]">
-                  - ₹
+            <div className="checkout-place-order__coupon-savings">
+              {couponDiscount > 0 ? (
+                <span>
+                  − ₹
                   {couponDiscount.toLocaleString(
                     "en-IN",
                   )}
                 </span>
-              </div>
-            ) : null}
+              ) : null}
 
-            {couponShippingDiscount >
-            0 ? (
-              <div className="mt-2 flex items-center justify-between gap-4">
-                <span className="text-[10px] text-[var(--color-text-muted)]">
-                  Shipping Discount
+              {couponShippingDiscount >
+              0 ? (
+                <span>
+                  Free shipping
                 </span>
-
-                <span className="text-[10px] font-semibold text-[var(--color-success)]">
-                  - ₹
-                  {couponShippingDiscount.toLocaleString(
-                    "en-IN",
-                  )}
-                </span>
-              </div>
-            ) : null}
+              ) : null}
+            </div>
           </div>
         ) : null}
 
-        {/* TOTAL */}
+        {/* ====================================================
+            TOTAL
+        ==================================================== */}
 
-        <div className="flex items-end justify-between gap-5 py-6">
-          <div>
-            <p className="eyebrow text-[var(--color-text-muted)]">
-              Payable Total
+        <div className="checkout-place-order__total">
+          <div className="checkout-place-order__total-copy">
+            <p className="checkout-place-order__total-eyebrow">
+              Payable total
             </p>
 
-            <p className="mt-2 max-w-[230px] text-[10px] leading-5 text-[var(--color-text-muted)]">
-              Final amount is verified securely by the server.
+            <p className="checkout-place-order__total-note">
+              Final amount verified securely by the server.
             </p>
           </div>
 
-          <p className="shrink-0 font-[var(--font-display)] text-3xl font-medium leading-none text-[var(--color-text)] sm:text-4xl">
+          <p className="checkout-place-order__total-value">
             ₹
             {total.toLocaleString(
               "en-IN",
@@ -881,43 +861,128 @@ if (hasInvalidProductId) {
           </p>
         </div>
 
-        {/* PLACE ORDER */}
+        {/* ====================================================
+            PRIMARY CTA
+        ==================================================== */}
 
         <button
           type="button"
           onClick={handlePlaceOrder}
-          disabled={
-            placingOrder ||
-            loadingCart ||
-            !items.length ||
-            payment !== "cod"
-          }
-          className="group flex min-h-[54px] w-full items-center justify-center gap-2 bg-[var(--color-text)] px-5 text-[10px] font-semibold uppercase tracking-[var(--tracking-luxury)] text-[var(--color-text-inverse)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-accent-dark)] disabled:cursor-not-allowed disabled:opacity-50"
+          disabled={isOrderDisabled}
+          className="checkout-place-order__button"
         >
-          <ShoppingBag
-            size={16}
-            className="transition-transform duration-[var(--duration-base)] group-hover:-translate-y-px"
-          />
+          <span className="checkout-place-order__button-icon">
+            <ShoppingBag />
+          </span>
 
-          {loadingCart
-            ? "Preparing Order..."
-            : placingOrder
-              ? "Placing Order..."
-              : payment === "cod"
-                ? `Place COD Order · ₹${total.toLocaleString(
-                    "en-IN",
-                  )}`
-                : "Online Payment Unavailable"}
+          <span className="checkout-place-order__button-copy">
+            <span className="checkout-place-order__button-label">
+              {loadingCart
+                ? "Preparing order..."
+                : placingOrder
+                  ? "Placing order..."
+                  : payment === "cod"
+                    ? "Place COD order"
+                    : "Online payment unavailable"}
+            </span>
+
+            {!loadingCart &&
+            !placingOrder &&
+            payment === "cod" ? (
+              <span className="checkout-place-order__button-total">
+                ₹
+                {total.toLocaleString(
+                  "en-IN",
+                )}
+              </span>
+            ) : null}
+          </span>
+
+          {!loadingCart &&
+          !placingOrder &&
+          payment === "cod" ? (
+            <ChevronRight className="checkout-place-order__button-arrow" />
+          ) : null}
         </button>
 
-        {/* TERMS */}
+        {/* ====================================================
+            TRUST LINE
+        ==================================================== */}
 
-        <p className="mt-4 text-center text-[9px] leading-5 text-[var(--color-text-muted)]">
+        <div className="checkout-place-order__trust">
+          <LockKeyhole />
+
+          <p>
+            Your order is protected by secure server-side
+            validation and idempotent order processing.
+          </p>
+        </div>
+
+        {/* ====================================================
+            TERMS
+        ==================================================== */}
+
+        <p className="checkout-place-order__terms">
           By placing your order, you agree to Aayesha
-          Fashion&apos;s applicable terms, shipping and return
-          policies.
+          Fashion&apos;s applicable terms, shipping and
+          return policies.
         </p>
       </div>
     </section>
+  );
+}
+
+/* ==========================================================
+   REVIEW ROW
+========================================================== */
+
+function ReviewRow({
+  label,
+  value,
+  meta,
+  icon,
+  success = false,
+}: {
+  label: string;
+  value: string;
+  meta?: string;
+  icon?: ReactNode;
+  success?: boolean;
+}) {
+  return (
+    <div className="checkout-place-order__review-row">
+      <div className="checkout-place-order__review-left">
+        <p className="checkout-place-order__review-label">
+          {label}
+        </p>
+
+        <p className="checkout-place-order__review-value">
+          {value}
+        </p>
+      </div>
+
+      <div className="checkout-place-order__review-right">
+        {meta ? (
+          <span className="checkout-place-order__review-meta">
+            {meta}
+          </span>
+        ) : null}
+
+        {icon ? (
+          <span
+            className={[
+              "checkout-place-order__review-icon",
+              success
+                ? "checkout-place-order__review-icon--success"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            {icon}
+          </span>
+        ) : null}
+      </div>
+    </div>
   );
 }
