@@ -1,0 +1,374 @@
+/* =========================================================
+   AAYESHA
+   Premium Fashion Loader
+   ========================================================= */
+
+.aayesha-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  width: 100%;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(194, 143, 133, 0.35),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(164, 119, 105, 0.28),
+      transparent 35%
+    ),
+    #8f655d;
+
+  color: #f7efe9;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   BACKGROUND PANELS
+   ========================================================= */
+
+.aayesha-loader__panel {
+  position: absolute;
+
+  pointer-events: none;
+
+  border: 1px solid rgba(247, 239, 233, 0.12);
+}
+
+.aayesha-loader__panel--one {
+  width: 42vw;
+  height: 72vh;
+
+  left: -16vw;
+  top: 14vh;
+
+  transform: rotate(-14deg);
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.aayesha-loader__panel--two {
+  width: 32vw;
+  height: 90vh;
+
+  right: -10vw;
+  top: -12vh;
+
+  transform: rotate(17deg);
+
+  background: rgba(49, 31, 27, 0.08);
+}
+
+
+/* =========================================================
+   GRAIN
+   ========================================================= */
+
+.aayesha-loader__grain {
+  position: absolute;
+  inset: -50%;
+
+  pointer-events: none;
+
+  opacity: 0.075;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+
+  transform: rotate(8deg);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.aayesha-loader__content {
+  position: relative;
+  z-index: 5;
+
+  width: min(500px, calc(100% - 48px));
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* =========================================================
+   TOP MARK
+   ========================================================= */
+
+.aayesha-loader__top {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+
+  color: rgba(247, 239, 233, 0.58);
+}
+
+.aayesha-loader__top-line {
+  width: 34px;
+  height: 1px;
+
+  background: rgba(247, 239, 233, 0.32);
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.aayesha-loader__brand-wrap {
+  margin-top: 34px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aayesha-loader__brand {
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(54px, 8vw, 92px);
+
+  font-weight: 400;
+
+  line-height: 0.8;
+
+  letter-spacing: 0.08em;
+  text-indent: 0.08em;
+
+  color: #f7efe9;
+}
+
+.aayesha-loader__brand-rule {
+  width: 52px;
+  height: 1px;
+
+  margin-top: 24px;
+
+  background: rgba(247, 239, 233, 0.5);
+}
+
+
+/* =========================================================
+   TAGLINE
+   ========================================================= */
+
+.aayesha-loader__tagline {
+  margin-top: 17px;
+
+  font-family:
+    "Manrope",
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 500;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+
+  text-align: center;
+
+  color: rgba(247, 239, 233, 0.62);
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.aayesha-loader__loading {
+  width: min(330px, 100%);
+
+  margin-top: 76px;
+}
+
+.aayesha-loader__loading-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 11px;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+
+  color: rgba(247, 239, 233, 0.58);
+}
+
+.aayesha-loader__track {
+  width: 100%;
+  height: 1px;
+
+  overflow: hidden;
+
+  background: rgba(247, 239, 233, 0.18);
+}
+
+.aayesha-loader__progress {
+  width: 100%;
+  height: 100%;
+
+  background: #f7efe9;
+
+  transform-origin: left center;
+}
+
+
+/* =========================================================
+   SIDE LABELS
+   ========================================================= */
+
+.aayesha-loader__side {
+  position: absolute;
+  z-index: 5;
+
+  top: 50%;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+
+  color: rgba(247, 239, 233, 0.4);
+
+  writing-mode: vertical-rl;
+
+  transform: translateY(-50%);
+}
+
+.aayesha-loader__side--left {
+  left: 25px;
+
+  transform:
+    translateY(-50%)
+    rotate(180deg);
+}
+
+.aayesha-loader__side--right {
+  right: 25px;
+}
+
+
+/* =========================================================
+   YEAR
+   ========================================================= */
+
+.aayesha-loader__year {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+
+  color: rgba(247, 239, 233, 0.38);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .aayesha-loader {
+    background:
+      radial-gradient(
+        circle at 50% 20%,
+        rgba(194, 143, 133, 0.34),
+        transparent 48%
+      ),
+      #8f655d;
+  }
+
+  .aayesha-loader__content {
+    width: calc(100% - 56px);
+  }
+
+  .aayesha-loader__brand {
+    font-size: clamp(48px, 15vw, 68px);
+
+    letter-spacing: 0.055em;
+    text-indent: 0.055em;
+  }
+
+  .aayesha-loader__brand-rule {
+    margin-top: 20px;
+  }
+
+  .aayesha-loader__tagline {
+    font-size: 8px;
+
+    letter-spacing: 0.18em;
+    text-indent: 0.18em;
+  }
+
+  .aayesha-loader__loading {
+    margin-top: 58px;
+  }
+
+  .aayesha-loader__side {
+    display: none;
+  }
+
+  .aayesha-loader__year {
+    bottom: 20px;
+  }
+
+  .aayesha-loader__panel--one {
+    width: 70vw;
+    height: 70vh;
+
+    left: -40vw;
+  }
+
+  .aayesha-loader__panel--two {
+    width: 65vw;
+    height: 75vh;
+
+    right: -35vw;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .aayesha-loader {
+    display: none;
+  }
+}

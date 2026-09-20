@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
+import BrandLoader from "@/components/layout/BrandLoader";
 
 import {
   Cormorant_Garamond,
@@ -260,6 +261,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${manrope.variable} ${cormorant.variable} antialiased`}
       >
+        <BrandLoader />
         <AuthProvider>
           {children}
         </AuthProvider>
