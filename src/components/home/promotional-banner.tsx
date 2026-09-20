@@ -1,9 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
+
+import { ArrowUpRight } from "lucide-react";
 
 import { getPromotionalBanner } from "@/services/marketing.service";
 
 import { Container } from "@/components/shared/container";
-import { LinkButton } from "@/components/ui/button";
+
+import "./PromotionalBanner.css";
 
 export async function PromotionalBanner() {
   const campaign = await getPromotionalBanner();
@@ -18,6 +22,7 @@ export async function PromotionalBanner() {
     <section
       id="promotion"
       className="promotional-banner"
+      aria-label="Aayesha promotion"
     >
       <div className="promotional-banner__media">
         <Image
@@ -29,32 +34,51 @@ export async function PromotionalBanner() {
           priority={false}
         />
 
-        {/* Subtle image protection */}
+        {/* =================================================
+            EDITORIAL OVERLAY
+        ================================================= */}
+
         <div
           aria-hidden="true"
           className="promotional-banner__overlay"
         />
 
-        {/* CTA */}
+        {/* =================================================
+            CONTENT
+        ================================================= */}
+
         {data.href && data.ctaLabel && (
           <Container className="promotional-banner__container">
             <div className="promotional-banner__content">
-              <LinkButton
+              <Link
                 href={data.href}
-                variant="secondary"
-                size="md"
-                icon={
-                  <span aria-hidden="true">
-                    ↗
-                  </span>
-                }
                 className="promotional-banner__button"
               >
-                {data.ctaLabel}
-              </LinkButton>
+                <span>
+                  {data.ctaLabel}
+                </span>
+
+                <span className="promotional-banner__button-icon">
+                  <ArrowUpRight
+                    size={15}
+                    strokeWidth={1.3}
+                  />
+                </span>
+              </Link>
             </div>
           </Container>
         )}
+
+        {/* =================================================
+            BRAND MARK
+        ================================================= */}
+
+        <span
+          className="promotional-banner__brand"
+          aria-hidden="true"
+        >
+          AAYESHA
+        </span>
       </div>
     </section>
   );
