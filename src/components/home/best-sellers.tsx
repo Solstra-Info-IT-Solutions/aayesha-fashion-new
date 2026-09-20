@@ -21,22 +21,30 @@ export async function BestSellers() {
   return (
     <section id="best-sellers" className="best-sellers">
       <Container className="best-sellers__container">
+        {/* =========================================
+            HEADER
+        ========================================= */}
+
         <header className="best-sellers__header">
           <div className="best-sellers__heading">
-            <span className="best-sellers__eyebrow">
+            <p className="best-sellers__eyebrow">
               Best Sellers
-            </span>
+            </p>
 
             <h2 className="best-sellers__title">
               Loved by our customers<span>.</span>
             </h2>
           </div>
 
-          <p className="best-sellers__description">
+          <p className="best-sellers__intro">
             Discover the pieces our customers return to
             time and again.
           </p>
         </header>
+
+        {/* =========================================
+            PRODUCTS
+        ========================================= */}
 
         {bestSellers.length > 0 ? (
           <div className="best-sellers__products">
@@ -44,31 +52,52 @@ export async function BestSellers() {
           </div>
         ) : (
           <div className="best-sellers__empty">
-            <span className="best-sellers__empty-letter">A</span>
+            <div className="best-sellers__empty-inner">
+              <div className="best-sellers__empty-mark">
+                <span />
+                <span />
+                <span />
+              </div>
 
-            <h3>Best sellers coming soon.</h3>
+              <p className="best-sellers__empty-eyebrow">
+                Best Sellers
+              </p>
 
-            <p>
-              Our most-loved pieces will appear here.
-            </p>
+              <h3 className="best-sellers__empty-title">
+                Our most-loved pieces
+                <br />
+                are coming soon.
+              </h3>
+
+              <p className="best-sellers__empty-description">
+                We are preparing a curated selection of
+                pieces our customers love most.
+              </p>
+            </div>
           </div>
         )}
 
-        <div className="best-sellers__bottom">
-          <Link
-            href="/collections/best-sellers"
-            className="best-sellers__view-all"
-          >
-            <span>View all best sellers</span>
+        {/* =========================================
+            CTA
+        ========================================= */}
 
-            <span className="best-sellers__view-icon">
-              <ArrowUpRight
-                size={16}
-                strokeWidth={1.5}
-              />
-            </span>
-          </Link>
-        </div>
+        {bestSellers.length > 0 && (
+          <div className="best-sellers__footer">
+            <Link
+              href="/collections/best-sellers"
+              className="best-sellers__link"
+            >
+              <span>View all best sellers</span>
+
+              <span className="best-sellers__link-icon">
+                <ArrowUpRight
+                  size={16}
+                  strokeWidth={1.5}
+                />
+              </span>
+            </Link>
+          </div>
+        )}
       </Container>
     </section>
   );
