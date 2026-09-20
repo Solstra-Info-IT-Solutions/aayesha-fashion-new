@@ -1,10 +1,12 @@
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 import { getProducts } from "@/services/product.service";
 
 import { ProductCarousel } from "@/components/product/product-carousel";
 import { Container } from "@/components/shared/container";
-import { LinkButton } from "@/components/ui/button";
+
+import "./BestSellers.css";
 
 export async function BestSellers() {
   const response = await getProducts({
@@ -21,36 +23,39 @@ export async function BestSellers() {
     <section
       id="best-sellers"
       className="best-sellers"
+      aria-labelledby="best-sellers-title"
     >
       <Container>
         <div className="best-sellers__inner">
-          {/* =====================================================
+          {/* =================================================
               SECTION HEADER
-          ===================================================== */}
+          ================================================= */}
 
-          <div className="best-sellers__header">
+          <header className="best-sellers__header">
             <div className="best-sellers__heading-group">
               <p className="best-sellers__eyebrow">
                 Curated Selection
               </p>
 
-              <h2 className="best-sellers__title">
+              <h2
+                id="best-sellers-title"
+                className="best-sellers__title"
+              >
                 Best{" "}
-                <span className="best-sellers__title-accent">
-                  Sellers.
-                </span>
+                <span> Sellers.</span>
               </h2>
-
-              <p className="best-sellers__description">
-                Discover the silhouettes our customers return
-                to time and again.
-              </p>
             </div>
-          </div>
 
-          {/* =====================================================
+            <p className="best-sellers__description">
+              Discover the silhouettes our
+              customers return to time and
+              again.
+            </p>
+          </header>
+
+          {/* =================================================
               PRODUCT CAROUSEL
-          ===================================================== */}
+          ================================================= */}
 
           {bestSellers.length > 0 ? (
             <div className="best-sellers__products">
@@ -66,29 +71,36 @@ export async function BestSellers() {
               </p>
 
               <p className="best-sellers__empty-title">
-                Our most-loved edit is being curated.
+                Our most-loved edit is
+                being curated.
               </p>
             </div>
           )}
 
-          {/* =====================================================
+          {/* =================================================
               CTA
-          ===================================================== */}
+          ================================================= */}
 
-          <div className="best-sellers__cta">
-            <LinkButton
+          <div className="best-sellers__footer">
+            <span className="best-sellers__footer-line" />
+
+            <Link
               href="/collections/best-sellers"
-              variant="secondary"
-              size="md"
-              icon={
-                <ArrowUpRight
-                  size={16}
-                  strokeWidth={1.5}
-                />
-              }
+              className="best-sellers__cta"
             >
-              View All Best Sellers
-            </LinkButton>
+              <span>
+                View All Best Sellers
+              </span>
+
+              <span className="best-sellers__cta-icon">
+                <ArrowUpRight
+                  size={15}
+                  strokeWidth={1.3}
+                />
+              </span>
+            </Link>
+
+            <span className="best-sellers__footer-line" />
           </div>
         </div>
       </Container>
