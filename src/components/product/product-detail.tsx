@@ -40,15 +40,15 @@ interface ProductDetailProps {
   recommendations?: Product[];
 }
 
+
 /* ============================================================
    SAFE PRODUCT NORMALIZER
-============================================================ */
+   ============================================================ */
 
 function normalizeProduct(
   product: Product,
 ): Product {
-  const source =
-    product ?? ({} as Product);
+  const source = product ?? ({} as Product);
 
   return {
     ...source,
@@ -98,8 +98,7 @@ function normalizeProduct(
         0,
 
       lowStockThreshold:
-        source.inventory
-          ?.lowStockThreshold ??
+        source.inventory?.lowStockThreshold ??
         2,
     },
 
@@ -109,45 +108,39 @@ function normalizeProduct(
         "",
 
       descriptionFormat:
-        source.content
-          ?.descriptionFormat ??
+        source.content?.descriptionFormat ??
         "plain",
 
       richContent:
         source.content?.richContent,
     },
 
-    media: Array.isArray(
-      source.media,
-    )
+    media: Array.isArray(source.media)
       ? source.media
       : [],
 
     merchandising: {
       isNew:
-        source.merchandising
-          ?.isNew ?? false,
+        source.merchandising?.isNew ??
+        false,
 
       isFeatured:
-        source.merchandising
-          ?.isFeatured ?? false,
+        source.merchandising?.isFeatured ??
+        false,
 
       isBestSeller:
-        source.merchandising
-          ?.isBestSeller ?? false,
+        source.merchandising?.isBestSeller ??
+        false,
 
       badges:
         Array.isArray(
-          source.merchandising
-            ?.badges,
+          source.merchandising?.badges,
         )
-          ? source.merchandising
-              .badges
+          ? source.merchandising.badges
           : [],
 
       ranking:
-        source.merchandising
-          ?.ranking,
+        source.merchandising?.ranking,
     },
 
     seo: source.seo
@@ -156,8 +149,7 @@ function normalizeProduct(
 
           keywords:
             Array.isArray(
-              source.seo
-                .keywords,
+              source.seo.keywords,
             )
               ? source.seo.keywords
               : [],
@@ -181,9 +173,10 @@ function normalizeProduct(
   };
 }
 
+
 /* ============================================================
    PRICE FORMATTER
-============================================================ */
+   ============================================================ */
 
 function formatPrice(
   value: number,
@@ -193,9 +186,10 @@ function formatPrice(
   ).toLocaleString("en-IN")}`;
 }
 
+
 /* ============================================================
    DISCOUNT
-============================================================ */
+   ============================================================ */
 
 function getDiscount(
   mrp: number,
@@ -209,15 +203,15 @@ function getDiscount(
   }
 
   return Math.round(
-    ((mrp - sellingPrice) /
-      mrp) *
+    ((mrp - sellingPrice) / mrp) *
       100,
   );
 }
 
+
 /* ============================================================
    MAIN COMPONENT
-============================================================ */
+   ============================================================ */
 
 export function ProductDetail({
   product,
@@ -231,7 +225,7 @@ export function ProductDetail({
 
   /* ==========================================================
      SAFE PRODUCT
-  ========================================================== */
+     ========================================================== */
 
   const safeProduct = useMemo(
     () =>
@@ -247,16 +241,15 @@ export function ProductDetail({
         )
           ? recommendations
               .filter(Boolean)
-              .map(
-                normalizeProduct,
-              )
+              .map(normalizeProduct)
           : [],
       [recommendations],
     );
 
+
   /* ==========================================================
      STATE
-  ========================================================== */
+     ========================================================== */
 
   const [categoryName, setCategoryName] =
     useState("");
@@ -287,9 +280,10 @@ export function ProductDetail({
   const [buyingNow, setBuyingNow] =
     useState(false);
 
+
   /* ==========================================================
      PRODUCT VALUES
-  ========================================================== */
+     ========================================================== */
 
   const maxStock =
     getAvailableStock(
@@ -315,17 +309,17 @@ export function ProductDetail({
       sellingPrice,
     );
 
+
   /* ==========================================================
      PRODUCT MEDIA
-  ========================================================== */
+     ========================================================== */
 
   const media = Array.isArray(
     safeProduct.media,
   )
     ? safeProduct.media.filter(
         (item) =>
-          item?.type ===
-            "image" &&
+          item?.type === "image" &&
           Boolean(item?.src),
       )
     : [];
@@ -335,9 +329,10 @@ export function ProductDetail({
     media[0] ??
     null;
 
+
   /* ==========================================================
      LOAD CATEGORY
-  ========================================================== */
+     ========================================================== */
 
   useEffect(() => {
     let cancelled = false;
@@ -348,9 +343,7 @@ export function ProductDetail({
           await getCategories();
 
         if (
-          !Array.isArray(
-            categories,
-          )
+          !Array.isArray(categories)
         ) {
           return;
         }
@@ -379,9 +372,7 @@ export function ProductDetail({
       }
     }
 
-    if (
-      safeProduct.categoryId
-    ) {
+    if (safeProduct.categoryId) {
       loadCategory();
     } else {
       setCategoryName("");
@@ -394,9 +385,10 @@ export function ProductDetail({
     safeProduct.categoryId,
   ]);
 
+
   /* ==========================================================
      RESET WHEN PRODUCT CHANGES
-  ========================================================== */
+     ========================================================== */
 
   useEffect(() => {
     setSelectedImage(0);
@@ -404,9 +396,10 @@ export function ProductDetail({
     setWishlist(false);
   }, [safeProduct._id]);
 
+
   /* ==========================================================
      QUANTITY
-  ========================================================== */
+     ========================================================== */
 
   function decreaseQuantity() {
     setQuantity(
@@ -432,9 +425,10 @@ export function ProductDetail({
     );
   }
 
+
   /* ==========================================================
      ADD TO CART
-  ========================================================== */
+     ========================================================== */
 
   async function handleAddToCart() {
     if (!isAuthenticated) {
@@ -471,9 +465,10 @@ export function ProductDetail({
     }
   }
 
+
   /* ==========================================================
      BUY NOW
-  ========================================================== */
+     ========================================================== */
 
   async function handleBuyNow() {
     if (!isAuthenticated) {
@@ -501,9 +496,7 @@ export function ProductDetail({
         quantity,
       );
 
-      router.push(
-        "/checkout",
-      );
+      router.push("/checkout");
     } catch (error) {
       console.error(
         "Failed to buy product:",
@@ -514,9 +507,10 @@ export function ProductDetail({
     }
   }
 
+
   /* ==========================================================
      IMAGE NAVIGATION
-  ========================================================== */
+     ========================================================== */
 
   function previousImage() {
     if (media.length <= 1) {
@@ -538,16 +532,16 @@ export function ProductDetail({
 
     setSelectedImage(
       (current) =>
-        current >=
-        media.length - 1
+        current >= media.length - 1
           ? 0
           : current + 1,
     );
   }
 
+
   /* ==========================================================
      ACCORDION
-  ========================================================== */
+     ========================================================== */
 
   function toggleSection(
     section: string,
@@ -560,9 +554,10 @@ export function ProductDetail({
     );
   }
 
+
   /* ==========================================================
      PINCODE
-  ========================================================== */
+     ========================================================== */
 
   function checkDelivery() {
     setDeliveryChecked(
@@ -572,130 +567,84 @@ export function ProductDetail({
     );
   }
 
+
   /* ==========================================================
      RENDER
-  ========================================================== */
+     ========================================================== */
 
   return (
-    <main className="bg-[var(--color-bg)]">
+    <main className="product-detail">
+
       {/* ======================================================
           PRODUCT HERO
       ====================================================== */}
 
-      <section className="border-b border-[var(--color-border-light)]">
-        <div
-          className="
-            mx-auto
-            w-full
-            max-w-[1500px]
-            px-4
-            py-5
-            sm:px-6
-            sm:py-7
-            lg:px-10
-            lg:py-8
-            xl:px-12
-          "
-        >
-          {/* ==================================================
-              BREADCRUMB
-          ================================================== */}
+      <section className="product-detail__hero">
+        <div className="product-detail__container">
 
-          <div
-            className="
-              mb-5
-              flex
-              items-center
-              gap-2
-              overflow-hidden
-              text-[9px]
-              font-medium
-              uppercase
-              tracking-[0.14em]
-              text-[var(--color-text-muted)]
-              sm:mb-7
-            "
-          >
+          {/* Breadcrumb */}
+
+          <div className="product-detail__breadcrumb">
             <button
               type="button"
               onClick={() =>
-                router.push(
-                  "/shop",
-                )
+                router.push("/shop")
               }
-              className="
-                shrink-0
-                transition-colors
-                hover:text-[var(--color-text)]
-              "
+              className="product-detail__breadcrumb-link"
             >
               Shop
             </button>
 
             {categoryName && (
               <>
-                <span>/</span>
+                <span
+                  className="product-detail__breadcrumb-separator"
+                  aria-hidden="true"
+                >
+                  /
+                </span>
 
-                <span className="truncate">
+                <span className="product-detail__breadcrumb-item">
                   {categoryName}
                 </span>
               </>
             )}
 
-            <span>/</span>
+            <span
+              className="product-detail__breadcrumb-separator"
+              aria-hidden="true"
+            >
+              /
+            </span>
 
-            <span className="truncate text-[var(--color-text-secondary)]">
+            <span className="product-detail__breadcrumb-current">
               {safeProduct.name}
             </span>
           </div>
 
-          {/* ==================================================
-              MAIN PRODUCT GRID
-          ================================================== */}
 
-          <div
-            className="
-              grid
-              items-start
-              gap-8
-              lg:grid-cols-[minmax(0,1.2fr)_minmax(360px,0.8fr)]
-              lg:gap-12
-              xl:gap-16
-            "
-          >
+          {/* Main Product Layout */}
+
+          <div className="product-detail__main-grid">
+
             {/* =================================================
                 PRODUCT MEDIA
             ================================================= */}
 
-            <div className="min-w-0">
+            <div className="product-detail__media-column">
+
               <div
                 className={
                   media.length > 1
-                    ? `
-                      grid
-                      gap-3
-                      sm:grid-cols-[76px_minmax(0,1fr)]
-                      lg:grid-cols-[86px_minmax(0,1fr)]
-                    `
-                    : "block"
+                    ? "product-detail__media-layout product-detail__media-layout--with-thumbnails"
+                    : "product-detail__media-layout"
                 }
               >
-                {/* =============================================
-                    THUMBNAILS
-                ============================================= */}
+
+                {/* Thumbnails */}
 
                 {media.length > 1 && (
-                  <div
-                    className="
-                      order-2
-                      flex
-                      gap-2
-                      overflow-x-auto
-                      sm:order-1
-                      sm:flex-col
-                      sm:overflow-y-auto
-                    "
-                  >
+                  <div className="product-detail__thumbnails">
                     {media.map(
                       (
                         item,
@@ -715,39 +664,24 @@ export function ProductDetail({
                           aria-label={`View image ${
                             index + 1
                           }`}
-                          className={`
-                            h-[78px]
-                            w-[62px]
-                            shrink-0
-                            overflow-hidden
-                            border
-                            bg-[var(--color-bg-soft)]
-                            transition
-                            sm:h-[92px]
-                            sm:w-[76px]
-                            lg:h-[104px]
-                            lg:w-[86px]
-                            ${
-                              selectedImage ===
-                              index
-                                ? "border-[var(--color-text)]"
-                                : "border-[var(--color-border)] hover:border-[var(--color-text-muted)]"
-                            }
-                          `}
+                          aria-current={
+                            selectedImage ===
+                            index
+                          }
+                          className={
+                            selectedImage ===
+                            index
+                              ? "product-detail__thumbnail product-detail__thumbnail--active"
+                              : "product-detail__thumbnail"
+                          }
                         >
                           <img
-                            src={
-                              item.src
-                            }
+                            src={item.src}
                             alt={
                               item.alt ||
                               safeProduct.name
                             }
-                            className="
-                              h-full
-                              w-full
-                              object-cover
-                            "
+                            className="product-detail__thumbnail-image"
                           />
                         </button>
                       ),
@@ -755,25 +689,11 @@ export function ProductDetail({
                   </div>
                 )}
 
-                {/* =============================================
-                    MAIN IMAGE
-                ============================================= */}
 
-                <div
-                  className={`
-                    relative
-                    ${
-                      media.length >
-                      1
-                        ? "order-1 sm:order-2"
-                        : ""
-                    }
-                    aspect-[3/4]
-                    w-full
-                    overflow-hidden
-                    bg-[var(--color-bg-soft)]
-                  `}
-                >
+                {/* Main Image */}
+
+                <div className="product-detail__main-media">
+
                   {currentMedia?.src ? (
                     <img
                       src={
@@ -783,42 +703,18 @@ export function ProductDetail({
                         currentMedia.alt ||
                         safeProduct.name
                       }
-                      className="
-                        block
-                        h-full
-                        w-full
-                        object-cover
-                        object-center
-                      "
+                      className="product-detail__main-image"
                     />
                   ) : (
-                    <div
-                      className="
-                        flex
-                        h-full
-                        w-full
-                        items-center
-                        justify-center
-                        bg-[var(--color-bg-soft)]
-                      "
-                    >
-                      <span
-                        className="
-                          text-[9px]
-                          font-semibold
-                          uppercase
-                          tracking-[0.15em]
-                          text-[var(--color-text-muted)]
-                        "
-                      >
+                    <div className="product-detail__image-placeholder">
+                      <span className="product-detail__placeholder-text">
                         No image available
                       </span>
                     </div>
                   )}
 
-                  {/* ==========================================
-                      IMAGE NAVIGATION
-                  ========================================== */}
+
+                  {/* Image Navigation */}
 
                   {media.length > 1 && (
                     <>
@@ -828,30 +724,11 @@ export function ProductDetail({
                           previousImage
                         }
                         aria-label="Previous image"
-                        className="
-                          absolute
-                          left-3
-                          top-1/2
-                          flex
-                          h-9
-                          w-9
-                          -translate-y-1/2
-                          items-center
-                          justify-center
-                          rounded-full
-                          bg-white/90
-                          text-[var(--color-text)]
-                          shadow-sm
-                          backdrop-blur
-                          transition
-                          hover:bg-white
-                        "
+                        className="product-detail__image-control product-detail__image-control--previous"
                       >
                         <ChevronLeft
-                          size={16}
-                          strokeWidth={
-                            1.5
-                          }
+                          className="product-detail__image-control-icon"
+                          aria-hidden="true"
                         />
                       </button>
 
@@ -861,134 +738,59 @@ export function ProductDetail({
                           nextImage
                         }
                         aria-label="Next image"
-                        className="
-                          absolute
-                          right-3
-                          top-1/2
-                          flex
-                          h-9
-                          w-9
-                          -translate-y-1/2
-                          items-center
-                          justify-center
-                          rounded-full
-                          bg-white/90
-                          text-[var(--color-text)]
-                          shadow-sm
-                          backdrop-blur
-                          transition
-                          hover:bg-white
-                        "
+                        className="product-detail__image-control product-detail__image-control--next"
                       >
                         <ChevronRight
-                          size={16}
-                          strokeWidth={
-                            1.5
-                          }
+                          className="product-detail__image-control-icon"
+                          aria-hidden="true"
                         />
                       </button>
 
-                      <div
-                        className="
-                          absolute
-                          bottom-3
-                          right-3
-                          bg-black/60
-                          px-2.5
-                          py-1.5
-                          text-[8px]
-                          font-medium
-                          tracking-[0.1em]
-                          text-white
-                          backdrop-blur
-                        "
-                      >
-                        {selectedImage +
-                          1}{" "}
-                        / {media.length}
+                      <div className="product-detail__image-counter">
+                        {selectedImage + 1} /{" "}
+                        {media.length}
                       </div>
                     </>
                   )}
 
-                  {/* ==========================================
-                      BADGE
-                  ========================================== */}
+
+                  {/* Product Badge */}
 
                   {safeProduct
                     .merchandising
                     ?.badges
                     ?.length > 0 && (
-                    <div className="absolute left-3 top-3">
-                      <span
-                        className="
-                          bg-[var(--color-text)]
-                          px-2.5
-                          py-1.5
-                          text-[8px]
-                          font-semibold
-                          uppercase
-                          tracking-[0.12em]
-                          text-white
-                        "
-                      >
-                        {safeProduct.merchandising.badges[0]
-                          .replace(
-                            "-",
-                            " ",
-                          )}
-                      </span>
+                    <div className="product-detail__badge">
+                      {safeProduct.merchandising.badges[0].replace(
+                        "-",
+                        " ",
+                      )}
                     </div>
                   )}
                 </div>
               </div>
             </div>
 
+
             {/* =================================================
                 PRODUCT INFORMATION
             ================================================= */}
 
-            <div
-              className="
-                min-w-0
-                lg:sticky
-                lg:top-24
-              "
-            >
-              {/* =============================================
-                  TITLE
-              ============================================= */}
+            <div className="product-detail__information">
 
-              <div className="border-b border-[var(--color-border)] pb-5">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="min-w-0">
+              {/* Title */}
+
+              <div className="product-detail__title-section">
+                <div className="product-detail__title-row">
+                  <div className="product-detail__title-content">
+
                     {categoryName && (
-                      <p
-                        className="
-                          mb-2
-                          text-[9px]
-                          font-semibold
-                          uppercase
-                          tracking-[0.15em]
-                          text-[var(--color-text-muted)]
-                        "
-                      >
+                      <p className="product-detail__category">
                         {categoryName}
                       </p>
                     )}
 
-                    <h1
-                      className="
-                        max-w-xl
-                        font-display
-                        text-[25px]
-                        font-medium
-                        leading-[1.1]
-                        tracking-[-0.02em]
-                        text-[var(--color-text)]
-                        sm:text-[28px]
-                        lg:text-[30px]
-                      "
-                    >
+                    <h1 className="product-detail__title">
                       {safeProduct.name}
                     </h1>
                   </div>
@@ -1001,52 +803,38 @@ export function ProductDetail({
                           !current,
                       )
                     }
-                    aria-label="Add to wishlist"
-                    className={`
-                      flex
-                      h-9
-                      w-9
-                      shrink-0
-                      items-center
-                      justify-center
-                      border
-                      transition
-                      ${
-                        wishlist
-                          ? "border-[var(--color-text)] bg-[var(--color-text)] text-white"
-                          : "border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-text)]"
-                      }
-                    `}
+                    aria-label={
+                      wishlist
+                        ? "Remove from wishlist"
+                        : "Add to wishlist"
+                    }
+                    aria-pressed={wishlist}
+                    className={
+                      wishlist
+                        ? "product-detail__wishlist product-detail__wishlist--active"
+                        : "product-detail__wishlist"
+                    }
                   >
                     <Heart
-                      size={16}
-                      strokeWidth={
-                        1.4
-                      }
+                      className="product-detail__wishlist-icon"
                       fill={
                         wishlist
                           ? "currentColor"
                           : "none"
                       }
+                      aria-hidden="true"
                     />
                   </button>
                 </div>
               </div>
 
-              {/* =============================================
-                  PRICE
-              ============================================= */}
 
-              <div className="border-b border-[var(--color-border)] py-5">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span
-                    className="
-                      text-[22px]
-                      font-semibold
-                      tracking-[-0.02em]
-                      text-[var(--color-text)]
-                    "
-                  >
+              {/* Price */}
+
+              <div className="product-detail__price-section">
+                <div className="product-detail__price-row">
+
+                  <span className="product-detail__selling-price">
                     {formatPrice(
                       sellingPrice,
                     )}
@@ -1055,162 +843,96 @@ export function ProductDetail({
                   {mrp >
                     sellingPrice && (
                     <>
-                      <span
-                        className="
-                          text-sm
-                          text-[var(--color-text-muted)]
-                          line-through
-                        "
-                      >
-                        {formatPrice(
-                          mrp,
-                        )}
+                      <span className="product-detail__mrp">
+                        {formatPrice(mrp)}
                       </span>
 
-                      {discount >
-                        0 && (
-                        <span
-                          className="
-                            text-[9px]
-                            font-semibold
-                            uppercase
-                            tracking-[0.1em]
-                            text-[var(--color-accent-dark)]
-                          "
-                        >
-                          {discount}% off
+                      {discount > 0 && (
+                        <span className="product-detail__discount">
+                          {discount}% OFF
                         </span>
                       )}
                     </>
                   )}
                 </div>
 
-                <p className="mt-1.5 text-[9px] text-[var(--color-text-muted)]">
-                  Inclusive of applicable
-                  taxes
+                <p className="product-detail__tax-note">
+                  Inclusive of applicable taxes
                 </p>
               </div>
 
-              {/* =============================================
-                  AVAILABILITY
-              ============================================= */}
 
-              <div className="border-b border-[var(--color-border)] py-4">
-                <div className="flex items-center justify-between gap-4">
-                  <span
-                    className="
-                      text-[9px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.13em]
-                      text-[var(--color-text-muted)]
-                    "
-                  >
-                    Availability
-                  </span>
+              {/* Availability */}
 
-                  <span
-                    className={`
-                      text-[9px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.1em]
-                      ${
-                        inventoryStatus ===
-                        "out-of-stock"
-                          ? "text-[var(--color-error)]"
-                          : inventoryStatus ===
-                              "low-stock"
-                            ? "text-[var(--color-accent-dark)]"
-                            : "text-[var(--color-success)]"
-                      }
-                    `}
-                  >
-                    {inventoryStatus ===
+              <div className="product-detail__availability">
+                <span className="product-detail__meta-label">
+                  Availability
+                </span>
+
+                <span
+                  className={
+                    inventoryStatus ===
                     "out-of-stock"
-                      ? "Sold Out"
+                      ? "product-detail__availability-value product-detail__availability-value--sold-out"
                       : inventoryStatus ===
                           "low-stock"
-                        ? `Only ${maxStock} left`
-                        : `${maxStock} available`}
-                  </span>
-                </div>
+                        ? "product-detail__availability-value product-detail__availability-value--low"
+                        : "product-detail__availability-value product-detail__availability-value--available"
+                  }
+                >
+                  {inventoryStatus ===
+                  "out-of-stock"
+                    ? "Sold Out"
+                    : inventoryStatus ===
+                        "low-stock"
+                      ? `Only ${maxStock} left`
+                      : `${maxStock} available`}
+                </span>
               </div>
 
-              {/* =============================================
-                  PURCHASE
-              ============================================= */}
 
-              <div className="border-b border-[var(--color-border)] py-5">
-                <div className="mb-3 flex items-center justify-between">
-                  <span
-                    className="
-                      text-[9px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.13em]
-                    "
-                  >
+              {/* Purchase */}
+
+              <div className="product-detail__purchase">
+
+                <div className="product-detail__purchase-heading">
+                  <span className="product-detail__meta-label">
                     Quantity
                   </span>
 
-                  <span className="text-[9px] text-[var(--color-text-muted)]">
+                  <span className="product-detail__stock-note">
                     {maxStock > 0
                       ? `${maxStock} in stock`
                       : "Unavailable"}
                   </span>
                 </div>
 
-                <div className="flex gap-2">
-                  {/* QUANTITY */}
 
-                  <div
-                    className="
-                      flex
-                      h-11
-                      shrink-0
-                      border
-                      border-[var(--color-border-dark)]
-                    "
-                  >
+                <div className="product-detail__purchase-row">
+
+                  {/* Quantity */}
+
+                  <div className="product-detail__quantity">
+
                     <button
                       type="button"
                       onClick={
                         decreaseQuantity
                       }
                       disabled={
-                        quantity <=
-                          1 ||
-                        maxStock <=
-                          0
+                        quantity <= 1 ||
+                        maxStock <= 0
                       }
                       aria-label="Decrease quantity"
-                      className="
-                        flex
-                        w-9
-                        items-center
-                        justify-center
-                        text-[var(--color-text)]
-                        disabled:opacity-30
-                      "
+                      className="product-detail__quantity-button"
                     >
                       <Minus
-                        size={13}
+                        className="product-detail__quantity-icon"
+                        aria-hidden="true"
                       />
                     </button>
 
-                    <span
-                      className="
-                        flex
-                        w-9
-                        items-center
-                        justify-center
-                        border-x
-                        border-[var(--color-border)]
-                        text-[11px]
-                        font-semibold
-                      "
-                    >
+                    <span className="product-detail__quantity-value">
                       {quantity}
                     </span>
 
@@ -1220,28 +942,23 @@ export function ProductDetail({
                         increaseQuantity
                       }
                       disabled={
-                        maxStock <=
-                          0 ||
+                        maxStock <= 0 ||
                         quantity >=
                           maxStock
                       }
                       aria-label="Increase quantity"
-                      className="
-                        flex
-                        w-9
-                        items-center
-                        justify-center
-                        text-[var(--color-text)]
-                        disabled:opacity-30
-                      "
+                      className="product-detail__quantity-button"
                     >
                       <Plus
-                        size={13}
+                        className="product-detail__quantity-icon"
+                        aria-hidden="true"
                       />
                     </button>
+
                   </div>
 
-                  {/* ADD TO BAG */}
+
+                  {/* Add To Bag */}
 
                   <button
                     type="button"
@@ -1249,46 +966,27 @@ export function ProductDetail({
                       handleAddToCart
                     }
                     disabled={
-                      maxStock <=
-                        0 ||
+                      maxStock <= 0 ||
                       addingToCart ||
                       buyingNow
                     }
-                    className="
-                      flex
-                      h-11
-                      min-w-0
-                      flex-1
-                      items-center
-                      justify-center
-                      gap-2
-                      bg-[var(--color-text)]
-                      px-4
-                      text-[9px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.14em]
-                      text-white
-                      transition
-                      hover:bg-[var(--color-accent-dark)]
-                      disabled:cursor-not-allowed
-                      disabled:opacity-40
-                    "
+                    className="product-detail__add-button"
                   >
                     <ShoppingBag
-                      size={15}
-                      strokeWidth={
-                        1.4
-                      }
+                      className="product-detail__button-icon"
+                      aria-hidden="true"
                     />
 
-                    {addingToCart
-                      ? "Adding..."
-                      : "Add to Bag"}
+                    <span>
+                      {addingToCart
+                        ? "Adding..."
+                        : "Add to Bag"}
+                    </span>
                   </button>
                 </div>
 
-                {/* BUY NOW */}
+
+                {/* Buy Now */}
 
                 <button
                   type="button"
@@ -1296,29 +994,11 @@ export function ProductDetail({
                     handleBuyNow
                   }
                   disabled={
-                    maxStock <=
-                      0 ||
+                    maxStock <= 0 ||
                     addingToCart ||
                     buyingNow
                   }
-                  className="
-                    mt-2
-                    h-11
-                    w-full
-                    border
-                    border-[var(--color-text)]
-                    bg-transparent
-                    text-[9px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.14em]
-                    text-[var(--color-text)]
-                    transition
-                    hover:bg-[var(--color-text)]
-                    hover:text-white
-                    disabled:cursor-not-allowed
-                    disabled:opacity-40
-                  "
+                  className="product-detail__buy-button"
                 >
                   {buyingNow
                     ? "Processing..."
@@ -1326,43 +1006,41 @@ export function ProductDetail({
                 </button>
               </div>
 
-              {/* =============================================
-                  DELIVERY CHECK
-              ============================================= */}
 
-              <div className="border-b border-[var(--color-border)] py-5">
-                <div className="flex gap-3">
+              {/* Delivery */}
+
+              <div className="product-detail__delivery">
+
+                <div className="product-detail__delivery-header">
+
                   <MapPin
-                    size={17}
-                    strokeWidth={
-                      1.4
-                    }
-                    className="mt-0.5 shrink-0 text-[var(--color-text-secondary)]"
+                    className="product-detail__delivery-icon"
+                    aria-hidden="true"
                   />
 
-                  <div className="min-w-0 flex-1">
-                    <p
-                      className="
-                        text-[9px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.13em]
-                      "
-                    >
+                  <div className="product-detail__delivery-content">
+
+                    <p className="product-detail__delivery-title">
                       Check Delivery
                     </p>
 
-                    <p className="mt-1 text-[9px] leading-5 text-[var(--color-text-muted)]">
-                      Enter your pincode
-                      to check delivery
-                      availability.
+                    <p className="product-detail__delivery-description">
+                      Enter your pincode to check delivery availability.
                     </p>
 
-                    <div className="mt-3 flex">
+
+                    <div className="product-detail__delivery-form">
+
+                      <label
+                        htmlFor="product-delivery-pincode"
+                        className="sr-only"
+                      >
+                        Enter delivery pincode
+                      </label>
+
                       <input
-                        value={
-                          pincode
-                        }
+                        id="product-delivery-pincode"
+                        value={pincode}
                         onChange={(
                           event,
                         ) => {
@@ -1382,25 +1060,21 @@ export function ProductDetail({
                             false,
                           );
                         }}
+                        onKeyDown={(
+                          event,
+                        ) => {
+                          if (
+                            event.key ===
+                            "Enter"
+                          ) {
+                            checkDelivery();
+                          }
+                        }}
                         inputMode="numeric"
-                        maxLength={
-                          6
-                        }
+                        autoComplete="postal-code"
+                        maxLength={6}
                         placeholder="Enter pincode"
-                        className="
-                          h-10
-                          min-w-0
-                          flex-1
-                          border
-                          border-r-0
-                          border-[var(--color-border-dark)]
-                          bg-transparent
-                          px-3
-                          text-[11px]
-                          outline-none
-                          placeholder:text-[var(--color-text-muted)]
-                          focus:border-[var(--color-text)]
-                        "
+                        className="product-detail__delivery-input"
                       />
 
                       <button
@@ -1408,163 +1082,120 @@ export function ProductDetail({
                         onClick={
                           checkDelivery
                         }
-                        className="
-                          h-10
-                          min-w-[72px]
-                          bg-[var(--color-text)]
-                          px-3
-                          text-[8px]
-                          font-semibold
-                          uppercase
-                          tracking-[0.12em]
-                          text-white
-                        "
+                        className="product-detail__delivery-button"
                       >
                         Check
                       </button>
                     </div>
 
+
                     {deliveryChecked && (
-                      <div className="mt-2 flex items-center gap-1.5 text-[9px] text-[var(--color-success)]">
+                      <div
+                        className="product-detail__delivery-result"
+                        role="status"
+                        aria-live="polite"
+                      >
                         <Check
-                          size={12}
+                          className="product-detail__delivery-result-icon"
+                          aria-hidden="true"
                         />
 
-                        Delivery available
+                        <span>
+                          Delivery available
+                        </span>
                       </div>
                     )}
                   </div>
                 </div>
               </div>
 
-              {/* =============================================
-                  SERVICE FEATURES
-              ============================================= */}
 
-              <div className="grid grid-cols-3">
-                <div className="border-r border-[var(--color-border)] px-2 py-4 text-center">
+              {/* Service Features */}
+
+              <div className="product-detail__service-features">
+
+                <div className="product-detail__service-feature">
                   <Truck
-                    size={17}
-                    strokeWidth={
-                      1.3
-                    }
-                    className="mx-auto text-[var(--color-text-secondary)]"
+                    className="product-detail__service-icon"
+                    aria-hidden="true"
                   />
 
-                  <p className="mt-2 text-[8px] font-semibold uppercase tracking-[0.08em]">
+                  <p className="product-detail__service-title">
                     Delivery
                   </p>
 
-                  <p className="mt-1 text-[8px] text-[var(--color-text-muted)]">
+                  <p className="product-detail__service-description">
                     Across India
                   </p>
                 </div>
 
-                <div className="border-r border-[var(--color-border)] px-2 py-4 text-center">
+                <div className="product-detail__service-feature">
                   <ShieldCheck
-                    size={17}
-                    strokeWidth={
-                      1.3
-                    }
-                    className="mx-auto text-[var(--color-text-secondary)]"
+                    className="product-detail__service-icon"
+                    aria-hidden="true"
                   />
 
-                  <p className="mt-2 text-[8px] font-semibold uppercase tracking-[0.08em]">
+                  <p className="product-detail__service-title">
                     Secure
                   </p>
 
-                  <p className="mt-1 text-[8px] text-[var(--color-text-muted)]">
+                  <p className="product-detail__service-description">
                     Safe checkout
                   </p>
                 </div>
 
-                <div className="px-2 py-4 text-center">
+                <div className="product-detail__service-feature">
                   <RotateCcw
-                    size={17}
-                    strokeWidth={
-                      1.3
-                    }
-                    className="mx-auto text-[var(--color-text-secondary)]"
+                    className="product-detail__service-icon"
+                    aria-hidden="true"
                   />
 
-                  <p className="mt-2 text-[8px] font-semibold uppercase tracking-[0.08em]">
+                  <p className="product-detail__service-title">
                     Returns
                   </p>
 
-                  <p className="mt-1 text-[8px] text-[var(--color-text-muted)]">
+                  <p className="product-detail__service-description">
                     Easy process
                   </p>
                 </div>
+
               </div>
             </div>
           </div>
         </div>
       </section>
 
+
       {/* ======================================================
           PRODUCT INFORMATION
       ====================================================== */}
 
-      <section className="border-b border-[var(--color-border-light)] bg-[var(--color-surface)]">
-        <div
-          className="
-            mx-auto
-            w-full
-            max-w-[1500px]
-            px-4
-            py-10
-            sm:px-6
-            sm:py-14
-            lg:px-10
-            lg:py-16
-            xl:px-12
-          "
-        >
-          <div
-            className="
-              grid
-              gap-10
-              lg:grid-cols-[minmax(0,1fr)_300px]
-              lg:gap-16
-            "
-          >
-            {/* =================================================
-                ACCORDIONS
-            ================================================= */}
+      <section className="product-detail__information-section">
+        <div className="product-detail__container product-detail__information-container">
 
-            <div className="min-w-0">
-              <div className="mb-5">
-                <p
-                  className="
-                    text-[9px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.16em]
-                    text-[var(--color-text-muted)]
-                  "
-                >
+          <div className="product-detail__details-grid">
+
+            {/* Accordions */}
+
+            <div className="product-detail__accordions">
+
+              <div className="product-detail__section-intro">
+                <p className="product-detail__eyebrow">
                   Product Information
                 </p>
 
-                <h2
-                  className="
-                    mt-2
-                    font-display
-                    text-[24px]
-                    font-medium
-                    tracking-[-0.02em]
-                    text-[var(--color-text)]
-                    sm:text-[26px]
-                  "
-                >
+                <h2 className="product-detail__section-title">
                   Product Details
                 </h2>
               </div>
 
-              <div className="border-t border-[var(--color-border)]">
-                {/* DESCRIPTION */}
 
-                <div className="border-b border-[var(--color-border)]">
+              <div className="product-detail__accordion-list">
+
+                {/* Description */}
+
+                <div className="product-detail__accordion">
+
                   <button
                     type="button"
                     onClick={() =>
@@ -1572,45 +1203,36 @@ export function ProductDetail({
                         "description",
                       )
                     }
-                    className="
-                      flex
-                      w-full
-                      items-center
-                      justify-between
-                      py-4
-                      text-left
-                    "
+                    aria-expanded={
+                      openSection ===
+                      "description"
+                    }
+                    className="product-detail__accordion-trigger"
                   >
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.13em]">
+                    <span>
                       Description
                     </span>
 
                     <ChevronDown
-                      size={15}
-                      className={`transition-transform ${
+                      className={
                         openSection ===
                         "description"
-                          ? "rotate-180"
-                          : ""
-                      }`}
+                          ? "product-detail__accordion-icon product-detail__accordion-icon--open"
+                          : "product-detail__accordion-icon"
+                      }
+                      aria-hidden="true"
                     />
                   </button>
 
                   {openSection ===
                     "description" && (
-                    <div className="pb-5">
+                    <div className="product-detail__accordion-content">
+
                       {safeProduct
                         .content
                         ?.description ? (
                         <div
-                          className="
-                            max-w-3xl
-                            text-[13px]
-                            leading-7
-                            text-[var(--color-text-secondary)]
-                            prose
-                            prose-sm
-                          "
+                          className="product-detail__description"
                           dangerouslySetInnerHTML={{
                             __html:
                               safeProduct
@@ -1619,20 +1241,20 @@ export function ProductDetail({
                           }}
                         />
                       ) : (
-                        <p className="text-[12px] text-[var(--color-text-muted)]">
-                          Description
-                          will be
-                          updated
-                          soon.
+                        <p className="product-detail__empty-copy">
+                          Description will be updated soon.
                         </p>
                       )}
+
                     </div>
                   )}
                 </div>
 
-                {/* PRODUCT DETAILS */}
 
-                <div className="border-b border-[var(--color-border)]">
+                {/* Product Details */}
+
+                <div className="product-detail__accordion">
+
                   <button
                     type="button"
                     onClick={() =>
@@ -1640,33 +1262,31 @@ export function ProductDetail({
                         "details",
                       )
                     }
-                    className="
-                      flex
-                      w-full
-                      items-center
-                      justify-between
-                      py-4
-                      text-left
-                    "
+                    aria-expanded={
+                      openSection ===
+                      "details"
+                    }
+                    className="product-detail__accordion-trigger"
                   >
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.13em]">
+                    <span>
                       Product Details
                     </span>
 
                     <ChevronDown
-                      size={15}
-                      className={`transition-transform ${
+                      className={
                         openSection ===
                         "details"
-                          ? "rotate-180"
-                          : ""
-                      }`}
+                          ? "product-detail__accordion-icon product-detail__accordion-icon--open"
+                          : "product-detail__accordion-icon"
+                      }
+                      aria-hidden="true"
                     />
                   </button>
 
                   {openSection ===
                     "details" && (
-                    <div className="grid pb-5 sm:grid-cols-2">
+                    <div className="product-detail__details-table">
+
                       {[
                         [
                           "Category",
@@ -1699,30 +1319,28 @@ export function ProductDetail({
                             key={
                               label
                             }
-                            className="
-                              border-b
-                              border-[var(--color-border-light)]
-                              py-3
-                              pr-5
-                            "
+                            className="product-detail__detail-row"
                           >
-                            <p className="text-[8px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
+                            <p className="product-detail__detail-label">
                               {label}
                             </p>
 
-                            <p className="mt-1 text-[12px] text-[var(--color-text-secondary)]">
+                            <p className="product-detail__detail-value">
                               {value}
                             </p>
                           </div>
                         ),
                       )}
+
                     </div>
                   )}
                 </div>
 
-                {/* SHIPPING */}
 
-                <div className="border-b border-[var(--color-border)]">
+                {/* Shipping */}
+
+                <div className="product-detail__accordion">
+
                   <button
                     type="button"
                     onClick={() =>
@@ -1730,48 +1348,40 @@ export function ProductDetail({
                         "shipping",
                       )
                     }
-                    className="
-                      flex
-                      w-full
-                      items-center
-                      justify-between
-                      py-4
-                      text-left
-                    "
+                    aria-expanded={
+                      openSection ===
+                      "shipping"
+                    }
+                    className="product-detail__accordion-trigger"
                   >
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.13em]">
+                    <span>
                       Shipping & Delivery
                     </span>
 
                     <ChevronDown
-                      size={15}
-                      className={`transition-transform ${
+                      className={
                         openSection ===
                         "shipping"
-                          ? "rotate-180"
-                          : ""
-                      }`}
+                          ? "product-detail__accordion-icon product-detail__accordion-icon--open"
+                          : "product-detail__accordion-icon"
+                      }
+                      aria-hidden="true"
                     />
                   </button>
 
                   {openSection ===
                     "shipping" && (
-                    <p className="max-w-3xl pb-5 text-[12px] leading-6 text-[var(--color-text-secondary)]">
-                      Shipping and
-                      delivery
-                      availability
-                      is calculated
-                      during checkout
-                      based on your
-                      delivery
-                      address.
+                    <p className="product-detail__accordion-copy">
+                      Shipping and delivery availability is calculated during checkout based on your delivery address.
                     </p>
                   )}
                 </div>
 
-                {/* RETURNS */}
 
-                <div className="border-b border-[var(--color-border)]">
+                {/* Returns */}
+
+                <div className="product-detail__accordion">
+
                   <button
                     type="button"
                     onClick={() =>
@@ -1779,176 +1389,109 @@ export function ProductDetail({
                         "returns",
                       )
                     }
-                    className="
-                      flex
-                      w-full
-                      items-center
-                      justify-between
-                      py-4
-                      text-left
-                    "
+                    aria-expanded={
+                      openSection ===
+                      "returns"
+                    }
+                    className="product-detail__accordion-trigger"
                   >
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.13em]">
+                    <span>
                       Returns & Exchange
                     </span>
 
                     <ChevronDown
-                      size={15}
-                      className={`transition-transform ${
+                      className={
                         openSection ===
                         "returns"
-                          ? "rotate-180"
-                          : ""
-                      }`}
+                          ? "product-detail__accordion-icon product-detail__accordion-icon--open"
+                          : "product-detail__accordion-icon"
+                      }
+                      aria-hidden="true"
                     />
                   </button>
 
                   {openSection ===
                     "returns" && (
-                    <p className="max-w-3xl pb-5 text-[12px] leading-6 text-[var(--color-text-secondary)]">
-                      Please refer to
-                      the store return
-                      and exchange
-                      policy applicable
-                      to this product.
+                    <p className="product-detail__accordion-copy">
+                      Please refer to the store return and exchange policy applicable to this product.
                     </p>
                   )}
                 </div>
+
               </div>
             </div>
 
-            {/* =================================================
-                AY E SHA STANDARD
-            ================================================= */}
 
-            <aside className="hidden lg:block">
-              <div
-                className="
-                  border
-                  border-[var(--color-border)]
-                  bg-[var(--color-bg-soft)]
-                  p-6
-                "
-              >
-                <p
-                  className="
-                    text-[8px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.16em]
-                    text-[var(--color-text-muted)]
-                  "
-                >
-                  Ayesha Fashion
-                </p>
+            {/* Brand Standard */}
 
-                <h3
-                  className="
-                    mt-3
-                    font-display
-                    text-[24px]
-                    font-medium
-                    leading-[1.08]
-                    tracking-[-0.02em]
-                  "
-                >
-                  Thoughtfully
-                  designed.
-                </h3>
+            <aside className="product-detail__brand-panel">
 
-                <p
-                  className="
-                    mt-4
-                    text-[11px]
-                    leading-6
-                    text-[var(--color-text-secondary)]
-                  "
-                >
-                  Designed with an
-                  emphasis on elegance,
-                  comfort and timeless
-                  style.
-                </p>
+              <p className="product-detail__brand-eyebrow">
+                Ayesha Fashion
+              </p>
 
-                <div className="my-5 h-px bg-[var(--color-border)]" />
+              <h3 className="product-detail__brand-title">
+                Thoughtfully
+                <br />
+                designed.
+              </h3>
 
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-[8px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
-                      Price
-                    </p>
+              <p className="product-detail__brand-description">
+                Designed with an emphasis on elegance, comfort and timeless style.
+              </p>
 
-                    <p className="mt-1 text-[13px] text-[var(--color-text-secondary)]">
-                      {formatPrice(
-                        sellingPrice,
-                      )}
-                    </p>
-                  </div>
+              <div className="product-detail__brand-divider" />
 
-                  <div>
-                    <p className="text-[8px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
-                      Availability
-                    </p>
+              <div className="product-detail__brand-meta">
 
-                    <p className="mt-1 text-[13px] text-[var(--color-text-secondary)]">
-                      {maxStock >
-                      0
-                        ? `${maxStock} available`
-                        : "Currently unavailable"}
-                    </p>
-                  </div>
+                <div>
+                  <p className="product-detail__brand-meta-label">
+                    Price
+                  </p>
+
+                  <p className="product-detail__brand-meta-value">
+                    {formatPrice(
+                      sellingPrice,
+                    )}
+                  </p>
                 </div>
+
+                <div>
+                  <p className="product-detail__brand-meta-label">
+                    Availability
+                  </p>
+
+                  <p className="product-detail__brand-meta-value">
+                    {maxStock > 0
+                      ? `${maxStock} available`
+                      : "Currently unavailable"}
+                  </p>
+                </div>
+
               </div>
             </aside>
           </div>
         </div>
       </section>
 
+
       {/* ======================================================
           RECOMMENDATIONS
       ====================================================== */}
 
-      {safeRecommendations
-        .length > 0 && (
-        <section className="border-b border-[var(--color-border-light)]">
-          <div
-            className="
-              mx-auto
-              w-full
-              max-w-[1500px]
-              px-4
-              py-10
-              sm:px-6
-              sm:py-14
-              lg:px-10
-              lg:py-16
-              xl:px-12
-            "
-          >
-            <div className="mb-6 flex items-end justify-between gap-4">
+      {safeRecommendations.length >
+        0 && (
+        <section className="product-detail__recommendations">
+          <div className="product-detail__container">
+
+            <div className="product-detail__recommendations-header">
+
               <div>
-                <p
-                  className="
-                    text-[9px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.16em]
-                    text-[var(--color-text-muted)]
-                  "
-                >
+                <p className="product-detail__eyebrow">
                   You may also like
                 </p>
 
-                <h2
-                  className="
-                    mt-2
-                    font-display
-                    text-[24px]
-                    font-medium
-                    tracking-[-0.02em]
-                    sm:text-[26px]
-                  "
-                >
+                <h2 className="product-detail__section-title">
                   More from this edit
                 </h2>
               </div>
@@ -1962,33 +1505,15 @@ export function ProductDetail({
                     )}`,
                   )
                 }
-                className="
-                  hidden
-                  text-[9px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.13em]
-                  underline
-                  underline-offset-4
-                  sm:block
-                "
+                className="product-detail__view-all"
               >
                 View all
               </button>
             </div>
 
-            <div
-              className="
-                grid
-                grid-cols-2
-                gap-x-3
-                gap-y-7
-                sm:grid-cols-3
-                sm:gap-x-5
-                lg:grid-cols-4
-                lg:gap-x-6
-              "
-            >
+
+            <div className="product-detail__recommendation-grid">
+
               {safeRecommendations.map(
                 (item) => {
                   const image =
@@ -2009,87 +1534,41 @@ export function ProductDetail({
 
                   return (
                     <button
-                      key={
-                        item._id
-                      }
+                      key={item._id}
                       type="button"
                       onClick={() =>
                         router.push(
                           `/products/${item._id}`,
                         )
                       }
-                      className="
-                        group
-                        min-w-0
-                        text-left
-                      "
+                      className="product-detail__recommendation"
                     >
-                      <div
-                        className="
-                          aspect-[3/4]
-                          overflow-hidden
-                          bg-[var(--color-bg-soft)]
-                        "
-                      >
+                      <div className="product-detail__recommendation-media">
+
                         {image ? (
                           <img
-                            src={
-                              image.src
-                            }
+                            src={image.src}
                             alt={
                               image.alt ||
                               item.name
                             }
-                            className="
-                              h-full
-                              w-full
-                              object-cover
-                              transition-transform
-                              duration-500
-                              group-hover:scale-[1.025]
-                            "
+                            className="product-detail__recommendation-image"
                           />
                         ) : (
-                          <div
-                            className="
-                              flex
-                              h-full
-                              items-center
-                              justify-center
-                              text-[8px]
-                              uppercase
-                              tracking-[0.12em]
-                              text-[var(--color-text-muted)]
-                            "
-                          >
+                          <div className="product-detail__recommendation-placeholder">
                             No image
                           </div>
                         )}
+
                       </div>
 
-                      <p
-                        className="
-                          mt-3
-                          line-clamp-2
-                          text-[11px]
-                          font-medium
-                          leading-5
-                          text-[var(--color-text)]
-                        "
-                      >
+                      <p className="product-detail__recommendation-name">
                         {item.name}
                       </p>
 
-                      <p
-                        className="
-                          mt-1
-                          text-[11px]
-                          text-[var(--color-text-secondary)]
-                        "
-                      >
+                      <p className="product-detail__recommendation-price">
                         {formatPrice(
-                          item
-                            .pricing
+                          item.pricing
                             ?.sellingPrice ??
                             0,
                         )}
@@ -2098,6 +1577,7 @@ export function ProductDetail({
                   );
                 },
               )}
+
             </div>
           </div>
         </section>

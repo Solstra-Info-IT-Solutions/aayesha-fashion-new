@@ -17,12 +17,14 @@ export function ProductContentRenderer({
     typeof content.richContent === "string"
   ) {
     return (
-      <div
-        className="product-rich-content text-sm leading-7 text-[var(--color-text-secondary)]"
-        dangerouslySetInnerHTML={{
-          __html: sanitizeHtml(content.richContent),
-        }}
-      />
+      <div className="product-content product-content--html">
+        <div
+          className="product-content__rich-html"
+          dangerouslySetInnerHTML={{
+            __html: sanitizeHtml(content.richContent),
+          }}
+        />
+      </div>
     );
   }
 
@@ -34,8 +36,12 @@ export function ProductContentRenderer({
   }
 
   return (
-    <div className="space-y-5 text-sm leading-7 text-[var(--color-text-secondary)]">
-      {content.description && <p>{content.description}</p>}
+    <div className="product-content product-content--plain">
+      {content.description && (
+        <p className="product-content__paragraph">
+          {content.description}
+        </p>
+      )}
     </div>
   );
 }
@@ -46,14 +52,14 @@ function RichBlocks({
   blocks: ProductContentBlock[];
 }) {
   return (
-    <div className="space-y-6">
+    <div className="product-content product-content--rich">
       {blocks.map((block, index) => {
         switch (block.type) {
           case "heading":
             return (
               <h3
                 key={index}
-                className="font-[var(--font-cormorant)] text-2xl text-[var(--color-charcoal)]"
+                className="product-content__heading"
               >
                 {block.content}
               </h3>
@@ -63,7 +69,7 @@ function RichBlocks({
             return (
               <p
                 key={index}
-                className="text-sm leading-7 text-[var(--color-text-secondary)]"
+                className="product-content__paragraph"
               >
                 {block.content}
               </p>
@@ -73,7 +79,7 @@ function RichBlocks({
             return (
               <blockquote
                 key={index}
-                className="border-l-2 border-[var(--color-rose)] pl-5 font-[var(--font-cormorant)] text-xl italic leading-7 text-[var(--color-charcoal)]"
+                className="product-content__quote"
               >
                 {block.content}
               </blockquote>
@@ -83,7 +89,7 @@ function RichBlocks({
             return (
               <ul
                 key={index}
-                className="space-y-2 text-sm leading-6 text-[var(--color-text-secondary)]"
+                className="product-content__list"
               >
                 {(Array.isArray(block.content)
                   ? block.content
@@ -91,10 +97,13 @@ function RichBlocks({
                 ).map((item, itemIndex) => (
                   <li
                     key={`${index}-${itemIndex}`}
-                    className="relative pl-4"
+                    className="product-content__list-item"
                   >
-                    <span className="absolute left-0 top-3 h-1 w-1 rounded-full bg-[var(--color-rose)]" />
-                    {item}
+                    <span
+                      className="product-content__list-marker"
+                      aria-hidden="true"
+                    />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -104,7 +113,8 @@ function RichBlocks({
             return (
               <div
                 key={index}
-                className="h-px bg-[var(--color-border)]"
+                className="product-content__divider"
+                role="separator"
               />
             );
 
