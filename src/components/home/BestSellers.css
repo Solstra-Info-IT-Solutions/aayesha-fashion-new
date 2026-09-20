@@ -1,25 +1,29 @@
+/* =========================================================
+   AAYESHA BEST SELLERS
+   Editorial Product Showcase
+========================================================= */
+
 .best-sellers {
   position: relative;
-  padding: 110px 0 120px;
-  background: var(--aayesha-surface);
-  color: var(--aayesha-ink);
+  overflow: hidden;
+
+  padding: 110px 0 115px;
+
+  background: var(--color-surface);
 }
 
-.best-sellers__container {
-  width: 100%;
-}
 
-/* -----------------------------------------
+/* =========================================================
    HEADER
------------------------------------------ */
+========================================================= */
 
 .best-sellers__header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 50px;
 
-  margin-bottom: 52px;
+  gap: 60px;
+  margin-bottom: 48px;
 }
 
 .best-sellers__heading {
@@ -27,245 +31,375 @@
 }
 
 .best-sellers__eyebrow {
-  display: block;
+  margin: 0 0 13px;
 
-  margin-bottom: 14px;
+  color: var(--color-secondary);
 
-  color: var(--aayesha-clay);
-
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  line-height: 1.2;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
 }
 
 .best-sellers__title {
   margin: 0;
 
-  color: var(--aayesha-ink);
+  color: var(--color-text);
 
-  font-family: var(--aayesha-font-serif);
-  font-size: clamp(2.25rem, 3.4vw, 3.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(
+    2.35rem,
+    3.5vw,
+    3.75rem
+  );
+
   font-weight: 400;
-  letter-spacing: -0.035em;
   line-height: 1;
+  letter-spacing: -0.035em;
+
+  white-space: nowrap;
 }
 
 .best-sellers__title span {
-  color: var(--aayesha-clay);
+  margin-left: 0.08em;
+
+  color: var(--color-secondary);
+
+  font-style: italic;
 }
 
-.best-sellers__description {
-  width: 280px;
-  flex-shrink: 0;
+.best-sellers__intro {
+  max-width: 300px;
 
-  margin: 0;
-  padding-bottom: 3px;
+  margin: 0 0 4px;
 
-  color: var(--aayesha-muted);
+  color: var(--color-text-secondary);
 
-  font-size: 0.78rem;
+  font-family: var(--font-body);
+  font-size: 11px;
   line-height: 1.7;
+  letter-spacing: 0.01em;
 }
 
-/* -----------------------------------------
+
+/* =========================================================
    PRODUCTS
------------------------------------------ */
+========================================================= */
 
 .best-sellers__products {
+  position: relative;
   width: 100%;
-  min-width: 0;
 }
 
-/* -----------------------------------------
-   BOTTOM LINK
------------------------------------------ */
 
-.best-sellers__bottom {
+/* =========================================================
+   DESKTOP CTA
+========================================================= */
+
+.best-sellers__footer {
   display: flex;
+  align-items: center;
   justify-content: center;
 
-  margin-top: 58px;
+  margin-top: 48px;
 }
 
-.best-sellers__view-all {
+.best-sellers__link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+
   gap: 12px;
 
-  color: var(--aayesha-ink);
+  color: var(--color-text);
 
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
   line-height: 1;
+  letter-spacing: 0.2em;
+
   text-decoration: none;
   text-transform: uppercase;
 
-  transition: color 220ms ease;
+  transition: color 240ms ease;
 }
 
-.best-sellers__view-icon {
-  display: inline-flex;
+.best-sellers__link-icon {
+  display: flex;
   align-items: center;
   justify-content: center;
 
   width: 34px;
   height: 34px;
 
-  border: 1px solid var(--aayesha-border);
+  border: 1px solid var(--color-border-dark);
   border-radius: 50%;
 
-  color: var(--aayesha-clay);
+  color: var(--color-secondary);
 
   transition:
-    background-color 220ms ease,
-    border-color 220ms ease,
-    color 220ms ease,
+    background-color 240ms ease,
+    border-color 240ms ease,
+    color 240ms ease,
     transform 300ms ease;
 }
 
-.best-sellers__view-all:hover {
-  color: var(--aayesha-clay);
+.best-sellers__link:hover {
+  color: var(--color-secondary);
 }
 
-.best-sellers__view-all:hover .best-sellers__view-icon {
-  border-color: var(--aayesha-clay);
-  background: var(--aayesha-clay);
-  color: var(--aayesha-surface);
+.best-sellers__link:hover .best-sellers__link-icon {
+  border-color: var(--color-secondary);
+
+  background: var(--color-secondary);
+
+  color: var(--color-surface);
 
   transform: translate(2px, -2px);
 }
 
-/* -----------------------------------------
-   EMPTY
------------------------------------------ */
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
 
 .best-sellers__empty {
   display: flex;
-  min-height: 300px;
-
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  padding: 40px 20px;
+  min-height: 430px;
 
-  border: 1px solid var(--aayesha-border);
-  background: var(--aayesha-surface-soft);
+  border: 1px solid var(--color-border);
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(169, 130, 130, 0.13),
+      transparent 42%
+    ),
+    var(--color-surface-soft);
+}
+
+.best-sellers__empty-inner {
+  max-width: 470px;
+
+  padding: 50px 24px;
 
   text-align: center;
 }
 
-.best-sellers__empty-letter {
+.best-sellers__empty-mark {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 50px;
-  height: 50px;
-  margin-bottom: 18px;
+  width: 48px;
+  height: 48px;
 
-  border: 1px solid var(--aayesha-clay);
+  margin: 0 auto 22px;
+
+  border: 1px solid var(--color-border-dark);
+  border-radius: 50%;
+}
+
+.best-sellers__empty-mark span {
+  position: absolute;
+
+  display: block;
+
+  width: 18px;
+  height: 1px;
+
+  background: var(--color-secondary);
+
+  transform-origin: center;
+}
+
+.best-sellers__empty-mark span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.best-sellers__empty-mark span:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+.best-sellers__empty-mark span:nth-child(3) {
+  width: 5px;
+  height: 5px;
+
+  border: 1px solid var(--color-secondary);
   border-radius: 50%;
 
-  color: var(--aayesha-clay);
-
-  font-family: var(--aayesha-font-serif);
-  font-size: 1.25rem;
+  background: transparent;
 }
 
-.best-sellers__empty h3 {
-  margin: 0 0 8px;
+.best-sellers__empty-eyebrow {
+  margin: 0 0 13px;
 
-  color: var(--aayesha-ink);
+  color: var(--color-secondary);
 
-  font-family: var(--aayesha-font-serif);
-  font-size: 1.65rem;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+
+  text-transform: uppercase;
 }
 
-.best-sellers__empty p {
+.best-sellers__empty-title {
   margin: 0;
 
-  color: var(--aayesha-muted);
+  color: var(--color-text);
 
-  font-size: 0.76rem;
-  line-height: 1.6;
+  font-family: var(--font-display);
+  font-size: 2.7rem;
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.025em;
 }
 
-/* -----------------------------------------
-   TABLET
------------------------------------------ */
+.best-sellers__empty-description {
+  max-width: 370px;
 
-@media (max-width: 900px) {
+  margin: 17px auto 0;
+
+  color: var(--color-text-secondary);
+
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.best-sellers__empty-cta {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 25px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1023px) {
   .best-sellers {
     padding: 90px 0 100px;
   }
 
   .best-sellers__header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 16px;
-
-    margin-bottom: 42px;
+    gap: 35px;
   }
 
-  .best-sellers__description {
-    width: auto;
-    max-width: 360px;
-    padding: 0;
+  .best-sellers__intro {
+    max-width: 250px;
   }
 }
 
-/* -----------------------------------------
-   MOBILE
------------------------------------------ */
 
-@media (max-width: 640px) {
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
   .best-sellers {
-    padding: 72px 0 82px;
+    padding: 72px 0 80px;
   }
 
   .best-sellers__header {
-    gap: 14px;
+    display: block;
+
     margin-bottom: 32px;
   }
 
   .best-sellers__eyebrow {
     margin-bottom: 11px;
 
-    font-size: 0.56rem;
-    letter-spacing: 0.16em;
+    font-size: 8px;
   }
 
   .best-sellers__title {
-    font-size: clamp(2rem, 9vw, 2.65rem);
-    line-height: 1.02;
+    font-size: 2.25rem;
+
+    white-space: nowrap;
   }
 
-  .best-sellers__description {
-    max-width: 300px;
+  .best-sellers__intro {
+    max-width: 310px;
 
-    font-size: 0.74rem;
+    margin-top: 14px;
+
+    font-size: 10px;
     line-height: 1.65;
   }
 
-  .best-sellers__bottom {
-    margin-top: 42px;
+  .best-sellers__footer {
+    margin-top: 34px;
   }
 
-  .best-sellers__view-all {
-    font-size: 0.6rem;
+  .best-sellers__link {
+    font-size: 8px;
+    letter-spacing: 0.17em;
   }
 
-  .best-sellers__view-icon {
+  .best-sellers__link-icon {
     width: 32px;
     height: 32px;
   }
 
   .best-sellers__empty {
-    min-height: 260px;
+    min-height: 390px;
+  }
+
+  .best-sellers__empty-inner {
+    padding: 40px 18px;
+  }
+
+  .best-sellers__empty-title {
+    font-size: 2.25rem;
+  }
+
+  .best-sellers__empty-description {
+    font-size: 10px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+  .best-sellers {
+    padding: 64px 0 72px;
+  }
+
+  .best-sellers__title {
+    font-size: 1.95rem;
+  }
+
+  .best-sellers__intro {
+    max-width: 290px;
+  }
+
+  .best-sellers__footer {
+    margin-top: 30px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .best-sellers * {
+    scroll-behavior: auto;
   }
 }
