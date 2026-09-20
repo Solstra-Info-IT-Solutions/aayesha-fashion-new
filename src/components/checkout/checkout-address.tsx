@@ -18,7 +18,7 @@ import {
   type CustomerAddress,
 } from "@/lib/customer-api";
 
-import type { CheckoutAddress } from "@/types/checkout";
+import type { CheckoutAddress as CheckoutAddressType } from "@/types/checkout";
 
 export function CheckoutAddress() {
   const address = useCheckoutStore(
@@ -200,46 +200,44 @@ export function CheckoutAddress() {
 
   if (shouldShowSavedAddressView) {
     return (
-      <section className="overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
+      <section className="checkout-address">
         {/* HEADER */}
 
-        <div className="border-b border-[var(--color-border-light)] px-5 py-6 sm:px-8 sm:py-7">
-          <div className="flex items-start gap-4">
-            <span className="mt-0.5 font-[var(--font-display)] text-lg text-[var(--color-accent)]">
-              02
-            </span>
+        <header className="checkout-address__header">
+          <div className="checkout-address__step">
+            02
+          </div>
 
-            <div className="min-w-0 flex-1">
-              <p className="eyebrow text-[var(--color-text-muted)]">
-                Delivery Address
-              </p>
+          <div className="checkout-address__header-content">
+            <p className="checkout-address__eyebrow">
+              Delivery Address
+            </p>
 
-              <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
-                <div>
-                  <h2 className="font-[var(--font-display)] text-3xl font-medium leading-none tracking-[var(--tracking-tight)] text-[var(--color-text)] sm:text-4xl">
-                    Where should we deliver?
-                  </h2>
+            <div className="checkout-address__heading-row">
+              <div>
+                <h2 className="checkout-address__title">
+                  Where should we deliver?
+                </h2>
 
-                  <p className="mt-3 max-w-lg text-xs leading-5 text-[var(--color-text-secondary)] sm:text-sm">
-                    Select a saved address or add a new
-                    delivery address.
-                  </p>
-                </div>
-
-                <Link
-                  href="/account/addresses"
-                  className="link-luxury shrink-0 text-[10px] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text)]"
-                >
-                  Manage Addresses
-                </Link>
+                <p className="checkout-address__description">
+                  Select a saved address or add a new
+                  delivery address.
+                </p>
               </div>
+
+              <Link
+                href="/account/addresses"
+                className="checkout-address__manage"
+              >
+                Manage Addresses
+              </Link>
             </div>
           </div>
-        </div>
+        </header>
 
         {/* CONTENT */}
 
-        <div className="space-y-6 px-5 py-7 sm:px-8 sm:py-8">
+        <div className="checkout-address__content">
           {isLoadingAddresses ? (
             <AddressLoadingState />
           ) : (
@@ -247,14 +245,14 @@ export function CheckoutAddress() {
               {/* ERROR */}
 
               {addressError ? (
-                <div className="flex items-start justify-between gap-4 border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-4 py-4 sm:px-5">
+                <div className="checkout-address__error">
                   <div>
-                    <p className="text-sm font-medium text-[var(--color-text)]">
+                    <p className="checkout-address__error-title">
                       We couldn&apos;t load your saved
                       addresses.
                     </p>
 
-                    <p className="mt-1 text-xs leading-5 text-[var(--color-text-secondary)]">
+                    <p className="checkout-address__error-description">
                       You can still enter a new delivery
                       address below.
                     </p>
@@ -265,10 +263,14 @@ export function CheckoutAddress() {
                     onClick={() => {
                       window.location.reload();
                     }}
-                    className="inline-flex shrink-0 items-center gap-2 border border-[var(--color-border-dark)] bg-[var(--color-surface)] px-3 py-2 text-[10px] font-semibold uppercase tracking-[var(--tracking-wide)] text-[var(--color-text)] transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-subtle)]"
+                    className="checkout-address__retry"
                   >
-                    <RefreshCw size={13} />
-                    Retry
+                    <RefreshCw
+                      size={15}
+                      strokeWidth={1.5}
+                    />
+
+                    <span>Retry</span>
                   </button>
                 </div>
               ) : null}
@@ -277,13 +279,13 @@ export function CheckoutAddress() {
 
               {!addressError &&
               savedAddresses.length > 0 ? (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between border-b border-[var(--color-border-light)] pb-3">
-                    <p className="eyebrow text-[var(--color-text-muted)]">
+                <div className="checkout-address__saved">
+                  <div className="checkout-address__section-heading">
+                    <p className="checkout-address__section-label">
                       Saved Addresses
                     </p>
 
-                    <span className="text-[11px] text-[var(--color-text-muted)]">
+                    <span className="checkout-address__section-count">
                       {savedAddresses.length}{" "}
                       {savedAddresses.length === 1
                         ? "address"
@@ -291,7 +293,7 @@ export function CheckoutAddress() {
                     </span>
                   </div>
 
-                  <div className="grid gap-3">
+                  <div className="checkout-address__saved-list">
                     {savedAddresses.map(
                       (savedAddress) => {
                         const isSelected =
@@ -308,48 +310,47 @@ export function CheckoutAddress() {
                               )
                             }
                             aria-pressed={isSelected}
-                            className={`group w-full border text-left transition-all duration-[var(--duration-base)] ${
+                            className={`checkout-address-card ${
                               isSelected
-                                ? "border-[var(--color-accent)] bg-[var(--color-bg-subtle)]"
-                                : "border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-dark)]"
+                                ? "checkout-address-card--selected"
+                                : ""
                             }`}
                           >
-                            <div className="flex items-start gap-4 px-4 py-5 sm:px-5">
-                              {/* SELECT INDICATOR */}
-
-                              <div
-                                className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border transition-colors ${
+                            <div className="checkout-address-card__inner">
+                              <span
+                                className={`checkout-address-card__indicator ${
                                   isSelected
-                                    ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-text-inverse)]"
-                                    : "border-[var(--color-border-dark)] bg-[var(--color-surface)] text-transparent group-hover:border-[var(--color-accent)]"
+                                    ? "checkout-address-card__indicator--selected"
+                                    : ""
                                 }`}
+                                aria-hidden="true"
                               >
-                                <Check
-                                  size={12}
-                                  strokeWidth={2.5}
-                                />
-                              </div>
+                                {isSelected ? (
+                                  <Check
+                                    size={12}
+                                    strokeWidth={2.5}
+                                  />
+                                ) : null}
+                              </span>
 
-                              {/* ADDRESS DETAILS */}
-
-                              <div className="min-w-0 flex-1">
-                                <div className="flex flex-wrap items-center gap-2">
-                                  <p className="text-sm font-semibold text-[var(--color-text)]">
+                              <div className="checkout-address-card__details">
+                                <div className="checkout-address-card__name-row">
+                                  <p className="checkout-address-card__name">
                                     {savedAddress.name}
                                   </p>
 
                                   {savedAddress.isDefault ? (
-                                    <span className="border border-[var(--color-accent-soft)] bg-[var(--color-accent-soft)] px-2 py-1 text-[9px] font-semibold uppercase tracking-[var(--tracking-wide)] text-[var(--color-accent-dark)]">
+                                    <span className="checkout-address-card__default">
                                       Default
                                     </span>
                                   ) : null}
                                 </div>
 
-                                <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
+                                <p className="checkout-address-card__phone">
                                   {savedAddress.phone}
                                 </p>
 
-                                <p className="mt-2 text-xs leading-5 text-[var(--color-text-secondary)]">
+                                <p className="checkout-address-card__address">
                                   {savedAddress.addressLine}
 
                                   {savedAddress.landmark
@@ -365,14 +366,13 @@ export function CheckoutAddress() {
                                 </p>
                               </div>
 
-                              {/* LOCATION ICON */}
-
                               <MapPin
-                                size={16}
-                                className={`mt-0.5 shrink-0 transition-colors ${
+                                size={18}
+                                strokeWidth={1.35}
+                                className={`checkout-address-card__pin ${
                                   isSelected
-                                    ? "text-[var(--color-accent)]"
-                                    : "text-[var(--color-text-muted)]"
+                                    ? "checkout-address-card__pin--selected"
+                                    : ""
                                 }`}
                               />
                             </div>
@@ -390,33 +390,37 @@ export function CheckoutAddress() {
                 type="button"
                 onClick={handleManualAddress}
                 aria-expanded={showManualForm}
-                className={`group flex w-full items-center justify-between border px-4 py-4 text-left transition-all duration-[var(--duration-base)] sm:px-5 ${
+                className={`checkout-address__add ${
                   showManualForm
-                    ? "border-[var(--color-accent)] bg-[var(--color-bg-subtle)]"
-                    : "border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-dark)]"
+                    ? "checkout-address__add--active"
+                    : ""
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center border border-[var(--color-border-dark)] bg-[var(--color-surface)] text-[var(--color-text)] transition-colors group-hover:border-[var(--color-accent)]">
-                    <Plus size={15} />
-                  </div>
+                <span className="checkout-address__add-content">
+                  <span className="checkout-address__add-icon">
+                    <Plus
+                      size={17}
+                      strokeWidth={1.4}
+                    />
+                  </span>
 
-                  <div>
-                    <p className="text-sm font-semibold text-[var(--color-text)]">
+                  <span>
+                    <span className="checkout-address__add-title">
                       Add a new address
-                    </p>
+                    </span>
 
-                    <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
+                    <span className="checkout-address__add-description">
                       Enter a different delivery address.
-                    </p>
-                  </div>
-                </div>
+                    </span>
+                  </span>
+                </span>
 
                 <ChevronDown
-                  size={16}
-                  className={`text-[var(--color-text-secondary)] transition-transform duration-[var(--duration-base)] ${
+                  size={17}
+                  strokeWidth={1.4}
+                  className={`checkout-address__add-chevron ${
                     showManualForm
-                      ? "rotate-180"
+                      ? "checkout-address__add-chevron--open"
                       : ""
                   }`}
                 />
@@ -435,26 +439,24 @@ export function CheckoutAddress() {
 
               {selectedSavedAddress &&
               !showManualForm ? (
-                <div className="border-t border-[var(--color-border-light)] pt-5">
-                  <p className="eyebrow text-[var(--color-text-muted)]">
+                <div className="checkout-address__selected">
+                  <p className="checkout-address__section-label">
                     Selected delivery address
                   </p>
 
-                  <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <p className="text-xs font-semibold text-[var(--color-text)]">
+                  <div className="checkout-address__selected-meta">
+                    <p>
                       {selectedSavedAddress.name}
                     </p>
 
-                    <span className="text-[var(--color-text-muted)]">
-                      ·
-                    </span>
+                    <span>·</span>
 
-                    <p className="text-xs text-[var(--color-text-secondary)]">
+                    <p>
                       {selectedSavedAddress.phone}
                     </p>
                   </div>
 
-                  <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
+                  <p className="checkout-address__selected-location">
                     {selectedSavedAddress.city}
                     {", "}
                     {selectedSavedAddress.state}{" "}
@@ -474,128 +476,32 @@ export function CheckoutAddress() {
   ========================================================== */
 
   return (
-    <section className="overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
-      <div className="border-b border-[var(--color-border-light)] px-5 py-6 sm:px-8 sm:py-7">
-        <div className="flex items-start gap-4">
-          <span className="mt-0.5 font-[var(--font-display)] text-lg text-[var(--color-accent)]">
-            02
-          </span>
-
-          <div>
-            <p className="eyebrow text-[var(--color-text-muted)]">
-              Delivery Address
-            </p>
-
-            <h2 className="mt-2 font-[var(--font-display)] text-3xl font-medium leading-none tracking-[var(--tracking-tight)] text-[var(--color-text)] sm:text-4xl">
-              Where should we deliver?
-            </h2>
-
-            <p className="mt-3 max-w-lg text-xs leading-5 text-[var(--color-text-secondary)] sm:text-sm">
-              Enter the address where you&apos;d like your
-              order delivered.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid gap-6 px-5 py-7 sm:grid-cols-2 sm:px-8 sm:py-8">
-        <Field
-          label="First Name"
-          value={address.firstName}
-          onChange={(value) =>
-            setAddress({
-              firstName: value,
-            })
-          }
-        />
-
-        <Field
-          label="Last Name"
-          value={address.lastName}
-          onChange={(value) =>
-            setAddress({
-              lastName: value,
-            })
-          }
-        />
-
-        <div className="sm:col-span-2">
-          <Field
-            label="Address"
-            value={address.addressLine1}
-            onChange={(value) =>
-              setAddress({
-                addressLine1: value,
-              })
-            }
-            placeholder="House / Flat / Street"
-          />
+    <section className="checkout-address">
+      <header className="checkout-address__header">
+        <div className="checkout-address__step">
+          02
         </div>
 
-        <div className="sm:col-span-2">
-          <Field
-            label="Apartment / Area"
-            value={address.addressLine2 ?? ""}
-            onChange={(value) =>
-              setAddress({
-                addressLine2: value,
-              })
-            }
-            placeholder="Apartment, locality, area"
-          />
+        <div className="checkout-address__header-content">
+          <p className="checkout-address__eyebrow">
+            Delivery Address
+          </p>
+
+          <h2 className="checkout-address__title">
+            Where should we deliver?
+          </h2>
+
+          <p className="checkout-address__description">
+            Enter the address where you&apos;d like your
+            order delivered.
+          </p>
         </div>
+      </header>
 
-        <Field
-          label="Landmark"
-          value={address.landmark ?? ""}
-          onChange={(value) =>
-            setAddress({
-              landmark: value,
-            })
-          }
-          placeholder="Optional"
-        />
-
-        <Field
-          label="City"
-          value={address.city}
-          onChange={(value) =>
-            setAddress({
-              city: value,
-            })
-          }
-        />
-
-        <Field
-          label="State"
-          value={address.state}
-          onChange={(value) =>
-            setAddress({
-              state: value,
-            })
-          }
-        />
-
-        <Field
-          label="PIN Code"
-          value={address.postalCode}
-          inputMode="numeric"
-          onChange={(value) =>
-            setAddress({
-              postalCode: value
-                .replace(/\D/g, "")
-                .slice(0, 6),
-            })
-          }
-        />
-
-        <SaveAddressCheckbox
-          checked={!!address.isDefault}
-          onChange={(checked) =>
-            setAddress({
-              isDefault: checked,
-            })
-          }
+      <div className="checkout-address__guest-form">
+        <ManualAddressFields
+          address={address}
+          setAddress={setAddress}
         />
       </div>
     </section>
@@ -610,13 +516,36 @@ function ManualAddressForm({
   address,
   setAddress,
 }: {
-  address: CheckoutAddress;
+  address: CheckoutAddressType;
   setAddress: (
-    address: Partial<CheckoutAddress>,
+    address: Partial<CheckoutAddressType>,
   ) => void;
 }) {
   return (
-    <div className="grid gap-6 border-t border-[var(--color-border-light)] pt-6 sm:grid-cols-2">
+    <div className="checkout-address__manual-form">
+      <ManualAddressFields
+        address={address}
+        setAddress={setAddress}
+      />
+    </div>
+  );
+}
+
+/* ============================================================
+   MANUAL ADDRESS FIELDS
+============================================================ */
+
+function ManualAddressFields({
+  address,
+  setAddress,
+}: {
+  address: CheckoutAddressType;
+  setAddress: (
+    address: Partial<CheckoutAddressType>,
+  ) => void;
+}) {
+  return (
+    <div className="checkout-address-fields">
       <Field
         label="First Name"
         value={address.firstName}
@@ -637,7 +566,7 @@ function ManualAddressForm({
         }
       />
 
-      <div className="sm:col-span-2">
+      <div className="checkout-address-fields__full">
         <Field
           label="Address"
           value={address.addressLine1}
@@ -650,7 +579,7 @@ function ManualAddressForm({
         />
       </div>
 
-      <div className="sm:col-span-2">
+      <div className="checkout-address-fields__full">
         <Field
           label="Apartment / Area"
           value={address.addressLine2 ?? ""}
@@ -731,17 +660,16 @@ function SaveAddressCheckbox({
   onChange: (checked: boolean) => void;
 }) {
   return (
-    <label className="group flex cursor-pointer items-center gap-3 border-t border-[var(--color-border-light)] pt-5 sm:col-span-2">
+    <label className="checkout-address__save">
       <input
         type="checkbox"
         checked={checked}
         onChange={(event) =>
           onChange(event.target.checked)
         }
-        className="h-4 w-4 accent-[var(--color-accent)]"
       />
 
-      <span className="text-xs text-[var(--color-text-secondary)] transition-colors group-hover:text-[var(--color-text)]">
+      <span>
         Save this address for future orders
       </span>
     </label>
@@ -755,22 +683,19 @@ function SaveAddressCheckbox({
 function AddressLoadingState() {
   return (
     <div
-      className="space-y-3"
+      className="checkout-address-loading"
       aria-busy="true"
       aria-label="Loading saved addresses"
     >
       {[1, 2].map((item) => (
         <div
           key={item}
-          className="animate-pulse border border-[var(--color-border)] px-5 py-5"
+          className="checkout-address-loading__card"
         >
-          <div className="h-3 w-28 bg-[var(--color-bg-soft)]" />
-
-          <div className="mt-3 h-3 w-40 bg-[var(--color-bg-soft)]" />
-
-          <div className="mt-2 h-3 w-full max-w-md bg-[var(--color-bg-soft)]" />
-
-          <div className="mt-2 h-3 w-3/4 max-w-sm bg-[var(--color-bg-soft)]" />
+          <div className="checkout-address-loading__line checkout-address-loading__line--short" />
+          <div className="checkout-address-loading__line checkout-address-loading__line--medium" />
+          <div className="checkout-address-loading__line" />
+          <div className="checkout-address-loading__line checkout-address-loading__line--large" />
         </div>
       ))}
     </div>
@@ -784,14 +709,12 @@ function AddressLoadingState() {
 function applySavedAddress(
   savedAddress: CustomerAddress,
   setAddress: (
-    address: Partial<CheckoutAddress>,
+    address: Partial<CheckoutAddressType>,
   ) => void,
-  setContact: (
-    contact: {
-      email?: string;
-      phone?: string;
-    },
-  ) => void,
+  setContact: (contact: {
+    email?: string;
+    phone?: string;
+  }) => void,
 ) {
   const { firstName, lastName } =
     splitName(savedAddress.name);
@@ -887,7 +810,7 @@ function normalizeIndianPhone(
 
 function isSameAddress(
   savedAddress: CustomerAddress,
-  checkoutAddress: CheckoutAddress,
+  checkoutAddress: CheckoutAddressType,
 ): boolean {
   const fullName = [
     checkoutAddress.firstName,
@@ -921,10 +844,8 @@ function isSameAddress(
       checkoutAddress.state
         .trim()
         .toLowerCase() &&
-    savedAddress.pincode
-      .trim() ===
-      checkoutAddress.postalCode
-        .trim() &&
+    savedAddress.pincode.trim() ===
+      checkoutAddress.postalCode.trim() &&
     (savedAddress.landmark ?? "")
       .trim()
       .toLowerCase() ===
@@ -952,12 +873,12 @@ function Field({
   inputMode?: "numeric" | "text";
 }) {
   return (
-    <label className="group block">
-      <span className="mb-2.5 block text-[10px] font-semibold uppercase tracking-[var(--tracking-wider)] text-[var(--color-text-secondary)]">
+    <label className="checkout-field">
+      <span className="checkout-field__label">
         {label}
       </span>
 
-      <div className="relative">
+      <span className="checkout-field__control">
         <input
           value={value}
           onChange={(event) =>
@@ -967,11 +888,10 @@ function Field({
           }
           placeholder={placeholder}
           inputMode={inputMode}
-          className="h-13 w-full border border-[var(--color-border-dark)] bg-[var(--color-surface-soft)] px-4 text-sm text-[var(--color-text)] outline-none transition-all duration-[var(--duration-base)] placeholder:text-[var(--color-text-muted)] hover:border-[var(--color-accent-soft)] focus:border-[var(--color-accent)] focus:bg-[var(--color-surface)]"
         />
 
-        <span className="pointer-events-none absolute bottom-0 left-0 h-px w-0 bg-[var(--color-accent)] transition-all duration-[var(--duration-luxury)] group-focus-within:w-full" />
-      </div>
+        <span className="checkout-field__focus-line" />
+      </span>
     </label>
   );
 }
