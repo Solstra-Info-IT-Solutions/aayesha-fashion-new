@@ -41,12 +41,6 @@ function formatPrice(price: number) {
   }).format(price);
 }
 
-function formatCategory(category: string) {
-  return category
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
-}
-
 function formatBadge(badge: string) {
   return badge
     .replace(/-/g, " ")
@@ -130,23 +124,39 @@ export function ProductCard({
 
       await addToCart(product._id, 1);
     } catch (error) {
-      console.error(
-        "ADD TO CART ERROR:",
-        error,
-      );
+      console.error("ADD TO CART ERROR:", error);
     } finally {
       setIsAdding(false);
     }
   };
 
+  /* =======================================================
+     BUTTON STATE
+  ======================================================= */
+
+  const buttonClassName = [
+    "product-card__button",
+    availability.isSoldOut
+      ? "product-card__button--sold-out"
+      : "",
+    isAdding
+      ? "product-card__button--loading"
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <>
       <article
-        className={`product-card ${
+        className={[
+          "product-card",
           availability.isSoldOut
             ? "product-card--sold-out"
-            : ""
-        }`}
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
         {/* =====================================================
             PRODUCT IMAGE
@@ -201,9 +211,7 @@ export function ProductCard({
             />
           </Link>
 
-          {/* ===================================================
-              BADGE
-          =================================================== */}
+          {/* BADGE */}
 
           {hasBadge && (
             <div className="product-card__badge">
@@ -213,9 +221,7 @@ export function ProductCard({
             </div>
           )}
 
-          {/* ===================================================
-              WISHLIST
-          =================================================== */}
+          {/* WISHLIST */}
 
           <div className="product-card__wishlist">
             <WishlistButton
@@ -224,9 +230,7 @@ export function ProductCard({
             />
           </div>
 
-          {/* ===================================================
-              SOLD OUT IMAGE LABEL
-          =================================================== */}
+          {/* SOLD OUT IMAGE LABEL */}
 
           {availability.isSoldOut && (
             <div className="product-card__sold-out-label">
@@ -240,7 +244,6 @@ export function ProductCard({
         ===================================================== */}
 
         <div className="product-card__content">
-
           {/* PRODUCT NAME */}
 
           <Link
@@ -288,15 +291,11 @@ export function ProductCard({
               isAdding ||
               !isInitialized
             }
-            className={`product-card__button ${
-              availability.isSoldOut
-                ? "product-card__button--sold-out"
-                : ""
-            }`}
+            className={buttonClassName}
           >
             <ShoppingBag
-              size={16}
-              strokeWidth={1.6}
+              className="product-card__button-icon"
+              aria-hidden="true"
             />
 
             <span>

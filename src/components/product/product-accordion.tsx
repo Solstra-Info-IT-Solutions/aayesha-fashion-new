@@ -17,28 +17,30 @@ export function ProductAccordion({
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-[var(--color-border)] last:border-b-0">
+    <div className="product-accordion">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="flex w-full items-center justify-between gap-6 py-5 text-left"
+        className="product-accordion__trigger"
         aria-expanded={open}
       >
-        <span className="text-[11px] font-semibold uppercase tracking-[0.15em]">
+        <span className="product-accordion__title">
           {title}
         </span>
 
         <ChevronDown
-          size={17}
           className={[
-            "shrink-0 transition-transform duration-200",
-            open ? "rotate-180" : "",
-          ].join(" ")}
+            "product-accordion__icon",
+            open ? "product-accordion__icon--open" : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          aria-hidden="true"
         />
       </button>
 
       {open && (
-        <div className="pb-6">
+        <div className="product-accordion__content">
           {children}
         </div>
       )}
