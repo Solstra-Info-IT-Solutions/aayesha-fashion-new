@@ -1,9 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
+
+import { ArrowUpRight } from "lucide-react";
 
 import { getFeaturedCollectionCampaign } from "@/services/marketing.service";
 
 import { Container } from "@/components/shared/container";
-import { LinkButton } from "@/components/ui/button";
+
+import "./FeaturedCollectionCampaign.css";
 
 export async function FeaturedCollectionCampaign() {
   const campaign =
@@ -19,10 +23,13 @@ export async function FeaturedCollectionCampaign() {
     <section
       id="featured-collection"
       className="featured-collection"
+      aria-label={data.title}
     >
-      {/* Campaign */}
-      <div className="featured-collection__hero">
+      {/* =====================================================
+          CAMPAIGN HERO
+      ===================================================== */}
 
+      <div className="featured-collection__hero">
         <Image
           src={data.image}
           alt={data.imageAlt}
@@ -32,23 +39,30 @@ export async function FeaturedCollectionCampaign() {
           priority={false}
         />
 
-        {/* Image Overlay */}
+        {/* ===================================================
+            EDITORIAL OVERLAYS
+        =================================================== */}
+
         <div
-          className="featured-collection__overlay featured-collection__overlay--horizontal"
+          className="featured-collection__overlay"
           aria-hidden="true"
         />
 
         <div
-          className="featured-collection__overlay featured-collection__overlay--vertical"
+          className="featured-collection__bottom-fade"
           aria-hidden="true"
         />
 
-        {/* Content */}
+        {/* ===================================================
+            CONTENT
+        =================================================== */}
+
         <Container className="featured-collection__container">
           <div className="featured-collection__content">
             <div className="featured-collection__content-inner">
 
               {/* Eyebrow */}
+
               <div className="featured-collection__eyebrow">
                 <span
                   className="featured-collection__eyebrow-line"
@@ -61,39 +75,46 @@ export async function FeaturedCollectionCampaign() {
               </div>
 
               {/* Heading */}
+
               <h2 className="featured-collection__title">
-                {formatCampaignTitle(data.title)}
+                {formatCampaignTitle(
+                  data.title,
+                )}
               </h2>
 
               {/* Description */}
+
               <p className="featured-collection__description">
                 {data.description}
               </p>
 
               {/* CTA */}
-              <div className="featured-collection__cta">
-                <LinkButton
-                  href={data.ctaHref}
-                  variant="darkOutline"
-                  size="lg"
-                  icon={
-                    <span
-                      aria-hidden="true"
-                      className="featured-collection__cta-icon"
-                    >
-                      ↗
-                    </span>
-                  }
-                >
-                  {data.ctaLabel}
-                </LinkButton>
-              </div>
 
+              <div className="featured-collection__cta">
+                <Link
+                  href={data.ctaHref}
+                  className="featured-collection__cta-link"
+                >
+                  <span>
+                    {data.ctaLabel}
+                  </span>
+
+                  <span className="featured-collection__cta-icon">
+                    <ArrowUpRight
+                      size={16}
+                      strokeWidth={1.3}
+                    />
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </Container>
 
-        {/* Brand Label */}
+        {/* ===================================================
+            BRAND LABEL
+        =================================================== */}
+
         <div className="featured-collection__brand-label">
           <div className="featured-collection__brand-label-inner">
             <span>
@@ -106,9 +127,23 @@ export async function FeaturedCollectionCampaign() {
             />
           </div>
         </div>
+
+        {/* ===================================================
+            CAMPAIGN INDEX
+        =================================================== */}
+
+        <span
+          className="featured-collection__index"
+          aria-hidden="true"
+        >
+          02
+        </span>
       </div>
 
-      {/* Bottom Strip */}
+      {/* =====================================================
+          BOTTOM STRIP
+      ===================================================== */}
+
       <div className="featured-collection__strip">
         <Container>
           <div className="featured-collection__strip-inner">
@@ -119,6 +154,13 @@ export async function FeaturedCollectionCampaign() {
             <p className="featured-collection__strip-title">
               {data.bottomTitle}
             </p>
+
+            <span
+              className="featured-collection__strip-mark"
+              aria-hidden="true"
+            >
+              AAYESHA
+            </span>
           </div>
         </Container>
       </div>
@@ -126,13 +168,15 @@ export async function FeaturedCollectionCampaign() {
   );
 }
 
-
 /* =========================================================
    TITLE FORMATTER
 ========================================================= */
 
-function formatCampaignTitle(title: string) {
-  const words = title.trim().split(/\s+/);
+function formatCampaignTitle(
+  title: string,
+) {
+  const words =
+    title.trim().split(/\s+/);
 
   if (words.length <= 1) {
     return (
@@ -147,6 +191,8 @@ function formatCampaignTitle(title: string) {
   return (
     <>
       {words.join(" ")}
+
+      {" "}
 
       <span className="featured-collection__title-accent">
         {lastWord}
