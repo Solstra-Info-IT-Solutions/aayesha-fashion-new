@@ -66,25 +66,23 @@ export function CheckoutPage() {
 
   if (isLoading) {
     return (
-      <main className="min-h-screen bg-[var(--color-bg)]">
-        <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-          <div className="border-b border-[var(--color-border-light)] pb-7">
-            <div className="h-4 w-28 animate-pulse bg-[var(--color-bg-soft)]" />
-
-            <div className="mt-7 h-12 w-48 animate-pulse bg-[var(--color-bg-soft)]" />
-
-            <div className="mt-4 h-4 w-full max-w-xl animate-pulse bg-[var(--color-bg-soft)]" />
+      <main className="checkout-page checkout-page--loading">
+        <div className="checkout-page__container">
+          <div className="checkout-page__loading-header">
+            <div className="checkout-page__skeleton checkout-page__skeleton--eyebrow" />
+            <div className="checkout-page__skeleton checkout-page__skeleton--title" />
+            <div className="checkout-page__skeleton checkout-page__skeleton--description" />
           </div>
 
-          <div className="mt-9 grid gap-10 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-start lg:gap-16 xl:gap-20">
-            <div className="space-y-4">
-              <div className="h-28 animate-pulse border border-[var(--color-border-light)] bg-[var(--color-surface)]" />
-              <div className="h-28 animate-pulse border border-[var(--color-border-light)] bg-[var(--color-surface)]" />
-              <div className="h-28 animate-pulse border border-[var(--color-border-light)] bg-[var(--color-surface)]" />
-              <div className="h-28 animate-pulse border border-[var(--color-border-light)] bg-[var(--color-surface)]" />
+          <div className="checkout-page__loading-layout">
+            <div className="checkout-page__loading-steps">
+              <div className="checkout-page__skeleton checkout-page__skeleton--step" />
+              <div className="checkout-page__skeleton checkout-page__skeleton--step" />
+              <div className="checkout-page__skeleton checkout-page__skeleton--step" />
+              <div className="checkout-page__skeleton checkout-page__skeleton--step" />
             </div>
 
-            <div className="h-[360px] animate-pulse border border-[var(--color-border-light)] bg-[var(--color-surface)]" />
+            <div className="checkout-page__skeleton checkout-page__skeleton--summary" />
           </div>
         </div>
       </main>
@@ -97,67 +95,31 @@ export function CheckoutPage() {
 
   if (!hasItems) {
     return (
-      <main className="min-h-[70vh] bg-[var(--color-bg)]">
-        <div className="mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6">
-          <div className="flex h-16 w-16 items-center justify-center border border-[var(--color-border)]">
+      <main className="checkout-page checkout-page--empty">
+        <div className="checkout-page__empty">
+          <div className="checkout-page__empty-icon">
             <ShieldCheck
               size={22}
               strokeWidth={1.25}
-              className="text-[var(--color-text)]"
             />
           </div>
 
-          <p className="eyebrow mt-7 text-[var(--color-accent)]">
+          <p className="checkout-page__eyebrow">
             Checkout
           </p>
 
-          <h1
-            className="
-              mt-3
-              font-display
-              text-[var(--text-heading-lg)]
-              font-medium
-              leading-[0.95]
-              tracking-[var(--tracking-tight)]
-              text-[var(--color-text)]
-            "
-          >
+          <h1 className="checkout-page__empty-title">
             Your bag is empty.
           </h1>
 
-          <p className="mt-5 max-w-md font-body text-sm leading-7 text-[var(--color-text-secondary)]">
-            Add something beautiful before continuing to
-            checkout.
+          <p className="checkout-page__empty-description">
+            Add something beautiful before continuing
+            to checkout.
           </p>
 
           <Link
             href="/shop"
-            className="
-              mt-8
-              inline-flex
-              min-h-12
-              items-center
-              justify-center
-              border
-              border-[var(--color-text)]
-              bg-[var(--color-text)]
-              px-7
-              py-3.5
-              font-body
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[var(--tracking-wider)]
-              text-[var(--color-text-inverse)]
-              transition-all
-              duration-[var(--duration-base)]
-              hover:border-[var(--color-accent-dark)]
-              hover:bg-[var(--color-accent-dark)]
-              focus:outline-none
-              focus:ring-2
-              focus:ring-[var(--color-accent)]
-              focus:ring-offset-2
-            "
+            className="checkout-page__primary-button"
           >
             Continue Shopping
           </Link>
@@ -171,99 +133,61 @@ export function CheckoutPage() {
   ========================================================== */
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg)]">
-      <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+    <main className="checkout-page">
+      <div className="checkout-page__container">
         {/* ====================================================
             HEADER
         ==================================================== */}
 
-        <div className="border-b border-[var(--color-border-light)] pb-7">
-          <div className="flex items-center justify-between gap-5">
+        <header className="checkout-page__header">
+          <div className="checkout-page__header-top">
             <Link
               href="/cart"
-              className="
-                link-luxury
-                inline-flex
-                items-center
-                gap-1
-                font-body
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[var(--tracking-wider)]
-                text-[var(--color-text-muted)]
-                transition-colors
-                hover:text-[var(--color-text)]
-              "
+              className="checkout-page__back"
             >
               <ChevronLeft
-                size={14}
+                className="checkout-page__back-icon"
+                size={16}
+                strokeWidth={1.5}
+              />
+
+              <span>Back to Bag</span>
+            </Link>
+
+            <div className="checkout-page__secure">
+              <ShieldCheck
+                size={16}
                 strokeWidth={1.4}
               />
 
-              Back to Bag
-            </Link>
-
-            <div
-              className="
-                hidden
-                items-center
-                gap-2
-                font-body
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[var(--tracking-wider)]
-                text-[var(--color-text-muted)]
-                sm:flex
-              "
-            >
-              <ShieldCheck
-                size={15}
-                strokeWidth={1.3}
-                className="text-[var(--color-accent)]"
-              />
-
-              Secure Checkout
+              <span>Secure Checkout</span>
             </div>
           </div>
 
-          <div className="mt-7">
-            <p className="eyebrow text-[var(--color-accent)]">
+          <div className="checkout-page__heading">
+            <p className="checkout-page__eyebrow">
               Aayesha Fashion
             </p>
 
-            <h1
-              className="
-                mt-3
-                font-display
-                text-[var(--text-heading-lg)]
-                font-medium
-                leading-[0.9]
-                tracking-[var(--tracking-tight)]
-                text-[var(--color-text)]
-              "
-            >
+            <h1 className="checkout-page__title">
               Checkout
             </h1>
 
-            <p className="mt-4 max-w-xl font-body text-sm leading-7 text-[var(--color-text-secondary)]">
-              Complete your details below to place your order
-              with Aayesha Fashion.
+            <p className="checkout-page__description">
+              Complete your details below to place
+              your order with Aayesha Fashion.
             </p>
           </div>
-        </div>
+        </header>
 
         {/* ====================================================
             CHECKOUT BODY
         ==================================================== */}
 
-        <div className="mt-9 grid gap-10 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-start lg:gap-16 xl:gap-20">
-          {/* ==================================================
-              LEFT — CHECKOUT STEPS
-          ================================================== */}
+        <div className="checkout-page__layout">
+          {/* LEFT — CHECKOUT STEPS */}
 
-          <div className="min-w-0 space-y-4 sm:space-y-5">
+          <div className="checkout-page__steps">
             <CheckoutContact />
 
             <CheckoutAddress />
@@ -277,11 +201,9 @@ export function CheckoutPage() {
             <CheckoutPlaceOrder />
           </div>
 
-          {/* ==================================================
-              RIGHT — ORDER SUMMARY
-          ================================================== */}
+          {/* RIGHT — ORDER SUMMARY */}
 
-          <aside className="lg:sticky lg:top-24">
+          <aside className="checkout-page__summary">
             <CheckoutSummary />
           </aside>
         </div>
