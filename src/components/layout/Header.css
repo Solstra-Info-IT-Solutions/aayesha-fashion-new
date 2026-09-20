@@ -1,0 +1,652 @@
+/* =========================================================
+   AAYESHA HEADER
+   Editorial Fashion Navigation
+   ========================================================= */
+
+.aayesha-header {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  z-index: var(--z-header);
+
+  width: 100%;
+  height: var(--header-height-desktop);
+
+  background: rgba(250, 249, 247, 0.96);
+
+  border-bottom: 1px solid var(--color-border-light);
+
+  transition:
+    background-color 400ms var(--ease-standard),
+    border-color 400ms var(--ease-standard),
+    box-shadow 400ms var(--ease-standard),
+    color 300ms var(--ease-standard);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+
+/* =========================================================
+   TRANSPARENT HEADER
+   ========================================================= */
+
+.aayesha-header--transparent {
+  background: transparent;
+
+  border-bottom-color: transparent;
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   SCROLLED HEADER
+   ========================================================= */
+
+.aayesha-header--scrolled {
+  background: rgba(250, 249, 247, 0.96);
+
+  border-bottom-color: var(--color-border-light);
+
+  box-shadow:
+    0 4px 20px rgba(51, 37, 34, 0.035);
+
+  color: var(--color-text);
+}
+
+
+/* =========================================================
+   INNER
+   ========================================================= */
+
+.aayesha-header__inner {
+  position: relative;
+
+  width: min(
+    calc(100% - (var(--page-padding) * 2)),
+    var(--container-wide)
+  );
+
+  height: 100%;
+
+  margin-inline: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(150px, 1fr)
+    auto
+    minmax(150px, 1fr);
+
+  align-items: center;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.aayesha-header__logo {
+  justify-self: start;
+
+  display: flex;
+  flex-direction: column;
+
+  width: fit-content;
+
+  line-height: 1;
+
+  color: inherit;
+}
+
+.aayesha-header__logo-main {
+  font-family: var(--font-display);
+
+  font-size: 22px;
+
+  font-weight: 500;
+
+  line-height: 0.8;
+
+  letter-spacing: 0.07em;
+}
+
+.aayesha-header__logo-sub {
+  margin-top: 6px;
+
+  font-family: var(--font-body);
+
+  font-size: 7px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.2em;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.aayesha-header__nav {
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+}
+
+.aayesha-header__nav-link {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  height: 68px;
+
+  font-size: var(--text-nav);
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: 0.02em;
+
+  white-space: nowrap;
+
+  color: inherit;
+}
+
+.aayesha-header__nav-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 20px;
+
+  width: 100%;
+  height: 1px;
+
+  background: currentColor;
+
+  transform-origin: right center;
+
+  transform: scaleX(0);
+
+  transition:
+    transform 350ms var(--ease-standard);
+}
+
+.aayesha-header__nav-link:hover::after {
+  transform-origin: left center;
+
+  transform: scaleX(1);
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.aayesha-header__actions {
+  justify-self: end;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 2px;
+}
+
+.aayesha-header__action {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: var(--radius-pill);
+
+  color: inherit;
+
+  transition:
+    background-color 250ms var(--ease-standard),
+    transform 180ms var(--ease-standard);
+}
+
+.aayesha-header__action:hover {
+  background: rgba(143, 101, 93, 0.08);
+}
+
+.aayesha-header__action:active {
+  transform: scale(0.94);
+}
+
+.aayesha-header__action:focus-visible {
+  outline: 2px solid var(--focus-ring);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   CART COUNT
+   ========================================================= */
+
+.aayesha-header__cart-count {
+  position: absolute;
+
+  top: 4px;
+  right: 3px;
+
+  min-width: 13px;
+  height: 13px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 3px;
+
+  border-radius: var(--radius-pill);
+
+  background: var(--color-primary);
+
+  color: #ffffff;
+
+  font-size: 7px;
+  font-weight: 600;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+   ========================================================= */
+
+.aayesha-header__mobile-menu {
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  color: inherit;
+
+  border-radius: var(--radius-pill);
+
+  transition:
+    background-color 250ms var(--ease-standard),
+    transform 180ms var(--ease-standard);
+}
+
+.aayesha-header__mobile-menu:hover {
+  background: rgba(143, 101, 93, 0.08);
+}
+
+.aayesha-header__mobile-menu:active {
+  transform: scale(0.94);
+}
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.aayesha-mobile-menu {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: calc(var(--z-header) - 1);
+
+  visibility: hidden;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(169, 130, 130, 0.16),
+      transparent 35%
+    ),
+    var(--color-surface-soft);
+
+  color: var(--color-text);
+
+  transform: translateY(-10px);
+
+  transition:
+    opacity 400ms var(--ease-luxury),
+    transform 500ms var(--ease-luxury),
+    visibility 500ms;
+}
+
+.aayesha-mobile-menu--open {
+  visibility: visible;
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+  transform: translateY(0);
+}
+
+.aayesha-mobile-menu__inner {
+  width: calc(100% - 32px);
+
+  height: 100%;
+
+  margin-inline: auto;
+
+  padding-top: calc(
+    var(--header-height-mobile) + 28px
+  );
+
+  padding-bottom: 32px;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   MOBILE TOP
+   ========================================================= */
+
+.aayesha-mobile-menu__top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.aayesha-mobile-menu__top span:first-child {
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+}
+
+.aayesha-mobile-menu__top span:last-child {
+  font-family: var(--font-display);
+
+  font-size: 16px;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   MOBILE NAV
+   ========================================================= */
+
+.aayesha-mobile-menu__nav {
+  display: flex;
+
+  flex-direction: column;
+
+  padding-top: 30px;
+}
+
+.aayesha-mobile-menu__link {
+  display: grid;
+
+  grid-template-columns: 32px 1fr;
+
+  align-items: center;
+
+  padding: 16px 0;
+
+  border-bottom: 1px solid var(--color-border-light);
+
+  font-family: var(--font-display);
+
+  font-size: 28px;
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -0.01em;
+
+  transition:
+    color 250ms var(--ease-standard),
+    padding-left 300ms var(--ease-standard);
+}
+
+.aayesha-mobile-menu__link:hover {
+  color: var(--color-secondary);
+
+  padding-left: 6px;
+}
+
+.aayesha-mobile-menu__number {
+  align-self: start;
+
+  padding-top: 4px;
+
+  font-family: var(--font-body);
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  color: var(--color-text-muted);
+}
+
+
+/* =========================================================
+   MOBILE BOTTOM
+   ========================================================= */
+
+.aayesha-mobile-menu__bottom {
+  margin-top: auto;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px 20px;
+
+  padding-top: 28px;
+
+  font-size: 10px;
+
+  color: var(--color-text-secondary);
+}
+
+.aayesha-mobile-menu__bottom a {
+  position: relative;
+}
+
+.aayesha-mobile-menu__bottom a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -4px;
+
+  width: 100%;
+  height: 1px;
+
+  background: var(--color-border-dark);
+
+  transform: scaleX(0);
+
+  transform-origin: right;
+
+  transition:
+    transform 300ms var(--ease-standard);
+}
+
+.aayesha-mobile-menu__bottom a:hover::after {
+  transform: scaleX(1);
+
+  transform-origin: left;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .aayesha-header__nav {
+    gap: 18px;
+  }
+
+  .aayesha-header__nav-link {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .aayesha-header {
+    height: var(--header-height-mobile);
+
+    background: rgba(250, 249, 247, 0.94);
+
+    border-bottom-color: var(--color-border-light);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .aayesha-header--transparent {
+    background: transparent;
+
+    border-bottom-color: transparent;
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .aayesha-header__inner {
+    width: calc(100% - 24px);
+
+    display: grid;
+
+    grid-template-columns: 40px 1fr 120px;
+  }
+
+  .aayesha-header__mobile-menu {
+    display: inline-flex;
+  }
+
+  .aayesha-header__logo {
+    justify-self: center;
+
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .aayesha-header__logo-main {
+    font-size: 19px;
+  }
+
+  .aayesha-header__logo-sub {
+    margin-top: 5px;
+
+    font-size: 6px;
+
+    letter-spacing: 0.18em;
+  }
+
+  .aayesha-header__nav {
+    display: none;
+  }
+
+  .aayesha-header__actions {
+    gap: 0;
+
+    justify-self: end;
+  }
+
+  .aayesha-header__action {
+    width: 36px;
+    height: 36px;
+  }
+
+  .aayesha-header__wishlist {
+    display: none;
+  }
+
+  .aayesha-header__cart-count {
+    top: 3px;
+    right: 1px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .aayesha-header__inner {
+    grid-template-columns: 38px 1fr 82px;
+  }
+
+  .aayesha-header__action {
+    width: 34px;
+    height: 34px;
+  }
+
+  .aayesha-header__logo-main {
+    font-size: 18px;
+  }
+
+  .aayesha-mobile-menu__link {
+    font-size: 25px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .aayesha-header,
+  .aayesha-header__nav-link,
+  .aayesha-header__action,
+  .aayesha-mobile-menu,
+  .aayesha-mobile-menu__link {
+    transition: none;
+  }
+}
