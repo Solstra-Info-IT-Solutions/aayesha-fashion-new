@@ -28,44 +28,24 @@ export function QuantitySelector({
   };
 
   return (
-    <div className="inline-flex h-12 items-center border border-[var(--color-border-dark)]">
+    <div className="quantity-selector">
       <button
         type="button"
         onClick={decrease}
         disabled={quantity <= min}
         aria-label="Decrease quantity"
-        className="
-          flex
-          h-full
-          w-12
-          items-center
-          justify-center
-          text-[var(--color-charcoal)]
-          transition-colors
-          duration-200
-          hover:bg-[var(--color-cream)]
-          disabled:cursor-not-allowed
-          disabled:opacity-30
-        "
+        className="quantity-selector__button"
       >
-        <Minus size={15} strokeWidth={1.4} />
+        <Minus
+          size={17}
+          strokeWidth={1.5}
+          aria-hidden="true"
+        />
       </button>
 
       <span
         aria-live="polite"
-        className="
-          flex
-          h-full
-          min-w-12
-          items-center
-          justify-center
-          border-x
-          border-[var(--color-border-dark)]
-          px-3
-          text-sm
-          font-semibold
-          text-[var(--color-charcoal)]
-        "
+        className="quantity-selector__value"
       >
         {quantity}
       </span>
@@ -75,21 +55,13 @@ export function QuantitySelector({
         onClick={increase}
         disabled={quantity >= max}
         aria-label="Increase quantity"
-        className="
-          flex
-          h-full
-          w-12
-          items-center
-          justify-center
-          text-[var(--color-charcoal)]
-          transition-colors
-          duration-200
-          hover:bg-[var(--color-cream)]
-          disabled:cursor-not-allowed
-          disabled:opacity-30
-        "
+        className="quantity-selector__button"
       >
-        <Plus size={15} strokeWidth={1.4} />
+        <Plus
+          size={17}
+          strokeWidth={1.5}
+          aria-hidden="true"
+        />
       </button>
     </div>
   );

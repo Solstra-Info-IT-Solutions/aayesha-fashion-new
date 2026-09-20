@@ -18,9 +18,7 @@ import {
   getProductAvailability,
 } from "@/types/product";
 
-import {
-  addToCart,
-} from "@/services/cart.service";
+import { addToCart } from "@/services/cart.service";
 
 import { useAuthStore } from "@/store/auth-store";
 
@@ -33,11 +31,9 @@ interface ProductQuickAddProps {
 export function ProductQuickAdd({
   product,
 }: ProductQuickAddProps) {
-  const [open, setOpen] =
-    useState(false);
+  const [open, setOpen] = useState(false);
 
-  const [adding, setAdding] =
-    useState(false);
+  const [adding, setAdding] = useState(false);
 
   const [showLoginPopup, setShowLoginPopup] =
     useState(false);
@@ -74,8 +70,7 @@ export function ProductQuickAdd({
     }
 
     if (
-      availability.availableQuantity <=
-      0
+      availability.availableQuantity <= 0
     ) {
       toast.error(
         "This product is currently unavailable.",
@@ -88,16 +83,10 @@ export function ProductQuickAdd({
       return;
     }
 
-    /*
-     * Wait for auth state to initialize.
-     */
     if (!isInitialized) {
       return;
     }
 
-    /*
-     * Backend cart requires login.
-     */
     if (!isAuthenticated) {
       setShowLoginPopup(true);
       return;
@@ -138,27 +127,11 @@ export function ProductQuickAdd({
 
   if (availability.isSoldOut) {
     return (
-      <div className="mt-4">
+      <div className="product-quick-add">
         <button
           type="button"
           disabled
-          className="
-            flex
-            h-11
-            w-full
-            items-center
-            justify-center
-            border
-            border-[var(--color-border)]
-            bg-[var(--color-bg-soft)]
-            px-4
-            font-body
-            text-[9px]
-            font-semibold
-            uppercase
-            tracking-[0.18em]
-            text-[var(--color-text-muted)]
-          "
+          className="product-quick-add__sold-out"
         >
           Sold Out
         </button>
@@ -172,110 +145,55 @@ export function ProductQuickAdd({
 
   return (
     <>
-      <div className="mt-4">
+      <div className="product-quick-add">
         {/* ====================================================
-           COLLAPSED STATE
+            COLLAPSED STATE
         ==================================================== */}
 
         {!open && (
           <button
             type="button"
-            onClick={() =>
-              setOpen(true)
-            }
+            onClick={() => setOpen(true)}
             disabled={
               adding ||
               !isInitialized
             }
-            className="
-              group
-              flex
-              h-11
-              w-full
-              items-center
-              justify-between
-              border
-              border-[var(--color-text)]
-              bg-transparent
-              px-4
-              font-body
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.17em]
-              text-[var(--color-text)]
-              transition-all
-              duration-[var(--duration-base)]
-              hover:border-[var(--color-text)]
-              hover:bg-[var(--color-text)]
-              hover:text-[var(--color-text-inverse)]
-              disabled:cursor-not-allowed
-              disabled:opacity-50
-            "
+            className="product-quick-add__trigger"
           >
-            <span className="flex items-center gap-2.5">
+            <span className="product-quick-add__trigger-content">
               <ShoppingBag
-                size={15}
-                strokeWidth={1.25}
+                size={17}
+                strokeWidth={1.5}
+                aria-hidden="true"
               />
 
-              Quick Add
+              <span>Quick Add</span>
             </span>
 
             <ChevronDown
-              size={15}
-              strokeWidth={1.25}
-              className="
-                transition-transform
-                duration-[var(--duration-base)]
-                group-hover:translate-y-0.5
-              "
+              size={17}
+              strokeWidth={1.5}
+              aria-hidden="true"
+              className="product-quick-add__trigger-icon"
             />
           </button>
         )}
 
         {/* ====================================================
-           EXPANDED PANEL
+            EXPANDED PANEL
         ==================================================== */}
 
         {open && (
-          <div
-            className="
-              overflow-hidden
-              border
-              border-[var(--color-border-dark)]
-              bg-[var(--color-surface)]
-              shadow-[var(--shadow-sm)]
-            "
-          >
+          <div className="product-quick-add__panel">
             {/* PANEL HEADER */}
 
-            <div
-              className="
-                flex
-                items-center
-                justify-between
-                border-b
-                border-[var(--color-border)]
-                px-4
-                py-4
-              "
-            >
+            <div className="product-quick-add__header">
               <div>
-                <p className="eyebrow">
+                <p className="product-quick-add__eyebrow">
                   Quick Add
                 </p>
 
-                <p
-                  className="
-                    mt-1.5
-                    font-display
-                    text-[18px]
-                    font-medium
-                    leading-none
-                    text-[var(--color-text)]
-                  "
-                >
+                <p className="product-quick-add__heading">
                   Add to your bag
                 </p>
               </div>
@@ -287,96 +205,38 @@ export function ProductQuickAdd({
                 }
                 disabled={adding}
                 aria-label="Close quick add"
-                className="
-                  group
-                  flex
-                  h-8
-                  w-8
-                  items-center
-                  justify-center
-                  border
-                  border-[var(--color-border)]
-                  text-[var(--color-text-secondary)]
-                  transition-all
-                  duration-[var(--duration-base)]
-                  hover:border-[var(--color-text)]
-                  hover:bg-[var(--color-text)]
-                  hover:text-[var(--color-text-inverse)]
-                  disabled:cursor-not-allowed
-                  disabled:opacity-50
-                "
+                className="product-quick-add__close"
               >
                 <X
-                  size={15}
-                  strokeWidth={1.25}
-                  className="
-                    transition-transform
-                    duration-[var(--duration-base)]
-                    group-hover:rotate-90
-                  "
+                  size={17}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
                 />
               </button>
             </div>
 
-            <div className="p-4 sm:p-5">
+            <div className="product-quick-add__body">
               {/* PRODUCT */}
 
-              <div>
-                <p className="eyebrow">
+              <div className="product-quick-add__product">
+                <p className="product-quick-add__eyebrow">
                   Product
                 </p>
 
-                <p
-                  className="
-                    mt-1.5
-                    font-display
-                    text-[20px]
-                    font-medium
-                    leading-tight
-                    text-[var(--color-text)]
-                  "
-                >
+                <p className="product-quick-add__product-name">
                   {product.name}
                 </p>
               </div>
 
               {/* PRICE */}
 
-              <div
-                className="
-                  mt-5
-                  flex
-                  items-start
-                  justify-between
-                  gap-4
-                  border-t
-                  border-[var(--color-border)]
-                  pt-4
-                "
-              >
+              <div className="product-quick-add__price">
                 <div>
-                  <p
-                    className="
-                      font-body
-                      text-[8px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.18em]
-                      text-[var(--color-text-muted)]
-                    "
-                  >
+                  <p className="product-quick-add__meta-label">
                     Price
                   </p>
 
-                  <p
-                    className="
-                      mt-1.5
-                      font-body
-                      text-[15px]
-                      font-semibold
-                      text-[var(--color-text)]
-                    "
-                  >
+                  <p className="product-quick-add__selling-price">
                     ₹
                     {product.pricing.sellingPrice.toLocaleString(
                       "en-IN",
@@ -387,32 +247,15 @@ export function ProductQuickAdd({
                 {product.pricing.mrp >
                   product.pricing
                     .sellingPrice && (
-                  <div className="text-right">
-                    <p
-                      className="
-                        font-body
-                        text-[9px]
-                        text-[var(--color-text-muted)]
-                        line-through
-                      "
-                    >
+                  <div className="product-quick-add__discount">
+                    <p className="product-quick-add__mrp">
                       ₹
                       {product.pricing.mrp.toLocaleString(
                         "en-IN",
                       )}
                     </p>
 
-                    <p
-                      className="
-                        mt-1
-                        font-body
-                        text-[8px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.05em]
-                        text-[var(--color-accent-dark)]
-                      "
-                    >
+                    <p className="product-quick-add__discount-value">
                       {Math.round(
                         ((product.pricing.mrp -
                           product.pricing
@@ -429,29 +272,14 @@ export function ProductQuickAdd({
 
               {/* STOCK */}
 
-              <div
-                className="
-                  mt-5
-                  border-t
-                  border-[var(--color-border)]
-                  pt-4
-                "
-              >
-                <p className="eyebrow">
+              <div className="product-quick-add__availability">
+                <p className="product-quick-add__eyebrow">
                   Availability
                 </p>
 
                 {inventoryStatus ===
                   "low-stock" && (
-                  <p
-                    className="
-                      mt-2
-                      font-body
-                      text-[9px]
-                      font-semibold
-                      text-[var(--color-warning)]
-                    "
-                  >
+                  <p className="product-quick-add__stock product-quick-add__stock--low">
                     Only{" "}
                     {
                       availability.availableQuantity
@@ -462,29 +290,14 @@ export function ProductQuickAdd({
 
                 {inventoryStatus ===
                   "in-stock" && (
-                  <p
-                    className="
-                      mt-2
-                      font-body
-                      text-[9px]
-                      text-[var(--color-success)]
-                    "
-                  >
+                  <p className="product-quick-add__stock product-quick-add__stock--available">
                     In stock
                   </p>
                 )}
 
                 {inventoryStatus ===
                   "out-of-stock" && (
-                  <p
-                    className="
-                      mt-2
-                      font-body
-                      text-[9px]
-                      font-semibold
-                      text-[var(--color-error)]
-                    "
-                  >
+                  <p className="product-quick-add__stock product-quick-add__stock--sold-out">
                     Sold out
                   </p>
                 )}
@@ -504,36 +317,12 @@ export function ProductQuickAdd({
                   adding ||
                   !isInitialized
                 }
-                className="
-                  group
-                  mt-5
-                  flex
-                  h-12
-                  w-full
-                  items-center
-                  justify-center
-                  gap-2.5
-                  border
-                  border-[var(--color-text)]
-                  bg-[var(--color-text)]
-                  px-4
-                  font-body
-                  text-[9px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.17em]
-                  text-[var(--color-text-inverse)]
-                  transition-all
-                  duration-[var(--duration-base)]
-                  hover:border-[var(--color-accent-dark)]
-                  hover:bg-[var(--color-accent-dark)]
-                  disabled:cursor-not-allowed
-                  disabled:opacity-40
-                "
+                className="product-quick-add__submit"
               >
                 <ShoppingBag
-                  size={15}
-                  strokeWidth={1.25}
+                  size={17}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
                 />
 
                 <span>
@@ -544,13 +333,10 @@ export function ProductQuickAdd({
 
                 {!adding && (
                   <ChevronRight
-                    size={14}
-                    strokeWidth={1.2}
-                    className="
-                      transition-transform
-                      duration-[var(--duration-base)]
-                      group-hover:translate-x-0.5
-                    "
+                    size={16}
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                    className="product-quick-add__submit-icon"
                   />
                 )}
               </button>

@@ -60,68 +60,26 @@ export function ProductInfo({
   }, [product.categoryId]);
 
   return (
-    <div
-      className="
-        w-full
-        max-w-[620px]
-        lg:ml-auto
-      "
-    >
+    <div className="product-info">
       {/* =====================================================
           PRODUCT HEADER
       ===================================================== */}
 
-      <div
-        className="
-          border-b
-          border-[var(--color-border)]
-          pb-7
-          sm:pb-8
-        "
-      >
-        <div
-          className="
-            flex
-            items-start
-            justify-between
-            gap-5
-          "
-        >
-          <div className="min-w-0">
-            {/* CATEGORY */}
-
+      <div className="product-info__header">
+        <div className="product-info__header-main">
+          <div className="product-info__heading-content">
             {categoryLabel && (
-              <p
-                className="
-                  eyebrow
-                  mb-3
-                  text-[var(--color-text-muted)]
-                "
-              >
+              <p className="product-info__category">
                 {categoryLabel}
               </p>
             )}
 
-            {/* PRODUCT NAME */}
-
-            <h1
-              className="
-                max-w-[560px]
-                font-display
-                text-[clamp(2.75rem,5vw,4.5rem)]
-                font-medium
-                leading-[0.88]
-                tracking-[-0.035em]
-                text-[var(--color-text)]
-              "
-            >
+            <h1 className="product-info__title">
               {product.name}
             </h1>
           </div>
 
-          {/* WISHLIST */}
-
-          <div className="shrink-0">
+          <div className="product-info__wishlist">
             <WishlistButton
               productId={product.id}
               productName={product.name}
@@ -134,26 +92,10 @@ export function ProductInfo({
           PRICE
       ===================================================== */}
 
-      <div
-        className="
-          border-b
-          border-[var(--color-border)]
-          py-6
-          sm:py-7
-        "
-      >
+      <div className="product-info__price-section">
         <ProductPrice product={product} />
 
-        <p
-          className="
-            mt-2
-            font-body
-            text-[9px]
-            uppercase
-            tracking-[0.14em]
-            text-[var(--color-text-muted)]
-          "
-        >
+        <p className="product-info__tax-note">
           Inclusive of applicable taxes
         </p>
       </div>
@@ -163,25 +105,10 @@ export function ProductInfo({
       ===================================================== */}
 
       {product.content.description && (
-        <div
-          className="
-            border-b
-            border-[var(--color-border)]
-            py-6
-          "
-        >
-          <div
-            className="
-              max-w-xl
-              font-body
-              text-[13px]
-              leading-7
-              text-[var(--color-text-secondary)]
-              sm:text-sm
-            "
-          >
+        <div className="product-info__description-section">
+          <p className="product-info__description">
             {product.content.description}
-          </div>
+          </p>
         </div>
       )}
 
@@ -189,14 +116,7 @@ export function ProductInfo({
           PURCHASE
       ===================================================== */}
 
-      <div
-        className="
-          border-b
-          border-[var(--color-border)]
-          py-7
-          sm:py-8
-        "
-      >
+      <div className="product-info__purchase">
         <ProductPurchasePanel
           product={product}
           quantity={quantity}
@@ -208,13 +128,7 @@ export function ProductInfo({
           DELIVERY
       ===================================================== */}
 
-      <div
-        className="
-          border-b
-          border-[var(--color-border)]
-          py-6
-        "
-      >
+      <div className="product-info__delivery">
         <ProductDeliveryChecker />
       </div>
 
@@ -222,7 +136,7 @@ export function ProductInfo({
           TRUST
       ===================================================== */}
 
-      <div className="pt-6">
+      <div className="product-info__trust">
         <ProductTrustBadges />
       </div>
     </div>

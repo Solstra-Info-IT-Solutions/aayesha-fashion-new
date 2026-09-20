@@ -36,10 +36,7 @@ export function ProductLightbox({
         return;
       }
 
-      if (
-        event.key === "ArrowLeft" &&
-        media.length > 1
-      ) {
+      if (event.key === "ArrowLeft" && media.length > 1) {
         onChange(
           activeIndex <= 0
             ? media.length - 1
@@ -47,10 +44,7 @@ export function ProductLightbox({
         );
       }
 
-      if (
-        event.key === "ArrowRight" &&
-        media.length > 1
-      ) {
+      if (event.key === "ArrowRight" && media.length > 1) {
         onChange(
           activeIndex >= media.length - 1
             ? 0
@@ -59,24 +53,15 @@ export function ProductLightbox({
       }
     };
 
-    document.addEventListener(
-      "keydown",
-      handleKeyDown,
-    );
+    document.addEventListener("keydown", handleKeyDown);
 
-    const previousOverflow =
-      document.body.style.overflow;
+    const previousOverflow = document.body.style.overflow;
 
     document.body.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener(
-        "keydown",
-        handleKeyDown,
-      );
-
-      document.body.style.overflow =
-        previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
     };
   }, [
     open,
@@ -91,8 +76,7 @@ export function ProductLightbox({
   }
 
   const safeIndex =
-    activeIndex >= 0 &&
-    activeIndex < media.length
+    activeIndex >= 0 && activeIndex < media.length
       ? activeIndex
       : 0;
 
@@ -110,13 +94,7 @@ export function ProductLightbox({
 
   return (
     <div
-      className="
-        fixed
-        inset-0
-        z-[var(--z-modal)]
-        bg-[var(--color-text)]/97
-        text-[var(--color-text-inverse)]
-      "
+      className="product-lightbox"
       role="dialog"
       aria-modal="true"
       aria-label={`${productName} fullscreen gallery`}
@@ -129,60 +107,20 @@ export function ProductLightbox({
         type="button"
         onClick={onClose}
         aria-label="Close fullscreen gallery"
-        className="
-          absolute
-          inset-0
-          cursor-default
-        "
+        className="product-lightbox__backdrop"
       />
 
       {/* =====================================================
           TOP BAR
       ===================================================== */}
 
-      <div
-        className="
-          absolute
-          inset-x-0
-          top-0
-          z-20
-          flex
-          items-center
-          justify-between
-          border-b
-          border-white/10
-          px-4
-          py-4
-          sm:px-7
-          sm:py-5
-        "
-      >
-        <div>
-          <p
-            className="
-              font-body
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.2em]
-              text-white/45
-            "
-          >
+      <div className="product-lightbox__topbar">
+        <div className="product-lightbox__product">
+          <p className="product-lightbox__eyebrow">
             Product View
           </p>
 
-          <p
-            className="
-              mt-1
-              max-w-[180px]
-              truncate
-              font-body
-              text-[10px]
-              tracking-[0.04em]
-              text-white/80
-              sm:max-w-sm
-            "
-          >
+          <p className="product-lightbox__product-name">
             {productName}
           </p>
         </div>
@@ -191,33 +129,11 @@ export function ProductLightbox({
           type="button"
           onClick={onClose}
           aria-label="Close fullscreen gallery"
-          className="
-            flex
-            h-10
-            w-10
-            shrink-0
-            items-center
-            justify-center
-            border
-            border-white/15
-            text-white/85
-            transition-all
-            duration-[var(--duration-base)]
-            hover:border-white/40
-            hover:bg-white
-            hover:text-[var(--color-text)]
-            focus-visible:outline-none
-            focus-visible:ring-1
-            focus-visible:ring-white
-            focus-visible:ring-offset-2
-            focus-visible:ring-offset-[var(--color-text)]
-            sm:h-11
-            sm:w-11
-          "
+          className="product-lightbox__close"
         >
           <X
-            size={18}
-            strokeWidth={1.25}
+            className="product-lightbox__close-icon"
+            aria-hidden="true"
           />
         </button>
       </div>
@@ -226,41 +142,14 @@ export function ProductLightbox({
           MAIN MEDIA
       ===================================================== */}
 
-      <div
-        className="
-          relative
-          z-10
-          flex
-          h-full
-          w-full
-          items-center
-          justify-center
-          px-14
-          py-24
-          sm:px-24
-          sm:py-28
-        "
-      >
+      <div className="product-lightbox__media-area">
         {active.type === "image" ? (
-          <div
-            className="
-              relative
-              h-full
-              w-full
-              max-w-6xl
-            "
-          >
+          <div className="product-lightbox__image-frame">
             <Image
               src={active.src}
-              alt={
-                active.alt ??
-                productName
-              }
+              alt={active.alt ?? productName}
               fill
-              className="
-                object-contain
-                select-none
-              "
+              className="product-lightbox__image"
               sizes="100vw"
               priority
             />
@@ -272,32 +161,14 @@ export function ProductLightbox({
             controls
             autoPlay
             playsInline
-            aria-label={
-              active.alt ??
-              productName
-            }
-            className="
-              max-h-full
-              max-w-full
-              object-contain
-              outline-none
-            "
+            aria-label={active.alt ?? productName}
+            className="product-lightbox__video"
           />
         ) : (
           <iframe
             src={active.src}
-            title={
-              active.alt ??
-              productName
-            }
-            className="
-              h-full
-              max-h-[82vh]
-              w-full
-              max-w-6xl
-              border
-              border-white/10
-            "
+            title={active.alt ?? productName}
+            className="product-lightbox__iframe"
             allow="
               autoplay;
               encrypted-media;
@@ -316,83 +187,25 @@ export function ProductLightbox({
         <>
           <button
             type="button"
-            onClick={() =>
-              onChange(previousIndex)
-            }
+            onClick={() => onChange(previousIndex)}
             aria-label="Previous product media"
-            className="
-              absolute
-              left-3
-              top-1/2
-              z-30
-              flex
-              h-11
-              w-11
-              -translate-y-1/2
-              items-center
-              justify-center
-              border
-              border-white/15
-              bg-black/10
-              text-white/85
-              backdrop-blur-sm
-              transition-all
-              duration-[var(--duration-base)]
-              hover:border-white/40
-              hover:bg-white
-              hover:text-[var(--color-text)]
-              focus-visible:outline-none
-              focus-visible:ring-1
-              focus-visible:ring-white
-              sm:left-6
-              sm:h-12
-              sm:w-12
-            "
+            className="product-lightbox__navigation product-lightbox__navigation--previous"
           >
             <ChevronLeft
-              size={20}
-              strokeWidth={1.25}
+              className="product-lightbox__navigation-icon"
+              aria-hidden="true"
             />
           </button>
 
           <button
             type="button"
-            onClick={() =>
-              onChange(nextIndex)
-            }
+            onClick={() => onChange(nextIndex)}
             aria-label="Next product media"
-            className="
-              absolute
-              right-3
-              top-1/2
-              z-30
-              flex
-              h-11
-              w-11
-              -translate-y-1/2
-              items-center
-              justify-center
-              border
-              border-white/15
-              bg-black/10
-              text-white/85
-              backdrop-blur-sm
-              transition-all
-              duration-[var(--duration-base)]
-              hover:border-white/40
-              hover:bg-white
-              hover:text-[var(--color-text)]
-              focus-visible:outline-none
-              focus-visible:ring-1
-              focus-visible:ring-white
-              sm:right-6
-              sm:h-12
-              sm:w-12
-            "
+            className="product-lightbox__navigation product-lightbox__navigation--next"
           >
             <ChevronRight
-              size={20}
-              strokeWidth={1.25}
+              className="product-lightbox__navigation-icon"
+              aria-hidden="true"
             />
           </button>
         </>
@@ -402,55 +215,19 @@ export function ProductLightbox({
           BOTTOM META
       ===================================================== */}
 
-      <div
-        className="
-          absolute
-          inset-x-0
-          bottom-0
-          z-20
-          flex
-          items-center
-          justify-center
-          border-t
-          border-white/10
-          px-5
-          py-4
-        "
-      >
-        <div
-          className="
-            flex
-            items-center
-            gap-3
-            font-body
-            text-[9px]
-            font-medium
-            uppercase
-            tracking-[0.2em]
-            text-white/55
-          "
-        >
+      <div className="product-lightbox__footer">
+        <div className="product-lightbox__counter">
           <span>
-            {String(safeIndex + 1).padStart(
-              2,
-              "0",
-            )}
+            {String(safeIndex + 1).padStart(2, "0")}
           </span>
 
           <span
-            className="
-              h-px
-              w-8
-              bg-white/20
-            "
+            className="product-lightbox__counter-line"
             aria-hidden="true"
           />
 
           <span>
-            {String(media.length).padStart(
-              2,
-              "0",
-            )}
+            {String(media.length).padStart(2, "0")}
           </span>
         </div>
       </div>

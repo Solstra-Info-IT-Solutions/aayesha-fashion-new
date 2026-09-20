@@ -54,7 +54,11 @@ export function ProductSpecifications({
 
   const stock = product.inventory?.stock ?? 0;
   const reserved = product.inventory?.reserved ?? 0;
-  const availableStock = Math.max(0, stock - reserved);
+
+  const availableStock = Math.max(
+    0,
+    stock - reserved,
+  );
 
   const specifications = [
     ["Category", categoryName],
@@ -88,45 +92,24 @@ export function ProductSpecifications({
   );
 
   return (
-    <div className="border-y border-[var(--color-border)]">
+    <section
+      aria-label="Product specifications"
+      className="product-specifications"
+    >
       {specifications.map(([label, value]) => (
         <div
           key={label}
-          className="
-            flex
-            items-start
-            justify-between
-            gap-8
-            border-b
-            border-[var(--color-border)]
-            py-4
-            last:border-b-0
-          "
+          className="product-specifications__row"
         >
-          <span
-            className="
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.11em]
-              text-[var(--color-text-muted)]
-            "
-          >
+          <span className="product-specifications__label">
             {label}
           </span>
 
-          <span
-            className="
-              max-w-[60%]
-              text-right
-              text-sm
-              text-[var(--color-text-secondary)]
-            "
-          >
+          <span className="product-specifications__value">
             {String(value)}
           </span>
         </div>
       ))}
-    </div>
+    </section>
   );
 }

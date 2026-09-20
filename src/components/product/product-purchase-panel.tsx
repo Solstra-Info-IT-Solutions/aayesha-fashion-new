@@ -19,9 +19,7 @@ import {
   getInventoryStatus,
 } from "@/types/product";
 
-import {
-  addToCart,
-} from "@/services/cart.service";
+import { addToCart } from "@/services/cart.service";
 
 import { useAuthStore } from "@/store/auth-store";
 
@@ -30,9 +28,7 @@ import { LoginRequiredPopup } from "@/components/product/login-required-popup";
 interface ProductPurchasePanelProps {
   product: Product;
   quantity: number;
-  onQuantityChange: (
-    quantity: number,
-  ) => void;
+  onQuantityChange: (quantity: number) => void;
 }
 
 export function ProductPurchasePanel({
@@ -50,20 +46,16 @@ export function ProductPurchasePanel({
     (state) => state.isInitialized,
   );
 
-  const [addingToBag, setAddingToBag] =
-    useState(false);
+  const [addingToBag, setAddingToBag] = useState(false);
 
-  const [buyingNow, setBuyingNow] =
-    useState(false);
+  const [buyingNow, setBuyingNow] = useState(false);
 
   const [showLoginPopup, setShowLoginPopup] =
     useState(false);
 
-  const stock =
-    getAvailableStock(product);
+  const stock = getAvailableStock(product);
 
-  const status =
-    getInventoryStatus(product);
+  const status = getInventoryStatus(product);
 
   const canBuy =
     status !== "out-of-stock" &&
@@ -82,10 +74,7 @@ export function ProductPurchasePanel({
       return;
     }
 
-    if (
-      addingToBag ||
-      buyingNow
-    ) {
+    if (addingToBag || buyingNow) {
       return;
     }
 
@@ -93,9 +82,6 @@ export function ProductPurchasePanel({
       return;
     }
 
-    /*
-     * Backend cart requires authentication.
-     */
     if (!isAuthenticated) {
       setShowLoginPopup(true);
       return;
@@ -143,10 +129,7 @@ export function ProductPurchasePanel({
       return;
     }
 
-    if (
-      addingToBag ||
-      buyingNow
-    ) {
+    if (addingToBag || buyingNow) {
       return;
     }
 
@@ -154,10 +137,6 @@ export function ProductPurchasePanel({
       return;
     }
 
-    /*
-     * Login required before adding
-     * the product to backend cart.
-     */
     if (!isAuthenticated) {
       setShowLoginPopup(true);
       return;
@@ -192,42 +171,18 @@ export function ProductPurchasePanel({
     <>
       <section
         aria-label="Purchase options"
-        className="w-full"
+        className="product-purchase"
       >
         {/* =====================================================
             PURCHASE HEADER
         ===================================================== */}
 
-        <div
-          className="
-            mb-4
-            flex
-            items-center
-            justify-between
-          "
-        >
-          <p
-            className="
-              font-body
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.18em]
-              text-[var(--color-text)]
-            "
-          >
+        <div className="product-purchase__header">
+          <p className="product-purchase__label">
             Quantity
           </p>
 
-          <span
-            className="
-              font-body
-              text-[9px]
-              uppercase
-              tracking-[0.12em]
-              text-[var(--color-text-muted)]
-            "
-          >
+          <span className="product-purchase__availability">
             {stock > 0
               ? `${stock} available`
               : "Unavailable"}
@@ -238,24 +193,10 @@ export function ProductPurchasePanel({
             QUANTITY + ADD TO BAG
         ===================================================== */}
 
-        <div
-          className="
-            flex
-            gap-2
-          "
-        >
+        <div className="product-purchase__primary-row">
           {/* QUANTITY */}
 
-          <div
-            className="
-              flex
-              h-12
-              shrink-0
-              border
-              border-[var(--color-border-dark)]
-              bg-[var(--color-surface)]
-            "
-          >
+          <div className="product-purchase__quantity">
             <button
               type="button"
               onClick={() =>
@@ -272,43 +213,17 @@ export function ProductPurchasePanel({
                 buyingNow
               }
               aria-label="Decrease quantity"
-              className="
-                flex
-                w-10
-                items-center
-                justify-center
-                text-[var(--color-text)]
-                transition-colors
-                duration-[var(--duration-base)]
-                hover:bg-[var(--color-bg-soft)]
-                disabled:cursor-not-allowed
-                disabled:opacity-30
-                focus-visible:outline-none
-                focus-visible:ring-1
-                focus-visible:ring-inset
-                focus-visible:ring-[var(--color-text)]
-              "
+              className="product-purchase__quantity-button"
             >
               <Minus
-                size={14}
-                strokeWidth={1.25}
+                size={16}
+                strokeWidth={1.5}
               />
             </button>
 
             <span
               aria-live="polite"
-              className="
-                flex
-                w-10
-                items-center
-                justify-center
-                border-x
-                border-[var(--color-border-light)]
-                font-body
-                text-[11px]
-                font-semibold
-                text-[var(--color-text)]
-              "
+              className="product-purchase__quantity-value"
             >
               {quantity}
             </span>
@@ -333,26 +248,11 @@ export function ProductPurchasePanel({
                 buyingNow
               }
               aria-label="Increase quantity"
-              className="
-                flex
-                w-10
-                items-center
-                justify-center
-                text-[var(--color-text)]
-                transition-colors
-                duration-[var(--duration-base)]
-                hover:bg-[var(--color-bg-soft)]
-                disabled:cursor-not-allowed
-                disabled:opacity-30
-                focus-visible:outline-none
-                focus-visible:ring-1
-                focus-visible:ring-inset
-                focus-visible:ring-[var(--color-text)]
-              "
+              className="product-purchase__quantity-button"
             >
               <Plus
-                size={14}
-                strokeWidth={1.25}
+                size={16}
+                strokeWidth={1.5}
               />
             </button>
           </div>
@@ -370,44 +270,12 @@ export function ProductPurchasePanel({
               buyingNow ||
               !isInitialized
             }
-            className="
-              group
-              flex
-              h-12
-              min-w-0
-              flex-1
-              items-center
-              justify-center
-              gap-2.5
-              bg-[var(--color-text)]
-              px-4
-              font-body
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.17em]
-              text-[var(--color-text-inverse)]
-              transition-all
-              duration-[var(--duration-base)]
-              ease-[var(--ease-luxury)]
-              hover:bg-[var(--color-accent-dark)]
-              focus-visible:outline-none
-              focus-visible:ring-1
-              focus-visible:ring-[var(--color-text)]
-              focus-visible:ring-offset-2
-              disabled:cursor-not-allowed
-              disabled:opacity-45
-              sm:px-6
-            "
+            className="product-purchase__add-button"
           >
             <ShoppingBag
-              size={16}
-              strokeWidth={1.25}
-              className="
-                transition-transform
-                duration-[var(--duration-base)]
-                group-hover:translate-x-0.5
-              "
+              size={17}
+              strokeWidth={1.5}
+              aria-hidden="true"
             />
 
             <span>
@@ -433,35 +301,7 @@ export function ProductPurchasePanel({
             buyingNow ||
             !isInitialized
           }
-          className="
-            mt-2
-            flex
-            h-12
-            w-full
-            items-center
-            justify-center
-            border
-            border-[var(--color-text)]
-            bg-transparent
-            px-5
-            font-body
-            text-[10px]
-            font-semibold
-            uppercase
-            tracking-[0.17em]
-            text-[var(--color-text)]
-            transition-all
-            duration-[var(--duration-base)]
-            ease-[var(--ease-luxury)]
-            hover:bg-[var(--color-text)]
-            hover:text-[var(--color-text-inverse)]
-            focus-visible:outline-none
-            focus-visible:ring-1
-            focus-visible:ring-[var(--color-text)]
-            focus-visible:ring-offset-2
-            disabled:cursor-not-allowed
-            disabled:opacity-45
-          "
+          className="product-purchase__buy-button"
         >
           {buyingNow
             ? "Adding..."
@@ -473,66 +313,24 @@ export function ProductPurchasePanel({
         ===================================================== */}
 
         <div
-          className="
-            mt-4
-            flex
-            items-center
-            gap-2
-          "
+          className={`product-purchase__inventory product-purchase__inventory--${status}`}
           aria-live="polite"
         >
           <span
             aria-hidden="true"
-            className={[
-              "h-1.5 w-1.5 rounded-full",
-              status === "low-stock"
-                ? "bg-[var(--color-warning)]"
-                : status === "in-stock"
-                  ? "bg-[var(--color-success)]"
-                  : "bg-[var(--color-error)]",
-            ].join(" ")}
+            className="product-purchase__inventory-dot"
           />
 
-          {status ===
-          "low-stock" ? (
-            <p
-              className="
-                font-body
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.08em]
-                text-[var(--color-warning)]
-              "
-            >
-              Only {stock} left
-              in stock
+          {status === "low-stock" ? (
+            <p>
+              Only {stock} left in stock
             </p>
-          ) : status ===
-            "in-stock" ? (
-            <p
-              className="
-                font-body
-                text-[10px]
-                font-medium
-                uppercase
-                tracking-[0.08em]
-                text-[var(--color-success)]
-              "
-            >
+          ) : status === "in-stock" ? (
+            <p>
               In stock · Ready to ship
             </p>
           ) : (
-            <p
-              className="
-                font-body
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.08em]
-                text-[var(--color-error)]
-              "
-            >
+            <p>
               Sold out
             </p>
           )}
@@ -542,22 +340,8 @@ export function ProductPurchasePanel({
             PURCHASE REASSURANCE
         ===================================================== */}
 
-        <div
-          className="
-            mt-5
-            border-t
-            border-[var(--color-border-light)]
-            pt-4
-          "
-        >
-          <p
-            className="
-              font-body
-              text-[9px]
-              leading-5
-              text-[var(--color-text-muted)]
-            "
-          >
+        <div className="product-purchase__reassurance">
+          <p>
             Secure checkout · Easy returns ·
             Carefully packed by Aayesha Fashion
           </p>

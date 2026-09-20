@@ -34,17 +34,14 @@ export function ProductStickyBuyBar({
     (state) => state.isInitialized,
   );
 
-  const [adding, setAdding] =
-    useState(false);
+  const [adding, setAdding] = useState(false);
 
   const [showLoginPopup, setShowLoginPopup] =
     useState(false);
 
-  const stock =
-    getAvailableStock(product);
+  const stock = getAvailableStock(product);
 
-  const status =
-    getInventoryStatus(product);
+  const status = getInventoryStatus(product);
 
   const available =
     status !== "out-of-stock" &&
@@ -71,9 +68,6 @@ export function ProductStickyBuyBar({
       return;
     }
 
-    /*
-     * Backend cart requires authentication.
-     */
     if (!isAuthenticated) {
       setShowLoginPopup(true);
       return;
@@ -108,42 +102,14 @@ export function ProductStickyBuyBar({
 
   return (
     <>
-      <div
-        className="
-          fixed
-          inset-x-0
-          bottom-0
-          z-40
-          border-t
-          border-[var(--color-border)]
-          bg-[var(--color-ivory)]
-          px-4
-          py-3
-          shadow-[0_-8px_30px_rgba(27,29,29,0.08)]
-          lg:hidden
-        "
-      >
-        <div
-          className="
-            mx-auto
-            flex
-            max-w-xl
-            items-center
-            gap-3
-          "
-        >
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-xs font-semibold">
+      <div className="product-sticky-buy-bar">
+        <div className="product-sticky-buy-bar__inner">
+          <div className="product-sticky-buy-bar__product">
+            <p className="product-sticky-buy-bar__name">
               {product.name}
             </p>
 
-            <p
-              className="
-                mt-0.5
-                text-xs
-                text-[var(--color-text-muted)]
-              "
-            >
+            <p className="product-sticky-buy-bar__price">
               ₹
               {product.pricing.sellingPrice.toLocaleString(
                 "en-IN",
@@ -161,30 +127,21 @@ export function ProductStickyBuyBar({
               adding ||
               !isInitialized
             }
-            className="
-              flex
-              h-12
-              shrink-0
-              items-center
-              gap-2
-              bg-[var(--color-charcoal)]
-              px-5
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.13em]
-              text-white
-              disabled:cursor-not-allowed
-              disabled:opacity-45
-            "
+            className="product-sticky-buy-bar__button"
           >
-            <ShoppingBag size={15} />
+            <ShoppingBag
+              size={17}
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
 
-            {adding
-              ? "Adding..."
-              : available
-                ? "Add to Bag"
-                : "Sold Out"}
+            <span>
+              {adding
+                ? "Adding..."
+                : available
+                  ? "Add to Bag"
+                  : "Sold Out"}
+            </span>
           </button>
         </div>
       </div>
