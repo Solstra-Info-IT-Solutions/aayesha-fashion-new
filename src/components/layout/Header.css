@@ -12,7 +12,7 @@
   z-index: var(--z-header);
 
   width: 100%;
-  height: var(--header-height-desktop);
+  height: 68px;
 
   background: rgba(250, 249, 247, 0.96);
 
@@ -359,7 +359,7 @@
   margin-inline: auto;
 
   padding-top: calc(
-    var(--header-height-mobile) + 28px
+    60px + 28px
   );
 
   padding-bottom: 32px;
@@ -536,7 +536,7 @@
 
 @media (max-width: 767px) {
   .aayesha-header {
-    height: var(--header-height-mobile);
+    height: 60px;
 
     background: rgba(250, 249, 247, 0.94);
 
