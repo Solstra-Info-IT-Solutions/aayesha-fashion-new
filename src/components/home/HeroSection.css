@@ -8,6 +8,9 @@
   width: 100%;
   overflow: hidden;
   background: var(--color-primary);
+   margin-top: 0;
+  border-top: 0;
+  border-bottom: 0;
 }
 
 .aayesha-hero__viewport {
@@ -17,6 +20,8 @@
   min-height: 620px;
   overflow: hidden;
   touch-action: pan-y;
+   margin-top: 0;
+  border-top: 0;
 }
 
 /* =========================================================
