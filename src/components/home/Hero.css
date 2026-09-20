@@ -1,0 +1,635 @@
+/* =========================================================
+   AAYESHA HERO
+   Editorial Fashion Hero
+   ========================================================= */
+
+.aayesha-hero {
+  position: relative;
+
+  width: 100%;
+  height: 100svh;
+  min-height: 620px;
+
+  overflow: hidden;
+
+  background: var(--color-secondary);
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+.aayesha-hero__media {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  overflow: hidden;
+}
+
+.aayesha-hero__media picture {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+.aayesha-hero__image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+
+  animation:
+    aayeshaHeroImageReveal 1.8s
+    var(--ease-standard)
+    both;
+
+  transform-origin: center center;
+}
+
+
+/* =========================================================
+   IMAGE REVEAL
+   ========================================================= */
+
+@keyframes aayeshaHeroImageReveal {
+  from {
+    opacity: 0;
+
+    transform: scale(1.055);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.aayesha-hero__overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(38, 25, 22, 0.48) 0%,
+      rgba(38, 25, 22, 0.22) 38%,
+      rgba(38, 25, 22, 0.04) 70%,
+      rgba(38, 25, 22, 0.14) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   TOP LABEL
+   ========================================================= */
+
+.aayesha-hero__top-label {
+  position: absolute;
+
+  top: 50%;
+
+  left: var(--page-padding);
+
+  z-index: 3;
+
+  transform:
+    translateY(-50%)
+    rotate(-90deg);
+
+  transform-origin: center;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  white-space: nowrap;
+}
+
+.aayesha-hero__top-line {
+  width: 28px;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.5);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.aayesha-hero__content {
+  position: relative;
+
+  z-index: 3;
+
+  width: min(
+    100% - (var(--page-padding) * 2),
+    var(--container-max)
+  );
+
+  height: 100%;
+
+  margin-inline: auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  padding-left: clamp(
+    4vw,
+    8vw,
+    130px
+  );
+
+  padding-top: 52px;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.aayesha-hero__eyebrow {
+  margin-bottom: 20px;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.2em;
+
+  color: rgba(255, 255, 255, 0.78);
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.aayesha-hero__title {
+  max-width: 650px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: var(--font-display);
+
+  font-size: clamp(
+    3.3rem,
+    6.4vw,
+    6.2rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.84;
+
+  letter-spacing: -0.035em;
+}
+
+.aayesha-hero__title span {
+  display: block;
+}
+
+.aayesha-hero__title em {
+  display: block;
+
+  margin-left: clamp(
+    25px,
+    5vw,
+    85px
+  );
+
+  font-style: italic;
+
+  font-weight: 400;
+
+  color: #f0ddd5;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.aayesha-hero__description {
+  margin-top: 30px;
+
+  font-size: 12px;
+
+  font-weight: 400;
+
+  line-height: 1.65;
+
+  color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.aayesha-hero__actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 24px;
+
+  margin-top: 34px;
+}
+
+
+/* Primary */
+
+.aayesha-hero__button--primary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+
+  padding-inline: 22px;
+
+  background: #f7eee9;
+
+  color: #332522;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  transition:
+    background-color 280ms var(--ease-standard),
+    color 280ms var(--ease-standard),
+    transform 180ms var(--ease-standard);
+}
+
+.aayesha-hero__button--primary:hover {
+  background: #ffffff;
+
+  color: #241916;
+
+  transform: translateY(-2px);
+}
+
+.aayesha-hero__button--primary:active {
+  transform: translateY(0);
+}
+
+
+/* Text link */
+
+.aayesha-hero__button--text {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  min-height: 44px;
+
+  color: #ffffff;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.aayesha-hero__button--text span {
+  font-size: 14px;
+
+  transition:
+    transform 280ms var(--ease-standard);
+}
+
+.aayesha-hero__button--text:hover span {
+  transform: translate(3px, -3px);
+}
+
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
+
+.aayesha-hero__bottom {
+  position: absolute;
+
+  left: var(--page-padding);
+  right: var(--page-padding);
+  bottom: 24px;
+
+  z-index: 3;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.aayesha-hero__scroll {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.aayesha-hero__scroll-line {
+  width: 34px;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.5);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .aayesha-hero__content {
+    padding-left: 5vw;
+  }
+
+  .aayesha-hero__title {
+    font-size: clamp(
+      3rem,
+      7vw,
+      5rem
+    );
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .aayesha-hero {
+    height: 100svh;
+
+    min-height: 620px;
+  }
+
+
+  /* Mobile photography */
+
+  .aayesha-hero__image {
+    object-position: 64% center;
+  }
+
+
+  /* Mobile overlay */
+
+  .aayesha-hero__overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(38, 25, 22, 0.12) 0%,
+        rgba(38, 25, 22, 0.04) 30%,
+        rgba(38, 25, 22, 0.12) 48%,
+        rgba(38, 25, 22, 0.68) 100%
+      );
+  }
+
+
+  /* Remove desktop side label */
+
+  .aayesha-hero__top-label {
+    top: auto;
+
+    left: 16px;
+    bottom: 112px;
+
+    transform: none;
+
+    font-size: 7px;
+  }
+
+
+  /* Content */
+
+  .aayesha-hero__content {
+    width: calc(100% - 32px);
+
+    height: auto;
+
+    margin-inline: 16px;
+
+    padding: 0;
+
+    padding-top: 90px;
+
+    justify-content: flex-end;
+
+    position: absolute;
+
+    bottom: 76px;
+
+    left: 0;
+  }
+
+
+  /* Eyebrow */
+
+  .aayesha-hero__eyebrow {
+    margin-bottom: 14px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.17em;
+  }
+
+
+  /* Title */
+
+  .aayesha-hero__title {
+    max-width: 100%;
+
+    font-size: clamp(
+      3rem,
+      14vw,
+      4.6rem
+    );
+
+    line-height: 0.83;
+
+    letter-spacing: -0.04em;
+  }
+
+  .aayesha-hero__title em {
+    margin-left: 24px;
+  }
+
+
+  /* Description */
+
+  .aayesha-hero__description {
+    margin-top: 20px;
+
+    font-size: 11px;
+
+    line-height: 1.55;
+  }
+
+
+  /* Actions */
+
+  .aayesha-hero__actions {
+    gap: 16px;
+
+    margin-top: 24px;
+  }
+
+  .aayesha-hero__button--primary {
+    min-height: 42px;
+
+    padding-inline: 18px;
+
+    font-size: 9px;
+  }
+
+  .aayesha-hero__button--text {
+    min-height: 42px;
+
+    font-size: 9px;
+  }
+
+
+  /* Bottom */
+
+  .aayesha-hero__bottom {
+    left: 16px;
+    right: 16px;
+
+    bottom: 18px;
+
+    font-size: 7px;
+  }
+
+  .aayesha-hero__bottom > span:first-child {
+    display: none;
+  }
+
+  .aayesha-hero__scroll {
+    margin-left: auto;
+  }
+
+  .aayesha-hero__scroll-line {
+    width: 24px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .aayesha-hero {
+    min-height: 580px;
+  }
+
+  .aayesha-hero__content {
+    bottom: 70px;
+  }
+
+  .aayesha-hero__title {
+    font-size: clamp(
+      2.7rem,
+      13vw,
+      3.8rem
+    );
+  }
+
+  .aayesha-hero__description {
+    margin-top: 16px;
+  }
+
+  .aayesha-hero__actions {
+    margin-top: 18px;
+
+    gap: 12px;
+  }
+
+  .aayesha-hero__button--primary {
+    padding-inline: 15px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .aayesha-hero__image {
+    animation: none;
+  }
+
+  .aayesha-hero__button--primary,
+  .aayesha-hero__button--text span {
+    transition: none;
+  }
+}
