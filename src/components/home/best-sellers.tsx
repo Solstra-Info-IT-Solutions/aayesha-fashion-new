@@ -21,51 +21,40 @@ export async function BestSellers() {
   return (
     <section id="best-sellers" className="best-sellers">
       <Container className="best-sellers__container">
-        <div className="best-sellers__top">
-          <div className="best-sellers__intro">
-            <div className="best-sellers__eyebrow">
-              <span className="best-sellers__eyebrow-line" />
-              <span>Signature Selection</span>
-            </div>
+        <div className="best-sellers__header">
+          <div className="best-sellers__heading">
+            <span className="best-sellers__eyebrow">
+              Best Sellers
+            </span>
 
             <h2 className="best-sellers__title">
-              The pieces
-              <span> everyone loves.</span>
+              Best Sellers<span>.</span>
             </h2>
           </div>
 
-          <div className="best-sellers__description">
-            <p>
-              Discover the silhouettes that continue to define the AAYESHA
-              wardrobe.
-            </p>
-          </div>
+          <p className="best-sellers__description">
+            Discover the silhouettes our customers return to
+            time and again.
+          </p>
         </div>
 
         {bestSellers.length > 0 ? (
-          <div className="best-sellers__showcase">
-            <div className="best-sellers__section-mark">
-              <span>BEST</span>
-              <span>SELLERS</span>
-            </div>
-
-            <ProductCarousel products={bestSellers} />
-          </div>
+          <ProductCarousel products={bestSellers} />
         ) : (
           <div className="best-sellers__empty">
             <span className="best-sellers__empty-mark">A</span>
 
-            <h3>Our signature edit is coming soon.</h3>
+            <h3>Our best sellers are coming soon.</h3>
 
             <p>
-              We are preparing a curated selection of the pieces our customers
-              love most.
+              We are preparing a curated selection of our most
+              loved pieces.
             </p>
           </div>
         )}
 
         <div className="best-sellers__footer">
-          <span className="best-sellers__footer-line" />
+          <span className="best-sellers__line" />
 
           <Link
             href="/collections/best-sellers"
@@ -73,12 +62,15 @@ export async function BestSellers() {
           >
             <span>View all best sellers</span>
 
-            <span className="best-sellers__link-icon">
-              <ArrowUpRight size={17} strokeWidth={1.5} />
+            <span className="best-sellers__arrow">
+              <ArrowUpRight
+                size={17}
+                strokeWidth={1.5}
+              />
             </span>
           </Link>
 
-          <span className="best-sellers__footer-line" />
+          <span className="best-sellers__line" />
         </div>
       </Container>
     </section>
