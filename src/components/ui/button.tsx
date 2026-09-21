@@ -9,8 +9,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+/* =========================================================
+   AAYESHA — BUTTON SYSTEM
+========================================================= */
+
 const buttonVariants = cva(
   [
+    "group",
     "inline-flex",
     "items-center",
     "justify-center",
@@ -24,49 +29,98 @@ const buttonVariants = cva(
     "duration-300",
     "focus-visible:outline-none",
     "focus-visible:ring-2",
-    "focus-visible:ring-[var(--color-rose)]",
+    "focus-visible:ring-[#9b7069]",
     "focus-visible:ring-offset-2",
     "disabled:pointer-events-none",
-    "disabled:opacity-50",
   ],
   {
     variants: {
       variant: {
+        /* =================================================
+           PRIMARY
+        ================================================= */
+
         primary: [
-          "bg-[var(--color-charcoal)]",
-          "text-white",
           "border",
-          "border-[var(--color-charcoal)]",
-          "hover:bg-[var(--color-charcoal-soft)]",
-          "hover:border-[var(--color-charcoal-soft)]",
+          "border-[#6f4b47]",
+          "bg-[#6f4b47]",
+          "text-white",
+
+          "hover:border-[#3f2d2a]",
+          "hover:bg-[#3f2d2a]",
+          "hover:text-white",
+
+          "active:border-[#7f5953]",
+          "active:bg-[#7f5953]",
+          "active:text-white",
+
+          "disabled:border-[#6f4b47]",
+          "disabled:bg-[#6f4b47]",
+          "disabled:text-white",
+          "disabled:opacity-60",
         ],
+
+        /* =================================================
+           SECONDARY
+        ================================================= */
 
         secondary: [
-          "bg-transparent",
-          "text-[var(--color-charcoal)]",
           "border",
-          "border-[var(--color-charcoal)]",
-          "hover:bg-[var(--color-charcoal)]",
+          "border-[#6f4b47]",
+          "bg-transparent",
+          "text-[#6f4b47]",
+
+          "hover:border-[#6f4b47]",
+          "hover:bg-[#6f4b47]",
           "hover:text-white",
+
+          "active:bg-[#7f5953]",
+          "active:border-[#7f5953]",
+          "active:text-white",
+
+          "disabled:opacity-60",
         ],
+
+        /* =================================================
+           ROSE
+        ================================================= */
 
         rose: [
-          "bg-[var(--color-rose)]",
-          "text-[var(--color-charcoal)]",
           "border",
-          "border-[var(--color-rose)]",
-          "hover:bg-[var(--color-rose-dark)]",
-          "hover:border-[var(--color-rose-dark)]",
+          "border-[#b98279]",
+          "bg-[#b98279]",
+          "text-white",
+
+          "hover:border-[#95645e]",
+          "hover:bg-[#95645e]",
+          "hover:text-white",
+
+          "active:border-[#7f5953]",
+          "active:bg-[#7f5953]",
+          "active:text-white",
+
+          "disabled:opacity-60",
         ],
 
+        /* =================================================
+           DARK OUTLINE
+        ================================================= */
+
         darkOutline: [
-          "bg-transparent",
-          "text-white",
           "border",
           "border-white/45",
-          "hover:bg-white",
-          "hover:text-[var(--color-charcoal)]",
+          "bg-transparent",
+          "text-white",
+
           "hover:border-white",
+          "hover:bg-white",
+          "hover:text-[#3f2d2a]",
+
+          "active:border-white",
+          "active:bg-white",
+          "active:text-[#3f2d2a]",
+
+          "disabled:opacity-60",
         ],
       },
 
@@ -92,6 +146,10 @@ const buttonVariants = cva(
   }
 );
 
+/* =========================================================
+   TYPES
+========================================================= */
+
 type BaseProps = {
   children: ReactNode;
   className?: string;
@@ -107,6 +165,10 @@ type LinkButtonProps = BaseProps &
   VariantProps<typeof buttonVariants> & {
     href: string;
   };
+
+/* =========================================================
+   BUTTON
+========================================================= */
 
 export function Button({
   children,
@@ -127,20 +189,24 @@ export function Button({
           size,
           rounded,
         }),
-        className
+        className,
       )}
       {...props}
     >
       <span>{children}</span>
 
-      {icon && (
-        <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+      {icon ? (
+        <span className="transition-transform duration-300 group-hover:translate-x-0.5">
           {icon}
         </span>
-      )}
+      ) : null}
     </button>
   );
 }
+
+/* =========================================================
+   LINK BUTTON
+========================================================= */
 
 export function LinkButton({
   href,
@@ -156,25 +222,28 @@ export function LinkButton({
     <Link
       href={href}
       className={cn(
-        "group",
         buttonVariants({
           variant,
           size,
           rounded,
         }),
-        className
+        className,
       )}
       {...props}
     >
       <span>{children}</span>
 
-      {icon && (
-        <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+      {icon ? (
+        <span className="transition-transform duration-300 group-hover:translate-x-0.5">
           {icon}
         </span>
-      )}
+      ) : null}
     </Link>
   );
 }
+
+/* =========================================================
+   EXPORT
+========================================================= */
 
 export { buttonVariants };

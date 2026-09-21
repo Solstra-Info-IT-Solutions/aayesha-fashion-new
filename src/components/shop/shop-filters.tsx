@@ -9,7 +9,6 @@ import {
 import Link from "next/link";
 
 import {
-  ChevronDown,
   RotateCcw,
 } from "lucide-react";
 
@@ -19,6 +18,9 @@ import { getInventoryStatus } from "@/types/product";
 import { getCategories } from "@/services/category.service";
 import type { Category } from "@/types/category";
 
+import { FilterSection } from "./filter-section";
+import "./ShopFilters.css";
+
 interface ShopFiltersProps {
   products: Product[];
   selectedCategory?: string;
@@ -26,15 +28,22 @@ interface ShopFiltersProps {
   onClose?: () => void;
 }
 
-type FilterSection =
+type FilterSectionKey =
   | "category"
   | "price"
   | "availability";
 
-const availabilityLabels = {
+type Availability =
+  | "in-stock"
+  | "out-of-stock";
+
+const availabilityLabels: Record<
+  Availability,
+  string
+> = {
   "in-stock": "In Stock",
   "out-of-stock": "Out of Stock",
-} as const;
+};
 
 const priceRanges = [
   {
@@ -60,7 +69,7 @@ const priceRanges = [
 ];
 
 const sectionLabels: Record<
-  FilterSection,
+  FilterSectionKey,
   string
 > = {
   category: "Category",
@@ -68,26 +77,25 @@ const sectionLabels: Record<
   availability: "Availability",
 };
 
-function getCollectionBasePath() {
+function getCollectionBasePath(): string {
   if (typeof window === "undefined") {
     return "/shop";
   }
 
-  const pathname =
-    window.location.pathname;
+  const { pathname } = window.location;
 
   if (
     pathname ===
     "/collections/new-arrivals"
   ) {
-    return "/collections/new-arrivals";
+    return pathname;
   }
 
   if (
     pathname ===
     "/collections/best-sellers"
   ) {
-    return "/collections/best-sellers";
+    return pathname;
   }
 
   return "/shop";
@@ -96,11 +104,10 @@ function getCollectionBasePath() {
 function buildFilterHref(
   key: string,
   value: string,
-) {
-  const params =
-    new URLSearchParams(
-      window.location.search,
-    );
+): string {
+  const params = new URLSearchParams(
+    window.location.search,
+  );
 
   if (value) {
     params.set(key, value);
@@ -108,18 +115,33 @@ function buildFilterHref(
     params.delete(key);
   }
 
-  const query =
-    params.toString();
+  const query = params.toString();
+  const pathname = getCollectionBasePath();
 
   return query
-    ? `${getCollectionBasePath()}?${query}`
-    : getCollectionBasePath();
+    ? `${pathname}?${query}`
+    : pathname;
 }
 
-function formatCategoryName(
-  category: Category,
-): string {
-  return category.name;
+function getInitialPrice(): string | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const params = new URLSearchParams(
+    window.location.search,
+  );
+
+  const min = params.get("minPrice");
+  const max = params.get("maxPrice");
+
+  return (
+    priceRanges.find(
+      (range) =>
+        String(range.min) === min &&
+        String(range.max) === max,
+    )?.label ?? null
+  );
 }
 
 export function ShopFilters({
@@ -129,7 +151,7 @@ export function ShopFilters({
   onClose,
 }: ShopFiltersProps) {
   const [openSections, setOpenSections] =
-    useState<FilterSection[]>([
+    useState<FilterSectionKey[]>([
       "category",
       "price",
       "availability",
@@ -138,36 +160,10 @@ export function ShopFilters({
   const [categories, setCategories] =
     useState<Category[]>([]);
 
-  const initialPrice =
-    typeof window !== "undefined"
-      ? (() => {
-          const params =
-            new URLSearchParams(
-              window.location.search,
-            );
-
-          const min =
-            params.get("minPrice");
-
-          const max =
-            params.get("maxPrice");
-
-          return (
-            priceRanges.find(
-              (range) =>
-                String(range.min) === min &&
-                String(range.max) === max,
-            )?.label ?? null
-          );
-        })()
-      : null;
-
-  const [
-    selectedPrice,
-    setSelectedPrice,
-  ] = useState<string | null>(
-    initialPrice,
-  );
+  const [selectedPrice, setSelectedPrice] =
+    useState<string | null>(
+      getInitialPrice(),
+    );
 
   useEffect(() => {
     let mounted = true;
@@ -194,55 +190,50 @@ export function ShopFilters({
     };
   }, []);
 
-  const categoryOptions =
-    useMemo(() => {
-      if (categories.length > 0) {
-        return categories;
+  const categoryOptions = useMemo(() => {
+    if (categories.length > 0) {
+      return categories;
+    }
+
+    const ids = new Set<string>();
+
+    products.forEach((product) => {
+      if (product.categoryId) {
+        ids.add(product.categoryId);
       }
+    });
 
-      const ids = new Set<string>();
-
-      products.forEach((product) => {
-        if (product.categoryId) {
-          ids.add(product.categoryId);
-        }
-      });
-
-      return Array.from(ids).map(
-        (id) =>
-          ({
-            id,
-            name: id,
-            slug: id,
-          }) as Category,
-      );
-    }, [categories, products]);
+    return Array.from(ids).map(
+      (id) =>
+        ({
+          id,
+          name: id,
+          slug: id,
+        }) as Category,
+    );
+  }, [categories, products]);
 
   const availabilityOptions =
-    useMemo(() => {
+    useMemo<Availability[]>(() => {
       const values =
-        new Set<
-          "in-stock" | "out-of-stock"
-        >();
+        new Set<Availability>();
 
       products.forEach((product) => {
         const status =
           getInventoryStatus(product);
 
-        if (
+        values.add(
           status === "out-of-stock"
-        ) {
-          values.add("out-of-stock");
-        } else {
-          values.add("in-stock");
-        }
+            ? "out-of-stock"
+            : "in-stock",
+        );
       });
 
       return Array.from(values);
     }, [products]);
 
   function toggleSection(
-    section: FilterSection,
+    section: FilterSectionKey,
   ) {
     setOpenSections((current) =>
       current.includes(section)
@@ -255,11 +246,8 @@ export function ShopFilters({
 
   function resetFilters() {
     setSelectedPrice(null);
-
-    const pathname =
+    window.location.href =
       getCollectionBasePath();
-
-    window.location.href = pathname;
   }
 
   function handlePriceChange(
@@ -269,82 +257,41 @@ export function ShopFilters({
   ) {
     setSelectedPrice(label);
 
-    const params =
-      new URLSearchParams(
-        window.location.search,
-      );
-
-    params.set(
-      "minPrice",
-      String(min),
+    const params = new URLSearchParams(
+      window.location.search,
     );
 
+    params.set("minPrice", String(min));
+
     if (Number.isFinite(max)) {
-      params.set(
-        "maxPrice",
-        String(max),
-      );
+      params.set("maxPrice", String(max));
     } else {
       params.delete("maxPrice");
     }
 
-    const pathname =
-      getCollectionBasePath();
+    const query = params.toString();
+    const pathname = getCollectionBasePath();
 
-    const query =
-      params.toString();
-
-    window.location.href =
-      query
-        ? `${pathname}?${query}`
-        : pathname;
+    window.location.href = query
+      ? `${pathname}?${query}`
+      : pathname;
   }
 
   return (
-    <div
+    <aside
       className={
         mobile
-          ? "pb-8"
-          : "sticky top-[116px]"
+          ? "shop-filters shop-filters--mobile"
+          : "shop-filters shop-filters--desktop"
       }
     >
-      {/* =====================================================
-          FILTER HEADER
-      ===================================================== */}
-
-      <div
-        className="
-          mb-5
-          flex
-          items-end
-          justify-between
-          gap-4
-        "
-      >
+      <header className="shop-filters__header">
         <div>
-          <p
-            className="
-              font-body
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.2em]
-              text-[var(--color-accent)]
-            "
-          >
+          <p className="shop-filters__eyebrow">
             Refine
           </p>
 
-          <h2
-            className="
-              mt-1
-              font-display
-              text-[1.9rem]
-              font-medium
-              leading-none
-              text-[var(--color-text)]
-            "
-          >
+          <h2 className="shop-filters__title">
             Shop by
           </h2>
         </div>
@@ -352,51 +299,19 @@ export function ShopFilters({
         <button
           type="button"
           onClick={resetFilters}
-          className="
-            inline-flex
-            min-h-9
-            items-center
-            gap-1.5
-            font-body
-            text-[9px]
-            font-semibold
-            uppercase
-            tracking-[0.14em]
-            text-[var(--color-text-muted)]
-            transition-colors
-            duration-[var(--duration-fast)]
-            hover:text-[var(--color-text)]
-            focus-visible:outline-none
-            focus-visible:ring-1
-            focus-visible:ring-[var(--color-text)]
-          "
+          className="shop-filters__reset"
         >
           <RotateCcw
             size={12}
             strokeWidth={1.4}
           />
 
-          Reset
+          <span>Reset</span>
         </button>
-      </div>
+      </header>
 
-      {/* =====================================================
-          FILTER SECTIONS
-      ===================================================== */}
-
-      <div
-        className="
-          divide-y
-          divide-[var(--color-border)]
-          border-y
-          border-[var(--color-border)]
-        "
-      >
-        {/* =================================================
-            CATEGORY
-        ================================================= */}
-
-        <FilterSectionUI
+      <div className="shop-filters__sections">
+        <FilterSection
           title={sectionLabels.category}
           open={openSections.includes(
             "category",
@@ -405,7 +320,7 @@ export function ShopFilters({
             toggleSection("category")
           }
         >
-          <div className="space-y-0.5">
+          <div className="shop-filters__list">
             {categoryOptions.map(
               (category) => {
                 const active =
@@ -427,53 +342,24 @@ export function ShopFilters({
                       category.id,
                     )}
                     onClick={onClose}
-                    className={`
-                      group
-                      flex
-                      min-h-10
-                      items-center
-                      justify-between
-                      gap-3
-                      py-2
-                      font-body
-                      text-[11px]
-                      transition-colors
-                      duration-[var(--duration-fast)]
-                      ${
-                        active
-                          ? "font-semibold text-[var(--color-text)]"
-                          : "text-[var(--color-text-secondary)] hover:text-[var(--color-text)]"
-                      }
-                    `}
+                    className={`shop-filters__category ${
+                      active
+                        ? "shop-filters__category--active"
+                        : ""
+                    }`}
                   >
-                    <span className="flex items-center gap-2.5">
+                    <span className="shop-filters__category-name">
                       <span
-                        className={`
-                          h-1
-                          w-1
-                          bg-[var(--color-accent)]
-                          transition-opacity
-                          ${
-                            active
-                              ? "opacity-100"
-                              : "opacity-0 group-hover:opacity-60"
-                          }
-                        `}
+                        className="shop-filters__category-dot"
                         aria-hidden="true"
                       />
 
-                      {formatCategoryName(
-                        category,
-                      )}
+                      <span>
+                        {category.name}
+                      </span>
                     </span>
 
-                    <span
-                      className="
-                        font-body
-                        text-[9px]
-                        text-[var(--color-text-muted)]
-                      "
-                    >
+                    <span className="shop-filters__count">
                       {count}
                     </span>
                   </Link>
@@ -481,13 +367,9 @@ export function ShopFilters({
               },
             )}
           </div>
-        </FilterSectionUI>
+        </FilterSection>
 
-        {/* =================================================
-            PRICE
-        ================================================= */}
-
-        <FilterSectionUI
+        <FilterSection
           title={sectionLabels.price}
           open={openSections.includes(
             "price",
@@ -496,20 +378,20 @@ export function ShopFilters({
             toggleSection("price")
           }
         >
-          <div className="space-y-0.5">
-            {priceRanges.map(
-              (range) => (
+          <div className="shop-filters__list">
+            {priceRanges.map((range) => {
+              const active =
+                selectedPrice ===
+                range.label;
+
+              return (
                 <label
                   key={range.label}
-                  className="
-                    group
-                    flex
-                    min-h-10
-                    cursor-pointer
-                    items-center
-                    gap-3
-                    py-2
-                  "
+                  className={`shop-filters__price ${
+                    active
+                      ? "shop-filters__price--active"
+                      : ""
+                  }`}
                 >
                   <input
                     type="radio"
@@ -518,10 +400,7 @@ export function ShopFilters({
                         ? "mobile-price"
                         : "desktop-price"
                     }
-                    checked={
-                      selectedPrice ===
-                      range.label
-                    }
+                    checked={active}
                     onChange={() =>
                       handlePriceChange(
                         range.label,
@@ -529,40 +408,23 @@ export function ShopFilters({
                         range.max,
                       )
                     }
-                    className="
-                      h-4
-                      w-4
-                      shrink-0
-                      accent-[var(--color-accent-dark)]
-                    "
                   />
 
                   <span
-                    className={`
-                      font-body
-                      text-[11px]
-                      transition-colors
-                      ${
-                        selectedPrice ===
-                        range.label
-                          ? "font-medium text-[var(--color-text)]"
-                          : "text-[var(--color-text-secondary)] group-hover:text-[var(--color-text)]"
-                      }
-                    `}
-                  >
+                    className="shop-filters__radio"
+                    aria-hidden="true"
+                  />
+
+                  <span className="shop-filters__price-label">
                     {range.label}
                   </span>
                 </label>
-              ),
-            )}
+              );
+            })}
           </div>
-        </FilterSectionUI>
+        </FilterSection>
 
-        {/* =================================================
-            AVAILABILITY
-        ================================================= */}
-
-        <FilterSectionUI
+        <FilterSection
           title={
             sectionLabels.availability
           }
@@ -575,7 +437,7 @@ export function ShopFilters({
             )
           }
         >
-          <div className="space-y-0.5">
+          <div className="shop-filters__list">
             {availabilityOptions.map(
               (status) => (
                 <Link
@@ -592,83 +454,36 @@ export function ShopFilters({
                         )
                   }
                   onClick={onClose}
-                  className="
-                    flex
-                    min-h-10
-                    items-center
-                    gap-2.5
-                    py-2
-                    font-body
-                    text-[11px]
-                    text-[var(--color-text-secondary)]
-                    transition-colors
-                    duration-[var(--duration-fast)]
-                    hover:text-[var(--color-text)]
-                  "
+                  className="shop-filters__availability"
                 >
                   <span
-                    className={`
-                      h-1.5
-                      w-1.5
-                      shrink-0
-                      ${
-                        status ===
-                        "in-stock"
-                          ? "bg-[var(--color-success)]"
-                          : "bg-[var(--color-text-muted)]"
-                      }
-                    `}
+                    className={`shop-filters__availability-dot ${
+                      status === "in-stock"
+                        ? "shop-filters__availability-dot--available"
+                        : "shop-filters__availability-dot--sold"
+                    }`}
                     aria-hidden="true"
                   />
 
-                  {
-                    availabilityLabels[
+                  <span>
+                    {availabilityLabels[
                       status
-                    ]
-                  }
+                    ]}
+                  </span>
                 </Link>
               ),
             )}
           </div>
-        </FilterSectionUI>
+        </FilterSection>
       </div>
 
-      {/* =====================================================
-          EDITORIAL NOTE
-      ===================================================== */}
-
       {!mobile && (
-        <div
-          className="
-            mt-6
-            border
-            border-[var(--color-border)]
-            bg-[var(--color-bg-soft)]
-            p-5
-          "
-        >
-          <p
-            className="
-              font-display
-              text-[1.45rem]
-              font-medium
-              leading-none
-              text-[var(--color-text)]
-            "
-          >
-            Find your signature
-            style
+        <div className="shop-filters__note">
+          <p className="shop-filters__note-title">
+            Find your signature style
           </p>
 
-          <p
-            className="
-              mt-2.5
-              font-body
-              text-[10px]
-              leading-6
-              text-[var(--color-text-secondary)]
-            "
-          >
+          <p className="shop-filters__note-text">
             Explore refined silhouettes
             designed for celebrations,
             everyday elegance and modern
@@ -676,82 +491,6 @@ export function ShopFilters({
           </p>
         </div>
       )}
-    </div>
-  );
-}
-
-/* ============================================================
-   FILTER SECTION UI
-============================================================ */
-
-interface FilterSectionUIProps {
-  title: string;
-  open: boolean;
-  onToggle: () => void;
-  children: React.ReactNode;
-}
-
-function FilterSectionUI({
-  title,
-  open,
-  onToggle,
-  children,
-}: FilterSectionUIProps) {
-  return (
-    <div className="py-4">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        className="
-          flex
-          min-h-8
-          w-full
-          items-center
-          justify-between
-          gap-4
-          text-left
-          focus-visible:outline-none
-          focus-visible:ring-1
-          focus-visible:ring-[var(--color-text)]
-        "
-      >
-        <span
-          className="
-            font-body
-            text-[9px]
-            font-semibold
-            uppercase
-            tracking-[0.18em]
-            text-[var(--color-text)]
-          "
-        >
-          {title}
-        </span>
-
-        <ChevronDown
-          size={14}
-          strokeWidth={1.3}
-          className={`
-            shrink-0
-            text-[var(--color-text-muted)]
-            transition-transform
-            duration-[var(--duration-base)]
-            ${
-              open
-                ? "rotate-180"
-                : ""
-            }
-          `}
-          aria-hidden="true"
-        />
-      </button>
-
-      {open && (
-        <div className="pt-4">
-          {children}
-        </div>
-      )}
-    </div>
+    </aside>
   );
 }
