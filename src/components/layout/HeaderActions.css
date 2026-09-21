@@ -1,0 +1,879 @@
+/* =========================================================
+   AAYESHA FASHION
+   HEADER ACTIONS
+   Quiet Indian Luxury
+   ========================================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+/* =========================================================
+   ACTION BUTTON / LINK
+   ========================================================= */
+
+.header-action-button,
+.header-action-link {
+  position: relative;
+
+  display: grid;
+  place-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: var(--color-primary, #342825);
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+.header-action-button__icon,
+.header-action-icon {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.header-action-button:hover,
+.header-action-link:hover {
+  color: var(--color-clay, #8f655d);
+}
+
+.header-action-button:hover
+  .header-action-button__icon,
+.header-action-link:hover
+  .header-action-icon {
+  transform: translateY(-1px);
+}
+
+.header-action-button:focus-visible,
+.header-action-link:focus-visible {
+  outline: 2px solid var(--color-clay, #8f655d);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   UNDERLINE
+   ========================================================= */
+
+.header-action-button__underline,
+.header-action-underline {
+  position: absolute;
+
+  left: 9px;
+  right: 9px;
+  bottom: 4px;
+
+  height: 1px;
+
+  background: var(--color-primary, #342825);
+
+  transform: scaleX(0);
+  transform-origin: right center;
+
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.header-action-button:hover
+  .header-action-button__underline,
+.header-action-link:hover
+  .header-action-underline,
+.header-action-button--active
+  .header-action-button__underline {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+
+/* =========================================================
+   ACTIVE ACTION
+   ========================================================= */
+
+.header-action-button--active {
+  color: var(--color-clay, #8f655d);
+}
+
+.header-action-button--active
+  .header-action-button__underline {
+  background: var(--color-clay, #8f655d);
+}
+
+
+/* =========================================================
+   ACCOUNT
+   ========================================================= */
+
+.header-action-account {
+  position: relative;
+}
+
+
+/* =========================================================
+   ACCOUNT STATUS
+   ========================================================= */
+
+.header-account-status {
+  position: absolute;
+
+  right: 8px;
+  bottom: 9px;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--color-clay, #8f655d);
+
+  box-shadow:
+    0 0 0 2px var(--color-surface, #f5eee8);
+}
+
+
+/* =========================================================
+   COUNTS
+   ========================================================= */
+
+.header-action-link {
+  position: relative;
+}
+
+.header-action-link
+  > :global(.wishlist-count),
+.header-action-link
+  > :global(.cart-count) {
+  position: absolute;
+}
+
+
+/*
+ * These selectors intentionally also support simple
+ * count wrappers without requiring changes to the
+ * WishlistCount / CartCount components.
+ */
+
+.header-action--wishlist > span:not(
+  .header-action-underline
+):not(.header-action-icon) {
+  position: absolute;
+
+  top: 4px;
+  right: 3px;
+
+  display: grid;
+  place-items: center;
+
+  min-width: 15px;
+  height: 15px;
+
+  padding: 0 3px;
+
+  border: 1px solid var(--color-surface, #f5eee8);
+
+  background: var(--color-clay, #8f655d);
+  color: #f8f1eb;
+
+  font-size: 7px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  border-radius: 50%;
+}
+
+.header-action--cart > span:not(
+  .header-action-underline
+):not(.header-action-icon) {
+  position: absolute;
+
+  top: 4px;
+  right: 3px;
+
+  display: grid;
+  place-items: center;
+
+  min-width: 15px;
+  height: 15px;
+
+  padding: 0 3px;
+
+  border: 1px solid var(--color-surface, #f5eee8);
+
+  background: var(--color-primary, #342825);
+  color: #f8f1eb;
+
+  font-size: 7px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================================
+   SEARCH BACKDROP
+   ========================================================= */
+
+.header-search-backdrop {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+
+  background: rgba(52, 40, 37, 0.34);
+
+  cursor: pointer;
+
+  animation: headerBackdropIn 220ms ease;
+}
+
+@keyframes headerBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   SEARCH PANEL
+   ========================================================= */
+
+.header-search-panel {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 1001;
+
+  background: var(--color-surface, #f5eee8);
+
+  border-bottom: 1px solid rgba(52, 40, 37, 0.13);
+
+  box-shadow:
+    0 18px 50px rgba(52, 40, 37, 0.1);
+
+  animation: searchPanelIn 280ms
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes searchPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   SEARCH ACCENT
+   ========================================================= */
+
+.header-search-accent {
+  display: block;
+
+  width: 100%;
+  height: 3px;
+
+  background: var(--color-clay, #8f655d);
+}
+
+
+/* =========================================================
+   SEARCH CONTAINER
+   ========================================================= */
+
+.header-search-container {
+  width: min(1180px, calc(100% - 48px));
+
+  margin: 0 auto;
+}
+
+.header-search-content {
+  padding: 30px 0 22px;
+}
+
+
+/* =========================================================
+   SEARCH ROW
+   ========================================================= */
+
+.header-search-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.header-search-form {
+  flex: 1;
+  min-width: 0;
+}
+
+.header-search-input-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.header-search-icon {
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  color: var(--color-clay, #8f655d);
+}
+
+.header-search-input {
+  flex: 1;
+
+  width: 100%;
+  min-width: 0;
+
+  padding: 7px 0;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: var(--color-primary, #342825);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(25px, 3vw, 38px);
+  font-weight: 400;
+
+  line-height: 1.05;
+}
+
+.header-search-input::placeholder {
+  color: rgba(52, 40, 37, 0.38);
+}
+
+.header-search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+
+/* =========================================================
+   SEARCH SUBMIT
+   ========================================================= */
+
+.header-search-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  flex: 0 0 auto;
+
+  min-height: 38px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--color-primary, #342825);
+
+  background: var(--color-primary, #342825);
+  color: #f8f1eb;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.header-search-submit:hover {
+  background: var(--color-clay, #8f655d);
+  border-color: var(--color-clay, #8f655d);
+  color: #f8f1eb;
+}
+
+.header-search-submit:focus-visible {
+  outline: 2px solid var(--color-clay, #8f655d);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   SEARCH LINE
+   ========================================================= */
+
+.header-search-line {
+  width: 100%;
+  height: 1px;
+
+  margin-top: 5px;
+
+  background: rgba(52, 40, 37, 0.22);
+}
+
+
+/* =========================================================
+   SEARCH CLOSE
+   ========================================================= */
+
+.header-search-close {
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  width: 38px;
+  height: 38px;
+
+  padding: 0;
+
+  border: 1px solid rgba(52, 40, 37, 0.15);
+
+  background: transparent;
+  color: var(--color-primary, #342825);
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.header-search-close:hover {
+  background: var(--color-primary, #342825);
+  border-color: var(--color-primary, #342825);
+  color: #f8f1eb;
+}
+
+.header-search-close:focus-visible {
+  outline: 2px solid var(--color-clay, #8f655d);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   SEARCH META
+   ========================================================= */
+
+.header-search-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 13px;
+}
+
+.header-search-meta .text-caption {
+  margin: 0;
+
+  font-size: 8px;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--color-muted, #786b65);
+}
+
+
+/* =========================================================
+   GUEST ACCOUNT POPUP
+   ========================================================= */
+
+.guest-account-popup {
+  position: absolute;
+
+  top: calc(100% + 12px);
+  right: 0;
+
+  z-index: 950;
+
+  width: min(365px, calc(100vw - 28px));
+
+  animation: guestPopupIn 230ms
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes guestPopupIn {
+  from {
+    opacity: 0;
+    transform: translateY(-7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.guest-account-popup__surface {
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(52, 40, 37, 0.14);
+
+  background: var(--color-surface, #f5eee8);
+  color: var(--color-primary, #342825);
+
+  box-shadow:
+    0 24px 65px rgba(52, 40, 37, 0.16),
+    0 5px 18px rgba(52, 40, 37, 0.08);
+}
+
+.guest-account-popup__accent {
+  display: block;
+
+  width: 100%;
+  height: 3px;
+
+  background: var(--color-clay, #8f655d);
+}
+
+
+/* =========================================================
+   GUEST INTRO
+   ========================================================= */
+
+.guest-account-popup__intro {
+  position: relative;
+
+  padding: 27px 24px 21px;
+
+  border-bottom: 1px solid rgba(52, 40, 37, 0.11);
+}
+
+.guest-account-popup__close {
+  position: absolute;
+
+  top: 14px;
+  right: 14px;
+
+  display: grid;
+  place-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  padding: 0;
+
+  border: 1px solid rgba(52, 40, 37, 0.13);
+
+  background: transparent;
+  color: var(--color-primary, #342825);
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.guest-account-popup__close:hover {
+  background: var(--color-primary, #342825);
+  color: #f8f1eb;
+}
+
+.guest-account-popup__close:focus-visible {
+  outline: 2px solid var(--color-clay, #8f655d);
+  outline-offset: 3px;
+}
+
+.guest-account-popup__eyebrow {
+  margin-bottom: 7px;
+}
+
+.guest-account-popup__title {
+  margin: 0;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 28px;
+  font-weight: 500;
+
+  line-height: 0.98;
+}
+
+.guest-account-popup__description {
+  max-width: 290px;
+
+  margin: 9px 0 0;
+
+  font-size: 10px;
+  line-height: 1.55;
+
+  color: var(--color-muted, #786b65);
+}
+
+
+/* =========================================================
+   AUTH ACTIONS
+   ========================================================= */
+
+.guest-account-popup__actions {
+  padding: 17px 24px;
+
+  border-bottom: 1px solid rgba(52, 40, 37, 0.11);
+}
+
+.guest-account-popup__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.guest-account-popup__button {
+  min-height: 42px;
+
+  font-size: 9px !important;
+  letter-spacing: 0.1em !important;
+}
+
+
+/* =========================================================
+   BENEFITS
+   ========================================================= */
+
+.guest-account-popup__benefits {
+  padding: 18px 24px 22px;
+}
+
+.guest-account-popup__benefits > .eyebrow {
+  margin: 0 0 11px;
+}
+
+.guest-account-popup__benefit-list {
+  display: grid;
+
+  border-top: 1px solid rgba(52, 40, 37, 0.1);
+}
+
+.guest-benefit {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr);
+  gap: 10px;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid rgba(52, 40, 37, 0.1);
+}
+
+.guest-benefit__dot {
+  width: 5px;
+  height: 5px;
+
+  margin-top: 4px;
+
+  background: var(--color-clay, #8f655d);
+}
+
+.guest-benefit__content {
+  min-width: 0;
+}
+
+.guest-benefit__title {
+  margin: 0;
+
+  font-size: 9.5px;
+  font-weight: 600;
+}
+
+.guest-benefit__description {
+  margin: 3px 0 0;
+
+  font-size: 8.5px;
+  line-height: 1.4;
+
+  color: var(--color-muted, #786b65);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .header-actions {
+    gap: 2px;
+  }
+
+  .header-action-button,
+  .header-action-link {
+    width: 37px;
+    height: 37px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .header-actions {
+    gap: 0;
+  }
+
+  .header-action-button,
+  .header-action-link {
+    width: 38px;
+    height: 38px;
+  }
+
+  .header-action-button__underline,
+  .header-action-underline {
+    display: none;
+  }
+
+  .header-account-status {
+    right: 6px;
+    bottom: 8px;
+  }
+
+  .header-search-container {
+    width: calc(100% - 32px);
+  }
+
+  .header-search-content {
+    padding: 22px 0 18px;
+  }
+
+  .header-search-row {
+    gap: 10px;
+  }
+
+  .header-search-input {
+    font-size: 25px;
+  }
+
+  .header-search-submit {
+    min-height: 34px;
+
+    padding: 0 10px;
+
+    font-size: 8px;
+  }
+
+  .header-search-close {
+    width: 34px;
+    height: 34px;
+  }
+
+  .header-search-meta {
+    margin-top: 10px;
+  }
+
+  .header-search-meta .text-caption {
+    font-size: 7px;
+  }
+
+  .guest-account-popup {
+    position: fixed;
+
+    top: 70px;
+    right: 12px;
+    left: 12px;
+
+    width: auto;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .header-action-button,
+  .header-action-link {
+    width: 35px;
+    height: 35px;
+  }
+
+  .header-action-button__icon,
+  .header-action-icon {
+    transform: scale(0.92);
+  }
+
+  .header-search-input {
+    font-size: 22px;
+  }
+
+  .guest-account-popup__intro,
+  .guest-account-popup__actions,
+  .guest-account-popup__benefits {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .guest-account-popup__title {
+    font-size: 25px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .header-action-button,
+  .header-action-link,
+  .header-action-button__icon,
+  .header-action-icon,
+  .header-action-button__underline,
+  .header-action-underline,
+  .header-search-backdrop,
+  .header-search-panel,
+  .header-search-submit,
+  .header-search-close,
+  .guest-account-popup {
+    animation: none;
+    transition: none;
+  }
+}

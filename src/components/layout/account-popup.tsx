@@ -19,6 +19,7 @@ import { useAuthStore } from "@/store/auth-store";
 import { deleteCustomerAccount } from "@/lib/customer-api";
 
 import { AccountConfirmDialog } from "@/components/account/account-confirm-dialog";
+import "./AccountPopup.css";
 
 type AccountPopupProps = {
   isOpen: boolean;

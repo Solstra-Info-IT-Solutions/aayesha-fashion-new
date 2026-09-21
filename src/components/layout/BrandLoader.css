@@ -1,75 +1,77 @@
 /* =========================================================
-   AAYESHA
-   Premium Fashion Loader
+   AAYESHA FASHION
+   CINEMATIC BRAND LOADER
    ========================================================= */
 
 .aayesha-loader {
   position: fixed;
   inset: 0;
-  z-index: 9999;
 
-  width: 100%;
-  height: 100dvh;
+  z-index: 99999;
+
+  display: grid;
+  place-items: center;
 
   overflow: hidden;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   background:
     radial-gradient(
-      circle at 20% 20%,
-      rgba(194, 143, 133, 0.35),
-      transparent 38%
+      circle at 50% 45%,
+      rgba(194, 150, 137, 0.28),
+      transparent 34%
     ),
     radial-gradient(
-      circle at 85% 75%,
-      rgba(164, 119, 105, 0.28),
-      transparent 35%
+      circle at 12% 20%,
+      rgba(217, 180, 162, 0.16),
+      transparent 28%
     ),
-    #8f655d;
+    #76534e;
 
-  color: #f7efe9;
+  color: #f8eee8;
 
   isolation: isolate;
 }
 
 
 /* =========================================================
-   BACKGROUND PANELS
+   BACKGROUND WASH
    ========================================================= */
 
-.aayesha-loader__panel {
+.aayesha-loader__wash {
   position: absolute;
+  inset: -20%;
+
+  background:
+    linear-gradient(
+      115deg,
+      transparent 25%,
+      rgba(255, 232, 220, 0.055) 46%,
+      rgba(255, 232, 220, 0.11) 50%,
+      transparent 56%
+    );
+
+  transform: translateX(-30%);
+
+  animation:
+    loaderLightSweep 7s
+    cubic-bezier(0.45, 0, 0.55, 1)
+    infinite;
 
   pointer-events: none;
-
-  border: 1px solid rgba(247, 239, 233, 0.12);
 }
 
-.aayesha-loader__panel--one {
-  width: 42vw;
-  height: 72vh;
+@keyframes loaderLightSweep {
+  0% {
+    transform: translateX(-45%);
+  }
 
-  left: -16vw;
-  top: 14vh;
+  50% {
+    transform: translateX(5%);
+  }
 
-  transform: rotate(-14deg);
-
-  background: rgba(255, 255, 255, 0.025);
-}
-
-.aayesha-loader__panel--two {
-  width: 32vw;
-  height: 90vh;
-
-  right: -10vw;
-  top: -12vh;
-
-  transform: rotate(17deg);
-
-  background: rgba(49, 31, 27, 0.08);
+  100% {
+    transform: translateX(45%);
+  }
 }
 
 
@@ -81,55 +83,335 @@
   position: absolute;
   inset: -50%;
 
-  pointer-events: none;
-
-  opacity: 0.075;
+  opacity: 0.055;
 
   background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
 
-  transform: rotate(8deg);
+  pointer-events: none;
+
+  animation: grainMove 0.22s steps(2) infinite;
+}
+
+@keyframes grainMove {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-2%, 1%);
+  }
+
+  50% {
+    transform: translate(1%, -2%);
+  }
+
+  75% {
+    transform: translate(2%, 1%);
+  }
+
+  100% {
+    transform: translate(-1%, -1%);
+  }
 }
 
 
 /* =========================================================
-   MAIN CONTENT
+   MOVING LIGHT
+   ========================================================= */
+
+.aayesha-loader__light {
+  position: absolute;
+
+  top: -30%;
+  left: 42%;
+
+  width: 1px;
+  height: 160%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 239, 229, 0.22),
+      transparent
+    );
+
+  transform: rotate(18deg);
+
+  filter: blur(1px);
+
+  opacity: 0.6;
+
+  animation:
+    verticalLight 5.5s
+    ease-in-out
+    infinite;
+}
+
+@keyframes verticalLight {
+  0%,
+  100% {
+    transform:
+      translateX(-80px)
+      rotate(18deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform:
+      translateX(80px)
+      rotate(18deg);
+    opacity: 0.65;
+  }
+}
+
+
+/* =========================================================
+   FLOATING ORBS
+   ========================================================= */
+
+.aayesha-loader__orb {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(60px);
+
+  opacity: 0.16;
+}
+
+.aayesha-loader__orb--one {
+  top: 12%;
+  left: 18%;
+
+  width: 160px;
+  height: 160px;
+
+  background: #c99384;
+
+  animation:
+    orbFloatOne 8s
+    ease-in-out
+    infinite;
+}
+
+.aayesha-loader__orb--two {
+  right: 10%;
+  bottom: 12%;
+
+  width: 210px;
+  height: 210px;
+
+  background: #a9786e;
+
+  animation:
+    orbFloatTwo 10s
+    ease-in-out
+    infinite;
+}
+
+@keyframes orbFloatOne {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(45px, -30px, 0);
+  }
+}
+
+@keyframes orbFloatTwo {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-55px, 35px, 0);
+  }
+}
+
+
+/* =========================================================
+   EDITORIAL FRAME
+   ========================================================= */
+
+.aayesha-loader__frame {
+  position: absolute;
+  inset: 22px;
+
+  border: 1px solid rgba(248, 238, 232, 0.13);
+
+  pointer-events: none;
+}
+
+.aayesha-loader__frame-inner {
+  position: absolute;
+  inset: 32px;
+
+  border: 1px solid rgba(248, 238, 232, 0.055);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SIDE PANELS
+   ========================================================= */
+
+.aayesha-loader__panel {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  width: 50%;
+
+  background: rgba(45, 30, 28, 0.13);
+
+  transform-origin: center;
+
+  pointer-events: none;
+}
+
+.aayesha-loader__panel--left {
+  left: 0;
+}
+
+.aayesha-loader__panel--right {
+  right: 0;
+}
+
+
+/* =========================================================
+   CENTER CONTENT
    ========================================================= */
 
 .aayesha-loader__content {
   position: relative;
   z-index: 5;
 
-  width: min(500px, calc(100% - 48px));
+  width: min(720px, calc(100vw - 100px));
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
 }
 
 
 /* =========================================================
-   TOP MARK
+   TOP META
    ========================================================= */
 
 .aayesha-loader__top {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 13px;
 
-  font-size: 8px;
+  margin-bottom: 34px;
+
+  font-size: 7px;
   font-weight: 600;
 
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
 
-  color: rgba(247, 239, 233, 0.58);
+  color: rgba(248, 238, 232, 0.65);
 }
 
-.aayesha-loader__top-line {
-  width: 34px;
+.aayesha-loader__top-rule {
+  width: 26px;
   height: 1px;
 
-  background: rgba(247, 239, 233, 0.32);
+  background: rgba(248, 238, 232, 0.28);
+}
+
+.aayesha-loader__top-code {
+  color: rgba(248, 238, 232, 0.9);
+}
+
+
+/* =========================================================
+   MONOGRAM
+   ========================================================= */
+
+.aayesha-loader__monogram {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 62px;
+  height: 62px;
+
+  margin: 0 auto 23px;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 23px;
+  font-weight: 500;
+
+  color: rgba(248, 238, 232, 0.94);
+}
+
+.aayesha-loader__monogram-divider {
+  font-family:
+    "Inter",
+    Arial,
+    sans-serif;
+
+  font-size: 11px;
+
+  opacity: 0.38;
+}
+
+.aayesha-loader__monogram-ring {
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid rgba(248, 238, 232, 0.28);
+
+  border-radius: 50%;
+
+  animation:
+    monogramRotate 12s
+    linear
+    infinite;
+}
+
+.aayesha-loader__monogram-ring::after {
+  content: "";
+
+  position: absolute;
+
+  top: -2px;
+  left: 50%;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #e2b7a8;
+
+  transform: translateX(-50%);
+}
+
+@keyframes monogramRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 
@@ -137,12 +419,27 @@
    BRAND
    ========================================================= */
 
-.aayesha-loader__brand-wrap {
-  margin-top: 34px;
-
+.aayesha-loader__brand-overline {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  margin-bottom: 9px;
+
+  font-size: 6.5px;
+  font-weight: 600;
+
+  letter-spacing: 0.24em;
+
+  color: rgba(248, 238, 232, 0.55);
+}
+
+.aayesha-loader__brand-overline span {
+  width: 18px;
+  height: 1px;
+
+  background: rgba(248, 238, 232, 0.22);
 }
 
 .aayesha-loader__brand {
@@ -151,25 +448,45 @@
     Georgia,
     serif;
 
-  font-size: clamp(54px, 8vw, 92px);
-
+  font-size: clamp(62px, 9vw, 118px);
   font-weight: 400;
 
-  line-height: 0.8;
+  line-height: 0.78;
 
-  letter-spacing: 0.08em;
-  text-indent: 0.08em;
+  letter-spacing: 0.045em;
 
-  color: #f7efe9;
+  text-indent: 0.045em;
+
+  color: #f8eee8;
+
+  text-shadow:
+    0 12px 45px rgba(34, 20, 18, 0.2);
 }
 
 .aayesha-loader__brand-rule {
-  width: 52px;
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+
+  margin-top: 17px;
+}
+
+.aayesha-loader__brand-rule span {
+  display: block;
+
+  width: min(210px, 35vw);
   height: 1px;
 
-  margin-top: 24px;
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      rgba(248, 238, 232, 0.72),
+      transparent
+    );
 
-  background: rgba(247, 239, 233, 0.5);
+  transform-origin: center;
 }
 
 
@@ -177,25 +494,33 @@
    TAGLINE
    ========================================================= */
 
+.aayesha-loader__tagline-wrap {
+  margin-top: 19px;
+}
+
 .aayesha-loader__tagline {
-  margin-top: 17px;
+  margin: 0;
+
+  font-size: 7px;
+  font-weight: 600;
+
+  letter-spacing: 0.28em;
+
+  color: rgba(248, 238, 232, 0.75);
+}
+
+.aayesha-loader__tagline-sub {
+  margin: 7px 0 0;
 
   font-family:
-    "Manrope",
-    Arial,
-    sans-serif;
+    "Cormorant Garamond",
+    Georgia,
+    serif;
 
-  font-size: 9px;
-  font-weight: 500;
+  font-size: 14px;
+  font-style: italic;
 
-  line-height: 1.2;
-
-  letter-spacing: 0.24em;
-  text-indent: 0.24em;
-
-  text-align: center;
-
-  color: rgba(247, 239, 233, 0.62);
+  color: rgba(248, 238, 232, 0.52);
 }
 
 
@@ -204,42 +529,83 @@
    ========================================================= */
 
 .aayesha-loader__loading {
-  width: min(330px, 100%);
+  width: min(380px, 65vw);
 
-  margin-top: 76px;
+  margin: 48px auto 0;
 }
 
-.aayesha-loader__loading-head {
+.aayesha-loader__loading-head,
+.aayesha-loader__loading-footer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
-  margin-bottom: 11px;
-
-  font-size: 8px;
+  font-size: 6.5px;
   font-weight: 600;
 
-  letter-spacing: 0.15em;
+  letter-spacing: 0.19em;
 
-  color: rgba(247, 239, 233, 0.58);
+  color: rgba(248, 238, 232, 0.58);
+}
+
+.aayesha-loader__loading-percent {
+  color: rgba(248, 238, 232, 0.92);
+
+  font-variant-numeric: tabular-nums;
+}
+
+.aayesha-loader__loading-percent small {
+  margin-left: 2px;
+
+  font-size: 5px;
 }
 
 .aayesha-loader__track {
+  position: relative;
+
   width: 100%;
   height: 1px;
 
-  overflow: hidden;
+  margin: 10px 0 8px;
 
-  background: rgba(247, 239, 233, 0.18);
+  overflow: visible;
+
+  background: rgba(248, 238, 232, 0.17);
 }
 
 .aayesha-loader__progress {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
 
-  background: #f7efe9;
+  background: #ead0c5;
 
   transform-origin: left center;
+}
+
+.aayesha-loader__track-marker {
+  position: absolute;
+
+  top: 50%;
+  left: 0;
+
+  width: 5px;
+  height: 5px;
+
+  border: 1px solid #ead0c5;
+
+  background: #76534e;
+
+  transform:
+    translate(
+      calc(var(--progress, 0) * 1%),
+      -50%
+    );
+
+  opacity: 0;
+}
+
+.aayesha-loader__loading-footer {
+  color: rgba(248, 238, 232, 0.38);
 }
 
 
@@ -249,16 +615,20 @@
 
 .aayesha-loader__side {
   position: absolute;
-  z-index: 5;
-
   top: 50%;
 
-  font-size: 8px;
+  z-index: 5;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  font-size: 6px;
   font-weight: 600;
 
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
 
-  color: rgba(247, 239, 233, 0.4);
+  color: rgba(248, 238, 232, 0.42);
 
   writing-mode: vertical-rl;
 
@@ -266,35 +636,122 @@
 }
 
 .aayesha-loader__side--left {
-  left: 25px;
-
-  transform:
-    translateY(-50%)
-    rotate(180deg);
+  left: 38px;
 }
 
 .aayesha-loader__side--right {
-  right: 25px;
+  right: 38px;
+}
+
+.aayesha-loader__side span:first-child {
+  color: rgba(248, 238, 232, 0.75);
 }
 
 
 /* =========================================================
-   YEAR
+   BOTTOM META
    ========================================================= */
 
-.aayesha-loader__year {
+.aayesha-loader__bottom-left,
+.aayesha-loader__bottom-right {
   position: absolute;
-  bottom: 24px;
-  left: 50%;
 
-  transform: translateX(-50%);
+  bottom: 38px;
 
-  font-size: 8px;
+  z-index: 5;
+
+  font-size: 6px;
   font-weight: 600;
 
   letter-spacing: 0.2em;
 
-  color: rgba(247, 239, 233, 0.38);
+  color: rgba(248, 238, 232, 0.4);
+}
+
+.aayesha-loader__bottom-left {
+  left: 38px;
+}
+
+.aayesha-loader__bottom-right {
+  right: 38px;
+}
+
+
+/* =========================================================
+   CROSSHAIRS
+   ========================================================= */
+
+.aayesha-loader__crosshair {
+  position: absolute;
+
+  left: 50%;
+
+  width: 9px;
+  height: 9px;
+
+  border-left: 1px solid rgba(248, 238, 232, 0.22);
+  border-right: 1px solid rgba(248, 238, 232, 0.22);
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
+}
+
+.aayesha-loader__crosshair--top {
+  top: 38px;
+}
+
+.aayesha-loader__crosshair--bottom {
+  bottom: 38px;
+}
+
+
+/* =========================================================
+   FINAL REVEAL
+   ========================================================= */
+
+.aayesha-loader__reveal {
+  position: absolute;
+  inset: 0;
+
+  z-index: 20;
+
+  background: #f5eee8;
+
+  transform-origin: bottom center;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .aayesha-loader__frame {
+    inset: 16px;
+  }
+
+  .aayesha-loader__frame-inner {
+    inset: 24px;
+  }
+
+  .aayesha-loader__side--left {
+    left: 26px;
+  }
+
+  .aayesha-loader__side--right {
+    right: 26px;
+  }
+
+  .aayesha-loader__bottom-left {
+    left: 26px;
+  }
+
+  .aayesha-loader__bottom-right {
+    right: 26px;
+  }
 }
 
 
@@ -302,63 +759,145 @@
    MOBILE
    ========================================================= */
 
-@media (max-width: 767px) {
+@media (max-width: 640px) {
   .aayesha-loader {
     background:
       radial-gradient(
-        circle at 50% 20%,
-        rgba(194, 143, 133, 0.34),
-        transparent 48%
+        circle at 50% 42%,
+        rgba(194, 150, 137, 0.28),
+        transparent 42%
       ),
-      #8f655d;
+      #76534e;
+  }
+
+  .aayesha-loader__frame {
+    inset: 12px;
+  }
+
+  .aayesha-loader__frame-inner {
+    inset: 19px;
   }
 
   .aayesha-loader__content {
-    width: calc(100% - 56px);
+    width: calc(100vw - 70px);
+  }
+
+  .aayesha-loader__top {
+    gap: 8px;
+
+    margin-bottom: 28px;
+
+    font-size: 5.5px;
+    letter-spacing: 0.17em;
+  }
+
+  .aayesha-loader__top-rule {
+    width: 16px;
+  }
+
+  .aayesha-loader__monogram {
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 19px;
+
+    font-size: 20px;
   }
 
   .aayesha-loader__brand {
-    font-size: clamp(48px, 15vw, 68px);
+    font-size: clamp(52px, 17vw, 78px);
 
-    letter-spacing: 0.055em;
-    text-indent: 0.055em;
+    letter-spacing: 0.025em;
+    text-indent: 0.025em;
   }
 
-  .aayesha-loader__brand-rule {
-    margin-top: 20px;
+  .aayesha-loader__brand-overline {
+    font-size: 5.5px;
+
+    letter-spacing: 0.18em;
   }
 
   .aayesha-loader__tagline {
-    font-size: 8px;
+    font-size: 5.5px;
 
-    letter-spacing: 0.18em;
-    text-indent: 0.18em;
+    letter-spacing: 0.2em;
+  }
+
+  .aayesha-loader__tagline-sub {
+    font-size: 12px;
   }
 
   .aayesha-loader__loading {
-    margin-top: 58px;
+    width: min(300px, 75vw);
+
+    margin-top: 38px;
+  }
+
+  .aayesha-loader__loading-head,
+  .aayesha-loader__loading-footer {
+    font-size: 5.5px;
   }
 
   .aayesha-loader__side {
-    display: none;
+    font-size: 5px;
   }
 
-  .aayesha-loader__year {
-    bottom: 20px;
+  .aayesha-loader__side--left {
+    left: 18px;
   }
 
-  .aayesha-loader__panel--one {
-    width: 70vw;
-    height: 70vh;
-
-    left: -40vw;
+  .aayesha-loader__side--right {
+    right: 18px;
   }
 
-  .aayesha-loader__panel--two {
-    width: 65vw;
-    height: 75vh;
+  .aayesha-loader__bottom-left,
+  .aayesha-loader__bottom-right {
+    bottom: 24px;
 
-    right: -35vw;
+    font-size: 5px;
+  }
+
+  .aayesha-loader__bottom-left {
+    left: 20px;
+  }
+
+  .aayesha-loader__bottom-right {
+    right: 20px;
+  }
+
+  .aayesha-loader__crosshair--top {
+    top: 25px;
+  }
+
+  .aayesha-loader__crosshair--bottom {
+    bottom: 25px;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .aayesha-loader__brand {
+    font-size: 50px;
+  }
+
+  .aayesha-loader__loading {
+    margin-top: 31px;
+  }
+
+  .aayesha-loader__tagline-sub {
+    font-size: 11px;
+  }
+
+  .aayesha-loader__side--left {
+    left: 14px;
+  }
+
+  .aayesha-loader__side--right {
+    right: 14px;
   }
 }
 
@@ -368,7 +907,11 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .aayesha-loader {
-    display: none;
+  .aayesha-loader__wash,
+  .aayesha-loader__grain,
+  .aayesha-loader__light,
+  .aayesha-loader__orb,
+  .aayesha-loader__monogram-ring {
+    animation: none;
   }
 }

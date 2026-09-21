@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
 import toast from "react-hot-toast";
+import "./MobileMenu.css";
 
 import {
   ArrowUpRight,
