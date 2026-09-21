@@ -4,9 +4,7 @@ import { useMemo } from "react";
 
 import Link from "next/link";
 
-import {
-  SlidersHorizontal,
-} from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 
 import type {
   Product,
@@ -19,6 +17,8 @@ import {
 } from "@/types/product";
 
 import { ProductCard } from "@/components/product/product-card";
+
+import "./ShopProductGrid.css";
 
 interface ShopProductGridProps {
   products: Product[];
@@ -33,10 +33,9 @@ function getUrlParams() {
     };
   }
 
-  const params =
-    new URLSearchParams(
-      window.location.search,
-    );
+  const params = new URLSearchParams(
+    window.location.search,
+  );
 
   return {
     availability:
@@ -52,13 +51,10 @@ function getCollectionContext() {
     };
   }
 
-  const pathname =
-    window.location.pathname;
-
-  const params =
-    new URLSearchParams(
-      window.location.search,
-    );
+  const pathname = window.location.pathname;
+  const params = new URLSearchParams(
+    window.location.search,
+  );
 
   return {
     isNew:
@@ -84,198 +80,156 @@ export function ShopProductGrid({
     [products, category, sort],
   );
 
-  const collectionContext =
-    useMemo(
-      () => getCollectionContext(),
-      [products, category, sort],
+  const collectionContext = useMemo(
+    () => getCollectionContext(),
+    [products, category, sort],
+  );
+
+  const filteredProducts = useMemo(() => {
+    let result = products.filter(
+      (product) =>
+        product.status === "active",
     );
 
-  const filteredProducts =
-    useMemo(() => {
-      let result = products.filter(
+    if (category) {
+      result = result.filter(
         (product) =>
-          product.status === "active",
+          product.categoryId === category,
       );
+    }
 
-      /* =====================================================
-         CATEGORY
-      ===================================================== */
+    if (collectionContext.isNew) {
+      result = result.filter(
+        (product) =>
+          product.merchandising?.isNew ===
+          true,
+      );
+    }
 
-      if (category) {
-        result = result.filter(
-          (product) =>
-            product.categoryId ===
-            category,
+    if (collectionContext.isBestSeller) {
+      result = result.filter(
+        (product) =>
+          product.merchandising
+            ?.isBestSeller === true,
+      );
+    }
+
+    if (urlParams.availability) {
+      result = result.filter((product) => {
+        const inventoryStatus =
+          getInventoryStatus(product);
+
+        if (
+          urlParams.availability ===
+          "out-of-stock"
+        ) {
+          return (
+            inventoryStatus ===
+            "out-of-stock"
+          );
+        }
+
+        if (
+          urlParams.availability ===
+          "in-stock"
+        ) {
+          return (
+            inventoryStatus ===
+              "in-stock" ||
+            inventoryStatus === "low-stock"
+          );
+        }
+
+        if (
+          urlParams.availability ===
+          "low"
+        ) {
+          return (
+            inventoryStatus ===
+            "low-stock"
+          );
+        }
+
+        return true;
+      });
+    }
+
+    switch (sort) {
+      case "price-low":
+        result.sort(
+          (a, b) =>
+            getProductStartingPrice(a) -
+            getProductStartingPrice(b),
         );
-      }
+        break;
 
-      /* =====================================================
-         COLLECTION SCOPE
-      ===================================================== */
-
-      if (collectionContext.isNew) {
-        result = result.filter(
-          (product) =>
-            product.merchandising
-              ?.isNew === true,
+      case "price-high":
+        result.sort(
+          (a, b) =>
+            getProductStartingPrice(b) -
+            getProductStartingPrice(a),
         );
-      }
+        break;
 
-      if (
-        collectionContext.isBestSeller
-      ) {
-        result = result.filter(
-          (product) =>
-            product.merchandising
-              ?.isBestSeller === true,
+      case "newest":
+        result.sort(
+          (a, b) =>
+            new Date(
+              b.createdAt,
+            ).getTime() -
+            new Date(
+              a.createdAt,
+            ).getTime(),
         );
-      }
+        break;
 
-      /* =====================================================
-         AVAILABILITY
-      ===================================================== */
+      case "best-selling":
+        result.sort((a, b) => {
+          const aScore =
+            a.merchandising?.isBestSeller
+              ? 1
+              : 0;
 
-      if (urlParams.availability) {
-        result = result.filter(
-          (product) => {
-            const inventoryStatus =
-              getInventoryStatus(
-                product,
-              );
+          const bScore =
+            b.merchandising?.isBestSeller
+              ? 1
+              : 0;
 
-            if (
-              urlParams.availability ===
-              "out-of-stock"
-            ) {
-              return (
-                inventoryStatus ===
-                "out-of-stock"
-              );
-            }
+          return bScore - aScore;
+        });
+        break;
 
-            if (
-              urlParams.availability ===
-              "in-stock"
-            ) {
-              return (
-                inventoryStatus ===
-                  "in-stock" ||
-                inventoryStatus ===
-                  "low-stock"
-              );
-            }
+      case "featured":
+        result.sort((a, b) => {
+          const aScore =
+            a.merchandising?.isFeatured
+              ? 1
+              : 0;
 
-            if (
-              urlParams.availability ===
-              "low"
-            ) {
-              return (
-                inventoryStatus ===
-                "low-stock"
-              );
-            }
+          const bScore =
+            b.merchandising?.isFeatured
+              ? 1
+              : 0;
 
-            return true;
-          },
-        );
-      }
+          return bScore - aScore;
+        });
+        break;
 
-      /* =====================================================
-         SORT
-      ===================================================== */
+      case "rating":
+      case "relevance":
+      default:
+        break;
+    }
 
-      switch (sort) {
-        case "price-low":
-          result.sort(
-            (a, b) =>
-              getProductStartingPrice(a) -
-              getProductStartingPrice(b),
-          );
-          break;
-
-        case "price-high":
-          result.sort(
-            (a, b) =>
-              getProductStartingPrice(b) -
-              getProductStartingPrice(a),
-          );
-          break;
-
-        case "newest":
-          result.sort(
-            (a, b) =>
-              new Date(
-                b.createdAt,
-              ).getTime() -
-              new Date(
-                a.createdAt,
-              ).getTime(),
-          );
-          break;
-
-        case "best-selling":
-          result.sort(
-            (a, b) => {
-              const aScore =
-                a.merchandising
-                  ?.isBestSeller
-                  ? 1
-                  : 0;
-
-              const bScore =
-                b.merchandising
-                  ?.isBestSeller
-                  ? 1
-                  : 0;
-
-              return (
-                bScore - aScore
-              );
-            },
-          );
-          break;
-
-        case "featured":
-          result.sort(
-            (a, b) => {
-              const aScore =
-                a.merchandising
-                  ?.isFeatured
-                  ? 1
-                  : 0;
-
-              const bScore =
-                b.merchandising
-                  ?.isFeatured
-                  ? 1
-                  : 0;
-
-              return (
-                bScore - aScore
-              );
-            },
-          );
-          break;
-
-        case "rating":
-        case "relevance":
-        default:
-          break;
-      }
-
-      return result;
-    }, [
-      products,
-      category,
-      sort,
-      urlParams.availability,
-      collectionContext.isNew,
-      collectionContext.isBestSeller,
-    ]);
-
-  /* ==========================================================
-     CURRENT COLLECTION LINK
-  ========================================================== */
+    return result;
+  }, [
+    products,
+    category,
+    sort,
+    urlParams.availability,
+    collectionContext.isNew,
+    collectionContext.isBestSeller,
+  ]);
 
   const refineHref =
     collectionContext.isNew
@@ -285,44 +239,14 @@ export function ShopProductGrid({
         : "/shop";
 
   return (
-    <div className="min-w-0">
-      {/* =====================================================
-          PRODUCT COUNT / REFINE
-      ===================================================== */}
-
-      <div
-        className="
-          mb-7
-          flex
-          min-h-8
-          items-center
-          justify-between
-          gap-4
-          sm:mb-8
-        "
-      >
-        <div>
-          <p
-            className="
-              font-body
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.18em]
-              text-[var(--color-text-muted)]
-            "
-          >
+    <section className="shop-product-grid">
+      <div className="shop-product-grid__toolbar">
+        <div className="shop-product-grid__collection">
+          <p className="shop-product-grid__eyebrow">
             Collection
           </p>
 
-          <p
-            className="
-              mt-1
-              font-body
-              text-[11px]
-              text-[var(--color-text-secondary)]
-            "
-          >
+          <p className="shop-product-grid__count">
             {filteredProducts.length}{" "}
             {filteredProducts.length === 1
               ? "piece"
@@ -332,160 +256,21 @@ export function ShopProductGrid({
 
         <Link
           href={refineHref}
-          className="
-            inline-flex
-            min-h-9
-            items-center
-            gap-2
-            font-body
-            text-[9px]
-            font-semibold
-            uppercase
-            tracking-[0.16em]
-            text-[var(--color-text-secondary)]
-            transition-colors
-            duration-[var(--duration-fast)]
-            hover:text-[var(--color-text)]
-            lg:hidden
-          "
+          className="shop-product-grid__refine"
         >
           <SlidersHorizontal
             size={13}
             strokeWidth={1.4}
           />
 
-          Refine
+          <span>Refine</span>
         </Link>
       </div>
 
-      {/* =====================================================
-          EMPTY STATE
-      ===================================================== */}
-
       {filteredProducts.length === 0 ? (
-        <div
-          className="
-            flex
-            min-h-[420px]
-            flex-col
-            items-center
-            justify-center
-            border-y
-            border-[var(--color-border)]
-            bg-[var(--color-bg-soft)]
-            px-6
-            py-16
-            text-center
-            sm:min-h-[500px]
-            sm:px-10
-          "
-        >
-          <span
-            className="
-              h-px
-              w-10
-              bg-[var(--color-accent)]
-            "
-            aria-hidden="true"
-          />
-
-          <p
-            className="
-              mt-6
-              font-body
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.22em]
-              text-[var(--color-accent)]
-            "
-          >
-            Nothing here yet
-          </p>
-
-          <h2
-            className="
-              mt-3
-              font-display
-              text-[clamp(2.2rem,5vw,3.5rem)]
-              font-medium
-              leading-none
-              tracking-tight
-              text-[var(--color-text)]
-            "
-          >
-            No pieces found
-          </h2>
-
-          <p
-            className="
-              mx-auto
-              mt-4
-              max-w-md
-              font-body
-              text-[11px]
-              leading-6
-              text-[var(--color-text-secondary)]
-            "
-          >
-            Try adjusting your filters or
-            explore the complete collection.
-          </p>
-
-          <Link
-            href={refineHref}
-            className="
-              mt-7
-              inline-flex
-              min-h-11
-              items-center
-              justify-center
-              border
-              border-[var(--color-text)]
-              px-6
-              font-body
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.18em]
-              text-[var(--color-text)]
-              transition-all
-              duration-[var(--duration-base)]
-              hover:bg-[var(--color-text)]
-              hover:text-[var(--color-text-inverse)]
-              focus-visible:outline-none
-              focus-visible:ring-1
-              focus-visible:ring-[var(--color-text)]
-              focus-visible:ring-offset-2
-            "
-          >
-            View Collection
-          </Link>
-        </div>
+        <EmptyState href={refineHref} />
       ) : (
-        /* ===================================================
-           PRODUCT GRID
-        =================================================== */
-
-        <div
-          className="
-            grid
-            grid-cols-2
-            gap-x-3
-            gap-y-10
-
-            sm:gap-x-5
-            sm:gap-y-12
-
-            md:grid-cols-3
-            md:gap-x-6
-            md:gap-y-14
-
-            xl:grid-cols-4
-            xl:gap-x-7
-            xl:gap-y-16
-          "
-        >
+        <div className="shop-product-grid__products">
           {filteredProducts.map(
             (product) => (
               <ProductCard
@@ -496,6 +281,43 @@ export function ShopProductGrid({
           )}
         </div>
       )}
+    </section>
+  );
+}
+
+interface EmptyStateProps {
+  href: string;
+}
+
+function EmptyState({
+  href,
+}: EmptyStateProps) {
+  return (
+    <div className="shop-product-grid__empty">
+      <span
+        className="shop-product-grid__empty-line"
+        aria-hidden="true"
+      />
+
+      <p className="shop-product-grid__empty-eyebrow">
+        Nothing here yet
+      </p>
+
+      <h2 className="shop-product-grid__empty-title">
+        No pieces found
+      </h2>
+
+      <p className="shop-product-grid__empty-description">
+        Try adjusting your filters or
+        explore the complete collection.
+      </p>
+
+      <Link
+        href={href}
+        className="shop-product-grid__empty-button"
+      >
+        View Collection
+      </Link>
     </div>
   );
 }

@@ -1,0 +1,322 @@
+/* ==========================================================
+   AAYESHA FASHION — SHOP HEADER
+========================================================== */
+
+.shop-header {
+  width: 100%;
+  color: var(--color-text);
+}
+
+/* ==========================================================
+   PAGE HEADING
+========================================================== */
+
+.shop-header__heading {
+  padding: 20px 0 24px;
+}
+
+.shop-header__title {
+  margin: 0;
+
+  color: var(--color-text);
+
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+
+/* ==========================================================
+   TOOLBAR
+========================================================== */
+
+.shop-header__toolbar {
+  position: relative;
+
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border-top: 1px solid var(--color-border-light);
+}
+
+/* ==========================================================
+   PRODUCT COUNT
+========================================================== */
+
+.shop-header__count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--color-text-secondary);
+
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.shop-header__count-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+
+  background: #6f4b47;
+}
+
+/* ==========================================================
+   SORT
+========================================================== */
+
+.shop-header__sort {
+  position: relative;
+}
+
+.shop-header__sort-button {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0 12px;
+
+  border: 1px solid var(--color-border-light);
+  border-radius: 0;
+  outline: none;
+
+  background: var(--color-bg);
+  color: var(--color-text);
+
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.shop-header__sort-button:hover {
+  border-color: var(--color-border-dark);
+}
+
+.shop-header__sort-button:active {
+  background: var(--color-bg-soft);
+}
+
+.shop-header__sort-button:focus-visible {
+  outline: 2px solid #9b7069;
+  outline-offset: 3px;
+}
+
+.shop-header__sort-button--open {
+  border-color: #6f4b47;
+}
+
+.shop-header__sort-label {
+  color: var(--color-text-muted);
+}
+
+.shop-header__sort-value {
+  color: var(--color-text);
+}
+
+.shop-header__sort-icon {
+  flex: 0 0 auto;
+
+  color: var(--color-text-muted);
+
+  transition:
+    transform 200ms ease,
+    color 180ms ease;
+}
+
+.shop-header__sort-button--open
+  .shop-header__sort-icon {
+  color: #6f4b47;
+  transform: rotate(180deg);
+}
+
+/* ==========================================================
+   SORT MENU
+========================================================== */
+
+.shop-header__sort-menu {
+  position: absolute;
+  z-index: var(--z-dropdown);
+  top: calc(100% + 6px);
+  right: 0;
+
+  width: 220px;
+  overflow: hidden;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==========================================================
+   SORT OPTION
+========================================================== */
+
+.shop-header__sort-option {
+  display: flex;
+  width: 100%;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 10px 16px;
+
+  border: 0;
+  border-radius: 0;
+  outline: none;
+
+  background: transparent;
+  color: var(--color-text-secondary);
+
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.3;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    padding-left 180ms ease;
+}
+
+.shop-header__sort-option:hover {
+  padding-left: 19px;
+
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+}
+
+.shop-header__sort-option:active {
+  background: #eee5e2;
+  color: #3f2d2a;
+}
+
+.shop-header__sort-option:focus-visible {
+  outline: 2px solid #9b7069;
+  outline-offset: -2px;
+}
+
+.shop-header__sort-option--active {
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.shop-header__option-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+
+  background: #6f4b47;
+}
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 1024px) {
+  .shop-header__title {
+    font-size: 34px;
+  }
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 640px) {
+  .shop-header__heading {
+    padding: 18px 0 20px;
+  }
+
+  .shop-header__title {
+    font-size: 30px;
+  }
+
+  .shop-header__toolbar {
+    min-height: 50px;
+  }
+
+  .shop-header__count {
+    font-size: 8px;
+    letter-spacing: 0.14em;
+  }
+
+  .shop-header__sort-button {
+    min-height: 35px;
+    gap: 8px;
+
+    padding: 0 10px;
+
+    font-size: 8px;
+    letter-spacing: 0.11em;
+  }
+
+  .shop-header__sort-menu {
+    width: 205px;
+  }
+}
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 390px) {
+  .shop-header__title {
+    font-size: 28px;
+  }
+
+  .shop-header__count {
+    gap: 7px;
+  }
+
+  .shop-header__count-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .shop-header__sort-value {
+    max-width: 105px;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-header__sort-button,
+  .shop-header__sort-icon,
+  .shop-header__sort-option {
+    transition: none;
+  }
+}

@@ -7,14 +7,14 @@ import {
   useState,
 } from "react";
 
-import {
-  ChevronDown,
-} from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import type {
   Product,
   ProductSort,
 } from "@/types/product";
+
+import "./ShopHeader.css";
 
 interface ShopHeaderProps {
   products?: Product[];
@@ -56,27 +56,25 @@ const sortOptions: {
   },
 ];
 
-function getPageTitle() {
+function getPageTitle(): string {
   if (typeof window === "undefined") {
     return "Shop";
   }
 
-  const pathname = window.location.pathname;
+  const { pathname } = window.location;
 
   if (
-    pathname === "/collections/new-arrivals"
+    pathname ===
+    "/collections/new-arrivals"
   ) {
     return "New Arrivals";
   }
 
   if (
-    pathname === "/collections/best-sellers"
+    pathname ===
+    "/collections/best-sellers"
   ) {
     return "Best Sellers";
-  }
-
-  if (pathname === "/shop") {
-    return "Shop";
   }
 
   return "Shop";
@@ -85,7 +83,7 @@ function getPageTitle() {
 function buildCurrentPath(
   pathname: string,
   params: URLSearchParams,
-) {
+): string {
   const query = params.toString();
 
   return query
@@ -110,13 +108,9 @@ export function ShopHeader({
 
   const activeSort =
     sortOptions.find(
-      (item) =>
-        item.value === selectedSort,
+      (option) =>
+        option.value === selectedSort,
     ) ?? sortOptions[0];
-
-  /* ==========================================================
-     OUTSIDE CLICK / ESCAPE
-  ========================================================== */
 
   useEffect(() => {
     function handleOutsideClick(
@@ -163,10 +157,6 @@ export function ShopHeader({
     };
   }, []);
 
-  /* ==========================================================
-     SORT
-  ========================================================== */
-
   function handleSortChange(
     value: ProductSort,
   ) {
@@ -181,85 +171,34 @@ export function ShopHeader({
     if (value === "relevance") {
       params.delete("sort");
     } else {
-      params.set(
-        "sort",
-        value,
-      );
+      params.set("sort", value);
     }
 
     setSortOpen(false);
 
-    const destination =
+    window.location.href =
       buildCurrentPath(
         pathname,
         params,
       );
-
-    window.location.href =
-      destination;
   }
 
   return (
-    <>
-      {/* =====================================================
-          SIMPLE PAGE HEADER
-      ===================================================== */}
-
-      <div className="py-5 sm:py-6">
-        <h1
-          className="
-            font-display
-            text-[1.9rem]
-            font-medium
-            leading-none
-            tracking-[-0.025em]
-            text-[var(--color-text)]
-
-            sm:text-[2.1rem]
-
-            lg:text-[2.3rem]
-          "
-        >
+    <header className="shop-header">
+      <div className="shop-header__heading">
+        <h1 className="shop-header__title">
           {pageTitle}
         </h1>
       </div>
 
-      {/* =====================================================
-          TOOLBAR
-      ===================================================== */}
-
-      <div
-        className="
-          flex
-          min-h-[52px]
-          items-center
-          justify-between
-          border-t
-          border-[var(--color-border-light)]
-        "
-      >
-        {/* PRODUCT COUNT */}
-
-        <div className="flex items-center gap-2.5">
+      <div className="shop-header__toolbar">
+        <div className="shop-header__count">
           <span
-            className="
-              h-1.5
-              w-1.5
-              bg-[var(--color-accent)]
-            "
+            className="shop-header__count-dot"
             aria-hidden="true"
           />
 
-          <span
-            className="
-              font-body
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.17em]
-              text-[var(--color-text-secondary)]
-            "
-          >
+          <span>
             {products.length}{" "}
             {products.length === 1
               ? "Product"
@@ -267,11 +206,9 @@ export function ShopHeader({
           </span>
         </div>
 
-        {/* SORT */}
-
         <div
           ref={sortRef}
-          className="relative"
+          className="shop-header__sort"
         >
           <button
             type="button"
@@ -282,66 +219,32 @@ export function ShopHeader({
                 (current) => !current,
               )
             }
-            className="
-              inline-flex
-              min-h-9
-              items-center
-              gap-2.5
-              border
-              border-[var(--color-border-light)]
-              bg-[var(--color-bg)]
-              px-3
-              font-body
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.14em]
-              text-[var(--color-text)]
-              transition-colors
-              duration-200
-              hover:border-[var(--color-border-dark)]
-            "
+            className={`shop-header__sort-button ${
+              sortOpen
+                ? "shop-header__sort-button--open"
+                : ""
+            }`}
           >
-            <span className="text-[var(--color-text-muted)]">
+            <span className="shop-header__sort-label">
               Sort:
             </span>
 
-            <span>
+            <span className="shop-header__sort-value">
               {activeSort.label}
             </span>
 
             <ChevronDown
               size={12}
               strokeWidth={1.4}
-              className={`
-                transition-transform
-                duration-200
-                ${
-                  sortOpen
-                    ? "rotate-180"
-                    : ""
-                }
-              `}
+              className="shop-header__sort-icon"
+              aria-hidden="true"
             />
           </button>
-
-          {/* SORT MENU */}
 
           {sortOpen && (
             <div
               role="menu"
-              className="
-                absolute
-                right-0
-                top-[calc(100%+6px)]
-                z-[var(--z-dropdown)]
-                w-[210px]
-                overflow-hidden
-                border
-                border-[var(--color-border)]
-                bg-[var(--color-surface)]
-                shadow-[var(--shadow-lg)]
-              "
+              className="shop-header__sort-menu"
             >
               {sortOptions.map(
                 (option) => {
@@ -359,25 +262,11 @@ export function ShopHeader({
                           option.value,
                         )
                       }
-                      className={`
-                        flex
-                        min-h-10
-                        w-full
-                        items-center
-                        justify-between
-                        px-4
-                        py-2.5
-                        text-left
-                        font-body
-                        text-[10px]
-                        transition-colors
-                        duration-200
-                        ${
-                          active
-                            ? "bg-[var(--color-bg-soft)] font-semibold text-[var(--color-text)]"
-                            : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-soft)] hover:text-[var(--color-text)]"
-                        }
-                      `}
+                      className={`shop-header__sort-option ${
+                        active
+                          ? "shop-header__sort-option--active"
+                          : ""
+                      }`}
                     >
                       <span>
                         {option.label}
@@ -385,11 +274,7 @@ export function ShopHeader({
 
                       {active && (
                         <span
-                          className="
-                            h-1.5
-                            w-1.5
-                            bg-[var(--color-accent)]
-                          "
+                          className="shop-header__option-dot"
                           aria-hidden="true"
                         />
                       )}
@@ -401,6 +286,6 @@ export function ShopHeader({
           )}
         </div>
       </div>
-    </>
+    </header>
   );
 }
