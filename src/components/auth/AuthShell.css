@@ -1,90 +1,138 @@
 /* =========================================================
-   AAYESHA — AUTH SHELL
+   AAYESHA FASHION — AUTH SHELL
    Premium Editorial Authentication Layout
 ========================================================= */
 
 .auth-shell {
-  min-height: 100vh;
   width: 100%;
-  display: grid;
-  grid-template-columns: minmax(360px, 42%) minmax(0, 58%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   background: var(--color-bg);
   color: var(--color-text);
 }
 
 /* =========================================================
-   LEFT — BRAND PANEL
+   MAIN TWO-COLUMN LAYOUT
 ========================================================= */
 
-.auth-shell__brand {
+.auth-shell__layout {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   LEFT — EDITORIAL BRAND PANEL
+========================================================= */
+
+.auth-shell__brand-panel {
   position: relative;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
   background: #4a3431;
   color: #f8f1ec;
 }
 
-/*
-   Subtle editorial depth without using a gradient.
-*/
-.auth-shell__brand::after {
+/* Editorial frame */
+.auth-shell__brand-frame {
+  position: absolute;
+  inset: 22px;
+  z-index: 0;
+  border: 1px solid rgba(248, 241, 236, 0.1);
+  pointer-events: none;
+}
+
+/* Large subtle circular detail */
+.auth-shell__brand-panel::after {
   content: "";
   position: absolute;
-  right: -130px;
-  bottom: -160px;
-  width: 360px;
-  height: 360px;
-  border: 1px solid rgba(248, 241, 236, 0.09);
+  right: -170px;
+  bottom: -190px;
+  width: 470px;
+  height: 470px;
+  border: 1px solid rgba(248, 241, 236, 0.08);
   border-radius: 50%;
   pointer-events: none;
 }
 
 /* =========================================================
-   BRAND HEADER
-========================================================= */
-
-.auth-shell__brand-header {
-  position: relative;
-  z-index: 2;
-  padding: 54px 58px 0;
-}
-
-.auth-shell__brand-logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.auth-shell__brand-logo img {
-  display: block;
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-}
-
-/* =========================================================
-   BRAND CONTENT
+   BRAND CONTENT WRAPPER
 ========================================================= */
 
 .auth-shell__brand-content {
   position: relative;
   z-index: 2;
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  padding: 52px 58px 40px;
+}
+
+/* =========================================================
+   BRAND TOP
+========================================================= */
+
+.auth-shell__brand-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.auth-shell__brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/*
+   BrandLogo is a component, so don't assume
+   it renders an img directly.
+*/
+.auth-shell__brand-logo img {
+  display: block;
+  width: 76px;
+  height: auto;
+  max-height: 76px;
+  object-fit: contain;
+}
+
+/* =========================================================
+   BRAND COPY
+========================================================= */
+
+.auth-shell__brand-copy {
+  display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
   max-width: 560px;
-  padding: 50px 58px 70px;
+  padding: 40px 0 55px;
 }
 
-.auth-shell__brand-eyebrow {
+/* =========================================================
+   BRAND EYEBROW
+========================================================= */
+
+.auth-shell__eyebrow {
   display: flex;
   align-items: center;
   gap: 11px;
-  margin-bottom: 20px;
-  color: rgba(248, 241, 236, 0.82);
+  margin-bottom: 21px;
+}
+
+.auth-shell__eyebrow-line {
+  display: block;
+  width: 29px;
+  height: 1px;
+  flex: 0 0 auto;
+  background: rgba(248, 241, 236, 0.65);
+}
+
+.auth-shell__eyebrow-text {
+  color: rgba(248, 241, 236, 0.84);
   font-family: var(--font-body);
   font-size: 9px;
   font-weight: 700;
@@ -93,33 +141,44 @@
   text-transform: uppercase;
 }
 
-.auth-shell__brand-eyebrow::before {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: rgba(248, 241, 236, 0.62);
-}
+/* =========================================================
+   BRAND TITLE
+========================================================= */
 
 .auth-shell__brand-title {
-  max-width: 470px;
+  max-width: 500px;
   margin: 0;
   color: #f8f1ec;
   font-family: var(--font-display);
-  font-size: clamp(48px, 5vw, 76px);
+  font-size: clamp(48px, 5vw, 74px);
   font-weight: 400;
   line-height: 0.96;
   letter-spacing: -0.035em;
 }
 
+/* =========================================================
+   BRAND RULE
+========================================================= */
+
+.auth-shell__brand-rule {
+  width: 46px;
+  height: 1px;
+  margin-top: 28px;
+  background: rgba(248, 241, 236, 0.38);
+}
+
+/* =========================================================
+   BRAND DESCRIPTION
+========================================================= */
+
 .auth-shell__brand-description {
   max-width: 390px;
-  margin: 28px 0 0;
-  color: rgba(248, 241, 236, 0.72);
+  margin: 22px 0 0;
+  color: rgba(248, 241, 236, 0.68);
   font-family: var(--font-body);
   font-size: 11px;
   line-height: 1.85;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.01em;
 }
 
 /* =========================================================
@@ -127,28 +186,16 @@
 ========================================================= */
 
 .auth-shell__brand-footer {
-  position: relative;
-  z-index: 2;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 30px;
-  padding: 0 58px 42px;
+  margin-top: auto;
+  padding-top: 20px;
 }
 
-.auth-shell__brand-footer::before {
-  content: "CONTEMPORARY INDIAN FASHION";
-  color: rgba(248, 241, 236, 0.38);
-  font-family: var(--font-body);
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 0.16em;
-}
-
-.auth-shell__brand-copyright {
-  margin: 0;
-  color: rgba(248, 241, 236, 0.42);
+.auth-shell__copyright {
+  color: rgba(248, 241, 236, 0.45);
   font-family: var(--font-body);
   font-size: 8px;
   line-height: 1.5;
@@ -156,38 +203,44 @@
   text-transform: uppercase;
 }
 
+.auth-shell__footer-line {
+  width: 70px;
+  height: 1px;
+  background: rgba(248, 241, 236, 0.18);
+}
+
 /* =========================================================
-   RIGHT — AUTH CONTENT
+   RIGHT — CONTENT PANEL
 ========================================================= */
 
-.auth-shell__content {
+.auth-shell__content-panel {
   min-width: 0;
   min-height: 100vh;
   background: var(--color-bg);
 }
 
-.auth-shell__content-inner {
-  width: min(100%, 820px);
-  min-height: 100vh;
-  margin: 0 auto;
+/* =========================================================
+   RIGHT HEADER
+========================================================= */
+
+.auth-shell__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 90px;
   padding: 0 54px;
+  border-bottom: 1px solid var(--color-border);
 }
 
 /* =========================================================
-   BACK NAVIGATION
+   BACK LINK
 ========================================================= */
-
-.auth-shell__back {
-  display: flex;
-  align-items: center;
-  min-height: 90px;
-  border-bottom: 1px solid var(--color-border);
-}
 
 .auth-shell__back-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   color: var(--color-text-secondary);
   font-family: var(--font-body);
   font-size: 9px;
@@ -211,6 +264,7 @@
 .auth-shell__back-icon {
   width: 14px;
   height: 14px;
+  flex: 0 0 auto;
   stroke-width: 1.5;
   transition: transform 180ms ease;
 }
@@ -220,28 +274,38 @@
 }
 
 /* =========================================================
-   MOBILE BRAND
+   MOBILE LOGO
 ========================================================= */
 
-.auth-shell__mobile-brand {
+.auth-shell__mobile-logo {
   display: none;
 }
 
 /* =========================================================
-   AUTH MAIN
+   RIGHT CONTENT
 ========================================================= */
 
-.auth-shell__main {
+.auth-shell__content {
   width: 100%;
-  padding: 62px 0 70px;
 }
 
-.auth-shell__header {
+.auth-shell__content-inner {
+  width: min(100%, 820px);
+  margin: 0 auto;
+  padding: 58px 54px 70px;
+}
+
+/* =========================================================
+   AUTH HEADING
+========================================================= */
+
+.auth-shell__heading {
+  width: 100%;
   max-width: 680px;
-  margin-bottom: 36px;
+  margin-bottom: 34px;
 }
 
-.auth-shell__eyebrow {
+.auth-shell__content-eyebrow {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -255,11 +319,11 @@
   text-transform: uppercase;
 }
 
-.auth-shell__eyebrow::before {
-  content: "";
+.auth-shell__content-eyebrow-line {
   display: block;
   width: 27px;
   height: 1px;
+  flex: 0 0 auto;
   background: var(--color-accent);
 }
 
@@ -268,9 +332,9 @@
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-display);
-  font-size: clamp(40px, 4vw, 56px);
+  font-size: clamp(40px, 3.8vw, 54px);
   font-weight: 400;
-  line-height: 1;
+  line-height: 0.98;
   letter-spacing: -0.035em;
 }
 
@@ -284,7 +348,7 @@
 }
 
 /* =========================================================
-   FORM AREA
+   FORM
 ========================================================= */
 
 .auth-shell__form {
@@ -305,85 +369,78 @@
 }
 
 /* =========================================================
-   TABLET
+   LARGE TABLET
 ========================================================= */
 
 @media (max-width: 1100px) {
-  .auth-shell {
-    grid-template-columns: minmax(300px, 38%) minmax(0, 62%);
-  }
-
-  .auth-shell__brand-header {
-    padding: 42px 40px 0;
+  .auth-shell__layout {
+    grid-template-columns: 38% 62%;
   }
 
   .auth-shell__brand-content {
-    padding: 40px;
+    padding: 42px 40px 32px;
   }
 
-  .auth-shell__brand-footer {
-    padding: 0 40px 32px;
+  .auth-shell__brand-frame {
+    inset: 17px;
   }
 
-  .auth-shell__content-inner {
+  .auth-shell__header {
     padding: 0 42px;
   }
 
-  .auth-shell__main {
-    padding-top: 54px;
+  .auth-shell__content-inner {
+    padding: 52px 42px 62px;
+  }
+
+  .auth-shell__brand-title {
+    font-size: clamp(44px, 5vw, 64px);
   }
 
   .auth-shell__title {
-    font-size: clamp(38px, 4vw, 52px);
+    font-size: clamp(38px, 4vw, 50px);
   }
 }
 
 /* =========================================================
-   TABLET / SMALL DESKTOP
+   TABLET
 ========================================================= */
 
 @media (max-width: 860px) {
-  .auth-shell {
-    grid-template-columns: 1fr;
+  .auth-shell__layout {
+    display: block;
+    min-height: 100vh;
   }
 
-  .auth-shell__brand {
+  .auth-shell__brand-panel {
     display: none;
   }
 
-  .auth-shell__content {
+  .auth-shell__content-panel {
     min-height: 100vh;
+  }
+
+  .auth-shell__header {
+    min-height: 74px;
+    padding: 0 32px;
+  }
+
+  .auth-shell__mobile-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .auth-shell__mobile-logo img {
+    display: block;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
   }
 
   .auth-shell__content-inner {
     width: min(100%, 700px);
-    padding: 0 32px;
-  }
-
-  .auth-shell__mobile-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 28px 0 10px;
-  }
-
-  .auth-shell__mobile-brand img {
-    display: block;
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-  }
-
-  .auth-shell__back {
-    min-height: 68px;
-  }
-
-  .auth-shell__main {
-    padding: 46px 0 60px;
-  }
-
-  .auth-shell__header {
-    margin-bottom: 32px;
+    padding: 48px 32px 60px;
   }
 
   .auth-shell__form,
@@ -397,25 +454,15 @@
 ========================================================= */
 
 @media (max-width: 640px) {
-  .auth-shell__content-inner {
+  .auth-shell__header {
+    min-height: 66px;
     padding: 0 20px;
   }
 
-  .auth-shell__mobile-brand {
-    padding: 22px 0 4px;
-  }
-
-  .auth-shell__mobile-brand img {
-    width: 58px;
-    height: 58px;
-  }
-
-  .auth-shell__back {
-    min-height: 61px;
-  }
-
   .auth-shell__back-link {
+    gap: 7px;
     font-size: 8px;
+    letter-spacing: 0.12em;
   }
 
   .auth-shell__back-icon {
@@ -423,17 +470,27 @@
     height: 13px;
   }
 
-  .auth-shell__main {
-    padding: 38px 0 48px;
+  .auth-shell__mobile-logo img {
+    width: 48px;
+    height: 48px;
   }
 
-  .auth-shell__eyebrow {
+  .auth-shell__content-inner {
+    width: 100%;
+    padding: 38px 20px 50px;
+  }
+
+  .auth-shell__heading {
+    margin-bottom: 28px;
+  }
+
+  .auth-shell__content-eyebrow {
     margin-bottom: 13px;
     font-size: 8px;
   }
 
   .auth-shell__title {
-    font-size: clamp(35px, 11vw, 46px);
+    font-size: clamp(35px, 10.5vw, 46px);
     line-height: 0.98;
   }
 
@@ -441,10 +498,6 @@
     margin-top: 13px;
     font-size: 10px;
     line-height: 1.7;
-  }
-
-  .auth-shell__header {
-    margin-bottom: 28px;
   }
 
   .auth-shell__footer {
@@ -458,21 +511,17 @@
 ========================================================= */
 
 @media (max-width: 390px) {
-  .auth-shell__content-inner {
+  .auth-shell__header {
     padding: 0 16px;
   }
 
-  .auth-shell__mobile-brand {
-    padding-top: 18px;
+  .auth-shell__content-inner {
+    padding: 32px 16px 44px;
   }
 
-  .auth-shell__mobile-brand img {
-    width: 52px;
-    height: 52px;
-  }
-
-  .auth-shell__main {
-    padding-top: 32px;
+  .auth-shell__mobile-logo img {
+    width: 44px;
+    height: 44px;
   }
 
   .auth-shell__title {
