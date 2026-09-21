@@ -9,50 +9,54 @@ interface BrandLoaderProps {
 }
 
 export default function BrandLoader({
-  minimumDuration = 1800,
+  minimumDuration = 3200,
 }: BrandLoaderProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const start = performance.now();
+
     let frame: number;
-    let timeout: ReturnType<typeof setTimeout>;
+    let exitTimer: ReturnType<typeof setTimeout>;
 
     const animate = (time: number) => {
       const elapsed = time - start;
 
-      const rawProgress = Math.min(
+      const raw = Math.min(
         elapsed / minimumDuration,
         1,
       );
 
       /*
-       * Cinematic progress curve.
-       * Moves quickly through the opening,
-       * then deliberately slows toward completion.
+       * Deliberately slower cinematic progression.
+       * The loader should feel like a brand introduction,
+       * not a technical loading indicator.
        */
-      const easedProgress =
-        rawProgress < 0.58
-          ? rawProgress * 1.12
-          : 0.6496 +
-            (rawProgress - 0.58) * 0.838;
+      const eased =
+        raw < 0.2
+          ? raw * 0.72
+          : raw < 0.72
+            ? 0.144 +
+              (raw - 0.2) * 1.18
+            : 0.758 +
+              (raw - 0.72) * 0.865;
 
-      const nextProgress = Math.min(
-        100,
-        Math.round(easedProgress * 100),
+      setProgress(
+        Math.min(
+          100,
+          Math.round(eased * 100),
+        ),
       );
-
-      setProgress(nextProgress);
 
       if (elapsed < minimumDuration) {
         frame = requestAnimationFrame(animate);
       } else {
         setProgress(100);
 
-        timeout = setTimeout(() => {
+        exitTimer = setTimeout(() => {
           setIsLoading(false);
-        }, 420);
+        }, 850);
       }
     };
 
@@ -60,7 +64,7 @@ export default function BrandLoader({
 
     return () => {
       cancelAnimationFrame(frame);
-      clearTimeout(timeout);
+      clearTimeout(exitTimer);
     };
   }, [minimumDuration]);
 
@@ -69,30 +73,22 @@ export default function BrandLoader({
       {isLoading && (
         <motion.div
           className="aayesha-loader"
-          initial={{
-            opacity: 1,
-          }}
+          initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
-            scale: 1.015,
             transition: {
-              duration: 0.8,
+              duration: 1.15,
               ease: [0.76, 0, 0.24, 1],
             },
           }}
         >
           {/* =================================================
-              BACKGROUND ATMOSPHERE
+              ATMOSPHERE
           ================================================= */}
 
           <div
             aria-hidden="true"
-            className="aayesha-loader__wash"
-          />
-
-          <div
-            aria-hidden="true"
-            className="aayesha-loader__grain"
+            className="aayesha-loader__texture"
           />
 
           <div
@@ -102,12 +98,7 @@ export default function BrandLoader({
 
           <div
             aria-hidden="true"
-            className="aayesha-loader__orb aayesha-loader__orb--one"
-          />
-
-          <div
-            aria-hidden="true"
-            className="aayesha-loader__orb aayesha-loader__orb--two"
+            className="aayesha-loader__light-second"
           />
 
           {/* =================================================
@@ -116,236 +107,192 @@ export default function BrandLoader({
 
           <div
             aria-hidden="true"
-            className="aayesha-loader__frame"
+            className="aayesha-loader__outer-frame"
           />
 
           <div
             aria-hidden="true"
-            className="aayesha-loader__frame-inner"
+            className="aayesha-loader__inner-frame"
           />
 
           {/* =================================================
-              DECORATIVE PANELS
+              TOP BRAND IDENTIFICATION
           ================================================= */}
 
-          <motion.div
-            aria-hidden="true"
-            className="aayesha-loader__panel aayesha-loader__panel--left"
+          <motion.header
+            className="aayesha-loader__header"
             initial={{
-              scaleY: 1,
+              opacity: 0,
+              y: -12,
             }}
             animate={{
-              scaleY: 0,
+              opacity: 1,
+              y: 0,
             }}
             transition={{
-              duration: 1.25,
-              delay: 0.15,
-              ease: [0.76, 0, 0.24, 1],
+              duration: 1,
+              delay: 0.2,
+              ease: [0.22, 1, 0.36, 1],
             }}
-          />
+          >
+            <span>AA</span>
 
-          <motion.div
-            aria-hidden="true"
-            className="aayesha-loader__panel aayesha-loader__panel--right"
-            initial={{
-              scaleY: 1,
-            }}
-            animate={{
-              scaleY: 0,
-            }}
-            transition={{
-              duration: 1.35,
-              delay: 0.05,
-              ease: [0.76, 0, 0.24, 1],
-            }}
-          />
+            <span className="aayesha-loader__header-line" />
+
+            <span>CONTEMPORARY INDIAN FASHION</span>
+
+            <span className="aayesha-loader__header-line" />
+
+            <span>2026</span>
+          </motion.header>
 
           {/* =================================================
-              CENTER CONTENT
+              MAIN BRAND SHOWCASE
           ================================================= */}
 
-          <div className="aayesha-loader__content">
-            {/* -------------------------------------------------
-                TOP METADATA
-            ------------------------------------------------- */}
+          <main className="aayesha-loader__center">
+
+            {/* Small collection label */}
 
             <motion.div
-              className="aayesha-loader__top"
+              className="aayesha-loader__collection"
               initial={{
                 opacity: 0,
-                y: -18,
+                letterSpacing: "0.5em",
               }}
               animate={{
                 opacity: 1,
-                y: 0,
+                letterSpacing: "0.28em",
               }}
               transition={{
-                duration: 0.8,
-                delay: 0.2,
+                duration: 1.4,
+                delay: 0.45,
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <span className="aayesha-loader__top-code">
-                AA / 01
-              </span>
+              <span className="aayesha-loader__collection-line" />
 
-              <span className="aayesha-loader__top-rule" />
+              THE NEW EDIT
 
-              <span className="aayesha-loader__top-season">
-                WOMENSWEAR
-              </span>
-
-              <span className="aayesha-loader__top-rule" />
-
-              <span className="aayesha-loader__top-year">
-                2026
-              </span>
+              <span className="aayesha-loader__collection-line" />
             </motion.div>
 
-            {/* -------------------------------------------------
-                MONOGRAM
-            ------------------------------------------------- */}
+            {/* Main wordmark */}
 
-            <motion.div
-              className="aayesha-loader__monogram"
-              initial={{
-                opacity: 0,
-                scale: 0.72,
-                rotate: -8,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                rotate: 0,
-              }}
-              transition={{
-                duration: 1.1,
-                delay: 0.3,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              <span>A</span>
-
-              <span className="aayesha-loader__monogram-divider">
-                /
-              </span>
-
-              <span>A</span>
-
-              <span
-                aria-hidden="true"
-                className="aayesha-loader__monogram-ring"
-              />
-            </motion.div>
-
-            {/* -------------------------------------------------
-                BRAND
-            ------------------------------------------------- */}
-
-            <motion.div
-              className="aayesha-loader__brand-wrap"
-              initial={{
-                opacity: 0,
-                y: 35,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 1.05,
-                delay: 0.45,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              <div className="aayesha-loader__brand-overline">
-                <span />
-                ESTABLISHED 2026
-                <span />
-              </div>
-
-              <div className="aayesha-loader__brand">
+            <div className="aayesha-loader__wordmark-wrap">
+              <motion.h1
+                className="aayesha-loader__wordmark"
+                initial={{
+                  opacity: 0,
+                  y: 55,
+                  scale: 1.04,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                }}
+                transition={{
+                  duration: 1.6,
+                  delay: 0.55,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
                 AAYESHA
-              </div>
+              </motion.h1>
 
-              <div className="aayesha-loader__brand-rule">
-                <motion.span
-                  initial={{
-                    scaleX: 0,
-                  }}
-                  animate={{
-                    scaleX: 1,
-                  }}
-                  transition={{
-                    duration: 1.1,
-                    delay: 0.75,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                />
-              </div>
-            </motion.div>
+              {/* Cinematic light across logo */}
 
-            {/* -------------------------------------------------
-                TAGLINE
-            ------------------------------------------------- */}
+              <motion.span
+                aria-hidden="true"
+                className="aayesha-loader__logo-light"
+                initial={{
+                  left: "-20%",
+                  opacity: 0,
+                }}
+                animate={{
+                  left: "120%",
+                  opacity: [0, 0.8, 0],
+                }}
+                transition={{
+                  duration: 1.8,
+                  delay: 1.35,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+
+            {/* Brand rule */}
 
             <motion.div
-              className="aayesha-loader__tagline-wrap"
+              className="aayesha-loader__brand-rule"
+              initial={{
+                scaleX: 0,
+              }}
+              animate={{
+                scaleX: 1,
+              }}
+              transition={{
+                duration: 1.25,
+                delay: 1.25,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <span />
+            </motion.div>
+
+            {/* Tagline */}
+
+            <motion.p
+              className="aayesha-loader__tagline"
               initial={{
                 opacity: 0,
-                y: 10,
+                y: 12,
               }}
               animate={{
                 opacity: 1,
                 y: 0,
               }}
               transition={{
-                duration: 0.7,
-                delay: 0.85,
+                duration: 0.9,
+                delay: 1.55,
               }}
             >
-              <p className="aayesha-loader__tagline">
-                CONTEMPORARY INDIAN FASHION
-              </p>
+              Made for moments worth remembering.
+            </motion.p>
 
-              <p className="aayesha-loader__tagline-sub">
-                Designed for the woman of today
-              </p>
-            </motion.div>
-
-            {/* -------------------------------------------------
-                LOADING
-            ------------------------------------------------- */}
+            {/* =================================================
+                COLLECTION LOADING
+            ================================================= */}
 
             <motion.div
               className="aayesha-loader__loading"
               initial={{
                 opacity: 0,
-                y: 14,
               }}
               animate={{
                 opacity: 1,
-                y: 0,
               }}
               transition={{
-                duration: 0.7,
-                delay: 1,
+                duration: 0.8,
+                delay: 1.85,
               }}
             >
-              <div className="aayesha-loader__loading-head">
+              <div className="aayesha-loader__loading-top">
                 <span>
-                  CURATING YOUR EDIT
+                  {progress >= 95
+                    ? "WELCOME TO AAYESHA"
+                    : "CURATING THE COLLECTION"}
                 </span>
 
-                <span className="aayesha-loader__loading-percent">
+                <span>
                   {String(progress).padStart(3, "0")}
-                  <small>%</small>
                 </span>
               </div>
 
-              <div className="aayesha-loader__track">
-                <motion.div
-                  className="aayesha-loader__progress"
+              <div className="aayesha-loader__progress-track">
+                <motion.span
+                  className="aayesha-loader__progress-bar"
                   animate={{
                     scaleX: progress / 100,
                   }}
@@ -354,90 +301,56 @@ export default function BrandLoader({
                     ease: "linear",
                   }}
                 />
-
-                <span className="aayesha-loader__track-marker" />
               </div>
 
-              <div className="aayesha-loader__loading-footer">
-                <span>PLEASE WAIT</span>
+              <div className="aayesha-loader__loading-bottom">
+                <span>JAIPUR</span>
 
-                <span>
-                  {progress >= 100
-                    ? "WELCOME"
-                    : "AAYESHA FASHION"}
-                </span>
+                <span>EST. 2026</span>
               </div>
             </motion.div>
-          </div>
+          </main>
 
           {/* =================================================
-              SIDE TYPOGRAPHY
+              LEFT EDITORIAL LABEL
           ================================================= */}
 
           <motion.div
-            className="aayesha-loader__side aayesha-loader__side--left"
-            initial={{
-              opacity: 0,
-              x: -15,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-            }}
+            className="aayesha-loader__vertical aayesha-loader__vertical--left"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{
-              duration: 0.7,
-              delay: 0.65,
-            }}
-          >
-            <span>01</span>
-            <span>THE</span>
-            <span>EDIT</span>
-          </motion.div>
-
-          <motion.div
-            className="aayesha-loader__side aayesha-loader__side--right"
-            initial={{
-              opacity: 0,
-              x: 15,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-            }}
-            transition={{
-              duration: 0.7,
-              delay: 0.65,
-            }}
-          >
-            <span>AA</span>
-            <span>WOMEN</span>
-            <span>2026</span>
-          </motion.div>
-
-          {/* =================================================
-              BOTTOM METADATA
-          ================================================= */}
-
-          <motion.div
-            className="aayesha-loader__bottom-left"
-            initial={{
-              opacity: 0,
-              y: 10,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.6,
+              duration: 0.8,
               delay: 1.1,
             }}
           >
-            JAIPUR · INDIA
+            <span>AA / 01</span>
+            <span>WOMENSWEAR</span>
           </motion.div>
 
+          {/* =================================================
+              RIGHT EDITORIAL LABEL
+          ================================================= */}
+
           <motion.div
-            className="aayesha-loader__bottom-right"
+            className="aayesha-loader__vertical aayesha-loader__vertical--right"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              duration: 0.8,
+              delay: 1.2,
+            }}
+          >
+            <span>THE EDIT</span>
+            <span>INDIA</span>
+          </motion.div>
+
+          {/* =================================================
+              BOTTOM BRAND
+          ================================================= */}
+
+          <motion.div
+            className="aayesha-loader__bottom-brand"
             initial={{
               opacity: 0,
               y: 10,
@@ -447,26 +360,25 @@ export default function BrandLoader({
               y: 0,
             }}
             transition={{
-              duration: 0.6,
-              delay: 1.15,
+              duration: 0.8,
+              delay: 2,
             }}
           >
-            EST. 2026
+            <span className="aayesha-loader__bottom-rule" />
+
+            <span>AAYESHA FASHION</span>
+
+            <span className="aayesha-loader__bottom-rule" />
           </motion.div>
 
           {/* =================================================
-              CENTER CROSSHAIR
+              CORNER DETAILS
           ================================================= */}
 
-          <span
-            aria-hidden="true"
-            className="aayesha-loader__crosshair aayesha-loader__crosshair--top"
-          />
-
-          <span
-            aria-hidden="true"
-            className="aayesha-loader__crosshair aayesha-loader__crosshair--bottom"
-          />
+          <span className="aayesha-loader__corner aayesha-loader__corner--tl" />
+          <span className="aayesha-loader__corner aayesha-loader__corner--tr" />
+          <span className="aayesha-loader__corner aayesha-loader__corner--bl" />
+          <span className="aayesha-loader__corner aayesha-loader__corner--br" />
 
           {/* =================================================
               FINAL REVEAL
@@ -474,7 +386,7 @@ export default function BrandLoader({
 
           <motion.div
             aria-hidden="true"
-            className="aayesha-loader__reveal"
+            className="aayesha-loader__final-reveal"
             initial={{
               scaleY: 1,
             }}
@@ -482,11 +394,9 @@ export default function BrandLoader({
               scaleY: 0,
             }}
             transition={{
-              duration: 0.9,
-              delay: Math.max(
-                1.15,
-                minimumDuration / 1000 - 0.15,
-              ),
+              duration: 1.15,
+              delay:
+                minimumDuration / 1000 + 0.15,
               ease: [0.76, 0, 0.24, 1],
             }}
           />
