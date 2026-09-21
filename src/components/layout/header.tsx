@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { HeaderActions } from "./HeaderActions";
-import { MobileMenu } from "./MobileMenu";
+import { HeaderActions } from "./header-actions";
+import { MobileMenu } from "./mobile-menu";
 
 import "./Header.css";
 
@@ -195,7 +195,7 @@ export default function Header({
           </nav>
 
           {/* =================================================
-              ACTIONS
+              HEADER ACTIONS
           ================================================= */}
 
           <div className="aayesha-header__actions">
