@@ -291,86 +291,139 @@
 
 /* =========================================================
    FOOTER CTA
+   Editorial Divider + Boxed CTA
 ========================================================= */
 
 .featured-categories__footer {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  gap: 28px;
+  width: 100%;
   margin-top: 56px;
 }
 
 .featured-categories__footer-line {
+  width: 100%;
   height: 1px;
   background: var(--color-border-dark);
-  opacity: 0.7;
+  opacity: 0.65;
 }
+
+
+/* =========================================================
+   BOXED CTA
+========================================================= */
 
 .featured-categories__all-link {
   display: inline-flex;
-  align-items: center;
-  gap: 15px;
+  align-items: stretch;
+  justify-content: center;
 
-  min-height: 44px;
+  min-height: 50px;
 
-  padding: 0 4px;
+  border: 1px solid var(--color-border-dark);
+
+  background: var(--color-surface);
 
   color: var(--color-text);
 
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.21em;
   line-height: 1;
   text-decoration: none;
   text-transform: uppercase;
 
   white-space: nowrap;
+
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease;
 }
+
+
+/* =========================================================
+   CTA TEXT
+========================================================= */
+
+.featured-categories__all-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 25px;
+}
+
+
+/* =========================================================
+   CTA ARROW BOX
+========================================================= */
 
 .featured-categories__all-icon {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 38px;
-  height: 38px;
+  width: 50px;
+  min-width: 50px;
 
-  border: 1px solid var(--color-border-dark);
-  border-radius: 50%;
-
-  background: var(--color-surface);
+  border-left: 1px solid var(--color-border-dark);
 
   color: var(--color-secondary);
+  background: transparent;
 
   transition:
     background-color 300ms ease,
-    border-color 300ms ease,
     color 300ms ease,
+    border-color 300ms ease,
     transform 350ms
       cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+
+/* =========================================================
+   CTA HOVER
+========================================================= */
+
 .featured-categories__all-link:hover {
-  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  background: var(--color-secondary);
+  color: var(--color-surface);
 }
 
 .featured-categories__all-link:hover
   .featured-categories__all-icon {
-  border-color: var(--color-secondary);
-  background: var(--color-surface-soft);
-  color: var(--color-secondary);
+  border-left-color: rgba(250, 247, 244, 0.35);
+  color: var(--color-surface);
+  background: transparent;
 
-  transform: rotate(45deg);
+  transform: translate(2px, -2px);
+}
+
+
+/* =========================================================
+   CTA ACTIVE
+========================================================= */
+
+.featured-categories__all-link:active {
+  background: var(--color-secondary);
+  color: var(--color-surface);
 }
 
 .featured-categories__all-link:active
   .featured-categories__all-icon {
-  background: var(--color-surface-muted);
-  color: var(--color-secondary);
-  transform: rotate(45deg) scale(0.96);
+  border-left-color: rgba(250, 247, 244, 0.35);
+  color: var(--color-surface);
+
+  transform: translate(1px, -1px);
 }
+
+
+/* =========================================================
+   CTA FOCUS
+========================================================= */
 
 .featured-categories__all-link:focus-visible {
   outline: 2px solid var(--focus-ring);
@@ -652,23 +705,44 @@
     font-size: 7px;
   }
 
+
+  /* =======================================================
+     MOBILE CTA
+  ======================================================= */
+
   .featured-categories__footer {
-    grid-template-columns: 1fr auto 1fr;
-    gap: 10px;
-    margin-top: 32px;
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      minmax(0, 1fr);
+
+    margin-top: 36px;
+  }
+
+  .featured-categories__footer-line {
+    opacity: 0.55;
   }
 
   .featured-categories__all-link {
-    gap: 8px;
-    font-size: 9px;
-    letter-spacing: 0.13em;
-    white-space: nowrap;
+    min-height: 46px;
+
+    font-size: 8px;
+    letter-spacing: 0.14em;
+  }
+
+  .featured-categories__all-label {
+    padding: 0 16px;
   }
 
   .featured-categories__all-icon {
-    width: 27px;
-    height: 27px;
+    width: 44px;
+    min-width: 44px;
   }
+
+
+  /* =======================================================
+     COMING SOON
+  ======================================================= */
 
   .categories-coming-soon {
     padding: 60px 18px;
@@ -694,7 +768,7 @@
     padding-bottom: 72px;
   }
 
-   .featured-categories__title {
+  .featured-categories__title {
     font-size: 1.95rem;
     white-space: nowrap;
   }
@@ -713,6 +787,31 @@
     width: 28px;
     height: 28px;
   }
+
+
+  /* =======================================================
+     SMALL MOBILE CTA
+  ======================================================= */
+
+  .featured-categories__footer {
+    margin-top: 30px;
+  }
+
+  .featured-categories__all-link {
+    min-height: 44px;
+
+    font-size: 7.5px;
+    letter-spacing: 0.11em;
+  }
+
+  .featured-categories__all-label {
+    padding: 0 12px;
+  }
+
+  .featured-categories__all-icon {
+    width: 40px;
+    min-width: 40px;
+  }
 }
 
 
@@ -724,6 +823,7 @@
   .category-card__image-element,
   .category-card__arrow,
   .category-card__shop,
+  .featured-categories__all-link,
   .featured-categories__all-icon {
     transition: none;
   }

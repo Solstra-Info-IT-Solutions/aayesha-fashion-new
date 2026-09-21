@@ -155,7 +155,7 @@ export function FeaturedCategories() {
                   href="/categories"
                   className="featured-categories__all-link"
                 >
-                  <span>
+                  <span className="featured-categories__all-label">
                     Explore all categories
                   </span>
 
