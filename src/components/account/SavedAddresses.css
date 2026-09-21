@@ -1,0 +1,1012 @@
+/* =========================================================
+   AAYESHA FASHION
+   SAVED ADDRESSES — EDITORIAL ACCOUNT SYSTEM
+========================================================= */
+
+.saved-addresses {
+  width: 100%;
+  min-height: 100%;
+  padding: 42px 32px 72px;
+
+  color: var(--color-text);
+}
+
+.saved-addresses__header,
+.saved-addresses__grid,
+.saved-addresses__feedback,
+.saved-addresses__footer {
+  width: min(1180px, 100%);
+  margin-inline: auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.saved-addresses__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding-bottom: 30px;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.saved-addresses__heading {
+  min-width: 0;
+}
+
+.saved-addresses__eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.saved-addresses__eyebrow-line {
+  width: 25px;
+  height: 1px;
+
+  background: var(--color-accent);
+}
+
+.saved-addresses__eyebrow {
+  margin: 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--color-accent);
+}
+
+.saved-addresses__title {
+  margin: 9px 0 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 500;
+
+  line-height: 1.03;
+
+  letter-spacing: -0.035em;
+
+  color: var(--color-text);
+}
+
+.saved-addresses__description {
+  max-width: 520px;
+
+  margin: 11px 0 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+  line-height: 1.7;
+
+  color: var(--color-text-secondary);
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.saved-addresses__button {
+  min-height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 0 17px;
+
+  border: 1px solid;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8.5px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.saved-addresses__button--primary {
+  border-color: var(--color-text);
+
+  background: var(--color-text);
+
+  color: var(--color-text-inverse);
+}
+
+.saved-addresses__button--primary:hover {
+  border-color: var(--color-accent-dark);
+
+  background: var(--color-accent-dark);
+
+  transform: translateY(-1px);
+}
+
+.saved-addresses__button--secondary {
+  border-color: var(--color-border-dark);
+
+  background: transparent;
+
+  color: var(--color-text);
+}
+
+.saved-addresses__button--secondary:hover {
+  border-color: var(--color-text);
+
+  background: var(--color-bg-soft);
+
+  transform: translateY(-1px);
+}
+
+.saved-addresses__button--small {
+  min-height: 36px;
+
+  padding-inline: 13px;
+
+  font-size: 7.5px;
+}
+
+.saved-addresses__button:focus-visible,
+.saved-address-card__action:focus-visible,
+.saved-addresses__back-link:focus-visible {
+  outline:
+    1px solid
+    var(--color-accent);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+.saved-addresses__feedback {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 18px;
+
+  padding: 11px 13px;
+
+  border: 1px solid rgba(154, 93, 88, 0.22);
+
+  background: rgba(154, 93, 88, 0.045);
+}
+
+.saved-addresses__feedback-content {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 0;
+}
+
+.saved-addresses__feedback-dot {
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
+
+  border-radius: 50%;
+
+  background: var(--color-danger, #9a5d58);
+}
+
+.saved-addresses__feedback p {
+  margin: 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8.5px;
+  line-height: 1.5;
+
+  color: var(--color-danger, #9a5d58);
+}
+
+/* =========================================================
+   ADDRESS GRID
+========================================================= */
+
+.saved-addresses__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 22px;
+}
+
+/* =========================================================
+   ADDRESS CARD
+========================================================= */
+
+.saved-address-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.saved-address-card:hover {
+  border-color: var(--color-border-dark);
+
+  box-shadow:
+    0 10px 28px rgba(68, 47, 43, 0.055);
+
+  transform: translateY(-2px);
+}
+
+.saved-address-card--default {
+  border-color: rgba(154, 93, 88, 0.38);
+}
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.saved-address-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 20px 20px 17px;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.saved-address-card__identity {
+  min-width: 0;
+}
+
+.saved-address-card__name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.saved-address-card__name {
+  margin: 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 21px;
+  font-weight: 500;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.018em;
+
+  color: var(--color-text);
+}
+
+.saved-address-card__default-badge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 5px 7px;
+
+  border: 1px solid rgba(154, 93, 88, 0.22);
+
+  background: rgba(154, 93, 88, 0.06);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 6.5px;
+  font-weight: 600;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: var(--color-accent);
+}
+
+.saved-address-card__phone {
+  margin: 6px 0 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8.5px;
+
+  color: var(--color-text-muted);
+}
+
+.saved-address-card__location-icon {
+  width: 35px;
+  height: 35px;
+
+  flex: 0 0 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--color-accent-soft);
+
+  background: var(--color-bg-soft);
+
+  color: var(--color-accent);
+}
+
+/* =========================================================
+   ADDRESS BODY
+========================================================= */
+
+.saved-address-card__body {
+  flex: 1;
+
+  padding: 20px;
+}
+
+.saved-address-card__address {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  margin: 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9.5px;
+  font-style: normal;
+
+  line-height: 1.55;
+
+  color: var(--color-text-secondary);
+}
+
+.saved-address-card__address > span:first-child {
+  color: var(--color-text);
+}
+
+.saved-address-card__pincode {
+  display: inline-flex;
+
+  width: fit-content;
+
+  margin-top: 3px;
+
+  padding: 4px 7px;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-bg-soft);
+
+  font-size: 7.5px;
+  font-weight: 600;
+
+  letter-spacing: 0.1em;
+
+  color: var(--color-text);
+}
+
+.saved-address-card__landmark {
+  margin-top: 4px;
+
+  padding-top: 9px;
+
+  border-top: 1px solid var(--color-border);
+
+  font-size: 7.5px;
+
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   CARD ACTIONS
+========================================================= */
+
+.saved-address-card__actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  border-top: 1px solid var(--color-border);
+}
+
+.saved-address-card__action {
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  border: 0;
+
+  background: transparent;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 7.5px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: var(--color-text-secondary);
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.saved-address-card__action
+  + .saved-address-card__action {
+  border-left: 1px solid var(--color-border);
+}
+
+.saved-address-card__action:hover:not(:disabled) {
+  background: var(--color-bg-soft);
+
+  color: var(--color-accent);
+}
+
+.saved-address-card__action--danger:hover:not(:disabled) {
+  background: rgba(154, 93, 88, 0.045);
+
+  color: var(--color-danger, #9a5d58);
+}
+
+.saved-address-card__action:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.48;
+}
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.saved-address-card__spinner {
+  width: 13px;
+  height: 13px;
+
+  display: block;
+
+  border: 1px solid var(--color-border-dark);
+
+  border-top-color: var(--color-accent);
+
+  border-radius: 50%;
+
+  animation:
+    saved-address-spin 0.75s linear infinite;
+}
+
+.saved-address-card__spinner--danger {
+  border-top-color: var(--color-danger, #9a5d58);
+}
+
+@keyframes saved-address-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.saved-addresses__empty {
+  width: min(580px, 100%);
+
+  margin: 42px auto 0;
+
+  padding: 55px 35px;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+
+  text-align: center;
+}
+
+.saved-addresses__empty-icon,
+.saved-addresses__state-icon {
+  width: 52px;
+  height: 52px;
+
+  margin-inline: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--color-accent-soft);
+
+  background: var(--color-bg-soft);
+
+  color: var(--color-accent);
+}
+
+.saved-addresses__empty .saved-addresses__eyebrow {
+  margin-top: 19px;
+}
+
+.saved-addresses__empty-title {
+  margin: 9px 0 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 29px;
+  font-weight: 500;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.025em;
+
+  color: var(--color-text);
+}
+
+.saved-addresses__empty-description {
+  max-width: 390px;
+
+  margin: 11px auto 22px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  line-height: 1.7;
+
+  color: var(--color-text-secondary);
+}
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+.saved-addresses--auth {
+  min-height: 550px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding-inline: 20px;
+
+  text-align: center;
+}
+
+.saved-addresses--auth .saved-addresses__state-icon {
+  margin-bottom: 18px;
+}
+
+.saved-addresses__state-title {
+  margin: 9px 0 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 32px;
+  font-weight: 500;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.025em;
+}
+
+.saved-addresses__state-description {
+  max-width: 400px;
+
+  margin: 11px auto 22px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  line-height: 1.7;
+
+  color: var(--color-text-secondary);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.saved-addresses__footer {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 24px;
+
+  padding-top: 17px;
+
+  border-top: 1px solid var(--color-border);
+}
+
+.saved-addresses__back-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 4px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  color: var(--color-text-secondary);
+
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    gap 180ms ease;
+}
+
+.saved-addresses__back-link:hover {
+  gap: 7px;
+
+  color: var(--color-accent);
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.saved-addresses__header--loading {
+  display: block;
+}
+
+.saved-addresses__grid {
+  min-height: 100px;
+}
+
+.saved-addresses__card-skeleton {
+  min-height: 240px;
+
+  padding: 22px;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+}
+
+.saved-addresses__skeleton {
+  position: relative;
+
+  overflow: hidden;
+
+  background: var(--color-bg-soft);
+}
+
+.saved-addresses__skeleton::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  transform: translateX(-100%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.42),
+      transparent
+    );
+
+  animation:
+    saved-address-skeleton 1.4s ease-in-out infinite;
+}
+
+.saved-addresses__skeleton--title {
+  width: 260px;
+  height: 34px;
+}
+
+.saved-addresses__skeleton--description {
+  width: 430px;
+  max-width: 80%;
+
+  height: 11px;
+
+  margin-top: 12px;
+}
+
+.saved-addresses__skeleton--card-title {
+  width: 150px;
+  height: 20px;
+}
+
+.saved-addresses__skeleton--line {
+  width: 85%;
+  height: 10px;
+
+  margin-top: 18px;
+}
+
+.saved-addresses__skeleton--line-short {
+  width: 55%;
+  margin-top: 9px;
+}
+
+@keyframes saved-address-skeleton {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .saved-addresses {
+    padding:
+      34px 24px 60px;
+  }
+
+  .saved-addresses__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+  .saved-addresses {
+    padding:
+      25px 16px 48px;
+  }
+
+  .saved-addresses__header {
+    display: block;
+
+    padding-bottom: 23px;
+  }
+
+  .saved-addresses__title {
+    font-size: 32px;
+  }
+
+  .saved-addresses__description {
+    font-size: 9px;
+  }
+
+  .saved-addresses__header
+    > .saved-addresses__button {
+    width: 100%;
+
+    margin-top: 19px;
+  }
+
+  .saved-addresses__feedback {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 11px;
+  }
+
+  .saved-addresses__feedback
+    .saved-addresses__button {
+    width: 100%;
+  }
+
+  .saved-addresses__grid {
+    gap: 11px;
+
+    margin-top: 18px;
+  }
+
+  .saved-address-card__header {
+    padding:
+      18px 16px 15px;
+  }
+
+  .saved-address-card__body {
+    padding:
+      18px 16px;
+  }
+
+  .saved-address-card__name {
+    font-size: 19px;
+  }
+
+  .saved-address-card__actions {
+    grid-template-columns:
+      repeat(3, 1fr);
+  }
+
+  .saved-address-card__action {
+    min-height: 44px;
+
+    gap: 5px;
+
+    padding-inline: 5px;
+
+    font-size: 6.7px;
+  }
+
+  .saved-addresses__empty {
+    margin-top: 25px;
+
+    padding:
+      42px 20px;
+  }
+
+  .saved-addresses__empty-title {
+    font-size: 27px;
+  }
+
+  .saved-addresses__footer {
+    justify-content: center;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+  .saved-addresses {
+    padding:
+      21px 13px 42px;
+  }
+
+  .saved-addresses__title {
+    font-size: 29px;
+  }
+
+  .saved-address-card__header {
+    gap: 10px;
+  }
+
+  .saved-address-card__name-row {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 7px;
+  }
+
+  .saved-address-card__location-icon {
+    width: 32px;
+    height: 32px;
+
+    flex-basis: 32px;
+  }
+
+  .saved-address-card__action {
+    min-height: 48px;
+
+    font-size: 6.2px;
+  }
+
+  .saved-address-card__action svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .saved-addresses__empty {
+    padding:
+      38px 17px;
+  }
+
+  .saved-addresses__empty-title {
+    font-size: 25px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .saved-addresses *,
+  .saved-addresses {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

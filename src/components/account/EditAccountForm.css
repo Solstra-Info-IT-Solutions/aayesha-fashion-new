@@ -1,0 +1,1089 @@
+/* =========================================================
+   AAYESHA — EDIT ACCOUNT
+   Premium Editorial Account Experience
+========================================================= */
+
+.edit-account {
+  width: 100%;
+  color: var(--color-text);
+}
+
+.edit-account__container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 42px 32px 70px;
+}
+
+/* =========================================================
+   BACK
+========================================================= */
+
+.edit-account__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 30px;
+
+  color: var(--color-text-secondary);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition:
+    color 220ms ease,
+    gap 220ms ease;
+}
+
+.edit-account__back:hover {
+  gap: 12px;
+  color: var(--color-accent);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.edit-account__header {
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.edit-account__eyebrow,
+.edit-account__section-eyebrow {
+  margin: 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--color-accent);
+}
+
+.edit-account__title {
+  margin: 9px 0 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+
+  color: var(--color-text);
+}
+
+.edit-account__description {
+  max-width: 560px;
+
+  margin: 11px 0 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 11px;
+  line-height: 1.7;
+
+  color: var(--color-text-secondary);
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.edit-account__error {
+  margin-top: 20px;
+  padding: 13px 15px;
+
+  border: 1px solid rgba(154, 93, 88, 0.25);
+
+  background: rgba(154, 93, 88, 0.055);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  color: var(--color-danger, #9a5d58);
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.edit-account__form {
+  margin-top: 28px;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-bg);
+}
+
+/* =========================================================
+   PROFILE SUMMARY
+========================================================= */
+
+.edit-account__profile {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 28px 32px;
+
+  border-bottom: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+}
+
+.edit-account__avatar {
+  position: relative;
+
+  width: 66px;
+  height: 66px;
+
+  flex: 0 0 66px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border: 1px solid var(--color-accent-soft);
+
+  background: var(--color-bg-soft);
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 23px;
+  font-weight: 500;
+
+  color: var(--color-text);
+}
+
+.edit-account__avatar::after {
+  content: "";
+
+  position: absolute;
+  inset: 5px;
+
+  border: 1px solid rgba(154, 93, 88, 0.16);
+
+  pointer-events: none;
+}
+
+.edit-account__avatar-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.edit-account__profile-info {
+  min-width: 0;
+}
+
+.edit-account__profile-name {
+  margin: 7px 0 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.1;
+
+  letter-spacing: -0.02em;
+
+  color: var(--color-text);
+}
+
+.edit-account__profile-email {
+  margin: 5px 0 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  color: var(--color-text-secondary);
+}
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.edit-account__details {
+  padding: 34px 32px 32px;
+}
+
+.edit-account__section-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+.edit-account__section-icon {
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--color-accent-soft);
+
+  background: var(--color-surface);
+
+  color: var(--color-accent);
+}
+
+.edit-account__section-title {
+  margin: 6px 0 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.1;
+
+  letter-spacing: -0.018em;
+
+  color: var(--color-text);
+}
+
+/* =========================================================
+   FIELDS
+========================================================= */
+
+.edit-account__fields {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 23px 20px;
+}
+
+.edit-account__field {
+  position: relative;
+  min-width: 0;
+}
+
+.edit-account__label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--color-text);
+}
+
+/* =========================================================
+   INPUT WRAP
+========================================================= */
+
+.edit-account__input-wrap {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  height: 48px;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.edit-account__input-wrap:hover {
+  border-color: var(--color-border-dark);
+}
+
+.edit-account__input-wrap:focus-within {
+  border-color: var(--color-accent);
+
+  background: var(--color-bg);
+
+  box-shadow:
+    0 0 0 3px var(--color-accent-soft);
+}
+
+.edit-account__input-icon {
+  position: absolute;
+  left: 14px;
+
+  pointer-events: none;
+
+  color: var(--color-text-muted);
+
+  transition: color 220ms ease;
+}
+
+.edit-account__input-wrap:focus-within
+.edit-account__input-icon {
+  color: var(--color-accent);
+}
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.edit-account__input {
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+  outline: 0;
+
+  padding:
+    0 14px 0 42px;
+
+  background: transparent;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 11px;
+  line-height: 1.4;
+
+  color: var(--color-text);
+}
+
+.edit-account__input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.75;
+}
+
+.edit-account__input--readonly {
+  cursor: not-allowed;
+
+  color: var(--color-text-secondary);
+}
+
+.edit-account__input-wrap--readonly {
+  background: var(--color-bg-soft);
+}
+
+.edit-account__input--standalone {
+  height: 48px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+}
+
+.edit-account__input--standalone:hover {
+  border-color: var(--color-border-dark);
+}
+
+.edit-account__input--standalone:focus {
+  border-color: var(--color-accent);
+
+  background: var(--color-bg);
+
+  box-shadow:
+    0 0 0 3px var(--color-accent-soft);
+}
+
+/* =========================================================
+   HELP
+========================================================= */
+
+.edit-account__help {
+  margin: 7px 0 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8.5px;
+  line-height: 1.55;
+
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   DROPDOWN / CALENDAR
+========================================================= */
+
+.edit-account__field--dropdown,
+.edit-account__field--calendar {
+  position: relative;
+}
+
+.edit-account__select {
+  width: 100%;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.edit-account__select:hover,
+.edit-account__select--open {
+  border-color: var(--color-accent);
+
+  background: var(--color-bg);
+}
+
+.edit-account__select--open {
+  box-shadow:
+    0 0 0 3px var(--color-accent-soft);
+}
+
+.edit-account__select-value,
+.edit-account__select-placeholder {
+  min-width: 0;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 11px;
+}
+
+.edit-account__select-value {
+  color: var(--color-text);
+}
+
+.edit-account__select-placeholder {
+  color: var(--color-text-muted);
+}
+
+.edit-account__select-icon {
+  flex: 0 0 auto;
+
+  color: var(--color-text-secondary);
+
+  transition:
+    transform 220ms ease,
+    color 220ms ease;
+}
+
+.edit-account__select-icon--open {
+  transform: rotate(180deg);
+  color: var(--color-accent);
+}
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.edit-account__dropdown {
+  position: absolute;
+
+  top: calc(100% + 7px);
+  left: 0;
+  right: 0;
+
+  z-index: 30;
+
+  overflow: hidden;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-bg);
+
+  box-shadow: var(--shadow-lg);
+}
+
+.edit-account__dropdown-header {
+  padding: 11px 14px;
+
+  border-bottom: 1px solid var(--color-border);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  color: var(--color-text-muted);
+}
+
+.edit-account__dropdown-options {
+  padding: 4px;
+}
+
+.edit-account__dropdown-option {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 40px;
+
+  padding: 0 11px;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+
+  color: var(--color-text);
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.edit-account__dropdown-option:hover {
+  background: var(--color-bg-soft);
+}
+
+.edit-account__dropdown-option--selected {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+}
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+.edit-account__calendar {
+  position: absolute;
+
+  top: calc(100% + 7px);
+  left: 0;
+
+  z-index: 30;
+
+  width: min(350px, 100vw - 40px);
+
+  overflow: hidden;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-bg);
+
+  box-shadow: var(--shadow-lg);
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.edit-account__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 9px;
+
+  margin-top: 32px;
+  padding-top: 24px;
+
+  border-top: 1px solid var(--color-border);
+}
+
+.edit-account__secondary-button,
+.edit-account__primary-button {
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 0 20px;
+
+  border: 1px solid;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 230ms ease,
+    border-color 230ms ease,
+    color 230ms ease,
+    transform 230ms ease;
+}
+
+.edit-account__secondary-button {
+  border-color: var(--color-border-dark);
+
+  background: transparent;
+
+  color: var(--color-text);
+}
+
+.edit-account__secondary-button:hover {
+  border-color: var(--color-text);
+
+  background: var(--color-bg-soft);
+
+  transform: translateY(-1px);
+}
+
+.edit-account__primary-button {
+  border-color: var(--color-text);
+
+  background: var(--color-text);
+
+  color: var(--color-text-inverse);
+}
+
+.edit-account__primary-button:hover {
+  border-color: var(--color-accent-dark);
+
+  background: var(--color-accent-dark);
+
+  transform: translateY(-1px);
+}
+
+.edit-account__save-button {
+  min-width: 155px;
+}
+
+.edit-account__primary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.edit-account__button-icon--loading {
+  animation: edit-account-spin 0.8s linear infinite;
+}
+
+@keyframes edit-account-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   SECURITY NOTE
+========================================================= */
+
+.edit-account__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+
+  margin-top: 18px;
+
+  padding: 15px 16px;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+}
+
+.edit-account__note-icon {
+  flex: 0 0 auto;
+
+  margin-top: 1px;
+
+  color: var(--color-accent);
+}
+
+.edit-account__note p {
+  margin: 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  line-height: 1.65;
+
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   STATE
+========================================================= */
+
+.edit-account__state {
+  min-height: 520px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+}
+
+.edit-account__state-content {
+  width: 100%;
+  max-width: 480px;
+
+  padding: 42px 34px;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+
+  text-align: center;
+}
+
+.edit-account__state-title {
+  margin: 10px 0 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.08;
+
+  letter-spacing: -0.025em;
+}
+
+.edit-account__state-description {
+  max-width: 380px;
+
+  margin: 12px auto 24px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+  line-height: 1.7;
+
+  color: var(--color-text-secondary);
+}
+
+.edit-account__state .edit-account__primary-button {
+  min-width: 130px;
+}
+
+.edit-account__loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--color-text-secondary);
+}
+
+.edit-account__loading-icon {
+  animation: edit-account-spin 0.8s linear infinite;
+
+  color: var(--color-accent);
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.edit-account__back:focus-visible,
+.edit-account__primary-button:focus-visible,
+.edit-account__secondary-button:focus-visible,
+.edit-account__select:focus-visible,
+.edit-account__dropdown-option:focus-visible {
+  outline:
+    1px solid
+    var(--color-accent);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .edit-account__container {
+    padding:
+      34px 24px 60px;
+  }
+
+  .edit-account__profile {
+    padding:
+      26px 28px;
+  }
+
+  .edit-account__details {
+    padding:
+      30px 28px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+  .edit-account__container {
+    padding:
+      26px 16px 48px;
+  }
+
+  .edit-account__back {
+    margin-bottom: 24px;
+  }
+
+  .edit-account__header {
+    padding-bottom: 24px;
+  }
+
+  .edit-account__title {
+    font-size: 31px;
+  }
+
+  .edit-account__description {
+    font-size: 10px;
+  }
+
+  .edit-account__form {
+    margin-top: 22px;
+
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .edit-account__profile {
+    padding:
+      24px 0;
+
+    gap: 14px;
+  }
+
+  .edit-account__avatar {
+    width: 56px;
+    height: 56px;
+
+    flex-basis: 56px;
+
+    font-size: 20px;
+  }
+
+  .edit-account__profile-name {
+    font-size: 21px;
+  }
+
+  .edit-account__profile-email {
+    font-size: 9px;
+  }
+
+  .edit-account__details {
+    padding:
+      26px 0 28px;
+  }
+
+  .edit-account__section-heading {
+    margin-bottom: 23px;
+  }
+
+  .edit-account__section-title {
+    font-size: 22px;
+  }
+
+  .edit-account__fields {
+    grid-template-columns: 1fr;
+
+    gap: 19px;
+  }
+
+  .edit-account__actions {
+    display: grid;
+
+    grid-template-columns:
+      1fr 1.35fr;
+
+    gap: 8px;
+  }
+
+  .edit-account__secondary-button,
+  .edit-account__primary-button {
+    width: 100%;
+
+    min-width: 0;
+
+    padding:
+      0 11px;
+
+    font-size: 8px;
+  }
+
+  .edit-account__save-button {
+    min-width: 0;
+  }
+
+  .edit-account__note {
+    margin-top: 14px;
+  }
+
+  .edit-account__state {
+    min-height: 450px;
+  }
+
+  .edit-account__state-content {
+    padding:
+      34px 22px;
+  }
+
+  .edit-account__state-title {
+    font-size: 28px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .edit-account__container {
+    padding:
+      22px 13px 42px;
+  }
+
+  .edit-account__title {
+    font-size: 28px;
+  }
+
+  .edit-account__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-account__secondary-button,
+  .edit-account__primary-button {
+    min-height: 44px;
+  }
+
+  .edit-account__calendar {
+    width: calc(100vw - 26px);
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .edit-account *,
+  .edit-account {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

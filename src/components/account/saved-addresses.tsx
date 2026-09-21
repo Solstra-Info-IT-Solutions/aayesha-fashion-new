@@ -21,6 +21,7 @@ import {
 import toast from "react-hot-toast";
 
 import { useAuthStore } from "@/store/auth-store";
+import "./SavedAddresses.css";
 
 import {
   deleteCustomerAddress,

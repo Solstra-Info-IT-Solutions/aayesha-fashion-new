@@ -8,6 +8,8 @@ import {
   X,
 } from "lucide-react";
 
+import "./AccountConfirmDialog.css";
+
 type AccountConfirmDialogProps = {
   open: boolean;
   type: "delete" | "logout";

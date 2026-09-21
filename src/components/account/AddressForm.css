@@ -1,0 +1,1290 @@
+/* =========================================================
+   AAYESHA — ADDRESS FORM
+   Premium Editorial Account Experience
+========================================================= */
+
+.address-form {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 42px 32px 72px;
+
+  color: var(--color-text);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.address-form__header {
+  margin-bottom: 42px;
+}
+
+.address-form__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 30px;
+
+  color: var(--color-text-secondary);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  transition:
+    color 240ms ease,
+    gap 240ms ease;
+}
+
+.address-form__back:hover {
+  gap: 12px;
+  color: var(--color-accent);
+}
+
+.address-form__hero {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 18px;
+
+  padding-bottom: 30px;
+
+  border-bottom:
+    1px solid
+    var(--color-border);
+}
+
+.address-form__hero-icon {
+  width: 48px;
+  height: 48px;
+
+  flex: 0 0 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    var(--color-accent-soft);
+
+  background:
+    var(--color-surface);
+
+  color:
+    var(--color-accent);
+}
+
+.address-form__eyebrow {
+  margin: 0 0 8px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color:
+    var(--color-accent);
+}
+
+.address-form__title {
+  margin: 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: clamp(30px, 4vw, 44px);
+
+  font-weight: 500;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.035em;
+
+  color:
+    var(--color-text);
+}
+
+.address-form__description {
+  max-width: 520px;
+
+  margin: 11px 0 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 11px;
+
+  line-height: 1.7;
+
+  color:
+    var(--color-text-secondary);
+}
+
+/* =========================================================
+   PAGE ERROR
+========================================================= */
+
+.address-form__page-error {
+  margin-bottom: 24px;
+
+  padding:
+    13px 16px;
+
+  border:
+    1px solid
+    rgba(154, 93, 88, 0.25);
+
+  background:
+    rgba(154, 93, 88, 0.055);
+
+  color:
+    var(--color-danger, #9a5d58);
+}
+
+.address-form__page-error p {
+  margin: 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+}
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.address-form__body {
+  display: flex;
+  flex-direction: column;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  background:
+    var(--color-bg);
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.address-form__section {
+  padding: 34px 36px 38px;
+
+  border-bottom:
+    1px solid
+    var(--color-border);
+}
+
+.address-form__section:last-child {
+  border-bottom: 0;
+}
+
+.address-form__section-heading {
+  display: grid;
+
+  grid-template-columns: 42px minmax(0, 1fr);
+
+  gap: 16px;
+
+  margin-bottom: 30px;
+}
+
+.address-form__section-number {
+  display: flex;
+
+  align-items: flex-start;
+
+  padding-top: 3px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  color:
+    var(--color-accent);
+}
+
+.address-form__section-title {
+  margin: 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 25px;
+
+  font-weight: 500;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.018em;
+
+  color:
+    var(--color-text);
+}
+
+.address-form__section-description {
+  max-width: 540px;
+
+  margin: 7px 0 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+
+  line-height: 1.7;
+
+  color:
+    var(--color-text-muted);
+}
+
+/* =========================================================
+   FIELDS
+========================================================= */
+
+.address-form__fields {
+  display: grid;
+
+  gap: 22px;
+}
+
+.address-form__fields--two {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.address-field {
+  min-width: 0;
+}
+
+.address-field__label {
+  display: flex;
+
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 8px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color:
+    var(--color-text);
+}
+
+.address-field__optional {
+  font-size: 7px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.1em;
+
+  color:
+    var(--color-text-muted);
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.address-field__input,
+.address-field__textarea,
+.address-field__select {
+  width: 100%;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  border-radius: 0;
+
+  background:
+    var(--color-surface);
+
+  color:
+    var(--color-text);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 11px;
+
+  outline: none;
+
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.address-field__input {
+  height: 48px;
+
+  padding:
+    0 14px;
+}
+
+.address-field__textarea {
+  min-height: 96px;
+
+  resize: vertical;
+
+  padding:
+    13px 14px;
+
+  line-height: 1.65;
+}
+
+.address-field__input::placeholder,
+.address-field__textarea::placeholder {
+  color:
+    var(--color-text-muted);
+
+  opacity: 0.75;
+}
+
+.address-field__input:hover,
+.address-field__textarea:hover,
+.address-field__select:hover {
+  border-color:
+    var(--color-border-dark);
+}
+
+.address-field__input:focus,
+.address-field__textarea:focus,
+.address-field__select:focus {
+  border-color:
+    var(--color-accent);
+
+  background:
+    var(--color-bg);
+
+  box-shadow:
+    0 0 0 3px
+    var(--color-accent-soft);
+}
+
+/* =========================================================
+   ERROR INPUT
+========================================================= */
+
+.address-field__input--error,
+.address-field__textarea--error,
+.address-field__select--error {
+  border-color:
+    var(--color-danger, #9a5d58);
+}
+
+.address-field__input--error:focus,
+.address-field__textarea--error:focus,
+.address-field__select--error:focus {
+  border-color:
+    var(--color-danger, #9a5d58);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(154, 93, 88, 0.1);
+}
+
+/* =========================================================
+   PHONE
+========================================================= */
+
+.address-field__phone {
+  display: flex;
+
+  height: 48px;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  background:
+    var(--color-surface);
+
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.address-field__phone:hover {
+  border-color:
+    var(--color-border-dark);
+}
+
+.address-field__phone:focus-within {
+  border-color:
+    var(--color-accent);
+
+  background:
+    var(--color-bg);
+
+  box-shadow:
+    0 0 0 3px
+    var(--color-accent-soft);
+}
+
+.address-field__phone--error {
+  border-color:
+    var(--color-danger, #9a5d58);
+}
+
+.address-field__country {
+  display: flex;
+
+  align-items: center;
+
+  padding:
+    0 13px;
+
+  border-right:
+    1px solid
+    var(--color-border);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  color:
+    var(--color-text-secondary);
+}
+
+.address-field__phone-input {
+  min-width: 0;
+  flex: 1;
+
+  border: 0;
+  outline: 0;
+
+  padding:
+    0 14px;
+
+  background:
+    transparent;
+
+  color:
+    var(--color-text);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 11px;
+}
+
+.address-field__phone-input::placeholder {
+  color:
+    var(--color-text-muted);
+}
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.address-field__select-wrap {
+  position: relative;
+}
+
+.address-field__select {
+  height: 48px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  padding:
+    0 42px 0 14px;
+
+  cursor: pointer;
+}
+
+.address-field__select-icon {
+  position: absolute;
+
+  top: 50%;
+  right: 14px;
+
+  pointer-events: none;
+
+  transform:
+    translateY(-50%);
+
+  color:
+    var(--color-text-secondary);
+}
+
+/* =========================================================
+   ERROR TEXT
+========================================================= */
+
+.address-field__error {
+  margin: 7px 0 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+
+  line-height: 1.5;
+
+  color:
+    var(--color-danger, #9a5d58);
+}
+
+/* =========================================================
+   DEFAULT ADDRESS
+========================================================= */
+
+.address-default {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  min-height: 68px;
+
+  margin-top: 4px;
+
+  padding:
+    13px 15px;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  background:
+    var(--color-surface);
+
+  cursor: pointer;
+
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+.address-default:hover {
+  border-color:
+    var(--color-border-dark);
+
+  background:
+    var(--color-bg-soft);
+}
+
+.address-default--active {
+  border-color:
+    var(--color-accent);
+
+  background:
+    var(--color-accent-soft);
+}
+
+.address-default__check {
+  width: 22px;
+  height: 22px;
+
+  flex: 0 0 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    var(--color-border-dark);
+
+  background:
+    var(--color-bg);
+
+  color:
+    transparent;
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease;
+}
+
+.address-default--active
+.address-default__check {
+  border-color:
+    var(--color-accent);
+
+  background:
+    var(--color-accent);
+
+  color:
+    var(--color-text-inverse);
+}
+
+.address-default__content {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.address-default__title {
+  display: block;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+
+  color:
+    var(--color-text);
+}
+
+.address-default__description {
+  display: block;
+
+  margin-top: 3px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 8.5px;
+
+  line-height: 1.5;
+
+  color:
+    var(--color-text-muted);
+}
+
+.address-default__badge {
+  flex: 0 0 auto;
+
+  padding:
+    5px 8px;
+
+  border:
+    1px solid
+    var(--color-accent-soft);
+
+  background:
+    var(--color-bg);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 7px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color:
+    var(--color-accent);
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.address-form__actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding:
+    22px 0 0;
+}
+
+.address-form__secondary-action,
+.address-form__save-action {
+  min-height: 46px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding:
+    0 20px;
+
+  border: 1px solid;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 240ms ease,
+    border-color 240ms ease,
+    color 240ms ease,
+    transform 240ms ease;
+}
+
+.address-form__secondary-action {
+  border-color:
+    var(--color-border-dark);
+
+  background:
+    transparent;
+
+  color:
+    var(--color-text);
+}
+
+.address-form__secondary-action:hover {
+  border-color:
+    var(--color-text);
+
+  background:
+    var(--color-bg);
+
+  transform:
+    translateY(-1px);
+}
+
+.address-form__save-action {
+  min-width: 170px;
+
+  border-color:
+    var(--color-text);
+
+  background:
+    var(--color-text);
+
+  color:
+    var(--color-text-inverse);
+}
+
+.address-form__save-action:hover:not(:disabled) {
+  border-color:
+    var(--color-accent-dark);
+
+  background:
+    var(--color-accent-dark);
+
+  transform:
+    translateY(-1px);
+}
+
+.address-form__save-action:active:not(:disabled),
+.address-form__secondary-action:active {
+  transform:
+    translateY(0);
+}
+
+.address-form__save-action:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.55;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.address-form__loading {
+  max-width: 1120px;
+}
+
+.address-form__loading-header {
+  padding-bottom: 30px;
+
+  border-bottom:
+    1px solid
+    var(--color-border);
+}
+
+.address-form__loading-fields {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 22px;
+
+  margin-top: 34px;
+}
+
+.address-form__skeleton {
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    var(--color-surface);
+
+  border:
+    1px solid
+    var(--color-border);
+}
+
+.address-form__skeleton::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  transform:
+    translateX(-100%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent
+    );
+
+  animation:
+    address-skeleton-shimmer
+    1.6s
+    infinite;
+}
+
+.address-form__skeleton--eyebrow {
+  width: 90px;
+  height: 8px;
+}
+
+.address-form__skeleton--title {
+  width: min(420px, 70%);
+  height: 40px;
+
+  margin-top: 14px;
+}
+
+.address-form__skeleton--description {
+  width: min(520px, 85%);
+  height: 12px;
+
+  margin-top: 12px;
+}
+
+.address-form__skeleton--field {
+  height: 82px;
+}
+
+@keyframes address-skeleton-shimmer {
+  100% {
+    transform:
+      translateX(100%);
+  }
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.address-form__empty {
+  max-width: 540px;
+
+  margin: 70px auto;
+
+  padding: 44px 36px;
+
+  text-align: center;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  background:
+    var(--color-surface);
+}
+
+.address-form__empty-icon {
+  width: 54px;
+  height: 54px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    var(--color-accent-soft);
+
+  background:
+    var(--color-bg);
+
+  color:
+    var(--color-accent);
+}
+
+.address-form__empty .address-form__eyebrow {
+  margin-bottom: 10px;
+}
+
+.address-form__empty-title {
+  margin: 0;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 30px;
+
+  font-weight: 500;
+
+  letter-spacing: -0.025em;
+}
+
+.address-form__empty-description {
+  max-width: 390px;
+
+  margin: 12px auto 24px;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+
+  line-height: 1.7;
+
+  color:
+    var(--color-text-secondary);
+}
+
+.address-form__primary-action {
+  display: inline-flex;
+
+  min-height: 44px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0 20px;
+
+  background:
+    var(--color-text);
+
+  color:
+    var(--color-text-inverse);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  transition:
+    background-color 240ms ease,
+    transform 240ms ease;
+}
+
+.address-form__primary-action:hover {
+  background:
+    var(--color-accent-dark);
+
+  transform:
+    translateY(-1px);
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.address-form__back:focus-visible,
+.address-form__secondary-action:focus-visible,
+.address-form__save-action:focus-visible,
+.address-form__primary-action:focus-visible {
+  outline:
+    1px solid
+    var(--color-accent);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .address-form {
+    padding:
+      34px 24px 60px;
+  }
+
+  .address-form__section {
+    padding:
+      30px 28px 34px;
+  }
+
+  .address-form__section-heading {
+    margin-bottom: 26px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+  .address-form {
+    padding:
+      26px 16px 48px;
+  }
+
+  .address-form__header {
+    margin-bottom: 28px;
+  }
+
+  .address-form__back {
+    margin-bottom: 24px;
+  }
+
+  .address-form__hero {
+    gap: 13px;
+
+    padding-bottom: 24px;
+  }
+
+  .address-form__hero-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-basis: 42px;
+  }
+
+  .address-form__title {
+    font-size: 30px;
+  }
+
+  .address-form__description {
+    font-size: 10px;
+  }
+
+  .address-form__body {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .address-form__section {
+    padding:
+      26px 0 30px;
+  }
+
+  .address-form__section-heading {
+    grid-template-columns:
+      32px minmax(0, 1fr);
+
+    gap: 11px;
+
+    margin-bottom: 24px;
+  }
+
+  .address-form__section-title {
+    font-size: 22px;
+  }
+
+  .address-form__fields--two {
+    grid-template-columns: 1fr;
+  }
+
+  .address-form__fields {
+    gap: 18px;
+  }
+
+  .address-default {
+    align-items: flex-start;
+
+    padding: 13px;
+  }
+
+  .address-default__badge {
+    display: none;
+  }
+
+  .address-form__actions {
+    display: grid;
+
+    grid-template-columns:
+      1fr 1.35fr;
+
+    gap: 8px;
+
+    padding-top: 18px;
+  }
+
+  .address-form__secondary-action,
+  .address-form__save-action {
+    width: 100%;
+
+    min-width: 0;
+
+    padding:
+      0 12px;
+
+    font-size: 8px;
+  }
+
+  .address-form__loading-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .address-form__empty {
+    margin:
+      40px auto;
+
+    padding:
+      34px 20px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .address-form {
+    padding:
+      22px 13px 42px;
+  }
+
+  .address-form__title {
+    font-size: 27px;
+  }
+
+  .address-form__hero-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-basis: 38px;
+  }
+
+  .address-field__input,
+  .address-field__select,
+  .address-field__phone {
+    height: 46px;
+  }
+
+  .address-form__actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .address-form *,
+  .address-form {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
