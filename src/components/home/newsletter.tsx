@@ -6,6 +6,8 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import type { HomepageNewsletter } from "@/types/homepage";
 
+import "./Newsletter.css";
+
 interface NewsletterProps {
   data: HomepageNewsletter;
 }
@@ -32,33 +34,25 @@ export function Newsletter({
   }
 
   return (
-    <section id="newsletter" className="newsletter">
+    <section
+      id="newsletter"
+      className="newsletter"
+    >
       <Container>
         <div className="newsletter__inner">
-          {/* =====================================================
+
+          {/* =========================================
               INTRO
-          ===================================================== */}
+          ========================================= */}
 
           <div className="newsletter__intro">
-            <div className="newsletter__eyebrow">
-              <span
-                aria-hidden="true"
-                className="newsletter__eyebrow-line"
-              />
-
-              <span className="newsletter__eyebrow-text">
-                Private Edit
-              </span>
-
-              <span
-                aria-hidden="true"
-                className="newsletter__eyebrow-line"
-              />
-            </div>
+            <p className="newsletter__eyebrow">
+              Private Edit
+            </p>
 
             <h2 className="newsletter__title">
               {data.title.lineOne}{" "}
-              <span className="newsletter__title-accent">
+              <span>
                 {data.title.lineTwo}
               </span>
             </h2>
@@ -68,24 +62,22 @@ export function Newsletter({
             </p>
           </div>
 
-          {/* =====================================================
+          {/* =========================================
               FORM
-          ===================================================== */}
+          ========================================= */}
 
           <div className="newsletter__form-wrapper">
             {submitted ? (
               <div className="newsletter__success">
-                <span
-                  aria-hidden="true"
-                  className="newsletter__success-icon"
-                >
+                <span className="newsletter__success-icon">
                   <Check
                     size={16}
-                    strokeWidth={1.6}
+                    strokeWidth={1.5}
+                    aria-hidden="true"
                   />
                 </span>
 
-                <div className="newsletter__success-content">
+                <div>
                   <p className="newsletter__success-title">
                     Welcome to the Private Edit.
                   </p>
@@ -101,7 +93,6 @@ export function Newsletter({
                   onSubmit={handleSubmit}
                   className="newsletter__form"
                 >
-                  {/* EMAIL */}
                   <div className="newsletter__field">
                     <label
                       htmlFor="newsletter-email"
@@ -118,26 +109,30 @@ export function Newsletter({
                       onChange={(event) =>
                         setEmail(event.target.value)
                       }
-                      placeholder={data.inputPlaceholder}
+                      placeholder={
+                        data.inputPlaceholder
+                      }
                       autoComplete="email"
                       required
                       className="newsletter__input"
                     />
                   </div>
 
-                  {/* BUTTON */}
                   <button
                     type="submit"
                     className="newsletter__button"
                   >
-                    <span>{data.buttonLabel}</span>
+                    <span>
+                      {data.buttonLabel}
+                    </span>
 
-                    <ArrowUpRight
-                      size={16}
-                      strokeWidth={1.4}
-                      aria-hidden="true"
-                      className="newsletter__button-icon"
-                    />
+                    <span className="newsletter__button-icon">
+                      <ArrowUpRight
+                        size={16}
+                        strokeWidth={1.4}
+                        aria-hidden="true"
+                      />
+                    </span>
                   </button>
                 </form>
 
@@ -148,9 +143,9 @@ export function Newsletter({
             )}
           </div>
 
-          {/* =====================================================
+          {/* =========================================
               BRAND SIGN-OFF
-          ===================================================== */}
+          ========================================= */}
 
           <div className="newsletter__signoff">
             <span className="newsletter__signoff-label">
@@ -161,6 +156,7 @@ export function Newsletter({
               Ayesha
             </span>
           </div>
+
         </div>
       </Container>
     </section>

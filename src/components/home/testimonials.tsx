@@ -13,6 +13,8 @@ import type {
   HomepageTestimonials,
 } from "@/types/homepage";
 
+import "./Testimonials.css";
+
 const AUTOPLAY_DELAY = 5500;
 
 interface TestimonialsProps {
@@ -97,38 +99,47 @@ export function Testimonials({
     >
       <Container>
         <div className="testimonials__inner">
-          {/* =====================================================
+
+          {/* =========================================
               HEADER
-          ===================================================== */}
+          ========================================= */}
 
-          <div className="testimonials__header">
-            <div className="testimonials__eyebrow">
-              <span
-                aria-hidden="true"
-                className="testimonials__eyebrow-line"
-              />
-
-              <p className="testimonials__eyebrow-text">
+          <header className="testimonials__header">
+            <div className="testimonials__heading">
+              <p className="testimonials__eyebrow">
                 Client Stories
               </p>
+
+              <h2 className="testimonials__title">
+                What they say
+                <span>.</span>
+              </h2>
             </div>
 
-            <span className="testimonials__counter">
-              {String(activeIndex + 1).padStart(2, "0")}{" "}
-              /{" "}
+            <span
+              className="testimonials__counter"
+              aria-label={`Testimonial ${
+                activeIndex + 1
+              } of ${total}`}
+            >
+              {String(activeIndex + 1).padStart(
+                2,
+                "0"
+              )}
+              <span>/</span>
               {String(total).padStart(2, "0")}
             </span>
-          </div>
+          </header>
 
-          {/* =====================================================
+          {/* =========================================
               TESTIMONIAL
-          ===================================================== */}
+          ========================================= */}
 
           <div className="testimonials__content">
             <Quote
               aria-hidden="true"
               className="testimonials__quote-icon"
-              size={26}
+              size={28}
               strokeWidth={1}
             />
 
@@ -144,15 +155,17 @@ export function Testimonials({
                 {testimonial.name}
               </p>
 
-              <p className="testimonials__location">
-                {testimonial.location}
-              </p>
+              {testimonial.location && (
+                <p className="testimonials__location">
+                  {testimonial.location}
+                </p>
+              )}
             </div>
           </div>
 
-          {/* =====================================================
+          {/* =========================================
               CONTROLS
-          ===================================================== */}
+          ========================================= */}
 
           {total > 1 && (
             <div className="testimonials__controls">
@@ -164,11 +177,14 @@ export function Testimonials({
               >
                 <ArrowLeft
                   size={16}
-                  strokeWidth={1.4}
+                  strokeWidth={1.3}
                 />
               </button>
 
-              <div className="testimonials__pagination">
+              <div
+                className="testimonials__pagination"
+                aria-label="Testimonial navigation"
+              >
                 {testimonials.map(
                   (item, index) => (
                     <button
@@ -208,11 +224,12 @@ export function Testimonials({
               >
                 <ArrowRight
                   size={16}
-                  strokeWidth={1.4}
+                  strokeWidth={1.3}
                 />
               </button>
             </div>
           )}
+
         </div>
       </Container>
     </section>

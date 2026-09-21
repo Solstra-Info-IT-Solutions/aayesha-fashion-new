@@ -9,6 +9,8 @@ import {
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/shared/container";
 
+import "./Footer.css";
+
 /* ============================================================
    FOOTER NAVIGATION
 ============================================================ */
@@ -131,25 +133,15 @@ export function Footer() {
 
   return (
     <footer className="site-footer">
-      {/* Ambient background */}
-      <div
-        aria-hidden="true"
-        className="site-footer__ambient site-footer__ambient--top"
-      />
-
-      <div
-        aria-hidden="true"
-        className="site-footer__ambient site-footer__ambient--bottom"
-      />
-
       <Container>
         <div className="site-footer__inner">
-          {/* ==================================================
-              TOP BRAND STATEMENT
-          ================================================== */}
+
+          {/* =========================================
+              BRAND INTRO
+          ========================================= */}
 
           <section className="site-footer__intro">
-            <div className="site-footer__intro-content">
+            <div className="site-footer__intro-heading">
               <p className="site-footer__eyebrow">
                 Aayesha Fashion
               </p>
@@ -157,37 +149,29 @@ export function Footer() {
               <h2 className="site-footer__intro-title">
                 Designed for
                 <br />
-                <span>
-                  every occasion.
-                </span>
+                <span>every occasion.</span>
               </h2>
             </div>
 
-            <div className="site-footer__intro-description">
-              <p>
-                {siteConfig.description}
-              </p>
-            </div>
+            <p className="site-footer__intro-description">
+              {siteConfig.description}
+            </p>
           </section>
 
-          {/* ==================================================
-              BRAND + NAVIGATION
-          ================================================== */}
+          {/* =========================================
+              MAIN FOOTER
+          ========================================= */}
 
-          <section className="site-footer__navigation">
-            {/* Brand */}
+          <section className="site-footer__main">
+
+            {/* BRAND */}
             <div className="site-footer__brand-column">
               <Link
                 href="/"
                 aria-label={`${siteConfig.name} home`}
                 className="site-footer__brand"
               >
-                <span className="site-footer__brand-mark">
-                  <span
-                    aria-hidden="true"
-                    className="site-footer__brand-glow"
-                  />
-
+                <span className="site-footer__brand-image-wrap">
                   <img
                     src="/images/logo.png"
                     alt="Aayesha Fashion"
@@ -204,7 +188,6 @@ export function Footer() {
                 </span>
               </Link>
 
-              {/* Social */}
               {socialLinks.length > 0 && (
                 <div className="site-footer__social">
                   <p className="site-footer__micro-label">
@@ -214,8 +197,7 @@ export function Footer() {
                   <div className="site-footer__social-list">
                     {socialLinks.map(
                       (social) => {
-                        const Icon =
-                          social.icon;
+                        const Icon = social.icon;
 
                         return (
                           <a
@@ -223,20 +205,13 @@ export function Footer() {
                             href={social.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label={
-                              social.label
-                            }
+                            aria-label={social.label}
                             className="site-footer__social-link"
                           >
-                            <span
-                              aria-hidden="true"
-                              className="site-footer__social-fill"
-                            />
-
                             <Icon
-                              size={17}
+                              size={16}
                               strokeWidth={1.25}
-                              className="site-footer__social-icon"
+                              aria-hidden="true"
                             />
                           </a>
                         );
@@ -247,7 +222,7 @@ export function Footer() {
               )}
             </div>
 
-            {/* Navigation */}
+            {/* NAVIGATION */}
             <div className="site-footer__columns">
               <FooterColumn
                 number="01"
@@ -258,24 +233,20 @@ export function Footer() {
               <FooterColumn
                 number="02"
                 title="Collections"
-                links={
-                  footerNavigation.collections
-                }
+                links={footerNavigation.collections}
               />
 
               <FooterColumn
                 number="03"
                 title="Information"
-                links={
-                  footerNavigation.information
-                }
+                links={footerNavigation.information}
               />
             </div>
           </section>
 
-          {/* ==================================================
+          {/* =========================================
               CUSTOMER CARE
-          ================================================== */}
+          ========================================= */}
 
           <section className="site-footer__customer-care">
             {siteConfig.contact.email && (
@@ -293,7 +264,7 @@ export function Footer() {
                   </span>
 
                   <ArrowUpRight
-                    size={15}
+                    size={14}
                     strokeWidth={1.25}
                   />
                 </a>
@@ -307,19 +278,15 @@ export function Footer() {
 
               {siteConfig.social.whatsapp ? (
                 <a
-                  href={
-                    siteConfig.social.whatsapp
-                  }
+                  href={siteConfig.social.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="site-footer__contact-link"
                 >
-                  <span>
-                    Chat with us
-                  </span>
+                  <span>Chat with us</span>
 
                   <ArrowUpRight
-                    size={15}
+                    size={14}
                     strokeWidth={1.25}
                   />
                 </a>
@@ -333,7 +300,7 @@ export function Footer() {
                   </span>
 
                   <ArrowUpRight
-                    size={15}
+                    size={14}
                     strokeWidth={1.25}
                   />
                 </a>
@@ -341,56 +308,46 @@ export function Footer() {
             </div>
           </section>
 
-          {/* ==================================================
-              NEWSLETTER / EDITORIAL CTA
-          ================================================== */}
+          {/* =========================================
+              NEWSLETTER
+          ========================================= */}
 
           <section className="site-footer__newsletter">
-            <div
-              aria-hidden="true"
-              className="site-footer__newsletter-glow"
-            />
+            <div>
+              <p className="site-footer__eyebrow">
+                Stay in the know
+              </p>
 
-            <div className="site-footer__newsletter-content">
-              <div>
-                <p className="site-footer__eyebrow">
-                  Stay in the know
-                </p>
+              <h3 className="site-footer__newsletter-title">
+                Discover the next
+                <br />
+                <span>Aayesha edit.</span>
+              </h3>
+            </div>
 
-                <h3 className="site-footer__newsletter-title">
-                  Discover the next
-                  <br />
-                  <span>
-                    Aayesha edit.
-                  </span>
-                </h3>
-              </div>
+            <Link
+              href="#newsletter"
+              className="site-footer__newsletter-link"
+            >
+              <span>Join the newsletter</span>
 
-              <Link
-                href="#newsletter"
-                className="site-footer__newsletter-link"
-              >
-                <span>
-                  Join the newsletter
-                </span>
-
+              <span className="site-footer__newsletter-icon">
                 <ArrowUpRight
                   size={15}
                   strokeWidth={1.25}
                 />
-              </Link>
-            </div>
+              </span>
+            </Link>
           </section>
 
-          {/* ==================================================
+          {/* =========================================
               LEGAL
-          ================================================== */}
+          ========================================= */}
 
           <section className="site-footer__legal">
             <p className="site-footer__copyright">
-              © {currentYear}{" "}
-              {siteConfig.name}. All rights
-              reserved.
+              © {currentYear} {siteConfig.name}.
+              All rights reserved.
             </p>
 
             <div className="site-footer__legal-links">
@@ -405,6 +362,7 @@ export function Footer() {
               ))}
             </div>
           </section>
+
         </div>
       </Container>
     </footer>
@@ -449,7 +407,7 @@ function FooterColumn({
             <span>{link.label}</span>
 
             <ArrowUpRight
-              size={13}
+              size={12}
               strokeWidth={1.2}
               className="site-footer__column-arrow"
             />
