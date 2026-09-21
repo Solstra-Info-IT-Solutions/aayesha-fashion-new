@@ -1,0 +1,135 @@
+/* =========================================================
+   AAYESHA FASHION
+   QUANTITY SELECTOR
+   ========================================================= */
+
+.quantity-selector {
+  display: inline-flex;
+  align-items: stretch;
+
+  height: 52px;
+
+  border: 1px solid var(--color-border-dark);
+
+  background: var(--color-surface);
+
+  color: var(--color-primary);
+}
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.quantity-selector__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  min-width: 48px;
+  height: 100%;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 0;
+
+  background: transparent;
+
+  color: var(--color-primary);
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.quantity-selector__button:hover:not(:disabled) {
+  background: var(--color-secondary);
+  color: var(--color-surface);
+}
+
+.quantity-selector__button:active:not(:disabled) {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.quantity-selector__button:focus-visible {
+  position: relative;
+  z-index: 2;
+
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+/* =========================================================
+   VALUE
+   ========================================================= */
+
+.quantity-selector__value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 44px;
+  height: 100%;
+
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.08em;
+
+  color: var(--color-primary);
+}
+
+/* =========================================================
+   DISABLED
+   ========================================================= */
+
+.quantity-selector__button:disabled {
+  cursor: not-allowed;
+
+  color: var(--color-text-muted);
+
+  opacity: 0.35;
+}
+
+.quantity-selector__button:disabled:hover {
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .quantity-selector {
+    height: 50px;
+  }
+
+  .quantity-selector__button {
+    width: 44px;
+    min-width: 44px;
+  }
+
+  .quantity-selector__value {
+    min-width: 40px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .quantity-selector__button {
+    transition: none;
+  }
+}

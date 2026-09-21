@@ -1,5 +1,7 @@
 import type { Product } from "@/types/product";
 
+import "./ProductPrice.css";
+
 interface ProductPriceProps {
   product: Product;
 }
@@ -18,10 +20,6 @@ export function ProductPrice({
 
   return (
     <div className="product-price">
-      {/* =====================================================
-          PRICE ROW
-      ===================================================== */}
-
       <div className="product-price__row">
         {/* SELLING PRICE */}
 
@@ -41,14 +39,12 @@ export function ProductPrice({
 
         {discount > 0 && (
           <span className="product-price__discount">
-            {discount}% off
+            {discount}% OFF
           </span>
         )}
       </div>
 
-      {/* =====================================================
-          TAX NOTE
-      ===================================================== */}
+      {/* TAX NOTE */}
 
       <p className="product-price__tax">
         Inclusive of applicable taxes

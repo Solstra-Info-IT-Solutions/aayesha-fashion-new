@@ -2,12 +2,22 @@
 
 import { Minus, Plus } from "lucide-react";
 
+import "./QuantitySelector.css";
+
+/* =========================================================
+   TYPES
+========================================================= */
+
 type QuantitySelectorProps = {
   quantity: number;
   onChange: (quantity: number) => void;
   min?: number;
   max?: number;
 };
+
+/* =========================================================
+   COMPONENT
+========================================================= */
 
 export function QuantitySelector({
   quantity,
@@ -27,39 +37,58 @@ export function QuantitySelector({
     }
   };
 
+  const decreaseDisabled = quantity <= min;
+  const increaseDisabled = quantity >= max;
+
   return (
-    <div className="quantity-selector">
+    <div
+      className="quantity-selector"
+      aria-label="Product quantity"
+    >
+      {/* ===================================================
+          DECREASE
+      =================================================== */}
+
       <button
         type="button"
         onClick={decrease}
-        disabled={quantity <= min}
+        disabled={decreaseDisabled}
         aria-label="Decrease quantity"
         className="quantity-selector__button"
       >
         <Minus
-          size={17}
-          strokeWidth={1.5}
+          size={14}
+          strokeWidth={1.4}
           aria-hidden="true"
         />
       </button>
 
+      {/* ===================================================
+          VALUE
+      =================================================== */}
+
       <span
         aria-live="polite"
+        aria-atomic="true"
         className="quantity-selector__value"
       >
         {quantity}
       </span>
 
+      {/* ===================================================
+          INCREASE
+      =================================================== */}
+
       <button
         type="button"
         onClick={increase}
-        disabled={quantity >= max}
+        disabled={increaseDisabled}
         aria-label="Increase quantity"
         className="quantity-selector__button"
       >
         <Plus
-          size={17}
-          strokeWidth={1.5}
+          size={14}
+          strokeWidth={1.4}
           aria-hidden="true"
         />
       </button>

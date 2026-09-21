@@ -2,24 +2,39 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
-import { useState } from "react";
+import {
+  Minus,
+  Plus,
+  ShoppingBag,
+} from "lucide-react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 import type { Product } from "@/types/product";
 
-import { WishlistButton } from "@/components/product/wishlist-button";
-import { LoginRequiredPopup } from "@/components/product/login-required-popup";
-import { AddToBagPopup } from "@/components/product/add-to-bag-popup";
-
 import {
-  getDiscountPercentage,
   getProductAvailability,
   getPrimaryProductMedia,
 } from "@/types/product";
 
-import { addToCart } from "@/services/cart.service";
+import {
+  addToCart,
+  getCart,
+  removeFromCart,
+  updateCartItem,
+} from "@/services/cart.service";
 
 import { useAuthStore } from "@/store/auth-store";
+
+import { WishlistButton } from "@/components/product/wishlist-button";
+import { LoginRequiredPopup } from "@/components/product/login-required-popup";
+import { AddToBagPopup } from "@/components/product/add-to-bag-popup";
+import { ProductPrice } from "@/components/product/product-price";
+
+import "./ProductCard.css";
 
 /* =========================================================
    TYPES
@@ -31,24 +46,6 @@ type ProductCardProps = {
 };
 
 /* =========================================================
-   HELPERS
-========================================================= */
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(price);
-}
-
-function formatBadge(badge: string) {
-  return badge
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
-}
-
-/* =========================================================
    COMPONENT
 ========================================================= */
 
@@ -56,12 +53,21 @@ export function ProductCard({
   product,
   priority = false,
 }: ProductCardProps) {
-  const [showLoginPopup, setShowLoginPopup] =
-    useState(false);
+  const availability =
+    getProductAvailability(product);
 
-  const [isAdding, setIsAdding] = useState(false);
+  const primaryMedia =
+    getPrimaryProductMedia(product);
 
-  const [showAddedPopup, setShowAddedPopup] = useState(false);
+  const secondaryMedia = product.media.find(
+    (media) =>
+      media.type === "image" &&
+      media.id !== primaryMedia?.id,
+  );
+
+  /* =======================================================
+     AUTH
+  ======================================================= */
 
   const isAuthenticated = useAuthStore(
     (state) => state.isAuthenticated,
@@ -71,31 +77,32 @@ export function ProductCard({
     (state) => state.isInitialized,
   );
 
-  const availability = getProductAvailability(product);
-
   /* =======================================================
-     PRODUCT MEDIA
+     LOCAL STATE
   ======================================================= */
 
-  const primaryMedia = getPrimaryProductMedia(product);
+  const [cartQuantity, setCartQuantity] =
+    useState(0);
 
-  const secondaryMedia = product.media.find(
-    (media) =>
-      media.type === "image" &&
-      media.id !== primaryMedia?.id,
-  );
+  const [cartLoading, setCartLoading] =
+    useState(false);
+
+  const [cartInitialized, setCartInitialized] =
+    useState(false);
+
+  const [showLoginPopup, setShowLoginPopup] =
+    useState(false);
+
+  const [showAddedPopup, setShowAddedPopup] =
+    useState(false);
+
+  /* =======================================================
+     PRODUCT MEDIA SAFETY
+  ======================================================= */
 
   if (!primaryMedia) {
     return null;
   }
-
-  /* =======================================================
-     PRICING
-  ======================================================= */
-
-  const discount = getDiscountPercentage(
-    product.pricing,
-  );
 
   /* =======================================================
      BADGE
@@ -104,33 +111,240 @@ export function ProductCard({
   const hasBadge =
     product.merchandising.badges.length > 0;
 
+  const badge =
+    hasBadge
+      ? product.merchandising.badges[0]
+          .replace(/-/g, " ")
+          .replace(/\b\w/g, (letter) =>
+            letter.toUpperCase(),
+          )
+      : null;
+
   /* =======================================================
-     ADD TO BAG
+     LOAD CART QUANTITY
   ======================================================= */
 
-  const handleAddToBag = async () => {
-    if (availability.isSoldOut || isAdding) {
+  const syncCartQuantity =
+    useCallback(async () => {
+      if (
+        !isInitialized ||
+        !isAuthenticated
+      ) {
+        setCartQuantity(0);
+        setCartInitialized(true);
+        return;
+      }
+
+      try {
+        const cart = await getCart();
+
+        const item = cart.items.find(
+          (cartItem) =>
+            cartItem.productId ===
+            product._id,
+        );
+
+        setCartQuantity(
+          item?.quantity ?? 0,
+        );
+      } catch (error) {
+        console.error(
+          "PRODUCT CARD CART SYNC ERROR:",
+          error,
+        );
+      } finally {
+        setCartInitialized(true);
+      }
+    }, [
+      isAuthenticated,
+      isInitialized,
+      product._id,
+    ]);
+
+  useEffect(() => {
+    void syncCartQuantity();
+  }, [syncCartQuantity]);
+
+  /* =======================================================
+     LOGIN CHECK
+  ======================================================= */
+
+  const requireAuthentication =
+    () => {
+      if (!isInitialized) {
+        return false;
+      }
+
+      if (!isAuthenticated) {
+        setShowLoginPopup(true);
+        return false;
+      }
+
+      return true;
+    };
+
+  /* =======================================================
+     ADD TO CART
+  ======================================================= */
+
+  const handleAddToCart = async () => {
+    if (
+      availability.isSoldOut ||
+      availability.availableQuantity <= 0 ||
+      cartLoading
+    ) {
       return;
     }
 
-    if (!isInitialized) {
-      return;
-    }
-
-    if (!isAuthenticated) {
-      setShowLoginPopup(true);
+    if (!requireAuthentication()) {
       return;
     }
 
     try {
-      setIsAdding(true);
+      setCartLoading(true);
 
-      await addToCart(product._id, 1);
-       setShowAddedPopup(true);
+      const cart = await addToCart(
+        product._id,
+        1,
+      );
+
+      const item = cart.items.find(
+        (cartItem) =>
+          cartItem.productId ===
+          product._id,
+      );
+
+      setCartQuantity(
+        item?.quantity ?? 1,
+      );
+
+      setShowAddedPopup(true);
     } catch (error) {
-      console.error("ADD TO CART ERROR:", error);
+      console.error(
+        "ADD TO CART ERROR:",
+        error,
+      );
     } finally {
-      setIsAdding(false);
+      setCartLoading(false);
+    }
+  };
+
+  /* =======================================================
+     INCREASE
+  ======================================================= */
+
+  const handleIncrease = async () => {
+    if (
+      availability.isSoldOut ||
+      cartLoading ||
+      cartQuantity <= 0
+    ) {
+      return;
+    }
+
+    if (!requireAuthentication()) {
+      return;
+    }
+
+    const nextQuantity =
+      cartQuantity + 1;
+
+    /*
+     * Don't allow the card to exceed
+     * the currently available inventory.
+     */
+    if (
+      nextQuantity >
+      availability.availableQuantity
+    ) {
+      return;
+    }
+
+    try {
+      setCartLoading(true);
+
+      const cart =
+        await updateCartItem(
+          product._id,
+          nextQuantity,
+        );
+
+      const item = cart.items.find(
+        (cartItem) =>
+          cartItem.productId ===
+          product._id,
+      );
+
+      setCartQuantity(
+        item?.quantity ?? nextQuantity,
+      );
+    } catch (error) {
+      console.error(
+        "UPDATE CART ERROR:",
+        error,
+      );
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  /* =======================================================
+     DECREASE
+  ======================================================= */
+
+  const handleDecrease = async () => {
+    if (
+      cartLoading ||
+      cartQuantity <= 0
+    ) {
+      return;
+    }
+
+    if (!requireAuthentication()) {
+      return;
+    }
+
+    try {
+      setCartLoading(true);
+
+      /*
+       * Quantity 1 → remove product
+       */
+      if (cartQuantity === 1) {
+        await removeFromCart(
+          product._id,
+        );
+
+        setCartQuantity(0);
+
+        return;
+      }
+
+      const nextQuantity =
+        cartQuantity - 1;
+
+      const cart =
+        await updateCartItem(
+          product._id,
+          nextQuantity,
+        );
+
+      const item = cart.items.find(
+        (cartItem) =>
+          cartItem.productId ===
+          product._id,
+      );
+
+      setCartQuantity(
+        item?.quantity ?? nextQuantity,
+      );
+    } catch (error) {
+      console.error(
+        "UPDATE CART ERROR:",
+        error,
+      );
+    } finally {
+      setCartLoading(false);
     }
   };
 
@@ -138,17 +352,14 @@ export function ProductCard({
      BUTTON STATE
   ======================================================= */
 
-  const buttonClassName = [
-    "product-card__button",
-    availability.isSoldOut
-      ? "product-card__button--sold-out"
-      : "",
-    isAdding
-      ? "product-card__button--loading"
-      : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const showQuantity =
+    cartInitialized &&
+    isAuthenticated &&
+    cartQuantity > 0;
+
+  /* =======================================================
+     RENDER
+  ======================================================= */
 
   return (
     <>
@@ -162,9 +373,9 @@ export function ProductCard({
           .filter(Boolean)
           .join(" ")}
       >
-        {/* =====================================================
-            PRODUCT IMAGE
-        ===================================================== */}
+        {/* =================================================
+            MEDIA
+        ================================================= */}
 
         <div className="product-card__media">
           <Link
@@ -181,11 +392,10 @@ export function ProductCard({
               fill
               priority={priority}
               sizes="
-                (max-width: 639px) 44vw,
-                (max-width: 767px) 44vw,
-                (max-width: 1023px) 30vw,
-                (max-width: 1279px) 23vw,
-                21vw
+                (max-width: 639px) 46vw,
+                (max-width: 1023px) 31vw,
+                (max-width: 1279px) 24vw,
+                22vw
               "
               className="product-card__image"
             />
@@ -199,11 +409,10 @@ export function ProductCard({
                 }
                 fill
                 sizes="
-                  (max-width: 639px) 44vw,
-                  (max-width: 767px) 44vw,
-                  (max-width: 1023px) 30vw,
-                  (max-width: 1279px) 23vw,
-                  21vw
+                  (max-width: 639px) 46vw,
+                  (max-width: 1023px) 31vw,
+                  (max-width: 1279px) 24vw,
+                  22vw
                 "
                 className="product-card__image product-card__image--secondary"
               />
@@ -211,18 +420,16 @@ export function ProductCard({
 
             <span
               aria-hidden="true"
-              className="product-card__image-overlay"
+              className="product-card__image-shade"
             />
           </Link>
 
           {/* BADGE */}
 
-          {hasBadge && (
-            <div className="product-card__badge">
-              {formatBadge(
-                product.merchandising.badges[0],
-              )}
-            </div>
+          {badge && (
+            <span className="product-card__badge">
+              {badge}
+            </span>
           )}
 
           {/* WISHLIST */}
@@ -234,18 +441,29 @@ export function ProductCard({
             />
           </div>
 
-          {/* SOLD OUT IMAGE LABEL */}
+          {/* SOLD OUT */}
 
           {availability.isSoldOut && (
-            <div className="product-card__sold-out-label">
-              Sold Out
+            <div className="product-card__sold-out">
+              SOLD OUT
             </div>
+          )}
+
+          {/* IMAGE LINK INDICATOR */}
+
+          {!availability.isSoldOut && (
+            <span
+              aria-hidden="true"
+              className="product-card__image-arrow"
+            >
+              ↗
+            </span>
           )}
         </div>
 
-        {/* =====================================================
-            PRODUCT INFORMATION
-        ===================================================== */}
+        {/* =================================================
+            CONTENT
+        ================================================= */}
 
         <div className="product-card__content">
           {/* PRODUCT NAME */}
@@ -261,73 +479,152 @@ export function ProductCard({
 
           {/* PRICE */}
 
-          <div className="product-card__pricing">
-            <span className="product-card__selling-price">
-              {formatPrice(
-                product.pricing.sellingPrice,
-              )}
-            </span>
+          <ProductPrice
+            product={product}
+          />
 
-            {discount > 0 && (
-              <>
-                <span className="product-card__mrp">
-                  {formatPrice(
-                    product.pricing.mrp,
-                  )}
+          {/* =================================================
+              CART ACTION
+          ================================================= */}
+
+          {availability.isSoldOut ? (
+            <button
+              type="button"
+              disabled
+              className="product-card__cart-button product-card__cart-button--sold-out"
+            >
+              <span>SOLD OUT</span>
+            </button>
+          ) : showQuantity ? (
+            <div
+              className={[
+                "product-card__quantity",
+                cartLoading
+                  ? "product-card__quantity--loading"
+                  : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              <button
+                type="button"
+                onClick={() =>
+                  void handleDecrease()
+                }
+                disabled={cartLoading}
+                aria-label={`Decrease ${product.name} quantity`}
+                className="product-card__quantity-button"
+              >
+                <Minus
+                  size={14}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+              </button>
+
+              <div
+                className="product-card__quantity-value"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <ShoppingBag
+                  size={14}
+                  strokeWidth={1.4}
+                  aria-hidden="true"
+                />
+
+                <span>
+                  {cartQuantity}
                 </span>
+              </div>
 
-                <span className="product-card__discount">
-                  {discount}% OFF
+              <button
+                type="button"
+                onClick={() =>
+                  void handleIncrease()
+                }
+                disabled={
+                  cartLoading ||
+                  cartQuantity >=
+                    availability.availableQuantity
+                }
+                aria-label={`Increase ${product.name} quantity`}
+                className="product-card__quantity-button"
+              >
+                <Plus
+                  size={14}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() =>
+                void handleAddToCart()
+              }
+              disabled={
+                cartLoading ||
+                !isInitialized ||
+                !cartInitialized
+              }
+              className={[
+                "product-card__cart-button",
+                cartLoading
+                  ? "product-card__cart-button--loading"
+                  : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              <span className="product-card__cart-button-main">
+                <ShoppingBag
+                  size={15}
+                  strokeWidth={1.4}
+                  aria-hidden="true"
+                />
+
+                <span>
+                  {cartLoading
+                    ? "ADDING..."
+                    : "ADD TO BAG"}
                 </span>
-              </>
-            )}
-          </div>
+              </span>
 
-          {/* ===================================================
-              ADD TO BAG
-          =================================================== */}
-
-          <button
-            type="button"
-            onClick={handleAddToBag}
-            disabled={
-              availability.isSoldOut ||
-              isAdding ||
-              !isInitialized
-            }
-            className={buttonClassName}
-          >
-            <ShoppingBag
-              className="product-card__button-icon"
-              aria-hidden="true"
-            />
-
-            <span>
-              {availability.isSoldOut
-                ? "Sold Out"
-                : isAdding
-                  ? "Adding..."
-                  : "Add to Bag"}
-            </span>
-          </button>
+              <span
+                aria-hidden="true"
+                className="product-card__cart-button-arrow"
+              >
+                ↗
+              </span>
+            </button>
+          )}
         </div>
       </article>
 
       {/* =====================================================
-          LOGIN REQUIRED POPUP
+          LOGIN REQUIRED
       ===================================================== */}
 
       <LoginRequiredPopup
         open={showLoginPopup}
-        onClose={() => setShowLoginPopup(false)}
+        onClose={() =>
+          setShowLoginPopup(false)
+        }
       />
 
+      {/* =====================================================
+          ADD TO BAG
+      ===================================================== */}
 
       <AddToBagPopup
         open={showAddedPopup}
         product={product}
         image={primaryMedia.src}
-        onClose={() => setShowAddedPopup(false)}
+        onClose={() =>
+          setShowAddedPopup(false)
+        }
       />
     </>
   );

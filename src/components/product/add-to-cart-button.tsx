@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
-
 import { ShoppingBag } from "lucide-react";
 
 import toast from "react-hot-toast";
@@ -14,6 +12,12 @@ import { useAuthStore } from "@/store/auth-store";
 
 import { LoginRequiredPopup } from "@/components/product/login-required-popup";
 
+import "./AddToCartButton.css";
+
+/* =========================================================
+   TYPES
+========================================================= */
+
 type AddToCartButtonProps = {
   productId: string;
   productName: string;
@@ -21,14 +25,16 @@ type AddToCartButtonProps = {
   fullWidth?: boolean;
 };
 
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 export function AddToCartButton({
   productId,
   productName,
   quantity = 1,
   fullWidth = true,
 }: AddToCartButtonProps) {
-  const router = useRouter();
-
   const isAuthenticated = useAuthStore(
     (state) => state.isAuthenticated,
   );
@@ -43,20 +49,25 @@ export function AddToCartButton({
   const [showLoginPopup, setShowLoginPopup] =
     useState(false);
 
+  /* =======================================================
+     ADD TO CART
+  ======================================================= */
+
   const handleAddToCart = async () => {
     if (adding) {
       return;
     }
 
     /*
-     * Wait until auth state is initialized.
+     * Wait until authentication state
+     * has been initialized.
      */
     if (!isInitialized) {
       return;
     }
 
     /*
-     * Login is required for backend cart.
+     * Cart requires an authenticated user.
      */
     if (!isAuthenticated) {
       setShowLoginPopup(true);
@@ -92,6 +103,26 @@ export function AddToCartButton({
     }
   };
 
+  /* =======================================================
+     BUTTON CLASS
+  ======================================================= */
+
+  const buttonClassName = [
+    "add-to-cart-button",
+    fullWidth
+      ? "add-to-cart-button--full"
+      : "add-to-cart-button--auto",
+    adding
+      ? "add-to-cart-button--loading"
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  /* =======================================================
+     RENDER
+  ======================================================= */
+
   return (
     <>
       <button
@@ -103,43 +134,30 @@ export function AddToCartButton({
           adding ||
           !isInitialized
         }
-        className={[
-          "inline-flex",
-          "items-center",
-          "justify-center",
-          "gap-2.5",
-          "border",
-          "border-[var(--color-charcoal)]",
-          "bg-[var(--color-charcoal)]",
-          "px-6",
-          "py-4",
-          "text-[11px]",
-          "font-semibold",
-          "uppercase",
-          "tracking-[0.14em]",
-          "text-white",
-          "transition-all",
-          "duration-300",
-          "hover:bg-[var(--color-charcoal-soft)]",
-          "focus:outline-none",
-          "focus-visible:ring-2",
-          "focus-visible:ring-[var(--color-rose)]",
-          "focus-visible:ring-offset-2",
-          "disabled:cursor-not-allowed",
-          "disabled:opacity-50",
-          fullWidth
-            ? "w-full"
-            : "w-auto",
-        ].join(" ")}
+        aria-busy={adding}
+        className={buttonClassName}
       >
-        <ShoppingBag
-          size={16}
-          strokeWidth={1.4}
-        />
+        <span className="add-to-cart-button__content">
+          <ShoppingBag
+            className="add-to-cart-button__icon"
+            size={16}
+            strokeWidth={1.35}
+            aria-hidden="true"
+          />
 
-        {adding
-          ? "Adding..."
-          : "Add to Bag"}
+          <span className="add-to-cart-button__label">
+            {adding
+              ? "Adding..."
+              : "Add to Bag"}
+          </span>
+        </span>
+
+        <span
+          className="add-to-cart-button__arrow"
+          aria-hidden="true"
+        >
+          ↗
+        </span>
       </button>
 
       <LoginRequiredPopup

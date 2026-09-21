@@ -1,0 +1,132 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT PRICE
+   ========================================================= */
+
+.product-price {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  width: 100%;
+}
+
+/* =========================================================
+   PRICE ROW
+   ========================================================= */
+
+.product-price__row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+
+  gap: 9px;
+}
+
+/* =========================================================
+   SELLING PRICE
+   ========================================================= */
+
+.product-price__selling {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+
+  letter-spacing: 0.01em;
+
+  color: var(--color-primary);
+}
+
+/* =========================================================
+   MRP
+   ========================================================= */
+
+.product-price__mrp {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  color: var(--color-text-muted);
+
+  text-decoration-line: line-through;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--color-text-muted);
+}
+
+/* =========================================================
+   DISCOUNT
+   ========================================================= */
+
+.product-price__discount {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 20px;
+
+  padding: 0 7px;
+
+  border: 1px solid rgba(143, 101, 93, 0.32);
+
+  font-family: var(--font-body);
+  font-size: 7px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--color-secondary);
+}
+
+/* =========================================================
+   TAX
+   ========================================================= */
+
+.product-price__tax {
+  margin: 0;
+
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 1.4;
+
+  letter-spacing: 0.02em;
+
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-price {
+    gap: 6px;
+  }
+
+  .product-price__row {
+    gap: 7px;
+  }
+
+  .product-price__selling {
+    font-size: 13px;
+  }
+
+  .product-price__mrp {
+    font-size: 10px;
+  }
+
+  .product-price__discount {
+    min-height: 18px;
+    padding: 0 6px;
+
+    font-size: 6.5px;
+  }
+
+  .product-price__tax {
+    font-size: 7px;
+  }
+}

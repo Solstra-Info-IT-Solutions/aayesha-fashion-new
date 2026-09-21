@@ -1,0 +1,142 @@
+/* =========================================================
+   AAYESHA FASHION
+   WISHLIST BUTTON
+   ========================================================= */
+
+.wishlist-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 0;
+
+  background: rgba(38, 27, 24, 0.42);
+
+  color: var(--color-surface);
+
+  cursor: pointer;
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+.wishlist-button__icon {
+  transition:
+    transform 220ms ease,
+    fill 220ms ease;
+}
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.wishlist-button:hover:not(:disabled) {
+  border-color: var(--color-surface);
+
+  background: var(--color-surface);
+
+  color: var(--color-primary);
+
+  transform: translateY(-1px);
+}
+
+.wishlist-button:hover:not(:disabled)
+  .wishlist-button__icon {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   ACTIVE
+   ========================================================= */
+
+.wishlist-button--active {
+  background: var(--color-surface);
+
+  border-color: var(--color-surface);
+
+  color: var(--color-secondary);
+}
+
+.wishlist-button--active:hover:not(:disabled) {
+  background: var(--color-secondary);
+
+  border-color: var(--color-secondary);
+
+  color: var(--color-surface);
+}
+
+/* =========================================================
+   ACTIVE ICON
+========================================================= */
+
+.wishlist-button--active
+  .wishlist-button__icon {
+  fill: currentColor;
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.wishlist-button:focus-visible {
+  outline: 2px solid var(--color-surface);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   DISABLED
+========================================================= */
+
+.wishlist-button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.45;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 639px) {
+  .wishlist-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .wishlist-button__icon {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .wishlist-button,
+  .wishlist-button__icon {
+    transition: none;
+  }
+
+  .wishlist-button:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .wishlist-button:hover:not(:disabled)
+    .wishlist-button__icon {
+    transform: none;
+  }
+}

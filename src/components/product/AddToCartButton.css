@@ -1,0 +1,226 @@
+/* =========================================================
+   AAYESHA FASHION
+   ADD TO CART BUTTON
+   ========================================================= */
+
+.add-to-cart-button {
+  position: relative;
+
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: space-between;
+
+  min-height: 52px;
+
+  padding: 0;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 0;
+
+  background: var(--color-primary);
+  color: var(--color-surface);
+
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease;
+}
+
+.add-to-cart-button--full {
+  width: 100%;
+}
+
+.add-to-cart-button--auto {
+  width: auto;
+}
+
+.add-to-cart-button__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  padding: 0 20px;
+}
+
+.add-to-cart-button__icon {
+  flex: 0 0 auto;
+}
+
+.add-to-cart-button__label {
+  white-space: nowrap;
+}
+
+.add-to-cart-button__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  min-width: 50px;
+
+  border-left: 1px solid rgba(255, 255, 255, 0.28);
+
+  font-size: 14px;
+  font-weight: 400;
+
+  color: var(--color-surface);
+
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.add-to-cart-button:hover:not(:disabled) {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.add-to-cart-button:hover:not(:disabled)
+  .add-to-cart-button__arrow {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-surface);
+
+  transform: translate(1px, -1px);
+}
+
+/* =========================================================
+   ACTIVE
+   ========================================================= */
+
+.add-to-cart-button:active:not(:disabled) {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.add-to-cart-button:active:not(:disabled)
+  .add-to-cart-button__arrow {
+  color: var(--color-surface);
+}
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.add-to-cart-button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.add-to-cart-button:focus-visible
+  .add-to-cart-button__arrow {
+  color: var(--color-surface);
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.add-to-cart-button--loading {
+  cursor: wait;
+}
+
+.add-to-cart-button--loading
+  .add-to-cart-button__icon {
+  animation: add-to-cart-pulse 900ms ease-in-out infinite;
+}
+
+/* =========================================================
+   DISABLED
+   ========================================================= */
+
+.add-to-cart-button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.55;
+}
+
+/*
+ * Don't allow the disabled state to turn
+ * the button white/invisible.
+ */
+.add-to-cart-button:disabled {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.add-to-cart-button:disabled
+  .add-to-cart-button__arrow {
+  color: var(--color-surface);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .add-to-cart-button {
+    min-height: 50px;
+
+    font-size: 8px;
+    letter-spacing: 0.15em;
+  }
+
+  .add-to-cart-button__content {
+    padding: 0 16px;
+    gap: 8px;
+  }
+
+  .add-to-cart-button__arrow {
+    width: 46px;
+    min-width: 46px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .add-to-cart-button,
+  .add-to-cart-button__arrow {
+    transition: none;
+  }
+
+  .add-to-cart-button--loading
+    .add-to-cart-button__icon {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes add-to-cart-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
