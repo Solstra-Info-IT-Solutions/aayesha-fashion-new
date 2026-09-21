@@ -2,12 +2,19 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Search, Heart, ShoppingBag, Menu, X } from "lucide-react";
+
+import { HeaderActions } from "./HeaderActions";
+import { MobileMenu } from "./MobileMenu";
+
 import "./Header.css";
 
 interface HeaderProps {
   transparent?: boolean;
 }
+
+/* =========================================================
+   DESKTOP NAVIGATION
+========================================================= */
 
 const navigation = [
   {
@@ -32,11 +39,22 @@ const navigation = [
   },
 ];
 
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 export default function Header({
   transparent = false,
 }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] =
+    useState(false);
+
+  const [isMenuOpen, setIsMenuOpen] =
+    useState(false);
+
+  /* =======================================================
+     SCROLL STATE
+  ======================================================= */
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,67 +63,101 @@ export default function Header({
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
+      },
+    );
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener(
+        "scroll",
+        handleScroll,
+      );
     };
   }, []);
 
+  /* =======================================================
+     CLOSE MOBILE MENU ON DESKTOP
+  ======================================================= */
+
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen
-      ? "hidden"
-      : "";
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener(
+      "resize",
+      handleResize,
+    );
 
     return () => {
-      document.body.style.overflow = "";
+      window.removeEventListener(
+        "resize",
+        handleResize,
+      );
     };
-  }, [isMenuOpen]);
+  }, []);
+
+  /* =======================================================
+     HEADER CLASS
+  ======================================================= */
+
+  const headerClassName = [
+    "aayesha-header",
+
+    transparent && !isScrolled
+      ? "aayesha-header--transparent"
+      : "",
+
+    isScrolled
+      ? "aayesha-header--scrolled"
+      : "",
+
+    isMenuOpen
+      ? "aayesha-header--menu-open"
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <>
-      <header
-        className={[
-          "aayesha-header",
-          transparent && !isScrolled
-            ? "aayesha-header--transparent"
-            : "",
-          isScrolled
-            ? "aayesha-header--scrolled"
-            : "",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-      >
+      {/* ===================================================
+          HEADER
+      =================================================== */}
+
+      <header className={headerClassName}>
         <div className="aayesha-header__inner">
 
-          {/* Mobile Menu */}
-          <button
-            type="button"
-            className="aayesha-header__mobile-menu"
-            aria-label={
-              isMenuOpen
-                ? "Close navigation"
-                : "Open navigation"
-            }
-            aria-expanded={isMenuOpen}
-            onClick={() => setIsMenuOpen((value) => !value)}
-          >
-            {isMenuOpen ? (
-              <X size={18} strokeWidth={1.5} />
-            ) : (
-              <Menu size={19} strokeWidth={1.5} />
-            )}
-          </button>
+          {/* =================================================
+              MOBILE MENU
+          ================================================= */}
 
+          <div className="aayesha-header__mobile">
+            <MobileMenu
+              isOpen={isMenuOpen}
+              onClose={() =>
+                setIsMenuOpen(false)
+              }
+              onOpen={() =>
+                setIsMenuOpen(true)
+              }
+            />
+          </div>
 
-          {/* Logo */}
+          {/* =================================================
+              LOGO
+          ================================================= */}
+
           <Link
             href="/"
             className="aayesha-header__logo"
-            aria-label="Aayesha home"
+            aria-label="Aayesha Fashion home"
           >
             <span className="aayesha-header__logo-main">
               AAYESHA
@@ -116,142 +168,41 @@ export default function Header({
             </span>
           </Link>
 
+          {/* =================================================
+              DESKTOP NAVIGATION
+          ================================================= */}
 
-          {/* Desktop Navigation */}
           <nav
             className="aayesha-header__nav"
-            aria-label="Main navigation"
+            aria-label="Primary navigation"
           >
             {navigation.map((item) => (
               <Link
-                key={item.label}
+                key={item.href}
                 href={item.href}
                 className="aayesha-header__nav-link"
               >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-
-          {/* Actions */}
-          <div className="aayesha-header__actions">
-
-            <button
-              type="button"
-              className="aayesha-header__action"
-              aria-label="Search"
-            >
-              <Search
-                size={17}
-                strokeWidth={1.45}
-              />
-            </button>
-
-            <Link
-              href="/wishlist"
-              className="aayesha-header__action aayesha-header__wishlist"
-              aria-label="Wishlist"
-            >
-              <Heart
-                size={17}
-                strokeWidth={1.45}
-              />
-            </Link>
-
-            <Link
-              href="/cart"
-              className="aayesha-header__action"
-              aria-label="Shopping bag"
-            >
-              <ShoppingBag
-                size={17}
-                strokeWidth={1.45}
-              />
-
-              <span className="aayesha-header__cart-count">
-                0
-              </span>
-            </Link>
-
-          </div>
-        </div>
-      </header>
-
-
-      {/* Mobile Navigation */}
-      <div
-        className={[
-          "aayesha-mobile-menu",
-          isMenuOpen
-            ? "aayesha-mobile-menu--open"
-            : "",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-        aria-hidden={!isMenuOpen}
-      >
-        <div className="aayesha-mobile-menu__inner">
-
-          <div className="aayesha-mobile-menu__top">
-            <span>EXPLORE</span>
-
-            <span>
-              AAYESHA
-            </span>
-          </div>
-
-
-          <nav
-            className="aayesha-mobile-menu__nav"
-            aria-label="Mobile navigation"
-          >
-            {navigation.map((item, index) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="aayesha-mobile-menu__link"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span className="aayesha-mobile-menu__number">
-                  0{index + 1}
-                </span>
-
                 <span>
                   {item.label}
                 </span>
+
+                <span
+                  aria-hidden="true"
+                  className="aayesha-header__nav-line"
+                />
               </Link>
             ))}
           </nav>
 
+          {/* =================================================
+              ACTIONS
+          ================================================= */}
 
-          <div className="aayesha-mobile-menu__bottom">
-
-            <Link
-              href="/about"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About Aayesha
-            </Link>
-
-            <Link
-              href="/contact"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </Link>
-
-            <Link
-              href="/account"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              My Account
-            </Link>
-
+          <div className="aayesha-header__actions">
+            <HeaderActions />
           </div>
-
         </div>
-      </div>
+      </header>
     </>
   );
 }
