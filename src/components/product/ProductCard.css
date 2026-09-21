@@ -265,7 +265,7 @@
   overflow: hidden;
 
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.45;
 
@@ -309,11 +309,11 @@
   cursor: pointer;
 
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 600;
   line-height: 1;
 
-  letter-spacing: 0.18em;
+  letter-spacing: 0.17em;
   text-transform: uppercase;
 
   transition:
@@ -505,7 +505,7 @@
   min-width: 0;
 
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
 
@@ -582,7 +582,7 @@
   }
 
   .product-card__title {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.4;
   }
 
@@ -595,7 +595,7 @@
       minmax(0, 1fr)
       40px;
 
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 0.15em;
   }
 
@@ -613,6 +613,18 @@
 
   .product-card__quantity-value {
     font-size: 8px;
+  }
+
+    .product-price__selling {
+    font-size: 14px;
+  }
+
+  .product-price__mrp {
+    font-size: 11px;
+  }
+
+  .product-price__discount {
+    font-size: 7px;
   }
 }
 
