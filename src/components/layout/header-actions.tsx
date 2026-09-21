@@ -9,12 +9,15 @@ import {
   UserRound,
   X,
 } from "lucide-react";
+
 import {
   FormEvent,
+  ReactNode,
   useEffect,
   useRef,
   useState,
 } from "react";
+
 import { useRouter } from "next/navigation";
 
 import { WishlistCount } from "./wishlist-count";
@@ -22,7 +25,12 @@ import { CartCount } from "./cart-count";
 import { AccountPopup } from "./account-popup";
 
 import { useAuthStore } from "@/store/auth-store";
+
 import "./HeaderActions.css";
+
+/* =========================================================
+   COMPONENT
+========================================================= */
 
 export function HeaderActions() {
   const router = useRouter();
@@ -31,7 +39,9 @@ export function HeaderActions() {
      AUTH STATE
   ======================================================= */
 
-  const user = useAuthStore((state) => state.user);
+  const user = useAuthStore(
+    (state) => state.user,
+  );
 
   const isAuthenticated = useAuthStore(
     (state) => state.isAuthenticated,
@@ -50,11 +60,17 @@ export function HeaderActions() {
      LOCAL STATE
   ======================================================= */
 
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [accountOpen, setAccountOpen] = useState(false);
-  const [query, setQuery] = useState("");
+  const [searchOpen, setSearchOpen] =
+    useState(false);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [accountOpen, setAccountOpen] =
+    useState(false);
+
+  const [query, setQuery] =
+    useState("");
+
+  const inputRef =
+    useRef<HTMLInputElement>(null);
 
   const accountWrapperRef =
     useRef<HTMLDivElement>(null);
@@ -86,14 +102,16 @@ export function HeaderActions() {
       return;
     }
 
-    function handleKeyDown(event: KeyboardEvent) {
+    const handleKeyDown = (
+      event: KeyboardEvent,
+    ) => {
       if (event.key !== "Escape") {
         return;
       }
 
       setSearchOpen(false);
       setAccountOpen(false);
-    }
+    };
 
     document.addEventListener(
       "keydown",
@@ -117,16 +135,21 @@ export function HeaderActions() {
       return;
     }
 
-    function handlePointerDown(event: MouseEvent) {
-      const target = event.target as Node;
+    const handlePointerDown = (
+      event: MouseEvent,
+    ) => {
+      const target =
+        event.target as Node;
 
       if (
         accountWrapperRef.current &&
-        !accountWrapperRef.current.contains(target)
+        !accountWrapperRef.current.contains(
+          target,
+        )
       ) {
         setAccountOpen(false);
       }
-    }
+    };
 
     document.addEventListener(
       "mousedown",
@@ -159,7 +182,8 @@ export function HeaderActions() {
   ) => {
     event.preventDefault();
 
-    const trimmedQuery = query.trim();
+    const trimmedQuery =
+      query.trim();
 
     if (!trimmedQuery) {
       return;
@@ -168,7 +192,9 @@ export function HeaderActions() {
     setSearchOpen(false);
 
     router.push(
-      `/search?q=${encodeURIComponent(trimmedQuery)}`,
+      `/search?q=${encodeURIComponent(
+        trimmedQuery,
+      )}`,
     );
   };
 
@@ -183,7 +209,9 @@ export function HeaderActions() {
 
     setSearchOpen(false);
 
-    setAccountOpen((current) => !current);
+    setAccountOpen(
+      (current) => !current,
+    );
   };
 
   /* =======================================================
@@ -192,7 +220,9 @@ export function HeaderActions() {
 
   const accountLabel =
     isInitialized && loggedIn
-      ? `Account for ${user?.name ?? "customer"}`
+      ? `Account for ${
+          user?.name ?? "customer"
+        }`
       : "Sign in or account";
 
   return (
@@ -201,8 +231,13 @@ export function HeaderActions() {
           HEADER ACTIONS
       =================================================== */}
 
-      <div className="header-actions">
-        {/* Search */}
+      <div
+        className="header-actions"
+        aria-label="Header actions"
+      >
+        {/* =================================================
+            SEARCH
+        ================================================= */}
 
         <HeaderActionButton
           label="Search"
@@ -212,11 +247,13 @@ export function HeaderActions() {
         >
           <Search
             size={20}
-            strokeWidth={1.45}
+            strokeWidth={1.35}
           />
         </HeaderActionButton>
 
-        {/* Account */}
+        {/* =================================================
+            ACCOUNT
+        ================================================= */}
 
         <div
           ref={accountWrapperRef}
@@ -232,77 +269,96 @@ export function HeaderActions() {
                 : undefined
             }
             hasPopup={isInitialized}
+            className="header-action--account"
           >
             <UserRound
               size={20}
-              strokeWidth={1.45}
+              strokeWidth={1.35}
             />
-
-            {isInitialized && loggedIn && (
-              <span
-                aria-hidden="true"
-                className="header-account-status"
-              />
-            )}
           </HeaderActionButton>
 
-          {isInitialized && loggedIn && (
-            <AccountPopup
-              isOpen={accountOpen}
-              onClose={() => setAccountOpen(false)}
-            />
-          )}
+          {/* Logged-in account popup */}
+
+          {isInitialized &&
+            loggedIn && (
+              <AccountPopup
+                isOpen={accountOpen}
+                onClose={() =>
+                  setAccountOpen(false)
+                }
+              />
+            )}
+
+          {/* Guest account popup */}
 
           {isInitialized &&
             !loggedIn &&
             accountOpen && (
               <GuestAccountPopup
-                onClose={() => setAccountOpen(false)}
+                onClose={() =>
+                  setAccountOpen(false)
+                }
               />
             )}
         </div>
 
-        {/* Wishlist */}
+        {/* =================================================
+            WISHLIST
+        ================================================= */}
 
         <Link
           href="/wishlist"
           aria-label="Wishlist"
-          onClick={() => setAccountOpen(false)}
-          className="header-action-link header-action--wishlist"
+          onClick={() =>
+            setAccountOpen(false)
+          }
+          className="
+            header-action-link
+            header-action--wishlist
+          "
         >
-          <Heart
-            size={20}
-            strokeWidth={1.45}
-            className="header-action-icon"
-          />
+          <span className="header-action-link__icon">
+            <Heart
+              size={20}
+              strokeWidth={1.35}
+            />
+          </span>
 
           <WishlistCount />
 
           <span
             aria-hidden="true"
-            className="header-action-underline"
+            className="header-action-link__underline"
           />
         </Link>
 
-        {/* Shopping bag */}
+        {/* =================================================
+            SHOPPING BAG
+        ================================================= */}
 
         <Link
           href="/cart"
           aria-label="Shopping bag"
-          onClick={() => setAccountOpen(false)}
-           className="header-action-link header-action--cart"
+          onClick={() =>
+            setAccountOpen(false)
+          }
+          className="
+            header-action-link
+            header-action--cart
+          "
         >
-          <ShoppingBag
-            size={20}
-            strokeWidth={1.45}
-            className="header-action-icon"
-          />
+          <span className="header-action-link__icon">
+            <ShoppingBag
+              size={20}
+              strokeWidth={1.35}
+            />
+          </span>
 
           <CartCount />
 
           <span
             aria-hidden="true"
-            className="header-action-underline"
+            className="header-action-link__underline"
           />
         </Link>
       </div>
@@ -313,6 +369,8 @@ export function HeaderActions() {
 
       {searchOpen && (
         <>
+          {/* Backdrop */}
+
           <button
             type="button"
             aria-label="Close search"
@@ -320,7 +378,14 @@ export function HeaderActions() {
             className="header-search-backdrop"
           />
 
-          <div className="header-search-panel">
+          {/* Search panel */}
+
+          <div
+            className="header-search-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Search"
+          >
             <span
               aria-hidden="true"
               className="header-search-accent"
@@ -328,9 +393,13 @@ export function HeaderActions() {
 
             <div className="header-search-container">
               <div className="header-search-content">
+                {/* Search row */}
+
                 <div className="header-search-row">
                   <form
-                    onSubmit={handleSearchSubmit}
+                    onSubmit={
+                      handleSearchSubmit
+                    }
                     className="header-search-form"
                   >
                     <div className="header-search-input-row">
@@ -349,7 +418,9 @@ export function HeaderActions() {
                         type="search"
                         value={query}
                         onChange={(event) =>
-                          setQuery(event.target.value)
+                          setQuery(
+                            event.target.value,
+                          )
                         }
                         placeholder="What are you looking for?"
                         aria-label="Search products"
@@ -362,7 +433,9 @@ export function HeaderActions() {
                           type="submit"
                           className="header-search-submit"
                         >
-                          Search
+                          <span>
+                            Search
+                          </span>
 
                           <ArrowUpRight
                             size={16}
@@ -372,7 +445,10 @@ export function HeaderActions() {
                       )}
                     </div>
 
-                    <div className="header-search-line" />
+                    <div
+                      aria-hidden="true"
+                      className="header-search-line"
+                    />
                   </form>
 
                   <button
@@ -387,6 +463,8 @@ export function HeaderActions() {
                     />
                   </button>
                 </div>
+
+                {/* Search meta */}
 
                 <div className="header-search-meta">
                   <p className="text-caption">
@@ -406,10 +484,19 @@ export function HeaderActions() {
   );
 }
 
-
 /* =========================================================
    HEADER ACTION BUTTON
 ========================================================= */
+
+interface HeaderActionButtonProps {
+  label: string;
+  children: ReactNode;
+  onClick: () => void;
+  active?: boolean;
+  expanded?: boolean;
+  hasPopup?: boolean;
+  className?: string;
+}
 
 function HeaderActionButton({
   label,
@@ -417,29 +504,27 @@ function HeaderActionButton({
   onClick,
   active = false,
   expanded,
-  hasPopup,
+  hasPopup = false,
   className = "",
-}: {
-  label: string;
-  children: React.ReactNode;
-  onClick: () => void;
-  active?: boolean;
-  expanded?: boolean;
-  hasPopup?: boolean;
-  className?: string;
-}) {
+}: HeaderActionButtonProps) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={label}
       aria-expanded={expanded}
-      aria-haspopup={hasPopup ? "menu" : undefined}
-      className={`header-action-button ${
+      aria-haspopup={
+        hasPopup ? "menu" : undefined
+      }
+      className={[
+        "header-action-button",
         active
           ? "header-action-button--active"
-          : ""
-      } ${className}`}
+          : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
       <span className="header-action-button__icon">
         {children}
@@ -453,7 +538,6 @@ function HeaderActionButton({
   );
 }
 
-
 /* =========================================================
    GUEST ACCOUNT POPUP
 ========================================================= */
@@ -464,12 +548,18 @@ function GuestAccountPopup({
   onClose: () => void;
 }) {
   return (
-    <div className="guest-account-popup">
+    <div
+      className="guest-account-popup"
+      role="dialog"
+      aria-label="Account"
+    >
       <div className="guest-account-popup__surface">
         <span
           aria-hidden="true"
           className="guest-account-popup__accent"
         />
+
+        {/* Intro */}
 
         <div className="guest-account-popup__intro">
           <button
@@ -506,9 +596,15 @@ function GuestAccountPopup({
             <Link
               href="/login"
               onClick={onClose}
-              className="button button-primary guest-account-popup__button"
+              className="
+                button
+                button-primary
+                guest-account-popup__button
+              "
             >
-              Sign In
+              <span>
+                Sign In
+              </span>
 
               <ArrowUpRight
                 size={15}
@@ -519,7 +615,11 @@ function GuestAccountPopup({
             <Link
               href="/register"
               onClick={onClose}
-              className="button button-secondary guest-account-popup__button"
+              className="
+                button
+                button-secondary
+                guest-account-popup__button
+              "
             >
               Sign Up
             </Link>
@@ -554,7 +654,6 @@ function GuestAccountPopup({
     </div>
   );
 }
-
 
 /* =========================================================
    GUEST BENEFIT

@@ -1,80 +1,156 @@
 /* =========================================================
-   AAYESHA FASHION
-   HEADER ACTIONS
-   Quiet Indian Luxury
-   ========================================================= */
+   AAYESHA — HEADER ACTIONS
+   Editorial / Luxury Fashion System
+========================================================= */
+
+/* =========================================================
+   ROOT
+========================================================= */
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+  height: 100%;
 }
 
-
 /* =========================================================
-   ACTION BUTTON / LINK
-   ========================================================= */
+   COMMON ACTION BUTTON / LINK
+========================================================= */
 
 .header-action-button,
 .header-action-link {
   position: relative;
 
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   width: 40px;
   height: 40px;
 
+  flex: 0 0 40px;
+
   padding: 0;
+  margin: 0;
 
   border: 0;
+  border-radius: 0;
+
   background: transparent;
 
-  color: var(--color-primary, #342825);
+  color: var(--color-text);
+
+  cursor: pointer;
 
   text-decoration: none;
 
-  cursor: pointer;
+  transition:
+    color 240ms ease,
+    background-color 240ms ease,
+    opacity 240ms ease;
 }
 
+/* =========================================================
+   ICON WRAPPER
+========================================================= */
+
 .header-action-button__icon,
-.header-action-icon {
+.header-action-link__icon {
   position: relative;
   z-index: 2;
 
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: inherit;
+
+  pointer-events: none;
+}
+
+.header-action-button svg,
+.header-action-link svg {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+
+  flex-shrink: 0;
+
+  color: currentColor;
+
+  stroke: currentColor;
 
   transition:
-    color 180ms ease,
-    transform 180ms ease;
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 240ms ease,
+    stroke 240ms ease;
 }
+
+/* =========================================================
+   HOVER
+========================================================= */
 
 .header-action-button:hover,
 .header-action-link:hover {
-  color: var(--color-clay, #8f655d);
+  color: var(--color-accent);
 }
 
-.header-action-button:hover
-  .header-action-button__icon,
-.header-action-link:hover
-  .header-action-icon {
+.header-action-button:hover svg,
+.header-action-link:hover svg {
   transform: translateY(-1px);
 }
 
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.header-action-button--active {
+  color: var(--color-accent);
+}
+
+.header-action-button--active svg {
+  color: var(--color-accent);
+}
+
+/*
+   IMPORTANT:
+   Keep active state visible.
+   Never turn icon white.
+*/
+
+.header-action-button:active,
+.header-action-link:active {
+  color: var(--color-accent);
+}
+
+.header-action-button:active svg,
+.header-action-link:active svg {
+  color: var(--color-accent);
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
 .header-action-button:focus-visible,
 .header-action-link:focus-visible {
-  outline: 2px solid var(--color-clay, #8f655d);
+  outline: 1px solid var(--color-accent);
   outline-offset: 3px;
 }
 
-
 /* =========================================================
    UNDERLINE
-   ========================================================= */
+========================================================= */
 
 .header-action-button__underline,
-.header-action-underline {
+.header-action-link__underline {
   position: absolute;
 
   left: 9px;
@@ -83,444 +159,478 @@
 
   height: 1px;
 
-  background: var(--color-primary, #342825);
+  background: var(--color-accent);
 
   transform: scaleX(0);
-  transform-origin: right center;
+  transform-origin: center;
 
   transition:
-    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header-action-button:hover
-  .header-action-button__underline,
+.header-action-button__underline,
 .header-action-link:hover
-  .header-action-underline,
+.header-action-link__underline,
 .header-action-button--active
-  .header-action-button__underline {
+.header-action-button__underline {
   transform: scaleX(1);
-  transform-origin: left center;
 }
-
-
-/* =========================================================
-   ACTIVE ACTION
-   ========================================================= */
-
-.header-action-button--active {
-  color: var(--color-clay, #8f655d);
-}
-
-.header-action-button--active
-  .header-action-button__underline {
-  background: var(--color-clay, #8f655d);
-}
-
 
 /* =========================================================
    ACCOUNT
-   ========================================================= */
+========================================================= */
 
 .header-action-account {
   position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 40px;
+
+  z-index: 30;
 }
 
+/*
+   Account icon is intentionally clean.
+   No notification/status dot.
+*/
+
+.header-action--account {
+  width: 40px;
+  height: 40px;
+}
 
 /* =========================================================
-   ACCOUNT STATUS
-   ========================================================= */
+   WISHLIST
+========================================================= */
 
-.header-account-status {
-  position: absolute;
-
-  right: 8px;
-  bottom: 9px;
-
-  width: 5px;
-  height: 5px;
-
-  border-radius: 50%;
-
-  background: var(--color-clay, #8f655d);
-
-  box-shadow:
-    0 0 0 2px var(--color-surface, #f5eee8);
+.header-action--wishlist {
+  width: 40px;
+  height: 40px;
 }
 
+/* =========================================================
+   CART
+========================================================= */
+
+.header-action--cart {
+  width: 40px;
+  height: 40px;
+}
 
 /* =========================================================
    COUNTS
-   ========================================================= */
+========================================================= */
 
-.header-action-link {
-  position: relative;
+.header-action-link > span:not(
+  .header-action-link__icon
+):not(
+  .header-action-link__underline
+) {
+  pointer-events: none;
 }
-
-.header-action-link
-  > :global(.wishlist-count),
-.header-action-link
-  > :global(.cart-count) {
-  position: absolute;
-}
-
 
 /*
- * These selectors intentionally also support simple
- * count wrappers without requiring changes to the
- * WishlistCount / CartCount components.
- */
+   WishlistCount / CartCount usually render their own
+   count element. These rules position common count shapes.
+*/
 
-.header-action--wishlist > span:not(
-  .header-action-underline
-):not(.header-action-icon) {
+.header-action--wishlist .wishlist-count,
+.header-action--cart .cart-count {
   position: absolute;
 
-  top: 4px;
+  top: 3px;
   right: 3px;
 
-  display: grid;
-  place-items: center;
+  z-index: 5;
 
-  min-width: 15px;
-  height: 15px;
+  min-width: 13px;
+  height: 13px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   padding: 0 3px;
 
-  border: 1px solid var(--color-surface, #f5eee8);
+  border-radius: 999px;
 
-  background: var(--color-clay, #8f655d);
-  color: #f8f1eb;
+  background: var(--color-text);
+  color: var(--color-bg);
 
+  font-family: var(--font-body);
   font-size: 7px;
   font-weight: 600;
 
   line-height: 1;
-
-  border-radius: 50%;
+  letter-spacing: 0;
 }
 
-.header-action--cart > span:not(
-  .header-action-underline
-):not(.header-action-icon) {
-  position: absolute;
+/*
+   If count component uses a generic span directly,
+   preserve the same visual hierarchy.
+*/
 
-  top: 4px;
+.header-action--wishlist > .wishlist-count,
+.header-action--cart > .cart-count {
+  top: 3px;
   right: 3px;
-
-  display: grid;
-  place-items: center;
-
-  min-width: 15px;
-  height: 15px;
-
-  padding: 0 3px;
-
-  border: 1px solid var(--color-surface, #f5eee8);
-
-  background: var(--color-primary, #342825);
-  color: #f8f1eb;
-
-  font-size: 7px;
-  font-weight: 600;
-
-  line-height: 1;
-
-  border-radius: 50%;
 }
-
 
 /* =========================================================
    SEARCH BACKDROP
-   ========================================================= */
+========================================================= */
 
 .header-search-backdrop {
   position: fixed;
+
   inset: 0;
 
-  z-index: 1000;
+  z-index: 55;
 
   width: 100%;
   height: 100%;
 
+  padding: 0;
+  margin: 0;
+
   border: 0;
 
-  background: rgba(52, 40, 37, 0.34);
+  background: rgba(44, 32, 29, 0.18);
 
-  cursor: pointer;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 
-  animation: headerBackdropIn 220ms ease;
+  cursor: default;
+
+  animation: header-search-backdrop-in 320ms ease both;
 }
-
-@keyframes headerBackdropIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
 
 /* =========================================================
    SEARCH PANEL
-   ========================================================= */
+========================================================= */
 
 .header-search-panel {
   position: fixed;
 
-  top: 0;
+  top: 72px;
   left: 0;
   right: 0;
 
-  z-index: 1001;
+  z-index: 70;
 
-  background: var(--color-surface, #f5eee8);
+  overflow: hidden;
 
-  border-bottom: 1px solid rgba(52, 40, 37, 0.13);
+  background: var(--color-bg);
 
-  box-shadow:
-    0 18px 50px rgba(52, 40, 37, 0.1);
+  border-bottom: 1px solid var(--color-border);
 
-  animation: searchPanelIn 280ms
-    cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: var(--shadow-md);
+
+  animation: header-search-panel-in 420ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
-
-@keyframes searchPanelIn {
-  from {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 
 /* =========================================================
    SEARCH ACCENT
-   ========================================================= */
+========================================================= */
 
 .header-search-accent {
-  display: block;
+  position: absolute;
+
+  top: 0;
+  left: 0;
 
   width: 100%;
-  height: 3px;
+  height: 1px;
 
-  background: var(--color-clay, #8f655d);
+  background: var(--color-accent);
+
+  transform-origin: left center;
+
+  animation: header-search-accent-in 700ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
-
 
 /* =========================================================
    SEARCH CONTAINER
-   ========================================================= */
+========================================================= */
 
 .header-search-container {
-  width: min(1180px, calc(100% - 48px));
-
-  margin: 0 auto;
+  width: 100%;
 }
 
 .header-search-content {
-  padding: 30px 0 22px;
-}
+  width: min(
+    100% - 48px,
+    1600px
+  );
 
+  margin-inline: auto;
+
+  padding: 28px 0 24px;
+}
 
 /* =========================================================
    SEARCH ROW
-   ========================================================= */
+========================================================= */
 
 .header-search-row {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 24px;
 }
 
+/* =========================================================
+   SEARCH FORM
+========================================================= */
+
 .header-search-form {
-  flex: 1;
   min-width: 0;
+  flex: 1;
 }
 
 .header-search-input-row {
   display: flex;
   align-items: center;
-  gap: 13px;
+
+  min-height: 42px;
+
+  gap: 14px;
 }
 
+/* =========================================================
+   SEARCH ICON
+========================================================= */
+
 .header-search-icon {
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   flex: 0 0 auto;
 
-  color: var(--color-clay, #8f655d);
+  width: 24px;
+  height: 24px;
+
+  color: var(--color-text-secondary);
 }
 
+.header-search-icon svg {
+  display: block;
+
+  width: 19px;
+  height: 19px;
+}
+
+/* =========================================================
+   SEARCH INPUT
+========================================================= */
+
 .header-search-input {
+  min-width: 0;
+
   flex: 1;
 
   width: 100%;
-  min-width: 0;
 
-  padding: 7px 0;
+  padding: 0;
 
   border: 0;
   outline: 0;
 
   background: transparent;
 
-  color: var(--color-primary, #342825);
+  color: var(--color-text);
 
-  font-family:
-    "Cormorant Garamond",
-    Georgia,
-    serif;
-
-  font-size: clamp(25px, 3vw, 38px);
+  font-family: var(--font-body);
+  font-size: 15px;
   font-weight: 400;
 
-  line-height: 1.05;
+  line-height: 1.5;
+
+  letter-spacing: -0.01em;
 }
 
 .header-search-input::placeholder {
-  color: rgba(52, 40, 37, 0.38);
+  color: var(--color-text-muted);
+
+  opacity: 1;
 }
 
-.header-search-input::-webkit-search-cancel-button {
-  display: none;
+.header-search-input:focus {
+  outline: none;
+  box-shadow: none;
 }
 
+/* Remove browser search decorations */
+
+.header-search-input::-webkit-search-decoration,
+.header-search-input::-webkit-search-cancel-button,
+.header-search-input::-webkit-search-results-button,
+.header-search-input::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
 
 /* =========================================================
    SEARCH SUBMIT
-   ========================================================= */
+========================================================= */
 
 .header-search-submit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
 
   flex: 0 0 auto;
 
-  min-height: 38px;
+  gap: 7px;
 
-  padding: 0 14px;
+  min-height: 34px;
 
-  border: 1px solid var(--color-primary, #342825);
+  padding: 0 4px;
 
-  background: var(--color-primary, #342825);
-  color: #f8f1eb;
+  border: 0;
 
+  background: transparent;
+
+  color: var(--color-text);
+
+  font-family: var(--font-body);
   font-size: 9px;
   font-weight: 600;
 
-  letter-spacing: 0.1em;
+  line-height: 1;
+
   text-transform: uppercase;
+  letter-spacing: 0.16em;
 
   cursor: pointer;
 
   transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    border-color 180ms ease;
+    color 220ms ease,
+    transform 220ms ease;
 }
 
 .header-search-submit:hover {
-  background: var(--color-clay, #8f655d);
-  border-color: var(--color-clay, #8f655d);
-  color: #f8f1eb;
+  color: var(--color-accent);
+}
+
+.header-search-submit:active {
+  color: var(--color-accent);
+
+  transform: translateY(1px);
 }
 
 .header-search-submit:focus-visible {
-  outline: 2px solid var(--color-clay, #8f655d);
-  outline-offset: 3px;
+  outline: 1px solid var(--color-accent);
+  outline-offset: 4px;
 }
-
 
 /* =========================================================
    SEARCH LINE
-   ========================================================= */
+========================================================= */
 
 .header-search-line {
   width: 100%;
   height: 1px;
 
-  margin-top: 5px;
+  margin-top: 7px;
 
-  background: rgba(52, 40, 37, 0.22);
+  background: var(--color-border);
+
+  transform-origin: left center;
+
+  animation: header-search-line-in 600ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
-
 
 /* =========================================================
    SEARCH CLOSE
-   ========================================================= */
+========================================================= */
 
 .header-search-close {
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
 
-  width: 38px;
-  height: 38px;
+  flex: 0 0 40px;
 
   padding: 0;
 
-  border: 1px solid rgba(52, 40, 37, 0.15);
+  border: 1px solid var(--color-border);
 
-  background: transparent;
-  color: var(--color-primary, #342825);
+  background: var(--color-surface);
+
+  color: var(--color-text);
 
   cursor: pointer;
 
   transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease;
+    color 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
 }
 
 .header-search-close:hover {
-  background: var(--color-primary, #342825);
-  border-color: var(--color-primary, #342825);
-  color: #f8f1eb;
+  color: var(--color-accent);
+
+  border-color: var(--color-accent);
+
+  background: var(--color-surface-soft);
+}
+
+.header-search-close:active {
+  color: var(--color-accent);
+
+  transform: scale(0.96);
 }
 
 .header-search-close:focus-visible {
-  outline: 2px solid var(--color-clay, #8f655d);
+  outline: 1px solid var(--color-accent);
   outline-offset: 3px;
 }
 
+.header-search-close svg {
+  display: block;
+}
 
 /* =========================================================
    SEARCH META
-   ========================================================= */
+========================================================= */
 
 .header-search-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  margin-top: 13px;
+  gap: 24px;
+
+  margin-top: 15px;
 }
 
 .header-search-meta .text-caption {
   margin: 0;
 
-  font-size: 8px;
-
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-
-  color: var(--color-muted, #786b65);
+  color: var(--color-text-muted);
 }
-
 
 /* =========================================================
    GUEST ACCOUNT POPUP
-   ========================================================= */
+========================================================= */
 
 .guest-account-popup {
   position: absolute;
@@ -528,24 +638,14 @@
   top: calc(100% + 12px);
   right: 0;
 
-  z-index: 950;
+  z-index: 100;
 
-  width: min(365px, calc(100vw - 28px));
+  width: 330px;
+  max-width: calc(100vw - 24px);
 
-  animation: guestPopupIn 230ms
-    cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes guestPopupIn {
-  from {
-    opacity: 0;
-    transform: translateY(-7px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  animation: guest-account-in 420ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
 
 .guest-account-popup__surface {
@@ -553,163 +653,181 @@
 
   overflow: hidden;
 
-  border: 1px solid rgba(52, 40, 37, 0.14);
+  border: 1px solid var(--color-border);
 
-  background: var(--color-surface, #f5eee8);
-  color: var(--color-primary, #342825);
+  background: var(--color-bg);
 
-  box-shadow:
-    0 24px 65px rgba(52, 40, 37, 0.16),
-    0 5px 18px rgba(52, 40, 37, 0.08);
+  box-shadow: var(--shadow-lg);
 }
+
+/* =========================================================
+   GUEST ACCOUNT ACCENT
+========================================================= */
 
 .guest-account-popup__accent {
-  display: block;
+  position: absolute;
+
+  top: 0;
+  left: 0;
 
   width: 100%;
-  height: 3px;
+  height: 2px;
 
-  background: var(--color-clay, #8f655d);
+  background: var(--color-accent);
 }
-
 
 /* =========================================================
    GUEST INTRO
-   ========================================================= */
+========================================================= */
 
 .guest-account-popup__intro {
   position: relative;
 
-  padding: 27px 24px 21px;
+  padding: 25px 22px 23px;
 
-  border-bottom: 1px solid rgba(52, 40, 37, 0.11);
+  border-bottom: 1px solid var(--color-border);
+
+  background: var(--color-surface);
 }
 
 .guest-account-popup__close {
   position: absolute;
 
-  top: 14px;
-  right: 14px;
+  top: 12px;
+  right: 12px;
 
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
 
   padding: 0;
 
-  border: 1px solid rgba(52, 40, 37, 0.13);
+  border: 0;
 
   background: transparent;
-  color: var(--color-primary, #342825);
+
+  color: var(--color-text-secondary);
 
   cursor: pointer;
 
   transition:
-    background-color 180ms ease,
-    color 180ms ease;
+    color 220ms ease,
+    background-color 220ms ease;
 }
 
 .guest-account-popup__close:hover {
-  background: var(--color-primary, #342825);
-  color: #f8f1eb;
+  color: var(--color-accent);
+
+  background: var(--color-surface-soft);
 }
 
 .guest-account-popup__close:focus-visible {
-  outline: 2px solid var(--color-clay, #8f655d);
-  outline-offset: 3px;
+  outline: 1px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .guest-account-popup__eyebrow {
-  margin-bottom: 7px;
+  color: var(--color-accent);
 }
 
 .guest-account-popup__title {
-  margin: 0;
+  max-width: 250px;
 
-  font-family:
-    "Cormorant Garamond",
-    Georgia,
-    serif;
+  margin: 8px 0 0;
 
-  font-size: 28px;
-  font-weight: 500;
+  color: var(--color-text);
 
-  line-height: 0.98;
+  font-family: var(--font-display);
+
+  font-size: 27px;
+  font-weight: 400;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.025em;
 }
 
 .guest-account-popup__description {
-  max-width: 290px;
+  max-width: 270px;
 
-  margin: 9px 0 0;
+  margin: 12px 0 0;
 
-  font-size: 10px;
-  line-height: 1.55;
+  color: var(--color-text-secondary);
 
-  color: var(--color-muted, #786b65);
+  font-family: var(--font-body);
+
+  font-size: 11px;
+  font-weight: 400;
+
+  line-height: 1.7;
 }
 
-
 /* =========================================================
-   AUTH ACTIONS
-   ========================================================= */
+   GUEST ACTIONS
+========================================================= */
 
 .guest-account-popup__actions {
-  padding: 17px 24px;
+  padding: 15px;
 
-  border-bottom: 1px solid rgba(52, 40, 37, 0.11);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .guest-account-popup__buttons {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
-  gap: 7px;
+
+  gap: 8px;
 }
 
 .guest-account-popup__button {
   min-height: 42px;
 
-  font-size: 9px !important;
-  letter-spacing: 0.1em !important;
+  justify-content: center;
 }
-
 
 /* =========================================================
-   BENEFITS
-   ========================================================= */
+   GUEST BENEFITS
+========================================================= */
 
 .guest-account-popup__benefits {
-  padding: 18px 24px 22px;
-}
-
-.guest-account-popup__benefits > .eyebrow {
-  margin: 0 0 11px;
+  padding: 19px 21px 22px;
 }
 
 .guest-account-popup__benefit-list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
 
-  border-top: 1px solid rgba(52, 40, 37, 0.1);
+  gap: 14px;
+
+  margin-top: 14px;
 }
 
+/* =========================================================
+   GUEST BENEFIT
+========================================================= */
+
 .guest-benefit {
-  display: grid;
-  grid-template-columns: 7px minmax(0, 1fr);
+  display: flex;
+  align-items: flex-start;
+
   gap: 10px;
-
-  padding: 10px 0;
-
-  border-bottom: 1px solid rgba(52, 40, 37, 0.1);
 }
 
 .guest-benefit__dot {
+  display: block;
+
   width: 5px;
   height: 5px;
 
-  margin-top: 4px;
+  flex: 0 0 5px;
 
-  background: var(--color-clay, #8f655d);
+  margin-top: 6px;
+
+  background: var(--color-accent);
 }
 
 .guest-benefit__content {
@@ -719,161 +837,366 @@
 .guest-benefit__title {
   margin: 0;
 
-  font-size: 9.5px;
+  color: var(--color-text);
+
+  font-family: var(--font-body);
+
+  font-size: 10.5px;
   font-weight: 600;
+
+  line-height: 1.4;
 }
 
 .guest-benefit__description {
-  margin: 3px 0 0;
+  margin: 2px 0 0;
 
-  font-size: 8.5px;
-  line-height: 1.4;
+  color: var(--color-text-secondary);
 
-  color: var(--color-muted, #786b65);
+  font-family: var(--font-body);
+
+  font-size: 9.5px;
+  font-weight: 400;
+
+  line-height: 1.55;
 }
 
+/* =========================================================
+   ACCOUNT POPUP SAFETY
+========================================================= */
+
+.header-action-account > * {
+  max-width: calc(100vw - 24px);
+}
 
 /* =========================================================
-   TABLET
-   ========================================================= */
+   DESKTOP
+========================================================= */
 
-@media (max-width: 1100px) {
+@media (min-width: 1024px) {
   .header-actions {
-    gap: 2px;
+    gap: 3px;
+  }
+
+  .header-search-panel {
+    top: 72px;
+  }
+
+  .header-search-content {
+    width: min(
+      calc(100% - 80px),
+      1600px
+    );
+
+    padding-top: 30px;
+    padding-bottom: 26px;
+  }
+}
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1280px) {
+  .header-actions {
+    gap: 4px;
+  }
+
+  .header-action-button,
+  .header-action-link,
+  .header-action-account {
+    width: 42px;
+    height: 42px;
   }
 
   .header-action-button,
   .header-action-link {
-    width: 37px;
-    height: 37px;
+    flex-basis: 42px;
+  }
+
+  .header-action-button svg,
+  .header-action-link svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header-search-panel {
+    top: 76px;
+  }
+
+  .header-search-content {
+    width: min(
+      calc(100% - 112px),
+      1600px
+    );
   }
 }
 
-
 /* =========================================================
-   MOBILE
-   ========================================================= */
+   TABLET
+========================================================= */
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .header-actions {
-    gap: 0;
+    gap: 2px;
   }
+
+  /*
+     On tablet/mobile the header layout can become tight.
+     Keep bag visible and allow the parent header to control
+     which actions are shown if required.
+  */
 
   .header-action-button,
   .header-action-link {
     width: 38px;
     height: 38px;
+
+    flex-basis: 38px;
   }
 
-  .header-action-button__underline,
-  .header-action-underline {
-    display: none;
+  .header-action-account {
+    width: 38px;
+    height: 38px;
   }
 
-  .header-account-status {
-    right: 6px;
-    bottom: 8px;
+  .header-action-button svg,
+  .header-action-link svg {
+    width: 19px;
+    height: 19px;
   }
 
-  .header-search-container {
-    width: calc(100% - 32px);
+  .header-search-panel {
+    top: 72px;
   }
 
   .header-search-content {
-    padding: 22px 0 18px;
+    width: calc(100% - 40px);
+
+    padding-top: 23px;
+    padding-bottom: 21px;
+  }
+
+  .header-search-row {
+    gap: 15px;
+  }
+
+  .header-search-input {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 639px) {
+  .header-actions {
+    gap: 0;
+  }
+
+  .header-action-button,
+  .header-action-link,
+  .header-action-account {
+    width: 36px;
+    height: 36px;
+  }
+
+  .header-action-button,
+  .header-action-link {
+    flex-basis: 36px;
+  }
+
+  .header-action-button svg,
+  .header-action-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /*
+     Keep account popup inside viewport.
+  */
+
+  .guest-account-popup {
+    position: fixed;
+
+    top: 66px;
+    right: 12px;
+    left: 12px;
+
+    width: auto;
+    max-width: none;
+  }
+
+  .header-search-panel {
+    top: 64px;
+  }
+
+  .header-search-content {
+    width: calc(100% - 28px);
+
+    padding-top: 18px;
+    padding-bottom: 17px;
   }
 
   .header-search-row {
     gap: 10px;
   }
 
+  .header-search-input-row {
+    gap: 10px;
+
+    min-height: 38px;
+  }
+
   .header-search-input {
-    font-size: 25px;
+    font-size: 13px;
   }
 
   .header-search-submit {
-    min-height: 34px;
-
-    padding: 0 10px;
-
-    font-size: 8px;
+    display: none;
   }
 
   .header-search-close {
+    width: 36px;
+    height: 36px;
+
+    flex-basis: 36px;
+  }
+
+  .header-search-meta {
+    margin-top: 11px;
+  }
+
+  .header-search-meta .text-caption {
+    font-size: 8px;
+  }
+
+  .guest-account-popup__intro {
+    padding: 23px 18px 20px;
+  }
+
+  .guest-account-popup__title {
+    font-size: 24px;
+  }
+
+  .guest-account-popup__actions {
+    padding: 12px;
+  }
+
+  .guest-account-popup__benefits {
+    padding: 17px 18px 19px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .header-action-button,
+  .header-action-link,
+  .header-action-account {
     width: 34px;
     height: 34px;
   }
 
-  .header-search-meta {
-    margin-top: 10px;
-  }
-
-  .header-search-meta .text-caption {
-    font-size: 7px;
-  }
-
-  .guest-account-popup {
-    position: fixed;
-
-    top: 70px;
-    right: 12px;
-    left: 12px;
-
-    width: auto;
-  }
-}
-
-
-/* =========================================================
-   SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 380px) {
   .header-action-button,
   .header-action-link {
-    width: 35px;
-    height: 35px;
+    flex-basis: 34px;
   }
 
-  .header-action-button__icon,
-  .header-action-icon {
-    transform: scale(0.92);
+  .header-action-button svg,
+  .header-action-link svg {
+    width: 17px;
+    height: 17px;
   }
 
-  .header-search-input {
-    font-size: 22px;
-  }
-
-  .guest-account-popup__intro,
-  .guest-account-popup__actions,
-  .guest-account-popup__benefits {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-
-  .guest-account-popup__title {
-    font-size: 25px;
+  .header-action--wishlist .wishlist-count,
+  .header-action--cart .cart-count {
+    top: 2px;
+    right: 2px;
   }
 }
-
 
 /* =========================================================
    REDUCED MOTION
-   ========================================================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   .header-action-button,
   .header-action-link,
-  .header-action-button__icon,
-  .header-action-icon,
+  .header-action-button svg,
+  .header-action-link svg,
   .header-action-button__underline,
-  .header-action-underline,
+  .header-action-link__underline,
+  .header-search-submit,
+  .header-search-close {
+    transition: none;
+  }
+
   .header-search-backdrop,
   .header-search-panel,
-  .header-search-submit,
-  .header-search-close,
+  .header-search-accent,
+  .header-search-line,
   .guest-account-popup {
     animation: none;
-    transition: none;
+  }
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes header-search-backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes header-search-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes header-search-accent-in {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes header-search-line-in {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes guest-account-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

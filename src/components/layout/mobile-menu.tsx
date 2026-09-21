@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
 import toast from "react-hot-toast";
-import "./MobileMenu.css";
 
 import {
   ArrowUpRight,
@@ -28,11 +27,21 @@ import { mainNavigation } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { useAuthStore } from "@/store/auth-store";
 
+import "./MobileMenu.css";
+
+/* =========================================================
+   TYPES
+========================================================= */
+
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   onOpen: () => void;
 }
+
+/* =========================================================
+   ACCOUNT LINKS
+========================================================= */
 
 const accountLinks = [
   {
@@ -60,6 +69,10 @@ const accountLinks = [
     icon: UserCog,
   },
 ];
+
+/* =========================================================
+   NAVIGATION DETAILS
+========================================================= */
 
 const navigationDetails: Record<
   string,
@@ -89,6 +102,10 @@ const navigationDetails: Record<
   },
 };
 
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 export function MobileMenu({
   isOpen,
   onClose,
@@ -101,6 +118,10 @@ export function MobileMenu({
 
   const [mounted, setMounted] =
     useState(false);
+
+  /* =======================================================
+     AUTH STATE
+  ======================================================= */
 
   const user = useAuthStore(
     (state) => state.user,
@@ -121,11 +142,19 @@ export function MobileMenu({
   const isLoggedIn =
     isInitialized &&
     isAuthenticated &&
-    !!user;
+    Boolean(user);
+
+  /* =======================================================
+     MOUNT
+  ======================================================= */
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  /* =======================================================
+     BODY SCROLL LOCK
+  ======================================================= */
 
   useEffect(() => {
     if (!isOpen) {
@@ -142,6 +171,10 @@ export function MobileMenu({
         previousOverflow;
     };
   }, [isOpen]);
+
+  /* =======================================================
+     ESCAPE
+  ======================================================= */
 
   useEffect(() => {
     if (!isOpen) {
@@ -169,6 +202,10 @@ export function MobileMenu({
     };
   }, [isOpen, onClose]);
 
+  /* =======================================================
+     INITIALS
+  ======================================================= */
+
   const initials =
     user?.name
       ?.trim()
@@ -178,6 +215,10 @@ export function MobileMenu({
         part.charAt(0).toUpperCase(),
       )
       .join("") || "A";
+
+  /* =======================================================
+     LOGOUT
+  ======================================================= */
 
   const handleLogout = async () => {
     if (isLoggingOut) {
@@ -206,6 +247,10 @@ export function MobileMenu({
     }
   };
 
+  /* =======================================================
+     HAMBURGER
+  ======================================================= */
+
   const hamburger = (
     <button
       type="button"
@@ -230,7 +275,10 @@ export function MobileMenu({
           <X
             size={20}
             strokeWidth={1.15}
-            className="mobile-menu-trigger__icon mobile-menu-trigger__icon--close"
+            className="
+              mobile-menu-trigger__icon
+              mobile-menu-trigger__icon--close
+            "
           />
         ) : (
           <Menu
@@ -243,16 +291,26 @@ export function MobileMenu({
     </button>
   );
 
+  /* =======================================================
+     DRAWER
+  ======================================================= */
+
   const drawer = (
     <div
-      className={`mobile-menu ${
-        isOpen
-          ? "mobile-menu--open"
-          : "mobile-menu--closed"
-      }`}
+      className={`
+        mobile-menu
+        ${
+          isOpen
+            ? "mobile-menu--open"
+            : "mobile-menu--closed"
+        }
+      `}
       aria-hidden={!isOpen}
     >
-      {/* Backdrop */}
+      {/* ===================================================
+          BACKDROP
+      =================================================== */}
+
       <button
         type="button"
         aria-label="Close navigation"
@@ -261,49 +319,61 @@ export function MobileMenu({
         className="mobile-menu__backdrop"
       />
 
-      {/* Drawer */}
+      {/* ===================================================
+          DRAWER
+      =================================================== */}
+
       <aside
         className="mobile-menu__drawer"
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
       >
-        {/* Ambient light */}
-        <div
+        {/* =================================================
+            EDITORIAL FRAME
+        ================================================= */}
+
+        <span
           aria-hidden="true"
-          className="mobile-menu__ambient mobile-menu__ambient--top"
+          className="mobile-menu__frame mobile-menu__frame--top"
         />
 
-        <div
+        <span
           aria-hidden="true"
-          className="mobile-menu__ambient mobile-menu__ambient--bottom"
+          className="mobile-menu__frame mobile-menu__frame--bottom"
         />
 
-        <div
+        {/* =================================================
+            TOP ACCENT
+        ================================================= */}
+
+        <span
           aria-hidden="true"
           className="mobile-menu__top-accent"
         />
 
-        {/* Header */}
-        <div className="mobile-menu__header">
+        {/* =================================================
+            HEADER
+        ================================================= */}
+
+        <header className="mobile-menu__header">
           <Link
             href="/"
             onClick={onClose}
             className="mobile-menu__brand"
             aria-label="Aayesha Fashion home"
           >
-            <span className="mobile-menu__brand-name">
-              Aayesha
+            <span className="mobile-menu__brand-mark">
+              A
             </span>
 
-            <span className="mobile-menu__brand-subline">
-              <span
-                aria-hidden="true"
-                className="mobile-menu__brand-line"
-              />
+            <span className="mobile-menu__brand-copy">
+              <span className="mobile-menu__brand-name">
+                Aayesha
+              </span>
 
-              <span className="mobile-menu__brand-tagline">
-                Fashion
+              <span className="mobile-menu__brand-subline">
+                Contemporary Indian Fashion
               </span>
             </span>
           </Link>
@@ -315,16 +385,22 @@ export function MobileMenu({
             className="mobile-menu__close"
           >
             <X
-              size={17}
+              size={18}
               strokeWidth={1.15}
             />
           </button>
-        </div>
+        </header>
 
-        {/* Scrollable content */}
+        {/* =================================================
+            SCROLLABLE CONTENT
+        ================================================= */}
+
         <div className="mobile-menu__content">
-          {/* Account */}
-          <div className="mobile-menu__account">
+          {/* =================================================
+              ACCOUNT
+          ================================================= */}
+
+          <section className="mobile-menu__account">
             {isLoggedIn ? (
               <Link
                 href="/account"
@@ -333,8 +409,10 @@ export function MobileMenu({
               >
                 <span
                   aria-hidden="true"
-                  className="mobile-account-card__glow"
-                />
+                  className="mobile-account-card__number"
+                >
+                  01
+                </span>
 
                 <span className="mobile-account-card__avatar">
                   {initials}
@@ -346,18 +424,18 @@ export function MobileMenu({
                   </span>
 
                   <span className="mobile-account-card__name">
-                    {user.name}
+                    {user?.name}
                   </span>
 
                   <span className="mobile-account-card__email">
-                    {user.email}
+                    {user?.email}
                   </span>
                 </span>
 
                 <span className="mobile-account-card__arrow">
-                  <ChevronRight
-                    size={15}
-                    strokeWidth={1.15}
+                  <ArrowUpRight
+                    size={16}
+                    strokeWidth={1.2}
                   />
                 </span>
               </Link>
@@ -374,47 +452,76 @@ export function MobileMenu({
                     </h2>
 
                     <p className="mobile-guest-account__description">
-                      Sign in or create an account
-                      to manage your orders and
-                      personal details.
+                      Sign in or create an
+                      account to manage your
+                      orders and personal
+                      details.
                     </p>
                   </div>
 
-                  <UserRound
-                    size={20}
-                    strokeWidth={1.1}
-                    className="mobile-guest-account__icon"
-                  />
+                  <span className="mobile-guest-account__icon">
+                    <UserRound
+                      size={19}
+                      strokeWidth={1.1}
+                    />
+                  </span>
                 </div>
 
                 <div className="mobile-guest-account__actions">
                   <Link
                     href="/login"
                     onClick={onClose}
-                    className="button button-primary mobile-guest-account__button"
+                    className="
+                      button
+                      button-primary
+                      mobile-guest-account__button
+                    "
                   >
-                    Sign In
+                    <span>Sign In</span>
+
+                    <ArrowUpRight
+                      size={14}
+                      strokeWidth={1.25}
+                    />
                   </Link>
 
                   <Link
                     href="/register"
                     onClick={onClose}
-                    className="button button-secondary mobile-guest-account__button"
+                    className="
+                      button
+                      button-secondary
+                      mobile-guest-account__button
+                    "
                   >
                     Create Account
                   </Link>
                 </div>
               </div>
             )}
-          </div>
+          </section>
 
-          {/* Account links */}
+          {/* =================================================
+              ACCOUNT LINKS
+          ================================================= */}
+
           {isLoggedIn && (
-            <section className="mobile-menu__section mobile-menu__section--account-links">
+            <section
+              className="
+                mobile-menu__section
+                mobile-menu__section--account-links
+              "
+            >
               <div className="mobile-menu__section-heading">
-                <p className="eyebrow">
-                  My Account
-                </p>
+                <div>
+                  <p className="eyebrow">
+                    My Account
+                  </p>
+
+                  <p className="mobile-menu__section-subtitle">
+                    Your personal space
+                  </p>
+                </div>
 
                 <Link
                   href="/account"
@@ -431,41 +538,50 @@ export function MobileMenu({
               </div>
 
               <div className="mobile-account-links">
-                {accountLinks.map((item) => {
-                  const Icon = item.icon;
+                {accountLinks.map(
+                  (item, index) => {
+                    const Icon = item.icon;
 
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={onClose}
-                      className="mobile-account-link"
-                    >
-                      <span className="mobile-account-link__icon">
-                        <Icon
-                          size={16}
-                          strokeWidth={1.2}
-                        />
-                      </span>
-
-                      <span className="mobile-account-link__content">
-                        <span className="mobile-account-link__title">
-                          {item.label}
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={onClose}
+                        className="mobile-account-link"
+                      >
+                        <span className="mobile-account-link__number">
+                          {String(
+                            index + 1,
+                          ).padStart(2, "0")}
                         </span>
 
-                        <span className="mobile-account-link__description">
-                          {item.description}
+                        <span className="mobile-account-link__icon">
+                          <Icon
+                            size={15}
+                            strokeWidth={1.2}
+                          />
                         </span>
-                      </span>
 
-                      <ChevronRight
-                        size={15}
-                        strokeWidth={1.15}
-                        className="mobile-account-link__arrow"
-                      />
-                    </Link>
-                  );
-                })}
+                        <span className="mobile-account-link__content">
+                          <span className="mobile-account-link__title">
+                            {item.label}
+                          </span>
+
+                          <span className="mobile-account-link__description">
+                            {item.description}
+                          </span>
+                        </span>
+
+                        <span className="mobile-account-link__arrow">
+                          <ChevronRight
+                            size={15}
+                            strokeWidth={1.15}
+                          />
+                        </span>
+                      </Link>
+                    );
+                  },
+                )}
 
                 <button
                   type="button"
@@ -473,11 +589,18 @@ export function MobileMenu({
                     void handleLogout();
                   }}
                   disabled={isLoggingOut}
-                  className="mobile-account-link mobile-account-link--logout"
+                  className="
+                    mobile-account-link
+                    mobile-account-link--logout
+                  "
                 >
+                  <span className="mobile-account-link__number">
+                    —
+                  </span>
+
                   <span className="mobile-account-link__icon">
                     <LogOut
-                      size={16}
+                      size={15}
                       strokeWidth={1.2}
                     />
                   </span>
@@ -498,12 +621,23 @@ export function MobileMenu({
             </section>
           )}
 
-          {/* Main navigation */}
+          {/* =================================================
+              MAIN NAVIGATION
+          ================================================= */}
+
           <nav
-            className="mobile-menu__section mobile-menu__navigation"
+            className="
+              mobile-menu__section
+              mobile-menu__navigation
+            "
             aria-label="Mobile navigation"
           >
-            <div className="mobile-menu__section-heading mobile-menu__section-heading--navigation">
+            <div
+              className="
+                mobile-menu__section-heading
+                mobile-menu__section-heading--navigation
+              "
+            >
               <div>
                 <p className="eyebrow">
                   Explore
@@ -520,6 +654,10 @@ export function MobileMenu({
                   </span>
                 </div>
               </div>
+
+              <span className="mobile-menu__section-index">
+                04
+              </span>
             </div>
 
             <div className="mobile-navigation-list">
@@ -545,10 +683,9 @@ export function MobileMenu({
                       className="mobile-navigation-item"
                     >
                       <span className="mobile-navigation-item__number">
-                        {String(index + 1).padStart(
-                          2,
-                          "0",
-                        )}
+                        {String(
+                          index + 1,
+                        ).padStart(2, "0")}
                       </span>
 
                       <span className="mobile-navigation-item__icon">
@@ -569,8 +706,8 @@ export function MobileMenu({
                       </span>
 
                       <span className="mobile-navigation-item__arrow">
-                        <ChevronRight
-                          size={16}
+                        <ArrowUpRight
+                          size={15}
                           strokeWidth={1.15}
                         />
                       </span>
@@ -581,12 +718,26 @@ export function MobileMenu({
             </div>
           </nav>
 
-          {/* Quick access */}
-          <section className="mobile-menu__section mobile-menu__quick-access">
+          {/* =================================================
+              QUICK ACCESS
+          ================================================= */}
+
+          <section
+            className="
+              mobile-menu__section
+              mobile-menu__quick-access
+            "
+          >
             <div className="mobile-menu__section-heading">
-              <p className="eyebrow">
-                Quick Access
-              </p>
+              <div>
+                <p className="eyebrow">
+                  Quick Access
+                </p>
+
+                <p className="mobile-menu__section-subtitle">
+                  Find your way around
+                </p>
+              </div>
             </div>
 
             <div className="mobile-quick-grid">
@@ -595,19 +746,24 @@ export function MobileMenu({
                 onClick={onClose}
                 className="mobile-quick-item"
               >
-                <Search
-                  size={17}
-                  strokeWidth={1.15}
-                  className="mobile-quick-item__icon"
-                />
+                <span className="mobile-quick-item__index">
+                  01
+                </span>
 
-                <span className="mobile-quick-item__content">
-                  <span className="mobile-quick-item__title">
-                    Search
-                  </span>
+                <span className="mobile-quick-item__main">
+                  <Search
+                    size={16}
+                    strokeWidth={1.15}
+                  />
 
-                  <span className="mobile-quick-item__description">
-                    Find your style
+                  <span className="mobile-quick-item__content">
+                    <span className="mobile-quick-item__title">
+                      Search
+                    </span>
+
+                    <span className="mobile-quick-item__description">
+                      Find your style
+                    </span>
                   </span>
                 </span>
               </Link>
@@ -615,21 +771,29 @@ export function MobileMenu({
               <Link
                 href="/wishlist"
                 onClick={onClose}
-                className="mobile-quick-item mobile-quick-item--wishlist"
+                className="
+                  mobile-quick-item
+                  mobile-quick-item--wishlist
+                "
               >
-                <Heart
-                  size={17}
-                  strokeWidth={1.15}
-                  className="mobile-quick-item__icon"
-                />
+                <span className="mobile-quick-item__index">
+                  02
+                </span>
 
-                <span className="mobile-quick-item__content">
-                  <span className="mobile-quick-item__title">
-                    Wishlist
-                  </span>
+                <span className="mobile-quick-item__main">
+                  <Heart
+                    size={16}
+                    strokeWidth={1.15}
+                  />
 
-                  <span className="mobile-quick-item__description">
-                    Saved pieces
+                  <span className="mobile-quick-item__content">
+                    <span className="mobile-quick-item__title">
+                      Wishlist
+                    </span>
+
+                    <span className="mobile-quick-item__description">
+                      Saved pieces
+                    </span>
                   </span>
                 </span>
               </Link>
@@ -641,13 +805,19 @@ export function MobileMenu({
                     : "/login"
                 }
                 onClick={onClose}
-                className="mobile-quick-item mobile-quick-item--account"
+                className="
+                  mobile-quick-item
+                  mobile-quick-item--account
+                "
               >
+                <span className="mobile-quick-item__index">
+                  03
+                </span>
+
                 <span className="mobile-quick-item__main">
                   <UserRound
-                    size={17}
+                    size={16}
                     strokeWidth={1.15}
-                    className="mobile-quick-item__icon"
                   />
 
                   <span className="mobile-quick-item__content">
@@ -664,7 +834,7 @@ export function MobileMenu({
                 </span>
 
                 <ChevronRight
-                  size={16}
+                  size={15}
                   strokeWidth={1.15}
                   className="mobile-quick-item__arrow"
                 />
@@ -672,8 +842,21 @@ export function MobileMenu({
             </div>
           </section>
 
-          {/* Editorial statement */}
-          <div className="mobile-menu__editorial">
+          {/* =================================================
+              EDITORIAL STATEMENT
+          ================================================= */}
+
+          <section className="mobile-menu__editorial">
+            <div className="mobile-menu__editorial-top">
+              <span className="mobile-menu__editorial-label">
+                AAYESHA / 01
+              </span>
+
+              <span className="mobile-menu__editorial-label">
+                WOMENSWEAR
+              </span>
+            </div>
+
             <div className="mobile-menu__editorial-rule">
               <span
                 aria-hidden="true"
@@ -697,20 +880,23 @@ export function MobileMenu({
                 Aayesha Fashion
               </p>
             </div>
-          </div>
+          </section>
         </div>
 
-        {/* Footer */}
-        <div className="mobile-menu__footer">
+        {/* =================================================
+            FOOTER
+        ================================================= */}
+
+        <footer className="mobile-menu__footer">
           {isLoggedIn ? (
             <div className="mobile-menu__footer-account">
               <div className="mobile-menu__footer-identity">
                 <p className="mobile-menu__footer-name">
-                  Signed in as {user.name}
+                  Signed in as {user?.name}
                 </p>
 
                 <p className="mobile-menu__footer-email">
-                  {user.email}
+                  {user?.email}
                 </p>
               </div>
 
@@ -738,10 +924,14 @@ export function MobileMenu({
               />
             </div>
           )}
-        </div>
+        </footer>
       </aside>
     </div>
   );
+
+  /* =======================================================
+     RETURN
+  ======================================================= */
 
   return (
     <>
