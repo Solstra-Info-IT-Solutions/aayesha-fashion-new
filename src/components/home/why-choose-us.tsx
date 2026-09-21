@@ -11,6 +11,8 @@ import type {
   HomepageWhyChooseUsValue,
 } from "@/types/homepage";
 
+import "./WhyChooseUs.css";
+
 interface WhyChooseUsProps {
   data: HomepageWhyChooseUs;
 }
@@ -44,26 +46,15 @@ export function WhyChooseUs({
     >
       <Container>
         <div className="why-choose-us__inner">
-          {/* =====================================================
+
+          {/* =========================================
               HEADER
-          ===================================================== */}
+          ========================================= */}
 
-          <div className="why-choose-us__header">
-            <div className="why-choose-us__eyebrow">
-              <span
-                aria-hidden="true"
-                className="why-choose-us__eyebrow-line"
-              />
-
-              <span className="why-choose-us__eyebrow-text">
-                The Aayesha Difference
-              </span>
-
-              <span
-                aria-hidden="true"
-                className="why-choose-us__eyebrow-line"
-              />
-            </div>
+          <header className="why-choose-us__header">
+            <p className="why-choose-us__eyebrow">
+              The Aayesha Difference
+            </p>
 
             <h2 className="why-choose-us__title">
               {data.title}
@@ -72,11 +63,11 @@ export function WhyChooseUs({
             <p className="why-choose-us__description">
               {data.description}
             </p>
-          </div>
+          </header>
 
-          {/* =====================================================
+          {/* =========================================
               VALUES
-          ===================================================== */}
+          ========================================= */}
 
           {values.length > 0 && (
             <div className="why-choose-us__values">
@@ -88,21 +79,20 @@ export function WhyChooseUs({
                     key={value.id}
                     className="why-choose-us__value"
                   >
-                    {/* NUMBER */}
-                    <span className="why-choose-us__number">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
+                    <div className="why-choose-us__top">
+                      <span className="why-choose-us__number">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
 
-                    {/* ICON */}
-                    <div className="why-choose-us__icon">
-                      <Icon
-                        size={19}
-                        strokeWidth={1.2}
-                        aria-hidden="true"
-                      />
+                      <div className="why-choose-us__icon">
+                        <Icon
+                          size={18}
+                          strokeWidth={1.2}
+                          aria-hidden="true"
+                        />
+                      </div>
                     </div>
 
-                    {/* CONTENT */}
                     <div className="why-choose-us__value-content">
                       <h3 className="why-choose-us__value-title">
                         {value.title}
@@ -118,27 +108,18 @@ export function WhyChooseUs({
             </div>
           )}
 
-          {/* =====================================================
+          {/* =========================================
               CLOSING STATEMENT
-          ===================================================== */}
+          ========================================= */}
 
           {data.closingStatement && (
             <div className="why-choose-us__closing">
-              <span
-                aria-hidden="true"
-                className="why-choose-us__closing-line"
-              />
-
               <p className="why-choose-us__closing-text">
                 {data.closingStatement}
               </p>
-
-              <span
-                aria-hidden="true"
-                className="why-choose-us__closing-line"
-              />
             </div>
           )}
+
         </div>
       </Container>
     </section>
