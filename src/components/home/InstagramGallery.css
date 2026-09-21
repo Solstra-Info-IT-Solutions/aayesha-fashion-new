@@ -1,300 +1,174 @@
 /* =========================================================
-   AAYESHA INSTAGRAM GALLERY
-   Editorial Social Showcase
-========================================================= */
-
-.instagram-gallery {
-  position: relative;
-  overflow: hidden;
-
-  padding: 115px 0 120px;
-
-  background: var(--color-surface-soft);
-  color: var(--color-text);
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.instagram-gallery__header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  gap: 50px;
-
-  margin-bottom: 48px;
-}
-
-.instagram-gallery__heading {
-  min-width: 0;
-}
-
-.instagram-gallery__eyebrow {
-  margin: 0 0 14px;
-
-  color: var(--color-secondary);
-
-  font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 600;
-
-  line-height: 1;
-  letter-spacing: 0.28em;
-
-  text-transform: uppercase;
-}
-
-.instagram-gallery__title {
-  margin: 0;
-
-  color: var(--color-text);
-
-  font-family: var(--font-display);
-  font-size: clamp(
-    2.35rem,
-    3.5vw,
-    3.75rem
-  );
-
-  font-weight: 400;
-  line-height: 1;
-
-  letter-spacing: -0.035em;
-}
-
-.instagram-gallery__title span {
-  margin-left: 0.08em;
-
-  color: var(--color-secondary);
-
-  font-style: italic;
-}
-
-
-/* =========================================================
-   META
-========================================================= */
-
-.instagram-gallery__meta {
-  display: flex;
-  align-items: flex-end;
-
-  gap: 25px;
-
-  padding-bottom: 4px;
-}
-
-.instagram-gallery__handle {
-  margin: 0;
-
-  color: var(--color-text-secondary);
-
-  font-family: var(--font-body);
-  font-size: 10px;
-  line-height: 1.4;
-
-  letter-spacing: 0.06em;
-}
-
-.instagram-gallery__count {
-  color: var(--color-text-secondary);
-
-  font-family: var(--font-body);
-  font-size: 8px;
-  font-weight: 600;
-
-  letter-spacing: 0.15em;
-}
-
-
-/* =========================================================
-   GRID
-========================================================= */
-
-.instagram-gallery__grid {
-  display: grid;
-
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-
-  gap: 10px;
-}
-
-.instagram-gallery__item {
-  display: block;
-
-  min-width: 0;
-
-  text-decoration: none;
-}
-
-.instagram-gallery__image-wrap {
-  position: relative;
-
-  aspect-ratio: 1 / 1;
-
-  overflow: hidden;
-
-  background: var(--color-surface);
-}
-
-.instagram-gallery__image {
-  object-fit: cover;
-
-  transition:
-    transform 700ms cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    );
-}
-
-.instagram-gallery__overlay {
-  position: absolute;
-  inset: 0;
-
-  background: rgba(48, 36, 33, 0.08);
-
-  opacity: 0;
-
-  transition:
-    opacity 350ms ease;
-}
-
-.instagram-gallery__icon {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 34px;
-  height: 34px;
-
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-
-  background: rgba(245, 238, 234, 0.92);
-
-  color: var(--color-text);
-
-  opacity: 0;
-
-  transform: translateY(8px);
-
-  transition:
-    opacity 300ms ease,
-    transform 350ms ease;
-}
-
-.instagram-gallery__item:hover
-  .instagram-gallery__image {
-  transform: scale(1.045);
-}
-
-.instagram-gallery__item:hover
-  .instagram-gallery__overlay {
-  opacity: 1;
-}
-
-.instagram-gallery__item:hover
-  .instagram-gallery__icon {
-  opacity: 1;
-
-  transform: translateY(0);
-}
-
-
-/* =========================================================
-   FOOTER CTA
+   INSTAGRAM CTA
+   Editorial Divider + Boxed CTA
 ========================================================= */
 
 .instagram-gallery__footer {
-  display: flex;
-  justify-content: center;
+  display: grid;
 
-  margin-top: 48px;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  width: 100%;
+
+  margin-top: 52px;
 }
+
+.instagram-gallery__footer-line {
+  width: 100%;
+
+  height: 1px;
+
+  background: var(--color-border-dark);
+
+  opacity: 0.65;
+}
+
+
+/* =========================================================
+   BOXED CTA
+========================================================= */
 
 .instagram-gallery__cta {
   display: inline-flex;
-  align-items: center;
+
+  align-items: stretch;
   justify-content: center;
 
-  gap: 12px;
+  min-height: 50px;
+
+  border: 1px solid var(--color-border-dark);
+
+  background: var(--color-surface);
 
   color: var(--color-text);
 
   font-family: var(--font-body);
-  font-size: 9px;
+
+  font-size: 10px;
+
   font-weight: 600;
 
+  letter-spacing: 0.21em;
+
   line-height: 1;
-  letter-spacing: 0.2em;
 
   text-decoration: none;
+
   text-transform: uppercase;
 
-  transition: color 240ms ease;
+  white-space: nowrap;
+
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease;
 }
 
-.instagram-gallery__cta-icon {
+
+/* =========================================================
+   CTA LABEL
+========================================================= */
+
+.instagram-gallery__cta-label {
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  width: 34px;
-  height: 34px;
+  padding: 0 25px;
+}
 
-  border: 1px solid var(--color-border-dark);
-  border-radius: 50%;
+
+/* =========================================================
+   CTA ARROW CELL
+========================================================= */
+
+.instagram-gallery__cta-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+
+  min-width: 50px;
+
+  border-left: 1px solid var(--color-border-dark);
 
   color: var(--color-secondary);
+
+  background: transparent;
 
   transition:
-    background-color 240ms ease,
-    border-color 240ms ease,
-    color 240ms ease,
-    transform 300ms ease;
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease,
+    transform 350ms
+      cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+
+/* =========================================================
+   HOVER
+========================================================= */
 
 .instagram-gallery__cta:hover {
-  color: var(--color-secondary);
-}
-
-.instagram-gallery__cta:hover
-  .instagram-gallery__cta-icon {
   border-color: var(--color-secondary);
 
   background: var(--color-secondary);
 
   color: var(--color-surface);
+}
+
+.instagram-gallery__cta:hover
+  .instagram-gallery__cta-icon {
+  border-left-color:
+    rgba(250, 247, 244, 0.35);
+
+  color: var(--color-surface);
+
+  background: transparent;
 
   transform: translate(2px, -2px);
 }
 
 
 /* =========================================================
-   TABLET
+   ACTIVE
 ========================================================= */
 
-@media (max-width: 1023px) {
-  .instagram-gallery {
-    padding: 95px 0 100px;
-  }
+.instagram-gallery__cta:active {
+  border-color: var(--color-secondary);
 
-  .instagram-gallery__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  background: var(--color-secondary);
 
-  .instagram-gallery__header {
-    gap: 35px;
-  }
+  color: var(--color-surface);
+}
+
+.instagram-gallery__cta:active
+  .instagram-gallery__cta-icon {
+  border-left-color:
+    rgba(250, 247, 244, 0.35);
+
+  color: var(--color-surface);
+
+  transform: translate(1px, -1px);
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.instagram-gallery__cta:focus-visible {
+  outline: 2px solid var(--focus-ring);
+
+  outline-offset: 5px;
 }
 
 
@@ -303,72 +177,30 @@
 ========================================================= */
 
 @media (max-width: 767px) {
-  .instagram-gallery {
-    padding: 72px 0 80px;
-  }
-
-  .instagram-gallery__header {
-    display: block;
-
-    margin-bottom: 32px;
-  }
-
-  .instagram-gallery__eyebrow {
-    margin-bottom: 11px;
-
-    font-size: 8px;
-  }
-
-  .instagram-gallery__title {
-    font-size: 2.25rem;
-  }
-
-  .instagram-gallery__meta {
-    align-items: center;
-    justify-content: space-between;
-
-    margin-top: 14px;
-    padding: 0;
-  }
-
-  .instagram-gallery__handle {
-    font-size: 9px;
-  }
-
-  .instagram-gallery__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap: 7px;
-  }
-
-  .instagram-gallery__icon {
-    right: 10px;
-    bottom: 10px;
-
-    width: 30px;
-    height: 30px;
-
-    opacity: 1;
-
-    transform: none;
-  }
-
-  .instagram-gallery__overlay {
-    display: none;
-  }
-
   .instagram-gallery__footer {
-    margin-top: 34px;
+    margin-top: 38px;
+  }
+
+  .instagram-gallery__footer-line {
+    opacity: 0.55;
   }
 
   .instagram-gallery__cta {
+    min-height: 46px;
+
     font-size: 8px;
-    letter-spacing: 0.17em;
+
+    letter-spacing: 0.14em;
+  }
+
+  .instagram-gallery__cta-label {
+    padding: 0 16px;
   }
 
   .instagram-gallery__cta-icon {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+
+    min-width: 44px;
   }
 }
 
@@ -378,20 +210,26 @@
 ========================================================= */
 
 @media (max-width: 420px) {
-  .instagram-gallery {
-    padding: 64px 0 72px;
+  .instagram-gallery__footer {
+    margin-top: 32px;
   }
 
-  .instagram-gallery__title {
-    font-size: 1.95rem;
+  .instagram-gallery__cta {
+    min-height: 44px;
+
+    font-size: 7.5px;
+
+    letter-spacing: 0.11em;
   }
 
-  .instagram-gallery__grid {
-    gap: 5px;
+  .instagram-gallery__cta-label {
+    padding: 0 12px;
   }
 
-  .instagram-gallery__handle {
-    font-size: 8px;
+  .instagram-gallery__cta-icon {
+    width: 40px;
+
+    min-width: 40px;
   }
 }
 
@@ -401,8 +239,8 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .instagram-gallery * {
-    scroll-behavior: auto;
-    transition: none !important;
+  .instagram-gallery__cta,
+  .instagram-gallery__cta-icon {
+    transition: none;
   }
 }

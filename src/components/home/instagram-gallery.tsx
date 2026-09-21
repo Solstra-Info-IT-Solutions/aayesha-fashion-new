@@ -107,26 +107,32 @@ export function InstagramGallery({
           )}
 
           {/* =========================================
-              CTA
+              VIEW ALL / INSTAGRAM CTA
           ========================================= */}
 
           {data.instagramUrl && (
             <div className="instagram-gallery__footer">
+              <div className="instagram-gallery__footer-line" />
+
               <Link
                 href={data.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="instagram-gallery__cta"
               >
-                <span>{data.ctaLabel}</span>
+                <span className="instagram-gallery__cta-label">
+                  {data.ctaLabel}
+                </span>
 
                 <span className="instagram-gallery__cta-icon">
                   <ArrowUpRight
-                    size={16}
-                    strokeWidth={1.4}
+                    size={15}
+                    strokeWidth={1.3}
                   />
                 </span>
               </Link>
+
+              <div className="instagram-gallery__footer-line" />
             </div>
           )}
 
