@@ -125,6 +125,10 @@ export function BrandStory({
                 )}
               </div>
 
+              {/* =================================================
+                  BOXED CTA
+              ================================================= */}
+
               {data.ctaLabel &&
                 data.ctaHref && (
                   <div className="brand-story__cta">
@@ -132,7 +136,7 @@ export function BrandStory({
                       href={data.ctaHref}
                       className="brand-story__cta-link"
                     >
-                      <span>
+                      <span className="brand-story__cta-label">
                         {data.ctaLabel}
                       </span>
 
@@ -145,6 +149,7 @@ export function BrandStory({
                     </Link>
                   </div>
                 )}
+
             </div>
           </div>
         </div>
