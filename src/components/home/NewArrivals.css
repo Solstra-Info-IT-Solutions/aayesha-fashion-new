@@ -1,25 +1,39 @@
 /* =========================================================
    AAYESHA NEW ARRIVALS
-   Editorial Product Showcase
+   Editorial Product Section
 ========================================================= */
 
 .new-arrivals {
   position: relative;
-  overflow: hidden;
+
   padding: 110px 0 115px;
+
+  overflow: hidden;
+
   background: var(--color-surface-soft);
 }
 
 
 /* =========================================================
-   HEADER
+   INNER
+========================================================= */
+
+.new-arrivals__inner {
+  position: relative;
+}
+
+
+/* =========================================================
+   SECTION HEADER
 ========================================================= */
 
 .new-arrivals__header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+
   gap: 60px;
+
   margin-bottom: 48px;
 }
 
@@ -28,7 +42,7 @@
 }
 
 .new-arrivals__eyebrow {
-  margin: 0 0 13px;
+  margin: 0 0 14px;
 
   color: var(--color-secondary);
 
@@ -36,7 +50,9 @@
   font-size: 9px;
   font-weight: 600;
   line-height: 1;
+
   letter-spacing: 0.28em;
+
   text-transform: uppercase;
 }
 
@@ -46,19 +62,26 @@
   color: var(--color-text);
 
   font-family: var(--font-display);
+
   font-size: clamp(
     2.35rem,
     3.5vw,
     3.75rem
   );
+
   font-weight: 400;
+
   line-height: 1;
+
   letter-spacing: -0.035em;
+
   white-space: nowrap;
 }
 
 .new-arrivals__title span {
-  margin-left: 0.14em;
+  display: inline;
+
+  margin-left: 0.12em;
 
   color: var(--color-secondary);
 
@@ -67,14 +90,18 @@
 
 .new-arrivals__intro {
   max-width: 300px;
+
   margin: 0 0 4px;
 
   color: var(--color-text-secondary);
 
   font-family: var(--font-body);
+
   font-size: 11px;
+
   line-height: 1.7;
-  letter-spacing: 0.01em;
+
+  letter-spacing: 0.015em;
 }
 
 
@@ -84,105 +111,256 @@
 
 .new-arrivals__products {
   position: relative;
+
   width: 100%;
 }
 
 
 /* =========================================================
-   MOBILE CTA
+   FOOTER CTA
+   Editorial Divider + Boxed CTA
 ========================================================= */
 
-.new-arrivals__mobile-cta {
-  display: none;
-  justify-content: center;
-  margin-top: 34px;
+.new-arrivals__footer {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  width: 100%;
+
+  margin-top: 56px;
+}
+
+.new-arrivals__footer-line {
+  width: 100%;
+  height: 1px;
+
+  background: var(--color-border-dark);
+
+  opacity: 0.65;
 }
 
 
 /* =========================================================
-   EMPTY STATE
+   BOXED CTA
+========================================================= */
+
+.new-arrivals__all-link {
+  display: inline-flex;
+
+  align-items: stretch;
+  justify-content: center;
+
+  min-height: 50px;
+
+  border: 1px solid var(--color-border-dark);
+
+  background: var(--color-surface);
+
+  color: var(--color-text);
+
+  font-family: var(--font-body);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.21em;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease;
+}
+
+
+/* =========================================================
+   CTA LABEL
+========================================================= */
+
+.new-arrivals__all-label {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 25px;
+}
+
+
+/* =========================================================
+   CTA ARROW CELL
+========================================================= */
+
+.new-arrivals__all-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  min-width: 50px;
+
+  border-left: 1px solid var(--color-border-dark);
+
+  color: var(--color-secondary);
+
+  background: transparent;
+
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease,
+    transform 350ms
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   CTA HOVER
+========================================================= */
+
+.new-arrivals__all-link:hover {
+  border-color: var(--color-secondary);
+
+  background: var(--color-secondary);
+
+  color: var(--color-surface);
+}
+
+.new-arrivals__all-link:hover
+  .new-arrivals__all-icon {
+  border-left-color:
+    rgba(250, 247, 244, 0.35);
+
+  color: var(--color-surface);
+
+  background: transparent;
+
+  transform: translate(2px, -2px);
+}
+
+
+/* =========================================================
+   CTA ACTIVE
+========================================================= */
+
+.new-arrivals__all-link:active {
+  border-color: var(--color-secondary);
+
+  background: var(--color-secondary);
+
+  color: var(--color-surface);
+}
+
+.new-arrivals__all-link:active
+  .new-arrivals__all-icon {
+  border-left-color:
+    rgba(250, 247, 244, 0.35);
+
+  color: var(--color-surface);
+
+  transform: translate(1px, -1px);
+}
+
+
+/* =========================================================
+   CTA FOCUS
+========================================================= */
+
+.new-arrivals__all-link:focus-visible {
+  outline: 2px solid var(--focus-ring);
+
+  outline-offset: 5px;
+}
+
+
+/* =========================================================
+   EMPTY / COMING SOON
 ========================================================= */
 
 .new-arrivals__empty {
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  min-height: 430px;
+  min-height: 390px;
+
+  padding: 70px 20px;
 
   border: 1px solid var(--color-border);
 
   background:
     radial-gradient(
       circle at 50% 0%,
-      rgba(169, 130, 130, 0.13),
+      rgba(169, 130, 130, 0.12),
       transparent 42%
     ),
     var(--color-surface);
 }
 
 .new-arrivals__empty-inner {
-  max-width: 470px;
-  padding: 50px 24px;
+  max-width: 460px;
+
   text-align: center;
 }
 
 .new-arrivals__empty-mark {
-  position: relative;
-
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  width: 48px;
-  height: 48px;
+  gap: 5px;
 
-  margin: 0 auto 22px;
+  width: 42px;
+  height: 42px;
+
+  margin: 0 auto 20px;
 
   border: 1px solid var(--color-border-dark);
+
   border-radius: 50%;
 }
 
 .new-arrivals__empty-mark span {
-  position: absolute;
-
   display: block;
 
-  width: 18px;
-  height: 1px;
+  width: 3px;
+  height: 3px;
 
-  background: var(--color-secondary);
-
-  transform-origin: center;
-}
-
-.new-arrivals__empty-mark span:nth-child(1) {
-  transform: rotate(45deg);
-}
-
-.new-arrivals__empty-mark span:nth-child(2) {
-  transform: rotate(-45deg);
-}
-
-.new-arrivals__empty-mark span:nth-child(3) {
-  width: 5px;
-  height: 5px;
-
-  border: 1px solid var(--color-secondary);
   border-radius: 50%;
 
-  background: transparent;
+  background: var(--color-secondary);
 }
 
 .new-arrivals__empty-eyebrow {
-  margin: 0 0 13px;
+  margin: 0 0 12px;
 
   color: var(--color-secondary);
 
   font-family: var(--font-body);
+
   font-size: 8px;
+
   font-weight: 600;
+
   letter-spacing: 0.25em;
+
   text-transform: uppercase;
 }
 
@@ -192,29 +370,119 @@
   color: var(--color-text);
 
   font-family: var(--font-display);
+
   font-size: 2.7rem;
+
   font-weight: 400;
-  line-height: 0.96;
+
+  line-height: 0.95;
+
   letter-spacing: -0.025em;
 }
 
 .new-arrivals__empty-description {
   max-width: 370px;
 
-  margin: 17px auto 0;
+  margin: 18px auto 0;
 
   color: var(--color-text-secondary);
 
   font-family: var(--font-body);
+
   font-size: 11px;
+
   line-height: 1.7;
 }
 
+
+/* =========================================================
+   EMPTY CTA
+========================================================= */
+
 .new-arrivals__empty-cta {
   display: flex;
+
   justify-content: center;
 
-  margin-top: 25px;
+  margin-top: 28px;
+}
+
+.new-arrivals__empty-link {
+  display: inline-flex;
+
+  align-items: stretch;
+
+  min-height: 46px;
+
+  border: 1px solid var(--color-border-dark);
+
+  color: var(--color-text);
+
+  background: var(--color-surface);
+
+  font-family: var(--font-body);
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  text-transform: uppercase;
+
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease;
+}
+
+.new-arrivals__empty-link > span:first-child {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 20px;
+}
+
+.new-arrivals__empty-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+
+  border-left: 1px solid var(--color-border-dark);
+
+  color: var(--color-secondary);
+
+  transition:
+    color 300ms ease,
+    border-color 300ms ease,
+    transform 300ms ease;
+}
+
+.new-arrivals__empty-link:hover {
+  border-color: var(--color-secondary);
+
+  background: var(--color-secondary);
+
+  color: var(--color-surface);
+}
+
+.new-arrivals__empty-link:hover
+  .new-arrivals__empty-icon {
+  border-left-color:
+    rgba(250, 247, 244, 0.35);
+
+  color: var(--color-surface);
+
+  transform: translate(2px, -2px);
 }
 
 
@@ -232,7 +500,7 @@
   }
 
   .new-arrivals__intro {
-    max-width: 250px;
+    max-width: 270px;
   }
 }
 
@@ -248,36 +516,72 @@
 
   .new-arrivals__header {
     display: block;
+
     margin-bottom: 32px;
   }
 
   .new-arrivals__eyebrow {
     margin-bottom: 11px;
+
     font-size: 8px;
   }
 
   .new-arrivals__title {
     font-size: 2.25rem;
+
     white-space: nowrap;
   }
 
   .new-arrivals__intro {
     max-width: 310px;
-    margin-top: 14px;
+
+    margin-top: 15px;
+
     font-size: 10px;
+
     line-height: 1.65;
   }
 
-  .new-arrivals__mobile-cta {
-    display: flex;
+
+  /* =======================================================
+     MOBILE CTA
+  ======================================================= */
+
+  .new-arrivals__footer {
+    margin-top: 40px;
   }
+
+  .new-arrivals__footer-line {
+    opacity: 0.55;
+  }
+
+  .new-arrivals__all-link {
+    min-height: 46px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.14em;
+  }
+
+  .new-arrivals__all-label {
+    padding: 0 16px;
+  }
+
+  .new-arrivals__all-icon {
+    width: 44px;
+
+    min-width: 44px;
+  }
+
+
+  /* =======================================================
+     EMPTY
+  ======================================================= */
 
   .new-arrivals__empty {
-    min-height: 390px;
-  }
+    min-height: 340px;
 
-  .new-arrivals__empty-inner {
-    padding: 40px 18px;
+    padding: 60px 18px;
   }
 
   .new-arrivals__empty-title {
@@ -296,15 +600,65 @@
 
 @media (max-width: 420px) {
   .new-arrivals {
-    padding: 64px 0 72px;
+    padding-top: 64px;
+
+    padding-bottom: 72px;
   }
 
   .new-arrivals__title {
     font-size: 1.95rem;
+
+    white-space: nowrap;
   }
 
-  .new-arrivals__intro {
-    max-width: 290px;
+
+  /* =======================================================
+     SMALL MOBILE CTA
+  ======================================================= */
+
+  .new-arrivals__footer {
+    margin-top: 32px;
+  }
+
+  .new-arrivals__all-link {
+    min-height: 44px;
+
+    font-size: 7.5px;
+
+    letter-spacing: 0.11em;
+  }
+
+  .new-arrivals__all-label {
+    padding: 0 12px;
+  }
+
+  .new-arrivals__all-icon {
+    width: 40px;
+
+    min-width: 40px;
+  }
+
+
+  /* =======================================================
+     EMPTY
+  ======================================================= */
+
+  .new-arrivals__empty-title {
+    font-size: 2rem;
+  }
+
+  .new-arrivals__empty-link {
+    min-height: 44px;
+
+    font-size: 8px;
+  }
+
+  .new-arrivals__empty-link > span:first-child {
+    padding: 0 15px;
+  }
+
+  .new-arrivals__empty-icon {
+    width: 42px;
   }
 }
 
@@ -314,7 +668,10 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .new-arrivals * {
-    scroll-behavior: auto;
+  .new-arrivals__all-link,
+  .new-arrivals__all-icon,
+  .new-arrivals__empty-link,
+  .new-arrivals__empty-icon {
+    transition: none;
   }
 }

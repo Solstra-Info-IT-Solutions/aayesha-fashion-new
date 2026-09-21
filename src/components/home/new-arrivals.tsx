@@ -4,7 +4,6 @@ import { getProducts } from "@/services/product.service";
 
 import { ProductCarousel } from "@/components/product/product-carousel";
 import { Container } from "@/components/shared/container";
-import { LinkButton } from "@/components/ui/button";
 
 import "./NewArrivals.css";
 
@@ -27,6 +26,7 @@ export async function NewArrivals() {
     >
       <Container>
         <div className="new-arrivals__inner">
+
           {/* =====================================================
               SECTION HEADER
           ===================================================== */}
@@ -67,23 +67,29 @@ export async function NewArrivals() {
               </div>
 
               {/* =================================================
-                  MOBILE CTA
+                  VIEW ALL CTA
               ================================================= */}
 
-              <div className="new-arrivals__mobile-cta">
-                <LinkButton
+              <div className="new-arrivals__footer">
+                <div className="new-arrivals__footer-line" />
+
+                <a
                   href="/collections/new-arrivals"
-                  variant="secondary"
-                  size="md"
-                  icon={
+                  className="new-arrivals__all-link"
+                >
+                  <span className="new-arrivals__all-label">
+                    View all new arrivals
+                  </span>
+
+                  <span className="new-arrivals__all-icon">
                     <ArrowUpRight
                       size={15}
-                      strokeWidth={1.4}
+                      strokeWidth={1.3}
                     />
-                  }
-                >
-                  View All New Arrivals
-                </LinkButton>
+                  </span>
+                </a>
+
+                <div className="new-arrivals__footer-line" />
               </div>
             </>
           ) : (
@@ -93,6 +99,7 @@ export async function NewArrivals() {
 
             <div className="new-arrivals__empty">
               <div className="new-arrivals__empty-inner">
+
                 <div
                   className="new-arrivals__empty-mark"
                   aria-hidden="true"
@@ -117,20 +124,23 @@ export async function NewArrivals() {
                 </p>
 
                 <div className="new-arrivals__empty-cta">
-                  <LinkButton
+                  <a
                     href="/shop"
-                    variant="secondary"
-                    size="md"
-                    icon={
+                    className="new-arrivals__empty-link"
+                  >
+                    <span>
+                      Explore Shop
+                    </span>
+
+                    <span className="new-arrivals__empty-icon">
                       <ArrowUpRight
                         size={15}
-                        strokeWidth={1.4}
+                        strokeWidth={1.3}
                       />
-                    }
-                  >
-                    Explore Shop
-                  </LinkButton>
+                    </span>
+                  </a>
                 </div>
+
               </div>
             </div>
           )}
