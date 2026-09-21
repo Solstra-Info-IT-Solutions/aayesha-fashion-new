@@ -6,6 +6,8 @@ import { ArrowRight, Loader2, Mail } from "lucide-react";
 
 import { useAuthStore } from "@/store/auth-store";
 
+import "./ForgotPasswordForm.css";
+
 /* =========================================================
    COMPONENT
 ========================================================= */

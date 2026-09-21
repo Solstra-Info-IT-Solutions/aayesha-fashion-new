@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 import { BrandLogo } from "@/components/layout/brand-logo";
+import "./AuthShell.css";
 
 /* =========================================================
    TYPES

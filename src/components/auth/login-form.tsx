@@ -20,6 +20,8 @@ import {
 import { ApiError } from "@/lib/api";
 import { useAuthStore } from "@/store/auth-store";
 
+import "./LoginForm.css";
+
 /* =========================================================
    COMPONENT
 ========================================================= */

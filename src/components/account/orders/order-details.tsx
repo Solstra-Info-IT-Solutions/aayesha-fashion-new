@@ -22,6 +22,7 @@ import {
   type OrderDetails as OrderDetailsData,
 } from "@/lib/api/orders";
 import { useAuthStore } from "@/store/auth-store";
+import "./OrderDetails.css";
 
 interface OrderDetailsProps {
   orderNumber: string;

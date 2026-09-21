@@ -20,6 +20,8 @@ import {
 
 import { useAuthStore } from "@/store/auth-store";
 
+import "./VerifyEmailForm.css";
+
 /* =========================================================
    COMPONENT
 ========================================================= */

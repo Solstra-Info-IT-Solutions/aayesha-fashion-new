@@ -18,6 +18,8 @@ import {
   useAuthStore,
 } from "@/store/auth-store";
 
+import "./RegisterForm.css";
+
 /* =========================================================
    INPUT FIELD
 ========================================================= */

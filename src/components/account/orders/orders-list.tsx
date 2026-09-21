@@ -15,6 +15,7 @@ import {
   type OrderDetails,
 } from "@/lib/api/orders";
 import { useAuthStore } from "@/store/auth-store";
+import "./OrdersList.css";
 
 /* ==========================================================
    HELPERS
