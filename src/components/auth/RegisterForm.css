@@ -330,52 +330,69 @@
    SUBMIT
 ========================================================== */
 
+/* ==========================================================
+   SUBMIT
+========================================================== */
+
 .register-form__submit {
   width: 100%;
-  min-height: 50px;
+  min-height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 21px;
   padding: 0 20px;
-  border: 1px solid var(--color-accent-dark);
+
+  border: 1px solid #6f4b47;
   border-radius: 0;
   outline: none;
   appearance: none;
+
   cursor: pointer;
-  color: var(--color-text-inverse);
-  background: var(--color-accent-dark);
+
+  background: #6f4b47;
+  color: #ffffff;
+
   font-family: var(--font-body);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.16em;
   line-height: 1;
   text-transform: uppercase;
+
+  opacity: 1;
+
   transition:
     color 180ms ease,
     background-color 180ms ease,
-    border-color 180ms ease;
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .register-form__submit:hover:not(:disabled) {
-  color: var(--color-text-inverse);
-  border-color: var(--color-text);
-  background: var(--color-text);
+  background: #3f2d2a;
+  border-color: #3f2d2a;
+  color: #ffffff;
 }
 
 .register-form__submit:active:not(:disabled) {
-  color: var(--color-text-inverse);
-  background: var(--color-text);
+  background: #7f5953;
+  border-color: #7f5953;
+  color: #ffffff;
+  transform: translateY(1px);
 }
 
 .register-form__submit:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #9b7069;
   outline-offset: 3px;
 }
 
 .register-form__submit:disabled {
+  background: #6f4b47;
+  border-color: #6f4b47;
+  color: #ffffff;
+  opacity: 0.6;
   cursor: wait;
-  opacity: 0.72;
 }
 
 /* ==========================================================
