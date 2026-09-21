@@ -1,146 +1,219 @@
 /* =========================================================
    AAYESHA HEADER
-   Editorial Fashion Navigation
-   ========================================================= */
+   Premium Editorial Fashion Header
+========================================================= */
 
 .aayesha-header {
-  position: fixed;
+  --header-height: 76px;
 
+  position: fixed;
   top: 0;
   left: 0;
+  right: 0;
 
-  z-index: var(--z-header);
+  z-index: 1000;
 
   width: 100%;
-  height: 68px;
+  height: var(--header-height);
 
-  background: rgba(250, 249, 247, 0.96);
+  background: var(--color-bg);
 
-  border-bottom: 1px solid var(--color-border-light);
+  border-bottom: 1px solid
+    var(--color-border);
 
   transition:
-    background-color 400ms var(--ease-standard),
-    border-color 400ms var(--ease-standard),
-    box-shadow 400ms var(--ease-standard),
-    color 300ms var(--ease-standard);
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+    background-color 420ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 420ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 420ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    transform 420ms
+      cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-
 /* =========================================================
-   TRANSPARENT HEADER
-   ========================================================= */
+   TRANSPARENT STATE
+========================================================= */
 
 .aayesha-header--transparent {
   background: transparent;
 
   border-bottom-color: transparent;
+}
 
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-
+.aayesha-header--transparent
+  .aayesha-header__logo-main,
+.aayesha-header--transparent
+  .aayesha-header__logo-sub,
+.aayesha-header--transparent
+  .aayesha-header__nav-link,
+.aayesha-header--transparent
+  .header-action-button,
+.aayesha-header--transparent
+  .header-action-link {
   color: #ffffff;
 }
 
-
-/* =========================================================
-   SCROLLED HEADER
-   ========================================================= */
-
-.aayesha-header--scrolled {
-  background: rgba(250, 249, 247, 0.96);
-
-  border-bottom-color: var(--color-border-light);
-
-  box-shadow:
-    0 4px 20px rgba(51, 37, 34, 0.035);
-
-  color: var(--color-text);
+.aayesha-header--transparent
+  .aayesha-header__nav-line,
+.aayesha-header--transparent
+  .header-action-button__underline,
+.aayesha-header--transparent
+  .header-action-underline {
+  background: #ffffff;
 }
 
+/* =========================================================
+   SCROLLED
+========================================================= */
+
+.aayesha-header--scrolled {
+  background: rgba(
+    247,
+    241,
+    238,
+    0.97
+  );
+
+  border-bottom-color:
+    var(--color-border);
+
+  box-shadow:
+    0 8px 30px
+      rgba(45, 34, 31, 0.055);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
 
 /* =========================================================
    INNER
-   ========================================================= */
+========================================================= */
 
 .aayesha-header__inner {
-  position: relative;
-
-  width: min(
-    calc(100% - (var(--page-padding) * 2)),
-    var(--container-wide)
-  );
-
+  width: 100%;
   height: 100%;
 
-  margin-inline: auto;
+  max-width: 1600px;
+
+  margin: 0 auto;
+
+  padding-left: 32px;
+  padding-right: 32px;
 
   display: grid;
 
+  /*
+    IMPORTANT:
+    Left      = logo
+    Center    = navigation
+    Right     = actions
+  */
+
   grid-template-columns:
-    minmax(150px, 1fr)
+    minmax(190px, 1fr)
     auto
-    minmax(150px, 1fr);
+    minmax(250px, 1fr);
 
   align-items: center;
-}
 
+  column-gap: 32px;
+}
 
 /* =========================================================
    LOGO
-   ========================================================= */
+========================================================= */
 
 .aayesha-header__logo {
+  position: relative;
+
   justify-self: start;
 
-  display: flex;
+  display: inline-flex;
+
   flex-direction: column;
 
-  width: fit-content;
+  align-items: flex-start;
 
-  line-height: 1;
+  width: max-content;
 
-  color: inherit;
+  text-decoration: none;
+
+  color: var(--color-text);
+
+  z-index: 2;
+
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+.aayesha-header__logo:hover {
+  opacity: 0.82;
 }
 
 .aayesha-header__logo-main {
-  font-family: var(--font-display);
+  display: block;
 
-  font-size: 22px;
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 23px;
 
   font-weight: 500;
 
-  line-height: 0.8;
+  line-height: 0.9;
 
-  letter-spacing: 0.07em;
+  letter-spacing: 0.055em;
+
+  color: var(--color-text);
+
+  white-space: nowrap;
 }
 
 .aayesha-header__logo-sub {
-  margin-top: 6px;
+  display: block;
 
-  font-family: var(--font-body);
+  margin-top: 5px;
 
-  font-size: 7px;
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 6px;
 
   font-weight: 600;
 
   line-height: 1;
 
-  letter-spacing: 0.2em;
+  letter-spacing: 0.34em;
+
+  text-transform: uppercase;
+
+  color: var(--color-text-muted);
+
+  white-space: nowrap;
 }
 
-
 /* =========================================================
-   NAVIGATION
-   ========================================================= */
+   DESKTOP NAVIGATION
+========================================================= */
 
 .aayesha-header__nav {
   display: flex;
-  align-items: center;
 
-  gap: 28px;
+  align-items: center;
+  justify-content: center;
+
+  gap: 30px;
+
+  min-width: 0;
+
+  white-space: nowrap;
 }
 
 .aayesha-header__nav-link {
@@ -150,400 +223,578 @@
 
   align-items: center;
 
-  height: 68px;
+  height: 76px;
 
-  font-size: var(--text-nav);
+  padding: 0;
+
+  color: var(--color-text);
+
+  text-decoration: none;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 11px;
 
   font-weight: 500;
 
   line-height: 1;
 
-  letter-spacing: 0.02em;
+  letter-spacing: 0.035em;
 
-  white-space: nowrap;
-
-  color: inherit;
+  transition:
+    color 280ms ease;
 }
 
-.aayesha-header__nav-link::after {
-  content: "";
+.aayesha-header__nav-link:hover {
+  color: var(--color-accent);
+}
 
+.aayesha-header__nav-line {
   position: absolute;
 
   left: 0;
-  bottom: 20px;
+  right: 0;
 
-  width: 100%;
+  bottom: 21px;
+
   height: 1px;
 
-  background: currentColor;
+  background: var(--color-accent);
+
+  transform:
+    scaleX(0);
 
   transform-origin: right center;
 
-  transform: scaleX(0);
-
   transition:
-    transform 350ms var(--ease-standard);
+    transform 420ms
+      cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.aayesha-header__nav-link:hover::after {
-  transform-origin: left center;
-
+.aayesha-header__nav-link:hover
+  .aayesha-header__nav-line {
   transform: scaleX(1);
-}
 
+  transform-origin: left center;
+}
 
 /* =========================================================
-   ACTIONS
-   ========================================================= */
+   ACTIONS WRAPPER
+========================================================= */
 
 .aayesha-header__actions {
+  min-width: 0;
+
+  width: 100%;
+
   justify-self: end;
 
   display: flex;
 
   align-items: center;
 
-  gap: 2px;
+  justify-content: flex-end;
+
+  /*
+    VERY IMPORTANT:
+    Prevent HeaderActions from moving
+    to a second line.
+  */
+
+  white-space: nowrap;
+
+  overflow: visible;
 }
 
-.aayesha-header__action {
+/* =========================================================
+   HEADER ACTIONS INNER
+========================================================= */
+
+.aayesha-header__actions
+  .header-actions {
+  width: max-content;
+
+  max-width: 100%;
+
+  display: flex;
+
+  flex-direction: row;
+
+  flex-wrap: nowrap;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 2px;
+
+  white-space: nowrap;
+
+  overflow: visible;
+}
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+.aayesha-header__actions
+  .header-action-button,
+.aayesha-header__actions
+  .header-action-link {
   position: relative;
+
+  flex: 0 0 auto;
+
+  width: 42px;
+  height: 42px;
 
   display: inline-flex;
 
   align-items: center;
   justify-content: center;
 
-  width: 38px;
-  height: 38px;
+  color: var(--color-text);
 
-  border-radius: var(--radius-pill);
+  background: transparent;
 
-  color: inherit;
+  border: 0;
+
+  text-decoration: none;
+
+  cursor: pointer;
 
   transition:
-    background-color 250ms var(--ease-standard),
-    transform 180ms var(--ease-standard);
+    color 280ms ease,
+    background-color 280ms ease;
 }
 
-.aayesha-header__action:hover {
-  background: rgba(143, 101, 93, 0.08);
+.aayesha-header__actions
+  .header-action-button:hover,
+.aayesha-header__actions
+  .header-action-link:hover {
+  color: var(--color-accent);
 }
-
-.aayesha-header__action:active {
-  transform: scale(0.94);
-}
-
-.aayesha-header__action:focus-visible {
-  outline: 2px solid var(--focus-ring);
-
-  outline-offset: 2px;
-}
-
 
 /* =========================================================
-   CART COUNT
-   ========================================================= */
+   ACTION ICON
+========================================================= */
 
-.aayesha-header__cart-count {
+.aayesha-header__actions
+  .header-action-button__icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: inherit;
+}
+
+.aayesha-header__actions
+  .header-action-icon {
+  display: block;
+
+  flex-shrink: 0;
+
+  color: inherit;
+}
+
+/* =========================================================
+   ACTION UNDERLINE
+========================================================= */
+
+.aayesha-header__actions
+  .header-action-button__underline,
+.aayesha-header__actions
+  .header-action-underline {
+  position: absolute;
+
+  left: 9px;
+  right: 9px;
+
+  bottom: 5px;
+
+  height: 1px;
+
+  background: var(--color-accent);
+
+  transform: scaleX(0);
+
+  transform-origin: center;
+
+  transition:
+    transform 320ms
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.aayesha-header__actions
+  .header-action-button:hover
+  .header-action-button__underline,
+.aayesha-header__actions
+  .header-action-link:hover
+  .header-action-underline,
+.aayesha-header__actions
+  .header-action-button--active
+  .header-action-button__underline {
+  transform: scaleX(1);
+}
+
+/* =========================================================
+   ACCOUNT STATUS DOT
+========================================================= */
+
+.header-account-status {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--color-accent);
+
+  box-shadow:
+    0 0 0 2px
+      var(--color-bg);
+}
+
+/* =========================================================
+   COUNTS
+========================================================= */
+
+.aayesha-header__actions
+  .wishlist-count,
+.aayesha-header__actions
+  .cart-count {
   position: absolute;
 
   top: 4px;
   right: 3px;
 
-  min-width: 13px;
-  height: 13px;
+  min-width: 15px;
+  height: 15px;
 
-  display: flex;
+  padding: 0 4px;
+
+  display: inline-flex;
 
   align-items: center;
   justify-content: center;
 
-  padding: 0 3px;
+  border-radius: 999px;
 
-  border-radius: var(--radius-pill);
+  background: var(--color-text);
 
-  background: var(--color-primary);
+  color: var(--color-text-inverse);
 
-  color: #ffffff;
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
 
   font-size: 7px;
+
   font-weight: 600;
 
   line-height: 1;
-}
 
+  letter-spacing: 0;
+
+  z-index: 2;
+}
 
 /* =========================================================
-   MOBILE MENU BUTTON
-   ========================================================= */
+   SEARCH PANEL
+========================================================= */
 
-.aayesha-header__mobile-menu {
-  display: none;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 40px;
-  height: 40px;
-
-  color: inherit;
-
-  border-radius: var(--radius-pill);
-
-  transition:
-    background-color 250ms var(--ease-standard),
-    transform 180ms var(--ease-standard);
-}
-
-.aayesha-header__mobile-menu:hover {
-  background: rgba(143, 101, 93, 0.08);
-}
-
-.aayesha-header__mobile-menu:active {
-  transform: scale(0.94);
-}
-
-
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
-
-.aayesha-mobile-menu {
+.header-search-backdrop {
   position: fixed;
 
   inset: 0;
 
-  z-index: calc(var(--z-header) - 1);
+  z-index: 1040;
 
-  visibility: hidden;
-
-  opacity: 0;
-
-  pointer-events: none;
+  border: 0;
 
   background:
-    radial-gradient(
-      circle at 100% 0%,
-      rgba(169, 130, 130, 0.16),
-      transparent 35%
-    ),
-    var(--color-surface-soft);
+    rgba(39, 31, 29, 0.22);
 
-  color: var(--color-text);
-
-  transform: translateY(-10px);
-
-  transition:
-    opacity 400ms var(--ease-luxury),
-    transform 500ms var(--ease-luxury),
-    visibility 500ms;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
-.aayesha-mobile-menu--open {
-  visibility: visible;
+.header-search-panel {
+  position: fixed;
 
-  opacity: 1;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
 
-  pointer-events: auto;
+  z-index: 1050;
 
-  transform: translateY(0);
+  background:
+    var(--color-bg);
+
+  border-bottom:
+    1px solid
+    var(--color-border);
+
+  box-shadow:
+    0 18px 50px
+      rgba(45, 34, 31, 0.08);
+
+  animation:
+    header-search-enter 420ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
 }
 
-.aayesha-mobile-menu__inner {
-  width: calc(100% - 32px);
+@keyframes header-search-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
 
-  height: 100%;
-
-  margin-inline: auto;
-
-  padding-top: calc(
-    60px + 28px
-  );
-
-  padding-bottom: 32px;
-
-  display: flex;
-
-  flex-direction: column;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+.header-search-accent {
+  display: block;
 
-/* =========================================================
-   MOBILE TOP
-   ========================================================= */
+  width: 100%;
 
-.aayesha-mobile-menu__top {
+  height: 2px;
+
+  background:
+    var(--color-accent);
+}
+
+.header-search-container {
+  width: 100%;
+
+  max-width: 1600px;
+
+  margin: 0 auto;
+
+  padding:
+    0 32px;
+}
+
+.header-search-content {
+  padding:
+    28px 0 22px;
+}
+
+.header-search-row {
   display: flex;
 
   align-items: center;
-  justify-content: space-between;
 
-  padding-bottom: 18px;
-
-  border-bottom: 1px solid var(--color-border);
+  gap: 22px;
 }
 
-.aayesha-mobile-menu__top span:first-child {
+.header-search-form {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.header-search-input-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+.header-search-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  color:
+    var(--color-text-secondary);
+}
+
+.header-search-input {
+  min-width: 0;
+
+  flex: 1;
+
+  height: 40px;
+
+  padding: 0;
+
+  border: 0;
+
+  outline: none;
+
+  background: transparent;
+
+  color: var(--color-text);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 15px;
+
+  line-height: 1.4;
+}
+
+.header-search-input::placeholder {
+  color:
+    var(--color-text-muted);
+
+  opacity: 1;
+}
+
+.header-search-submit {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--color-text);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
   font-size: 9px;
 
   font-weight: 600;
 
-  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  letter-spacing: 0.16em;
+
+  cursor: pointer;
+
+  transition:
+    color 240ms ease;
 }
 
-.aayesha-mobile-menu__top span:last-child {
-  font-family: var(--font-display);
-
-  font-size: 16px;
-
-  letter-spacing: 0.08em;
+.header-search-submit:hover {
+  color: var(--color-accent);
 }
 
+.header-search-line {
+  width: 100%;
 
-/* =========================================================
-   MOBILE NAV
-   ========================================================= */
+  height: 1px;
 
-.aayesha-mobile-menu__nav {
+  margin-top: 8px;
+
+  background:
+    var(--color-border-dark);
+}
+
+.header-search-close {
+  flex: 0 0 auto;
+
+  width: 38px;
+  height: 38px;
+
   display: flex;
 
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  padding-top: 30px;
+  border: 1px solid
+    var(--color-border);
+
+  background: transparent;
+
+  color:
+    var(--color-text-secondary);
+
+  cursor: pointer;
+
+  transition:
+    background-color 260ms ease,
+    color 260ms ease,
+    border-color 260ms ease;
 }
 
-.aayesha-mobile-menu__link {
-  display: grid;
+.header-search-close:hover {
+  background:
+    var(--color-text);
 
-  grid-template-columns: 32px 1fr;
+  border-color:
+    var(--color-text);
+
+  color:
+    var(--color-text-inverse);
+}
+
+.header-search-meta {
+  display: flex;
 
   align-items: center;
 
-  padding: 16px 0;
+  justify-content: space-between;
 
-  border-bottom: 1px solid var(--color-border-light);
+  gap: 20px;
 
-  font-family: var(--font-display);
-
-  font-size: 28px;
-
-  font-weight: 400;
-
-  line-height: 1;
-
-  letter-spacing: -0.01em;
-
-  transition:
-    color 250ms var(--ease-standard),
-    padding-left 300ms var(--ease-standard);
+  margin-top: 13px;
 }
-
-.aayesha-mobile-menu__link:hover {
-  color: var(--color-secondary);
-
-  padding-left: 6px;
-}
-
-.aayesha-mobile-menu__number {
-  align-self: start;
-
-  padding-top: 4px;
-
-  font-family: var(--font-body);
-
-  font-size: 8px;
-
-  font-weight: 600;
-
-  letter-spacing: 0.08em;
-
-  color: var(--color-text-muted);
-}
-
 
 /* =========================================================
-   MOBILE BOTTOM
-   ========================================================= */
+   MOBILE MENU HOST
+========================================================= */
 
-.aayesha-mobile-menu__bottom {
-  margin-top: auto;
+.aayesha-header__mobile {
+  display: none;
 
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 8px 20px;
-
-  padding-top: 28px;
-
-  font-size: 10px;
-
-  color: var(--color-text-secondary);
+  min-width: 0;
 }
-
-.aayesha-mobile-menu__bottom a {
-  position: relative;
-}
-
-.aayesha-mobile-menu__bottom a::after {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  bottom: -4px;
-
-  width: 100%;
-  height: 1px;
-
-  background: var(--color-border-dark);
-
-  transform: scaleX(0);
-
-  transform-origin: right;
-
-  transition:
-    transform 300ms var(--ease-standard);
-}
-
-.aayesha-mobile-menu__bottom a:hover::after {
-  transform: scaleX(1);
-
-  transform-origin: left;
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1023px) {
-  .aayesha-header__nav {
-    gap: 18px;
-  }
-
-  .aayesha-header__nav-link {
-    font-size: 11px;
-  }
-}
-
 
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .aayesha-header {
-    height: 60px;
+    --header-height: 68px;
 
-    background: rgba(250, 249, 247, 0.94);
+    background:
+      rgba(247, 241, 238, 0.98);
 
-    border-bottom-color: var(--color-border-light);
+    border-bottom-color:
+      var(--color-border);
 
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+      0 5px 22px
+        rgba(45, 34, 31, 0.045);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .aayesha-header--transparent {
@@ -551,168 +802,271 @@
 
     border-bottom-color: transparent;
 
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    box-shadow: none;
   }
 
   .aayesha-header__inner {
-    position: relative;
+    display: grid;
 
-    width: calc(100% - 24px);
+    grid-template-columns:
+      1fr
+      auto
+      1fr;
 
+    height: var(--header-height);
+
+    padding:
+      0 14px;
+
+    column-gap: 8px;
+  }
+
+  /* -------------------------------------------------------
+     MOBILE MENU
+  ------------------------------------------------------- */
+
+  .aayesha-header__mobile {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  /* -----------------------------------------
-     Hamburger
-     ----------------------------------------- */
-
-  .aayesha-header__mobile-menu {
-    position: relative;
-    z-index: 2;
-
-    display: inline-flex;
 
     align-items: center;
-    justify-content: center;
 
-    flex: 0 0 40px;
-
-    width: 40px;
-    height: 40px;
+    justify-self: start;
   }
 
-  /* -----------------------------------------
-     TRUE CENTER LOGO
-     ----------------------------------------- */
+  /* -------------------------------------------------------
+     MOBILE LOGO
+  ------------------------------------------------------- */
 
   .aayesha-header__logo {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    z-index: 1;
-
-    display: flex;
+    justify-self: center;
 
     align-items: center;
-    justify-content: center;
 
-    transform: translate(-50%, -50%);
-
-    width: max-content;
-
-    text-align: center;
+    z-index: 2;
   }
 
   .aayesha-header__logo-main {
-    font-family: var(--font-display);
+    font-size: 19px;
 
-    font-size: 21px;
-
-    font-weight: 500;
-
-    line-height: 0.82;
-
-    letter-spacing: 0.075em;
-
-    white-space: nowrap;
+    letter-spacing: 0.06em;
   }
 
   .aayesha-header__logo-sub {
-    margin-top: 5px;
+    margin-top: 3px;
 
-    font-family: var(--font-body);
+    font-size: 5px;
 
-    font-size: 6px;
-
-    font-weight: 600;
-
-    line-height: 1;
-
-    letter-spacing: 0.2em;
-
-    white-space: nowrap;
+    letter-spacing: 0.31em;
   }
 
-  /* -----------------------------------------
-     RIGHT ACTIONS
-     ----------------------------------------- */
-
-  .aayesha-header__actions {
-    position: relative;
-    z-index: 2;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 0;
-
-    margin-left: auto;
-  }
-
-  .aayesha-header__action {
-    width: 36px;
-    height: 36px;
-  }
-
-  .aayesha-header__wishlist {
-    display: none;
-  }
-
-  .aayesha-header__cart-count {
-    top: 3px;
-    right: 1px;
-  }
-
-  /* -----------------------------------------
-     DESKTOP NAV HIDDEN
-     ----------------------------------------- */
+  /* -------------------------------------------------------
+     HIDE DESKTOP NAV
+  ------------------------------------------------------- */
 
   .aayesha-header__nav {
     display: none;
   }
-}
 
+  /* -------------------------------------------------------
+     MOBILE ACTIONS
+  ------------------------------------------------------- */
+
+  .aayesha-header__actions {
+    width: auto;
+
+    justify-self: end;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+  }
+
+  .aayesha-header__actions
+    .header-actions {
+    gap: 0;
+  }
+
+  .aayesha-header__actions
+    .header-action-button,
+  .aayesha-header__actions
+    .header-action-link {
+    width: 34px;
+    height: 40px;
+  }
+
+  .aayesha-header__actions
+    .header-action-button__underline,
+  .aayesha-header__actions
+    .header-action-underline {
+    display: none;
+  }
+
+  .aayesha-header__actions
+    .header-action-button svg,
+  .aayesha-header__actions
+    .header-action-link svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* -------------------------------------------------------
+     SEARCH
+  ------------------------------------------------------- */
+
+  .header-search-panel {
+    top: var(--header-height);
+  }
+
+  .header-search-container {
+    padding:
+      0 16px;
+  }
+
+  .header-search-content {
+    padding:
+      20px 0 17px;
+  }
+
+  .header-search-input {
+    font-size: 14px;
+  }
+}
 
 /* =========================================================
    SMALL MOBILE
-   ========================================================= */
+========================================================= */
 
-@media (max-width: 380px) {
-  .aayesha-header__inner {
-    grid-template-columns: 38px 1fr 82px;
+@media (max-width: 639px) {
+  .aayesha-header {
+    --header-height: 66px;
   }
 
-  .aayesha-header__action {
-    width: 34px;
-    height: 34px;
+  .aayesha-header__inner {
+    padding:
+      0 10px;
   }
 
   .aayesha-header__logo-main {
     font-size: 18px;
   }
 
-  .aayesha-mobile-menu__link {
-    font-size: 25px;
+  .aayesha-header__logo-sub {
+    font-size: 4.5px;
+  }
+
+  .aayesha-header__actions
+    .header-action-button,
+  .aayesha-header__actions
+    .header-action-link {
+    width: 32px;
+  }
+
+  .aayesha-header__actions
+    .header-action-button svg,
+  .aayesha-header__actions
+    .header-action-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .header-account-status {
+    top: 8px;
+    right: 5px;
+
+    width: 4px;
+    height: 4px;
+  }
+
+  .aayesha-header__actions
+    .wishlist-count,
+  .aayesha-header__actions
+    .cart-count {
+    top: 5px;
+    right: 1px;
+
+    min-width: 13px;
+    height: 13px;
+
+    padding: 0 3px;
+
+    font-size: 6px;
+  }
+
+  .header-search-row {
+    gap: 12px;
+  }
+
+  .header-search-close {
+    width: 35px;
+    height: 35px;
+  }
+
+  .header-search-meta {
+    display: none;
   }
 }
 
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+  .aayesha-header__inner {
+    padding:
+      0 7px;
+  }
+
+  .aayesha-header__logo-main {
+    font-size: 17px;
+  }
+
+  .aayesha-header__actions
+    .header-action-button,
+  .aayesha-header__actions
+    .header-action-link {
+    width: 30px;
+  }
+
+  .aayesha-header__actions
+    .header-action-button svg,
+  .aayesha-header__actions
+    .header-action-link svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* =========================================================
+   FOCUS STATES
+========================================================= */
+
+.aayesha-header
+  button:focus-visible,
+.aayesha-header
+  a:focus-visible,
+.header-search-panel
+  button:focus-visible,
+.header-search-panel
+  input:focus-visible {
+  outline: 1px solid
+    var(--color-accent);
+
+  outline-offset: 3px;
+}
 
 /* =========================================================
    REDUCED MOTION
-   ========================================================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   .aayesha-header,
-  .aayesha-header__nav-link,
-  .aayesha-header__action,
-  .aayesha-mobile-menu,
-  .aayesha-mobile-menu__link {
-    transition: none;
+  .aayesha-header *,
+  .header-search-panel,
+  .header-search-panel * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
