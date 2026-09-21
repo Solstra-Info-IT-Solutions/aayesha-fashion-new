@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { getProducts } from "@/services/product.service";
@@ -19,8 +18,13 @@ export async function BestSellers() {
   const bestSellers = response.products;
 
   return (
-    <section id="best-sellers" className="best-sellers">
+    <section
+      id="best-sellers"
+      className="best-sellers"
+      aria-labelledby="best-sellers-title"
+    >
       <Container className="best-sellers__container">
+
         {/* =========================================
             HEADER
         ========================================= */}
@@ -31,8 +35,12 @@ export async function BestSellers() {
               Best Sellers
             </p>
 
-            <h2 className="best-sellers__title">
-              Loved by our customers<span>.</span>
+            <h2
+              id="best-sellers-title"
+              className="best-sellers__title"
+            >
+              Loved by our customers
+              <span>.</span>
             </h2>
           </div>
 
@@ -48,12 +56,19 @@ export async function BestSellers() {
 
         {bestSellers.length > 0 ? (
           <div className="best-sellers__products">
-            <ProductCarousel products={bestSellers} />
+            <ProductCarousel
+              products={bestSellers}
+              ariaLabel="Best selling products"
+            />
           </div>
         ) : (
           <div className="best-sellers__empty">
             <div className="best-sellers__empty-inner">
-              <div className="best-sellers__empty-mark">
+
+              <div
+                className="best-sellers__empty-mark"
+                aria-hidden="true"
+              >
                 <span />
                 <span />
                 <span />
@@ -73,31 +88,39 @@ export async function BestSellers() {
                 We are preparing a curated selection of
                 pieces our customers love most.
               </p>
+
             </div>
           </div>
         )}
 
         {/* =========================================
-            CTA
+            VIEW ALL CTA
         ========================================= */}
 
         {bestSellers.length > 0 && (
           <div className="best-sellers__footer">
-            <Link
-              href="/collections/best-sellers"
-              className="best-sellers__link"
-            >
-              <span>View all best sellers</span>
+            <div className="best-sellers__footer-line" />
 
-              <span className="best-sellers__link-icon">
+            <a
+              href="/collections/best-sellers"
+              className="best-sellers__all-link"
+            >
+              <span className="best-sellers__all-label">
+                View all best sellers
+              </span>
+
+              <span className="best-sellers__all-icon">
                 <ArrowUpRight
-                  size={16}
-                  strokeWidth={1.5}
+                  size={15}
+                  strokeWidth={1.3}
                 />
               </span>
-            </Link>
+            </a>
+
+            <div className="best-sellers__footer-line" />
           </div>
         )}
+
       </Container>
     </section>
   );
