@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { CookiePreferences } from "./CookiePreferences";
+import { CookiePreferences } from "./cookie-preferences";
 
 import "./CookieSettingsButton.css";
 

@@ -13,7 +13,7 @@ import {
   type CookieConsentState,
 } from "@/lib/consent/cookie-consent";
 
-import { CookiePreferences } from "./CookiePreferences";
+import { CookiePreferences } from "./cookie-preferences";
 
 import "./CookieConsent.css";
 
