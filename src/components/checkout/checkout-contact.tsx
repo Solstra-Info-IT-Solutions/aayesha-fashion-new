@@ -4,6 +4,8 @@ import type { ChangeEvent } from "react";
 
 import { useCheckoutStore } from "@/store/checkout-store";
 
+import "./CheckoutContact.css";
+
 export function CheckoutContact() {
   const contact = useCheckoutStore(
     (state) => state.contact,
@@ -23,8 +25,6 @@ export function CheckoutContact() {
 
   return (
     <section className="checkout-contact">
-      {/* HEADER */}
-
       <header className="checkout-contact__header">
         <div className="checkout-contact__step">
           01
@@ -45,8 +45,6 @@ export function CheckoutContact() {
           </p>
         </div>
       </header>
-
-      {/* FIELDS */}
 
       <div className="checkout-contact__content">
         <div className="checkout-contact__fields">

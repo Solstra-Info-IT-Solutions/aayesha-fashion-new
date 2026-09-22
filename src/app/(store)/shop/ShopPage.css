@@ -1,0 +1,181 @@
+/* =========================================================
+   AAYESHA FASHION
+   SHOP PAGE — PREMIUM EDITORIAL COLLECTION
+   ========================================================= */
+
+.shop-page {
+  min-height: 100vh;
+
+  background: #f7f3f0;
+
+  color: #3f2d2a;
+}
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.shop-page__container {
+  width: 100%;
+  max-width: 1480px;
+
+  margin: 0 auto;
+
+  padding-inline: 48px;
+}
+
+/* =========================================================
+   SHOP HEADER
+   ========================================================= */
+
+.shop-page__header {
+  position: relative;
+
+  background: #f7f3f0;
+
+  border-bottom: 1px solid #ddd1cb;
+}
+
+.shop-page__header::before {
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: calc(100% - 96px);
+  max-width: 1384px;
+
+  height: 1px;
+
+  background: #e7ddd8;
+
+  transform: translateX(-50%);
+
+  content: "";
+}
+
+/* =========================================================
+   COLLECTION AREA
+   ========================================================= */
+
+.shop-page__collection {
+  background: #f1eae6;
+
+  padding-top: 34px;
+  padding-bottom: 80px;
+}
+
+.shop-page__collection-frame {
+  min-width: 0;
+}
+
+/* =========================================================
+   SUBTLE EDITORIAL DIVIDER
+   ========================================================= */
+
+.shop-page__collection-frame::before {
+  display: block;
+
+  width: 100%;
+  height: 1px;
+
+  margin-bottom: 28px;
+
+  background: #ded2cc;
+
+  content: "";
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1199px) {
+  .shop-page__container {
+    padding-inline: 32px;
+  }
+
+  .shop-page__header::before {
+    width: calc(100% - 64px);
+  }
+
+  .shop-page__collection {
+    padding-top: 28px;
+    padding-bottom: 64px;
+  }
+}
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .shop-page__container {
+    padding-inline: 24px;
+  }
+
+  .shop-page__header::before {
+    width: calc(100% - 48px);
+  }
+
+  .shop-page__collection {
+    padding-top: 24px;
+    padding-bottom: 56px;
+  }
+
+  .shop-page__collection-frame::before {
+    margin-bottom: 22px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .shop-page__container {
+    padding-inline: 16px;
+  }
+
+  .shop-page__header::before {
+    width: calc(100% - 32px);
+  }
+
+  .shop-page__collection {
+    padding-top: 18px;
+    padding-bottom: 42px;
+  }
+
+  .shop-page__collection-frame::before {
+    margin-bottom: 18px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .shop-page__container {
+    padding-inline: 14px;
+  }
+
+  .shop-page__collection {
+    padding-top: 16px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-page *,
+  .shop-page *::before,
+  .shop-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

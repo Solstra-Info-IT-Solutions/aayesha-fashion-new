@@ -38,6 +38,8 @@ import {
   useCheckoutStore,
 } from "@/store/checkout-store";
 
+import "./CheckoutPlaceOrder.css";
+
 /* ==========================================================
    TYPES
 ========================================================== */

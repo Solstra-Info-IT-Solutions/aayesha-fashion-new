@@ -1,0 +1,363 @@
+/* =========================================================
+   AAYESHA — CONTACT PAGE
+   Premium Customer Care Section
+   ========================================================= */
+
+.contact-page__care {
+  background: #f1eae6;
+  border-top: 1px solid #e3d8d2;
+  border-bottom: 1px solid #d8cbc5;
+}
+
+.contact-page__care-container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 64px 32px 68px;
+}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.contact-page__care-intro {
+  max-width: 620px;
+}
+
+.contact-page__care-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-page__care-line {
+  width: 24px;
+  height: 1px;
+  background: #6f4b47;
+  flex: 0 0 auto;
+}
+
+.contact-page__care-eyebrow {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6f4b47;
+}
+
+.contact-page__care-title {
+  margin: 13px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: #3f2d2a;
+}
+
+.contact-page__care-description {
+  max-width: 540px;
+  margin: 15px 0 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.8;
+  color: #665551;
+}
+
+/* =========================================================
+   CONTACT CARDS
+   ========================================================= */
+
+.contact-page__care-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 38px;
+}
+
+.contact-page__care-card {
+  position: relative;
+  display: flex;
+  min-height: 245px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 23px;
+  overflow: hidden;
+  border: 1px solid #d5c7c1;
+  background: #f7f3f0;
+  color: #3f2d2a;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
+}
+
+.contact-page__care-card::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  content: "";
+  background: #6f4b47;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 260ms ease;
+}
+
+.contact-page__care-card:hover {
+  background: #fbf8f6;
+  border-color: #bfaea7;
+  transform: translateY(-2px);
+}
+
+.contact-page__care-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* =========================================================
+   CARD TOP
+   ========================================================= */
+
+.contact-page__care-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-page__care-index {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  color: #8b7974;
+}
+
+.contact-page__care-action {
+  display: inline-flex;
+  min-height: 25px;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid #d8cbc5;
+  font-family: var(--font-body);
+  font-size: 7px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6f4b47;
+}
+
+/* =========================================================
+   CARD BODY
+   ========================================================= */
+
+.contact-page__care-card-body {
+  max-width: 100%;
+}
+
+.contact-page__care-label {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6f4b47;
+}
+
+.contact-page__care-value {
+  margin: 10px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.5vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #3f2d2a;
+}
+
+.contact-page__care-value--email {
+  overflow-wrap: anywhere;
+  font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+}
+
+.contact-page__care-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #bdaaa3;
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: #3f2d2a;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.contact-page__care-link span {
+  font-size: 13px;
+  line-height: 0.7;
+  transition: transform 180ms ease;
+}
+
+.contact-page__care-card:hover
+  .contact-page__care-link {
+  color: #6f4b47;
+  border-color: #6f4b47;
+}
+
+.contact-page__care-card:hover
+  .contact-page__care-link span {
+  transform: translate(2px, -2px);
+}
+
+/* =========================================================
+   NOTE
+   ========================================================= */
+
+.contact-page__care-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  max-width: 650px;
+  margin-top: 25px;
+  padding-top: 18px;
+  border-top: 1px solid #d8cbc5;
+}
+
+.contact-page__care-note-mark {
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  flex: 0 0 auto;
+  background: #95645e;
+}
+
+.contact-page__care-note p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 10px;
+  line-height: 1.7;
+  color: #8b7974;
+}
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.contact-page__care-card:focus-visible {
+  outline: 2px solid #95645e;
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .contact-page__care-container {
+    padding: 48px 24px 52px;
+  }
+
+  .contact-page__care-grid {
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .contact-page__care-card {
+    min-height: 220px;
+    padding: 20px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .contact-page__care-container {
+    padding: 40px 16px 44px;
+  }
+
+  .contact-page__care-title {
+    margin-top: 11px;
+    font-size: 2.35rem;
+  }
+
+  .contact-page__care-description {
+    margin-top: 12px;
+    font-size: 11px;
+    line-height: 1.75;
+  }
+
+  .contact-page__care-grid {
+    grid-template-columns: 1fr;
+    margin-top: 26px;
+  }
+
+  .contact-page__care-card {
+    min-height: 195px;
+    padding: 19px;
+  }
+
+  .contact-page__care-value {
+    font-size: 1.65rem;
+  }
+
+  .contact-page__care-value--email {
+    font-size: 1.3rem;
+  }
+
+  .contact-page__care-link {
+    margin-top: 17px;
+  }
+
+  .contact-page__care-note {
+    margin-top: 21px;
+    padding-top: 15px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .contact-page__care-container {
+    padding-inline: 14px;
+  }
+
+  .contact-page__care-title {
+    font-size: 2.15rem;
+  }
+
+  .contact-page__care-card {
+    min-height: 185px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-page__care *,
+  .contact-page__care *::before,
+  .contact-page__care *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+} 

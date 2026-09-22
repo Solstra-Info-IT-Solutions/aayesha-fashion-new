@@ -20,6 +20,10 @@ interface ProductPageProps {
   }>;
 }
 
+/* ============================================================
+   NORMALIZE PRODUCT
+============================================================ */
+
 function normalizeProduct(
   product: Product,
 ): Product {
@@ -132,6 +136,7 @@ function normalizeProduct(
     seo: safeProduct.seo
       ? {
           ...safeProduct.seo,
+
           keywords:
             Array.isArray(
               safeProduct.seo
@@ -176,7 +181,11 @@ export async function generateMetadata({
     if (!response) {
       return {
         title:
-          "Product Not Found",
+          "Product Not Found | Aayesha Fashion",
+
+        description:
+          "The requested product could not be found.",
+
         robots: {
           index: false,
           follow: false,
@@ -221,6 +230,7 @@ export async function generateMetadata({
 
     return {
       title,
+
       description,
 
       keywords:
@@ -253,8 +263,7 @@ export async function generateMetadata({
         images: primaryImage
           ? [
               {
-                url:
-                  primaryImage,
+                url: primaryImage,
                 alt:
                   primaryMedia?.alt ||
                   product.name,
@@ -283,7 +292,7 @@ export async function generateMetadata({
 
     return {
       title:
-        "Product Not Found",
+        "Product Not Found | Aayesha Fashion",
 
       description:
         "The requested product could not be found.",
@@ -309,6 +318,10 @@ export default async function ProductPage({
     notFound();
   }
 
+  /* ----------------------------------------------------------
+     PRODUCT
+  ---------------------------------------------------------- */
+
   let product: Product;
 
   try {
@@ -331,7 +344,7 @@ export default async function ProductPage({
   }
 
   /* ----------------------------------------------------------
-     LOAD CATEGORY
+     CATEGORY
   ---------------------------------------------------------- */
 
   let categoryName:
@@ -361,7 +374,7 @@ export default async function ProductPage({
   }
 
   /* ----------------------------------------------------------
-     LOAD RELATED PRODUCTS
+     RELATED PRODUCTS
   ---------------------------------------------------------- */
 
   let recommendations:
@@ -409,16 +422,14 @@ export default async function ProductPage({
   }
 
   /* ----------------------------------------------------------
-     RENDER
+     SEO + PRODUCT DETAIL
   ---------------------------------------------------------- */
 
   return (
     <>
       <ProductJsonLd
         product={product}
-        categoryName={
-          categoryName
-        }
+        categoryName={categoryName}
       />
 
       <BreadcrumbJsonLd
@@ -436,9 +447,7 @@ export default async function ProductPage({
           ...(categoryName
             ? [
                 {
-                  name:
-                    categoryName,
-
+                  name: categoryName,
                   url:
                     `/shop?category=${encodeURIComponent(
                       product.categoryId,
@@ -448,9 +457,7 @@ export default async function ProductPage({
             : []),
 
           {
-            name:
-              product.name,
-
+            name: product.name,
             url:
               `/products/${product._id}`,
           },

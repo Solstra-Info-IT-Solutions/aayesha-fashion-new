@@ -8,6 +8,8 @@ import type { Product } from "@/types/product";
 
 import { ProductCard } from "@/components/product/product-card";
 
+import "./CategoryBrowser.css";
+
 interface CategoryBrowserProps {
   categories: Category[];
   selectedCategoryId?: string;
@@ -45,10 +47,7 @@ export function CategoryBrowser({
 
   return (
     <main className="category-browser">
-      {/* =====================================================
-          PAGE HEADER
-      ===================================================== */}
-
+      {/* PAGE HEADER */}
       <section className="category-browser__header">
         <div className="category-browser__container">
           <div className="category-browser__header-content">
@@ -76,10 +75,7 @@ export function CategoryBrowser({
         </div>
       </section>
 
-      {/* =====================================================
-          CATEGORY NAVIGATION
-      ===================================================== */}
-
+      {/* CATEGORY NAVIGATION */}
       <section className="category-browser__navigation">
         <div className="category-browser__container">
           <nav
@@ -118,10 +114,7 @@ export function CategoryBrowser({
         </div>
       </section>
 
-      {/* =====================================================
-          SELECTED CATEGORY
-      ===================================================== */}
-
+      {/* SELECTED CATEGORY */}
       <section className="category-browser__products">
         <div className="category-browser__container">
           <header className="category-browser__section-header">
@@ -145,10 +138,7 @@ export function CategoryBrowser({
             )}
           </header>
 
-          {/* =================================================
-              PRODUCTS
-          ================================================= */}
-
+          {/* PRODUCTS */}
           {products.length > 0 ? (
             <div className="category-browser__product-grid">
               {products.map((product) => (

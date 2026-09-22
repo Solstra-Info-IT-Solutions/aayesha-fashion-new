@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import {
   ArrowRight,
   ArrowUpRight,
@@ -13,9 +14,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import { ShopFilters } from "@/components/shop/shop-filters";
 import { ShopProductGrid } from "@/components/shop/shop-product-grid";
 
-/* =========================================================
-   TYPES
-========================================================= */
+import "./CollectionPage.css";
 
 type CollectionPageProps = {
   title: string;
@@ -27,10 +26,6 @@ type CollectionPageProps = {
   mood?: string;
 };
 
-/* =========================================================
-   COLLECTION LINKS
-========================================================= */
-
 const collectionLinks = [
   {
     label: "New Arrivals",
@@ -41,10 +36,6 @@ const collectionLinks = [
     href: "/collections/best-sellers",
   },
 ] as const;
-
-/* =========================================================
-   COMPONENT
-========================================================= */
 
 export function CollectionPage({
   title,
@@ -62,10 +53,6 @@ export function CollectionPage({
 
   return (
     <>
-      {/* =====================================================
-          BREADCRUMB JSON-LD
-      ===================================================== */}
-
       <BreadcrumbJsonLd
         items={[
           {
@@ -85,19 +72,17 @@ export function CollectionPage({
 
       <main className="collection-page">
         {/* =====================================================
-            COLLECTION HERO
+            HERO
         ===================================================== */}
 
         <section className="collection-page__hero">
           <div className="collection-page__container">
             <div className="collection-page__hero-inner">
-              {/* HERO COPY */}
-
               <div className="collection-page__intro">
                 <div className="collection-page__eyebrow">
                   <span className="collection-page__eyebrow-line" />
 
-                  <span className="eyebrow">
+                  <span>
                     {eyebrow}
                   </span>
                 </div>
@@ -117,54 +102,62 @@ export function CollectionPage({
                 )}
               </div>
 
-              {/* COLLECTION NAVIGATION */}
-
               <div className="collection-page__navigation">
                 <p className="collection-page__navigation-label">
                   Explore collections
                 </p>
 
                 <div className="collection-page__links">
-                  {collectionLinks.map((item) => {
-                    const isActive =
-                      item.href ===
-                      `/collections/${currentSlug}`;
+                  {collectionLinks.map(
+                    (item) => {
+                      const isActive =
+                        item.href ===
+                        `/collections/${currentSlug}`;
 
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        aria-current={
-                          isActive
-                            ? "page"
-                            : undefined
-                        }
-                        className={[
-                          "collection-page__link",
-                          isActive
-                            ? "collection-page__link--active"
-                            : "",
-                        ]
-                          .filter(Boolean)
-                          .join(" ")}
-                      >
-                        <span>{item.label}</span>
+                      return (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          aria-current={
+                            isActive
+                              ? "page"
+                              : undefined
+                          }
+                          className={`collection-page__link ${
+                            isActive
+                              ? "collection-page__link--active"
+                              : ""
+                          }`}
+                        >
+                          <span>
+                            {item.label}
+                          </span>
 
-                        <ArrowUpRight
-                          className="collection-page__link-icon"
-                          aria-hidden="true"
-                        />
-                      </Link>
-                    );
-                  })}
+                          <ArrowUpRight
+                            size={14}
+                            strokeWidth={1.3}
+                            className="collection-page__link-icon"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      );
+                    },
+                  )}
                 </div>
               </div>
+
+              <span
+                className="collection-page__hero-mark"
+                aria-hidden="true"
+              >
+                AA
+              </span>
             </div>
           </div>
         </section>
 
         {/* =====================================================
-            COLLECTION TOOLBAR
+            TOOLBAR
         ===================================================== */}
 
         <section className="collection-page__toolbar">
@@ -197,6 +190,8 @@ export function CollectionPage({
                 <span>Shop all</span>
 
                 <ArrowRight
+                  size={14}
+                  strokeWidth={1.3}
                   className="collection-page__shop-icon"
                   aria-hidden="true"
                 />
@@ -206,14 +201,12 @@ export function CollectionPage({
         </section>
 
         {/* =====================================================
-            PRODUCT AREA
+            PRODUCTS
         ===================================================== */}
 
         <section className="collection-page__products">
           <div className="collection-page__container">
             <div className="collection-page__product-layout">
-              {/* FILTERS */}
-
               <aside className="collection-page__filters">
                 <div className="collection-page__filters-inner">
                   <ShopFilters
@@ -222,8 +215,6 @@ export function CollectionPage({
                   />
                 </div>
               </aside>
-
-              {/* PRODUCT GRID */}
 
               <div className="collection-page__grid">
                 <ShopProductGrid
@@ -249,7 +240,8 @@ export function CollectionPage({
                 </p>
 
                 <h2 className="collection-page__continue-title">
-                  Discover more from Aayesha Fashion.
+                  Discover more from
+                  Aayesha Fashion.
                 </h2>
               </div>
 
@@ -258,9 +250,13 @@ export function CollectionPage({
                   href="/collections/new-arrivals"
                   className="collection-page__action collection-page__action--primary"
                 >
-                  <span>New Arrivals</span>
+                  <span>
+                    New Arrivals
+                  </span>
 
                   <ArrowUpRight
+                    size={14}
+                    strokeWidth={1.3}
                     className="collection-page__action-icon"
                     aria-hidden="true"
                   />
@@ -270,9 +266,13 @@ export function CollectionPage({
                   href="/collections/best-sellers"
                   className="collection-page__action collection-page__action--secondary"
                 >
-                  <span>Best Sellers</span>
+                  <span>
+                    Best Sellers
+                  </span>
 
                   <ArrowUpRight
+                    size={14}
+                    strokeWidth={1.3}
                     className="collection-page__action-icon"
                     aria-hidden="true"
                   />

@@ -4,6 +4,8 @@ import { Check, Truck } from "lucide-react";
 
 import { useCheckoutStore } from "@/store/checkout-store";
 
+import "./CheckoutDelivery.css";
+
 const options = [
   {
     id: "standard" as const,

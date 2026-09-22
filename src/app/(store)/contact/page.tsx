@@ -2,6 +2,7 @@ import { ContentPage } from "@/components/content/content-page";
 import { siteConfig } from "@/config/site";
 
 import type { Metadata } from "next";
+import "./ContactPage.css";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -62,49 +63,103 @@ export default function ContactPage() {
         ]}
       />
 
-      <section className="border-b border-[var(--color-border)] bg-white">
-        <div className="mx-auto max-w-[1180px] px-5 py-10 sm:px-7 lg:px-8">
-          <div className="grid gap-3 sm:grid-cols-2">
-            {siteConfig.contact.phone && (
-              <a
-                href={`tel:+${siteConfig.contact.phone}`}
-                className="group border border-[var(--color-border)] bg-[var(--color-ivory)] p-6 transition-colors duration-300 hover:bg-[var(--color-cream)]"
-              >
-                <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                  Phone
-                </p>
+      <section className="contact-page__care">
+  <div className="contact-page__care-container">
+    <div className="contact-page__care-intro">
+      <div className="contact-page__care-eyebrow-row">
+        <span className="contact-page__care-line" />
 
-                <p className="mt-3 text-base font-medium text-[var(--color-charcoal)]">
-                  +{siteConfig.contact.phone}
-                </p>
+        <p className="contact-page__care-eyebrow">
+          Customer Care
+        </p>
+      </div>
 
-                <span className="mt-5 inline-flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-secondary)]">
-                  Call customer care
-                </span>
-              </a>
-            )}
+      <h2 className="contact-page__care-title">
+        We&apos;re here to help.
+      </h2>
 
-            {siteConfig.contact.email && (
-              <a
-                href={`mailto:${siteConfig.contact.email}`}
-                className="group border border-[var(--color-border)] bg-[var(--color-ivory)] p-6 transition-colors duration-300 hover:bg-[var(--color-cream)]"
-              >
-                <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                  Email
-                </p>
+      <p className="contact-page__care-description">
+        Have a question about an order, product or delivery?
+        Reach our customer care team directly.
+      </p>
+    </div>
 
-                <p className="mt-3 break-all text-base font-medium text-[var(--color-charcoal)]">
-                  {siteConfig.contact.email}
-                </p>
+    <div className="contact-page__care-grid">
+      {siteConfig.contact.phone && (
+        <a
+          href={`tel:+${siteConfig.contact.phone}`}
+          className="contact-page__care-card"
+        >
+          <div className="contact-page__care-card-top">
+            <span className="contact-page__care-index">
+              01
+            </span>
 
-                <span className="mt-5 inline-flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-secondary)]">
-                  Send an enquiry
-                </span>
-              </a>
-            )}
+            <span className="contact-page__care-action">
+              Call
+            </span>
           </div>
-        </div>
-      </section>
+
+          <div className="contact-page__care-card-body">
+            <p className="contact-page__care-label">
+              Phone
+            </p>
+
+            <p className="contact-page__care-value">
+              +{siteConfig.contact.phone}
+            </p>
+
+            <span className="contact-page__care-link">
+              Call customer care
+              <span aria-hidden="true">↗</span>
+            </span>
+          </div>
+        </a>
+      )}
+
+      {siteConfig.contact.email && (
+        <a
+          href={`mailto:${siteConfig.contact.email}`}
+          className="contact-page__care-card"
+        >
+          <div className="contact-page__care-card-top">
+            <span className="contact-page__care-index">
+              02
+            </span>
+
+            <span className="contact-page__care-action">
+              Email
+            </span>
+          </div>
+
+          <div className="contact-page__care-card-body">
+            <p className="contact-page__care-label">
+              Email
+            </p>
+
+            <p className="contact-page__care-value contact-page__care-value--email">
+              {siteConfig.contact.email}
+            </p>
+
+            <span className="contact-page__care-link">
+              Send an enquiry
+              <span aria-hidden="true">↗</span>
+            </span>
+          </div>
+        </a>
+      )}
+    </div>
+
+    <div className="contact-page__care-note">
+      <span className="contact-page__care-note-mark" />
+
+      <p>
+        For order-related enquiries, please keep your
+        order number and registered email address ready.
+      </p>
+    </div>
+  </div>
+</section>
     </>
   );
 }

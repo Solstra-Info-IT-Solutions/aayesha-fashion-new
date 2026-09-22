@@ -19,6 +19,8 @@ import {
   useCheckoutStore,
 } from "@/store/checkout-store";
 
+import "./CheckoutCoupon.css";
+
 /* =========================================================
    COMPONENT
 ========================================================= */

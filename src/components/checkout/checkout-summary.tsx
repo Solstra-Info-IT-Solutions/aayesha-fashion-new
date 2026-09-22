@@ -10,6 +10,8 @@ import {
 
 import { useCheckoutStore } from "@/store/checkout-store";
 
+import "./CheckoutSummary.css";
+
 type CheckoutCartItem = CartItem;
 
 export function CheckoutSummary() {
@@ -86,15 +88,13 @@ export function CheckoutSummary() {
   let mrpTotal = 0;
 
   for (const item of items) {
-    const sellingPrice =
-      Number(
-        item.product.pricing.sellingPrice,
-      );
+    const sellingPrice = Number(
+      item.product.pricing.sellingPrice,
+    );
 
-    const mrp =
-      Number(
-        item.product.pricing.mrp,
-      );
+    const mrp = Number(
+      item.product.pricing.mrp,
+    );
 
     subtotal +=
       sellingPrice * item.quantity;
@@ -103,10 +103,6 @@ export function CheckoutSummary() {
       mrp * item.quantity;
   }
 
-  /*
-   * Base shipping before coupon.
-   */
-
   const baseShipping =
     delivery === "express"
       ? 199
@@ -114,29 +110,16 @@ export function CheckoutSummary() {
         ? 0
         : 99;
 
-  /*
-   * Coupon shipping discount.
-   */
-
   const shipping = Math.max(
     0,
     baseShipping -
       couponShippingDiscount,
   );
 
-  /*
-   * Product savings.
-   */
-
-  const productSavings =
-    Math.max(
-      0,
-      mrpTotal - subtotal,
-    );
-
-  /*
-   * Final total.
-   */
+  const productSavings = Math.max(
+    0,
+    mrpTotal - subtotal,
+  );
 
   const total = Math.max(
     0,
@@ -145,36 +128,32 @@ export function CheckoutSummary() {
       couponDiscount,
   );
 
-  /* ==========================================================
-     RENDER
-  ========================================================== */
-
   return (
-    <aside className="lg:sticky lg:top-28">
-      <div className="overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
+    <aside className="checkout-summary">
+      <div className="checkout-summary__card">
         {/* ===================================================
             HEADER
         =================================================== */}
 
-        <div className="border-b border-[var(--color-border-light)] px-5 py-6 sm:px-6 sm:py-7">
-          <p className="eyebrow text-[var(--color-text-muted)]">
+        <header className="checkout-summary__header">
+          <p className="checkout-summary__eyebrow">
             Order Summary
           </p>
 
-          <h2 className="mt-2 font-[var(--font-display)] text-3xl font-medium leading-none tracking-[var(--tracking-tight)] text-[var(--color-text)]">
+          <h2 className="checkout-summary__title">
             Your Ayesha edit
           </h2>
 
-          <p className="mt-3 text-[11px] leading-5 text-[var(--color-text-secondary)]">
+          <p className="checkout-summary__description">
             A final look at everything in your bag.
           </p>
-        </div>
+        </header>
 
         {/* ===================================================
             PRODUCTS
         =================================================== */}
 
-        <div className="max-h-[420px] overflow-y-auto">
+        <div className="checkout-summary__products">
           {loading ? (
             <CheckoutItemsSkeleton />
           ) : items.length ? (
@@ -187,15 +166,10 @@ export function CheckoutSummary() {
                     .sellingPrice,
                 );
 
-              const mrp =
-                Number(
-                  product.pricing.mrp,
-                );
+              const mrp = Number(
+                product.pricing.mrp,
+              );
 
-              /*
-               * Cart service returns media.url
-               * from the backend.
-               */
               const image =
                 product.media.find(
                   (media) =>
@@ -207,11 +181,11 @@ export function CheckoutSummary() {
               return (
                 <div
                   key={item.productId}
-                  className="flex gap-4 border-b border-[var(--color-border-light)] px-5 py-4 sm:px-6"
+                  className="checkout-summary__product"
                 >
                   {/* IMAGE */}
 
-                  <div className="relative h-24 w-[76px] shrink-0 overflow-hidden bg-[var(--color-bg-soft)]">
+                  <div className="checkout-summary__image">
                     {image?.url ? (
                       <Image
                         src={image.url}
@@ -220,35 +194,33 @@ export function CheckoutSummary() {
                           product.name
                         }
                         fill
-                        className="image-luxury object-cover"
+                        className="checkout-summary__product-image"
                         sizes="76px"
                       />
                     ) : (
-                      <div className="flex h-full items-center justify-center px-2 text-center text-[8px] uppercase tracking-[var(--tracking-wide)] text-[var(--color-text-muted)]">
+                      <div className="checkout-summary__no-image">
                         No image
                       </div>
                     )}
 
-                    {/* QUANTITY */}
-
-                    <span className="absolute bottom-1 right-1 flex h-5 min-w-5 items-center justify-center bg-[var(--color-text)] px-1 text-[8px] font-semibold text-[var(--color-text-inverse)]">
+                    <span className="checkout-summary__quantity">
                       {item.quantity}
                     </span>
                   </div>
 
                   {/* DETAILS */}
 
-                  <div className="min-w-0 flex-1 py-0.5">
-                    <p className="font-[var(--font-display)] text-xl leading-none text-[var(--color-text)]">
+                  <div className="checkout-summary__product-details">
+                    <p className="checkout-summary__product-name">
                       {product.name}
                     </p>
 
-                    <p className="mt-2 text-[10px] uppercase tracking-[0.06em] text-[var(--color-text-muted)]">
+                    <p className="checkout-summary__product-type">
                       Product
                     </p>
 
-                    <div className="mt-3 flex items-center justify-between gap-3">
-                      <p className="text-xs font-semibold text-[var(--color-text)]">
+                    <div className="checkout-summary__product-price-row">
+                      <p className="checkout-summary__selling-price">
                         ₹
                         {sellingPrice.toLocaleString(
                           "en-IN",
@@ -257,7 +229,7 @@ export function CheckoutSummary() {
 
                       {mrp >
                       sellingPrice ? (
-                        <p className="text-[10px] text-[var(--color-text-muted)] line-through">
+                        <p className="checkout-summary__mrp">
                           ₹
                           {mrp.toLocaleString(
                             "en-IN",
@@ -266,7 +238,7 @@ export function CheckoutSummary() {
                       ) : null}
                     </div>
 
-                    <p className="mt-1 text-[10px] text-[var(--color-text-muted)]">
+                    <p className="checkout-summary__product-quantity">
                       Qty: {item.quantity}
                     </p>
                   </div>
@@ -274,12 +246,12 @@ export function CheckoutSummary() {
               );
             })
           ) : (
-            <div className="px-6 py-10 text-center">
-              <p className="font-[var(--font-display)] text-xl text-[var(--color-text)]">
+            <div className="checkout-summary__empty">
+              <p className="checkout-summary__empty-title">
                 Your bag is empty.
               </p>
 
-              <p className="mt-2 text-[10px] text-[var(--color-text-muted)]">
+              <p className="checkout-summary__empty-copy">
                 Add something beautiful to continue.
               </p>
             </div>
@@ -290,7 +262,7 @@ export function CheckoutSummary() {
             TOTALS
         =================================================== */}
 
-        <div className="space-y-4 px-5 py-6 sm:px-6 sm:py-7">
+        <div className="checkout-summary__totals">
           <SummaryRow
             label="MRP Total"
             value={`₹${mrpTotal.toLocaleString(
@@ -304,7 +276,7 @@ export function CheckoutSummary() {
               value={`- ₹${productSavings.toLocaleString(
                 "en-IN",
               )}`}
-              valueClass="text-[var(--color-success)]"
+              valueClass="checkout-summary__value--success"
             />
           ) : null}
 
@@ -315,19 +287,19 @@ export function CheckoutSummary() {
               value={`- ₹${couponDiscount.toLocaleString(
                 "en-IN",
               )}`}
-              valueClass="text-[var(--color-success)]"
+              valueClass="checkout-summary__value--success"
             />
           ) : null}
 
           {couponShippingDiscount >
-          0 &&
+            0 &&
           couponCode ? (
             <SummaryRow
               label={`Shipping Discount (${couponCode.toUpperCase()})`}
               value={`- ₹${couponShippingDiscount.toLocaleString(
                 "en-IN",
               )}`}
-              valueClass="text-[var(--color-success)]"
+              valueClass="checkout-summary__value--success"
             />
           ) : null}
 
@@ -344,25 +316,23 @@ export function CheckoutSummary() {
 
           {/* TOTAL */}
 
-          <div className="border-t border-[var(--color-border-light)] pt-5">
-            <div className="flex items-end justify-between gap-5">
-              <div>
-                <p className="eyebrow text-[var(--color-text-muted)]">
-                  Total
-                </p>
+          <div className="checkout-summary__total">
+            <div className="checkout-summary__total-copy">
+              <p className="checkout-summary__total-eyebrow">
+                Total
+              </p>
 
-                <p className="mt-1 text-[10px] leading-5 text-[var(--color-text-muted)]">
-                  Inclusive of applicable taxes
-                </p>
-              </div>
-
-              <p className="font-[var(--font-display)] text-3xl font-medium leading-none text-[var(--color-text)]">
-                ₹
-                {total.toLocaleString(
-                  "en-IN",
-                )}
+              <p className="checkout-summary__total-note">
+                Inclusive of applicable taxes
               </p>
             </div>
+
+            <p className="checkout-summary__total-value">
+              ₹
+              {total.toLocaleString(
+                "en-IN",
+              )}
+            </p>
           </div>
         </div>
       </div>
@@ -372,12 +342,12 @@ export function CheckoutSummary() {
       ===================================================== */}
 
       {productSavings > 0 ? (
-        <div className="mt-4 border border-[var(--color-accent-soft)] bg-[var(--color-bg-subtle)] px-5 py-4">
-          <p className="eyebrow text-[var(--color-text-muted)]">
+        <div className="checkout-summary__savings">
+          <p className="checkout-summary__savings-eyebrow">
             You&apos;re saving
           </p>
 
-          <p className="mt-1 font-[var(--font-display)] text-2xl font-medium text-[var(--color-success)]">
+          <p className="checkout-summary__savings-value">
             ₹
             {productSavings.toLocaleString(
               "en-IN",
@@ -403,13 +373,18 @@ function SummaryRow({
   valueClass?: string;
 }) {
   return (
-    <div className="flex justify-between gap-5 text-xs">
-      <span className="text-[var(--color-text-secondary)]">
+    <div className="checkout-summary__row">
+      <span className="checkout-summary__row-label">
         {label}
       </span>
 
       <span
-        className={`text-right font-medium text-[var(--color-text)] ${valueClass}`}
+        className={[
+          "checkout-summary__row-value",
+          valueClass,
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
         {value}
       </span>
@@ -429,16 +404,16 @@ function CheckoutItemsSkeleton() {
       }).map((_, index) => (
         <div
           key={index}
-          className="flex gap-4 border-b border-[var(--color-border-light)] px-5 py-4 sm:px-6"
+          className="checkout-summary__product checkout-summary__product--skeleton"
         >
-          <div className="h-24 w-[76px] animate-pulse bg-[var(--color-bg-soft)]" />
+          <div className="checkout-summary__skeleton-image" />
 
-          <div className="flex-1 py-1">
-            <div className="h-5 w-32 animate-pulse bg-[var(--color-bg-soft)]" />
+          <div className="checkout-summary__skeleton-content">
+            <div className="checkout-summary__skeleton-line checkout-summary__skeleton-line--name" />
 
-            <div className="mt-3 h-3 w-24 animate-pulse bg-[var(--color-bg-soft)]" />
+            <div className="checkout-summary__skeleton-line checkout-summary__skeleton-line--type" />
 
-            <div className="mt-4 h-4 w-16 animate-pulse bg-[var(--color-bg-soft)]" />
+            <div className="checkout-summary__skeleton-line checkout-summary__skeleton-line--price" />
           </div>
         </div>
       ))}

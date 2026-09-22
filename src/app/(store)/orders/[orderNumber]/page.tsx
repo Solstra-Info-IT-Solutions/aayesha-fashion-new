@@ -21,6 +21,8 @@ import {
   type OrderDetails,
 } from "@/lib/api/orders";
 
+import "./PublicOrderPage.css";
+
 interface PublicOrderPageProps {
   params: Promise<{
     orderNumber: string;
@@ -29,8 +31,7 @@ interface PublicOrderPageProps {
 
 const getOrderAccessTokenKey = (
   orderNumber: string,
-) =>
-  `aayesha-order-access-token:${orderNumber}`;
+) => `aayesha-order-access-token:${orderNumber}`;
 
 const formatCurrency = (
   value: number,
@@ -44,14 +45,11 @@ const formatCurrency = (
 const formatDate = (
   date: string,
 ) =>
-  new Intl.DateTimeFormat(
-    "en-IN",
-    {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    },
-  ).format(new Date(date));
+  new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(date));
 
 const formatStatus = (
   status: string,
@@ -60,9 +58,7 @@ const formatStatus = (
     .split("_")
     .map(
       (word) =>
-        word
-          .charAt(0)
-          .toUpperCase() +
+        word.charAt(0).toUpperCase() +
         word.slice(1),
     )
     .join(" ");
@@ -83,9 +79,7 @@ const getTrackingIndex = (
     return 3;
   }
 
-  return trackingStatuses.indexOf(
-    status,
-  );
+  return trackingStatuses.indexOf(status);
 };
 
 const getStatusTone = (
@@ -93,17 +87,19 @@ const getStatusTone = (
 ) => {
   switch (status) {
     case "delivered":
-      return "border-emerald-200 bg-emerald-50 text-emerald-700";
+      return "public-order-page__status--delivered";
 
     case "cancelled":
-      return "border-red-200 bg-red-50 text-red-700";
+      return "public-order-page__status--cancelled";
 
     case "returned":
+      return "public-order-page__status--returned";
+
     case "exchanged":
-      return "border-amber-200 bg-amber-50 text-amber-700";
+      return "public-order-page__status--exchanged";
 
     default:
-      return "border-[#edc6ca] bg-[#fdf2f3] text-[#b86670]";
+      return "public-order-page__status--default";
   }
 };
 
@@ -137,9 +133,7 @@ export default function PublicOrderPage({
             ?.trim()
             .toUpperCase();
 
-        if (
-          !normalizedOrderNumber
-        ) {
+        if (!normalizedOrderNumber) {
           throw new Error(
             "Order number is required.",
           );
@@ -203,23 +197,31 @@ export default function PublicOrderPage({
     };
   }, [params]);
 
+  /* =======================================================
+     LOADING
+  ======================================================= */
+
   if (loading) {
     return (
-      <main className="min-h-[70vh] bg-[var(--color-ivory)]">
-        <div className="mx-auto flex min-h-[70vh] max-w-3xl items-center justify-center px-5 py-16">
-          <div className="w-full border border-[var(--color-border)] bg-white p-8 text-center sm:p-12">
-            <div className="mx-auto flex h-14 w-14 animate-pulse items-center justify-center bg-[var(--color-cream)]">
+      <main className="public-order-page public-order-page--state">
+        <div className="public-order-page__state-wrapper">
+          <div className="public-order-page__state-card">
+            <div className="public-order-page__state-icon public-order-page__state-icon--loading">
               <ShoppingBag
                 size={24}
-                strokeWidth={1.5}
+                strokeWidth={1.4}
               />
             </div>
 
-            <h1 className="mt-6 font-[var(--font-display)] text-3xl text-[var(--color-charcoal)]">
+            <p className="public-order-page__state-eyebrow">
+              Aayesha Fashion
+            </p>
+
+            <h1 className="public-order-page__state-title">
               Loading your order
             </h1>
 
-            <p className="mt-3 text-sm leading-6 text-[var(--color-text-muted)]">
+            <p className="public-order-page__state-description">
               We&apos;re securely retrieving
               your order details.
             </p>
@@ -229,38 +231,50 @@ export default function PublicOrderPage({
     );
   }
 
+  /* =======================================================
+     ERROR
+  ======================================================= */
+
   if (error || !order) {
     return (
-      <main className="min-h-[70vh] bg-[var(--color-ivory)]">
-        <div className="mx-auto flex min-h-[70vh] max-w-3xl items-center justify-center px-5 py-16">
-          <div className="w-full border border-[var(--color-border)] bg-white p-8 text-center sm:p-12">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center bg-[var(--color-rose-light)]">
+      <main className="public-order-page public-order-page--state">
+        <div className="public-order-page__state-wrapper">
+          <div className="public-order-page__state-card">
+            <div className="public-order-page__state-icon public-order-page__state-icon--error">
               <Package
                 size={24}
-                strokeWidth={1.5}
+                strokeWidth={1.4}
               />
             </div>
 
-            <h1 className="mt-6 font-[var(--font-display)] text-3xl text-[var(--color-charcoal)]">
+            <p className="public-order-page__state-eyebrow">
+              Aayesha Fashion
+            </p>
+
+            <h1 className="public-order-page__state-title">
               Order unavailable
             </h1>
 
-            <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[var(--color-text-muted)]">
+            <p className="public-order-page__state-description">
               {error}
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <div className="public-order-page__state-actions">
               <Link
                 href="/shop"
-                className="inline-flex min-h-12 items-center justify-center gap-2 bg-[var(--color-charcoal)] px-6 text-[10px] font-semibold uppercase tracking-[0.16em] text-white"
+                className="public-order-page__state-button public-order-page__state-button--primary"
               >
                 Continue Shopping
-                <ArrowUpRight size={15} />
+
+                <ArrowUpRight
+                  size={14}
+                  strokeWidth={1.4}
+                />
               </Link>
 
               <Link
                 href="/"
-                className="inline-flex min-h-12 items-center justify-center gap-2 border border-[var(--color-border)] bg-white px-6 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-charcoal)]"
+                className="public-order-page__state-button public-order-page__state-button--secondary"
               >
                 Back to Home
               </Link>
@@ -284,43 +298,57 @@ export default function PublicOrderPage({
     ].includes(order.status);
 
   return (
-    <main className="bg-[var(--color-ivory)]">
+    <main className="public-order-page">
       {/* =====================================================
           HEADER
       ===================================================== */}
 
-      <section className="border-b border-[var(--color-border)]">
-        <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+      <section className="public-order-page__hero">
+        <div className="public-order-page__container">
           <Link
             href={`/checkout/success?orderNumber=${encodeURIComponent(
               orderNumber,
             )}`}
-            className="inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)] transition hover:text-[var(--color-charcoal)]"
+            className="public-order-page__back"
           >
-            <ArrowLeft size={16} />
-            Order Confirmation
+            <ArrowLeft
+              size={15}
+              strokeWidth={1.4}
+            />
+
+            <span>
+              Order Confirmation
+            </span>
           </Link>
 
-          <div className="mt-7 flex flex-col gap-5 sm:mt-8 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[var(--color-rose-dark)]">
+          <div className="public-order-page__hero-content">
+            <div className="public-order-page__hero-copy">
+              <p className="public-order-page__eyebrow">
                 Aayesha Fashion
               </p>
 
-              <h1 className="mt-2 break-words font-[var(--font-display)] text-3xl leading-tight text-[var(--color-charcoal)] sm:text-4xl">
+              <h1 className="public-order-page__title">
                 Order #{order.orderNumber}
               </h1>
 
-              <div className="mt-3 flex flex-wrap gap-4 text-xs text-[var(--color-text-secondary)]">
-                <span className="inline-flex items-center gap-1.5">
-                  <CalendarDays size={14} />
+              <div className="public-order-page__meta">
+                <span>
+                  <CalendarDays
+                    size={14}
+                    strokeWidth={1.4}
+                  />
+
                   {formatDate(
                     order.createdAt,
                   )}
                 </span>
 
-                <span className="inline-flex items-center gap-1.5">
-                  <ShoppingBag size={14} />
+                <span>
+                  <ShoppingBag
+                    size={14}
+                    strokeWidth={1.4}
+                  />
+
                   {order.items.reduce(
                     (total, item) =>
                       total + item.quantity,
@@ -332,7 +360,7 @@ export default function PublicOrderPage({
             </div>
 
             <span
-              className={`inline-flex w-fit rounded-full border px-3.5 py-2 text-xs font-medium ${getStatusTone(
+              className={`public-order-page__status ${getStatusTone(
                 order.status,
               )}`}
             >
@@ -343,12 +371,12 @@ export default function PublicOrderPage({
           </div>
 
           {/* =================================================
-              PROGRESS
+              TRACKING
           ================================================= */}
 
           {showTracking && (
-            <div className="mt-8 overflow-x-auto pb-1">
-              <div className="grid min-w-[560px] grid-cols-6 gap-2">
+            <div className="public-order-page__tracking-wrapper">
+              <div className="public-order-page__tracking">
                 {trackingStatuses.map(
                   (
                     status,
@@ -361,42 +389,44 @@ export default function PublicOrderPage({
                     return (
                       <div
                         key={status}
-                        className="relative"
+                        className="public-order-page__tracking-step"
                       >
                         {index <
                           trackingStatuses.length -
                             1 && (
                           <div
-                            className={`absolute left-[calc(50%+14px)] right-[calc(-50%+14px)] top-3 h-px ${
+                            className={`public-order-page__tracking-line ${
                               trackingIndex >
                               index
-                                ? "bg-[#d98791]"
-                                : "bg-[#ddd8d3]"
+                                ? "public-order-page__tracking-line--active"
+                                : ""
                             }`}
                           />
                         )}
 
-                        <div className="relative flex flex-col items-center">
+                        <div className="public-order-page__tracking-content">
                           <div
-                            className={`flex h-6 w-6 items-center justify-center rounded-full border ${
+                            className={`public-order-page__tracking-dot ${
                               completed
-                                ? "border-[#d98791] bg-[#d98791] text-white"
-                                : "border-[#d8d1ca] bg-white text-[#c4bfba]"
+                                ? "public-order-page__tracking-dot--active"
+                                : ""
                             }`}
                           >
                             {completed ? (
                               <Check
-                                size={12}
+                                size={11}
+                                strokeWidth={2}
                               />
                             ) : (
                               <Circle
                                 size={7}
                                 fill="currentColor"
+                                strokeWidth={0}
                               />
                             )}
                           </div>
 
-                          <p className="mt-2 max-w-[90px] text-center text-[10px] leading-4 text-[var(--color-text-muted)]">
+                          <p>
                             {status ===
                             "out_for_delivery"
                               ? "Out for Delivery"
@@ -425,111 +455,127 @@ export default function PublicOrderPage({
           CONTENT
       ===================================================== */}
 
-      <section>
-        <div className="mx-auto grid max-w-6xl gap-5 px-5 py-8 sm:px-8 lg:grid-cols-[1fr_340px] lg:px-10 lg:py-12">
-          <div className="space-y-5">
-            {/* ITEMS */}
+      <section className="public-order-page__content">
+        <div className="public-order-page__container">
+          <div className="public-order-page__layout">
+            {/* =================================================
+                MAIN
+            ================================================= */}
 
-            <div className="border border-[var(--color-border)] bg-white">
-              <div className="border-b border-[var(--color-border)] px-5 py-4 sm:px-6">
-                <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
-                  Your Selection
-                </p>
+            <div className="public-order-page__main">
+              {/* =================================================
+                  ORDER ITEMS
+              ================================================= */}
 
-                <h2 className="mt-1 font-[var(--font-display)] text-2xl text-[var(--color-charcoal)]">
-                  Order Items
-                </h2>
-              </div>
+              <div className="public-order-page__card">
+                <div className="public-order-page__card-header">
+                  <p className="public-order-page__card-eyebrow">
+                    Your Selection
+                  </p>
 
-              <div className="divide-y divide-[var(--color-border)]">
-                {order.items.map(
-                  (item) => (
-                    <div
-                      key={item.productId}
-                      className="flex gap-4 p-5 sm:p-6"
-                    >
-                      <div className="h-28 w-24 shrink-0 overflow-hidden bg-[var(--color-cream)] sm:h-32 sm:w-28">
-                        {item.image ? (
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="h-full w-full object-cover"
-                          />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center">
+                  <h2 className="public-order-page__card-title">
+                    Order Items
+                  </h2>
+                </div>
+
+                <div className="public-order-page__items">
+                  {order.items.map(
+                    (item) => (
+                      <div
+                        key={item.productId}
+                        className="public-order-page__item"
+                      >
+                        <div className="public-order-page__item-image">
+                          {item.image ? (
+                            <img
+                              src={
+                                item.image
+                              }
+                              alt={
+                                item.name
+                              }
+                            />
+                          ) : (
                             <Package
                               size={22}
                               strokeWidth={
-                                1.4
+                                1.3
                               }
-                              className="text-[var(--color-text-muted)]"
                             />
-                          </div>
-                        )}
-                      </div>
+                          )}
+                        </div>
 
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-col gap-2 sm:flex-row sm:justify-between">
-                          <div className="min-w-0">
-                            <p className="break-words text-sm font-semibold text-[var(--color-charcoal)] sm:text-base">
-                              {item.name}
-                            </p>
+                        <div className="public-order-page__item-content">
+                          <div className="public-order-page__item-main">
+                            <div className="public-order-page__item-info">
+                              <p className="public-order-page__item-name">
+                                {item.name}
+                              </p>
 
-                            <p className="mt-2 text-xs text-[var(--color-text-secondary)]">
-                              Qty:{" "}
-                              {item.quantity}
-                            </p>
-                          </div>
+                              <p className="public-order-page__item-quantity">
+                                Qty:{" "}
+                                {
+                                  item.quantity
+                                }
+                              </p>
+                            </div>
 
-                          <div className="shrink-0 sm:text-right">
-                            <p className="text-sm font-semibold text-[var(--color-charcoal)]">
-                              {formatCurrency(
-                                item.lineTotal,
-                              )}
-                            </p>
+                            <div className="public-order-page__item-price">
+                              <p>
+                                {formatCurrency(
+                                  item.lineTotal,
+                                )}
+                              </p>
 
-                            <p className="mt-1 text-[10px] text-[var(--color-text-muted)]">
-                              {formatCurrency(
-                                item.sellingPrice,
-                              )}{" "}
-                              each
-                            </p>
+                              <span>
+                                {formatCurrency(
+                                  item.sellingPrice,
+                                )}{" "}
+                                each
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ),
-                )}
+                    ),
+                  )}
+                </div>
               </div>
-            </div>
 
-            {/* ADDRESS + PAYMENT */}
+              {/* =================================================
+                  ADDRESS + PAYMENT
+              ================================================= */}
 
-            <div className="grid gap-5 md:grid-cols-2">
-              <div className="border border-[var(--color-border)] bg-white p-5 sm:p-6">
-                <div className="flex gap-3">
-                  <MapPin
-                    size={18}
-                    className="mt-0.5 shrink-0 text-[var(--color-rose-dark)]"
-                  />
+              <div className="public-order-page__details-grid">
+                {/* ADDRESS */}
 
-                  <div className="min-w-0">
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+                <div className="public-order-page__info-card">
+                  <div className="public-order-page__info-icon">
+                    <MapPin
+                      size={17}
+                      strokeWidth={1.4}
+                    />
+                  </div>
+
+                  <div className="public-order-page__info-content">
+                    <p className="public-order-page__info-eyebrow">
                       Delivery Address
                     </p>
 
-                    <p className="mt-2 text-sm font-semibold text-[var(--color-charcoal)]">
+                    <p className="public-order-page__info-name">
                       {
-                        order.shippingAddress
+                        order
+                          .shippingAddress
                           .firstName
                       }{" "}
                       {
-                        order.shippingAddress
+                        order
+                          .shippingAddress
                           .lastName
                       }
                     </p>
 
-                    <div className="mt-2 space-y-1 break-words text-xs leading-5 text-[var(--color-text-secondary)]">
+                    <div className="public-order-page__info-copy">
                       <p>
                         {
                           order
@@ -592,28 +638,30 @@ export default function PublicOrderPage({
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="border border-[var(--color-border)] bg-white p-5 sm:p-6">
-                <div className="flex gap-3">
-                  <CreditCard
-                    size={18}
-                    className="mt-0.5 shrink-0 text-[var(--color-rose-dark)]"
-                  />
+                {/* PAYMENT */}
 
-                  <div className="min-w-0">
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+                <div className="public-order-page__info-card">
+                  <div className="public-order-page__info-icon">
+                    <CreditCard
+                      size={17}
+                      strokeWidth={1.4}
+                    />
+                  </div>
+
+                  <div className="public-order-page__info-content">
+                    <p className="public-order-page__info-eyebrow">
                       Payment
                     </p>
 
-                    <p className="mt-2 text-sm font-semibold text-[var(--color-charcoal)]">
+                    <p className="public-order-page__info-name">
                       {order.paymentMethod ===
                       "cod"
                         ? "Cash on Delivery"
                         : "Online Payment"}
                     </p>
 
-                    <div className="mt-2 space-y-1 text-xs leading-5 text-[var(--color-text-secondary)]">
+                    <div className="public-order-page__info-copy">
                       <p>
                         Payment:{" "}
                         {formatStatus(
@@ -631,19 +679,19 @@ export default function PublicOrderPage({
 
                     {order.shippingInfo
                       ?.trackingNumber && (
-                      <div className="mt-4 border-t border-[var(--color-border)] pt-4">
-                        <div className="flex items-center gap-2">
+                      <div className="public-order-page__tracking-info">
+                        <div className="public-order-page__tracking-heading">
                           <Truck
-                            size={15}
-                            className="text-[var(--color-rose-dark)]"
+                            size={14}
+                            strokeWidth={1.4}
                           />
 
-                          <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text-muted)]">
+                          <span>
                             Tracking
                           </span>
                         </div>
 
-                        <p className="mt-2 break-all text-xs text-[var(--color-charcoal)]">
+                        <p className="public-order-page__tracking-number">
                           {
                             order
                               .shippingInfo
@@ -651,7 +699,8 @@ export default function PublicOrderPage({
                           }
                         </p>
 
-                        {order.shippingInfo
+                        {order
+                          .shippingInfo
                           .trackingUrl && (
                           <a
                             href={
@@ -661,11 +710,15 @@ export default function PublicOrderPage({
                             }
                             target="_blank"
                             rel="noreferrer"
-                            className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-[var(--color-charcoal)] underline underline-offset-4"
+                            className="public-order-page__track-link"
                           >
                             Track Shipment
+
                             <ArrowUpRight
-                              size={13}
+                              size={12}
+                              strokeWidth={
+                                1.4
+                              }
                             />
                           </a>
                         )}
@@ -675,111 +728,115 @@ export default function PublicOrderPage({
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* SUMMARY */}
+            {/* =================================================
+                SUMMARY
+            ================================================= */}
 
-          <aside className="h-fit border border-[var(--color-border)] bg-white p-5 sm:p-6">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
-              Price Details
-            </p>
-
-            <h2 className="mt-1 font-[var(--font-display)] text-2xl text-[var(--color-charcoal)]">
-              Order Summary
-            </h2>
-
-            <div className="mt-6 space-y-3 border-t border-[var(--color-border)] pt-5">
-              <div className="flex justify-between gap-4 text-xs">
-                <span className="text-[var(--color-text-muted)]">
-                  MRP Total
-                </span>
-
-                <span>
-                  {formatCurrency(
-                    order.mrpTotal,
-                  )}
-                </span>
-              </div>
-
-              {order.productDiscount >
-                0 && (
-                <div className="flex justify-between gap-4 text-xs">
-                  <span className="text-[var(--color-text-muted)]">
-                    Product Discount
-                  </span>
-
-                  <span className="text-[var(--color-rose-dark)]">
-                    -
-                    {formatCurrency(
-                      order.productDiscount,
-                    )}
-                  </span>
-                </div>
-              )}
-
-              {order.couponDiscount >
-                0 && (
-                <div className="flex justify-between gap-4 text-xs">
-                  <span className="text-[var(--color-text-muted)]">
-                    Coupon
-                  </span>
-
-                  <span className="text-[var(--color-rose-dark)]">
-                    -
-                    {formatCurrency(
-                      order.couponDiscount,
-                    )}
-                  </span>
-                </div>
-              )}
-
-              <div className="flex justify-between gap-4 text-xs">
-                <span className="text-[var(--color-text-muted)]">
-                  Shipping
-                </span>
-
-                <span>
-                  {order.shippingAmount ===
-                  0
-                    ? "FREE"
-                    : formatCurrency(
-                        order.shippingAmount,
-                      )}
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-5 border-t border-[var(--color-border)] pt-5">
-              <div className="flex items-end justify-between gap-4">
-                <div>
-                  <p className="text-[9px] uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
-                    Total
-                  </p>
-
-                  <p className="mt-1 text-xs text-[var(--color-text-muted)]">
-                    {order.paymentMethod ===
-                    "cod"
-                      ? "Payable on delivery"
-                      : "Paid securely"}
-                  </p>
-                </div>
-
-                <p className="text-2xl font-semibold text-[var(--color-charcoal)]">
-                  {formatCurrency(
-                    order.total,
-                  )}
+            <aside className="public-order-page__summary">
+              <div className="public-order-page__summary-inner">
+                <p className="public-order-page__summary-eyebrow">
+                  Price Details
                 </p>
-              </div>
-            </div>
 
-            <Link
-              href="/shop"
-              className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 border border-[var(--color-border)] bg-white px-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-charcoal)] transition hover:bg-[var(--color-cream)]"
-            >
-              Continue Shopping
-              <ChevronRight size={15} />
-            </Link>
-          </aside>
+                <h2 className="public-order-page__summary-title">
+                  Order Summary
+                </h2>
+
+                <div className="public-order-page__summary-rows">
+                  <div className="public-order-page__summary-row">
+                    <span>
+                      MRP Total
+                    </span>
+
+                    <strong>
+                      {formatCurrency(
+                        order.mrpTotal,
+                      )}
+                    </strong>
+                  </div>
+
+                  {order.productDiscount >
+                    0 && (
+                    <div className="public-order-page__summary-row">
+                      <span>
+                        Product Discount
+                      </span>
+
+                      <strong className="public-order-page__discount">
+                        -
+                        {formatCurrency(
+                          order.productDiscount,
+                        )}
+                      </strong>
+                    </div>
+                  )}
+
+                  {order.couponDiscount >
+                    0 && (
+                    <div className="public-order-page__summary-row">
+                      <span>
+                        Coupon
+                      </span>
+
+                      <strong className="public-order-page__discount">
+                        -
+                        {formatCurrency(
+                          order.couponDiscount,
+                        )}
+                      </strong>
+                    </div>
+                  )}
+
+                  <div className="public-order-page__summary-row">
+                    <span>
+                      Shipping
+                    </span>
+
+                    <strong>
+                      {order.shippingAmount ===
+                      0
+                        ? "FREE"
+                        : formatCurrency(
+                            order.shippingAmount,
+                          )}
+                    </strong>
+                  </div>
+                </div>
+
+                <div className="public-order-page__summary-total">
+                  <div>
+                    <p>Total</p>
+
+                    <span>
+                      {order.paymentMethod ===
+                      "cod"
+                        ? "Payable on delivery"
+                        : "Paid securely"}
+                    </span>
+                  </div>
+
+                  <strong>
+                    {formatCurrency(
+                      order.total,
+                    )}
+                  </strong>
+                </div>
+
+                <Link
+                  href="/shop"
+                  className="public-order-page__continue"
+                >
+                  Continue Shopping
+
+                  <ChevronRight
+                    size={15}
+                    strokeWidth={1.4}
+                  />
+                </Link>
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
     </main>

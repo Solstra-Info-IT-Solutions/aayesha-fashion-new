@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 
+import "./SectionHeading.css";
+
 interface SectionHeadingProps {
   eyebrow?: string;
   title: string;
@@ -19,8 +21,9 @@ export function SectionHeading({
     <div
       className={cn(
         "section-heading",
-        align === "center" && "section-heading--center",
-        className
+        align === "center" &&
+          "section-heading--center",
+        className,
       )}
     >
       {eyebrow && (

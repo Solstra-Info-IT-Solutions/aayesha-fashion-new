@@ -19,6 +19,7 @@ import {
 } from "@/lib/customer-api";
 
 import type { CheckoutAddress as CheckoutAddressType } from "@/types/checkout";
+import "./CheckoutAddress.css";
 
 export function CheckoutAddress() {
   const address = useCheckoutStore(

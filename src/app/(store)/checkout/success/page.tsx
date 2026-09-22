@@ -18,6 +18,8 @@ import type { OrderDetails } from "@/lib/api/orders";
 
 import { useAuthStore } from "@/store/auth-store";
 
+import "./CheckoutSuccessPage.css";
+
 /* ==========================================================
    HELPERS
 ========================================================== */
@@ -26,15 +28,11 @@ const getOrderAccessTokenKey = (
   orderNumber: string,
 ) => `aayesha-order-access-token:${orderNumber}`;
 
-const formatCurrency = (
-  amount: number,
-) => {
+const formatCurrency = (amount: number) => {
   return `₹${amount.toLocaleString("en-IN")}`;
 };
 
-const formatDate = (
-  date: string,
-) => {
+const formatDate = (date: string) => {
   return new Intl.DateTimeFormat("en-IN", {
     day: "numeric",
     month: "long",
@@ -48,27 +46,26 @@ const formatDate = (
 
 function CheckoutSuccessLoading() {
   return (
-    <main className="min-h-[70vh] bg-[var(--color-bg)]">
-      <div className="mx-auto flex min-h-[70vh] w-full max-w-3xl items-center justify-center px-5 py-16 sm:px-8">
-        <div className="w-full border border-[var(--color-border-light)] bg-[var(--color-surface)] p-8 text-center shadow-[var(--shadow-xs)] sm:p-14">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center bg-[var(--color-bg-soft)]">
+    <main className="checkout-success checkout-success--loading">
+      <div className="checkout-success__loading-wrap">
+        <div className="checkout-success__loading-card">
+          <div className="checkout-success__loading-icon">
             <ShoppingBag
               size={24}
               strokeWidth={1.3}
-              className="text-[var(--color-text-secondary)]"
             />
           </div>
 
-          <p className="mt-8 font-[var(--font-display)] text-3xl leading-none tracking-[-0.02em] text-[var(--color-text)] sm:text-4xl">
+          <p className="checkout-success__loading-title">
             Confirming your order
           </p>
 
-          <p className="mx-auto mt-4 max-w-md text-sm leading-7 text-[var(--color-text-secondary)]">
+          <p className="checkout-success__loading-description">
             We&apos;re securely retrieving your order
             details. Please wait a moment.
           </p>
 
-          <div className="mx-auto mt-7 h-px w-16 animate-pulse bg-[var(--color-accent)]" />
+          <div className="checkout-success__loading-line" />
         </div>
       </div>
     </main>
@@ -85,42 +82,45 @@ function CheckoutSuccessError({
   error: string | null;
 }) {
   return (
-    <main className="min-h-[70vh] bg-[var(--color-bg)]">
-      <div className="mx-auto flex min-h-[70vh] w-full max-w-3xl items-center justify-center px-5 py-16 sm:px-8">
-        <div className="w-full border border-[var(--color-border-light)] bg-[var(--color-surface)] p-8 text-center shadow-[var(--shadow-xs)] sm:p-14">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center bg-[var(--color-bg-soft)]">
+    <main className="checkout-success checkout-success--error">
+      <div className="checkout-success__error-wrap">
+        <div className="checkout-success__error-card">
+          <div className="checkout-success__error-icon">
             <Clock3
               size={24}
               strokeWidth={1.3}
-              className="text-[var(--color-accent-dark)]"
             />
           </div>
 
-          <p className="mt-8 text-[9px] font-semibold uppercase tracking-[0.24em] text-[var(--color-accent)]">
+          <p className="checkout-success__eyebrow">
             Order Verification
           </p>
 
-          <h1 className="mt-3 font-[var(--font-display)] text-4xl leading-[0.95] tracking-[-0.02em] text-[var(--color-text)] sm:text-5xl">
+          <h1 className="checkout-success__error-title">
             We&apos;re checking your order
           </h1>
 
-          <p className="mx-auto mt-5 max-w-md text-sm leading-7 text-[var(--color-text-secondary)]">
+          <p className="checkout-success__error-description">
             {error ||
               "Your order may still be processing. Please check your orders shortly."}
           </p>
 
-          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="checkout-success__error-actions">
             <Link
               href="/account/orders"
-              className="inline-flex min-h-12 items-center justify-center gap-2 bg-[var(--color-text)] px-7 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-inverse)] transition duration-300 hover:bg-[var(--color-accent-dark)]"
+              className="checkout-success__button checkout-success__button--primary"
             >
-              View My Orders
-              <ArrowRight size={15} strokeWidth={1.6} />
+              <span>View My Orders</span>
+
+              <ArrowRight
+                size={15}
+                strokeWidth={1.6}
+              />
             </Link>
 
             <Link
               href="/shop"
-              className="inline-flex min-h-12 items-center justify-center border border-[var(--color-border)] bg-[var(--color-surface)] px-7 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text)] transition duration-300 hover:border-[var(--color-text)] hover:bg-[var(--color-bg-soft)]"
+              className="checkout-success__button checkout-success__button--secondary"
             >
               Continue Shopping
             </Link>
@@ -181,9 +181,7 @@ function CheckoutSuccessContent() {
       return;
     }
 
-    setOrderNumber(
-      normalizedOrderNumber,
-    );
+    setOrderNumber(normalizedOrderNumber);
     setError(null);
   }, [searchParams]);
 
@@ -204,14 +202,10 @@ function CheckoutSuccessContent() {
 
       try {
         const storageKey =
-          getOrderAccessTokenKey(
-            orderNumber,
-          );
+          getOrderAccessTokenKey(orderNumber);
 
         const storedToken =
-          sessionStorage.getItem(
-            storageKey,
-          );
+          sessionStorage.getItem(storageKey);
 
         if (!storedToken) {
           if (!cancelled) {
@@ -227,23 +221,17 @@ function CheckoutSuccessContent() {
           return;
         }
 
-        const response =
-          await getOrder(
-            orderNumber,
-            storedToken,
-          );
+        const response = await getOrder(
+          orderNumber,
+          storedToken,
+        );
 
         if (cancelled) {
           return;
         }
 
-        setOrder(
-          response.order,
-        );
-
-        setPublicAccessToken(
-          storedToken,
-        );
+        setOrder(response.order);
+        setPublicAccessToken(storedToken);
       } catch (requestError) {
         if (cancelled) {
           return;
@@ -275,17 +263,9 @@ function CheckoutSuccessContent() {
     };
   }, [orderNumber]);
 
-  /* ==========================================================
-     LOADING
-  ========================================================== */
-
   if (loading) {
     return <CheckoutSuccessLoading />;
   }
-
-  /* ==========================================================
-     INVALID / ERROR
-  ========================================================== */
 
   if (error || !order) {
     return (
@@ -309,8 +289,7 @@ function CheckoutSuccessContent() {
   ].filter(Boolean);
 
   const viewOrderHref =
-    isInitialized &&
-    isAuthenticated
+    isInitialized && isAuthenticated
       ? `/account/orders/${encodeURIComponent(
           order.orderNumber,
         )}`
@@ -319,16 +298,16 @@ function CheckoutSuccessContent() {
         )}`;
 
   return (
-    <main className="bg-[var(--color-bg)]">
+    <main className="checkout-success">
       {/* =====================================================
           CONFIRMATION HERO
       ===================================================== */}
 
-      <section className="border-b border-[var(--color-border-light)]">
-        <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 sm:py-18 lg:px-12 lg:py-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center border border-[var(--color-border)] bg-[var(--color-surface)]">
-              <div className="flex h-10 w-10 items-center justify-center bg-[var(--color-text)] text-[var(--color-text-inverse)]">
+      <section className="checkout-success__hero">
+        <div className="checkout-success__container checkout-success__hero-container">
+          <div className="checkout-success__hero-content">
+            <div className="checkout-success__confirmation-mark">
+              <div>
                 <Check
                   size={21}
                   strokeWidth={1.7}
@@ -336,34 +315,32 @@ function CheckoutSuccessContent() {
               </div>
             </div>
 
-            <p className="mt-8 text-[9px] font-semibold uppercase tracking-[0.24em] text-[var(--color-accent)]">
+            <p className="checkout-success__eyebrow">
               Order Confirmed
             </p>
 
-            <h1 className="mt-4 font-[var(--font-display)] text-5xl leading-[0.9] tracking-[-0.025em] text-[var(--color-text)] sm:text-6xl lg:text-7xl">
+            <h1 className="checkout-success__hero-title">
               Thank you for your order.
             </h1>
 
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-7 text-[var(--color-text-secondary)] sm:text-[15px]">
+            <p className="checkout-success__hero-description">
               Your order has been received and is
               now being prepared with care.
             </p>
 
-            <div className="mx-auto mt-9 inline-flex max-w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 border border-[var(--color-border-light)] bg-[var(--color-surface)] px-5 py-3.5">
-              <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+            <div className="checkout-success__order-meta">
+              <span className="checkout-success__order-meta-label">
                 Order Number
               </span>
 
-              <span className="break-all text-sm font-semibold tracking-[0.05em] text-[var(--color-text)]">
+              <span className="checkout-success__order-number">
                 {order.orderNumber}
               </span>
 
-              <span className="hidden h-4 w-px bg-[var(--color-border)] sm:block" />
+              <span className="checkout-success__order-divider" />
 
-              <span className="text-[10px] text-[var(--color-text-muted)]">
-                {formatDate(
-                  order.createdAt,
-                )}
+              <span className="checkout-success__order-date">
+                {formatDate(order.createdAt)}
               </span>
             </div>
           </div>
@@ -374,60 +351,55 @@ function CheckoutSuccessContent() {
           ORDER DETAILS
       ===================================================== */}
 
-      <section>
-        <div className="mx-auto grid w-full max-w-[1440px] gap-6 px-5 py-10 sm:px-8 sm:py-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)] lg:px-12 lg:py-16">
-          {/* =================================================
-              LEFT COLUMN
-          ================================================= */}
+      <section className="checkout-success__details">
+        <div className="checkout-success__container checkout-success__details-layout">
+          {/* LEFT COLUMN */}
 
-          <div className="space-y-6">
+          <div className="checkout-success__main-column">
             {/* PAYMENT */}
 
-            <div className="border border-[var(--color-border-light)] bg-[var(--color-surface)] p-6 sm:p-8">
-              <div className="flex items-start gap-5">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-[var(--color-bg-soft)]">
-                  <CheckCircle2
-                    size={19}
-                    strokeWidth={1.4}
-                    className="text-[var(--color-accent-dark)]"
-                  />
-                </div>
+            <div className="checkout-success__card checkout-success__payment-card">
+              <div className="checkout-success__card-icon">
+                <CheckCircle2
+                  size={19}
+                  strokeWidth={1.4}
+                />
+              </div>
 
-                <div>
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
-                    Payment
-                  </p>
+              <div>
+                <p className="checkout-success__card-eyebrow">
+                  Payment
+                </p>
 
-                  <h2 className="mt-1.5 text-base font-semibold text-[var(--color-text)]">
-                    {isCod
-                      ? "Cash on Delivery"
-                      : "Online Payment"}
-                  </h2>
+                <h2 className="checkout-success__card-title">
+                  {isCod
+                    ? "Cash on Delivery"
+                    : "Online Payment"}
+                </h2>
 
-                  <p className="mt-2 max-w-xl text-xs leading-6 text-[var(--color-text-secondary)]">
-                    {isCod
-                      ? "Please keep the payable amount ready when your order is delivered."
-                      : "Your payment has been recorded successfully."}
-                  </p>
-                </div>
+                <p className="checkout-success__card-description">
+                  {isCod
+                    ? "Please keep the payable amount ready when your order is delivered."
+                    : "Your payment has been recorded successfully."}
+                </p>
               </div>
             </div>
 
             {/* ORDER ITEMS */}
 
-            <div className="border border-[var(--color-border-light)] bg-[var(--color-surface)]">
-              <div className="flex items-end justify-between gap-5 border-b border-[var(--color-border-light)] px-6 py-6 sm:px-8">
+            <div className="checkout-success__card checkout-success__items-card">
+              <div className="checkout-success__section-header">
                 <div>
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+                  <p className="checkout-success__card-eyebrow">
                     Your Selection
                   </p>
 
-                  <h2 className="mt-2 font-[var(--font-display)] text-3xl leading-none tracking-[-0.02em] text-[var(--color-text)]">
+                  <h2 className="checkout-success__section-title">
                     Order Items
                   </h2>
                 </div>
 
-                <span className="shrink-0 text-[10px] uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
+                <span className="checkout-success__item-count">
                   {order.items.length}{" "}
                   {order.items.length === 1
                     ? "Item"
@@ -435,263 +407,227 @@ function CheckoutSuccessContent() {
                 </span>
               </div>
 
-              <div className="divide-y divide-[var(--color-border-light)]">
-                {order.items.map(
-                  (item) => (
-                    <div
-                      key={item.productId}
-                      className="flex gap-5 px-6 py-6 sm:px-8"
-                    >
-                      <div className="h-28 w-22 shrink-0 overflow-hidden bg-[var(--color-bg-soft)] sm:h-32 sm:w-28">
-                        {item.image ? (
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="h-full w-full object-cover transition duration-500 hover:scale-[1.02]"
+              <div className="checkout-success__items-list">
+                {order.items.map((item) => (
+                  <div
+                    key={item.productId}
+                    className="checkout-success__item"
+                  >
+                    <div className="checkout-success__item-image">
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="checkout-success__item-image-element"
+                        />
+                      ) : (
+                        <div className="checkout-success__item-image-empty">
+                          <ShoppingBag
+                            size={18}
+                            strokeWidth={1.3}
                           />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center">
-                            <ShoppingBag
-                              size={18}
-                              strokeWidth={1.3}
-                              className="text-[var(--color-text-muted)]"
-                            />
-                          </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
+                    </div>
 
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-col justify-between gap-4 sm:flex-row">
-                          <div className="min-w-0">
-                            <p className="break-words font-[var(--font-display)] text-xl leading-tight text-[var(--color-text)] sm:text-2xl">
-                              {item.name}
-                            </p>
+                    <div className="checkout-success__item-details">
+                      <div className="checkout-success__item-main">
+                        <div className="checkout-success__item-info">
+                          <p className="checkout-success__item-name">
+                            {item.name}
+                          </p>
 
-                            <p className="mt-3 text-[11px] text-[var(--color-text-secondary)]">
-                              Quantity{" "}
-                              <span className="font-medium text-[var(--color-text)]">
-                                {item.quantity}
-                              </span>
-                            </p>
-                          </div>
+                          <p className="checkout-success__item-quantity">
+                            Quantity{" "}
+                            <span>
+                              {item.quantity}
+                            </span>
+                          </p>
+                        </div>
 
-                          <div className="shrink-0 text-left sm:text-right">
-                            <p className="text-sm font-semibold text-[var(--color-text)]">
-                              {formatCurrency(
-                                item.lineTotal,
-                              )}
-                            </p>
-
-                            {item.mrp >
-                              item.sellingPrice && (
-                              <p className="mt-1 text-[10px] text-[var(--color-text-muted)] line-through">
-                                {formatCurrency(
-                                  item.mrp *
-                                    item.quantity,
-                                )}
-                              </p>
+                        <div className="checkout-success__item-price">
+                          <p>
+                            {formatCurrency(
+                              item.lineTotal,
                             )}
-                          </div>
+                          </p>
+
+                          {item.mrp >
+                            item.sellingPrice && (
+                            <span>
+                              {formatCurrency(
+                                item.mrp *
+                                  item.quantity,
+                              )}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
-                  ),
-                )}
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* DELIVERY ADDRESS */}
 
-            <div className="border border-[var(--color-border-light)] bg-[var(--color-surface)] p-6 sm:p-8">
-              <div className="flex gap-5">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-[var(--color-bg-soft)]">
-                  <MapPin
-                    size={18}
-                    strokeWidth={1.4}
-                    className="text-[var(--color-text-secondary)]"
-                  />
+            <div className="checkout-success__card checkout-success__address-card">
+              <div className="checkout-success__card-icon">
+                <MapPin
+                  size={18}
+                  strokeWidth={1.4}
+                />
+              </div>
+
+              <div className="checkout-success__address-content">
+                <p className="checkout-success__card-eyebrow">
+                  Delivery Address
+                </p>
+
+                <h2 className="checkout-success__card-title">
+                  {order.shippingAddress.firstName}{" "}
+                  {order.shippingAddress.lastName}
+                </h2>
+
+                <div className="checkout-success__address-lines">
+                  {fullAddress.map(
+                    (line, index) => (
+                      <p
+                        key={`${line}-${index}`}
+                      >
+                        {line}
+                      </p>
+                    ),
+                  )}
                 </div>
 
-                <div className="min-w-0">
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
-                    Delivery Address
+                <div className="checkout-success__contact">
+                  <p>
+                    {order.customerPhone}
                   </p>
 
-                  <h2 className="mt-1.5 text-base font-semibold text-[var(--color-text)]">
-                    {
-                      order.shippingAddress
-                        .firstName
-                    }{" "}
-                    {
-                      order.shippingAddress
-                        .lastName
-                    }
-                  </h2>
-
-                  <div className="mt-4 space-y-1 break-words text-xs leading-5 text-[var(--color-text-secondary)]">
-                    {fullAddress.map(
-                      (line, index) => (
-                        <p
-                          key={`${line}-${index}`}
-                        >
-                          {line}
-                        </p>
-                      ),
-                    )}
-                  </div>
-
-                  <div className="mt-4 space-y-1 break-words border-t border-[var(--color-border-light)] pt-4 text-xs text-[var(--color-text-secondary)]">
-                    <p>
-                      {order.customerPhone}
-                    </p>
-
-                    <p>
-                      {order.customerEmail}
-                    </p>
-                  </div>
+                  <p>
+                    {order.customerEmail}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* =================================================
-              RIGHT COLUMN
-          ================================================= */}
+          {/* RIGHT COLUMN */}
 
-          <aside className="space-y-6">
+          <aside className="checkout-success__sidebar">
             {/* ORDER SUMMARY */}
 
-            <div className="border border-[var(--color-border-light)] bg-[var(--color-surface)] p-6 sm:p-8 lg:sticky lg:top-28">
-              <div className="flex items-center gap-3">
+            <div className="checkout-success__summary">
+              <div className="checkout-success__summary-header">
                 <PackageCheck
                   size={19}
                   strokeWidth={1.4}
-                  className="text-[var(--color-accent-dark)]"
                 />
 
                 <div>
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+                  <p className="checkout-success__card-eyebrow">
                     Your Purchase
                   </p>
 
-                  <h2 className="mt-1 font-[var(--font-display)] text-3xl leading-none tracking-[-0.02em] text-[var(--color-text)]">
+                  <h2 className="checkout-success__summary-title">
                     Order Summary
                   </h2>
                 </div>
               </div>
 
-              <div className="mt-7 space-y-4 border-t border-[var(--color-border-light)] pt-6">
-                <div className="flex items-center justify-between gap-5 text-xs">
-                  <span className="text-[var(--color-text-muted)]">
-                    MRP Total
-                  </span>
+              <div className="checkout-success__summary-rows">
+                <SummaryRow
+                  label="MRP Total"
+                  value={formatCurrency(
+                    order.mrpTotal,
+                  )}
+                />
 
-                  <span className="font-medium text-[var(--color-text)]">
-                    {formatCurrency(
-                      order.mrpTotal,
-                    )}
-                  </span>
-                </div>
-
-                {order.productDiscount >
-                  0 && (
-                  <div className="flex items-center justify-between gap-5 text-xs">
-                    <span className="text-[var(--color-text-muted)]">
-                      Product Savings
-                    </span>
-
-                    <span className="font-medium text-[var(--color-success)]">
-                      -
-                      {formatCurrency(
-                        order.productDiscount,
-                      )}
-                    </span>
-                  </div>
+                {order.productDiscount > 0 && (
+                  <SummaryRow
+                    label="Product Savings"
+                    value={`-${formatCurrency(
+                      order.productDiscount,
+                    )}`}
+                    valueClassName="checkout-success__summary-value--success"
+                  />
                 )}
 
-                {order.couponDiscount >
-                  0 && (
-                  <div className="flex items-center justify-between gap-5 text-xs">
-                    <span className="text-[var(--color-text-muted)]">
-                      {order.couponCode ||
-                        "Coupon"}
-                    </span>
-
-                    <span className="font-medium text-[var(--color-success)]">
-                      -
-                      {formatCurrency(
-                        order.couponDiscount,
-                      )}
-                    </span>
-                  </div>
+                {order.couponDiscount > 0 && (
+                  <SummaryRow
+                    label={
+                      order.couponCode ||
+                      "Coupon"
+                    }
+                    value={`-${formatCurrency(
+                      order.couponDiscount,
+                    )}`}
+                    valueClassName="checkout-success__summary-value--success"
+                  />
                 )}
 
-                <div className="flex items-center justify-between gap-5 text-xs">
-                  <span className="text-[var(--color-text-muted)]">
-                    {order.deliveryMethod ===
+                <SummaryRow
+                  label={
+                    order.deliveryMethod ===
                     "express"
                       ? "Express Delivery"
-                      : "Standard Delivery"}
-                  </span>
-
-                  <span className="font-medium text-[var(--color-text)]">
-                    {order.shippingAmount ===
-                    0
+                      : "Standard Delivery"
+                  }
+                  value={
+                    order.shippingAmount === 0
                       ? "FREE"
                       : formatCurrency(
                           order.shippingAmount,
-                        )}
-                  </span>
-                </div>
+                        )
+                  }
+                />
               </div>
 
-              <div className="mt-6 border-t border-[var(--color-border-light)] pt-6">
-                <div className="flex items-end justify-between gap-5">
-                  <div>
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
-                      Total
-                    </p>
+              <div className="checkout-success__summary-total">
+                <div>
+                  <p>Total</p>
 
-                    <p className="mt-1.5 text-xs text-[var(--color-text-muted)]">
-                      {isCod
-                        ? "Payable on delivery"
-                        : "Paid securely"}
-                    </p>
-                  </div>
-
-                  <p className="font-[var(--font-display)] text-3xl leading-none text-[var(--color-text)]">
-                    {formatCurrency(
-                      order.total,
-                    )}
-                  </p>
+                  <span>
+                    {isCod
+                      ? "Payable on delivery"
+                      : "Paid securely"}
+                  </span>
                 </div>
+
+                <strong>
+                  {formatCurrency(
+                    order.total,
+                  )}
+                </strong>
               </div>
             </div>
 
             {/* STATUS */}
 
-            <div className="bg-[var(--color-text)] p-6 text-[var(--color-text-inverse)] sm:p-8">
-              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/45">
+            <div className="checkout-success__status">
+              <p className="checkout-success__status-eyebrow">
                 Current Status
               </p>
 
-              <div className="mt-6 flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-white/15 bg-white/[0.04]">
+              <div className="checkout-success__status-content">
+                <div className="checkout-success__status-icon">
                   <Check
                     size={16}
                     strokeWidth={1.7}
                   />
                 </div>
 
-                <div className="min-w-0">
-                  <p className="break-words text-sm font-semibold capitalize">
+                <div>
+                  <p className="checkout-success__status-title">
                     {order.status.replace(
                       /_/g,
                       " ",
                     )}
                   </p>
 
-                  <p className="mt-1.5 text-[10px] leading-5 text-white/50">
+                  <p className="checkout-success__status-description">
                     We&apos;ll keep you updated as
                     your order progresses.
                   </p>
@@ -701,24 +637,24 @@ function CheckoutSuccessContent() {
 
             {/* ACTIONS */}
 
-            <div className="border border-[var(--color-border-light)] bg-[var(--color-surface)] p-6 sm:p-8">
+            <div className="checkout-success__actions">
               {publicAccessToken ? (
                 <Link
                   href={viewOrderHref}
-                  className="group flex min-h-12 w-full items-center justify-center gap-2 bg-[var(--color-text)] px-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-inverse)] transition duration-300 hover:bg-[var(--color-accent-dark)]"
+                  className="checkout-success__action checkout-success__action--primary"
                 >
-                  View Order
+                  <span>View Order</span>
+
                   <ArrowRight
                     size={15}
                     strokeWidth={1.6}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
                   />
                 </Link>
               ) : null}
 
               <Link
                 href="/shop"
-                className="mt-3 flex min-h-12 w-full items-center justify-center border border-[var(--color-border)] bg-[var(--color-surface)] px-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text)] transition duration-300 hover:border-[var(--color-text)] hover:bg-[var(--color-bg-soft)]"
+                className="checkout-success__action checkout-success__action--secondary"
               >
                 Continue Shopping
               </Link>
@@ -731,24 +667,49 @@ function CheckoutSuccessContent() {
           CLOSING NOTE
       ===================================================== */}
 
-      <section className="border-t border-[var(--color-border-light)]">
-        <div className="mx-auto flex w-full max-w-[1440px] items-center gap-4 px-5 py-9 sm:px-8 lg:px-12">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center bg-[var(--color-bg-soft)]">
-            <CheckCircle2
-              size={16}
-              strokeWidth={1.4}
-              className="text-[var(--color-accent-dark)]"
-            />
-          </div>
+      <section className="checkout-success__closing">
+        <div className="checkout-success__container">
+          <div className="checkout-success__closing-inner">
+            <div className="checkout-success__closing-icon">
+              <CheckCircle2
+                size={16}
+                strokeWidth={1.4}
+              />
+            </div>
 
-          <p className="max-w-2xl text-[10px] leading-5 text-[var(--color-text-muted)]">
-            Thank you for choosing Aayesha Fashion.
-            Your order has been successfully recorded
-            and our team will begin processing it shortly.
-          </p>
+            <p>
+              Thank you for choosing Aayesha Fashion.
+              Your order has been successfully recorded
+              and our team will begin processing it shortly.
+            </p>
+          </div>
         </div>
       </section>
     </main>
+  );
+}
+
+/* ==========================================================
+   SUMMARY ROW
+========================================================== */
+
+function SummaryRow({
+  label,
+  value,
+  valueClassName = "",
+}: {
+  label: string;
+  value: string;
+  valueClassName?: string;
+}) {
+  return (
+    <div className="checkout-success__summary-row">
+      <span>{label}</span>
+
+      <strong className={valueClassName}>
+        {value}
+      </strong>
+    </div>
   );
 }
 
@@ -758,11 +719,7 @@ function CheckoutSuccessContent() {
 
 export default function CheckoutSuccessPage() {
   return (
-    <Suspense
-      fallback={
-        <CheckoutSuccessLoading />
-      }
-    >
+    <Suspense fallback={<CheckoutSuccessLoading />}>
       <CheckoutSuccessContent />
     </Suspense>
   );

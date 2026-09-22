@@ -6,6 +6,8 @@ import type { ProductSort } from "@/types/product";
 import { ShopHeader } from "@/components/shop/shop-header";
 import { ShopProductGrid } from "@/components/shop/shop-product-grid";
 
+import "./ShopPage.css";
+
 type ShopPageProps = {
   searchParams: Promise<{
     category?: string;
@@ -28,25 +30,36 @@ const validSorts: ProductSort[] = [
 ];
 
 function parseNumber(value?: string) {
-  if (!value) return undefined;
+  if (!value) {
+    return undefined;
+  }
 
   const parsed = Number(value);
 
-  return Number.isFinite(parsed) ? parsed : undefined;
+  return Number.isFinite(parsed)
+    ? parsed
+    : undefined;
 }
 
 export const metadata: Metadata = {
-  title: "Shop Women's Fashion",
+  title: "Shop Women's Fashion | Aayesha Fashion",
+
   description:
     "Explore Aayesha Fashion's curated collection of elegant Indian fashion, contemporary silhouettes, festive wear, and timeless everyday styles.",
+
   alternates: {
     canonical: "/shop",
   },
+
   openGraph: {
-    title: "Shop Women's Fashion | Aayesha Fashion",
+    title:
+      "Shop Women's Fashion | Aayesha Fashion",
+
     description:
       "Explore elegant Indian fashion, festive silhouettes, and contemporary styles from Aayesha Fashion.",
+
     url: "/shop",
+
     type: "website",
   },
 };
@@ -56,41 +69,51 @@ export default async function ShopPage({
 }: ShopPageProps) {
   const params = await searchParams;
 
-  const categoryId = params.category || undefined;
+  const categoryId =
+    params.category || undefined;
 
   const sort =
     params.sort &&
-    validSorts.includes(params.sort as ProductSort)
+    validSorts.includes(
+      params.sort as ProductSort,
+    )
       ? (params.sort as ProductSort)
       : "relevance";
 
-  const minPrice = parseNumber(params.minPrice);
-  const maxPrice = parseNumber(params.maxPrice);
+  const minPrice = parseNumber(
+    params.minPrice,
+  );
+
+  const maxPrice = parseNumber(
+    params.maxPrice,
+  );
 
   const inStockOnly =
-    params.availability === "in-stock"
+    params.availability ===
+    "in-stock"
       ? true
       : undefined;
 
-  const response = await getProducts({
-    page: 1,
-    limit: 48,
-    categoryId,
-    minPrice,
-    maxPrice,
-    inStockOnly,
-    search: params.search,
-    sort,
-  });
+  const response =
+    await getProducts({
+      page: 1,
+      limit: 48,
+      categoryId,
+      minPrice,
+      maxPrice,
+      inStockOnly,
+      search: params.search,
+      sort,
+    });
 
   return (
-    <main className="min-h-screen bg-[var(--color-ivory)]">
+    <main className="shop-page">
       {/* =====================================================
           SHOP HEADER
       ===================================================== */}
 
-      <section className="bg-[var(--color-ivory)]">
-        <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
+      <section className="shop-page__header">
+        <div className="shop-page__container">
           <ShopHeader
             products={response.products}
             selectedSort={sort}
@@ -99,16 +122,18 @@ export default async function ShopPage({
       </section>
 
       {/* =====================================================
-          PRODUCT GRID
+          PRODUCT COLLECTION
       ===================================================== */}
 
-      <section className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
-        <div className="min-w-0">
-          <ShopProductGrid
-            products={response.products}
-            category={categoryId}
-            sort={sort}
-          />
+      <section className="shop-page__collection">
+        <div className="shop-page__container">
+          <div className="shop-page__collection-frame">
+            <ShopProductGrid
+              products={response.products}
+              category={categoryId}
+              sort={sort}
+            />
+          </div>
         </div>
       </section>
     </main>

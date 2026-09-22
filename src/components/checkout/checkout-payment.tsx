@@ -10,6 +10,8 @@ import {
 
 import { useCheckoutStore } from "@/store/checkout-store";
 
+import "./CheckoutPayment.css";
+
 export function CheckoutPayment() {
   const selected = useCheckoutStore(
     (state) => state.payment,

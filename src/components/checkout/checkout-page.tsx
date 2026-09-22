@@ -16,6 +16,7 @@ import { CheckoutPayment } from "@/components/checkout/checkout-payment";
 import { CheckoutCoupon } from "@/components/checkout/checkout-coupon";
 import { CheckoutSummary } from "@/components/checkout/checkout-summary";
 import { CheckoutPlaceOrder } from "@/components/checkout/checkout-place-order";
+import "./CheckoutPage.css";
 
 export function CheckoutPage() {
   const [hasItems, setHasItems] = useState(false);

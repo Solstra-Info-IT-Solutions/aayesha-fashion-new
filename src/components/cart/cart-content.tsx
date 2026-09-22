@@ -20,6 +20,8 @@ import {
   type Cart,
 } from "@/services/cart.service";
 
+import "./CartContent.css";
+
 export function CartContent() {
   const [cart, setCart] = useState<Cart | null>(null);
 

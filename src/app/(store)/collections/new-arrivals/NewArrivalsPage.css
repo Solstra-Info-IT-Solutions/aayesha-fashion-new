@@ -1,0 +1,241 @@
+/* =========================================================
+   AAYESHA — NEW ARRIVALS PAGE
+   Editorial Collection Layout
+   ========================================================= */
+
+.new-arrivals-page {
+  min-height: 100vh;
+  background: #f7f3f0;
+  color: #3f2d2a;
+}
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.new-arrivals-page__container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-inline: 32px;
+}
+
+/* =========================================================
+   HERO / PAGE HEADING
+   ========================================================= */
+
+.new-arrivals-page__hero {
+  background: #f7f3f0;
+  border-bottom: 1px solid #e8ded9;
+}
+
+.new-arrivals-page__heading {
+  padding: 30px 0 28px;
+}
+
+.new-arrivals-page__eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.new-arrivals-page__eyebrow-line {
+  width: 22px;
+  height: 1px;
+  flex: 0 0 auto;
+  background: #6f4b47;
+}
+
+.new-arrivals-page__eyebrow {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6f4b47;
+}
+
+.new-arrivals-page__title {
+  margin: 9px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 2.4vw, 2.55rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: #3f2d2a;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.new-arrivals-page__content {
+  background: #f7f3f0;
+}
+
+.new-arrivals-page__content-container {
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+.new-arrivals-page__layout {
+  display: grid;
+  grid-template-columns: 215px minmax(0, 1fr);
+  gap: 44px;
+  align-items: start;
+}
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+.new-arrivals-page__filters {
+  min-width: 0;
+}
+
+.new-arrivals-page__filters-sticky {
+  position: sticky;
+  top: 112px;
+}
+
+.new-arrivals-page__filters-card {
+  overflow: hidden;
+  border: 1px solid #d8cbc5;
+  background: #f1eae6;
+}
+
+.new-arrivals-page__filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 46px;
+  padding: 0 16px;
+  border-bottom: 1px solid #d8cbc5;
+}
+
+.new-arrivals-page__filters-title {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3f2d2a;
+}
+
+.new-arrivals-page__filters-label {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #8b7974;
+}
+
+.new-arrivals-page__filters-body {
+  padding: 4px 16px 8px;
+}
+
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
+
+.new-arrivals-page__products {
+  min-width: 0;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1279px) {
+  .new-arrivals-page__container {
+    padding-inline: 28px;
+  }
+
+  .new-arrivals-page__layout {
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .new-arrivals-page__container {
+    padding-inline: 24px;
+  }
+
+  .new-arrivals-page__heading {
+    padding-top: 26px;
+    padding-bottom: 24px;
+  }
+
+  .new-arrivals-page__content-container {
+    padding-top: 28px;
+    padding-bottom: 40px;
+  }
+
+  .new-arrivals-page__layout {
+    display: block;
+  }
+
+  .new-arrivals-page__filters {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .new-arrivals-page__container {
+    padding-inline: 16px;
+  }
+
+  .new-arrivals-page__heading {
+    padding-top: 22px;
+    padding-bottom: 21px;
+  }
+
+  .new-arrivals-page__eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.18em;
+  }
+
+  .new-arrivals-page__eyebrow-line {
+    width: 18px;
+  }
+
+  .new-arrivals-page__title {
+    margin-top: 8px;
+    font-size: 2rem;
+  }
+
+  .new-arrivals-page__content-container {
+    padding-top: 22px;
+    padding-bottom: 32px;
+  }
+}
+
+@media (max-width: 390px) {
+  .new-arrivals-page__container {
+    padding-inline: 14px;
+  }
+
+  .new-arrivals-page__title {
+    font-size: 1.85rem;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .new-arrivals-page *,
+  .new-arrivals-page *::before,
+  .new-arrivals-page *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
