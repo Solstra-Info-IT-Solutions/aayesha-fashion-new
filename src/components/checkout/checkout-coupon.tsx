@@ -5,6 +5,10 @@ import {
   useState,
 } from "react";
 
+import {
+  useSearchParams,
+} from "next/navigation";
+
 import toast from "react-hot-toast";
 
 import {
@@ -26,6 +30,8 @@ import "./CheckoutCoupon.css";
 ========================================================= */
 
 export function CheckoutCoupon() {
+  const searchParams = useSearchParams();
+
   const couponCode = useCheckoutStore(
     (state) => state.couponCode,
   );
@@ -99,6 +105,44 @@ export function CheckoutCoupon() {
   useEffect(() => {
     setInput(couponCode);
   }, [couponCode]);
+
+  /* =========================================================
+     READ COUPON FROM URL
+     
+     Example:
+     /checkout?coupon=WELCOME10
+     
+     This only pre-fills the field.
+     It does NOT apply the coupon automatically.
+  ========================================================= */
+
+  useEffect(() => {
+    const queryCoupon =
+      searchParams.get("coupon");
+
+    if (!queryCoupon?.trim()) {
+      return;
+    }
+
+    const normalizedCoupon =
+      queryCoupon
+        .trim()
+        .toUpperCase()
+        .slice(0, 40);
+
+    if (!normalizedCoupon) {
+      return;
+    }
+
+    setInput(normalizedCoupon);
+
+    setCouponCode(
+      normalizedCoupon,
+    );
+  }, [
+    searchParams,
+    setCouponCode,
+  ]);
 
   /* =========================================================
      LOAD CART FROM BACKEND
@@ -389,7 +433,9 @@ export function CheckoutCoupon() {
 
         {/* APPLIED COUPON */}
 
-        {couponCode ? (
+        {couponCode &&
+        couponDiscount > 0 ||
+        couponShippingDiscount > 0 ? (
           <div
             className="checkout-coupon__applied"
             role="status"

@@ -21,6 +21,14 @@ interface ProductPageProps {
 }
 
 /* ============================================================
+   SITE URL
+============================================================ */
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://www.aayeshafashion.com";
+
+/* ============================================================
    NORMALIZE PRODUCT
 ============================================================ */
 
@@ -166,6 +174,70 @@ function normalizeProduct(
 }
 
 /* ============================================================
+   GET PRIMARY PRODUCT IMAGE
+============================================================ */
+
+function getPrimaryProductImage(
+  product: Product,
+): {
+  src?: string;
+  alt?: string;
+} {
+  const media =
+    Array.isArray(product.media)
+      ? product.media
+      : [];
+
+  const primaryMedia =
+    media.find(
+      (item) =>
+        item?.isPrimary &&
+        item?.type === "image" &&
+        Boolean(item?.src),
+    ) ??
+    media.find(
+      (item) =>
+        item?.type === "image" &&
+        Boolean(item?.src),
+    );
+
+  return {
+    src: primaryMedia?.src,
+    alt:
+      primaryMedia?.alt ||
+      product.name,
+  };
+}
+
+/* ============================================================
+   BUILD PRODUCT URL
+============================================================ */
+
+function getProductUrl(
+  productId: string,
+): string {
+  return `${SITE_URL.replace(
+    /\/$/,
+    "",
+  )}/products/${encodeURIComponent(
+    productId,
+  )}`;
+}
+
+/* ============================================================
+   CLEAN DESCRIPTION
+============================================================ */
+
+function cleanDescription(
+  description: string,
+): string {
+  return description
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/* ============================================================
    DYNAMIC PRODUCT METADATA
 ============================================================ */
 
@@ -200,33 +272,31 @@ export async function generateMetadata({
       product.seo?.title ||
       `${product.name} | Aayesha Fashion`;
 
-    const description =
+    const rawDescription =
       product.seo?.description ||
       product.content?.description ||
       `Discover ${product.name} from Aayesha Fashion.`;
 
+    const description =
+      cleanDescription(
+        rawDescription,
+      ).slice(0, 160);
+
+    const productUrl =
+      getProductUrl(product._id);
+
     const canonical =
       product.seo?.canonical ||
-      `/products/${product._id}`;
-
-    const media =
-      Array.isArray(product.media)
-        ? product.media
-        : [];
-
-    const primaryMedia =
-      media.find(
-        (item) =>
-          item?.isPrimary &&
-          item?.type === "image",
-      ) ??
-      media.find(
-        (item) =>
-          item?.type === "image",
-      );
+      productUrl;
 
     const primaryImage =
-      primaryMedia?.src;
+      getPrimaryProductImage(
+        product,
+      );
+
+    const shouldIndex =
+      product.seo?.noIndex !== true &&
+      product.status === "active";
 
     return {
       title,
@@ -243,29 +313,41 @@ export async function generateMetadata({
         canonical,
       },
 
-      robots: product.seo
-        ?.noIndex
+      robots: shouldIndex
         ? {
-            index: false,
-            follow: false,
-          }
-        : {
             index: true,
             follow: true,
+          }
+        : {
+            index: false,
+            follow: false,
           },
 
       openGraph: {
         title,
+
         description,
+
         url: canonical,
+
+        siteName:
+          "Aayesha Fashion",
+
+        locale: "en_IN",
+
         type: "website",
 
-        images: primaryImage
+        images: primaryImage.src
           ? [
               {
-                url: primaryImage,
+                url: primaryImage.src,
+
+                width: 1200,
+
+                height: 1500,
+
                 alt:
-                  primaryMedia?.alt ||
+                  primaryImage.alt ||
                   product.name,
               },
             ]
@@ -277,11 +359,26 @@ export async function generateMetadata({
           "summary_large_image",
 
         title,
+
         description,
 
-        images: primaryImage
-          ? [primaryImage]
+        images: primaryImage.src
+          ? [
+              primaryImage.src,
+            ]
           : undefined,
+      },
+
+      other: {
+        "product:price:amount":
+          String(
+            product.pricing
+              ?.sellingPrice ?? 0,
+          ),
+
+        "product:price:currency":
+          product.pricing
+            ?.currency || "INR",
       },
     };
   } catch (error) {

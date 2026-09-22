@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 
 import type { Product } from "@/types/product";
 
+import { ProductShare } from "./product-share";
+
 import {
   getAvailableStock,
   getInventoryStatus,
@@ -22,11 +24,12 @@ import { useAuthStore } from "@/store/auth-store";
 
 import { RecentlyViewed } from "@/components/recently-viewed/recently-viewed";
 
+import { WishlistButton } from "./wishlist-button";
+
 import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  Heart,
   Minus,
   Plus,
   ShoppingBag,
@@ -229,9 +232,6 @@ export function ProductDetail({
   const [quantity, setQuantity] =
     useState(1);
 
-  const [wishlist, setWishlist] =
-    useState(false);
-
   const [openSection, setOpenSection] =
     useState<string | null>(
       "description",
@@ -349,20 +349,19 @@ export function ProductDetail({
   useEffect(() => {
     setSelectedImage(0);
     setQuantity(1);
-    setWishlist(false);
   }, [safeProduct._id]);
 
   /* ==========================================================
-   RECENTLY VIEWED
-========================================================== */
+     RECENTLY VIEWED
+  ========================================================== */
 
-useEffect(() => {
-  if (!safeProduct._id) {
-    return;
-  }
+  useEffect(() => {
+    if (!safeProduct._id) {
+      return;
+    }
 
-  addRecentlyViewed(safeProduct._id);
-}, [safeProduct._id]);
+    addRecentlyViewed(safeProduct._id);
+  }, [safeProduct._id]);
 
   /* ==========================================================
      QUANTITY
@@ -759,40 +758,19 @@ useEffect(() => {
                     </h1>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setWishlist(
-                        (current) =>
-                          !current,
-                      )
-                    }
-                    aria-label={
-                      wishlist
-                        ? "Remove from wishlist"
-                        : "Add to wishlist"
-                    }
-                    aria-pressed={
-                      wishlist
-                    }
-                    className={[
-                      "product-detail__wishlist",
-                      wishlist
-                        ? "product-detail__wishlist--active"
-                        : "",
-                    ]
-                      .filter(Boolean)
-                      .join(" ")}
-                  >
-                    <Heart
-                      aria-hidden="true"
-                      fill={
-                        wishlist
-                          ? "currentColor"
-                          : "none"
+                  <div className="product-detail__title-actions">
+                    <ProductShare
+                      productName={
+                        safeProduct.name
                       }
                     />
-                  </button>
+                    <WishlistButton
+  productId={safeProduct._id}
+  productName={safeProduct.name}
+  className="product-detail__wishlist"
+/>
+                    
+                  </div>
                 </div>
 
                 {/* Price */}
@@ -1557,7 +1535,7 @@ useEffect(() => {
         </section>
       )}
 
-            {/* =====================================================
+      {/* =====================================================
           RECENTLY VIEWED
       ===================================================== */}
 

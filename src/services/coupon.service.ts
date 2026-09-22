@@ -51,10 +51,67 @@ export interface ValidateCustomerCouponResponse {
   message: string;
 }
 
+export interface AvailableCustomerCoupon {
+  code: string;
+
+  description: string;
+
+  discountType:
+    | "percentage"
+    | "fixed"
+    | "free_shipping";
+
+  discountValue: number;
+
+  maxDiscountAmount:
+    | number
+    | null;
+
+  minimumOrderValue: number;
+
+  startsAt: string;
+
+  endsAt: string | null;
+
+  firstOrderOnly: boolean;
+
+  applicableProductIds: string[];
+}
+
 interface CouponApiResponse {
   success: boolean;
   data: ValidateCustomerCouponResponse;
 }
+
+interface AvailableCouponsApiResponse {
+  success: boolean;
+  data: AvailableCustomerCoupon[];
+}
+
+/* =========================================================
+   GET AVAILABLE CUSTOMER COUPONS
+========================================================= */
+
+export const getAvailableCustomerCoupons =
+  async (): Promise<
+    AvailableCustomerCoupon[]
+  > => {
+    const response =
+      await apiFetch<AvailableCouponsApiResponse>(
+        "/coupons/available",
+        {
+          method: "GET",
+        },
+      );
+
+    if (!response.success) {
+      throw new Error(
+        "Unable to load available coupons.",
+      );
+    }
+
+    return response.data;
+  };
 
 /* =========================================================
    VALIDATE CUSTOMER COUPON
@@ -97,9 +154,7 @@ export const validateCustomerCoupon =
         },
       );
 
-    if (
-      !response.success
-    ) {
+    if (!response.success) {
       throw new Error(
         "Unable to validate coupon.",
       );
