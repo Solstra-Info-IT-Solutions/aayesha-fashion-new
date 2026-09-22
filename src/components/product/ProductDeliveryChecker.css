@@ -1,0 +1,397 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT DELIVERY CHECKER
+   Editorial / Quiet Luxury
+   ========================================================= */
+
+.product-delivery-checker {
+  width: 100%;
+  padding: 22px 0;
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+
+  color: var(--color-text, #3f2d2a);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.product-delivery-checker__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.product-delivery-checker__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  border: 1px solid var(--color-border-dark, #b9a7a0);
+
+  background: var(--color-bg-soft, #f1eae6);
+  color: var(--color-accent, #6f4b47);
+}
+
+.product-delivery-checker__icon-svg {
+  width: 17px;
+  height: 17px;
+
+  color: currentColor;
+}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.product-delivery-checker__intro {
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.product-delivery-checker__title {
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.product-delivery-checker__description {
+  margin: 5px 0 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+
+  color: var(--color-text-secondary, #6f625d);
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.product-delivery-checker__form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px;
+
+  width: 100%;
+
+  margin-top: 18px;
+}
+
+.product-delivery-checker__input {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--color-border-dark, #b9a7a0);
+  border-right: 0;
+  border-radius: 0;
+
+  outline: none;
+
+  background: var(--color-surface, #fbf8f5);
+  color: var(--color-text, #3f2d2a);
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+
+  letter-spacing: 0.04em;
+
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.product-delivery-checker__input::placeholder {
+  color: var(--color-text-muted, #8d817b);
+}
+
+.product-delivery-checker__input:hover {
+  border-color: var(--color-accent, #6f4b47);
+}
+
+.product-delivery-checker__input:focus {
+  border-color: var(--color-accent, #6f4b47);
+
+  background: #ffffff;
+
+  box-shadow: inset 0 0 0 1px
+    var(--color-accent, #6f4b47);
+}
+
+.product-delivery-checker__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 46px;
+
+  padding: 0 16px;
+
+  border: 1px solid #6f4b47;
+  border-radius: 0;
+
+  background: #6f4b47;
+  color: #ffffff;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.product-delivery-checker__button:hover {
+  border-color: #3f2d2a;
+
+  background: #3f2d2a;
+  color: #ffffff;
+}
+
+.product-delivery-checker__button:active {
+  border-color: #7f5953;
+
+  background: #7f5953;
+  color: #ffffff;
+
+  transform: translateY(1px);
+}
+
+.product-delivery-checker__button:focus-visible {
+  position: relative;
+  z-index: 1;
+
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   HINT
+   ========================================================= */
+
+.product-delivery-checker__hint {
+  margin: 8px 0 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  letter-spacing: 0.03em;
+
+  color: var(--color-text-muted, #8d817b);
+}
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.product-delivery-checker__result {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  margin-top: 18px;
+  padding: 14px;
+
+  border: 1px solid rgba(111, 75, 71, 0.28);
+
+  background: rgba(185, 130, 121, 0.08);
+
+  animation: delivery-result-in 220ms ease-out both;
+}
+
+.product-delivery-checker__result-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  flex: 0 0 28px;
+
+  border: 1px solid var(--color-accent, #6f4b47);
+
+  background: var(--color-accent, #6f4b47);
+  color: #ffffff;
+}
+
+.product-delivery-checker__result-icon-svg {
+  width: 14px;
+  height: 14px;
+
+  color: #ffffff;
+}
+
+.product-delivery-checker__result-content {
+  min-width: 0;
+}
+
+.product-delivery-checker__result-title {
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.product-delivery-checker__result-description {
+  margin: 4px 0 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.6;
+
+  color: var(--color-text-secondary, #6f625d);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-delivery-checker {
+    padding: 18px 0;
+  }
+
+  .product-delivery-checker__header {
+    gap: 11px;
+  }
+
+  .product-delivery-checker__icon {
+    width: 34px;
+    height: 34px;
+
+    flex-basis: 34px;
+  }
+
+  .product-delivery-checker__icon-svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .product-delivery-checker__title {
+    font-size: 10px;
+  }
+
+  .product-delivery-checker__description {
+    font-size: 10px;
+  }
+
+  .product-delivery-checker__form {
+    grid-template-columns: minmax(0, 1fr) 88px;
+
+    margin-top: 15px;
+  }
+
+  .product-delivery-checker__input,
+  .product-delivery-checker__button {
+    height: 44px;
+  }
+
+  .product-delivery-checker__input {
+    padding-inline: 12px;
+
+    font-size: 11px;
+  }
+
+  .product-delivery-checker__button {
+    padding-inline: 12px;
+
+    font-size: 9px;
+  }
+
+  .product-delivery-checker__result {
+    margin-top: 15px;
+    padding: 12px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-delivery-checker__form {
+    grid-template-columns: minmax(0, 1fr) 82px;
+  }
+
+  .product-delivery-checker__input {
+    font-size: 10.5px;
+  }
+
+  .product-delivery-checker__button {
+    font-size: 8.5px;
+  }
+
+  .product-delivery-checker__result {
+    gap: 9px;
+  }
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes delivery-result-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-delivery-checker__input,
+  .product-delivery-checker__button,
+  .product-delivery-checker__result {
+    transition: none;
+    animation: none;
+  }
+}

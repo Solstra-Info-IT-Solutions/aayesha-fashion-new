@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check, ShoppingBag, X } from "lucide-react";
 
 import type { Product } from "@/types/product";
+import "./AddToBagPopup.css";
 
 type AddToBagPopupProps = {
   open: boolean;

@@ -1,0 +1,567 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT LIGHTBOX
+   Editorial / Quiet Luxury
+   ========================================================= */
+
+.product-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #2b211f;
+  color: #ffffff;
+
+  animation: product-lightbox-in 220ms ease-out both;
+}
+
+/* =========================================================
+   BACKDROP
+   ========================================================= */
+
+.product-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 0;
+
+  background: #2b211f;
+
+  cursor: default;
+}
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.product-lightbox__topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 24px 28px;
+
+  pointer-events: none;
+}
+
+.product-lightbox__product {
+  min-width: 0;
+  max-width: min(420px, calc(100% - 72px));
+}
+
+.product-lightbox__eyebrow {
+  margin: 0 0 6px;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: #d8b7b0;
+}
+
+.product-lightbox__product-name {
+  margin: 0;
+
+  overflow: hidden;
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.1;
+
+  letter-spacing: -0.01em;
+
+  color: #ffffff;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CLOSE
+   ========================================================= */
+
+.product-lightbox__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 0;
+
+  background: rgba(63, 45, 42, 0.78);
+  color: #ffffff;
+
+  cursor: pointer;
+  pointer-events: auto;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.product-lightbox__close:hover {
+  border-color: #ffffff;
+
+  background: #6f4b47;
+  color: #ffffff;
+}
+
+.product-lightbox__close:active {
+  border-color: #ffffff;
+
+  background: #7f5953;
+  color: #ffffff;
+
+  transform: scale(0.95);
+}
+
+.product-lightbox__close:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.product-lightbox__close-icon {
+  width: 18px;
+  height: 18px;
+
+  color: currentColor;
+
+  stroke-width: 1.35;
+}
+
+/* =========================================================
+   MEDIA AREA
+   ========================================================= */
+
+.product-lightbox__media-area {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 92px 92px 84px;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.product-lightbox__image-frame {
+  position: relative;
+
+  width: min(78vw, 980px);
+  height: min(78vh, 760px);
+
+  overflow: hidden;
+
+  background: #3f302d;
+
+  pointer-events: auto;
+}
+
+.product-lightbox__image {
+  object-fit: contain;
+
+  user-select: none;
+}
+
+/* =========================================================
+   VIDEO
+   ========================================================= */
+
+.product-lightbox__video {
+  display: block;
+
+  width: min(82vw, 1000px);
+  height: min(76vh, 720px);
+
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+
+  background: #1e1716;
+
+  pointer-events: auto;
+}
+
+/* =========================================================
+   IFRAME
+   ========================================================= */
+
+.product-lightbox__iframe {
+  display: block;
+
+  width: min(82vw, 1000px);
+  height: min(76vh, 720px);
+
+  max-width: 100%;
+  max-height: 100%;
+
+  border: 0;
+
+  background: #1e1716;
+
+  pointer-events: auto;
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.product-lightbox__navigation {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 0;
+
+  background: rgba(63, 45, 42, 0.78);
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.product-lightbox__navigation--previous {
+  left: 24px;
+}
+
+.product-lightbox__navigation--next {
+  right: 24px;
+}
+
+.product-lightbox__navigation:hover {
+  border-color: #ffffff;
+
+  background: #6f4b47;
+  color: #ffffff;
+}
+
+.product-lightbox__navigation:active {
+  border-color: #ffffff;
+
+  background: #7f5953;
+  color: #ffffff;
+}
+
+.product-lightbox__navigation--previous:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.product-lightbox__navigation--next:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.product-lightbox__navigation:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.product-lightbox__navigation-icon {
+  width: 19px;
+  height: 19px;
+
+  color: currentColor;
+
+  stroke-width: 1.25;
+
+  transition: transform 180ms ease;
+}
+
+.product-lightbox__navigation--previous:hover
+  .product-lightbox__navigation-icon {
+  transform: translateX(-2px);
+}
+
+.product-lightbox__navigation--next:hover
+  .product-lightbox__navigation-icon {
+  transform: translateX(2px);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.product-lightbox__footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px 28px;
+
+  pointer-events: none;
+}
+
+.product-lightbox__counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.16em;
+
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.product-lightbox__counter-line {
+  display: block;
+
+  width: 34px;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.38);
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .product-lightbox__topbar {
+    padding: 20px 22px;
+  }
+
+  .product-lightbox__media-area {
+    padding: 82px 74px 72px;
+  }
+
+  .product-lightbox__image-frame {
+    width: min(82vw, 820px);
+    height: min(76vh, 680px);
+  }
+
+  .product-lightbox__navigation--previous {
+    left: 16px;
+  }
+
+  .product-lightbox__navigation--next {
+    right: 16px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-lightbox__topbar {
+    padding: 14px 14px;
+  }
+
+  .product-lightbox__product {
+    max-width: calc(100% - 58px);
+  }
+
+  .product-lightbox__eyebrow {
+    margin-bottom: 4px;
+
+    font-size: 7px;
+  }
+
+  .product-lightbox__product-name {
+    font-size: 17px;
+  }
+
+  .product-lightbox__close {
+    width: 38px;
+    height: 38px;
+
+    flex-basis: 38px;
+  }
+
+  .product-lightbox__close-icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .product-lightbox__media-area {
+    padding: 68px 16px 86px;
+  }
+
+  .product-lightbox__image-frame {
+    width: 100%;
+    height: min(72vh, 680px);
+  }
+
+  .product-lightbox__video,
+  .product-lightbox__iframe {
+    width: 100%;
+    height: min(68vh, 600px);
+  }
+
+  .product-lightbox__navigation {
+    top: auto;
+    bottom: 54px;
+
+    width: 40px;
+    height: 40px;
+
+    transform: none;
+  }
+
+  .product-lightbox__navigation--previous {
+    left: 16px;
+  }
+
+  .product-lightbox__navigation--next {
+    right: 16px;
+  }
+
+  .product-lightbox__navigation--previous:active,
+  .product-lightbox__navigation--next:active {
+    transform: scale(0.95);
+  }
+
+  .product-lightbox__navigation-icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .product-lightbox__footer {
+    padding: 17px 16px;
+
+    justify-content: center;
+  }
+
+  .product-lightbox__counter {
+    font-size: 8px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-lightbox__media-area {
+    padding-inline: 12px;
+  }
+
+  .product-lightbox__image-frame {
+    height: min(70vh, 600px);
+  }
+
+  .product-lightbox__navigation {
+    bottom: 50px;
+
+    width: 38px;
+    height: 38px;
+  }
+
+  .product-lightbox__navigation--previous {
+    left: 12px;
+  }
+
+  .product-lightbox__navigation--next {
+    right: 12px;
+  }
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes product-lightbox-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-lightbox,
+  .product-lightbox__close,
+  .product-lightbox__navigation,
+  .product-lightbox__navigation-icon {
+    animation: none;
+    transition: none;
+  }
+
+  .product-lightbox__navigation--previous:hover
+    .product-lightbox__navigation-icon,
+  .product-lightbox__navigation--next:hover
+    .product-lightbox__navigation-icon {
+    transform: none;
+  }
+}

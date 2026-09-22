@@ -1,42 +1,43 @@
 /* =========================================================
    AAYESHA FASHION
    ADD TO CART BUTTON
+   Editorial / Quiet Luxury
    ========================================================= */
 
 .add-to-cart-button {
-  position: relative;
-
-  display: inline-flex;
-  align-items: stretch;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
 
   min-height: 52px;
 
   padding: 0;
 
-  border: 1px solid var(--color-primary);
+  border: 1px solid var(--color-accent, #6f4b47);
   border-radius: 0;
 
-  background: var(--color-primary);
-  color: var(--color-surface);
+  background: var(--color-accent, #6f4b47);
+  color: #ffffff;
 
-  font-family: var(--font-body);
+  cursor: pointer;
+
+  font-family: var(--font-body, Arial, sans-serif);
   font-size: 9px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1;
 
   letter-spacing: 0.17em;
   text-transform: uppercase;
 
-  cursor: pointer;
-
-  overflow: hidden;
-
   transition:
     background-color 220ms ease,
     border-color 220ms ease,
-    color 220ms ease;
+    color 220ms ease,
+    opacity 220ms ease;
 }
+
+/* =========================================================
+   WIDTH
+   ========================================================= */
 
 .add-to-cart-button--full {
   width: 100%;
@@ -44,42 +45,56 @@
 
 .add-to-cart-button--auto {
   width: auto;
+  min-width: 190px;
 }
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
 
 .add-to-cart-button__content {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  gap: 10px;
-
   min-width: 0;
 
-  padding: 0 20px;
+  gap: 9px;
 }
 
 .add-to-cart-button__icon {
   flex: 0 0 auto;
+
+  width: 16px;
+  height: 16px;
+
+  color: currentColor;
 }
 
 .add-to-cart-button__label {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* =========================================================
+   ARROW
+   ========================================================= */
 
 .add-to-cart-button__arrow {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 50px;
-  min-width: 50px;
-
   border-left: 1px solid rgba(255, 255, 255, 0.28);
 
-  font-size: 14px;
-  font-weight: 400;
+  color: #ffffff;
 
-  color: var(--color-surface);
+  font-family: var(--font-body, Arial, sans-serif);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1;
 
   transition:
     background-color 220ms ease,
@@ -92,16 +107,20 @@
    ========================================================= */
 
 .add-to-cart-button:hover:not(:disabled) {
-  background: var(--color-secondary);
-  border-color: var(--color-secondary);
+  border-color: var(--color-accent-dark, #3f2d2a);
+
+  background: var(--color-accent-dark, #3f2d2a);
+
+  color: #ffffff;
 }
 
 .add-to-cart-button:hover:not(:disabled)
   .add-to-cart-button__arrow {
   background: rgba(255, 255, 255, 0.08);
-  color: var(--color-surface);
 
-  transform: translate(1px, -1px);
+  color: #ffffff;
+
+  transform: translate(2px, -2px);
 }
 
 /* =========================================================
@@ -109,14 +128,18 @@
    ========================================================= */
 
 .add-to-cart-button:active:not(:disabled) {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-surface);
+  border-color: #7f5953;
+
+  background: #7f5953;
+
+  color: #ffffff;
 }
 
 .add-to-cart-button:active:not(:disabled)
   .add-to-cart-button__arrow {
-  color: var(--color-surface);
+  color: #ffffff;
+
+  transform: translate(1px, -1px);
 }
 
 /* =========================================================
@@ -124,13 +147,38 @@
    ========================================================= */
 
 .add-to-cart-button:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 3px;
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 4px;
 }
 
 .add-to-cart-button:focus-visible
   .add-to-cart-button__arrow {
-  color: var(--color-surface);
+  color: #ffffff;
+}
+
+/* =========================================================
+   DISABLED
+   ========================================================= */
+
+.add-to-cart-button:disabled {
+  cursor: not-allowed;
+
+  border-color: var(--color-accent, #6f4b47);
+
+  background: var(--color-accent, #6f4b47);
+
+  color: #ffffff;
+
+  opacity: 0.58;
+}
+
+.add-to-cart-button:disabled
+  .add-to-cart-button__icon,
+.add-to-cart-button:disabled
+  .add-to-cart-button__label,
+.add-to-cart-button:disabled
+  .add-to-cart-button__arrow {
+  color: #ffffff;
 }
 
 /* =========================================================
@@ -143,32 +191,44 @@
 
 .add-to-cart-button--loading
   .add-to-cart-button__icon {
-  animation: add-to-cart-pulse 900ms ease-in-out infinite;
+  animation: add-to-cart-icon-pulse 900ms ease-in-out infinite;
+}
+
+.add-to-cart-button--loading
+  .add-to-cart-button__arrow {
+  transform: none;
+}
+
+@keyframes add-to-cart-icon-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
 }
 
 /* =========================================================
-   DISABLED
+   TABLET
    ========================================================= */
 
-.add-to-cart-button:disabled {
-  cursor: not-allowed;
+@media (max-width: 1023px) {
+  .add-to-cart-button {
+    min-height: 49px;
 
-  opacity: 0.55;
-}
+    font-size: 8px;
+    letter-spacing: 0.15em;
+  }
 
-/*
- * Don't allow the disabled state to turn
- * the button white/invisible.
- */
-.add-to-cart-button:disabled {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-surface);
-}
-
-.add-to-cart-button:disabled
   .add-to-cart-button__arrow {
-  color: var(--color-surface);
+    font-size: 14px;
+  }
+
+  .add-to-cart-button--auto {
+    min-width: 175px;
+  }
 }
 
 /* =========================================================
@@ -177,20 +237,53 @@
 
 @media (max-width: 639px) {
   .add-to-cart-button {
-    min-height: 50px;
+    grid-template-columns: minmax(0, 1fr) 41px;
 
-    font-size: 8px;
-    letter-spacing: 0.15em;
+    min-height: 46px;
+
+    font-size: 7px;
+    letter-spacing: 0.13em;
+  }
+
+  .add-to-cart-button--auto {
+    width: 100%;
+    min-width: 0;
   }
 
   .add-to-cart-button__content {
-    padding: 0 16px;
-    gap: 8px;
+    gap: 7px;
+  }
+
+  .add-to-cart-button__icon {
+    width: 14px;
+    height: 14px;
   }
 
   .add-to-cart-button__arrow {
-    width: 46px;
-    min-width: 46px;
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .add-to-cart-button {
+    grid-template-columns: minmax(0, 1fr) 38px;
+
+    min-height: 44px;
+
+    font-size: 7px;
+  }
+
+  .add-to-cart-button__content {
+    gap: 6px;
+  }
+
+  .add-to-cart-button__icon {
+    width: 13px;
+    height: 13px;
   }
 }
 
@@ -207,20 +300,5 @@
   .add-to-cart-button--loading
     .add-to-cart-button__icon {
     animation: none;
-  }
-}
-
-/* =========================================================
-   ANIMATION
-   ========================================================= */
-
-@keyframes add-to-cart-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.45;
   }
 }

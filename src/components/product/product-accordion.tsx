@@ -3,6 +3,8 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
+import "./ProductAccordion.css";
+
 interface ProductAccordionProps {
   title: string;
   children: React.ReactNode;

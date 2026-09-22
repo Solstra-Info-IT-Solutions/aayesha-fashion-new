@@ -5,6 +5,8 @@ import {
   RotateCcw,
 } from "lucide-react";
 
+import "./ProductTrustBadges.css";
+
 const trustItems = [
   {
     icon: Truck,

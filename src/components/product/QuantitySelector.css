@@ -1,19 +1,20 @@
 /* =========================================================
    AAYESHA FASHION
    QUANTITY SELECTOR
+   Editorial / Quiet Luxury
    ========================================================= */
 
 .quantity-selector {
-  display: inline-flex;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 42px;
 
-  height: 52px;
+  width: 126px;
+  min-height: 48px;
 
-  border: 1px solid var(--color-border-dark);
+  border: 1px solid var(--color-border-dark, #bcaea8);
 
-  background: var(--color-surface);
-
-  color: var(--color-primary);
+  background: var(--color-surface, #ffffff);
+  color: var(--color-text, #3f2d2a);
 }
 
 /* =========================================================
@@ -25,9 +26,8 @@
   align-items: center;
   justify-content: center;
 
-  width: 48px;
-  min-width: 48px;
-  height: 100%;
+  width: 100%;
+  min-height: 46px;
 
   padding: 0;
 
@@ -35,8 +35,7 @@
   border-radius: 0;
 
   background: transparent;
-
-  color: var(--color-primary);
+  color: var(--color-accent, #6f4b47);
 
   cursor: pointer;
 
@@ -45,22 +44,45 @@
     color 180ms ease;
 }
 
+.quantity-selector__button:first-child {
+  border-right: 1px solid var(--color-border, #d8cbc5);
+}
+
+.quantity-selector__button:last-child {
+  border-left: 1px solid var(--color-border, #d8cbc5);
+}
+
 .quantity-selector__button:hover:not(:disabled) {
-  background: var(--color-secondary);
-  color: var(--color-surface);
+  background: var(--color-accent, #6f4b47);
+  color: #ffffff;
 }
 
 .quantity-selector__button:active:not(:disabled) {
-  background: var(--color-primary);
-  color: var(--color-surface);
+  background: var(--color-accent-dark, #3f2d2a);
+  color: #ffffff;
 }
 
 .quantity-selector__button:focus-visible {
   position: relative;
   z-index: 2;
 
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-accent, #6f4b47);
   outline-offset: -2px;
+}
+
+.quantity-selector__button:disabled {
+  cursor: not-allowed;
+
+  color: var(--color-text-muted, #8a7c76);
+
+  opacity: 0.3;
+}
+
+.quantity-selector__button svg {
+  width: 14px;
+  height: 14px;
+
+  color: currentColor;
 }
 
 /* =========================================================
@@ -72,37 +94,25 @@
   align-items: center;
   justify-content: center;
 
-  min-width: 44px;
-  height: 100%;
+  min-width: 0;
 
-  border-left: 1px solid var(--color-border);
-  border-right: 1px solid var(--color-border);
+  color: var(--color-text, #3f2d2a);
 
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 600;
+  font-family: var(--font-body, Arial, sans-serif);
+  font-size: 10px;
+  font-weight: 700;
   line-height: 1;
 
   letter-spacing: 0.08em;
-
-  color: var(--color-primary);
 }
 
 /* =========================================================
-   DISABLED
+   HOVER / ACTIVE SAFETY
    ========================================================= */
 
-.quantity-selector__button:disabled {
-  cursor: not-allowed;
-
-  color: var(--color-text-muted);
-
-  opacity: 0.35;
-}
-
-.quantity-selector__button:disabled:hover {
-  background: transparent;
-  color: var(--color-text-muted);
+.quantity-selector__button:hover:not(:disabled) svg,
+.quantity-selector__button:active:not(:disabled) svg {
+  color: #ffffff;
 }
 
 /* =========================================================
@@ -111,16 +121,39 @@
 
 @media (max-width: 639px) {
   .quantity-selector {
-    height: 50px;
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+
+    width: 114px;
+    min-height: 45px;
   }
 
   .quantity-selector__button {
-    width: 44px;
-    min-width: 44px;
+    min-height: 43px;
+  }
+
+  .quantity-selector__button svg {
+    width: 13px;
+    height: 13px;
   }
 
   .quantity-selector__value {
-    min-width: 40px;
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .quantity-selector {
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+
+    width: 102px;
+  }
+
+  .quantity-selector__button {
+    min-height: 43px;
   }
 }
 

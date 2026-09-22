@@ -33,79 +33,59 @@ import {
   RotateCcw,
   MapPin,
   Check,
+  ArrowUpRight,
 } from "lucide-react";
+
+import "./ProductDetail.css";
 
 interface ProductDetailProps {
   product: Product;
   recommendations?: Product[];
 }
 
-
 /* ============================================================
    SAFE PRODUCT NORMALIZER
-   ============================================================ */
+============================================================ */
 
-function normalizeProduct(
-  product: Product,
-): Product {
+function normalizeProduct(product: Product): Product {
   const source = product ?? ({} as Product);
 
   return {
     ...source,
 
-    _id:
-      source._id ??
-      source.id ??
-      "",
+    _id: source._id ?? source.id ?? "",
 
-    id:
-      source.id ??
-      source._id ??
-      "",
+    id: source.id ?? source._id ?? "",
 
-    slug:
-      source.slug ?? "",
+    slug: source.slug ?? "",
 
-    name:
-      source.name ??
-      "Product",
+    name: source.name ?? "Product",
 
-    categoryId:
-      source.categoryId ??
-      "",
+    categoryId: source.categoryId ?? "",
 
     pricing: {
-      mrp:
-        source.pricing?.mrp ??
-        0,
+      mrp: source.pricing?.mrp ?? 0,
 
       sellingPrice:
-        source.pricing?.sellingPrice ??
-        0,
+        source.pricing?.sellingPrice ?? 0,
 
       currency:
-        source.pricing?.currency ??
-        "INR",
+        source.pricing?.currency ?? "INR",
     },
 
     inventory: {
-      stock:
-        source.inventory?.stock ??
-        0,
+      stock: source.inventory?.stock ?? 0,
 
       reserved:
-        source.inventory?.reserved ??
-        0,
+        source.inventory?.reserved ?? 0,
 
       lowStockThreshold:
-        source.inventory?.lowStockThreshold ??
-        2,
+        source.inventory?.lowStockThreshold ?? 2,
     },
 
     content: {
       description:
-        source.content?.description ??
-        "",
+        source.content?.description ?? "",
 
       descriptionFormat:
         source.content?.descriptionFormat ??
@@ -121,8 +101,7 @@ function normalizeProduct(
 
     merchandising: {
       isNew:
-        source.merchandising?.isNew ??
-        false,
+        source.merchandising?.isNew ?? false,
 
       isFeatured:
         source.merchandising?.isFeatured ??
@@ -157,39 +136,32 @@ function normalizeProduct(
       : undefined,
 
     status:
-      source.status ??
-      "draft",
+      source.status ?? "draft",
 
     publishedAt:
       source.publishedAt,
 
     createdAt:
-      source.createdAt ??
-      "",
+      source.createdAt ?? "",
 
     updatedAt:
-      source.updatedAt ??
-      "",
+      source.updatedAt ?? "",
   };
 }
 
-
 /* ============================================================
-   PRICE FORMATTER
-   ============================================================ */
+   FORMAT PRICE
+============================================================ */
 
-function formatPrice(
-  value: number,
-): string {
+function formatPrice(value: number): string {
   return `₹${Number(
     value ?? 0,
   ).toLocaleString("en-IN")}`;
 }
 
-
 /* ============================================================
    DISCOUNT
-   ============================================================ */
+============================================================ */
 
 function getDiscount(
   mrp: number,
@@ -203,15 +175,13 @@ function getDiscount(
   }
 
   return Math.round(
-    ((mrp - sellingPrice) / mrp) *
-      100,
+    ((mrp - sellingPrice) / mrp) * 100,
   );
 }
 
-
 /* ============================================================
    MAIN COMPONENT
-   ============================================================ */
+============================================================ */
 
 export function ProductDetail({
   product,
@@ -219,37 +189,32 @@ export function ProductDetail({
 }: ProductDetailProps) {
   const router = useRouter();
 
-  const {
-    isAuthenticated,
-  } = useAuthStore();
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated,
+  );
 
   /* ==========================================================
      SAFE PRODUCT
-     ========================================================== */
+  ========================================================== */
 
   const safeProduct = useMemo(
-    () =>
-      normalizeProduct(product),
+    () => normalizeProduct(product),
     [product],
   );
 
-  const safeRecommendations =
-    useMemo(
-      () =>
-        Array.isArray(
-          recommendations,
-        )
-          ? recommendations
-              .filter(Boolean)
-              .map(normalizeProduct)
-          : [],
-      [recommendations],
-    );
-
+  const safeRecommendations = useMemo(
+    () =>
+      Array.isArray(recommendations)
+        ? recommendations
+            .filter(Boolean)
+            .map(normalizeProduct)
+        : [],
+    [recommendations],
+  );
 
   /* ==========================================================
      STATE
-     ========================================================== */
+  ========================================================== */
 
   const [categoryName, setCategoryName] =
     useState("");
@@ -280,39 +245,32 @@ export function ProductDetail({
   const [buyingNow, setBuyingNow] =
     useState(false);
 
-
   /* ==========================================================
      PRODUCT VALUES
-     ========================================================== */
+  ========================================================== */
 
-  const maxStock =
-    getAvailableStock(
-      safeProduct,
-    );
+  const maxStock = getAvailableStock(
+    safeProduct,
+  );
 
   const inventoryStatus =
-    getInventoryStatus(
-      safeProduct,
-    );
+    getInventoryStatus(safeProduct);
 
   const mrp =
-    safeProduct.pricing?.mrp ??
-    0;
+    safeProduct.pricing?.mrp ?? 0;
 
   const sellingPrice =
-    safeProduct.pricing
-      ?.sellingPrice ?? 0;
+    safeProduct.pricing?.sellingPrice ??
+    0;
 
-  const discount =
-    getDiscount(
-      mrp,
-      sellingPrice,
-    );
-
+  const discount = getDiscount(
+    mrp,
+    sellingPrice,
+  );
 
   /* ==========================================================
      PRODUCT MEDIA
-     ========================================================== */
+  ========================================================== */
 
   const media = Array.isArray(
     safeProduct.media,
@@ -329,10 +287,9 @@ export function ProductDetail({
     media[0] ??
     null;
 
-
   /* ==========================================================
      LOAD CATEGORY
-     ========================================================== */
+  ========================================================== */
 
   useEffect(() => {
     let cancelled = false;
@@ -342,9 +299,7 @@ export function ProductDetail({
         const categories =
           await getCategories();
 
-        if (
-          !Array.isArray(categories)
-        ) {
+        if (!Array.isArray(categories)) {
           return;
         }
 
@@ -373,7 +328,7 @@ export function ProductDetail({
     }
 
     if (safeProduct.categoryId) {
-      loadCategory();
+      void loadCategory();
     } else {
       setCategoryName("");
     }
@@ -381,14 +336,11 @@ export function ProductDetail({
     return () => {
       cancelled = true;
     };
-  }, [
-    safeProduct.categoryId,
-  ]);
-
+  }, [safeProduct.categoryId]);
 
   /* ==========================================================
-     RESET WHEN PRODUCT CHANGES
-     ========================================================== */
+     RESET PRODUCT STATE
+  ========================================================== */
 
   useEffect(() => {
     setSelectedImage(0);
@@ -396,18 +348,13 @@ export function ProductDetail({
     setWishlist(false);
   }, [safeProduct._id]);
 
-
   /* ==========================================================
      QUANTITY
-     ========================================================== */
+  ========================================================== */
 
   function decreaseQuantity() {
-    setQuantity(
-      (current) =>
-        Math.max(
-          current - 1,
-          1,
-        ),
+    setQuantity((current) =>
+      Math.max(current - 1, 1),
     );
   }
 
@@ -416,19 +363,17 @@ export function ProductDetail({
       return;
     }
 
-    setQuantity(
-      (current) =>
-        Math.min(
-          current + 1,
-          maxStock,
-        ),
+    setQuantity((current) =>
+      Math.min(
+        current + 1,
+        maxStock,
+      ),
     );
   }
 
-
   /* ==========================================================
      ADD TO CART
-     ========================================================== */
+  ========================================================== */
 
   async function handleAddToCart() {
     if (!isAuthenticated) {
@@ -465,10 +410,9 @@ export function ProductDetail({
     }
   }
 
-
   /* ==========================================================
      BUY NOW
-     ========================================================== */
+  ========================================================== */
 
   async function handleBuyNow() {
     if (!isAuthenticated) {
@@ -507,21 +451,19 @@ export function ProductDetail({
     }
   }
 
-
   /* ==========================================================
      IMAGE NAVIGATION
-     ========================================================== */
+  ========================================================== */
 
   function previousImage() {
     if (media.length <= 1) {
       return;
     }
 
-    setSelectedImage(
-      (current) =>
-        current <= 0
-          ? media.length - 1
-          : current - 1,
+    setSelectedImage((current) =>
+      current <= 0
+        ? media.length - 1
+        : current - 1,
     );
   }
 
@@ -530,34 +472,28 @@ export function ProductDetail({
       return;
     }
 
-    setSelectedImage(
-      (current) =>
-        current >= media.length - 1
-          ? 0
-          : current + 1,
+    setSelectedImage((current) =>
+      current >= media.length - 1
+        ? 0
+        : current + 1,
     );
   }
-
 
   /* ==========================================================
      ACCORDION
-     ========================================================== */
+  ========================================================== */
 
-  function toggleSection(
-    section: string,
-  ) {
-    setOpenSection(
-      (current) =>
-        current === section
-          ? null
-          : section,
+  function toggleSection(section: string) {
+    setOpenSection((current) =>
+      current === section
+        ? null
+        : section,
     );
   }
 
-
   /* ==========================================================
      PINCODE
-     ========================================================== */
+  ========================================================== */
 
   function checkDelivery() {
     setDeliveryChecked(
@@ -567,24 +503,24 @@ export function ProductDetail({
     );
   }
 
-
   /* ==========================================================
      RENDER
-     ========================================================== */
+  ========================================================== */
 
   return (
     <main className="product-detail">
-
-      {/* ======================================================
+      {/* =====================================================
           PRODUCT HERO
-      ====================================================== */}
+      ===================================================== */}
 
       <section className="product-detail__hero">
         <div className="product-detail__container">
-
           {/* Breadcrumb */}
 
-          <div className="product-detail__breadcrumb">
+          <nav
+            className="product-detail__breadcrumb"
+            aria-label="Breadcrumb"
+          >
             <button
               type="button"
               onClick={() =>
@@ -620,31 +556,33 @@ export function ProductDetail({
             <span className="product-detail__breadcrumb-current">
               {safeProduct.name}
             </span>
-          </div>
+          </nav>
 
-
-          {/* Main Product Layout */}
+          {/* Main Product Grid */}
 
           <div className="product-detail__main-grid">
-
             {/* =================================================
-                PRODUCT MEDIA
+                MEDIA
             ================================================= */}
 
             <div className="product-detail__media-column">
-
               <div
-                className={
+                className={[
+                  "product-detail__media-layout",
                   media.length > 1
-                    ? "product-detail__media-layout product-detail__media-layout--with-thumbnails"
-                    : "product-detail__media-layout"
-                }
+                    ? "product-detail__media-layout--with-thumbnails"
+                    : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
-
-                {/* Thumbnails */}
+                {/* Thumbnail Rail */}
 
                 {media.length > 1 && (
-                  <div className="product-detail__thumbnails">
+                  <div
+                    className="product-detail__thumbnails"
+                    aria-label="Product images"
+                  >
                     {media.map(
                       (
                         item,
@@ -668,12 +606,15 @@ export function ProductDetail({
                             selectedImage ===
                             index
                           }
-                          className={
+                          className={[
+                            "product-detail__thumbnail",
                             selectedImage ===
                             index
-                              ? "product-detail__thumbnail product-detail__thumbnail--active"
-                              : "product-detail__thumbnail"
-                          }
+                              ? "product-detail__thumbnail--active"
+                              : "",
+                          ]
+                            .filter(Boolean)
+                            .join(" ")}
                         >
                           <img
                             src={item.src}
@@ -689,16 +630,12 @@ export function ProductDetail({
                   </div>
                 )}
 
-
-                {/* Main Image */}
+                {/* Main Media */}
 
                 <div className="product-detail__main-media">
-
                   {currentMedia?.src ? (
                     <img
-                      src={
-                        currentMedia.src
-                      }
+                      src={currentMedia.src}
                       alt={
                         currentMedia.alt ||
                         safeProduct.name
@@ -707,14 +644,13 @@ export function ProductDetail({
                     />
                   ) : (
                     <div className="product-detail__image-placeholder">
-                      <span className="product-detail__placeholder-text">
+                      <span>
                         No image available
                       </span>
                     </div>
                   )}
 
-
-                  {/* Image Navigation */}
+                  {/* Image Controls */}
 
                   {media.length > 1 && (
                     <>
@@ -727,7 +663,6 @@ export function ProductDetail({
                         className="product-detail__image-control product-detail__image-control--previous"
                       >
                         <ChevronLeft
-                          className="product-detail__image-control-icon"
                           aria-hidden="true"
                         />
                       </button>
@@ -741,49 +676,62 @@ export function ProductDetail({
                         className="product-detail__image-control product-detail__image-control--next"
                       >
                         <ChevronRight
-                          className="product-detail__image-control-icon"
                           aria-hidden="true"
                         />
                       </button>
 
-                      <div className="product-detail__image-counter">
-                        {selectedImage + 1} /{" "}
+                      <div
+                        className="product-detail__image-counter"
+                        aria-live="polite"
+                      >
+                        {selectedImage + 1}
+                        {" / "}
                         {media.length}
                       </div>
                     </>
                   )}
 
+                  {/* Badge */}
 
-                  {/* Product Badge */}
-
-                  {safeProduct
-                    .merchandising
-                    ?.badges
-                    ?.length > 0 && (
+                  {safeProduct.merchandising
+                    ?.badges?.length >
+                    0 && (
                     <div className="product-detail__badge">
-                      {safeProduct.merchandising.badges[0].replace(
-                        "-",
-                        " ",
-                      )}
+                      {safeProduct.merchandising.badges[0]
+                        .replace(
+                          /-/g,
+                          " ",
+                        )
+                        .replace(
+                          /\b\w/g,
+                          (letter) =>
+                            letter.toUpperCase(),
+                        )}
                     </div>
                   )}
                 </div>
               </div>
             </div>
 
-
             {/* =================================================
                 PRODUCT INFORMATION
             ================================================= */}
 
             <div className="product-detail__information">
+              <div className="product-detail__information-inner">
+                {/* Editorial Label */}
 
-              {/* Title */}
+                <div className="product-detail__eyebrow">
+                  <span className="product-detail__eyebrow-line" />
+                  <span>
+                    AAYESHA EDIT
+                  </span>
+                </div>
 
-              <div className="product-detail__title-section">
+                {/* Title */}
+
                 <div className="product-detail__title-row">
                   <div className="product-detail__title-content">
-
                     {categoryName && (
                       <p className="product-detail__category">
                         {categoryName}
@@ -808,394 +756,404 @@ export function ProductDetail({
                         ? "Remove from wishlist"
                         : "Add to wishlist"
                     }
-                    aria-pressed={wishlist}
-                    className={
+                    aria-pressed={
                       wishlist
-                        ? "product-detail__wishlist product-detail__wishlist--active"
-                        : "product-detail__wishlist"
                     }
+                    className={[
+                      "product-detail__wishlist",
+                      wishlist
+                        ? "product-detail__wishlist--active"
+                        : "",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
                   >
                     <Heart
-                      className="product-detail__wishlist-icon"
+                      aria-hidden="true"
                       fill={
                         wishlist
                           ? "currentColor"
                           : "none"
                       }
-                      aria-hidden="true"
                     />
                   </button>
                 </div>
-              </div>
 
+                {/* Price */}
 
-              {/* Price */}
-
-              <div className="product-detail__price-section">
-                <div className="product-detail__price-row">
-
-                  <span className="product-detail__selling-price">
-                    {formatPrice(
-                      sellingPrice,
-                    )}
-                  </span>
-
-                  {mrp >
-                    sellingPrice && (
-                    <>
-                      <span className="product-detail__mrp">
-                        {formatPrice(mrp)}
-                      </span>
-
-                      {discount > 0 && (
-                        <span className="product-detail__discount">
-                          {discount}% OFF
-                        </span>
+                <div className="product-detail__price-section">
+                  <div className="product-detail__price-row">
+                    <span className="product-detail__selling-price">
+                      {formatPrice(
+                        sellingPrice,
                       )}
-                    </>
-                  )}
-                </div>
-
-                <p className="product-detail__tax-note">
-                  Inclusive of applicable taxes
-                </p>
-              </div>
-
-
-              {/* Availability */}
-
-              <div className="product-detail__availability">
-                <span className="product-detail__meta-label">
-                  Availability
-                </span>
-
-                <span
-                  className={
-                    inventoryStatus ===
-                    "out-of-stock"
-                      ? "product-detail__availability-value product-detail__availability-value--sold-out"
-                      : inventoryStatus ===
-                          "low-stock"
-                        ? "product-detail__availability-value product-detail__availability-value--low"
-                        : "product-detail__availability-value product-detail__availability-value--available"
-                  }
-                >
-                  {inventoryStatus ===
-                  "out-of-stock"
-                    ? "Sold Out"
-                    : inventoryStatus ===
-                        "low-stock"
-                      ? `Only ${maxStock} left`
-                      : `${maxStock} available`}
-                </span>
-              </div>
-
-
-              {/* Purchase */}
-
-              <div className="product-detail__purchase">
-
-                <div className="product-detail__purchase-heading">
-                  <span className="product-detail__meta-label">
-                    Quantity
-                  </span>
-
-                  <span className="product-detail__stock-note">
-                    {maxStock > 0
-                      ? `${maxStock} in stock`
-                      : "Unavailable"}
-                  </span>
-                </div>
-
-
-                <div className="product-detail__purchase-row">
-
-                  {/* Quantity */}
-
-                  <div className="product-detail__quantity">
-
-                    <button
-                      type="button"
-                      onClick={
-                        decreaseQuantity
-                      }
-                      disabled={
-                        quantity <= 1 ||
-                        maxStock <= 0
-                      }
-                      aria-label="Decrease quantity"
-                      className="product-detail__quantity-button"
-                    >
-                      <Minus
-                        className="product-detail__quantity-icon"
-                        aria-hidden="true"
-                      />
-                    </button>
-
-                    <span className="product-detail__quantity-value">
-                      {quantity}
                     </span>
 
+                    {mrp >
+                      sellingPrice && (
+                      <>
+                        <span className="product-detail__mrp">
+                          {formatPrice(mrp)}
+                        </span>
+
+                        {discount > 0 && (
+                          <span className="product-detail__discount">
+                            {discount}% OFF
+                          </span>
+                        )}
+                      </>
+                    )}
+                  </div>
+
+                  <p className="product-detail__tax-note">
+                    Inclusive of applicable
+                    taxes
+                  </p>
+                </div>
+
+                {/* Availability */}
+
+                <div className="product-detail__availability">
+                  <span className="product-detail__meta-label">
+                    Availability
+                  </span>
+
+                  <span
+                    className={[
+                      "product-detail__availability-value",
+                      inventoryStatus ===
+                      "out-of-stock"
+                        ? "product-detail__availability-value--sold-out"
+                        : inventoryStatus ===
+                            "low-stock"
+                          ? "product-detail__availability-value--low"
+                          : "product-detail__availability-value--available",
+                    ].join(" ")}
+                  >
+                    {inventoryStatus ===
+                    "out-of-stock"
+                      ? "Sold Out"
+                      : inventoryStatus ===
+                          "low-stock"
+                        ? `Only ${maxStock} left`
+                        : `${maxStock} available`}
+                  </span>
+                </div>
+
+                {/* Purchase */}
+
+                <div className="product-detail__purchase">
+                  <div className="product-detail__purchase-heading">
+                    <div>
+                      <span className="product-detail__meta-label">
+                        Quantity
+                      </span>
+
+                      <span className="product-detail__purchase-caption">
+                        Select your preferred
+                        quantity
+                      </span>
+                    </div>
+
+                    <span className="product-detail__stock-note">
+                      {maxStock > 0
+                        ? `${maxStock} in stock`
+                        : "Unavailable"}
+                    </span>
+                  </div>
+
+                  <div className="product-detail__purchase-row">
+                    {/* Quantity */}
+
+                    <div className="product-detail__quantity">
+                      <button
+                        type="button"
+                        onClick={
+                          decreaseQuantity
+                        }
+                        disabled={
+                          quantity <= 1 ||
+                          maxStock <= 0
+                        }
+                        aria-label="Decrease quantity"
+                        className="product-detail__quantity-button"
+                      >
+                        <Minus
+                          aria-hidden="true"
+                        />
+                      </button>
+
+                      <span
+                        className="product-detail__quantity-value"
+                        aria-live="polite"
+                      >
+                        {quantity}
+                      </span>
+
+                      <button
+                        type="button"
+                        onClick={
+                          increaseQuantity
+                        }
+                        disabled={
+                          maxStock <= 0 ||
+                          quantity >=
+                            maxStock
+                        }
+                        aria-label="Increase quantity"
+                        className="product-detail__quantity-button"
+                      >
+                        <Plus
+                          aria-hidden="true"
+                        />
+                      </button>
+                    </div>
+
+                    {/* Add To Bag */}
+
                     <button
                       type="button"
                       onClick={
-                        increaseQuantity
+                        handleAddToCart
                       }
                       disabled={
                         maxStock <= 0 ||
-                        quantity >=
-                          maxStock
+                        addingToCart ||
+                        buyingNow
                       }
-                      aria-label="Increase quantity"
-                      className="product-detail__quantity-button"
+                      className="product-detail__add-button"
                     >
-                      <Plus
-                        className="product-detail__quantity-icon"
-                        aria-hidden="true"
-                      />
-                    </button>
+                      <span className="product-detail__add-button-main">
+                        <ShoppingBag
+                          aria-hidden="true"
+                        />
 
+                        <span>
+                          {addingToCart
+                            ? "Adding..."
+                            : "Add to Bag"}
+                        </span>
+                      </span>
+
+                      <span
+                        className="product-detail__add-button-arrow"
+                        aria-hidden="true"
+                      >
+                        ↗
+                      </span>
+                    </button>
                   </div>
 
-
-                  {/* Add To Bag */}
+                  {/* Buy Now */}
 
                   <button
                     type="button"
                     onClick={
-                      handleAddToCart
+                      handleBuyNow
                     }
                     disabled={
                       maxStock <= 0 ||
                       addingToCart ||
                       buyingNow
                     }
-                    className="product-detail__add-button"
+                    className="product-detail__buy-button"
                   >
-                    <ShoppingBag
-                      className="product-detail__button-icon"
-                      aria-hidden="true"
-                    />
-
-                    <span>
-                      {addingToCart
-                        ? "Adding..."
-                        : "Add to Bag"}
-                    </span>
+                    {buyingNow
+                      ? "Processing..."
+                      : "Buy Now"}
                   </button>
                 </div>
 
+                {/* Delivery */}
 
-                {/* Buy Now */}
-
-                <button
-                  type="button"
-                  onClick={
-                    handleBuyNow
-                  }
-                  disabled={
-                    maxStock <= 0 ||
-                    addingToCart ||
-                    buyingNow
-                  }
-                  className="product-detail__buy-button"
-                >
-                  {buyingNow
-                    ? "Processing..."
-                    : "Buy Now"}
-                </button>
-              </div>
-
-
-              {/* Delivery */}
-
-              <div className="product-detail__delivery">
-
-                <div className="product-detail__delivery-header">
-
-                  <MapPin
-                    className="product-detail__delivery-icon"
-                    aria-hidden="true"
-                  />
-
-                  <div className="product-detail__delivery-content">
-
-                    <p className="product-detail__delivery-title">
-                      Check Delivery
-                    </p>
-
-                    <p className="product-detail__delivery-description">
-                      Enter your pincode to check delivery availability.
-                    </p>
-
-
-                    <div className="product-detail__delivery-form">
-
-                      <label
-                        htmlFor="product-delivery-pincode"
-                        className="sr-only"
-                      >
-                        Enter delivery pincode
-                      </label>
-
-                      <input
-                        id="product-delivery-pincode"
-                        value={pincode}
-                        onChange={(
-                          event,
-                        ) => {
-                          setPincode(
-                            event.target.value
-                              .replace(
-                                /\D/g,
-                                "",
-                              )
-                              .slice(
-                                0,
-                                6,
-                              ),
-                          );
-
-                          setDeliveryChecked(
-                            false,
-                          );
-                        }}
-                        onKeyDown={(
-                          event,
-                        ) => {
-                          if (
-                            event.key ===
-                            "Enter"
-                          ) {
-                            checkDelivery();
-                          }
-                        }}
-                        inputMode="numeric"
-                        autoComplete="postal-code"
-                        maxLength={6}
-                        placeholder="Enter pincode"
-                        className="product-detail__delivery-input"
+                <div className="product-detail__delivery">
+                  <div className="product-detail__delivery-header">
+                    <div className="product-detail__delivery-icon-wrap">
+                      <MapPin
+                        aria-hidden="true"
                       />
-
-                      <button
-                        type="button"
-                        onClick={
-                          checkDelivery
-                        }
-                        className="product-detail__delivery-button"
-                      >
-                        Check
-                      </button>
                     </div>
 
-
-                    {deliveryChecked && (
-                      <div
-                        className="product-detail__delivery-result"
-                        role="status"
-                        aria-live="polite"
-                      >
-                        <Check
-                          className="product-detail__delivery-result-icon"
-                          aria-hidden="true"
-                        />
+                    <div className="product-detail__delivery-content">
+                      <div className="product-detail__delivery-heading">
+                        <p className="product-detail__delivery-title">
+                          Check Delivery
+                        </p>
 
                         <span>
-                          Delivery available
+                          India
                         </span>
                       </div>
-                    )}
+
+                      <p className="product-detail__delivery-description">
+                        Enter your
+                        pincode to
+                        check delivery
+                        availability.
+                      </p>
+
+                      <div className="product-detail__delivery-form">
+                        <label
+                          htmlFor="product-delivery-pincode"
+                          className="sr-only"
+                        >
+                          Enter delivery
+                          pincode
+                        </label>
+
+                        <input
+                          id="product-delivery-pincode"
+                          value={pincode}
+                          onChange={(
+                            event,
+                          ) => {
+                            setPincode(
+                              event.target.value
+                                .replace(
+                                  /\D/g,
+                                  "",
+                                )
+                                .slice(
+                                  0,
+                                  6,
+                                ),
+                            );
+
+                            setDeliveryChecked(
+                              false,
+                            );
+                          }}
+                          onKeyDown={(
+                            event,
+                          ) => {
+                            if (
+                              event.key ===
+                              "Enter"
+                            ) {
+                              checkDelivery();
+                            }
+                          }}
+                          inputMode="numeric"
+                          autoComplete="postal-code"
+                          maxLength={6}
+                          placeholder="Enter pincode"
+                          className="product-detail__delivery-input"
+                        />
+
+                        <button
+                          type="button"
+                          onClick={
+                            checkDelivery
+                          }
+                          className="product-detail__delivery-button"
+                        >
+                          Check
+                        </button>
+                      </div>
+
+                      {deliveryChecked && (
+                        <div
+                          className="product-detail__delivery-result"
+                          role="status"
+                          aria-live="polite"
+                        >
+                          <Check
+                            aria-hidden="true"
+                          />
+
+                          <span>
+                            Delivery available
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
 
+                {/* Service Features */}
 
-              {/* Service Features */}
+                <div className="product-detail__service-features">
+                  <div className="product-detail__service-feature">
+                    <Truck
+                      aria-hidden="true"
+                    />
 
-              <div className="product-detail__service-features">
+                    <div>
+                      <p className="product-detail__service-title">
+                        Delivery
+                      </p>
 
-                <div className="product-detail__service-feature">
-                  <Truck
-                    className="product-detail__service-icon"
-                    aria-hidden="true"
-                  />
+                      <p className="product-detail__service-description">
+                        Across India
+                      </p>
+                    </div>
+                  </div>
 
-                  <p className="product-detail__service-title">
-                    Delivery
-                  </p>
+                  <div className="product-detail__service-feature">
+                    <ShieldCheck
+                      aria-hidden="true"
+                    />
 
-                  <p className="product-detail__service-description">
-                    Across India
-                  </p>
+                    <div>
+                      <p className="product-detail__service-title">
+                        Secure
+                      </p>
+
+                      <p className="product-detail__service-description">
+                        Safe checkout
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="product-detail__service-feature">
+                    <RotateCcw
+                      aria-hidden="true"
+                    />
+
+                    <div>
+                      <p className="product-detail__service-title">
+                        Returns
+                      </p>
+
+                      <p className="product-detail__service-description">
+                        Easy process
+                      </p>
+                    </div>
+                  </div>
                 </div>
-
-                <div className="product-detail__service-feature">
-                  <ShieldCheck
-                    className="product-detail__service-icon"
-                    aria-hidden="true"
-                  />
-
-                  <p className="product-detail__service-title">
-                    Secure
-                  </p>
-
-                  <p className="product-detail__service-description">
-                    Safe checkout
-                  </p>
-                </div>
-
-                <div className="product-detail__service-feature">
-                  <RotateCcw
-                    className="product-detail__service-icon"
-                    aria-hidden="true"
-                  />
-
-                  <p className="product-detail__service-title">
-                    Returns
-                  </p>
-
-                  <p className="product-detail__service-description">
-                    Easy process
-                  </p>
-                </div>
-
               </div>
             </div>
           </div>
         </div>
       </section>
 
-
-      {/* ======================================================
+      {/* =====================================================
           PRODUCT INFORMATION
-      ====================================================== */}
+      ===================================================== */}
 
       <section className="product-detail__information-section">
-        <div className="product-detail__container product-detail__information-container">
-
+        <div className="product-detail__container">
           <div className="product-detail__details-grid">
-
             {/* Accordions */}
 
             <div className="product-detail__accordions">
-
               <div className="product-detail__section-intro">
-                <p className="product-detail__eyebrow">
-                  Product Information
-                </p>
+                <div className="product-detail__eyebrow">
+                  <span className="product-detail__eyebrow-line" />
+                  <span>
+                    Product Information
+                  </span>
+                </div>
 
                 <h2 className="product-detail__section-title">
                   Product Details
                 </h2>
               </div>
 
-
               <div className="product-detail__accordion-list">
-
                 {/* Description */}
 
                 <div className="product-detail__accordion">
-
                   <button
                     type="button"
                     onClick={() =>
@@ -1214,22 +1172,20 @@ export function ProductDetail({
                     </span>
 
                     <ChevronDown
+                      aria-hidden="true"
                       className={
                         openSection ===
                         "description"
                           ? "product-detail__accordion-icon product-detail__accordion-icon--open"
                           : "product-detail__accordion-icon"
                       }
-                      aria-hidden="true"
                     />
                   </button>
 
                   {openSection ===
                     "description" && (
                     <div className="product-detail__accordion-content">
-
-                      {safeProduct
-                        .content
+                      {safeProduct.content
                         ?.description ? (
                         <div
                           className="product-detail__description"
@@ -1242,19 +1198,17 @@ export function ProductDetail({
                         />
                       ) : (
                         <p className="product-detail__empty-copy">
-                          Description will be updated soon.
+                          Description will be
+                          updated soon.
                         </p>
                       )}
-
                     </div>
                   )}
                 </div>
 
-
                 {/* Product Details */}
 
                 <div className="product-detail__accordion">
-
                   <button
                     type="button"
                     onClick={() =>
@@ -1273,20 +1227,19 @@ export function ProductDetail({
                     </span>
 
                     <ChevronDown
+                      aria-hidden="true"
                       className={
                         openSection ===
                         "details"
                           ? "product-detail__accordion-icon product-detail__accordion-icon--open"
                           : "product-detail__accordion-icon"
                       }
-                      aria-hidden="true"
                     />
                   </button>
 
                   {openSection ===
                     "details" && (
                     <div className="product-detail__details-table">
-
                       {[
                         [
                           "Category",
@@ -1299,8 +1252,7 @@ export function ProductDetail({
                         ],
                         [
                           "Currency",
-                          safeProduct
-                            .pricing
+                          safeProduct.pricing
                             ?.currency ??
                             "INR",
                         ],
@@ -1311,14 +1263,9 @@ export function ProductDetail({
                           ),
                         ],
                       ].map(
-                        ([
-                          label,
-                          value,
-                        ]) => (
+                        ([label, value]) => (
                           <div
-                            key={
-                              label
-                            }
+                            key={label}
                             className="product-detail__detail-row"
                           >
                             <p className="product-detail__detail-label">
@@ -1331,16 +1278,13 @@ export function ProductDetail({
                           </div>
                         ),
                       )}
-
                     </div>
                   )}
                 </div>
 
-
                 {/* Shipping */}
 
                 <div className="product-detail__accordion">
-
                   <button
                     type="button"
                     onClick={() =>
@@ -1359,29 +1303,32 @@ export function ProductDetail({
                     </span>
 
                     <ChevronDown
+                      aria-hidden="true"
                       className={
                         openSection ===
                         "shipping"
                           ? "product-detail__accordion-icon product-detail__accordion-icon--open"
                           : "product-detail__accordion-icon"
                       }
-                      aria-hidden="true"
                     />
                   </button>
 
                   {openSection ===
                     "shipping" && (
                     <p className="product-detail__accordion-copy">
-                      Shipping and delivery availability is calculated during checkout based on your delivery address.
+                      Shipping and delivery
+                      availability is
+                      calculated during
+                      checkout based on
+                      your delivery
+                      address.
                     </p>
                   )}
                 </div>
 
-
                 {/* Returns */}
 
                 <div className="product-detail__accordion">
-
                   <button
                     type="button"
                     onClick={() =>
@@ -1400,34 +1347,39 @@ export function ProductDetail({
                     </span>
 
                     <ChevronDown
+                      aria-hidden="true"
                       className={
                         openSection ===
                         "returns"
                           ? "product-detail__accordion-icon product-detail__accordion-icon--open"
                           : "product-detail__accordion-icon"
                       }
-                      aria-hidden="true"
                     />
                   </button>
 
                   {openSection ===
                     "returns" && (
                     <p className="product-detail__accordion-copy">
-                      Please refer to the store return and exchange policy applicable to this product.
+                      Please refer to the
+                      store return and
+                      exchange policy
+                      applicable to this
+                      product.
                     </p>
                   )}
                 </div>
-
               </div>
             </div>
 
-
-            {/* Brand Standard */}
+            {/* Brand Panel */}
 
             <aside className="product-detail__brand-panel">
+              <div className="product-detail__brand-mark">
+                AA
+              </div>
 
               <p className="product-detail__brand-eyebrow">
-                Ayesha Fashion
+                AAYESHA FASHION
               </p>
 
               <h3 className="product-detail__brand-title">
@@ -1437,13 +1389,15 @@ export function ProductDetail({
               </h3>
 
               <p className="product-detail__brand-description">
-                Designed with an emphasis on elegance, comfort and timeless style.
+                Designed with an
+                emphasis on elegance,
+                comfort and timeless
+                style.
               </p>
 
               <div className="product-detail__brand-divider" />
 
               <div className="product-detail__brand-meta">
-
                 <div>
                   <p className="product-detail__brand-meta-label">
                     Price
@@ -1467,29 +1421,28 @@ export function ProductDetail({
                       : "Currently unavailable"}
                   </p>
                 </div>
-
               </div>
             </aside>
           </div>
         </div>
       </section>
 
-
-      {/* ======================================================
+      {/* =====================================================
           RECOMMENDATIONS
-      ====================================================== */}
+      ===================================================== */}
 
       {safeRecommendations.length >
         0 && (
         <section className="product-detail__recommendations">
           <div className="product-detail__container">
-
             <div className="product-detail__recommendations-header">
-
               <div>
-                <p className="product-detail__eyebrow">
-                  You may also like
-                </p>
+                <div className="product-detail__eyebrow">
+                  <span className="product-detail__eyebrow-line" />
+                  <span>
+                    You May Also Like
+                  </span>
+                </div>
 
                 <h2 className="product-detail__section-title">
                   More from this edit
@@ -1507,13 +1460,17 @@ export function ProductDetail({
                 }
                 className="product-detail__view-all"
               >
-                View all
+                <span>
+                  View All
+                </span>
+
+                <ArrowUpRight
+                  aria-hidden="true"
+                />
               </button>
             </div>
 
-
             <div className="product-detail__recommendation-grid">
-
               {safeRecommendations.map(
                 (item) => {
                   const image =
@@ -1521,9 +1478,7 @@ export function ProductDetail({
                       item.media,
                     )
                       ? item.media.find(
-                          (
-                            mediaItem,
-                          ) =>
+                          (mediaItem) =>
                             mediaItem?.type ===
                               "image" &&
                             Boolean(
@@ -1544,7 +1499,6 @@ export function ProductDetail({
                       className="product-detail__recommendation"
                     >
                       <div className="product-detail__recommendation-media">
-
                         {image ? (
                           <img
                             src={image.src}
@@ -1560,24 +1514,28 @@ export function ProductDetail({
                           </div>
                         )}
 
+                        <span className="product-detail__recommendation-arrow">
+                          ↗
+                        </span>
                       </div>
 
-                      <p className="product-detail__recommendation-name">
-                        {item.name}
-                      </p>
+                      <div className="product-detail__recommendation-content">
+                        <p className="product-detail__recommendation-name">
+                          {item.name}
+                        </p>
 
-                      <p className="product-detail__recommendation-price">
-                        {formatPrice(
-                          item.pricing
-                            ?.sellingPrice ??
-                            0,
-                        )}
-                      </p>
+                        <p className="product-detail__recommendation-price">
+                          {formatPrice(
+                            item.pricing
+                              ?.sellingPrice ??
+                              0,
+                          )}
+                        </p>
+                      </div>
                     </button>
                   );
                 },
               )}
-
             </div>
           </div>
         </section>

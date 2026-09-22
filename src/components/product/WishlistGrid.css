@@ -1,0 +1,326 @@
+/* =========================================================
+   AAYESHA FASHION
+   WISHLIST GRID
+   Editorial / Quiet Indian Luxury
+   ========================================================= */
+
+.wishlist-grid {
+  width: 100%;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.wishlist-grid__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 38px;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+}
+
+.wishlist-grid__eyebrow {
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.wishlist-grid__title {
+  margin: 7px 0 0;
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 500;
+  line-height: 0.98;
+
+  letter-spacing: -0.025em;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.wishlist-grid__count {
+  flex: 0 0 auto;
+
+  padding-bottom: 3px;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--color-text-muted, #8d817b);
+}
+
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
+
+.wishlist-grid__products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  column-gap: 24px;
+  row-gap: 52px;
+
+  width: 100%;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.wishlist-grid__footer {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 64px;
+  padding-top: 28px;
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.wishlist-grid__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 72px 24px;
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+
+  text-align: center;
+
+  background: var(--color-bg-soft, #f1eae6);
+}
+
+.wishlist-grid__empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 68px;
+  height: 68px;
+
+  margin-bottom: 24px;
+
+  border: 1px solid var(--color-border-dark, #b9a7a0);
+
+  background: var(--color-surface, #ffffff);
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.wishlist-grid__empty-icon svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+.wishlist-grid__empty-title {
+  max-width: 600px;
+
+  margin: 8px 0 0;
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 500;
+  line-height: 0.98;
+
+  letter-spacing: -0.025em;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.wishlist-grid__empty-description {
+  max-width: 420px;
+
+  margin: 16px auto 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.75;
+
+  color: var(--color-text-secondary, #6f625d);
+}
+
+.wishlist-grid__empty-action {
+  margin-top: 30px;
+}
+
+/* =========================================================
+   BUTTON ICON SAFETY
+   ========================================================= */
+
+.wishlist-grid__footer svg,
+.wishlist-grid__empty-action svg {
+  flex: 0 0 auto;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .wishlist-grid__products {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    column-gap: 18px;
+    row-gap: 44px;
+  }
+
+  .wishlist-grid__header {
+    margin-bottom: 32px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .wishlist-grid__header {
+    align-items: flex-end;
+
+    gap: 14px;
+
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+  }
+
+  .wishlist-grid__eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+  }
+
+  .wishlist-grid__title {
+    margin-top: 6px;
+
+    font-size: 34px;
+  }
+
+  .wishlist-grid__count {
+    padding-bottom: 2px;
+
+    font-size: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .wishlist-grid__products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 10px;
+    row-gap: 34px;
+  }
+
+  .wishlist-grid__footer {
+    margin-top: 46px;
+    padding-top: 22px;
+  }
+
+  .wishlist-grid__empty {
+    padding: 56px 18px;
+  }
+
+  .wishlist-grid__empty-icon {
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 20px;
+  }
+
+  .wishlist-grid__empty-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .wishlist-grid__empty-title {
+    font-size: 36px;
+  }
+
+  .wishlist-grid__empty-description {
+    max-width: 330px;
+
+    margin-top: 13px;
+
+    font-size: 10px;
+    line-height: 1.7;
+  }
+
+  .wishlist-grid__empty-action {
+    margin-top: 25px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .wishlist-grid__products {
+    column-gap: 8px;
+    row-gap: 30px;
+  }
+
+  .wishlist-grid__title {
+    font-size: 31px;
+  }
+
+  .wishlist-grid__count {
+    font-size: 7px;
+  }
+
+  .wishlist-grid__empty {
+    padding: 48px 14px;
+  }
+
+  .wishlist-grid__empty-title {
+    font-size: 32px;
+  }
+
+  .wishlist-grid__empty-description {
+    font-size: 9.5px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .wishlist-grid * {
+    scroll-behavior: auto;
+  }
+}

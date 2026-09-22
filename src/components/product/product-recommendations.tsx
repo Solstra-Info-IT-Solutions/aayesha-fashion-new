@@ -4,6 +4,8 @@ import type { Product } from "@/types/product";
 
 import { ProductCard } from "@/components/product/product-card";
 
+import "./ProductRecommendations.css";
+
 interface ProductRecommendationsProps {
   product: Product;
   recommendations: Product[];

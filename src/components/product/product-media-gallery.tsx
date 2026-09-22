@@ -13,6 +13,8 @@ import type { Product } from "@/types/product";
 
 import { ProductLightbox } from "@/components/product/product-lightbox";
 
+import "./ProductMediaGallery.css";
+
 interface ProductMediaGalleryProps {
   product: Product;
 }

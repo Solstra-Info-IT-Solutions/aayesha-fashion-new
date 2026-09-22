@@ -12,6 +12,8 @@ import { getCategories } from "@/services/category.service";
 
 import type { Product } from "@/types/product";
 
+import "./ProductInfo.css";
+
 interface ProductInfoProps {
   product: Product;
   quantity: number;

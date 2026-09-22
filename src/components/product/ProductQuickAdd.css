@@ -1,0 +1,622 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT QUICK ADD
+   Editorial / Quiet Indian Luxury
+   ========================================================= */
+
+.product-quick-add {
+  position: relative;
+
+  width: 100%;
+}
+
+/* =========================================================
+   COLLAPSED TRIGGER
+   ========================================================= */
+
+.product-quick-add__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  width: 100%;
+  min-height: 46px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--color-border-dark, #b9a7a0);
+  border-radius: 0;
+
+  background: var(--color-surface, #fbf8f5);
+  color: var(--color-text, #3f2d2a);
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.product-quick-add__trigger:hover:not(:disabled) {
+  border-color: var(--color-accent, #6f4b47);
+
+  background: var(--color-accent, #6f4b47);
+  color: #ffffff;
+}
+
+.product-quick-add__trigger:active:not(:disabled) {
+  border-color: #7f5953;
+
+  background: #7f5953;
+  color: #ffffff;
+
+  transform: translateY(1px);
+}
+
+.product-quick-add__trigger:focus-visible {
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 3px;
+}
+
+.product-quick-add__trigger:disabled {
+  cursor: not-allowed;
+
+  border-color: var(--color-border, #d9cbc5);
+
+  background: var(--color-bg-soft, #f1eae6);
+  color: var(--color-text-muted, #8d817b);
+}
+
+.product-quick-add__trigger-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  min-width: 0;
+}
+
+.product-quick-add__trigger-content svg {
+  flex: 0 0 auto;
+
+  color: currentColor;
+}
+
+.product-quick-add__trigger-icon {
+  flex: 0 0 auto;
+
+  color: currentColor;
+
+  transition: transform 180ms ease;
+}
+
+.product-quick-add__trigger:hover:not(:disabled)
+  .product-quick-add__trigger-icon {
+  transform: translateY(2px);
+}
+
+/* =========================================================
+   EXPANDED PANEL
+   ========================================================= */
+
+.product-quick-add__panel {
+  width: 100%;
+
+  border: 1px solid var(--color-border-dark, #b9a7a0);
+
+  background: var(--color-surface, #fbf8f5);
+
+  animation: product-quick-add-open 220ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* =========================================================
+   PANEL HEADER
+   ========================================================= */
+
+.product-quick-add__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+
+  padding: 16px;
+
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+
+  background: var(--color-bg-soft, #f1eae6);
+}
+
+.product-quick-add__eyebrow {
+  margin: 0 0 5px;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.product-quick-add__heading {
+  margin: 0;
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+
+  letter-spacing: -0.01em;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+/* =========================================================
+   CLOSE
+   ========================================================= */
+
+.product-quick-add__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  flex: 0 0 32px;
+
+  padding: 0;
+
+  border: 1px solid var(--color-border-dark, #b9a7a0);
+  border-radius: 0;
+
+  background: transparent;
+  color: var(--color-text-secondary, #6f625d);
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.product-quick-add__close:hover:not(:disabled) {
+  border-color: var(--color-accent, #6f4b47);
+
+  background: var(--color-accent, #6f4b47);
+  color: #ffffff;
+}
+
+.product-quick-add__close:active:not(:disabled) {
+  border-color: #7f5953;
+
+  background: #7f5953;
+  color: #ffffff;
+
+  transform: scale(0.95);
+}
+
+.product-quick-add__close:focus-visible {
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 3px;
+}
+
+.product-quick-add__close:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.product-quick-add__body {
+  padding: 18px 16px 16px;
+}
+
+/* =========================================================
+   PRODUCT
+   ========================================================= */
+
+.product-quick-add__product {
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+}
+
+.product-quick-add__product-name {
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+/* =========================================================
+   PRICE
+   ========================================================= */
+
+.product-quick-add__price {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+}
+
+.product-quick-add__meta-label {
+  margin: 0 0 5px;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  color: var(--color-text-muted, #8d817b);
+}
+
+.product-quick-add__selling-price {
+  margin: 0;
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1;
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.product-quick-add__discount {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.product-quick-add__mrp {
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.4;
+
+  color: var(--color-text-muted, #8d817b);
+
+  text-decoration: line-through;
+}
+
+.product-quick-add__discount-value {
+  margin: 0;
+
+  padding: 5px 7px;
+
+  border: 1px solid rgba(111, 75, 71, 0.35);
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.06em;
+
+  color: var(--color-accent, #6f4b47);
+}
+
+/* =========================================================
+   AVAILABILITY
+   ========================================================= */
+
+.product-quick-add__availability {
+  padding: 15px 0;
+}
+
+.product-quick-add__stock {
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.product-quick-add__stock--low {
+  color: #9a704c;
+}
+
+.product-quick-add__stock--available {
+  color: #5f765d;
+}
+
+.product-quick-add__stock--sold-out {
+  color: var(--color-danger, #9a5d59);
+}
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.product-quick-add__submit {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 48px;
+
+  padding: 0 15px;
+
+  border: 1px solid #6f4b47;
+  border-radius: 0;
+
+  background: #6f4b47;
+  color: #ffffff;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.product-quick-add__submit svg {
+  color: #ffffff;
+}
+
+.product-quick-add__submit > span {
+  text-align: center;
+}
+
+.product-quick-add__submit:hover:not(:disabled) {
+  border-color: #3f2d2a;
+
+  background: #3f2d2a;
+  color: #ffffff;
+}
+
+.product-quick-add__submit:hover:not(:disabled) svg {
+  color: #ffffff;
+}
+
+.product-quick-add__submit:active:not(:disabled) {
+  border-color: #7f5953;
+
+  background: #7f5953;
+  color: #ffffff;
+
+  transform: translateY(1px);
+}
+
+.product-quick-add__submit:active:not(:disabled) svg {
+  color: #ffffff;
+}
+
+.product-quick-add__submit:focus-visible {
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 3px;
+}
+
+.product-quick-add__submit:disabled {
+  border-color: #b99892;
+
+  background: #b99892;
+  color: rgba(255, 255, 255, 0.72);
+
+  cursor: not-allowed;
+}
+
+.product-quick-add__submit:disabled svg {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.product-quick-add__submit-icon {
+  transition: transform 180ms ease;
+}
+
+.product-quick-add__submit:hover:not(:disabled)
+  .product-quick-add__submit-icon {
+  transform: translateX(2px);
+}
+
+/* =========================================================
+   SOLD OUT
+   ========================================================= */
+
+.product-quick-add__sold-out {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 46px;
+
+  padding: 0 16px;
+
+  border: 1px solid var(--color-border, #d9cbc5);
+  border-radius: 0;
+
+  background: var(--color-bg-soft, #f1eae6);
+  color: var(--color-text-muted, #8d817b);
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .product-quick-add__heading {
+    font-size: 22px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-quick-add__trigger {
+    min-height: 44px;
+
+    padding-inline: 12px;
+
+    font-size: 9px;
+  }
+
+  .product-quick-add__trigger-content {
+    gap: 8px;
+  }
+
+  .product-quick-add__panel {
+    width: 100%;
+  }
+
+  .product-quick-add__header {
+    padding: 14px 13px;
+  }
+
+  .product-quick-add__heading {
+    font-size: 21px;
+  }
+
+  .product-quick-add__close {
+    width: 30px;
+    height: 30px;
+
+    flex-basis: 30px;
+  }
+
+  .product-quick-add__body {
+    padding: 16px 13px 13px;
+  }
+
+  .product-quick-add__selling-price {
+    font-size: 24px;
+  }
+
+  .product-quick-add__submit {
+    min-height: 46px;
+
+    padding-inline: 12px;
+
+    font-size: 9px;
+  }
+
+  .product-quick-add__sold-out {
+    min-height: 44px;
+
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-quick-add__price {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .product-quick-add__discount {
+    width: 100%;
+  }
+
+  .product-quick-add__submit {
+    gap: 8px;
+
+    font-size: 8.5px;
+  }
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes product-quick-add-open {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-quick-add__trigger,
+  .product-quick-add__close,
+  .product-quick-add__submit,
+  .product-quick-add__submit-icon,
+  .product-quick-add__panel {
+    transition: none;
+    animation: none;
+  }
+
+  .product-quick-add__submit:hover:not(:disabled)
+    .product-quick-add__submit-icon {
+    transform: none;
+  }
+}

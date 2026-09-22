@@ -1,0 +1,227 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT TRUST BADGES
+   Editorial / Quiet Indian Luxury
+   ========================================================= */
+
+.product-trust {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  width: 100%;
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+  border-left: 1px solid var(--color-border, #d9cbc5);
+
+  background: var(--color-bg-soft, #f1eae6);
+}
+
+/* =========================================================
+   ITEM
+   ========================================================= */
+
+.product-trust__item {
+  display: flex;
+  align-items: flex-start;
+
+  min-width: 0;
+  min-height: 88px;
+
+  padding: 18px;
+
+  border-right: 1px solid var(--color-border, #d9cbc5);
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+
+  background: transparent;
+}
+
+.product-trust__item--right-border {
+  border-right-color: var(--color-border, #d9cbc5);
+}
+
+.product-trust__item--bottom-border {
+  border-bottom-color: var(--color-border, #d9cbc5);
+}
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.product-trust__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  margin-right: 12px;
+
+  border: 1px solid var(--color-border-dark, #b9a7a0);
+
+  background: var(--color-surface, #ffffff);
+  color: var(--color-accent, #6f4b47);
+}
+
+.product-trust__icon svg {
+  width: 16px;
+  height: 16px;
+
+  color: currentColor;
+  stroke: currentColor;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.product-trust__content {
+  min-width: 0;
+}
+
+.product-trust__title {
+  margin: 1px 0 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.45;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.product-trust__text {
+  margin: 5px 0 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.55;
+
+  color: var(--color-text-secondary, #6f625d);
+}
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.product-trust__item {
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.product-trust__item:hover {
+  background: var(--color-surface, #ffffff);
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .product-trust__item {
+    min-height: 82px;
+
+    padding: 15px;
+  }
+
+  .product-trust__icon {
+    width: 32px;
+    height: 32px;
+
+    flex-basis: 32px;
+
+    margin-right: 10px;
+  }
+
+  .product-trust__title {
+    font-size: 8.5px;
+  }
+
+  .product-trust__text {
+    font-size: 9.5px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-trust__item {
+    min-height: 76px;
+
+    padding: 13px 11px;
+  }
+
+  .product-trust__icon {
+    width: 30px;
+    height: 30px;
+
+    flex-basis: 30px;
+
+    margin-right: 8px;
+  }
+
+  .product-trust__icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .product-trust__title {
+    font-size: 7.5px;
+    letter-spacing: 0.08em;
+  }
+
+  .product-trust__text {
+    margin-top: 4px;
+
+    font-size: 9px;
+    line-height: 1.5;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-trust__item {
+    min-height: 72px;
+
+    padding: 11px 9px;
+  }
+
+  .product-trust__icon {
+    width: 28px;
+    height: 28px;
+
+    flex-basis: 28px;
+
+    margin-right: 7px;
+  }
+
+  .product-trust__title {
+    font-size: 7px;
+  }
+
+  .product-trust__text {
+    font-size: 8.5px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-trust__item {
+    transition: none;
+  }
+}

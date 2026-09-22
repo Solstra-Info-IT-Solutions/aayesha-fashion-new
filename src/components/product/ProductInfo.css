@@ -1,0 +1,249 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT INFO
+   Editorial / Quiet Luxury
+   ========================================================= */
+
+.product-info {
+  width: 100%;
+  max-width: 560px;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+/* =========================================================
+   PRODUCT HEADER
+   ========================================================= */
+
+.product-info__header {
+  width: 100%;
+}
+
+.product-info__header-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.product-info__heading-content {
+  min-width: 0;
+}
+
+.product-info__category {
+  margin: 0 0 10px;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.product-info__title {
+  max-width: 520px;
+
+  margin: 0;
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+
+  font-size: clamp(38px, 4vw, 54px);
+  font-weight: 500;
+  line-height: 0.98;
+
+  letter-spacing: -0.025em;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.product-info__wishlist {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+
+  padding-top: 2px;
+}
+
+/* =========================================================
+   PRICE
+   ========================================================= */
+
+.product-info__price-section {
+  margin-top: 22px;
+  padding-top: 18px;
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+}
+
+.product-info__price-section .product-price__tax {
+  display: none;
+}
+
+.product-info__tax-note {
+  margin: 7px 0 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  letter-spacing: 0.03em;
+
+  color: var(--color-text-muted, #8d817b);
+}
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.product-info__description-section {
+  margin-top: 20px;
+}
+
+.product-info__description {
+  max-width: 500px;
+
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.75;
+
+  color: var(--color-text-secondary, #6f625d);
+}
+
+/* =========================================================
+   PURCHASE
+   ========================================================= */
+
+.product-info__purchase {
+  margin-top: 26px;
+  padding-top: 22px;
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+}
+
+/* =========================================================
+   DELIVERY
+   ========================================================= */
+
+.product-info__delivery {
+  margin-top: 24px;
+}
+
+/* =========================================================
+   TRUST
+   ========================================================= */
+
+.product-info__trust {
+  margin-top: 0;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .product-info {
+    max-width: none;
+  }
+
+  .product-info__title {
+    max-width: 680px;
+
+    font-size: clamp(38px, 5vw, 50px);
+  }
+
+  .product-info__description {
+    max-width: 680px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-info__header-main {
+    gap: 16px;
+  }
+
+  .product-info__category {
+    margin-bottom: 8px;
+
+    font-size: 8px;
+  }
+
+  .product-info__title {
+    font-size: clamp(32px, 9vw, 40px);
+    line-height: 1;
+  }
+
+  .product-info__wishlist {
+    padding-top: 0;
+  }
+
+  .product-info__price-section {
+    margin-top: 18px;
+    padding-top: 15px;
+  }
+
+  .product-info__tax-note {
+    font-size: 8.5px;
+  }
+
+  .product-info__description-section {
+    margin-top: 17px;
+  }
+
+  .product-info__description {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .product-info__purchase {
+    margin-top: 21px;
+    padding-top: 18px;
+  }
+
+  .product-info__delivery {
+    margin-top: 20px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-info__header-main {
+    gap: 12px;
+  }
+
+  .product-info__title {
+    font-size: 30px;
+  }
+
+  .product-info__description {
+    font-size: 10.5px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-info * {
+    scroll-behavior: auto;
+  }
+}

@@ -24,6 +24,8 @@ import { useAuthStore } from "@/store/auth-store";
 
 import { LoginRequiredPopup } from "@/components/product/login-required-popup";
 
+import "./ProductQuickAdd.css";
+
 interface ProductQuickAddProps {
   product: Product;
 }

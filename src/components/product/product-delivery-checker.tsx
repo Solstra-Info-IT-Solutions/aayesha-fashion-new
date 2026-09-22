@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Check, MapPin } from "lucide-react";
 
+import "./ProductDeliveryChecker.css";
+
 export function ProductDeliveryChecker() {
   const [pincode, setPincode] = useState("");
   const [checked, setChecked] = useState(false);

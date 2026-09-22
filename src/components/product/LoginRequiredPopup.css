@@ -1,7 +1,8 @@
-/* ==========================================================
+/* =========================================================
    AAYESHA FASHION
    LOGIN REQUIRED POPUP
-========================================================== */
+   Editorial / Quiet Luxury
+   ========================================================= */
 
 .login-required-popup {
   position: fixed;
@@ -12,177 +13,185 @@
   align-items: center;
   justify-content: center;
 
-  width: 100vw;
-  height: 100dvh;
-
   padding: 24px;
 
-  background: rgba(48, 35, 32, 0.52);
+  background: rgba(42, 31, 29, 0.58);
 
-  animation:
-    login-popup-overlay-in 180ms ease-out;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  animation: login-popup-overlay-in 220ms ease-out both;
 }
 
-/* ==========================================================
+/* =========================================================
    DIALOG
-========================================================== */
+   ========================================================= */
 
 .login-required-popup__dialog {
   position: relative;
 
-  width: min(100%, 440px);
+  width: min(100%, 460px);
 
-  padding: 46px 42px 40px;
+  padding: 48px 44px 40px;
 
-  border: 1px solid #d8c9c3;
-
-  background: #f8f3ef;
-  color: #3f2d2a;
+  background: var(--color-surface, #fbf8f5);
+  border: 1px solid var(--color-border, #d9cbc5);
 
   box-shadow:
-    0 30px 90px rgba(35, 25, 22, 0.24);
+    0 24px 70px rgba(63, 45, 42, 0.18),
+    0 8px 24px rgba(63, 45, 42, 0.08);
 
-  animation:
-    login-popup-dialog-in 220ms ease-out;
+  animation: login-popup-dialog-in 260ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ==========================================================
+/* =========================================================
    CLOSE
-========================================================== */
+   ========================================================= */
 
 .login-required-popup__close {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 16px;
+  right: 16px;
 
-  display: flex;
-  width: 34px;
-  height: 34px;
-
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
+  width: 36px;
+  height: 36px;
+
   padding: 0;
 
-  border: 1px solid transparent;
-  border-radius: 0;
+  border: 1px solid var(--color-border, #d9cbc5);
 
   background: transparent;
-  color: #6f4b47;
+  color: var(--color-text-secondary, #6f625d);
 
   cursor: pointer;
 
   transition:
-    color 180ms ease,
     background-color 180ms ease,
-    border-color 180ms ease;
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .login-required-popup__close:hover {
-  border-color: #d8c9c3;
-  background: #eee5e1;
-  color: #3f2d2a;
+  border-color: var(--color-accent, #6f4b47);
+
+  background: var(--color-accent, #6f4b47);
+  color: #ffffff;
 }
 
 .login-required-popup__close:active {
-  background: #e3d7d2;
-  color: #6f4b47;
+  border-color: #7f5953;
+
+  background: #7f5953;
+  color: #ffffff;
+
+  transform: scale(0.95);
 }
 
 .login-required-popup__close:focus-visible {
-  outline: 2px solid #9b7069;
+  outline: 2px solid var(--color-accent, #6f4b47);
   outline-offset: 3px;
 }
 
 .login-required-popup__close-icon {
-  display: block;
+  color: currentColor;
 }
 
-/* ==========================================================
+/* =========================================================
    CONTENT
-========================================================== */
+   ========================================================= */
 
 .login-required-popup__content {
-  text-align: left;
+  text-align: center;
 }
 
 .login-required-popup__eyebrow {
   margin: 0;
 
-  color: #6f4b47;
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
 
-  font-family: var(--font-body);
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+
+  color: var(--color-accent, #6f4b47);
 }
 
 .login-required-popup__rule {
   display: block;
 
-  width: 34px;
+  width: 42px;
   height: 1px;
 
-  margin-top: 17px;
+  margin: 18px auto 20px;
 
-  background: #9b7069;
+  background: var(--color-border-dark, #b9a7a0);
 }
 
 .login-required-popup__title {
-  margin: 18px 0 0;
+  margin: 0;
 
-  color: #3f2d2a;
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
 
-  font-family: var(--font-display);
-  font-size: 40px;
-  font-weight: 400;
-  line-height: 0.96;
-  letter-spacing: -0.025em;
+  font-size: clamp(34px, 5vw, 44px);
+  font-weight: 500;
+  line-height: 0.98;
+
+  letter-spacing: -0.02em;
+
+  color: var(--color-text, #3f2d2a);
 }
 
 .login-required-popup__description {
-  max-width: 340px;
+  max-width: 330px;
 
-  margin: 14px 0 0;
+  margin: 18px auto 0;
 
-  color: #756560;
+  font-family: var(--font-body, sans-serif);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
 
-  font-family: var(--font-body);
-  font-size: 11px;
-  line-height: 1.75;
+  color: var(--color-text-secondary, #6f625d);
 }
 
-/* ==========================================================
+/* =========================================================
    ACTIONS
-========================================================== */
+   ========================================================= */
 
 .login-required-popup__actions {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 
-  margin-top: 30px;
+  margin-top: 32px;
 }
 
 .login-required-popup__button {
-  display: flex;
-  width: 100%;
-  min-height: 50px;
+  min-height: 48px;
 
-  align-items: center;
-  justify-content: center;
+  padding: 0 18px;
 
-  padding: 0 20px;
-
+  border: 1px solid transparent;
   border-radius: 0;
 
-  font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 700;
+  font-family: var(--font-body, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: 0.18em;
+
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 
   cursor: pointer;
@@ -194,12 +203,12 @@
     transform 180ms ease;
 }
 
-/* ==========================================================
+/* =========================================================
    PRIMARY
-========================================================== */
+   ========================================================= */
 
 .login-required-popup__button--primary {
-  border: 1px solid #6f4b47;
+  border-color: #6f4b47;
 
   background: #6f4b47;
   color: #ffffff;
@@ -207,93 +216,133 @@
 
 .login-required-popup__button--primary:hover {
   border-color: #3f2d2a;
+
   background: #3f2d2a;
+  color: #ffffff;
 }
 
 .login-required-popup__button--primary:active {
   border-color: #7f5953;
+
   background: #7f5953;
+  color: #ffffff;
+
   transform: translateY(1px);
 }
 
-/* ==========================================================
+/* =========================================================
    SECONDARY
-========================================================== */
+   ========================================================= */
 
 .login-required-popup__button--secondary {
-  border: 1px solid #cdbdb7;
+  border-color: var(--color-border-dark, #b9a7a0);
 
   background: transparent;
-  color: #6f4b47;
+  color: var(--color-text, #3f2d2a);
 }
 
 .login-required-popup__button--secondary:hover {
-  border-color: #6f4b47;
-  background: #eee5e1;
-  color: #3f2d2a;
+  border-color: var(--color-accent, #6f4b47);
+
+  background: var(--color-accent, #6f4b47);
+  color: #ffffff;
 }
 
 .login-required-popup__button--secondary:active {
-  background: #e3d7d2;
+  border-color: #7f5953;
+
+  background: #7f5953;
+  color: #ffffff;
+
   transform: translateY(1px);
 }
 
-/* ==========================================================
-   FOCUS
-========================================================== */
+/* =========================================================
+   BUTTON FOCUS
+   ========================================================= */
 
 .login-required-popup__button:focus-visible {
-  outline: 2px solid #9b7069;
+  outline: 2px solid var(--color-accent, #6f4b47);
   outline-offset: 3px;
 }
 
-/* ==========================================================
+/* =========================================================
    MOBILE
-========================================================== */
+   ========================================================= */
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .login-required-popup {
     align-items: flex-end;
 
-    padding: 12px;
+    padding: 0;
   }
 
   .login-required-popup__dialog {
     width: 100%;
 
-    padding: 40px 24px 26px;
+    padding: 42px 22px 24px;
+
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+
+    box-shadow:
+      0 -18px 60px rgba(63, 45, 42, 0.16);
+
+    animation-name: login-popup-sheet-in;
+  }
+
+  .login-required-popup__close {
+    top: 12px;
+    right: 12px;
+
+    width: 34px;
+    height: 34px;
   }
 
   .login-required-popup__title {
-    font-size: 35px;
+    font-size: 36px;
   }
 
   .login-required-popup__description {
-    font-size: 10px;
+    max-width: 340px;
+
+    font-size: 12px;
+    line-height: 1.65;
   }
 
   .login-required-popup__actions {
-    margin-top: 24px;
+    grid-template-columns: 1fr;
+
+    margin-top: 26px;
+  }
+
+  .login-required-popup__button {
+    min-height: 47px;
   }
 }
 
-/* ==========================================================
+/* =========================================================
    SMALL MOBILE
-========================================================== */
+   ========================================================= */
 
 @media (max-width: 390px) {
   .login-required-popup__dialog {
-    padding: 38px 20px 22px;
+    padding-inline: 18px;
   }
 
   .login-required-popup__title {
     font-size: 32px;
   }
+
+  .login-required-popup__actions {
+    gap: 8px;
+  }
 }
 
-/* ==========================================================
-   ANIMATION
-========================================================== */
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
 
 @keyframes login-popup-overlay-in {
   from {
@@ -308,7 +357,19 @@
 @keyframes login-popup-dialog-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(14px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes login-popup-sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
   }
 
   to {
@@ -317,17 +378,16 @@
   }
 }
 
-/* ==========================================================
+/* =========================================================
    REDUCED MOTION
-========================================================== */
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   .login-required-popup,
-  .login-required-popup__dialog {
+  .login-required-popup__dialog,
+  .login-required-popup__button,
+  .login-required-popup__close {
     animation: none;
-  }
-
-  .login-required-popup__button {
     transition: none;
   }
 }

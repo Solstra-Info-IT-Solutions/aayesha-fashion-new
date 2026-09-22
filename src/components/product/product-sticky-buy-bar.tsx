@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 
 import type { Product } from "@/types/product";
 
+import "./ProductStickyBuyBar.css";
+
 import {
   getAvailableStock,
   getInventoryStatus,

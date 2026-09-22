@@ -10,6 +10,8 @@ import {
 
 import type { ProductMedia } from "@/types/product";
 
+import "./ProductLightbox.css";
+
 interface ProductLightboxProps {
   open: boolean;
   media: ProductMedia[];

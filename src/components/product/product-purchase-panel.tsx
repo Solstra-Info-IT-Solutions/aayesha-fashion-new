@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 
 import type { Product } from "@/types/product";
 
+import "./ProductPurchasePanel.css";
+
 import {
   getAvailableStock,
   getInventoryStatus,

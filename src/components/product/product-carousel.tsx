@@ -6,6 +6,8 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Product } from "@/types/product";
 import { ProductCard } from "@/components/product/product-card";
 
+import "./ProductCarousel.css";
+
 type ProductCarouselProps = {
   products: Product[];
   ariaLabel?: string;

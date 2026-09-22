@@ -1,6 +1,7 @@
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import Header from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer";
+import { CookieConsent } from "@/components/consent/cookie-consent";
 
 export default function StoreLayout({
   children,
@@ -9,7 +10,7 @@ export default function StoreLayout({
 }>) {
   return (
     <div className="min-h-screen">
-      {/*<AnnouncementBar />*/}
+      {/* <AnnouncementBar /> */}
 
       <Header />
 
@@ -27,6 +28,8 @@ export default function StoreLayout({
       </main>
 
       <Footer />
+
+      <CookieConsent />
     </div>
   );
 }

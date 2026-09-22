@@ -1,0 +1,133 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT SPECIFICATIONS
+   Editorial / Quiet Indian Luxury
+   ========================================================= */
+
+.product-specifications {
+  width: 100%;
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+
+  background: transparent;
+}
+
+/* =========================================================
+   ROW
+   ========================================================= */
+
+.product-specifications__row {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.75fr) minmax(0, 1.25fr);
+  gap: 24px;
+
+  min-height: 48px;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+
+  align-items: center;
+}
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.product-specifications__label {
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.45;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--color-text-muted, #8d817b);
+}
+
+/* =========================================================
+   VALUE
+   ========================================================= */
+
+.product-specifications__value {
+  min-width: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.55;
+
+  color: var(--color-text, #3f2d2a);
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .product-specifications__row {
+    grid-template-columns: minmax(115px, 0.8fr) minmax(0, 1.2fr);
+
+    gap: 18px;
+
+    padding: 12px 0;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-specifications__row {
+    grid-template-columns: minmax(105px, 0.8fr) minmax(0, 1.2fr);
+
+    gap: 14px;
+
+    min-height: 44px;
+
+    padding: 11px 0;
+  }
+
+  .product-specifications__label {
+    font-size: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .product-specifications__value {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-specifications__row {
+    grid-template-columns: 92px minmax(0, 1fr);
+
+    gap: 12px;
+  }
+
+  .product-specifications__label {
+    font-size: 7.5px;
+  }
+
+  .product-specifications__value {
+    font-size: 9.5px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-specifications * {
+    scroll-behavior: auto;
+  }
+}

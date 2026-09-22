@@ -1,0 +1,307 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT RECOMMENDATIONS
+   Editorial / Quiet Indian Luxury
+   ========================================================= */
+
+.product-recommendations {
+  width: 100%;
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+
+  background: var(--color-bg-soft, #f1eae6);
+}
+
+.product-recommendations__container {
+  width: 100%;
+  max-width: 1600px;
+
+  margin: 0 auto;
+  padding: 64px 16px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.product-recommendations__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+
+  margin-bottom: 40px;
+}
+
+.product-recommendations__heading-group {
+  min-width: 0;
+}
+
+.product-recommendations__eyebrow {
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.product-recommendations__title {
+  margin: 8px 0 0;
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+
+  font-size: clamp(36px, 4vw, 58px);
+  font-weight: 500;
+  line-height: 0.96;
+
+  letter-spacing: -0.025em;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.product-recommendations__description {
+  max-width: 430px;
+
+  margin: 12px 0 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.75;
+
+  color: var(--color-text-muted, #8d817b);
+}
+
+/* =========================================================
+   COLLECTION LINK
+   ========================================================= */
+
+.product-recommendations__collection-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  flex: 0 0 auto;
+
+  padding-bottom: 5px;
+
+  border-bottom: 1px solid var(--color-text, #3f2d2a);
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  color: var(--color-text, #3f2d2a);
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.product-recommendations__collection-link::after {
+  content: "→";
+
+  font-size: 13px;
+  line-height: 1;
+
+  transition: transform 180ms ease;
+}
+
+.product-recommendations__collection-link:hover {
+  border-color: var(--color-accent, #6f4b47);
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.product-recommendations__collection-link:hover::after {
+  transform: translateX(3px);
+}
+
+.product-recommendations__collection-link:focus-visible {
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   PRODUCT GRID
+   ========================================================= */
+
+.product-recommendations__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  column-gap: 12px;
+  row-gap: 40px;
+}
+
+/* =========================================================
+   MOBILE COLLECTION LINK
+   ========================================================= */
+
+.product-recommendations__mobile-link {
+  display: none;
+
+  margin-top: 40px;
+
+  justify-content: center;
+}
+
+.product-recommendations__mobile-link
+  .product-recommendations__collection-link {
+  padding-bottom: 4px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 640px) {
+  .product-recommendations__container {
+    padding: 80px 24px;
+  }
+
+  .product-recommendations__grid {
+    column-gap: 20px;
+    row-gap: 48px;
+  }
+}
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 1024px) {
+  .product-recommendations__container {
+    padding: 96px 40px;
+  }
+
+  .product-recommendations__header {
+    margin-bottom: 48px;
+  }
+
+  .product-recommendations__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    column-gap: 24px;
+    row-gap: 56px;
+  }
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1280px) {
+  .product-recommendations__container {
+    padding-right: 48px;
+    padding-left: 48px;
+  }
+
+  .product-recommendations__grid {
+    column-gap: 28px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-recommendations__container {
+    padding: 56px 16px;
+  }
+
+  .product-recommendations__header {
+    display: block;
+
+    margin-bottom: 32px;
+  }
+
+  .product-recommendations__title {
+    font-size: clamp(32px, 9vw, 40px);
+    line-height: 0.98;
+  }
+
+  .product-recommendations__description {
+    max-width: 340px;
+
+    margin-top: 10px;
+
+    font-size: 10.5px;
+    line-height: 1.7;
+  }
+
+  .product-recommendations__header
+    > .product-recommendations__collection-link {
+    display: none;
+  }
+
+  .product-recommendations__grid {
+    column-gap: 10px;
+    row-gap: 34px;
+  }
+
+  .product-recommendations__mobile-link {
+    display: flex;
+  }
+
+  .product-recommendations__mobile-link
+    .product-recommendations__collection-link {
+    font-size: 8px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-recommendations__container {
+    padding-inline: 12px;
+  }
+
+  .product-recommendations__title {
+    font-size: 30px;
+  }
+
+  .product-recommendations__description {
+    font-size: 10px;
+  }
+
+  .product-recommendations__grid {
+    column-gap: 8px;
+    row-gap: 30px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-recommendations__collection-link,
+  .product-recommendations__collection-link::after {
+    transition: none;
+  }
+
+  .product-recommendations__collection-link:hover::after {
+    transform: none;
+  }
+}

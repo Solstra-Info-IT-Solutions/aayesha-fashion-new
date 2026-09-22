@@ -1,0 +1,449 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT CONTENT RENDERER
+   Editorial / Quiet Luxury
+   ========================================================= */
+
+.product-content {
+  width: 100%;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.8;
+
+  color: var(--color-text-secondary, #6f625d);
+}
+
+/* =========================================================
+   PLAIN CONTENT
+   ========================================================= */
+
+.product-content--plain {
+  max-width: 760px;
+}
+
+.product-content__paragraph {
+  margin: 0;
+}
+
+/* =========================================================
+   HTML / RICH CONTENT
+   ========================================================= */
+
+.product-content--html,
+.product-content--rich {
+  max-width: 780px;
+}
+
+.product-content__rich-html {
+  width: 100%;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.product-content__rich-html h1,
+.product-content__rich-html h2,
+.product-content__rich-html h3,
+.product-content__rich-html h4,
+.product-content__rich-html h5,
+.product-content__rich-html h6,
+.product-content__heading {
+  margin: 0 0 12px;
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.product-content__rich-html h1 {
+  font-size: 30px;
+}
+
+.product-content__rich-html h2 {
+  font-size: 26px;
+}
+
+.product-content__rich-html h3,
+.product-content__heading {
+  font-size: 22px;
+}
+
+.product-content__rich-html h4 {
+  font-size: 19px;
+}
+
+.product-content__rich-html h5 {
+  font-size: 16px;
+}
+
+.product-content__rich-html h6 {
+  font-size: 14px;
+}
+
+.product-content__heading {
+  margin-top: 26px;
+}
+
+.product-content__heading:first-child {
+  margin-top: 0;
+}
+
+.product-content__rich-html p {
+  margin: 0 0 16px;
+}
+
+.product-content__rich-html p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+.product-content__rich-html a {
+  color: var(--color-accent, #6f4b47);
+
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+
+  transition:
+    color 180ms ease,
+    text-decoration-color 180ms ease;
+}
+
+.product-content__rich-html a:hover {
+  color: var(--color-accent-dark, #3f2d2a);
+}
+
+/* =========================================================
+   EMPHASIS
+   ========================================================= */
+
+.product-content__rich-html strong,
+.product-content__rich-html b {
+  font-weight: 600;
+  color: var(--color-text, #3f2d2a);
+}
+
+.product-content__rich-html em,
+.product-content__rich-html i {
+  font-style: italic;
+}
+
+/* =========================================================
+   LISTS
+   ========================================================= */
+
+.product-content__rich-html ul,
+.product-content__rich-html ol,
+.product-content__list {
+  margin: 0 0 18px;
+  padding: 0;
+
+  list-style: none;
+}
+
+.product-content__rich-html ol {
+  counter-reset: product-content-counter;
+}
+
+.product-content__rich-html ol > li {
+  position: relative;
+
+  padding-left: 24px;
+
+  counter-increment: product-content-counter;
+}
+
+.product-content__rich-html ol > li::before {
+  content: counter(product-content-counter) ".";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  color: var(--color-accent, #6f4b47);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.product-content__list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin: 0 0 9px;
+
+  line-height: 1.7;
+}
+
+.product-content__list-item:last-child {
+  margin-bottom: 0;
+}
+
+.product-content__list-marker {
+  width: 4px;
+  height: 4px;
+
+  flex: 0 0 4px;
+
+  margin-top: 9px;
+
+  background: var(--color-accent, #6f4b47);
+}
+
+/* =========================================================
+   HTML LIST ITEMS
+   ========================================================= */
+
+.product-content__rich-html li {
+  margin-bottom: 9px;
+}
+
+.product-content__rich-html li:last-child {
+  margin-bottom: 0;
+}
+
+.product-content__rich-html ul {
+  padding-left: 18px;
+  list-style: none;
+}
+
+.product-content__rich-html ul > li {
+  position: relative;
+
+  padding-left: 12px;
+}
+
+.product-content__rich-html ul > li::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+
+  width: 4px;
+  height: 4px;
+
+  background: var(--color-accent, #6f4b47);
+}
+
+/* =========================================================
+   BLOCKQUOTE
+   ========================================================= */
+
+.product-content__quote,
+.product-content__rich-html blockquote {
+  margin: 24px 0;
+
+  padding: 18px 22px;
+
+  border-left: 2px solid var(--color-accent, #6f4b47);
+
+  background: var(--color-bg-soft, #f1eae6);
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.45;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.product-content__quote {
+  margin-top: 24px;
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.product-content__divider {
+  width: 100%;
+  height: 1px;
+
+  margin: 26px 0;
+
+  background: var(--color-border, #d9cbc5);
+}
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+.product-content__rich-html img {
+  display: block;
+
+  max-width: 100%;
+  height: auto;
+
+  margin: 20px 0;
+
+  border: 0;
+}
+
+.product-content__rich-html figure {
+  margin: 24px 0;
+}
+
+.product-content__rich-html figcaption {
+  margin-top: 8px;
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  color: var(--color-text-muted, #8d817b);
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.product-content__rich-html table {
+  width: 100%;
+
+  margin: 20px 0;
+
+  border-collapse: collapse;
+}
+
+.product-content__rich-html th,
+.product-content__rich-html td {
+  padding: 11px 12px;
+
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+
+  text-align: left;
+  vertical-align: top;
+}
+
+.product-content__rich-html th {
+  font-weight: 600;
+  color: var(--color-text, #3f2d2a);
+}
+
+/* =========================================================
+   CODE
+   ========================================================= */
+
+.product-content__rich-html code {
+  padding: 2px 5px;
+
+  background: var(--color-bg-soft, #f1eae6);
+
+  font-family: monospace;
+  font-size: 0.9em;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+.product-content__rich-html pre {
+  max-width: 100%;
+
+  margin: 20px 0;
+  padding: 16px;
+
+  overflow-x: auto;
+
+  background: var(--color-bg-soft, #f1eae6);
+
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-content {
+    font-size: 11.5px;
+    line-height: 1.75;
+  }
+
+  .product-content__rich-html h1 {
+    font-size: 27px;
+  }
+
+  .product-content__rich-html h2 {
+    font-size: 23px;
+  }
+
+  .product-content__rich-html h3,
+  .product-content__heading {
+    font-size: 20px;
+  }
+
+  .product-content__rich-html h4 {
+    font-size: 17px;
+  }
+
+  .product-content__quote,
+  .product-content__rich-html blockquote {
+    margin: 20px 0;
+    padding: 15px 17px;
+
+    font-size: 17px;
+  }
+
+  .product-content__divider {
+    margin: 22px 0;
+  }
+
+  .product-content__rich-html table {
+    display: block;
+
+    overflow-x: auto;
+
+    white-space: nowrap;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-content {
+    font-size: 11px;
+  }
+
+  .product-content__rich-html h3,
+  .product-content__heading {
+    font-size: 19px;
+  }
+
+  .product-content__quote,
+  .product-content__rich-html blockquote {
+    font-size: 16px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-content__rich-html a {
+    transition: none;
+  }
+}

@@ -1,0 +1,323 @@
+/* =========================================================
+   AAYESHA FASHION
+   PRODUCT CAROUSEL
+   Editorial / Quiet Luxury
+   ========================================================= */
+
+.product-carousel {
+  position: relative;
+  width: 100%;
+}
+
+/* =========================================================
+   TRACK
+   ========================================================= */
+
+.product-carousel__track {
+  display: flex;
+  gap: 18px;
+
+  width: 100%;
+
+  padding: 2px 0 8px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;
+
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================================
+   ITEM
+   ========================================================= */
+
+.product-carousel__item {
+  flex: 0 0 calc(25% - 14px);
+
+  min-width: 0;
+
+  scroll-snap-align: start;
+}
+
+/* =========================================================
+   END SPACER
+   ========================================================= */
+
+.product-carousel__end-spacer {
+  flex: 0 0 1px;
+  width: 1px;
+}
+
+/* =========================================================
+   KEYBOARD FOCUS
+   ========================================================= */
+
+.product-carousel__track:focus-visible {
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 5px;
+}
+
+/* =========================================================
+   CONTROLS
+   ========================================================= */
+
+.product-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  margin-top: 24px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+}
+
+/* =========================================================
+   HINT
+   ========================================================= */
+
+.product-carousel__hint {
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: var(--color-text-muted, #8d817b);
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.product-carousel__actions {
+  display: flex;
+  align-items: center;
+
+  border: 1px solid var(--color-border-dark, #b9a7a0);
+}
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.product-carousel__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 42px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 0;
+
+  background: var(--color-surface, #fbf8f5);
+  color: var(--color-text, #3f2d2a);
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.product-carousel__button
+  + .product-carousel__button {
+  border-left: 1px solid var(--color-border-dark, #b9a7a0);
+}
+
+.product-carousel__button:hover {
+  background: var(--color-accent, #6f4b47);
+  color: #ffffff;
+}
+
+.product-carousel__button:active {
+  background: #7f5953;
+  color: #ffffff;
+
+  transform: scale(0.96);
+}
+
+.product-carousel__button:focus-visible {
+  position: relative;
+  z-index: 1;
+
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.product-carousel__icon {
+  width: 16px;
+  height: 16px;
+
+  flex: 0 0 auto;
+
+  color: currentColor;
+
+  stroke-width: 1.35;
+
+  transition:
+    transform 180ms ease,
+    color 180ms ease;
+}
+
+.product-carousel__button:first-child:hover
+  .product-carousel__icon {
+  transform: translateX(-2px);
+}
+
+.product-carousel__button:last-child:hover
+  .product-carousel__icon {
+  transform: translateX(2px);
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1199px) {
+  .product-carousel__item {
+    flex: 0 0 calc(33.333% - 12px);
+  }
+
+  .product-carousel__track {
+    gap: 16px;
+  }
+}
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .product-carousel__item {
+    flex: 0 0 calc(50% - 8px);
+  }
+
+  .product-carousel__track {
+    gap: 14px;
+
+    padding-bottom: 6px;
+
+    scroll-snap-type: x mandatory;
+  }
+
+  .product-carousel__controls {
+    margin-top: 20px;
+    padding-top: 12px;
+  }
+
+  .product-carousel__button {
+    width: 44px;
+    height: 40px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .product-carousel__item {
+    flex: 0 0 78%;
+  }
+
+  .product-carousel__track {
+    gap: 12px;
+
+    margin-right: -1px;
+
+    scroll-padding-left: 0;
+  }
+
+  .product-carousel__controls {
+    gap: 16px;
+
+    margin-top: 18px;
+    padding-top: 11px;
+  }
+
+  .product-carousel__hint {
+    font-size: 8px;
+    letter-spacing: 0.13em;
+  }
+
+  .product-carousel__button {
+    width: 40px;
+    height: 38px;
+  }
+
+  .product-carousel__icon {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-carousel__item {
+    flex-basis: 82%;
+  }
+
+  .product-carousel__controls {
+    margin-top: 16px;
+  }
+
+  .product-carousel__button {
+    width: 38px;
+    height: 36px;
+  }
+
+  .product-carousel__hint {
+    font-size: 7.5px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-carousel__track {
+    scroll-behavior: auto;
+  }
+
+  .product-carousel__button,
+  .product-carousel__icon {
+    transition: none;
+  }
+
+  .product-carousel__button:first-child:hover
+    .product-carousel__icon,
+  .product-carousel__button:last-child:hover
+    .product-carousel__icon {
+    transform: none;
+  }
+}

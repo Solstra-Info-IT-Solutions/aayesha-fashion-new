@@ -14,6 +14,8 @@ import { useWishlistStore } from "@/store/wishlist-store";
 
 import { LinkButton } from "@/components/ui/button";
 
+import "./WishlistGrid.css";
+
 type WishlistGridProps = {
   products: Product[];
 };

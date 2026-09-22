@@ -6,6 +6,8 @@ import { getCategories } from "@/services/category.service";
 
 import type { Product } from "@/types/product";
 
+import "./ProductSpecifications.css";
+
 interface ProductSpecificationsProps {
   product: Product;
 }

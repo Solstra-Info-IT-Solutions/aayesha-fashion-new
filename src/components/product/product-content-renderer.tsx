@@ -5,6 +5,8 @@ import type {
   ProductContentBlock,
 } from "@/types/product";
 
+import "./ProductContentRenderer.css";
+
 interface ProductContentRendererProps {
   content: ProductContent;
 }
