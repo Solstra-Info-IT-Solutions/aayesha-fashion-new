@@ -6,6 +6,8 @@ import type { Product } from "@/types/product";
 import { getProducts } from "@/lib/api/products";
 import { ProductCard } from "@/components/product/product-card";
 
+import { RecentSearchTracker } from "@/components/search/recent-search-tracker";
+
 import "./SearchPage.css";
 
 interface SearchPageProps {
@@ -29,6 +31,8 @@ export default async function SearchPage({
   const params = await searchParams;
 
   const query = params.q?.trim() ?? "";
+
+  <RecentSearchTracker query={query} />
 
   let results: Product[] = [];
 

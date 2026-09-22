@@ -1,0 +1,103 @@
+/* =========================================================
+   AAYESHA FASHION
+   GLOBAL TOAST STYLES
+   Editorial / Quiet Indian Luxury
+   ========================================================= */
+
+:root {
+  --toast-bg: #3f2d2a;
+  --toast-text: #ffffff;
+  --toast-border: #6f4b47;
+  --toast-success: #6f4b47;
+  --toast-error: #8a514b;
+}
+
+/* =========================================================
+   BASE TOAST
+   ========================================================= */
+
+[data-sonner-toast],
+div[role="status"] {
+  font-family: var(--font-body, sans-serif);
+}
+
+/*
+ * react-hot-toast creates its own fixed container.
+ * Target the generated toast elements without
+ * changing the toast functionality.
+ */
+
+div[style*="z-index"] > div[role="status"] {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   REACT HOT TOAST
+   ========================================================= */
+
+.go2072408551 {
+  font-family: var(--font-body, sans-serif) !important;
+
+  min-height: 46px !important;
+
+  padding: 10px 14px !important;
+
+  border: 1px solid var(--toast-border) !important;
+
+  border-radius: 0 !important;
+
+  background: var(--toast-bg) !important;
+  color: var(--toast-text) !important;
+
+  box-shadow:
+    0 10px 30px rgba(63, 45, 42, 0.18) !important;
+}
+
+/* =========================================================
+   FALLBACK SELECTOR
+   ========================================================= */
+
+[data-hot-toast] {
+  font-family: var(--font-body, sans-serif);
+}
+
+/* =========================================================
+   SUCCESS / ERROR CONTENT
+   ========================================================= */
+
+.go3958317564 {
+  color: var(--toast-text) !important;
+}
+
+.go3958317564 svg {
+  flex: 0 0 auto;
+
+  color: currentColor !important;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .go2072408551 {
+    max-width: calc(100vw - 24px) !important;
+
+    min-height: 44px !important;
+
+    padding: 9px 12px !important;
+
+    font-size: 11px !important;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .go2072408551 {
+    transition: none !important;
+    animation: none !important;
+  }
+}

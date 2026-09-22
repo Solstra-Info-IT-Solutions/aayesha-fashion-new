@@ -1,0 +1,403 @@
+/* =========================================================
+   AAYESHA FASHION
+   RECENT SEARCHES
+   Editorial / Quiet Indian Luxury
+   ========================================================= */
+
+.recent-searches {
+  width: 100%;
+
+  margin-bottom: 48px;
+
+  padding: 28px 30px;
+
+  border: 1px solid var(--color-border, #d9cbc5);
+
+  background: var(--color-bg-soft, #f1eae6);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.recent-searches__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 20px;
+}
+
+.recent-searches__heading {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  gap: 12px;
+}
+
+.recent-searches__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  flex: 0 0 36px;
+
+  border: 1px solid var(--color-border-dark, #b9a7a0);
+
+  background: var(--color-surface, #ffffff);
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.recent-searches__icon svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+.recent-searches__eyebrow {
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.recent-searches__title {
+  margin: 4px 0 0;
+
+  font-family: var(
+    --font-display,
+    "Cormorant Garamond",
+    serif
+  );
+
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 1;
+
+  letter-spacing: -0.015em;
+
+  color: var(--color-text, #3f2d2a);
+}
+
+/* =========================================================
+   CLEAR ALL
+   ========================================================= */
+
+.recent-searches__clear {
+  flex: 0 0 auto;
+
+  padding: 5px 0;
+
+  border: 0;
+  border-bottom: 1px solid var(--color-text, #3f2d2a);
+
+  background: transparent;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: var(--color-text, #3f2d2a);
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.recent-searches__clear:hover {
+  border-color: var(--color-accent, #6f4b47);
+
+  color: var(--color-accent, #6f4b47);
+}
+
+.recent-searches__clear:focus-visible {
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   SEARCH LIST
+   ========================================================= */
+
+.recent-searches__list {
+  display: grid;
+
+  grid-template-columns: repeat(
+    4,
+    minmax(0, 1fr)
+  );
+
+  border-top: 1px solid var(--color-border, #d9cbc5);
+  border-left: 1px solid var(--color-border, #d9cbc5);
+}
+
+/* =========================================================
+   SEARCH ITEM
+   ========================================================= */
+
+.recent-searches__item {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  border-right: 1px solid var(--color-border, #d9cbc5);
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+
+  background: var(--color-surface, #ffffff);
+
+  transition: background-color 180ms ease;
+}
+
+.recent-searches__item:hover {
+  background: #faf7f5;
+}
+
+/* =========================================================
+   QUERY
+   ========================================================= */
+
+.recent-searches__query {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  flex: 1;
+
+  gap: 9px;
+
+  padding: 13px 12px;
+
+  color: var(--color-text, #3f2d2a);
+
+  text-decoration: none;
+}
+
+.recent-searches__query svg {
+  flex: 0 0 auto;
+
+  color: var(--color-accent, #6f4b47);
+  stroke: currentColor;
+}
+
+.recent-searches__query span {
+  min-width: 0;
+
+  overflow: hidden;
+
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  color: currentColor;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-searches__query:hover {
+  color: var(--color-accent, #6f4b47);
+}
+
+.recent-searches__query:focus-visible {
+  position: relative;
+  z-index: 1;
+
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: -3px;
+}
+
+/* =========================================================
+   REMOVE
+   ========================================================= */
+
+.recent-searches__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 100%;
+
+  min-height: 42px;
+
+  flex: 0 0 38px;
+
+  border: 0;
+  border-left: 1px solid var(--color-border, #d9cbc5);
+
+  background: transparent;
+
+  color: var(--color-text-muted, #8d817b);
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.recent-searches__remove:hover {
+  background: var(--color-accent, #6f4b47);
+
+  color: #ffffff;
+}
+
+.recent-searches__remove:active {
+  background: #7f5953;
+
+  color: #ffffff;
+}
+
+.recent-searches__remove:focus-visible {
+  position: relative;
+  z-index: 1;
+
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: -3px;
+}
+
+.recent-searches__remove svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .recent-searches {
+    margin-bottom: 42px;
+
+    padding: 24px;
+  }
+
+  .recent-searches__list {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .recent-searches {
+    margin-bottom: 34px;
+
+    padding: 20px 16px;
+  }
+
+  .recent-searches__header {
+    align-items: flex-end;
+
+    gap: 14px;
+
+    margin-bottom: 16px;
+  }
+
+  .recent-searches__heading {
+    gap: 9px;
+  }
+
+  .recent-searches__icon {
+    width: 32px;
+    height: 32px;
+
+    flex-basis: 32px;
+  }
+
+  .recent-searches__eyebrow {
+    font-size: 7px;
+
+    letter-spacing: 0.14em;
+  }
+
+  .recent-searches__title {
+    font-size: 24px;
+  }
+
+  .recent-searches__clear {
+    font-size: 7px;
+
+    letter-spacing: 0.11em;
+  }
+
+  .recent-searches__list {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-searches__query {
+    padding: 12px 10px;
+  }
+
+  .recent-searches__query span {
+    font-size: 9.5px;
+  }
+
+  .recent-searches__remove {
+    width: 42px;
+
+    flex-basis: 42px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .recent-searches {
+    padding: 18px 12px;
+  }
+
+  .recent-searches__title {
+    font-size: 22px;
+  }
+
+  .recent-searches__clear {
+    font-size: 6.5px;
+  }
+
+  .recent-searches__query span {
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .recent-searches__clear,
+  .recent-searches__item,
+  .recent-searches__remove {
+    transition: none;
+  }
+}

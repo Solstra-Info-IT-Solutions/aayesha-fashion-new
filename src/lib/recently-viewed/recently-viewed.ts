@@ -1,34 +1,8 @@
 const STORAGE_KEY = "aayesha-recently-viewed";
-
 const MAX_ITEMS = 12;
 
-export interface RecentlyViewedProduct {
-  id: string;
-  name: string;
-  slug?: string;
-  image?: string;
-  price?: number;
-  originalPrice?: number;
-  category?: string;
-  viewedAt: number;
-}
-
-function isBrowser(): boolean {
-  return typeof window !== "undefined";
-}
-
-function isValidProduct(
-  product: RecentlyViewedProduct,
-): boolean {
-  return Boolean(
-    product &&
-      typeof product.id === "string" &&
-      product.id.trim().length > 0,
-  );
-}
-
-function readProducts(): RecentlyViewedProduct[] {
-  if (!isBrowser()) {
+export function getRecentlyViewed(): string[] {
+  if (typeof window === "undefined") {
     return [];
   }
 
@@ -39,97 +13,66 @@ function readProducts(): RecentlyViewedProduct[] {
       return [];
     }
 
-    const parsed: unknown = JSON.parse(stored);
+    const parsed = JSON.parse(stored);
 
     if (!Array.isArray(parsed)) {
       return [];
     }
 
-    return parsed.filter(isValidProduct);
-  } catch {
+    return parsed.filter(
+      (id): id is string =>
+        typeof id === "string" && id.trim().length > 0,
+    );
+  } catch (error) {
+    console.error(
+      "Failed to read recently viewed products:",
+      error,
+    );
+
     return [];
   }
 }
 
-function writeProducts(
-  products: RecentlyViewedProduct[],
-): void {
-  if (!isBrowser()) {
+export function addRecentlyViewed(productId: string): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  if (!productId) {
     return;
   }
 
   try {
+    const existing = getRecentlyViewed();
+
+    const updated = [
+      productId,
+      ...existing.filter((id) => id !== productId),
+    ].slice(0, MAX_ITEMS);
+
     window.localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify(products.slice(0, MAX_ITEMS)),
+      JSON.stringify(updated),
     );
-  } catch {
-    // Ignore localStorage failures.
+  } catch (error) {
+    console.error(
+      "Failed to save recently viewed product:",
+      error,
+    );
   }
-}
-
-export function getRecentlyViewed(): RecentlyViewedProduct[] {
-  return readProducts();
-}
-
-export function addRecentlyViewed(
-  product: Omit<RecentlyViewedProduct, "viewedAt">,
-): RecentlyViewedProduct[] {
-  if (!isValidProduct({ ...product, viewedAt: Date.now() })) {
-    return readProducts();
-  }
-
-  const existingProducts = readProducts();
-
-  const nextProduct: RecentlyViewedProduct = {
-    ...product,
-    viewedAt: Date.now(),
-  };
-
-  const filteredProducts = existingProducts.filter(
-    (item) => item.id !== product.id,
-  );
-
-  const nextProducts = [
-    nextProduct,
-    ...filteredProducts,
-  ].slice(0, MAX_ITEMS);
-
-  writeProducts(nextProducts);
-
-  return nextProducts;
-}
-
-export function removeRecentlyViewed(
-  productId: string,
-): RecentlyViewedProduct[] {
-  const products = readProducts();
-
-  const nextProducts = products.filter(
-    (product) => product.id !== productId,
-  );
-
-  writeProducts(nextProducts);
-
-  return nextProducts;
 }
 
 export function clearRecentlyViewed(): void {
-  if (!isBrowser()) {
+  if (typeof window === "undefined") {
     return;
   }
 
   try {
     window.localStorage.removeItem(STORAGE_KEY);
-  } catch {
-    // Ignore localStorage failures.
+  } catch (error) {
+    console.error(
+      "Failed to clear recently viewed products:",
+      error,
+    );
   }
-}
-
-export function hasRecentlyViewed(
-  productId: string,
-): boolean {
-  return readProducts().some(
-    (product) => product.id === productId,
-  );
 }

@@ -20,6 +20,8 @@ import { addToCart } from "@/services/cart.service";
 
 import { useAuthStore } from "@/store/auth-store";
 
+import { RecentlyViewed } from "@/components/recently-viewed/recently-viewed";
+
 import {
   ChevronDown,
   ChevronLeft,
@@ -42,6 +44,8 @@ interface ProductDetailProps {
   product: Product;
   recommendations?: Product[];
 }
+
+import { addRecentlyViewed } from "@/lib/recently-viewed/recently-viewed";
 
 /* ============================================================
    SAFE PRODUCT NORMALIZER
@@ -347,6 +351,18 @@ export function ProductDetail({
     setQuantity(1);
     setWishlist(false);
   }, [safeProduct._id]);
+
+  /* ==========================================================
+   RECENTLY VIEWED
+========================================================== */
+
+useEffect(() => {
+  if (!safeProduct._id) {
+    return;
+  }
+
+  addRecentlyViewed(safeProduct._id);
+}, [safeProduct._id]);
 
   /* ==========================================================
      QUANTITY
@@ -1540,6 +1556,14 @@ export function ProductDetail({
           </div>
         </section>
       )}
+
+            {/* =====================================================
+          RECENTLY VIEWED
+      ===================================================== */}
+
+      <RecentlyViewed
+        currentProductId={safeProduct._id}
+      />
     </main>
   );
 }
