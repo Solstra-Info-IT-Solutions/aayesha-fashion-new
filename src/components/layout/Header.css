@@ -40,7 +40,6 @@
 
   box-shadow: 0 1px 0 rgba(17, 17, 17, 0.02);
 
-  /* Prevent accidental layout overflow */
   overflow: visible;
 }
 
@@ -207,7 +206,7 @@
   align-items: center;
   justify-content: center;
 
-  gap: 8px;
+  gap: 14px;
 
   min-width: 0;
 
@@ -222,9 +221,9 @@
   align-items: center;
   justify-content: center;
 
-  min-height: 38px;
+  min-height: 40px;
 
-  padding: 0 13px;
+  padding: 0 14px;
 
   color: var(--mf-text);
 
@@ -235,15 +234,15 @@
     Arial,
     sans-serif;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 600;
 
-  line-height: 1;
+  line-height: 1.2;
 
-  letter-spacing: 0.025em;
+  letter-spacing: 0.015em;
 
-  border-radius: 6px;
+  border-radius: 7px;
 
   outline: none;
 }
@@ -255,14 +254,14 @@
 }
 
 /* =========================================================
-   NAV ACTIVE / UNDERLINE
+   NAV ACTIVE / HOVER INDICATOR
 ========================================================= */
 
 .aayesha-header__nav-line {
   position: absolute;
 
-  left: 13px;
-  right: 13px;
+  left: 14px;
+  right: 14px;
 
   bottom: 5px;
 
