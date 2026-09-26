@@ -157,6 +157,18 @@ export function LoginForm() {
       className="login-form"
     >
       {/* ===================================================
+          FORM INTRO
+      =================================================== */}
+
+      <div className="login-form__intro">
+        <div className="login-form__intro-line" />
+
+        <span className="login-form__intro-text">
+          Welcome back
+        </span>
+      </div>
+
+      {/* ===================================================
           SUCCESS
       =================================================== */}
 
@@ -165,7 +177,10 @@ export function LoginForm() {
           role="status"
           className="login-form__success"
         >
-          <span className="login-form__success-mark">
+          <span
+            className="login-form__success-mark"
+            aria-hidden="true"
+          >
             ✓
           </span>
 
@@ -316,7 +331,10 @@ export function LoginForm() {
           role="alert"
           className="login-form__error"
         >
-          <span className="login-form__error-mark">
+          <span
+            className="login-form__error-mark"
+            aria-hidden="true"
+          >
             !
           </span>
 
@@ -339,17 +357,19 @@ export function LoginForm() {
             : "Sign in"}
         </span>
 
-        {isLoading ? (
-          <Loader2
-            aria-hidden="true"
-            className="login-form__submit-icon login-form__submit-icon--loading"
-          />
-        ) : (
-          <ArrowRight
-            aria-hidden="true"
-            className="login-form__submit-icon"
-          />
-        )}
+        <span className="login-form__submit-icon-wrap">
+          {isLoading ? (
+            <Loader2
+              aria-hidden="true"
+              className="login-form__submit-icon login-form__submit-icon--loading"
+            />
+          ) : (
+            <ArrowRight
+              aria-hidden="true"
+              className="login-form__submit-icon"
+            />
+          )}
+        </span>
       </button>
 
       {/* ===================================================
@@ -357,29 +377,30 @@ export function LoginForm() {
       =================================================== */}
 
       <div className="login-form__register">
-  <div className="login-form__register-copy">
-    <p className="login-form__register-label">
-      New to Aayesha Fashion?
-    </p>
+        <div className="login-form__register-copy">
+          <p className="login-form__register-label">
+            New to Aayesha Fashion?
+          </p>
 
-    <p className="login-form__register-title">
-      Create your account
-    </p>
-  </div>
+          <p className="login-form__register-title">
+            Create your account
+          </p>
+        </div>
 
-  <Link
-    href="/register"
-    className="login-form__register-link"
-  >
-    <span>Create Account</span>
+        <Link
+          href="/register"
+          className="login-form__register-link"
+        >
+          <span>Create Account</span>
 
-    <ArrowRight
-      className="login-form__register-icon"
-      size={15}
-      strokeWidth={1.6}
-    />
-  </Link>
-</div>
+          <ArrowRight
+            className="login-form__register-icon"
+            size={15}
+            strokeWidth={1.6}
+            aria-hidden="true"
+          />
+        </Link>
+      </div>
     </form>
   );
 }

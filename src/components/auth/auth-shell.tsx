@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Sparkles } from "lucide-react";
 
 import { BrandLogo } from "@/components/layout/brand-logo";
 import "./AuthShell.css";
@@ -35,29 +35,71 @@ export function AuthShell({
   return (
     <main className="auth-shell">
       <div className="auth-shell__layout">
+
         {/* =====================================================
-            EDITORIAL BRAND PANEL
+            BRAND PANEL
         ===================================================== */}
 
-        <section className="auth-shell__brand-panel" aria-label="Aayesha Fashion">
-          <div className="auth-shell__brand-frame" />
+        <section
+          className="auth-shell__brand-panel"
+          aria-label="Aayesha Fashion"
+        >
+          <div
+            className="auth-shell__brand-decoration"
+            aria-hidden="true"
+          />
+
+          <div
+            className="auth-shell__brand-pattern"
+            aria-hidden="true"
+          />
 
           <div className="auth-shell__brand-content">
-            {/* Top */}
-            <div className="auth-shell__brand-top">
+
+            {/* =================================================
+                BRAND HEADER
+            ================================================= */}
+
+            <header className="auth-shell__brand-top">
+
               <div className="auth-shell__brand-logo">
                 <BrandLogo />
               </div>
-            </div>
 
-            {/* Center */}
+              <div
+                className="auth-shell__brand-badge"
+                aria-hidden="true"
+              >
+                <Sparkles
+                  size={14}
+                  strokeWidth={1.5}
+                />
+
+                <span>EST. 2026</span>
+              </div>
+
+            </header>
+
+
+            {/* =================================================
+                BRAND MESSAGE
+            ================================================= */}
+
             <div className="auth-shell__brand-copy">
+
               <div className="auth-shell__eyebrow">
-                <span className="auth-shell__eyebrow-line" />
+
+                <span
+                  className="auth-shell__eyebrow-line"
+                  aria-hidden="true"
+                />
+
                 <span className="auth-shell__eyebrow-text">
                   Aayesha Fashion
                 </span>
+
               </div>
+
 
               <h2 className="auth-shell__brand-title">
                 Elegance,
@@ -65,77 +107,158 @@ export function AuthShell({
                 made personal.
               </h2>
 
-              <div className="auth-shell__brand-rule" />
 
               <p className="auth-shell__brand-description">
-                Discover timeless Indian fashion crafted for confidence,
-                celebration, and everyday beauty.
+                Discover contemporary Indian fashion crafted
+                for confidence, celebration, and everyday
+                beauty.
               </p>
+
+
+              <div className="auth-shell__brand-highlights">
+
+                <div className="auth-shell__highlight">
+                  <span className="auth-shell__highlight-dot" />
+                  <span>Curated Collections</span>
+                </div>
+
+                <div className="auth-shell__highlight">
+                  <span className="auth-shell__highlight-dot" />
+                  <span>Designed for Every Moment</span>
+                </div>
+
+              </div>
+
             </div>
 
-            {/* Bottom */}
+
+            {/* =================================================
+                BRAND FOOTER
+            ================================================= */}
+
             <div className="auth-shell__brand-footer">
+
               <span className="auth-shell__copyright">
                 © {new Date().getFullYear()} Aayesha Fashion
               </span>
 
-              <span className="auth-shell__footer-line" aria-hidden="true" />
+              <span
+                className="auth-shell__footer-line"
+                aria-hidden="true"
+              />
+
+              <span className="auth-shell__brand-region">
+                Contemporary Indian Womenswear
+              </span>
+
             </div>
+
           </div>
         </section>
+
 
         {/* =====================================================
             AUTH CONTENT PANEL
         ===================================================== */}
 
         <section className="auth-shell__content-panel">
-          {/* Header */}
+
+          {/* =================================================
+              HEADER
+          ================================================= */}
+
           <header className="auth-shell__header">
+
             <Link
               href={backHref}
               className="auth-shell__back-link"
               aria-label={backLabel}
             >
-              <ArrowLeft
-                className="auth-shell__back-icon"
-                aria-hidden="true"
-              />
+              <span className="auth-shell__back-icon-wrapper">
+                <ArrowLeft
+                  className="auth-shell__back-icon"
+                  aria-hidden="true"
+                />
+              </span>
 
               <span>{backLabel}</span>
             </Link>
 
+
             <div className="auth-shell__mobile-logo">
               <BrandLogo />
             </div>
+
           </header>
 
-          {/* Content */}
+
+          {/* =================================================
+              CONTENT
+          ================================================= */}
+
           <div className="auth-shell__content">
+
             <div className="auth-shell__content-inner">
-              {/* Heading */}
+
+              {/* =================================================
+                  HEADING
+              ================================================= */}
+
               <div className="auth-shell__heading">
+
                 <div className="auth-shell__content-eyebrow">
-                  <span className="auth-shell__content-eyebrow-line" />
-                  <span>Aayesha Fashion</span>
+
+                  <span
+                    className="auth-shell__content-eyebrow-line"
+                    aria-hidden="true"
+                  />
+
+                  <span>
+                    Aayesha Fashion
+                  </span>
+
                 </div>
 
-                <h1 className="auth-shell__title">{title}</h1>
+
+                <h1 className="auth-shell__title">
+                  {title}
+                </h1>
+
 
                 {subtitle ? (
-                  <p className="auth-shell__subtitle">{subtitle}</p>
+                  <p className="auth-shell__subtitle">
+                    {subtitle}
+                  </p>
                 ) : null}
+
               </div>
 
-              {/* Form */}
-              <div className="auth-shell__form">{children}</div>
 
-              {/* Footer */}
+              {/* =================================================
+                  FORM
+              ================================================= */}
+
+              <div className="auth-shell__form">
+                {children}
+              </div>
+
+
+              {/* =================================================
+                  FOOTER
+              ================================================= */}
+
               {footer ? (
-                <div className="auth-shell__footer">{footer}</div>
+                <div className="auth-shell__footer">
+                  {footer}
+                </div>
               ) : null}
+
             </div>
+
           </div>
+
         </section>
+
       </div>
     </main>
   );
