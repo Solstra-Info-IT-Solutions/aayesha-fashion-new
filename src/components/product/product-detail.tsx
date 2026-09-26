@@ -147,6 +147,9 @@ export function ProductDetail({
     [product.content?.description],
   );
 
+  const [isFullscreen, setIsFullscreen] =
+  useState(false);
+
   const [categoryName, setCategoryName] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -155,6 +158,9 @@ export function ProductDetail({
   const [loginOpen, setLoginOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+const [loginAction, setLoginAction] =
+  useState<"cart" | "wishlist">("cart");
+
   const [openSection, setOpenSection] = useState<string | null>(
     "details",
   );
@@ -274,16 +280,22 @@ export function ProductDetail({
     );
   }
 
-  function requireAuth() {
-    if (!isInitialized) return false;
-
-    if (!isAuthenticated) {
-      setLoginOpen(true);
-      return false;
-    }
-
-    return true;
+  const requireAuth = (
+  action: "cart" | "wishlist" = "cart",
+) => {
+  if (!isInitialized) {
+    return false;
   }
+
+  if (!isAuthenticated) {
+    setLoginAction(action);
+    setLoginOpen(true);
+
+    return false;
+  }
+
+  return true;
+};
 
   async function handleAddToCart() {
     if (!available) {
@@ -340,8 +352,8 @@ export function ProductDetail({
     }
   }
 
-  function handleWishlist() {
-    if (!requireAuth()) return;
+  const handleWishlist() {
+    if (!requireAuth("wishlist")) return;
 
     toggleWishlist(productId);
 
@@ -1064,95 +1076,103 @@ export function ProductDetail({
       )}
 
       {/* =======================================================
-          FULLSCREEN MEDIA
-      ======================================================= */}
-      {lightboxOpen && activeMedia && (
-        <div
-          className="product-detail__lightbox"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${product.name} fullscreen gallery`}
-        >
-          <div className="product-detail__lightbox-actions">
-            <button
-              type="button"
-              onClick={() => setLightboxOpen(false)}
-              className="product-detail__lightbox-exit"
-              aria-label="Exit fullscreen gallery"
-            >
-              <Minimize2 size={15} strokeWidth={1.7} />
-              <span>Exit Fullscreen</span>
-            </button>
+    FULLSCREEN MEDIA
+======================================================= */}
+{lightboxOpen && activeMedia && (
+  <div
+    className="product-detail__lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label={`${product.name} fullscreen gallery`}
+  >
+    {/* TOP ACTIONS */}
+    <div className="product-detail__lightbox-actions">
+      <button
+        type="button"
+        onClick={() => setLightboxOpen(false)}
+        className="product-detail__lightbox-close"
+        aria-label="Close fullscreen gallery"
+      >
+        <X
+          size={22}
+          strokeWidth={1.8}
+          aria-hidden="true"
+        />
+      </button>
+    </div>
 
-            <button
-              type="button"
-              onClick={() => setLightboxOpen(false)}
-              className="product-detail__lightbox-close"
-              aria-label="Close gallery"
-            >
-              <X size={20} strokeWidth={1.7} />
-            </button>
-          </div>
+    {/* PRODUCT HEADER */}
+    <div className="product-detail__lightbox-top">
+      <span>AAYESHA / PRODUCT VIEW</span>
 
-          <div className="product-detail__lightbox-top">
-            <span>AAYESHA / PRODUCT VIEW</span>
-            <strong>{product.name}</strong>
-          </div>
+      <strong>{product.name}</strong>
+    </div>
 
-          <div className="product-detail__lightbox-stage">
-            {activeMedia.type === "video" ? (
-              <video
-                src={activeMedia.src}
-                poster={activeMedia.poster}
-                controls
-                autoPlay
-                playsInline
-              />
-            ) : (
-              <Image
-                src={activeMedia.src}
-                alt={activeMedia.alt || product.name}
-                fill
-                sizes="100vw"
-                className="product-detail__lightbox-image"
-                priority
-              />
-            )}
-
-            {media.length > 1 && (
-              <>
-                <button
-                  type="button"
-                  onClick={previousMedia}
-                  className="product-detail__lightbox-nav product-detail__lightbox-nav--prev"
-                  aria-label="Previous media"
-                >
-                  <ArrowLeft size={20} />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={nextMedia}
-                  className="product-detail__lightbox-nav product-detail__lightbox-nav--next"
-                  aria-label="Next media"
-                >
-                  <ArrowRight size={20} />
-                </button>
-              </>
-            )}
-          </div>
-
-          <div className="product-detail__lightbox-counter">
-            {String(activeIndex + 1).padStart(2, "0")} /{" "}
-            {String(media.length).padStart(2, "0")}
-          </div>
-        </div>
+    {/* IMAGE STAGE */}
+    <div className="product-detail__lightbox-stage">
+      {activeMedia.type === "video" ? (
+        <video
+          src={activeMedia.src}
+          poster={activeMedia.poster}
+          controls
+          autoPlay
+          playsInline
+        />
+      ) : (
+        <Image
+          src={activeMedia.src}
+          alt={activeMedia.alt || product.name}
+          fill
+          sizes="100vw"
+          className="product-detail__lightbox-image"
+          priority
+        />
       )}
 
+      {/* PREVIOUS */}
+      {media.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={previousMedia}
+            className="
+              product-detail__lightbox-nav
+              product-detail__lightbox-nav--prev
+            "
+            aria-label="Previous media"
+          >
+            <ArrowLeft size={20} />
+          </button>
+
+          {/* NEXT */}
+          <button
+            type="button"
+            onClick={nextMedia}
+            className="
+              product-detail__lightbox-nav
+              product-detail__lightbox-nav--next
+            "
+            aria-label="Next media"
+          >
+            <ArrowRight size={20} />
+          </button>
+        </>
+      )}
+    </div>
+
+    {/* COUNTER */}
+    <div className="product-detail__lightbox-counter">
+      {String(activeIndex + 1).padStart(2, "0")} /{" "}
+      {String(Math.max(media.length, 1)).padStart(2, "0")}
+    </div>
+  </div>
+)}
+
       <LoginRequiredPopup
-        open={loginOpen}
-        onClose={() => setLoginOpen(false)}
-      />
+  open={loginOpen}
+  onClose={() => setLoginOpen(false)}
+  action={loginAction}
+/>
     </>
   );
 }
