@@ -1,18 +1,65 @@
 /* =========================================================
-   AAYESHA NEW ARRIVALS
-   Editorial Product Section
+   AAYESHA FASHION
+   NEW ARRIVALS
+   Premium Editorial Product Section
 ========================================================= */
 
 .new-arrivals {
   position: relative;
+  width: 100%;
 
-  padding: 110px 0 115px;
+  padding: 110px 0 120px;
 
   overflow: hidden;
 
   background: var(--color-surface-soft);
+  color: var(--color-text);
 }
 
+/* =========================================================
+   BACKGROUND DETAILS
+========================================================= */
+
+.new-arrivals::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 38%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(51, 37, 34, 0.22),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+.new-arrivals::after {
+  content: "";
+
+  position: absolute;
+
+  width: 360px;
+  height: 360px;
+
+  right: -210px;
+  top: 18%;
+
+  border-radius: 50%;
+
+  background: rgba(210, 190, 160, 0.08);
+
+  filter: blur(55px);
+
+  pointer-events: none;
+}
 
 /* =========================================================
    INNER
@@ -20,8 +67,8 @@
 
 .new-arrivals__inner {
   position: relative;
+  z-index: 2;
 }
-
 
 /* =========================================================
    SECTION HEADER
@@ -29,26 +76,59 @@
 
 .new-arrivals__header {
   display: flex;
+
   align-items: flex-end;
   justify-content: space-between;
 
   gap: 60px;
 
-  margin-bottom: 48px;
+  margin-bottom: 50px;
 }
 
 .new-arrivals__heading {
   min-width: 0;
 }
 
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.new-arrivals__eyebrow-wrap {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 16px;
+}
+
+.new-arrivals__eyebrow-line {
+  width: 30px;
+  height: 1px;
+
+  background: var(--color-secondary);
+
+  transition:
+    width 500ms
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.new-arrivals__header:hover
+  .new-arrivals__eyebrow-line {
+  width: 48px;
+}
+
 .new-arrivals__eyebrow {
-  margin: 0 0 14px;
+  margin: 0;
 
   color: var(--color-secondary);
 
   font-family: var(--font-body);
-  font-size: 9px;
+
+  font-size: 8px;
   font-weight: 600;
+
   line-height: 1;
 
   letter-spacing: 0.28em;
@@ -56,7 +136,13 @@
   text-transform: uppercase;
 }
 
+/* =========================================================
+   TITLE
+========================================================= */
+
 .new-arrivals__title {
+  max-width: 650px;
+
   margin: 0;
 
   color: var(--color-text);
@@ -64,16 +150,16 @@
   font-family: var(--font-display);
 
   font-size: clamp(
-    2.35rem,
-    3.5vw,
-    3.75rem
+    2.55rem,
+    4vw,
+    4.15rem
   );
 
   font-weight: 400;
 
-  line-height: 1;
+  line-height: 0.94;
 
-  letter-spacing: -0.035em;
+  letter-spacing: -0.045em;
 
   white-space: nowrap;
 }
@@ -81,29 +167,64 @@
 .new-arrivals__title span {
   display: inline;
 
-  margin-left: 0.12em;
+  margin-left: 0.1em;
 
   color: var(--color-secondary);
 
   font-style: italic;
 }
 
-.new-arrivals__intro {
-  max-width: 300px;
+/* =========================================================
+   INTRO
+========================================================= */
 
-  margin: 0 0 4px;
+.new-arrivals__intro-wrap {
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 25px;
+
+  width: min(100%, 350px);
+
+  padding-bottom: 3px;
+}
+
+.new-arrivals__intro {
+  max-width: 290px;
+
+  margin: 0;
 
   color: var(--color-text-secondary);
 
   font-family: var(--font-body);
 
-  font-size: 11px;
+  font-size: 10.5px;
 
-  line-height: 1.7;
+  font-weight: 400;
+
+  line-height: 1.75;
 
   letter-spacing: 0.015em;
 }
 
+.new-arrivals__intro-mark {
+  flex-shrink: 0;
+
+  color: rgba(51, 37, 34, 0.32);
+
+  font-family: var(--font-body);
+
+  font-size: 7px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.16em;
+
+  white-space: nowrap;
+}
 
 /* =========================================================
    PRODUCTS
@@ -113,66 +234,110 @@
   position: relative;
 
   width: 100%;
+
+  z-index: 2;
 }
 
+/* =========================================================
+   PRODUCT AREA DECORATION
+========================================================= */
+
+.new-arrivals__products::before {
+  content: "";
+
+  position: absolute;
+
+  top: -18px;
+  left: 0;
+
+  width: 42px;
+  height: 1px;
+
+  background: var(--color-secondary);
+
+  opacity: 0.55;
+
+  pointer-events: none;
+}
 
 /* =========================================================
    FOOTER CTA
-   Editorial Divider + Boxed CTA
 ========================================================= */
 
 .new-arrivals__footer {
   display: grid;
 
   grid-template-columns:
-    minmax(0, 1fr)
+    minmax(30px, 1fr)
     auto
-    minmax(0, 1fr);
+    minmax(30px, 1fr);
 
   align-items: center;
 
+  gap: 26px;
+
   width: 100%;
 
-  margin-top: 56px;
+  margin-top: 58px;
 }
 
 .new-arrivals__footer-line {
   width: 100%;
   height: 1px;
 
-  background: var(--color-border-dark);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--color-border-dark)
+    );
 
-  opacity: 0.65;
+  opacity: 0.55;
 }
 
+.new-arrivals__footer-line:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-border-dark),
+      transparent
+    );
+}
 
 /* =========================================================
-   BOXED CTA
+   VIEW ALL CTA
 ========================================================= */
 
 .new-arrivals__all-link {
+  position: relative;
+
   display: inline-flex;
 
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
 
-  min-height: 50px;
+  min-height: 48px;
 
-  border: 1px solid var(--color-border-dark);
+  padding: 0 8px 0 21px;
 
-  background: var(--color-surface);
+  overflow: hidden;
 
-  color: var(--color-text);
+  border: 1px solid
+    var(--color-border-dark);
+
+  background: var(--color-text);
+
+  color: var(--color-surface);
 
   font-family: var(--font-body);
 
-  font-size: 10px;
+  font-size: 8px;
 
   font-weight: 600;
 
-  letter-spacing: 0.21em;
-
   line-height: 1;
+
+  letter-spacing: 0.2em;
 
   text-decoration: none;
 
@@ -180,54 +345,105 @@
 
   white-space: nowrap;
 
+  box-shadow:
+    0 7px 18px
+      rgba(51, 37, 34, 0.08);
+
   transition:
-    background-color 300ms ease,
-    color 300ms ease,
-    border-color 300ms ease;
+    transform 450ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 450ms ease,
+    border-color 350ms ease;
 }
 
+/* =========================================================
+   CTA HOVER BACKGROUND
+========================================================= */
+
+.new-arrivals__all-link::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: var(--color-secondary);
+
+  transform: translateX(-101%);
+
+  transition:
+    transform 500ms
+      cubic-bezier(0.77, 0, 0.175, 1);
+
+  z-index: 0;
+}
 
 /* =========================================================
    CTA LABEL
 ========================================================= */
 
 .new-arrivals__all-label {
+  position: relative;
+
+  z-index: 2;
+
   display: flex;
 
   align-items: center;
   justify-content: center;
 
-  padding: 0 25px;
-}
+  padding: 0;
 
-
-/* =========================================================
-   CTA ARROW CELL
-========================================================= */
-
-.new-arrivals__all-icon {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 50px;
-  min-width: 50px;
-
-  border-left: 1px solid var(--color-border-dark);
-
-  color: var(--color-secondary);
-
-  background: transparent;
+  color: inherit;
 
   transition:
-    background-color 300ms ease,
-    color 300ms ease,
-    border-color 300ms ease,
-    transform 350ms
+    color 350ms ease,
+    transform 450ms
       cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* =========================================================
+   CTA ICON
+========================================================= */
+
+.new-arrivals__all-icon {
+  position: relative;
+
+  z-index: 2;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  margin-left: 11px;
+
+  border: 1px solid
+    rgba(250, 247, 244, 0.4);
+
+  border-radius: 50%;
+
+  background:
+    rgba(250, 247, 244, 0.07);
+
+  color: var(--color-surface);
+
+  transition:
+    transform 450ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 350ms ease,
+    border-color 350ms ease,
+    color 350ms ease;
+}
+
+.new-arrivals__all-icon svg {
+  transition:
+    transform 450ms
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
 
 /* =========================================================
    CTA HOVER
@@ -236,46 +452,52 @@
 .new-arrivals__all-link:hover {
   border-color: var(--color-secondary);
 
-  background: var(--color-secondary);
+  transform: translateY(-3px);
 
-  color: var(--color-surface);
+  box-shadow:
+    0 14px 30px
+      rgba(51, 37, 34, 0.18);
+}
+
+.new-arrivals__all-link:hover::before {
+  transform: translateX(0);
+}
+
+.new-arrivals__all-link:hover
+  .new-arrivals__all-label {
+  color: var(--color-text);
+
+  transform: translateX(2px);
 }
 
 .new-arrivals__all-link:hover
   .new-arrivals__all-icon {
-  border-left-color:
-    rgba(250, 247, 244, 0.35);
+  border-color: var(--color-text);
+
+  background: var(--color-text);
 
   color: var(--color-surface);
 
-  background: transparent;
-
-  transform: translate(2px, -2px);
+  transform:
+    translate(3px, -2px)
+    rotate(5deg);
 }
 
+.new-arrivals__all-link:hover
+  .new-arrivals__all-icon svg {
+  transform:
+    translate(2px, -2px);
+}
 
 /* =========================================================
    CTA ACTIVE
 ========================================================= */
 
 .new-arrivals__all-link:active {
-  border-color: var(--color-secondary);
-
-  background: var(--color-secondary);
-
-  color: var(--color-surface);
+  transform:
+    translateY(-1px)
+    scale(0.985);
 }
-
-.new-arrivals__all-link:active
-  .new-arrivals__all-icon {
-  border-left-color:
-    rgba(250, 247, 244, 0.35);
-
-  color: var(--color-surface);
-
-  transform: translate(1px, -1px);
-}
-
 
 /* =========================================================
    CTA FOCUS
@@ -287,12 +509,13 @@
   outline-offset: 5px;
 }
 
-
 /* =========================================================
    EMPTY / COMING SOON
 ========================================================= */
 
 .new-arrivals__empty {
+  position: relative;
+
   display: flex;
 
   align-items: center;
@@ -302,22 +525,49 @@
 
   padding: 70px 20px;
 
-  border: 1px solid var(--color-border);
+  overflow: hidden;
+
+  border: 1px solid
+    var(--color-border);
 
   background:
     radial-gradient(
       circle at 50% 0%,
-      rgba(169, 130, 130, 0.12),
-      transparent 42%
+      rgba(169, 130, 130, 0.13),
+      transparent 45%
     ),
     var(--color-surface);
 }
 
+.new-arrivals__empty::before {
+  content: "";
+
+  position: absolute;
+
+  top: 25px;
+  right: 25px;
+  bottom: 25px;
+  left: 25px;
+
+  border: 1px solid
+    rgba(51, 37, 34, 0.07);
+
+  pointer-events: none;
+}
+
 .new-arrivals__empty-inner {
+  position: relative;
+
+  z-index: 2;
+
   max-width: 460px;
 
   text-align: center;
 }
+
+/* =========================================================
+   EMPTY MARK
+========================================================= */
 
 .new-arrivals__empty-mark {
   display: flex;
@@ -327,14 +577,24 @@
 
   gap: 5px;
 
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
 
   margin: 0 auto 20px;
 
-  border: 1px solid var(--color-border-dark);
+  border: 1px solid
+    var(--color-border-dark);
 
   border-radius: 50%;
+
+  transition:
+    transform 500ms
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.new-arrivals__empty:hover
+  .new-arrivals__empty-mark {
+  transform: rotate(12deg);
 }
 
 .new-arrivals__empty-mark span {
@@ -348,6 +608,10 @@
   background: var(--color-secondary);
 }
 
+/* =========================================================
+   EMPTY EYEBROW
+========================================================= */
+
 .new-arrivals__empty-eyebrow {
   margin: 0 0 12px;
 
@@ -359,10 +623,16 @@
 
   font-weight: 600;
 
+  line-height: 1;
+
   letter-spacing: 0.25em;
 
   text-transform: uppercase;
 }
+
+/* =========================================================
+   EMPTY TITLE
+========================================================= */
 
 .new-arrivals__empty-title {
   margin: 0;
@@ -380,6 +650,10 @@
   letter-spacing: -0.025em;
 }
 
+/* =========================================================
+   EMPTY DESCRIPTION
+========================================================= */
+
 .new-arrivals__empty-description {
   max-width: 370px;
 
@@ -394,7 +668,6 @@
   line-height: 1.7;
 }
 
-
 /* =========================================================
    EMPTY CTA
 ========================================================= */
@@ -408,83 +681,121 @@
 }
 
 .new-arrivals__empty-link {
+  position: relative;
+
   display: inline-flex;
 
-  align-items: stretch;
+  align-items: center;
 
   min-height: 46px;
 
-  border: 1px solid var(--color-border-dark);
+  padding: 0 7px 0 20px;
 
-  color: var(--color-text);
+  overflow: hidden;
 
-  background: var(--color-surface);
+  border: 1px solid
+    var(--color-border-dark);
+
+  background: var(--color-text);
+
+  color: var(--color-surface);
 
   font-family: var(--font-body);
 
-  font-size: 9px;
+  font-size: 8px;
 
   font-weight: 600;
 
-  letter-spacing: 0.18em;
-
   line-height: 1;
+
+  letter-spacing: 0.18em;
 
   text-decoration: none;
 
   text-transform: uppercase;
 
   transition:
-    background-color 300ms ease,
-    color 300ms ease,
+    transform 400ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 400ms ease,
     border-color 300ms ease;
 }
 
-.new-arrivals__empty-link > span:first-child {
-  display: flex;
+.new-arrivals__empty-link::before {
+  content: "";
 
-  align-items: center;
-  justify-content: center;
+  position: absolute;
 
-  padding: 0 20px;
+  inset: 0;
+
+  background: var(--color-secondary);
+
+  transform: translateX(-101%);
+
+  transition:
+    transform 450ms
+      cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.new-arrivals__empty-label {
+  position: relative;
+
+  z-index: 2;
 }
 
 .new-arrivals__empty-icon {
-  display: flex;
+  position: relative;
+
+  z-index: 2;
+
+  display: inline-flex;
 
   align-items: center;
   justify-content: center;
 
-  width: 46px;
+  width: 29px;
+  height: 29px;
 
-  border-left: 1px solid var(--color-border-dark);
+  margin-left: 10px;
 
-  color: var(--color-secondary);
+  border: 1px solid
+    rgba(250, 247, 244, 0.4);
+
+  border-radius: 50%;
+
+  color: var(--color-surface);
 
   transition:
-    color 300ms ease,
-    border-color 300ms ease,
-    transform 300ms ease;
+    transform 400ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 300ms ease,
+    color 300ms ease;
 }
 
 .new-arrivals__empty-link:hover {
   border-color: var(--color-secondary);
 
-  background: var(--color-secondary);
+  transform: translateY(-3px);
 
-  color: var(--color-surface);
+  box-shadow:
+    0 12px 26px
+      rgba(51, 37, 34, 0.16);
+}
+
+.new-arrivals__empty-link:hover::before {
+  transform: translateX(0);
 }
 
 .new-arrivals__empty-link:hover
   .new-arrivals__empty-icon {
-  border-left-color:
-    rgba(250, 247, 244, 0.35);
+  background: var(--color-text);
 
   color: var(--color-surface);
 
-  transform: translate(2px, -2px);
+  transform:
+    translate(3px, -2px)
+    rotate(5deg);
 }
-
 
 /* =========================================================
    TABLET
@@ -497,6 +808,16 @@
 
   .new-arrivals__header {
     gap: 35px;
+
+    margin-bottom: 42px;
+  }
+
+  .new-arrivals__title {
+    font-size: 3.2rem;
+  }
+
+  .new-arrivals__intro-wrap {
+    width: 300px;
   }
 
   .new-arrivals__intro {
@@ -504,14 +825,13 @@
   }
 }
 
-
 /* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 767px) {
   .new-arrivals {
-    padding: 72px 0 80px;
+    padding: 72px 0 82px;
   }
 
   .new-arrivals__header {
@@ -520,59 +840,83 @@
     margin-bottom: 32px;
   }
 
-  .new-arrivals__eyebrow {
-    margin-bottom: 11px;
+  .new-arrivals__eyebrow-wrap {
+    margin-bottom: 13px;
+  }
 
-    font-size: 8px;
+  .new-arrivals__eyebrow {
+    font-size: 7px;
   }
 
   .new-arrivals__title {
-    font-size: 2.25rem;
+    max-width: 100%;
 
-    white-space: nowrap;
+    font-size: 2.35rem;
+
+    line-height: 0.95;
+
+    white-space: normal;
+  }
+
+  .new-arrivals__title span {
+    display: block;
+
+    margin-left: 0;
+
+    margin-top: 3px;
+  }
+
+  .new-arrivals__intro-wrap {
+    width: 100%;
+
+    margin-top: 17px;
+
+    padding-bottom: 0;
   }
 
   .new-arrivals__intro {
-    max-width: 310px;
-
-    margin-top: 15px;
+    max-width: 320px;
 
     font-size: 10px;
 
-    line-height: 1.65;
+    line-height: 1.7;
   }
 
+  .new-arrivals__intro-mark {
+    display: none;
+  }
 
   /* =======================================================
-     MOBILE CTA
+     CTA
   ======================================================= */
 
   .new-arrivals__footer {
+    grid-template-columns:
+      minmax(8px, 1fr)
+      auto
+      minmax(8px, 1fr);
+
+    gap: 9px;
+
     margin-top: 40px;
   }
 
-  .new-arrivals__footer-line {
-    opacity: 0.55;
-  }
-
   .new-arrivals__all-link {
-    min-height: 46px;
+    min-height: 45px;
 
-    font-size: 8px;
+    padding-left: 16px;
 
-    letter-spacing: 0.14em;
-  }
+    font-size: 7px;
 
-  .new-arrivals__all-label {
-    padding: 0 16px;
+    letter-spacing: 0.13em;
   }
 
   .new-arrivals__all-icon {
-    width: 44px;
+    width: 28px;
+    height: 28px;
 
-    min-width: 44px;
+    margin-left: 8px;
   }
-
 
   /* =======================================================
      EMPTY
@@ -584,6 +928,13 @@
     padding: 60px 18px;
   }
 
+  .new-arrivals__empty::before {
+    top: 17px;
+    right: 17px;
+    bottom: 17px;
+    left: 17px;
+  }
+
   .new-arrivals__empty-title {
     font-size: 2.25rem;
   }
@@ -592,7 +943,6 @@
     font-size: 10px;
   }
 }
-
 
 /* =========================================================
    SMALL MOBILE
@@ -606,42 +956,35 @@
   }
 
   .new-arrivals__title {
-    font-size: 1.95rem;
-
-    white-space: nowrap;
+    font-size: 2rem;
   }
 
-
-  /* =======================================================
-     SMALL MOBILE CTA
-  ======================================================= */
+  .new-arrivals__intro {
+    font-size: 9.5px;
+  }
 
   .new-arrivals__footer {
     margin-top: 32px;
+
+    gap: 6px;
   }
 
   .new-arrivals__all-link {
-    min-height: 44px;
+    min-height: 43px;
 
-    font-size: 7.5px;
+    padding-left: 13px;
 
-    letter-spacing: 0.11em;
-  }
+    font-size: 6.5px;
 
-  .new-arrivals__all-label {
-    padding: 0 12px;
+    letter-spacing: 0.105em;
   }
 
   .new-arrivals__all-icon {
-    width: 40px;
+    width: 27px;
+    height: 27px;
 
-    min-width: 40px;
+    margin-left: 7px;
   }
-
-
-  /* =======================================================
-     EMPTY
-  ======================================================= */
 
   .new-arrivals__empty-title {
     font-size: 2rem;
@@ -650,27 +993,44 @@
   .new-arrivals__empty-link {
     min-height: 44px;
 
-    font-size: 8px;
-  }
+    padding-left: 15px;
 
-  .new-arrivals__empty-link > span:first-child {
-    padding: 0 15px;
+    font-size: 7px;
   }
 
   .new-arrivals__empty-icon {
-    width: 42px;
+    width: 28px;
+    height: 28px;
   }
 }
 
+/* =========================================================
+   TOUCH DEVICES
+========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+  .new-arrivals__all-link:active,
+  .new-arrivals__empty-link:active {
+    transform:
+      translateY(-1px)
+      scale(0.985);
+  }
+}
 
 /* =========================================================
    REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+  .new-arrivals__eyebrow-line,
   .new-arrivals__all-link,
+  .new-arrivals__all-link::before,
+  .new-arrivals__all-label,
   .new-arrivals__all-icon,
+  .new-arrivals__all-icon svg,
+  .new-arrivals__empty-mark,
   .new-arrivals__empty-link,
+  .new-arrivals__empty-link::before,
   .new-arrivals__empty-icon {
     transition: none;
   }
