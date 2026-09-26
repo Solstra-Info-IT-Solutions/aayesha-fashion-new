@@ -1,49 +1,50 @@
 /* =========================================================
    AAYESHA FASHION
    MOBILE MENU
-   Modern Material Fashion Theme
-   Compact • Responsive • No Animation
-========================================================= */
+   MODERN LUXURY FASHION THEME
+   Compact • Readable • Responsive • No Animation
+   ========================================================= */
+
 
 /* =========================================================
    DESIGN TOKENS
-========================================================= */
+   ========================================================= */
 
 .mobile-menu {
-  --mm-primary: #181616;
-  --mm-secondary: #625c5c;
-  --mm-muted: #8b8383;
+  --mm-primary: #211c1a;
+  --mm-secondary: #5d514b;
+  --mm-muted: #756861;
+  --mm-subtle: #8d8078;
 
-  --mm-background: #faf8f7;
+  --mm-background: #fbf8f6;
   --mm-surface: #ffffff;
-  --mm-surface-soft: #f7f3f2;
-  --mm-surface-muted: #f0ebea;
+  --mm-surface-soft: #f8f3f0;
+  --mm-surface-muted: #f1e9e5;
 
-  --mm-border: #e6dfdd;
-  --mm-border-strong: #d7cecc;
+  --mm-border: #e3d9d4;
+  --mm-border-strong: #cdbdb5;
 
-  --mm-accent: #b76e79;
-  --mm-accent-dark: #96545f;
-  --mm-accent-soft: #f6e8ea;
-  --mm-accent-light: #fcf5f5;
+  --mm-accent: #a86f60;
+  --mm-accent-dark: #7e5045;
+  --mm-accent-soft: #f3e5e0;
+  --mm-accent-light: #fbf3f0;
 
-  --mm-danger: #a64e55;
+  --mm-danger: #a34e4e;
 
   --mm-shadow-sm:
-    0 2px 8px rgba(24, 22, 22, 0.05);
+    0 2px 8px rgba(35, 27, 23, 0.05);
 
   --mm-shadow-md:
-    0 8px 24px rgba(24, 22, 22, 0.09);
+    0 8px 24px rgba(35, 27, 23, 0.09);
 
   --mm-shadow-lg:
-    0 18px 50px rgba(24, 22, 22, 0.16);
+    0 18px 50px rgba(35, 27, 23, 0.16);
 
   --mm-radius-sm: 7px;
-  --mm-radius-md: 9px;
-  --mm-radius-lg: 12px;
+  --mm-radius-md: 10px;
+  --mm-radius-lg: 14px;
 
   position: fixed;
-
   inset: 0;
 
   z-index: 9990;
@@ -58,11 +59,22 @@
   overflow: hidden;
 
   box-sizing: border-box;
+
+  font-family:
+    var(--font-body),
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
+
 
 /* =========================================================
    GLOBAL BOX SIZING
-========================================================= */
+   ========================================================= */
 
 .mobile-menu *,
 .mobile-menu *::before,
@@ -70,25 +82,25 @@
   box-sizing: border-box;
 }
 
+
 /* =========================================================
    OPEN / CLOSED
-========================================================= */
+   ========================================================= */
 
 .mobile-menu--open {
   pointer-events: auto;
-
   visibility: visible;
 }
 
 .mobile-menu--closed {
   pointer-events: none;
-
   visibility: hidden;
 }
 
+
 /* =========================================================
    REMOVE NUMBERING
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__section-index,
 .mobile-navigation-item__number,
@@ -98,9 +110,10 @@
   display: none !important;
 }
 
+
 /* =========================================================
    HAMBURGER TRIGGER
-========================================================= */
+   ========================================================= */
 
 .mobile-menu-trigger {
   position: relative;
@@ -118,8 +131,7 @@
   padding: 0;
 
   border: 1px solid transparent;
-
-  border-radius: 7px;
+  border-radius: 8px;
 
   background: transparent;
 
@@ -166,7 +178,6 @@
 
 .mobile-menu-trigger__frame {
   position: absolute;
-
   inset: 3px;
 
   border: 1px solid var(--mm-border);
@@ -178,7 +189,6 @@
 
 .mobile-menu-trigger__icon {
   position: relative;
-
   z-index: 2;
 
   display: block;
@@ -193,13 +203,13 @@
   color: currentColor;
 }
 
+
 /* =========================================================
    BACKDROP
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__backdrop {
   position: absolute;
-
   inset: 0;
 
   width: 100%;
@@ -210,7 +220,7 @@
 
   border: 0;
 
-  background: rgba(18, 16, 16, 0.48);
+  background: rgba(24, 19, 17, 0.48);
 
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -222,9 +232,10 @@
   outline: none;
 }
 
+
 /* =========================================================
    DRAWER
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__drawer {
   position: absolute;
@@ -256,9 +267,10 @@
   transform: none;
 }
 
+
 /* =========================================================
    HIDE OLD DECORATIVE FRAME
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__frame,
 .mobile-menu__frame--top,
@@ -266,15 +278,15 @@
   display: none !important;
 }
 
+
 /* =========================================================
    TOP ACCENT
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__top-accent {
   display: block;
 
   width: 100%;
-
   height: 3px;
 
   flex: 0 0 3px;
@@ -282,13 +294,13 @@
   background: var(--mm-accent);
 }
 
+
 /* =========================================================
    HEADER
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__header {
   position: relative;
-
   z-index: 10;
 
   display: flex;
@@ -300,7 +312,7 @@
 
   min-height: 64px;
 
-  gap: 10px;
+  gap: 12px;
 
   padding: 10px 14px;
 
@@ -309,9 +321,10 @@
   background: var(--mm-surface);
 }
 
+
 /* =========================================================
    BRAND
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__brand {
   display: flex;
@@ -320,7 +333,7 @@
 
   min-width: 0;
 
-  gap: 8px;
+  gap: 9px;
 
   color: var(--mm-primary);
 
@@ -348,9 +361,9 @@
 
   flex: 0 0 30px;
 
-  border: 1px solid #dfc2c6;
+  border: 1px solid #d7b8ae;
 
-  border-radius: 7px;
+  border-radius: 8px;
 
   background: var(--mm-accent-soft);
 
@@ -406,29 +419,25 @@
 .mobile-menu__brand-subline {
   display: block;
 
-  margin-top: 3px;
+  margin-top: 4px;
 
   color: var(--mm-muted);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 6px;
+  font-size: 8px;
 
   font-weight: 700;
 
   line-height: 1.2;
 
-  letter-spacing: 0.11em;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 }
 
+
 /* =========================================================
    CLOSE BUTTON
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__close {
   display: inline-flex;
@@ -436,16 +445,16 @@
   align-items: center;
   justify-content: center;
 
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
 
-  flex: 0 0 34px;
+  flex: 0 0 36px;
 
   padding: 0;
 
   border: 1px solid var(--mm-border);
 
-  border-radius: 7px;
+  border-radius: 8px;
 
   background: var(--mm-surface);
 
@@ -457,7 +466,7 @@
 }
 
 .mobile-menu__close:hover {
-  border-color: #dfc2c6;
+  border-color: #d8b8ae;
 
   background: var(--mm-accent-soft);
 
@@ -478,9 +487,10 @@
   outline-offset: 2px;
 }
 
+
 /* =========================================================
    SCROLL CONTENT
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__content {
   position: relative;
@@ -516,17 +526,19 @@
   background: var(--mm-border-strong);
 }
 
+
 /* =========================================================
    ACCOUNT SECTION
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__account {
-  padding: 13px 14px 0;
+  padding: 14px 14px 0;
 }
+
 
 /* =========================================================
    ACCOUNT CARD
-========================================================= */
+   ========================================================= */
 
 .mobile-account-card {
   position: relative;
@@ -539,7 +551,7 @@
 
   width: 100%;
 
-  gap: 9px;
+  gap: 10px;
 
   padding: 10px 11px;
 
@@ -559,7 +571,7 @@
 }
 
 .mobile-account-card:hover {
-  border-color: #dfc2c6;
+  border-color: #d9bbb1;
 
   background: var(--mm-accent-light);
 }
@@ -587,7 +599,7 @@
 
   flex: 0 0 38px;
 
-  border: 1px solid #e4c8cc;
+  border: 1px solid #ddc1b8;
 
   border-radius: 50%;
 
@@ -600,7 +612,7 @@
     Georgia,
     serif;
 
-  font-size: 15px;
+  font-size: 16px;
 
   font-weight: 600;
 
@@ -618,22 +630,17 @@
 }
 
 .mobile-account-card__eyebrow {
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 
   color: var(--mm-accent-dark);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 9px;
 
-  font-size: 7px;
-
-  font-weight: 700;
+  font-weight: 800;
 
   line-height: 1.2;
 
-  letter-spacing: 0.11em;
+  letter-spacing: 0.1em;
 
   text-transform: uppercase;
 }
@@ -643,12 +650,7 @@
 
   color: var(--mm-primary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 12px;
+  font-size: 13px;
 
   font-weight: 700;
 
@@ -660,18 +662,13 @@
 }
 
 .mobile-account-card__email {
-  margin-top: 2px;
+  margin-top: 3px;
 
   overflow: hidden;
 
-  color: var(--mm-muted);
+  color: var(--mm-secondary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 8.5px;
+  font-size: 10px;
 
   line-height: 1.3;
 
@@ -686,14 +683,14 @@
   align-items: center;
   justify-content: center;
 
-  width: 28px;
-  height: 28px;
+  width: 29px;
+  height: 29px;
 
-  flex: 0 0 28px;
+  flex: 0 0 29px;
 
   border: 1px solid var(--mm-border);
 
-  border-radius: 6px;
+  border-radius: 7px;
 
   background: var(--mm-surface-soft);
 
@@ -708,9 +705,10 @@
   color: #ffffff;
 }
 
+
 /* =========================================================
    GUEST ACCOUNT
-========================================================= */
+   ========================================================= */
 
 .mobile-guest-account {
   position: relative;
@@ -749,17 +747,25 @@
 
   justify-content: space-between;
 
-  gap: 8px;
+  gap: 9px;
 }
 
 .mobile-guest-account__eyebrow {
   margin: 0;
 
   color: var(--mm-accent-dark);
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
 }
 
 .mobile-guest-account__title {
-  margin: 4px 0 0;
+  margin: 5px 0 0;
 
   color: var(--mm-primary);
 
@@ -768,7 +774,7 @@
     Georgia,
     serif;
 
-  font-size: 20px;
+  font-size: 21px;
 
   font-weight: 600;
 
@@ -780,18 +786,13 @@
 .mobile-guest-account__description {
   max-width: 270px;
 
-  margin: 5px 0 0;
+  margin: 6px 0 0;
 
   color: var(--mm-secondary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 11px;
 
-  font-size: 9px;
-
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .mobile-guest-account__icon {
@@ -800,14 +801,14 @@
   align-items: center;
   justify-content: center;
 
-  width: 31px;
-  height: 31px;
+  width: 32px;
+  height: 32px;
 
-  flex: 0 0 31px;
+  flex: 0 0 32px;
 
-  border: 1px solid #e3c8cb;
+  border: 1px solid #dfc3b9;
 
-  border-radius: 7px;
+  border-radius: 8px;
 
   background: var(--mm-accent-soft);
 
@@ -819,9 +820,9 @@
 
   grid-template-columns: 1fr 1fr;
 
-  gap: 6px;
+  gap: 7px;
 
-  margin-top: 11px;
+  margin-top: 12px;
 }
 
 .mobile-guest-account__button {
@@ -830,36 +831,32 @@
   align-items: center;
   justify-content: center;
 
-  min-height: 34px;
+  min-height: 36px;
 
   gap: 5px;
 
   border: 1px solid var(--mm-border);
 
-  border-radius: 6px;
+  border-radius: 7px;
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 9px;
 
-  font-size: 8px;
+  font-weight: 800;
 
-  font-weight: 700;
-
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 
   text-transform: uppercase;
 
   text-decoration: none;
 }
 
+
 /* =========================================================
    SECTIONS
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__section {
-  margin-top: 18px;
+  margin-top: 19px;
 
   padding: 0 14px;
 }
@@ -873,7 +870,7 @@
 
   gap: 10px;
 
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
 
 .mobile-menu__section-heading--navigation {
@@ -881,18 +878,13 @@
 }
 
 .mobile-menu__section-subtitle {
-  margin: 2px 0 0;
+  margin: 3px 0 0;
 
   color: var(--mm-muted);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 10px;
 
-  font-size: 8px;
-
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .mobile-menu__section-index {
@@ -904,14 +896,9 @@
 
   color: var(--mm-accent-dark);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 9px;
 
-  font-size: 8px;
-
-  font-weight: 700;
+  font-weight: 800;
 
   line-height: 1.2;
 
@@ -920,29 +907,25 @@
   text-transform: uppercase;
 }
 
+
 /* =========================================================
    COLLECTION LABEL
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__collection-label {
   display: flex;
 
   align-items: center;
 
-  gap: 5px;
+  gap: 6px;
 
-  margin-top: 3px;
+  margin-top: 4px;
 
   color: var(--mm-muted);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 8px;
 
-  font-size: 7px;
-
-  font-weight: 600;
+  font-weight: 700;
 
   line-height: 1.2;
 
@@ -962,9 +945,10 @@
   background: var(--mm-accent);
 }
 
+
 /* =========================================================
    ACCOUNT LINKS
-========================================================= */
+   ========================================================= */
 
 .mobile-account-links {
   overflow: hidden;
@@ -987,11 +971,11 @@
 
   width: 100%;
 
-  min-height: 48px;
+  min-height: 49px;
 
-  gap: 8px;
+  gap: 9px;
 
-  padding: 6px 9px;
+  padding: 7px 10px;
 
   border: 0;
 
@@ -1034,14 +1018,14 @@
   align-items: center;
   justify-content: center;
 
-  width: 28px;
-  height: 28px;
+  width: 29px;
+  height: 29px;
 
-  flex: 0 0 28px;
+  flex: 0 0 29px;
 
   border: 1px solid var(--mm-border);
 
-  border-radius: 6px;
+  border-radius: 7px;
 
   background: var(--mm-surface-soft);
 
@@ -1049,7 +1033,7 @@
 }
 
 .mobile-account-link:hover .mobile-account-link__icon {
-  border-color: #dfc2c6;
+  border-color: #d9bbb1;
 
   background: var(--mm-accent-soft);
 
@@ -1069,31 +1053,21 @@
 .mobile-account-link__title {
   color: var(--mm-primary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 10.5px;
+  font-size: 12px;
 
   font-weight: 700;
 
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .mobile-account-link__description {
-  margin-top: 1px;
+  margin-top: 2px;
 
-  color: var(--mm-muted);
+  color: var(--mm-secondary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 9px;
 
-  font-size: 8px;
-
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .mobile-account-link__arrow {
@@ -1102,7 +1076,7 @@
   align-items: center;
   justify-content: center;
 
-  color: var(--mm-muted);
+  color: var(--mm-secondary);
 }
 
 .mobile-account-link:hover .mobile-account-link__arrow {
@@ -1115,9 +1089,10 @@
   background: #fff5f5;
 }
 
+
 /* =========================================================
    NAVIGATION
-========================================================= */
+   ========================================================= */
 
 .mobile-navigation-list {
   overflow: hidden;
@@ -1140,11 +1115,11 @@
 
   width: 100%;
 
-  min-height: 54px;
+  min-height: 56px;
 
-  gap: 8px;
+  gap: 9px;
 
-  padding: 7px 10px;
+  padding: 8px 10px;
 
   border-bottom: 1px solid var(--mm-border);
 
@@ -1181,14 +1156,14 @@
   align-items: center;
   justify-content: center;
 
-  width: 30px;
-  height: 30px;
+  width: 31px;
+  height: 31px;
 
-  flex: 0 0 30px;
+  flex: 0 0 31px;
 
   border: 1px solid var(--mm-border);
 
-  border-radius: 6px;
+  border-radius: 7px;
 
   background: var(--mm-surface-soft);
 
@@ -1196,7 +1171,7 @@
 }
 
 .mobile-navigation-item:hover .mobile-navigation-item__icon {
-  border-color: #dfc2c6;
+  border-color: #d9bbb1;
 
   background: var(--mm-accent-soft);
 
@@ -1218,16 +1193,11 @@
 
   color: var(--mm-primary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 12.5px;
 
-  font-size: 11px;
+  font-weight: 750;
 
-  font-weight: 700;
-
-  line-height: 1.25;
+  line-height: 1.3;
 
   text-overflow: ellipsis;
 
@@ -1237,18 +1207,13 @@
 .mobile-navigation-item__description {
   overflow: hidden;
 
-  margin-top: 1px;
+  margin-top: 2px;
 
-  color: var(--mm-muted);
+  color: var(--mm-secondary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 9px;
 
-  font-size: 8px;
-
-  line-height: 1.3;
+  line-height: 1.35;
 
   text-overflow: ellipsis;
 
@@ -1261,14 +1226,14 @@
   align-items: center;
   justify-content: center;
 
-  width: 27px;
-  height: 27px;
+  width: 28px;
+  height: 28px;
 
-  flex: 0 0 27px;
+  flex: 0 0 28px;
 
   border: 1px solid var(--mm-border);
 
-  border-radius: 6px;
+  border-radius: 7px;
 
   background: var(--mm-surface-soft);
 
@@ -1283,27 +1248,23 @@
   color: #ffffff;
 }
 
+
 /* =========================================================
    VIEW ACCOUNT
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__view-account {
   display: inline-flex;
 
   align-items: center;
 
-  gap: 4px;
+  gap: 5px;
 
   color: var(--mm-accent-dark);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 9px;
 
-  font-size: 8px;
-
-  font-weight: 700;
+  font-weight: 800;
 
   line-height: 1;
 
@@ -1332,10 +1293,11 @@
   outline-offset: 2px;
 }
 
+
 /* =========================================================
    QUICK ACCESS
-   COMPACT VERSION
-========================================================= */
+   COMPACT BUT READABLE
+   ========================================================= */
 
 .mobile-quick-grid {
   display: grid;
@@ -1343,7 +1305,7 @@
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 5px;
+  gap: 6px;
 }
 
 .mobile-quick-item {
@@ -1355,17 +1317,17 @@
 
   min-width: 0;
 
-  min-height: 44px;
+  min-height: 46px;
 
-  height: 44px;
+  height: 46px;
 
-  gap: 6px;
+  gap: 7px;
 
-  padding: 6px 7px;
+  padding: 7px 8px;
 
   border: 1px solid var(--mm-border);
 
-  border-radius: 7px;
+  border-radius: 8px;
 
   background: var(--mm-surface);
 
@@ -1379,7 +1341,7 @@
 }
 
 .mobile-quick-item:hover {
-  border-color: #dfc2c6;
+  border-color: #d9bbb1;
 
   background: var(--mm-accent-light);
 }
@@ -1396,19 +1358,21 @@
   outline-offset: 2px;
 }
 
-/* Full-width account quick-access item */
+
+/* Full-width account quick-access */
 
 .mobile-quick-item--account {
   grid-column: 1 / -1;
 
-  min-height: 42px;
+  min-height: 44px;
 
-  height: 42px;
+  height: 44px;
 
   align-items: center;
 
   justify-content: space-between;
 }
+
 
 /* Quick access content */
 
@@ -1419,14 +1383,14 @@
 
   min-width: 0;
 
-  gap: 6px;
+  gap: 7px;
 }
 
 .mobile-quick-item__main > svg {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
 
-  flex: 0 0 14px;
+  flex: 0 0 15px;
 
   margin: 0;
 
@@ -1448,27 +1412,24 @@
 
   color: var(--mm-primary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 10px;
 
-  font-size: 8.5px;
+  font-weight: 750;
 
-  font-weight: 700;
-
-  line-height: 1.15;
+  line-height: 1.2;
 
   text-overflow: ellipsis;
 
   white-space: nowrap;
 }
 
-/* Hide descriptions to keep cards compact */
+
+/* Hide descriptions to preserve compact cards */
 
 .mobile-quick-item__description {
   display: none;
 }
+
 
 /* Arrow */
 
@@ -1478,21 +1439,22 @@
   align-items: center;
   justify-content: center;
 
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
 
-  flex: 0 0 18px;
+  flex: 0 0 19px;
 
-  color: var(--mm-muted);
+  color: var(--mm-secondary);
 }
 
 .mobile-quick-item:hover .mobile-quick-item__arrow {
   color: var(--mm-accent-dark);
 }
 
+
 /* =========================================================
    EDITORIAL SECTION
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__editorial {
   margin: 20px 14px 17px;
@@ -1511,20 +1473,15 @@
 
   gap: 10px;
 
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
 
 .mobile-menu__editorial-label {
   color: var(--mm-muted);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 8px;
 
-  font-size: 7px;
-
-  font-weight: 700;
+  font-weight: 800;
 
   line-height: 1.2;
 
@@ -1565,7 +1522,7 @@
     Georgia,
     serif;
 
-  font-size: 21px;
+  font-size: 22px;
 
   font-weight: 500;
 
@@ -1579,7 +1536,7 @@
 
   align-items: center;
 
-  gap: 6px;
+  gap: 7px;
 
   margin-top: 10px;
 }
@@ -1596,27 +1553,23 @@
 .mobile-menu__editorial-signature p {
   margin: 0;
 
-  color: var(--mm-muted);
+  color: var(--mm-secondary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 7px;
+  font-size: 8px;
 
   font-weight: 700;
 
   line-height: 1.2;
 
-  letter-spacing: 0.11em;
+  letter-spacing: 0.1em;
 
   text-transform: uppercase;
 }
 
+
 /* =========================================================
    FOOTER
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__footer {
   position: relative;
@@ -1625,9 +1578,9 @@
 
   flex-shrink: 0;
 
-  min-height: 56px;
+  min-height: 58px;
 
-  padding: 8px 14px;
+  padding: 9px 14px;
 
   border-top: 1px solid var(--mm-border);
 
@@ -1662,14 +1615,9 @@
 
   color: var(--mm-primary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
+  font-size: 10px;
 
-  font-size: 9px;
-
-  font-weight: 700;
+  font-weight: 750;
 
   line-height: 1.3;
 
@@ -1681,16 +1629,11 @@
 .mobile-menu__footer-email {
   overflow: hidden;
 
-  margin: 1px 0 0;
+  margin: 2px 0 0;
 
-  color: var(--mm-muted);
+  color: var(--mm-secondary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 7.5px;
+  font-size: 9px;
 
   line-height: 1.3;
 
@@ -1705,14 +1648,14 @@
   align-items: center;
   justify-content: center;
 
-  width: 30px;
-  height: 30px;
+  width: 31px;
+  height: 31px;
 
-  flex: 0 0 30px;
+  flex: 0 0 31px;
 
   border: 1px solid var(--mm-border);
 
-  border-radius: 6px;
+  border-radius: 7px;
 
   background: var(--mm-surface-soft);
 
@@ -1752,18 +1695,13 @@
 
   margin: 0;
 
-  color: var(--mm-muted);
+  color: var(--mm-secondary);
 
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 7px;
+  font-size: 8.5px;
 
   line-height: 1.4;
 
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
 }
 
 .mobile-menu__footer-dot {
@@ -1777,9 +1715,10 @@
   background: var(--mm-accent);
 }
 
+
 /* =========================================================
    TABLET
-========================================================= */
+   ========================================================= */
 
 @media (min-width: 640px) and (max-width: 1023px) {
   .mobile-menu-trigger {
@@ -1793,40 +1732,41 @@
   }
 
   .mobile-menu__header {
-    min-height: 66px;
+    min-height: 68px;
 
-    padding: 10px 18px;
+    padding: 11px 18px;
   }
 
   .mobile-menu__account,
   .mobile-menu__section {
     padding-left: 18px;
-
     padding-right: 18px;
   }
 
   .mobile-menu__editorial {
     margin-left: 18px;
-
     margin-right: 18px;
   }
 
   .mobile-menu__footer {
     padding-left: 18px;
-
     padding-right: 18px;
   }
 
-  .mobile-quick-item {
-    min-height: 44px;
+  .mobile-navigation-item {
+    min-height: 57px;
+  }
 
-    height: 44px;
+  .mobile-quick-item {
+    min-height: 46px;
+    height: 46px;
   }
 }
 
+
 /* =========================================================
    MOBILE
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 639px) {
   .mobile-menu-trigger {
@@ -1834,35 +1774,147 @@
   }
 
   .mobile-menu__drawer {
-    width: min(360px, 88vw);
+    width: min(370px, 90vw);
 
-    max-width: 88vw;
+    max-width: 90vw;
   }
 
   .mobile-menu__header {
-    min-height: 62px;
+    min-height: 64px;
 
     padding: 9px 12px;
   }
 
   .mobile-menu__account {
-    padding: 12px 12px 0;
+    padding: 13px 12px 0;
   }
 
   .mobile-menu__section {
-    margin-top: 17px;
+    margin-top: 18px;
 
     padding: 0 12px;
   }
 
   .mobile-menu__editorial {
-    margin: 18px 12px 15px;
+    margin: 19px 12px 15px;
   }
 
   .mobile-menu__footer {
-    min-height: 54px;
+    min-height: 56px;
 
     padding: 8px 12px;
+  }
+
+  .mobile-menu__brand-mark {
+    width: 30px;
+    height: 30px;
+
+    flex-basis: 30px;
+  }
+
+  .mobile-menu__brand-name {
+    font-size: 20px;
+  }
+
+  .mobile-menu__brand-subline {
+    font-size: 7px;
+  }
+
+  .mobile-menu__close {
+    width: 34px;
+    height: 34px;
+
+    flex-basis: 34px;
+  }
+
+  .mobile-account-card {
+    min-height: 66px;
+
+    padding: 9px 10px;
+  }
+
+  .mobile-account-card__name {
+    font-size: 12.5px;
+  }
+
+  .mobile-account-card__email {
+    font-size: 9.5px;
+  }
+
+  .mobile-navigation-item {
+    min-height: 54px;
+
+    padding: 7px 9px;
+  }
+
+  .mobile-account-link {
+    min-height: 48px;
+  }
+
+  /* Compact Quick Access */
+
+  .mobile-quick-grid {
+    gap: 5px;
+  }
+
+  .mobile-quick-item {
+    min-height: 45px;
+
+    height: 45px;
+
+    padding: 6px 8px;
+  }
+
+  .mobile-quick-item--account {
+    min-height: 43px;
+
+    height: 43px;
+  }
+
+  .mobile-quick-item__title {
+    font-size: 9.5px;
+  }
+
+  .mobile-quick-item__main > svg {
+    width: 14px;
+    height: 14px;
+
+    flex-basis: 14px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .mobile-menu__drawer {
+    width: 92vw;
+
+    max-width: 92vw;
+  }
+
+  .mobile-menu__header {
+    min-height: 61px;
+
+    padding: 8px 10px;
+  }
+
+  .mobile-menu__account,
+  .mobile-menu__section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .mobile-menu__editorial {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .mobile-menu__footer {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .mobile-menu__brand-mark {
@@ -1870,10 +1922,24 @@
     height: 29px;
 
     flex-basis: 29px;
+
+    font-size: 15px;
   }
 
   .mobile-menu__brand-name {
-    font-size: 20px;
+    font-size: 19px;
+  }
+
+  .mobile-menu__brand-subline {
+    max-width: 160px;
+
+    overflow: hidden;
+
+    font-size: 6.5px;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
   }
 
   .mobile-menu__close {
@@ -1884,112 +1950,7 @@
   }
 
   .mobile-account-card {
-    min-height: 65px;
-
-    padding: 9px 10px;
-  }
-
-  .mobile-navigation-item {
-    min-height: 52px;
-
-    padding: 7px 9px;
-  }
-
-  .mobile-account-link {
-    min-height: 46px;
-  }
-
-  /* Compact Quick Access */
-
-  .mobile-quick-grid {
-    gap: 5px;
-  }
-
-  .mobile-quick-item {
-    min-height: 44px;
-
-    height: 44px;
-
-    padding: 6px 7px;
-  }
-
-  .mobile-quick-item--account {
-    min-height: 42px;
-
-    height: 42px;
-  }
-}
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 380px) {
-  .mobile-menu__drawer {
-    width: 90vw;
-
-    max-width: 90vw;
-  }
-
-  .mobile-menu__header {
-    min-height: 59px;
-
-    padding: 8px 10px;
-  }
-
-  .mobile-menu__account,
-  .mobile-menu__section {
-    padding-left: 10px;
-
-    padding-right: 10px;
-  }
-
-  .mobile-menu__editorial {
-    margin-left: 10px;
-
-    margin-right: 10px;
-  }
-
-  .mobile-menu__footer {
-    padding-left: 10px;
-
-    padding-right: 10px;
-  }
-
-  .mobile-menu__brand-mark {
-    width: 28px;
-    height: 28px;
-
-    flex-basis: 28px;
-
-    font-size: 15px;
-  }
-
-  .mobile-menu__brand-name {
-    font-size: 18px;
-  }
-
-  .mobile-menu__brand-subline {
-    max-width: 160px;
-
-    overflow: hidden;
-
-    font-size: 5.5px;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-  }
-
-  .mobile-menu__close {
-    width: 32px;
-    height: 32px;
-
-    flex-basis: 32px;
-  }
-
-  .mobile-account-card {
-    min-height: 61px;
+    min-height: 63px;
 
     padding: 8px 9px;
   }
@@ -2004,18 +1965,18 @@
   }
 
   .mobile-account-card__name {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .mobile-account-card__email {
-    font-size: 8px;
+    font-size: 9px;
   }
 
   .mobile-account-card__arrow {
-    width: 26px;
-    height: 26px;
+    width: 27px;
+    height: 27px;
 
-    flex-basis: 26px;
+    flex-basis: 27px;
   }
 
   .mobile-guest-account {
@@ -2023,111 +1984,109 @@
   }
 
   .mobile-guest-account__title {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .mobile-guest-account__description {
-    font-size: 8.5px;
+    font-size: 10px;
   }
 
   .mobile-guest-account__icon {
+    width: 30px;
+    height: 30px;
+
+    flex-basis: 30px;
+  }
+
+  .mobile-guest-account__actions {
+    gap: 5px;
+
+    margin-top: 10px;
+  }
+
+  .mobile-guest-account__button {
+    min-height: 33px;
+
+    font-size: 8.5px;
+  }
+
+  .mobile-navigation-item {
+    min-height: 51px;
+
+    padding: 6px 8px;
+
+    gap: 8px;
+  }
+
+  .mobile-navigation-item__icon {
     width: 29px;
     height: 29px;
 
     flex-basis: 29px;
   }
 
-  .mobile-guest-account__actions {
-    grid-template-columns: 1fr;
-
-    gap: 5px;
-
-    margin-top: 9px;
-  }
-
-  .mobile-guest-account__button {
-    min-height: 32px;
-
-    font-size: 7.5px;
-  }
-
-  .mobile-navigation-item {
-    min-height: 49px;
-
-    padding: 6px 8px;
-
-    gap: 7px;
-  }
-
-  .mobile-navigation-item__icon {
-    width: 28px;
-    height: 28px;
-
-    flex-basis: 28px;
-  }
-
   .mobile-navigation-item__title {
-    font-size: 10.5px;
+    font-size: 11.5px;
   }
 
   .mobile-navigation-item__description {
-    font-size: 7.5px;
+    font-size: 8.5px;
   }
 
   .mobile-navigation-item__arrow {
-    width: 25px;
-    height: 25px;
-
-    flex-basis: 25px;
-  }
-
-  .mobile-account-link {
-    min-height: 44px;
-
-    padding: 5px 8px;
-  }
-
-  .mobile-account-link__icon {
     width: 26px;
     height: 26px;
 
     flex-basis: 26px;
   }
 
+  .mobile-account-link {
+    min-height: 46px;
+
+    padding: 6px 8px;
+  }
+
+  .mobile-account-link__icon {
+    width: 27px;
+    height: 27px;
+
+    flex-basis: 27px;
+  }
+
   .mobile-account-link__title {
-    font-size: 9.5px;
+    font-size: 10.5px;
   }
 
   .mobile-account-link__description {
-    font-size: 7.5px;
+    font-size: 8px;
   }
 
-  /* Even smaller Quick Access */
+  /* Quick Access */
 
   .mobile-quick-grid {
     gap: 4px;
   }
 
   .mobile-quick-item {
-    min-height: 40px;
+    min-height: 42px;
 
-    height: 40px;
+    height: 42px;
 
-    padding: 5px 6px;
+    padding: 5px 7px;
 
-    gap: 5px;
+    gap: 6px;
 
-    border-radius: 6px;
+    border-radius: 7px;
   }
 
   .mobile-quick-item--account {
-    min-height: 39px;
+    min-height: 41px;
 
-    height: 39px;
+    height: 41px;
   }
 
   .mobile-quick-item__main {
-    gap: 5px;
+    gap: 6px;
   }
 
   .mobile-quick-item__main > svg {
@@ -2138,14 +2097,16 @@
   }
 
   .mobile-quick-item__title {
-    font-size: 8px;
+    font-size: 9px;
+
+    line-height: 1.2;
   }
 
   .mobile-quick-item__arrow {
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
 
-    flex-basis: 16px;
+    flex-basis: 17px;
   }
 
   .mobile-menu__editorial {
@@ -2153,19 +2114,24 @@
   }
 
   .mobile-menu__editorial-title {
-    font-size: 19px;
+    font-size: 20px;
+  }
+
+  .mobile-menu__editorial-signature p {
+    font-size: 7.5px;
   }
 }
 
+
 /* =========================================================
    VERY SMALL DEVICES
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 320px) {
   .mobile-menu__drawer {
-    width: 92vw;
+    width: 94vw;
 
-    max-width: 92vw;
+    max-width: 94vw;
 
     border-right: 0;
   }
@@ -2177,21 +2143,20 @@
   .mobile-menu__account,
   .mobile-menu__section {
     padding-left: 9px;
-
     padding-right: 9px;
   }
 
   .mobile-menu__editorial {
     margin-left: 9px;
-
     margin-right: 9px;
   }
 
   .mobile-menu__footer {
     padding-left: 9px;
-
     padding-right: 9px;
   }
+
+  /* Keep descriptions hidden only on extremely small screens */
 
   .mobile-navigation-item__description,
   .mobile-account-link__description,
@@ -2200,35 +2165,45 @@
   }
 
   .mobile-navigation-item {
-    min-height: 47px;
+    min-height: 48px;
+  }
+
+  .mobile-navigation-item__title {
+    font-size: 11px;
   }
 
   .mobile-account-link {
-    min-height: 42px;
+    min-height: 44px;
   }
 
-  /* Minimum compact Quick Access */
+  .mobile-account-link__title {
+    font-size: 10px;
+  }
+
+  /* Compact Quick Access */
 
   .mobile-quick-grid {
-    gap: 3px;
+    gap: 4px;
   }
 
   .mobile-quick-item {
-    min-height: 38px;
+    min-height: 40px;
 
-    height: 38px;
+    height: 40px;
 
-    padding: 4px 5px;
+    padding: 5px 6px;
   }
 
   .mobile-quick-item--account {
-    min-height: 37px;
+    min-height: 39px;
 
-    height: 37px;
+    height: 39px;
   }
 
   .mobile-quick-item__title {
-    font-size: 7.5px;
+    font-size: 8.5px;
+
+    font-weight: 750;
   }
 
   .mobile-quick-item__main > svg {
@@ -2237,11 +2212,23 @@
 
     flex-basis: 12px;
   }
+
+  .mobile-quick-item__arrow {
+    width: 16px;
+    height: 16px;
+
+    flex-basis: 16px;
+  }
+
+  .mobile-menu__editorial-title {
+    font-size: 19px;
+  }
 }
+
 
 /* =========================================================
    TOUCH DEVICES
-========================================================= */
+   ========================================================= */
 
 @media (hover: none) {
   .mobile-menu-trigger:hover {
@@ -2253,7 +2240,7 @@
   }
 
   .mobile-menu__brand:hover .mobile-menu__brand-mark {
-    border-color: #dfc2c6;
+    border-color: #d9bbb1;
 
     background: var(--mm-accent-soft);
 
@@ -2329,9 +2316,10 @@
   }
 }
 
+
 /* =========================================================
    ACCESSIBILITY
-========================================================= */
+   ========================================================= */
 
 .mobile-menu-trigger:focus-visible,
 .mobile-menu__close:focus-visible,
@@ -2347,9 +2335,10 @@
   outline-offset: 2px;
 }
 
+
 /* =========================================================
    DISABLED
-========================================================= */
+   ========================================================= */
 
 .mobile-account-link:disabled,
 .mobile-menu__close:disabled,
@@ -2359,9 +2348,10 @@
   opacity: 0.55;
 }
 
+
 /* =========================================================
    OVERFLOW SAFETY
-========================================================= */
+   ========================================================= */
 
 .mobile-menu__drawer,
 .mobile-menu__drawer a,
@@ -2389,4 +2379,36 @@
   max-width: 100%;
 
   box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TEXT READABILITY SAFETY
+   ========================================================= */
+
+.mobile-menu__drawer {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mobile-menu__drawer
+  :is(
+    .mobile-account-card__name,
+    .mobile-navigation-item__title,
+    .mobile-account-link__title,
+    .mobile-quick-item__title,
+    .mobile-menu__footer-name
+  ) {
+  color: var(--mm-primary);
+}
+
+.mobile-menu__drawer
+  :is(
+    .mobile-account-card__email,
+    .mobile-navigation-item__description,
+    .mobile-account-link__description,
+    .mobile-menu__footer-email,
+    .mobile-menu__section-subtitle
+  ) {
+  color: var(--mm-secondary);
 }
