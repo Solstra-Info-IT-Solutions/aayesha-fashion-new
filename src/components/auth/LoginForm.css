@@ -1,16 +1,14 @@
 /* =========================================================
    AAYESHA FASHION
-   LOGIN FORM
-   PREMIUM MATERIAL / FASHION THEME
+   LOGIN FORM — CLEAN FASHION / MATERIAL THEME
 ========================================================= */
 
 .login-form {
   width: 100%;
   max-width: 500px;
-
   margin: 0 auto;
 
-  color: #302624;
+  color: #2f2927;
 
   font-family:
     var(--font-body),
@@ -34,61 +32,57 @@
 .login-form__intro {
   display: flex;
   align-items: center;
-
   gap: 10px;
 
-  margin-bottom: 24px;
+  margin: 0 0 26px;
 }
 
 .login-form__intro-line {
   width: 24px;
   height: 1px;
 
-  flex: 0 0 24px;
+  flex-shrink: 0;
 
   background: #9a5b52;
 }
 
 .login-form__intro-text {
-  color: #8d5048;
+  color: #8a5149;
 
   font-size: 11px;
   font-weight: 700;
 
   line-height: 1.4;
 
-  letter-spacing: 0.14em;
-
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 
 /* =========================================================
-   SUCCESS MESSAGE
+   SUCCESS
 ========================================================= */
 
 .login-form__success {
   display: flex;
   align-items: flex-start;
-
-  gap: 11px;
+  gap: 10px;
 
   width: 100%;
 
-  margin-bottom: 20px;
-  padding: 13px 14px;
+  margin: 0 0 20px;
+  padding: 12px 14px;
 
-  border: 1px solid #cbdac8;
-  border-radius: 8px;
+  border: 1px solid #cbd9c8;
+  border-radius: 7px;
 
-  background: #f5f9f3;
+  background: #f5f8f3;
 
-  color: #496044;
+  color: #4b6146;
 }
 
 .login-form__success-mark {
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -97,26 +91,20 @@
 
   flex: 0 0 20px;
 
-  border: 1px solid #789170;
+  border: 1px solid #78906f;
   border-radius: 50%;
-
-  color: #496044;
 
   font-size: 11px;
   font-weight: 700;
-
-  line-height: 1;
 }
 
 .login-form__success p {
   margin: 1px 0 0;
 
-  color: #496044;
+  color: #4b6146;
 
   font-size: 12px;
-  font-weight: 500;
-
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 
@@ -126,10 +114,11 @@
 
 .login-form__field {
   width: 100%;
+  margin: 0;
 }
 
 .login-form__field + .login-form__field {
-  margin-top: 20px;
+  margin-top: 21px;
 }
 
 
@@ -142,9 +131,14 @@
   align-items: center;
   justify-content: space-between;
 
+  width: 100%;
+
   gap: 16px;
 
-  margin-bottom: 8px;
+  /* IMPORTANT:
+     Creates visible space between label row
+     and the input field */
+  margin: 0 0 9px;
 }
 
 
@@ -156,15 +150,27 @@
   display: block;
 
   margin: 0;
+  padding: 0;
 
-  color: #332a28;
+  color: #302825;
 
   font-size: 13px;
   font-weight: 650;
 
-  line-height: 1.4;
+  line-height: 18px;
 
-  letter-spacing: 0.005em;
+  letter-spacing: 0;
+
+  cursor: pointer;
+}
+
+
+/*
+   Email label does not have a wrapper, so add
+   spacing directly before its input.
+*/
+.login-form__field > .login-form__label {
+  margin-bottom: 9px;
 }
 
 
@@ -173,14 +179,17 @@
 ========================================================= */
 
 .login-form__forgot-link {
-  flex: 0 0 auto;
+  display: inline-block;
 
-  color: #895149;
+  margin: 0;
+  padding: 0;
+
+  color: #885148;
 
   font-size: 12px;
   font-weight: 600;
 
-  line-height: 1.4;
+  line-height: 18px;
 
   text-decoration: none;
 
@@ -188,14 +197,7 @@
 }
 
 .login-form__forgot-link:hover {
-  color: #5e3934;
-}
-
-.login-form__forgot-link:focus-visible {
-  outline: 2px solid #9a5b52;
-  outline-offset: 3px;
-
-  border-radius: 3px;
+  color: #613d38;
 }
 
 
@@ -206,7 +208,10 @@
 .login-form__input-wrap {
   position: relative;
 
+  display: block;
+
   width: 100%;
+  margin: 0;
 }
 
 
@@ -223,7 +228,7 @@
   width: 17px;
   height: 17px;
 
-  color: #876f69;
+  color: #776a65;
 
   pointer-events: none;
 
@@ -236,19 +241,22 @@
 ========================================================= */
 
 .login-form__input {
+  display: block;
+
   width: 100%;
   height: 50px;
 
+  margin: 0;
   padding: 0 15px;
 
-  border: 1px solid #cfc4bf;
+  border: 1px solid #cfc5c1 !important;
   border-radius: 8px;
 
-  outline: none;
+  outline: none !important;
 
-  background: #ffffff;
+  background: #ffffff !important;
 
-  color: #302624;
+  color: #302825 !important;
 
   font-family:
     var(--font-body),
@@ -258,33 +266,31 @@
   font-size: 14px;
   font-weight: 450;
 
-  line-height: 1.4;
+  line-height: 50px;
 
-  box-shadow:
-    0 1px 2px rgba(50, 36, 32, 0.03);
+  appearance: none;
+  -webkit-appearance: none;
+
+  box-shadow: none !important;
+
+  transition: none;
 }
 
-.login-form__input:not(
+
+/* Email input icon spacing */
+
+.login-form__input-wrap
+  .login-form__input:not(
     .login-form__input--password
   ) {
   padding-left: 44px;
 }
 
+
+/* Password spacing */
+
 .login-form__input--password {
   padding-right: 52px;
-}
-
-
-/* =========================================================
-   PLACEHOLDER
-========================================================= */
-
-.login-form__input::placeholder {
-  color: #817773;
-
-  opacity: 1;
-
-  font-size: 13px;
 }
 
 
@@ -293,7 +299,8 @@
 ========================================================= */
 
 .login-form__input:hover {
-  border-color: #ae9c96;
+  border-color: #cfc5c1 !important;
+  box-shadow: none !important;
 }
 
 
@@ -301,18 +308,77 @@
    INPUT FOCUS
 ========================================================= */
 
-.login-form__input:focus {
-  border-color: #955b52;
+/*
+   IMPORTANT:
+   Do NOT change the border when the user clicks
+   inside the field.
 
-  background: #ffffff;
+   No colored focus border.
+   No glow.
+   No outline.
+*/
 
-  box-shadow:
-    0 0 0 3px rgba(149, 91, 82, 0.10);
+.login-form__input:focus,
+.login-form__input:focus-visible,
+.login-form__input:active {
+  border: 1px solid #cfc5c1 !important;
+
+  outline: none !important;
+
+  box-shadow: none !important;
+
+  background: #ffffff !important;
+}
+
+
+/*
+   Also prevent the wrapper from producing
+   any focus styling.
+*/
+
+.login-form__input-wrap:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .login-form__input-wrap:focus-within
-  .login-form__input-icon {
-  color: #955b52;
+  .login-form__input {
+  border-color: #cfc5c1 !important;
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.login-form__input::placeholder {
+  color: #817773 !important;
+
+  opacity: 1;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   CHROME / EDGE AUTOFILL
+========================================================= */
+
+.login-form__input:-webkit-autofill,
+.login-form__input:-webkit-autofill:hover,
+.login-form__input:-webkit-autofill:focus,
+.login-form__input:-webkit-autofill:active {
+  -webkit-text-fill-color: #302825 !important;
+
+  caret-color: #302825;
+
+  box-shadow:
+    0 0 0 1000px #ffffff inset !important;
+
+  border: 1px solid #cfc5c1 !important;
+
+  transition: background-color 9999s ease-out;
 }
 
 
@@ -333,31 +399,33 @@
   width: 38px;
   height: 38px;
 
+  margin: 0;
   padding: 0;
 
   border: 0;
   border-radius: 6px;
 
+  outline: none;
+
   background: transparent;
 
-  color: #746864;
+  color: #766965;
 
   cursor: pointer;
-
-  outline: none;
 
   transform: translateY(-50%);
 }
 
 .login-form__password-toggle:hover {
-  background: #f2eeec;
+  background: #f3efed;
 
-  color: #583d38;
+  color: #5c4843;
 }
 
+.login-form__password-toggle:focus,
 .login-form__password-toggle:focus-visible {
-  outline: 2px solid #955b52;
-  outline-offset: -2px;
+  outline: none;
+  box-shadow: none;
 }
 
 .login-form__password-icon {
@@ -378,10 +446,9 @@
 
   gap: 9px;
 
-  margin-top: 13px;
+  margin: 13px 0 0;
 
   cursor: pointer;
-
   user-select: none;
 }
 
@@ -391,20 +458,22 @@
 
   margin: 0;
 
+  padding: 0;
+
   flex: 0 0 16px;
 
-  accent-color: #92574e;
+  accent-color: #92574f;
 
   cursor: pointer;
 }
 
 .login-form__remember-text {
-  color: #5f5551;
+  color: #5d5551;
 
   font-size: 12px;
   font-weight: 500;
 
-  line-height: 1.4;
+  line-height: 16px;
 }
 
 
@@ -416,22 +485,21 @@
   display: flex;
   align-items: flex-start;
 
-  gap: 11px;
+  gap: 10px;
 
-  margin-top: 14px;
-  padding: 13px 14px;
+  margin: 14px 0 0;
+  padding: 12px 14px;
 
-  border: 1px solid #e1c1bd;
-  border-radius: 8px;
+  border: 1px solid #e1c2bd;
+  border-radius: 7px;
 
   background: #fff7f6;
 
-  color: #814840;
+  color: #7f4841;
 }
 
 .login-form__error-mark {
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -440,10 +508,8 @@
 
   flex: 0 0 20px;
 
-  border: 1px solid #a6645b;
+  border: 1px solid #a7655c;
   border-radius: 50%;
-
-  color: #814840;
 
   font-size: 11px;
   font-weight: 700;
@@ -452,41 +518,40 @@
 .login-form__error p {
   margin: 1px 0 0;
 
-  color: #814840;
+  color: #7f4841;
 
   font-size: 12px;
   font-weight: 500;
 
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 
 /* =========================================================
-   SUBMIT BUTTON
+   SUBMIT
 ========================================================= */
 
 .login-form__submit {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
 
   width: 100%;
   height: 50px;
 
-  margin-top: 20px;
+  margin: 21px 0 0;
   padding: 0 6px 0 18px;
 
   border: 1px solid #92584f;
   border-radius: 8px;
+
+  outline: none;
 
   background: #92584f;
 
   color: #ffffff;
 
   cursor: pointer;
-
-  outline: none;
 
   font-family:
     var(--font-body),
@@ -498,51 +563,37 @@
 
   letter-spacing: 0.09em;
 
-  line-height: 1;
-
   text-transform: uppercase;
 
   box-shadow:
-    0 5px 15px rgba(83, 48, 43, 0.15);
+    0 5px 15px rgba(83, 48, 43, 0.14);
 }
 
 .login-form__submit:hover:not(:disabled) {
-  background: #75443e;
-
-  border-color: #75443e;
+  background: #7c4942;
+  border-color: #7c4942;
 }
 
-.login-form__submit:active:not(:disabled) {
-  transform: translateY(1px);
-}
-
+.login-form__submit:focus,
 .login-form__submit:focus-visible {
-  outline: 2px solid #9a5b52;
-  outline-offset: 3px;
+  outline: none;
+  box-shadow:
+    0 5px 15px rgba(83, 48, 43, 0.14);
 }
 
 .login-form__submit:disabled {
   opacity: 0.6;
-
   cursor: wait;
 }
 
-
-/* =========================================================
-   SUBMIT LABEL
-========================================================= */
-
 .login-form__submit-label {
   display: flex;
-
   align-items: center;
   justify-content: center;
 
   flex: 1;
 
   min-width: 0;
-
-  padding: 0 10px;
 
   color: #ffffff;
 
@@ -554,14 +605,8 @@
   text-transform: uppercase;
 }
 
-
-/* =========================================================
-   SUBMIT ICON WRAPPER
-========================================================= */
-
 .login-form__submit-icon-wrap {
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -573,8 +618,6 @@
   border-radius: 6px;
 
   background: rgba(255, 255, 255, 0.15);
-
-  color: #ffffff;
 }
 
 .login-form__submit-icon {
@@ -586,29 +629,28 @@
 
 
 /* =========================================================
-   REGISTER SECTION
+   REGISTER
 ========================================================= */
 
 .login-form__register {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
 
-  gap: 18px;
-
   width: 100%;
 
-  margin-top: 18px;
-  padding: 16px;
+  gap: 18px;
 
-  border: 1px solid #ddd3cf;
-  border-radius: 9px;
+  margin: 18px 0 0;
+  padding: 15px 16px;
+
+  border: 1px solid #ddd4d0;
+  border-radius: 8px;
 
   background: #fbf9f8;
 
   box-shadow:
-    0 2px 7px rgba(48, 36, 32, 0.035);
+    0 2px 7px rgba(48, 36, 32, 0.03);
 }
 
 
@@ -623,12 +665,12 @@
 .login-form__register-label {
   margin: 0 0 3px;
 
-  color: #6d625e;
+  color: #706662;
 
   font-size: 11px;
   font-weight: 500;
 
-  line-height: 1.4;
+  line-height: 15px;
 }
 
 .login-form__register-title {
@@ -638,14 +680,13 @@
 
   font-family:
     var(--font-display),
-    var(--font-serif),
     Georgia,
     serif;
 
   font-size: 18px;
   font-weight: 600;
 
-  line-height: 1.25;
+  line-height: 23px;
 }
 
 
@@ -655,7 +696,6 @@
 
 .login-form__register-link {
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
 
@@ -663,12 +703,14 @@
 
   min-height: 40px;
 
-  padding: 0 13px;
+  padding: 0 14px;
 
   flex: 0 0 auto;
 
-  border: 1px solid #bda9a3;
+  border: 1px solid #bca9a3;
   border-radius: 7px;
+
+  outline: none;
 
   background: #ffffff;
 
@@ -679,24 +721,20 @@
 
   letter-spacing: 0.07em;
 
-  line-height: 1;
-
   text-decoration: none;
-
   text-transform: uppercase;
 }
 
 .login-form__register-link:hover {
   border-color: #8e554d;
-
   background: #8e554d;
-
   color: #ffffff;
 }
 
+.login-form__register-link:focus,
 .login-form__register-link:focus-visible {
-  outline: 2px solid #9a5b52;
-  outline-offset: 3px;
+  outline: none;
+  box-shadow: none;
 }
 
 .login-form__register-icon {
@@ -713,7 +751,7 @@
 
 @media (max-width: 900px) {
   .login-form {
-    max-width: 520px;
+    max-width: 500px;
   }
 }
 
@@ -725,63 +763,54 @@
 @media (max-width: 640px) {
   .login-form {
     width: 100%;
-
-    max-width: none;
+    max-width: 100%;
   }
 
   .login-form__intro {
-    margin-bottom: 20px;
+    margin-bottom: 23px;
   }
 
   .login-form__field + .login-form__field {
-    margin-top: 18px;
+    margin-top: 19px;
   }
 
-  .login-form__label {
-    font-size: 13px;
+  .login-form__field-header {
+    margin-bottom: 9px;
   }
 
-  .login-form__forgot-link {
-    font-size: 11px;
+  .login-form__field > .login-form__label {
+    margin-bottom: 9px;
   }
 
   .login-form__input {
     height: 48px;
 
     font-size: 14px;
+
+    line-height: 48px;
   }
 
   .login-form__input::placeholder {
     font-size: 13px;
   }
 
-  .login-form__remember-text {
-    font-size: 12px;
-  }
-
   .login-form__submit {
     height: 49px;
 
-    margin-top: 18px;
+    margin-top: 19px;
   }
 
   .login-form__register {
-    align-items: stretch;
-
     flex-direction: column;
+    align-items: stretch;
 
     gap: 12px;
 
-    padding: 15px;
-  }
-
-  .login-form__register-title {
-    font-size: 17px;
+    padding: 14px;
   }
 
   .login-form__register-link {
     width: 100%;
-
     min-height: 42px;
   }
 }
@@ -801,54 +830,34 @@
   }
 
   .login-form__forgot-link {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .login-form__input {
     height: 47px;
-  }
 
-  .login-form__submit {
-    height: 48px;
+    font-size: 14px;
+
+    line-height: 47px;
   }
 
   .login-form__register-title {
-    font-size: 16px;
+    font-size: 17px;
   }
 }
 
 
 /* =========================================================
-   VERY SMALL MOBILE
+   ACCESSIBILITY / FOCUS RESET
 ========================================================= */
 
-@media (max-width: 320px) {
-  .login-form__label {
-    font-size: 12px;
-  }
-
-  .login-form__input {
-    font-size: 13px;
-  }
-
-  .login-form__input::placeholder {
-    font-size: 12px;
-  }
-
-  .login-form__register {
-    padding: 13px;
-  }
-}
-
-
-/* =========================================================
-   ACCESSIBILITY
-========================================================= */
-
-.login-form a:focus-visible,
+.login-form input:focus,
+.login-form input:focus-visible,
+.login-form button:focus,
 .login-form button:focus-visible,
-.login-form input:focus-visible {
-  outline-color: #9a5b52;
+.login-form a:focus,
+.login-form a:focus-visible {
+  outline: none !important;
 }
 
 
@@ -858,5 +867,4 @@
 
 .login-form {
   overflow: visible;
-  max-width: 100%;
 }
