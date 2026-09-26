@@ -247,7 +247,7 @@ export function HeaderActions() {
         >
           <Search
             size={20}
-            strokeWidth={1.35}
+            strokeWidth={1.6}
           />
         </HeaderActionButton>
 
@@ -273,7 +273,7 @@ export function HeaderActions() {
           >
             <UserRound
               size={20}
-              strokeWidth={1.35}
+              strokeWidth={1.6}
             />
           </HeaderActionButton>
 
@@ -320,7 +320,7 @@ export function HeaderActions() {
           <span className="header-action-link__icon">
             <Heart
               size={20}
-              strokeWidth={1.35}
+              strokeWidth={1.6}
             />
           </span>
 
@@ -350,7 +350,7 @@ export function HeaderActions() {
           <span className="header-action-link__icon">
             <ShoppingBag
               size={20}
-              strokeWidth={1.35}
+              strokeWidth={1.6}
             />
           </span>
 
@@ -393,6 +393,33 @@ export function HeaderActions() {
 
             <div className="header-search-container">
               <div className="header-search-content">
+
+                {/* Search heading */}
+
+                <div className="header-search-heading">
+                  <div>
+                    <span className="header-search-kicker">
+                      AAYESHA SEARCH
+                    </span>
+
+                    <h2 className="header-search-title">
+                      Find your style
+                    </h2>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={closeSearch}
+                    aria-label="Close search"
+                    className="header-search-close"
+                  >
+                    <X
+                      size={18}
+                      strokeWidth={1.6}
+                    />
+                  </button>
+                </div>
+
                 {/* Search row */}
 
                 <div className="header-search-row">
@@ -408,8 +435,8 @@ export function HeaderActions() {
                         className="header-search-icon"
                       >
                         <Search
-                          size={19}
-                          strokeWidth={1.35}
+                          size={20}
+                          strokeWidth={1.6}
                         />
                       </span>
 
@@ -422,7 +449,7 @@ export function HeaderActions() {
                             event.target.value,
                           )
                         }
-                        placeholder="What are you looking for?"
+                        placeholder="Search dresses, garara, suits..."
                         aria-label="Search products"
                         autoComplete="off"
                         className="header-search-input"
@@ -439,7 +466,7 @@ export function HeaderActions() {
 
                           <ArrowUpRight
                             size={16}
-                            strokeWidth={1.35}
+                            strokeWidth={1.6}
                           />
                         </button>
                       )}
@@ -450,25 +477,13 @@ export function HeaderActions() {
                       className="header-search-line"
                     />
                   </form>
-
-                  <button
-                    type="button"
-                    onClick={closeSearch}
-                    aria-label="Close search"
-                    className="header-search-close"
-                  >
-                    <X
-                      size={18}
-                      strokeWidth={1.35}
-                    />
-                  </button>
                 </div>
 
                 {/* Search meta */}
 
                 <div className="header-search-meta">
                   <p className="text-caption">
-                    Search Aayesha Fashion
+                    Explore the latest Aayesha collections
                   </p>
 
                   <p className="text-caption">
@@ -554,45 +569,53 @@ function GuestAccountPopup({
       aria-label="Account"
     >
       <div className="guest-account-popup__surface">
+
         <span
           aria-hidden="true"
           className="guest-account-popup__accent"
         />
 
-        {/* Intro */}
+        {/* Popup header */}
 
         <div className="guest-account-popup__intro">
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close account menu"
-            className="guest-account-popup__close"
-          >
-            <X
-              size={16}
-              strokeWidth={1.3}
-            />
-          </button>
 
-          <p className="eyebrow guest-account-popup__eyebrow">
-            Your Account
-          </p>
+          <div className="guest-account-popup__intro-top">
+            <div>
+              <p className="eyebrow guest-account-popup__eyebrow">
+                Your Account
+              </p>
 
-          <h3 className="guest-account-popup__title">
-            Welcome to Aayesha
-          </h3>
+              <h3 className="guest-account-popup__title">
+                Welcome to Aayesha
+              </h3>
+            </div>
+
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close account menu"
+              className="guest-account-popup__close"
+            >
+              <X
+                size={17}
+                strokeWidth={1.6}
+              />
+            </button>
+          </div>
 
           <p className="guest-account-popup__description">
             Sign in or create an account
-            to manage your orders and
-            details.
+            to manage your orders,
+            wishlist and details.
           </p>
         </div>
 
         {/* Auth actions */}
 
         <div className="guest-account-popup__actions">
+
           <div className="guest-account-popup__buttons">
+
             <Link
               href="/login"
               onClick={onClose}
@@ -608,7 +631,7 @@ function GuestAccountPopup({
 
               <ArrowUpRight
                 size={15}
-                strokeWidth={1.35}
+                strokeWidth={1.6}
               />
             </Link>
 
@@ -623,17 +646,27 @@ function GuestAccountPopup({
             >
               Sign Up
             </Link>
+
           </div>
+
         </div>
 
         {/* Benefits */}
 
         <div className="guest-account-popup__benefits">
-          <p className="eyebrow">
-            With an account
-          </p>
+
+          <div className="guest-account-popup__benefits-heading">
+            <span className="guest-account-popup__benefits-icon">
+              ✦
+            </span>
+
+            <p className="eyebrow">
+              With an account
+            </p>
+          </div>
 
           <div className="guest-account-popup__benefit-list">
+
             <GuestBenefit
               title="Track your orders"
               description="View order status and history."
@@ -648,8 +681,11 @@ function GuestAccountPopup({
               title="Manage your profile"
               description="Keep your account information updated."
             />
+
           </div>
+
         </div>
+
       </div>
     </div>
   );
@@ -668,12 +704,14 @@ function GuestBenefit({
 }) {
   return (
     <div className="guest-benefit">
+
       <span
         aria-hidden="true"
         className="guest-benefit__dot"
       />
 
       <div className="guest-benefit__content">
+
         <p className="guest-benefit__title">
           {title}
         </p>
@@ -681,7 +719,9 @@ function GuestBenefit({
         <p className="guest-benefit__description">
           {description}
         </p>
+
       </div>
+
     </div>
   );
 }
