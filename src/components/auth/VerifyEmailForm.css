@@ -118,18 +118,6 @@
 
 
 /* =========================================================
-   FORM
-========================================================= */
-
-.verify-email-form__fields {
-  width: 100%;
-
-  margin: 0;
-  padding: 0;
-}
-
-
-/* =========================================================
    FIELD
 ========================================================= */
 
@@ -179,7 +167,8 @@
   padding: 0;
 }
 
-.verify-email-form__otp-header .verify-email-form__label {
+.verify-email-form__otp-header
+  .verify-email-form__label {
   margin-bottom: 8px;
 }
 
@@ -248,7 +237,7 @@
   height: 48px;
 
   margin: 0;
-  padding: 0 13px;
+  padding: 0 13px 0 41px;
 
   border: 1px solid #cec4c0 !important;
   border-radius: 7px;
@@ -275,13 +264,9 @@
   box-shadow: none !important;
 }
 
-.verify-email-form__input--with-icon {
-  padding-left: 41px;
-}
-
 
 /* =========================================================
-   EMAIL INPUT STATES
+   INPUT STATES
 ========================================================= */
 
 .verify-email-form__input:hover {
@@ -456,11 +441,6 @@
   color: #7b4841;
 }
 
-
-/* =========================================================
-   ERROR ICON
-========================================================= */
-
 .verify-email-form__message-icon {
   display: flex;
   align-items: center;
@@ -481,11 +461,6 @@
 
   line-height: 1;
 }
-
-
-/* =========================================================
-   ERROR TEXT
-========================================================= */
 
 .verify-email-form__error p {
   min-width: 0;
@@ -548,7 +523,7 @@
 
 
 /* =========================================================
-   SUBMIT BUTTON
+   VERIFY / SUBMIT BUTTON
 ========================================================= */
 
 .verify-email-form__submit {
@@ -582,32 +557,17 @@
     0 5px 14px rgba(73, 43, 39, 0.13);
 }
 
-
-/* =========================================================
-   SUBMIT HOVER
-========================================================= */
-
 .verify-email-form__submit:hover:not(:disabled) {
   border-color: #7c4942;
 
   background: #7c4942;
 }
 
-
-/* =========================================================
-   SUBMIT ACTIVE
-========================================================= */
-
 .verify-email-form__submit:active:not(:disabled) {
   border-color: #70423c;
 
   background: #70423c;
 }
-
-
-/* =========================================================
-   SUBMIT FOCUS
-========================================================= */
 
 .verify-email-form__submit:focus,
 .verify-email-form__submit:focus-visible {
@@ -618,11 +578,6 @@
   box-shadow:
     0 5px 14px rgba(73, 43, 39, 0.13);
 }
-
-
-/* =========================================================
-   SUBMIT DISABLED
-========================================================= */
 
 .verify-email-form__submit:disabled {
   opacity: 0.55;
@@ -685,11 +640,6 @@
   stroke-width: 1.8;
 }
 
-
-/* =========================================================
-   LOADING ICON
-========================================================= */
-
 .verify-email-form__submit-icon--loading {
   width: 18px;
   height: 18px;
@@ -719,11 +669,6 @@
 
   background: #faf8f7;
 }
-
-
-/* =========================================================
-   RESEND COPY
-========================================================= */
 
 .verify-email-form__resend-copy {
   min-width: 0;
@@ -838,7 +783,7 @@
 
 
 /* =========================================================
-   CHANGE EMAIL
+   CREATE ACCOUNT SECTION
 ========================================================= */
 
 .verify-email-form__change-email {
@@ -850,26 +795,31 @@
 
   gap: 14px;
 
-  margin: 13px 0 0;
-  padding: 11px 13px;
+  margin: 14px 0 0;
+  padding: 13px 14px;
 
-  border-top: 1px solid #e3dcd9;
+  border: 1px solid #ded5d2;
+  border-radius: 8px;
+
+  background: #faf8f7;
 }
 
 .verify-email-form__change-email p {
+  min-width: 0;
+
   margin: 0;
 
-  color: #7c706b;
+  color: #655b57;
 
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
 
-  line-height: 15px;
+  line-height: 16px;
 }
 
 
 /* =========================================================
-   REGISTER LINK
+   CREATE ACCOUNT BUTTON
 ========================================================= */
 
 .verify-email-form__register-link {
@@ -877,24 +827,52 @@
   align-items: center;
   justify-content: center;
 
-  gap: 5px;
+  min-height: 38px;
 
   flex: 0 0 auto;
 
-  color: #784a43;
+  gap: 7px;
+
+  padding: 0 13px;
+
+  border: 1px solid #9a6259;
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  color: #814f47;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
 
   font-size: 10px;
   font-weight: 700;
 
-  line-height: 15px;
+  line-height: 14px;
 
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 
   text-decoration: none;
+
+  text-transform: uppercase;
 }
 
 .verify-email-form__register-link:hover {
-  color: #5f3934;
+  border-color: #92584f;
+
+  background: #92584f;
+
+  color: #ffffff;
+}
+
+.verify-email-form__register-link:active {
+  border-color: #7d4942;
+
+  background: #7d4942;
+
+  color: #ffffff;
 }
 
 .verify-email-form__register-link:focus,
@@ -906,7 +884,7 @@
 
 
 /* =========================================================
-   REGISTER ICON
+   CREATE ACCOUNT ARROW
 ========================================================= */
 
 .verify-email-form__register-icon {
@@ -915,7 +893,7 @@
 
   flex: 0 0 16px;
 
-  stroke-width: 1.7;
+  stroke-width: 1.8;
 }
 
 
@@ -1020,12 +998,29 @@
     min-height: 40px;
   }
 
+  /* CREATE ACCOUNT */
   .verify-email-form__change-email {
-    align-items: flex-start;
+    align-items: stretch;
 
     flex-direction: column;
 
-    gap: 5px;
+    gap: 10px;
+
+    margin-top: 12px;
+
+    padding: 12px;
+  }
+
+  .verify-email-form__change-email p {
+    font-size: 10px;
+
+    line-height: 15px;
+  }
+
+  .verify-email-form__register-link {
+    width: 100%;
+
+    min-height: 40px;
   }
 }
 
@@ -1087,6 +1082,16 @@
 
     flex-basis: 18px;
   }
+
+  .verify-email-form__change-email {
+    padding: 11px;
+  }
+
+  .verify-email-form__register-link {
+    min-height: 39px;
+
+    font-size: 10px;
+  }
 }
 
 
@@ -1131,12 +1136,13 @@
 ========================================================= */
 
 .verify-email-form,
-.verify-email-form__fields,
 .verify-email-form__intro,
 .verify-email-form__field,
 .verify-email-form__input-wrap,
 .verify-email-form__input,
 .verify-email-form__otp,
+.verify-email-form__error,
+.verify-email-form__success,
 .verify-email-form__resend,
 .verify-email-form__change-email {
   min-width: 0;
