@@ -32,6 +32,10 @@ export function VerifyEmailForm() {
   const emailFromUrl =
     searchParams.get("email") ?? "";
 
+  /* =======================================================
+     AUTH STORE
+  ======================================================= */
+
   const verifyEmail = useAuthStore(
     (state) => state.verifyEmail,
   );
@@ -52,6 +56,10 @@ export function VerifyEmailForm() {
   const clearError = useAuthStore(
     (state) => state.clearError,
   );
+
+  /* =======================================================
+     FORM STATE
+  ======================================================= */
 
   const [email, setEmail] =
     useState(emailFromUrl);
@@ -280,12 +288,18 @@ export function VerifyEmailForm() {
         ================================================= */}
 
         <div className="verify-email-form__field">
-          <label
-            htmlFor="verify-email-otp"
-            className="verify-email-form__label"
-          >
-            Verification code
-          </label>
+          <div className="verify-email-form__otp-header">
+            <label
+              htmlFor="verify-email-otp"
+              className="verify-email-form__label"
+            >
+              Verification code
+            </label>
+
+            <span className="verify-email-form__otp-meta">
+              6 digits
+            </span>
+          </div>
 
           <input
             id="verify-email-otp"
@@ -314,8 +328,7 @@ export function VerifyEmailForm() {
             id="verify-email-otp-help"
             className="verify-email-form__hint"
           >
-            Enter the 6-digit code from your
-            email.
+            Enter the 6-digit code from your email.
           </p>
         </div>
 
@@ -366,7 +379,7 @@ export function VerifyEmailForm() {
           }
           className="verify-email-form__submit"
         >
-          <span>
+          <span className="verify-email-form__submit-label">
             {isLoading
               ? "Verifying"
               : "Verify email"}
@@ -391,9 +404,15 @@ export function VerifyEmailForm() {
       =================================================== */}
 
       <div className="verify-email-form__resend">
-        <p className="verify-email-form__resend-text">
-          Didn&apos;t receive the code?
-        </p>
+        <div className="verify-email-form__resend-copy">
+          <span className="verify-email-form__resend-label">
+            Verification code
+          </span>
+
+          <p className="verify-email-form__resend-text">
+            Didn&apos;t receive the code?
+          </p>
+        </div>
 
         <button
           type="button"
@@ -421,15 +440,22 @@ export function VerifyEmailForm() {
           CHANGE EMAIL
       =================================================== */}
 
-      <p className="verify-email-form__change-email">
-        Entered the wrong email?{" "}
+      <div className="verify-email-form__change-email">
+        <p>
+          Entered the wrong email?
+        </p>
+
         <Link
           href="/register"
           className="verify-email-form__register-link"
         >
           Create your account again
+          <ArrowRight
+            aria-hidden="true"
+            className="verify-email-form__register-icon"
+          />
         </Link>
-      </p>
+      </div>
     </div>
   );
 }
