@@ -127,10 +127,6 @@ export default function Header({
 
   return (
     <>
-      {/* ===================================================
-          HEADER
-      =================================================== */}
-
       <header className={headerClassName}>
         <div className="aayesha-header__inner">
 
