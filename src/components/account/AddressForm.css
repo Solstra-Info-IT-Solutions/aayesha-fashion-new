@@ -1,15 +1,16 @@
 /* =========================================================
-   AAYESHA — ADDRESS FORM
-   Premium Editorial Account Experience
+   AAYESHA FASHION
+   ADDRESS FORM
+   Modern Premium Fashion Store
 ========================================================= */
 
 .address-form {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 42px 32px 72px;
+  padding: 42px 28px 64px;
 
-  color: var(--color-text);
+  color: #332725;
 }
 
 /* =========================================================
@@ -17,119 +18,69 @@
 ========================================================= */
 
 .address-form__header {
-  margin-bottom: 42px;
+  margin-bottom: 30px;
 }
 
 .address-form__back {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 7px;
 
-  margin-bottom: 30px;
+  margin-bottom: 22px;
 
-  color: var(--color-text-secondary);
+  color: #746762;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 9px;
-  font-weight: 600;
-
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
 
   text-decoration: none;
 
   transition:
-    color 240ms ease,
-    gap 240ms ease;
+    color 160ms ease,
+    gap 160ms ease;
 }
 
 .address-form__back:hover {
-  gap: 12px;
-  color: var(--color-accent);
+  gap: 10px;
+  color: #8b5f59;
 }
 
 .address-form__hero {
   display: flex;
   align-items: flex-start;
 
-  gap: 18px;
+  gap: 15px;
 
-  padding-bottom: 30px;
+  padding-bottom: 25px;
 
-  border-bottom:
-    1px solid
-    var(--color-border);
+  border-bottom: 1px solid #e3d9d5;
 }
 
 .address-form__hero-icon {
-  width: 48px;
-  height: 48px;
-
-  flex: 0 0 48px;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border:
-    1px solid
-    var(--color-accent-soft);
+  width: 44px;
+  height: 44px;
 
-  background:
-    var(--color-surface);
+  flex: 0 0 44px;
 
-  color:
-    var(--color-accent);
+  border: 1px solid #d9c3bc;
+
+  background: #f8f1ee;
+
+  color: #8b5f59;
 }
 
 .address-form__eyebrow {
-  margin: 0 0 8px;
-
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 8px;
-  font-weight: 600;
-
-  line-height: 1;
-
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-
-  color:
-    var(--color-accent);
-}
-
-.address-form__title {
-  margin: 0;
-
-  font-family:
-    var(--font-display),
-    Georgia,
-    serif;
-
-  font-size: clamp(30px, 4vw, 44px);
-
-  font-weight: 500;
-
-  line-height: 1.05;
-
-  letter-spacing: -0.035em;
-
-  color:
-    var(--color-text);
-}
-
-.address-form__description {
-  max-width: 520px;
-
-  margin: 11px 0 0;
+  margin: 0 0 7px;
 
   font-family:
     var(--font-body),
@@ -137,11 +88,48 @@
     sans-serif;
 
   font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
 
-  line-height: 1.7;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 
-  color:
-    var(--color-text-secondary);
+  color: #8b5f59;
+}
+
+.address-form__title {
+  margin: 0;
+
+  font-family:
+    var(--font-display),
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 500;
+  line-height: 1;
+
+  letter-spacing: -0.025em;
+
+  color: #332725;
+}
+
+.address-form__description {
+  max-width: 620px;
+
+  margin: 10px 0 0;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+
+  color: #71635e;
 }
 
 /* =========================================================
@@ -149,20 +137,20 @@
 ========================================================= */
 
 .address-form__page-error {
-  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
 
-  padding:
-    13px 16px;
+  gap: 10px;
 
-  border:
-    1px solid
-    rgba(154, 93, 88, 0.25);
+  margin-bottom: 20px;
 
-  background:
-    rgba(154, 93, 88, 0.055);
+  padding: 13px 15px;
 
-  color:
-    var(--color-danger, #9a5d58);
+  border: 1px solid #dfbeba;
+
+  background: #fff7f6;
+
+  color: #934f4a;
 }
 
 .address-form__page-error p {
@@ -173,9 +161,8 @@
     Arial,
     sans-serif;
 
-  font-size: 10px;
-
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 /* =========================================================
@@ -186,12 +173,11 @@
   display: flex;
   flex-direction: column;
 
-  border:
-    1px solid
-    var(--color-border);
+  overflow: hidden;
 
-  background:
-    var(--color-bg);
+  border: 1px solid #e1d6d1;
+
+  background: #ffffff;
 }
 
 /* =========================================================
@@ -199,11 +185,9 @@
 ========================================================= */
 
 .address-form__section {
-  padding: 34px 36px 38px;
+  padding: 28px 30px 32px;
 
-  border-bottom:
-    1px solid
-    var(--color-border);
+  border-bottom: 1px solid #ebe3df;
 }
 
 .address-form__section:last-child {
@@ -211,35 +195,16 @@
 }
 
 .address-form__section-heading {
-  display: grid;
+  display: flex;
+  align-items: flex-start;
 
-  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 12px;
 
-  gap: 16px;
-
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .address-form__section-number {
-  display: flex;
-
-  align-items: flex-start;
-
-  padding-top: 3px;
-
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 9px;
-
-  font-weight: 600;
-
-  letter-spacing: 0.14em;
-
-  color:
-    var(--color-accent);
+  display: none;
 }
 
 .address-form__section-title {
@@ -247,37 +212,33 @@
 
   font-family:
     var(--font-display),
+    "Cormorant Garamond",
     Georgia,
     serif;
 
-  font-size: 25px;
-
+  font-size: 27px;
   font-weight: 500;
+  line-height: 1.1;
 
-  line-height: 1.15;
+  letter-spacing: -0.015em;
 
-  letter-spacing: -0.018em;
-
-  color:
-    var(--color-text);
+  color: #3d302d;
 }
 
 .address-form__section-description {
-  max-width: 540px;
+  max-width: 620px;
 
-  margin: 7px 0 0;
+  margin: 5px 0 0;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 10px;
+  font-size: 13px;
+  line-height: 1.55;
 
-  line-height: 1.7;
-
-  color:
-    var(--color-text-muted);
+  color: #786b66;
 }
 
 /* =========================================================
@@ -287,7 +248,7 @@
 .address-form__fields {
   display: grid;
 
-  gap: 22px;
+  gap: 18px;
 }
 
 .address-form__fields--two {
@@ -305,40 +266,29 @@
 
 .address-field__label {
   display: flex;
+  align-items: baseline;
 
-  align-items: center;
-  gap: 7px;
+  gap: 6px;
 
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 9px;
-
+  font-size: 13px;
   font-weight: 600;
+  line-height: 1.35;
 
-  line-height: 1;
-
-  letter-spacing: 0.12em;
-
-  text-transform: uppercase;
-
-  color:
-    var(--color-text);
+  color: #403431;
 }
 
 .address-field__optional {
-  font-size: 7px;
+  font-size: 11px;
+  font-weight: 400;
 
-  font-weight: 500;
-
-  letter-spacing: 0.1em;
-
-  color:
-    var(--color-text-muted);
+  color: #92847e;
 }
 
 /* =========================================================
@@ -350,78 +300,80 @@
 .address-field__select {
   width: 100%;
 
-  border:
-    1px solid
-    var(--color-border);
+  border: 1px solid #d8ccc7;
 
-  border-radius: 0;
+  border-radius: 4px;
 
-  background:
-    var(--color-surface);
+  background: #ffffff;
 
-  color:
-    var(--color-text);
+  color: #332725;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 11px;
+  font-size: 14px;
+  font-weight: 400;
 
   outline: none;
 
   transition:
-    border-color 220ms ease,
-    background-color 220ms ease,
-    box-shadow 220ms ease;
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .address-field__input {
-  height: 48px;
+  height: 46px;
 
-  padding:
-    0 14px;
+  padding: 0 13px;
 }
 
 .address-field__textarea {
-  min-height: 96px;
+  min-height: 92px;
+
+  padding: 12px 13px;
 
   resize: vertical;
 
-  padding:
-    13px 14px;
+  line-height: 1.55;
+}
 
-  line-height: 1.65;
+.address-field__select {
+  height: 46px;
+
+  padding: 0 36px 0 13px;
+
+  cursor: pointer;
 }
 
 .address-field__input::placeholder,
 .address-field__textarea::placeholder {
-  color:
-    var(--color-text-muted);
-
-  opacity: 0.75;
+  color: #a1948e;
+  opacity: 1;
 }
 
 .address-field__input:hover,
 .address-field__textarea:hover,
 .address-field__select:hover {
-  border-color:
-    var(--color-border-dark);
+  border-color: #bda9a2;
 }
+
+/* =========================================================
+   FOCUS
+   No heavy browser focus border
+========================================================= */
 
 .address-field__input:focus,
 .address-field__textarea:focus,
 .address-field__select:focus {
-  border-color:
-    var(--color-accent);
+  border-color: #a87870;
 
-  background:
-    var(--color-bg);
+  background: #ffffff;
 
   box-shadow:
-    0 0 0 3px
-    var(--color-accent-soft);
+    0 0 0 2px rgba(168, 120, 112, 0.12);
 }
 
 /* =========================================================
@@ -431,19 +383,16 @@
 .address-field__input--error,
 .address-field__textarea--error,
 .address-field__select--error {
-  border-color:
-    var(--color-danger, #9a5d58);
+  border-color: #b65f58;
 }
 
 .address-field__input--error:focus,
 .address-field__textarea--error:focus,
 .address-field__select--error:focus {
-  border-color:
-    var(--color-danger, #9a5d58);
+  border-color: #b65f58;
 
   box-shadow:
-    0 0 0 3px
-    rgba(154, 93, 88, 0.1);
+    0 0 0 2px rgba(182, 95, 88, 0.1);
 }
 
 /* =========================================================
@@ -452,150 +401,58 @@
 
 .address-field__phone {
   display: flex;
+  align-items: stretch;
 
-  height: 48px;
-
-  border:
-    1px solid
-    var(--color-border);
-
-  background:
-    var(--color-surface);
-
-  transition:
-    border-color 220ms ease,
-    box-shadow 220ms ease;
+  width: 100%;
 }
 
-.address-field__phone:hover {
-  border-color:
-    var(--color-border-dark);
-}
-
-.address-field__phone:focus-within {
-  border-color:
-    var(--color-accent);
-
-  background:
-    var(--color-bg);
-
-  box-shadow:
-    0 0 0 3px
-    var(--color-accent-soft);
-}
-
-.address-field__phone--error {
-  border-color:
-    var(--color-danger, #9a5d58);
-}
-
-.address-field__country {
+.address-field__phone-prefix {
   display: flex;
-
   align-items: center;
+  justify-content: center;
 
-  padding:
-    0 13px;
+  min-width: 58px;
 
-  border-right:
-    1px solid
-    var(--color-border);
+  padding: 0 10px;
+
+  border: 1px solid #d8ccc7;
+  border-right: 0;
+
+  border-radius: 4px 0 0 4px;
+
+  background: #f9f5f3;
+
+  color: #625550;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 10px;
-
+  font-size: 13px;
   font-weight: 600;
-
-  color:
-    var(--color-text-secondary);
 }
 
-.address-field__phone-input {
-  min-width: 0;
-  flex: 1;
-
-  border: 0;
-  outline: 0;
-
-  padding:
-    0 14px;
-
-  background:
-    transparent;
-
-  color:
-    var(--color-text);
-
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 11px;
-}
-
-.address-field__phone-input::placeholder {
-  color:
-    var(--color-text-muted);
+.address-field__phone .address-field__input {
+  border-radius: 0 4px 4px 0;
 }
 
 /* =========================================================
-   SELECT
-========================================================= */
-
-.address-field__select-wrap {
-  position: relative;
-}
-
-.address-field__select {
-  height: 48px;
-
-  appearance: none;
-  -webkit-appearance: none;
-
-  padding:
-    0 42px 0 14px;
-
-  cursor: pointer;
-}
-
-.address-field__select-icon {
-  position: absolute;
-
-  top: 50%;
-  right: 14px;
-
-  pointer-events: none;
-
-  transform:
-    translateY(-50%);
-
-  color:
-    var(--color-text-secondary);
-}
-
-/* =========================================================
-   ERROR TEXT
+   FIELD ERROR
 ========================================================= */
 
 .address-field__error {
-  margin: 7px 0 0;
+  margin: 6px 0 0;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 12px;
+  line-height: 1.4;
 
-  line-height: 1.5;
-
-  color:
-    var(--color-danger, #9a5d58);
+  color: #a4524c;
 }
 
 /* =========================================================
@@ -603,88 +460,64 @@
 ========================================================= */
 
 .address-default {
-  position: relative;
-
   display: flex;
-
   align-items: center;
 
-  gap: 13px;
+  gap: 12px;
 
-  min-height: 68px;
+  margin-top: 20px;
 
-  margin-top: 4px;
+  padding: 14px 15px;
 
-  padding:
-    13px 15px;
+  border: 1px solid #ded1cc;
 
-  border:
-    1px solid
-    var(--color-border);
+  border-radius: 5px;
 
-  background:
-    var(--color-surface);
+  background: #fcfaf9;
 
   cursor: pointer;
 
   transition:
-    border-color 220ms ease,
-    background-color 220ms ease;
+    border-color 160ms ease,
+    background-color 160ms ease;
 }
 
 .address-default:hover {
-  border-color:
-    var(--color-border-dark);
-
-  background:
-    var(--color-bg-soft);
+  border-color: #c6ada5;
 }
 
 .address-default--active {
-  border-color:
-    var(--color-accent);
+  border-color: #b68b82;
 
-  background:
-    var(--color-accent-soft);
+  background: #faf3f1;
 }
 
 .address-default__check {
-  width: 22px;
-  height: 22px;
-
-  flex: 0 0 22px;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
 
-  border:
-    1px solid
-    var(--color-border-dark);
+  width: 21px;
+  height: 21px;
 
-  background:
-    var(--color-bg);
+  flex: 0 0 21px;
 
-  color:
-    transparent;
+  border: 1px solid #bba7a0;
 
-  transition:
-    background-color 220ms ease,
-    border-color 220ms ease,
-    color 220ms ease;
+  border-radius: 3px;
+
+  background: #ffffff;
+
+  color: transparent;
 }
 
 .address-default--active
 .address-default__check {
-  border-color:
-    var(--color-accent);
+  border-color: #8b5f59;
 
-  background:
-    var(--color-accent);
+  background: #8b5f59;
 
-  color:
-    var(--color-text-inverse);
+  color: #ffffff;
 }
 
 .address-default__content {
@@ -701,14 +534,11 @@
     Arial,
     sans-serif;
 
-  font-size: 10px;
-
+  font-size: 13px;
   font-weight: 600;
-
   line-height: 1.4;
 
-  color:
-    var(--color-text);
+  color: #3d302d;
 }
 
 .address-default__description {
@@ -721,42 +551,35 @@
     Arial,
     sans-serif;
 
-  font-size: 8.5px;
+  font-size: 12px;
+  line-height: 1.45;
 
-  line-height: 1.5;
-
-  color:
-    var(--color-text-muted);
+  color: #796b65;
 }
 
 .address-default__badge {
   flex: 0 0 auto;
 
-  padding:
-    5px 8px;
+  padding: 5px 8px;
 
-  border:
-    1px solid
-    var(--color-accent-soft);
+  border: 1px solid #d6bdb6;
 
-  background:
-    var(--color-bg);
+  border-radius: 3px;
+
+  background: #fffaf8;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 7px;
+  font-size: 9px;
+  font-weight: 700;
 
-  font-weight: 600;
-
-  letter-spacing: 0.12em;
-
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 
-  color:
-    var(--color-accent);
+  color: #8b5f59;
 }
 
 /* =========================================================
@@ -765,108 +588,78 @@
 
 .address-form__actions {
   display: flex;
-
   align-items: center;
   justify-content: flex-end;
 
   gap: 10px;
 
-  padding:
-    22px 0 0;
+  padding: 22px 0 0;
 }
 
 .address-form__secondary-action,
 .address-form__save-action {
-  min-height: 46px;
+  min-height: 44px;
 
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
 
-  gap: 9px;
+  gap: 8px;
 
-  padding:
-    0 20px;
+  padding: 0 18px;
 
-  border: 1px solid;
+  border: 1px solid #cdbdb7;
+
+  border-radius: 4px;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 9px;
-
+  font-size: 12px;
   font-weight: 600;
 
   line-height: 1;
 
-  letter-spacing: 0.14em;
-
-  text-transform: uppercase;
+  cursor: pointer;
 
   text-decoration: none;
 
-  cursor: pointer;
-
   transition:
-    background-color 240ms ease,
-    border-color 240ms ease,
-    color 240ms ease,
-    transform 240ms ease;
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
 }
 
 .address-form__secondary-action {
-  border-color:
-    var(--color-border-dark);
+  background: #ffffff;
 
-  background:
-    transparent;
-
-  color:
-    var(--color-text);
+  color: #554743;
 }
 
 .address-form__secondary-action:hover {
-  border-color:
-    var(--color-text);
+  border-color: #a88c84;
 
-  background:
-    var(--color-bg);
+  background: #faf6f4;
 
-  transform:
-    translateY(-1px);
+  color: #3f302d;
 }
 
 .address-form__save-action {
-  min-width: 170px;
+  min-width: 150px;
 
-  border-color:
-    var(--color-text);
+  border-color: #8b5f59;
 
-  background:
-    var(--color-text);
+  background: #8b5f59;
 
-  color:
-    var(--color-text-inverse);
+  color: #ffffff;
 }
 
 .address-form__save-action:hover:not(:disabled) {
-  border-color:
-    var(--color-accent-dark);
+  border-color: #704b46;
 
-  background:
-    var(--color-accent-dark);
-
-  transform:
-    translateY(-1px);
-}
-
-.address-form__save-action:active:not(:disabled),
-.address-form__secondary-action:active {
-  transform:
-    translateY(0);
+  background: #704b46;
 }
 
 .address-form__save-action:disabled {
@@ -876,19 +669,60 @@
 }
 
 /* =========================================================
+   PRIMARY ACTION / EMPTY STATE
+========================================================= */
+
+.address-form__primary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 0 18px;
+
+  border: 1px solid #8b5f59;
+  border-radius: 4px;
+
+  background: #8b5f59;
+
+  color: #ffffff;
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.address-form__primary-action:hover {
+  border-color: #704b46;
+
+  background: #704b46;
+}
+
+/* =========================================================
    LOADING
 ========================================================= */
 
 .address-form__loading {
-  max-width: 1120px;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
 }
 
 .address-form__loading-header {
-  padding-bottom: 30px;
+  padding-bottom: 26px;
 
-  border-bottom:
-    1px solid
-    var(--color-border);
+  border-bottom: 1px solid #e3d9d5;
 }
 
 .address-form__loading-fields {
@@ -897,9 +731,9 @@
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 22px;
+  gap: 18px;
 
-  margin-top: 34px;
+  margin-top: 28px;
 }
 
 .address-form__skeleton {
@@ -907,12 +741,13 @@
 
   overflow: hidden;
 
-  background:
-    var(--color-surface);
+  min-height: 46px;
 
-  border:
-    1px solid
-    var(--color-border);
+  border: 1px solid #e5dcd8;
+
+  border-radius: 4px;
+
+  background: #eee8e5;
 }
 
 .address-form__skeleton::after {
@@ -921,14 +756,13 @@
   position: absolute;
   inset: 0;
 
-  transform:
-    translateX(-100%);
+  transform: translateX(-100%);
 
   background:
     linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0.5),
       transparent
     );
 
@@ -939,32 +773,34 @@
 }
 
 .address-form__skeleton--eyebrow {
-  width: 90px;
-  height: 8px;
+  width: 110px;
+  height: 10px;
+  min-height: 10px;
 }
 
 .address-form__skeleton--title {
   width: min(420px, 70%);
-  height: 40px;
-
-  margin-top: 14px;
-}
-
-.address-form__skeleton--description {
-  width: min(520px, 85%);
-  height: 12px;
+  height: 42px;
+  min-height: 42px;
 
   margin-top: 12px;
 }
 
+.address-form__skeleton--description {
+  width: min(520px, 85%);
+  height: 13px;
+  min-height: 13px;
+
+  margin-top: 10px;
+}
+
 .address-form__skeleton--field {
-  height: 82px;
+  height: 70px;
 }
 
 @keyframes address-skeleton-shimmer {
   100% {
-    transform:
-      translateX(100%);
+    transform: translateX(100%);
   }
 }
 
@@ -973,46 +809,40 @@
 ========================================================= */
 
 .address-form__empty {
-  max-width: 540px;
+  max-width: 560px;
 
-  margin: 70px auto;
+  margin: 60px auto;
 
-  padding: 44px 36px;
+  padding: 42px 30px;
+
+  border: 1px solid #e0d5d0;
+
+  background: #ffffff;
 
   text-align: center;
-
-  border:
-    1px solid
-    var(--color-border);
-
-  background:
-    var(--color-surface);
 }
 
 .address-form__empty-icon {
-  width: 54px;
-  height: 54px;
-
-  margin: 0 auto 20px;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
 
-  border:
-    1px solid
-    var(--color-accent-soft);
+  width: 50px;
+  height: 50px;
 
-  background:
-    var(--color-bg);
+  margin: 0 auto 17px;
 
-  color:
-    var(--color-accent);
+  border: 1px solid #d8c1ba;
+
+  border-radius: 50%;
+
+  background: #f8f1ee;
+
+  color: #8b5f59;
 }
 
 .address-form__empty .address-form__eyebrow {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .address-form__empty-title {
@@ -1020,92 +850,53 @@
 
   font-family:
     var(--font-display),
+    "Cormorant Garamond",
     Georgia,
     serif;
 
   font-size: 30px;
-
   font-weight: 500;
+  line-height: 1.1;
 
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
+
+  color: #3d302d;
 }
 
 .address-form__empty-description {
-  max-width: 390px;
+  max-width: 410px;
 
-  margin: 12px auto 24px;
-
-  font-family:
-    var(--font-body),
-    Arial,
-    sans-serif;
-
-  font-size: 10px;
-
-  line-height: 1.7;
-
-  color:
-    var(--color-text-secondary);
-}
-
-.address-form__primary-action {
-  display: inline-flex;
-
-  min-height: 44px;
-
-  align-items: center;
-  justify-content: center;
-
-  padding:
-    0 20px;
-
-  background:
-    var(--color-text);
-
-  color:
-    var(--color-text-inverse);
+  margin: 10px auto 20px;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 13px;
+  line-height: 1.6;
 
-  font-weight: 600;
-
-  letter-spacing: 0.14em;
-
-  text-transform: uppercase;
-
-  text-decoration: none;
-
-  transition:
-    background-color 240ms ease,
-    transform 240ms ease;
-}
-
-.address-form__primary-action:hover {
-  background:
-    var(--color-accent-dark);
-
-  transform:
-    translateY(-1px);
+  color: #756762;
 }
 
 /* =========================================================
-   FOCUS
+   FOCUS / ACCESSIBILITY
 ========================================================= */
 
 .address-form__back:focus-visible,
 .address-form__secondary-action:focus-visible,
 .address-form__save-action:focus-visible,
-.address-form__primary-action:focus-visible {
-  outline:
-    1px solid
-    var(--color-accent);
+.address-form__primary-action:focus-visible,
+.address-default:focus-visible {
+  outline: 2px solid #a87870;
 
-  outline-offset: 3px;
+  outline-offset: 2px;
+}
+
+.address-field__input:focus-visible,
+.address-field__textarea:focus-visible,
+.address-field__select:focus-visible {
+  outline: none;
 }
 
 /* =========================================================
@@ -1114,17 +905,19 @@
 
 @media (max-width: 900px) {
   .address-form {
-    padding:
-      34px 24px 60px;
+    padding: 34px 22px 54px;
   }
 
   .address-form__section {
-    padding:
-      30px 28px 34px;
+    padding: 26px 24px 30px;
   }
 
   .address-form__section-heading {
-    margin-bottom: 26px;
+    margin-bottom: 21px;
+  }
+
+  .address-form__fields {
+    gap: 16px;
   }
 }
 
@@ -1134,37 +927,47 @@
 
 @media (max-width: 640px) {
   .address-form {
-    padding:
-      26px 16px 48px;
+    padding: 25px 14px 44px;
   }
 
   .address-form__header {
-    margin-bottom: 28px;
-  }
-
-  .address-form__back {
     margin-bottom: 24px;
   }
 
-  .address-form__hero {
-    gap: 13px;
+  .address-form__back {
+    margin-bottom: 18px;
 
-    padding-bottom: 24px;
+    font-size: 12px;
+  }
+
+  .address-form__hero {
+    gap: 11px;
+
+    padding-bottom: 21px;
   }
 
   .address-form__hero-icon {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
 
-    flex-basis: 42px;
+    flex-basis: 40px;
+  }
+
+  .address-form__eyebrow {
+    margin-bottom: 6px;
+
+    font-size: 10px;
   }
 
   .address-form__title {
-    font-size: 30px;
+    font-size: 32px;
   }
 
   .address-form__description {
-    font-size: 10px;
+    margin-top: 8px;
+
+    font-size: 13px;
+    line-height: 1.55;
   }
 
   .address-form__body {
@@ -1173,21 +976,19 @@
   }
 
   .address-form__section {
-    padding:
-      26px 0 30px;
+    padding: 23px 0 27px;
   }
 
   .address-form__section-heading {
-    grid-template-columns:
-      32px minmax(0, 1fr);
-
-    gap: 11px;
-
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .address-form__section-title {
-    font-size: 22px;
+    font-size: 24px;
+  }
+
+  .address-form__section-description {
+    font-size: 12px;
   }
 
   .address-form__fields--two {
@@ -1195,17 +996,44 @@
   }
 
   .address-form__fields {
-    gap: 18px;
+    gap: 16px;
+  }
+
+  .address-field__label {
+    margin-bottom: 6px;
+
+    font-size: 13px;
+  }
+
+  .address-field__input,
+  .address-field__select {
+    height: 45px;
+
+    font-size: 14px;
+  }
+
+  .address-field__textarea {
+    min-height: 88px;
+
+    font-size: 14px;
   }
 
   .address-default {
     align-items: flex-start;
 
-    padding: 13px;
+    padding: 12px;
   }
 
   .address-default__badge {
     display: none;
+  }
+
+  .address-default__title {
+    font-size: 13px;
+  }
+
+  .address-default__description {
+    font-size: 11px;
   }
 
   .address-form__actions {
@@ -1224,11 +1052,11 @@
     width: 100%;
 
     min-width: 0;
+    min-height: 44px;
 
-    padding:
-      0 12px;
+    padding: 0 11px;
 
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .address-form__loading-fields {
@@ -1236,11 +1064,17 @@
   }
 
   .address-form__empty {
-    margin:
-      40px auto;
+    margin: 42px auto;
 
-    padding:
-      34px 20px;
+    padding: 34px 18px;
+  }
+
+  .address-form__empty-title {
+    font-size: 27px;
+  }
+
+  .address-form__empty-description {
+    font-size: 12px;
   }
 }
 
@@ -1250,29 +1084,32 @@
 
 @media (max-width: 380px) {
   .address-form {
-    padding:
-      22px 13px 42px;
+    padding: 21px 12px 40px;
   }
 
   .address-form__title {
-    font-size: 27px;
+    font-size: 29px;
   }
 
   .address-form__hero-icon {
-    width: 38px;
-    height: 38px;
+    width: 37px;
+    height: 37px;
 
-    flex-basis: 38px;
+    flex-basis: 37px;
   }
 
   .address-field__input,
-  .address-field__select,
-  .address-field__phone {
-    height: 46px;
+  .address-field__select {
+    height: 44px;
   }
 
   .address-form__actions {
     grid-template-columns: 1fr;
+  }
+
+  .address-form__secondary-action,
+  .address-form__save-action {
+    width: 100%;
   }
 }
 

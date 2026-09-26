@@ -1,6 +1,6 @@
 /* =========================================================
-   AAYESHA — EDIT ACCOUNT
-   Premium Editorial Account Experience
+   AAYESHA FASHION — EDIT ACCOUNT
+   Clean Premium Account Experience
 ========================================================= */
 
 .edit-account {
@@ -8,11 +8,15 @@
   color: var(--color-text);
 }
 
+/* =========================================================
+   CONTAINER
+========================================================= */
+
 .edit-account__container {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 42px 32px 70px;
+  padding: 40px 28px 60px;
 }
 
 /* =========================================================
@@ -22,9 +26,10 @@
 .edit-account__back {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
 
-  margin-bottom: 30px;
+  gap: 7px;
+
+  margin-bottom: 22px;
 
   color: var(--color-text-secondary);
 
@@ -33,19 +38,22 @@
     Arial,
     sans-serif;
 
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  letter-spacing: 0;
+
+  text-transform: none;
   text-decoration: none;
 
   transition:
-    color 220ms ease,
-    gap 220ms ease;
+    color 160ms ease,
+    gap 160ms ease;
 }
 
 .edit-account__back:hover {
-  gap: 12px;
+  gap: 10px;
   color: var(--color-accent);
 }
 
@@ -54,7 +62,8 @@
 ========================================================= */
 
 .edit-account__header {
-  padding-bottom: 30px;
+  padding-bottom: 25px;
+
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -67,44 +76,45 @@
     Arial,
     sans-serif;
 
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.3;
 
-  letter-spacing: 0.18em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 
   color: var(--color-accent);
 }
 
 .edit-account__title {
-  margin: 9px 0 0;
+  margin: 8px 0 0;
 
   font-family:
     var(--font-display),
     Georgia,
     serif;
 
-  font-size: clamp(32px, 4vw, 46px);
+  font-size: clamp(34px, 4vw, 48px);
   font-weight: 500;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  line-height: 1.02;
+
+  letter-spacing: -0.03em;
 
   color: var(--color-text);
 }
 
 .edit-account__description {
-  max-width: 560px;
+  max-width: 620px;
 
-  margin: 11px 0 0;
+  margin: 10px 0 0;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 11px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 1.6;
 
   color: var(--color-text-secondary);
 }
@@ -114,19 +124,20 @@
 ========================================================= */
 
 .edit-account__error {
-  margin-top: 20px;
+  margin-top: 18px;
+
   padding: 13px 15px;
 
-  border: 1px solid rgba(154, 93, 88, 0.25);
+  border: 1px solid rgba(154, 93, 88, 0.28);
 
-  background: rgba(154, 93, 88, 0.055);
+  background: rgba(154, 93, 88, 0.06);
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.5;
 
   color: var(--color-danger, #9a5d58);
@@ -137,7 +148,9 @@
 ========================================================= */
 
 .edit-account__form {
-  margin-top: 28px;
+  margin-top: 26px;
+
+  overflow: hidden;
 
   border: 1px solid var(--color-border);
 
@@ -151,9 +164,10 @@
 .edit-account__profile {
   display: flex;
   align-items: center;
-  gap: 18px;
 
-  padding: 28px 32px;
+  gap: 16px;
+
+  padding: 24px 28px;
 
   border-bottom: 1px solid var(--color-border);
 
@@ -163,10 +177,10 @@
 .edit-account__avatar {
   position: relative;
 
-  width: 66px;
-  height: 66px;
+  width: 62px;
+  height: 62px;
 
-  flex: 0 0 66px;
+  flex: 0 0 62px;
 
   display: flex;
   align-items: center;
@@ -176,6 +190,8 @@
 
   border: 1px solid var(--color-accent-soft);
 
+  border-radius: 50%;
+
   background: var(--color-bg-soft);
 
   font-family:
@@ -183,7 +199,7 @@
     Georgia,
     serif;
 
-  font-size: 23px;
+  font-size: 22px;
   font-weight: 500;
 
   color: var(--color-text);
@@ -193,9 +209,11 @@
   content: "";
 
   position: absolute;
-  inset: 5px;
+  inset: 4px;
 
-  border: 1px solid rgba(154, 93, 88, 0.16);
+  border: 1px solid rgba(154, 93, 88, 0.15);
+
+  border-radius: 50%;
 
   pointer-events: none;
 }
@@ -212,7 +230,7 @@
 }
 
 .edit-account__profile-name {
-  margin: 7px 0 0;
+  margin: 0;
 
   font-family:
     var(--font-display),
@@ -236,10 +254,12 @@
     Arial,
     sans-serif;
 
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.5;
 
   color: var(--color-text-secondary);
+
+  word-break: break-word;
 }
 
 /* =========================================================
@@ -247,15 +267,16 @@
 ========================================================= */
 
 .edit-account__details {
-  padding: 34px 32px 32px;
+  padding: 30px 28px 28px;
 }
 
 .edit-account__section-heading {
   display: flex;
   align-items: center;
-  gap: 14px;
 
-  margin-bottom: 28px;
+  gap: 12px;
+
+  margin-bottom: 23px;
 }
 
 .edit-account__section-icon {
@@ -276,18 +297,18 @@
 }
 
 .edit-account__section-title {
-  margin: 6px 0 0;
+  margin: 5px 0 0;
 
   font-family:
     var(--font-display),
     Georgia,
     serif;
 
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 500;
   line-height: 1.1;
 
-  letter-spacing: -0.018em;
+  letter-spacing: -0.015em;
 
   color: var(--color-text);
 }
@@ -302,7 +323,7 @@
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 23px 20px;
+  gap: 19px 18px;
 }
 
 .edit-account__field {
@@ -313,20 +334,21 @@
 .edit-account__label {
   display: block;
 
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 13px;
   font-weight: 600;
 
-  line-height: 1;
+  line-height: 1.35;
 
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+
+  text-transform: none;
 
   color: var(--color-text);
 }
@@ -341,21 +363,26 @@
   display: flex;
   align-items: center;
 
-  height: 48px;
+  height: 46px;
 
   border: 1px solid var(--color-border);
 
   background: var(--color-surface);
 
   transition:
-    border-color 220ms ease,
-    background-color 220ms ease,
-    box-shadow 220ms ease;
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .edit-account__input-wrap:hover {
   border-color: var(--color-border-dark);
 }
+
+/*
+  Subtle focus state.
+  No heavy browser border.
+*/
 
 .edit-account__input-wrap:focus-within {
   border-color: var(--color-accent);
@@ -363,22 +390,23 @@
   background: var(--color-bg);
 
   box-shadow:
-    0 0 0 3px var(--color-accent-soft);
+    0 0 0 2px var(--color-accent-soft);
 }
 
 .edit-account__input-icon {
   position: absolute;
-  left: 14px;
+
+  left: 13px;
 
   pointer-events: none;
 
   color: var(--color-text-muted);
 
-  transition: color 220ms ease;
+  transition: color 160ms ease;
 }
 
 .edit-account__input-wrap:focus-within
-.edit-account__input-icon {
+  .edit-account__input-icon {
   color: var(--color-accent);
 }
 
@@ -394,7 +422,7 @@
   outline: 0;
 
   padding:
-    0 14px 0 42px;
+    0 13px 0 40px;
 
   background: transparent;
 
@@ -403,7 +431,9 @@
     Arial,
     sans-serif;
 
-  font-size: 11px;
+  font-size: 14px;
+  font-weight: 400;
+
   line-height: 1.4;
 
   color: var(--color-text);
@@ -411,7 +441,7 @@
 
 .edit-account__input::placeholder {
   color: var(--color-text-muted);
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 .edit-account__input--readonly {
@@ -425,13 +455,30 @@
 }
 
 .edit-account__input--standalone {
-  height: 48px;
+  width: 100%;
+  height: 46px;
 
-  padding: 0 14px;
+  padding: 0 13px;
 
   border: 1px solid var(--color-border);
 
+  outline: none;
+
   background: var(--color-surface);
+
+  font-family:
+    var(--font-body),
+    Arial,
+    sans-serif;
+
+  font-size: 14px;
+
+  color: var(--color-text);
+
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .edit-account__input--standalone:hover {
@@ -443,8 +490,10 @@
 
   background: var(--color-bg);
 
+  outline: none;
+
   box-shadow:
-    0 0 0 3px var(--color-accent-soft);
+    0 0 0 2px var(--color-accent-soft);
 }
 
 /* =========================================================
@@ -452,15 +501,15 @@
 ========================================================= */
 
 .edit-account__help {
-  margin: 7px 0 0;
+  margin: 6px 0 0;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 8.5px;
-  line-height: 1.55;
+  font-size: 12px;
+  line-height: 1.5;
 
   color: var(--color-text-muted);
 }
@@ -476,13 +525,13 @@
 
 .edit-account__select {
   width: 100%;
-  height: 48px;
+  height: 46px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 14px;
+  padding: 0 13px;
 
   border: 1px solid var(--color-border);
 
@@ -493,9 +542,9 @@
   text-align: left;
 
   transition:
-    border-color 220ms ease,
-    background-color 220ms ease,
-    box-shadow 220ms ease;
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .edit-account__select:hover,
@@ -507,7 +556,7 @@
 
 .edit-account__select--open {
   box-shadow:
-    0 0 0 3px var(--color-accent-soft);
+    0 0 0 2px var(--color-accent-soft);
 }
 
 .edit-account__select-value,
@@ -524,7 +573,8 @@
     Arial,
     sans-serif;
 
-  font-size: 11px;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .edit-account__select-value {
@@ -541,12 +591,13 @@
   color: var(--color-text-secondary);
 
   transition:
-    transform 220ms ease,
-    color 220ms ease;
+    transform 160ms ease,
+    color 160ms ease;
 }
 
 .edit-account__select-icon--open {
   transform: rotate(180deg);
+
   color: var(--color-accent);
 }
 
@@ -557,7 +608,7 @@
 .edit-account__dropdown {
   position: absolute;
 
-  top: calc(100% + 7px);
+  top: calc(100% + 6px);
   left: 0;
   right: 0;
 
@@ -573,7 +624,7 @@
 }
 
 .edit-account__dropdown-header {
-  padding: 11px 14px;
+  padding: 10px 13px;
 
   border-bottom: 1px solid var(--color-border);
 
@@ -582,10 +633,10 @@
     Arial,
     sans-serif;
 
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
 
-  letter-spacing: 0.13em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 
   color: var(--color-text-muted);
@@ -602,7 +653,7 @@
   align-items: center;
   justify-content: space-between;
 
-  min-height: 40px;
+  min-height: 42px;
 
   padding: 0 11px;
 
@@ -619,13 +670,13 @@
     Arial,
     sans-serif;
 
-  font-size: 10px;
+  font-size: 13px;
 
   color: var(--color-text);
 
   transition:
-    background-color 180ms ease,
-    color 180ms ease;
+    background-color 150ms ease,
+    color 150ms ease;
 }
 
 .edit-account__dropdown-option:hover {
@@ -634,6 +685,7 @@
 
 .edit-account__dropdown-option--selected {
   background: var(--color-accent-soft);
+
   color: var(--color-accent-dark);
 }
 
@@ -644,12 +696,12 @@
 .edit-account__calendar {
   position: absolute;
 
-  top: calc(100% + 7px);
+  top: calc(100% + 6px);
   left: 0;
 
   z-index: 30;
 
-  width: min(350px, 100vw - 40px);
+  width: min(350px, calc(100vw - 40px));
 
   overflow: hidden;
 
@@ -671,48 +723,50 @@
 
   gap: 9px;
 
-  margin-top: 32px;
-  padding-top: 24px;
+  margin-top: 27px;
+  padding-top: 21px;
 
   border-top: 1px solid var(--color-border);
 }
 
 .edit-account__secondary-button,
 .edit-account__primary-button {
-  min-height: 46px;
+  min-height: 44px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  gap: 8px;
+  gap: 7px;
 
-  padding: 0 20px;
+  padding: 0 18px;
 
   border: 1px solid;
+
+  border-radius: 3px;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
 
   line-height: 1;
 
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+
+  text-transform: none;
 
   text-decoration: none;
 
   cursor: pointer;
 
   transition:
-    background-color 230ms ease,
-    border-color 230ms ease,
-    color 230ms ease,
-    transform 230ms ease;
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
 }
 
 .edit-account__secondary-button {
@@ -727,8 +781,6 @@
   border-color: var(--color-text);
 
   background: var(--color-bg-soft);
-
-  transform: translateY(-1px);
 }
 
 .edit-account__primary-button {
@@ -739,25 +791,28 @@
   color: var(--color-text-inverse);
 }
 
-.edit-account__primary-button:hover {
+.edit-account__primary-button:hover:not(:disabled) {
   border-color: var(--color-accent-dark);
 
   background: var(--color-accent-dark);
-
-  transform: translateY(-1px);
 }
 
 .edit-account__save-button {
-  min-width: 155px;
+  min-width: 145px;
 }
 
 .edit-account__primary-button:disabled {
   cursor: not-allowed;
+
   opacity: 0.55;
 }
 
 .edit-account__button-icon--loading {
-  animation: edit-account-spin 0.8s linear infinite;
+  animation:
+    edit-account-spin
+    0.8s
+    linear
+    infinite;
 }
 
 @keyframes edit-account-spin {
@@ -773,11 +828,12 @@
 .edit-account__note {
   display: flex;
   align-items: flex-start;
-  gap: 11px;
 
-  margin-top: 18px;
+  gap: 10px;
 
-  padding: 15px 16px;
+  margin-top: 16px;
+
+  padding: 13px 14px;
 
   border: 1px solid var(--color-border);
 
@@ -800,8 +856,8 @@
     Arial,
     sans-serif;
 
-  font-size: 9px;
-  line-height: 1.65;
+  font-size: 12px;
+  line-height: 1.55;
 
   color: var(--color-text-muted);
 }
@@ -811,20 +867,20 @@
 ========================================================= */
 
 .edit-account__state {
-  min-height: 520px;
+  min-height: 480px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 40px 20px;
+  padding: 35px 20px;
 }
 
 .edit-account__state-content {
   width: 100%;
   max-width: 480px;
 
-  padding: 42px 34px;
+  padding: 38px 30px;
 
   border: 1px solid var(--color-border);
 
@@ -846,20 +902,22 @@
   line-height: 1.08;
 
   letter-spacing: -0.025em;
+
+  color: var(--color-text);
 }
 
 .edit-account__state-description {
-  max-width: 380px;
+  max-width: 390px;
 
-  margin: 12px auto 24px;
+  margin: 11px auto 22px;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 10px;
-  line-height: 1.7;
+  font-size: 13px;
+  line-height: 1.6;
 
   color: var(--color-text-secondary);
 }
@@ -871,22 +929,25 @@
 .edit-account__loading {
   display: flex;
   align-items: center;
-  gap: 10px;
+
+  gap: 9px;
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12px;
 
   color: var(--color-text-secondary);
 }
 
 .edit-account__loading-icon {
-  animation: edit-account-spin 0.8s linear infinite;
+  animation:
+    edit-account-spin
+    0.8s
+    linear
+    infinite;
 
   color: var(--color-accent);
 }
@@ -900,11 +961,15 @@
 .edit-account__secondary-button:focus-visible,
 .edit-account__select:focus-visible,
 .edit-account__dropdown-option:focus-visible {
-  outline:
-    1px solid
-    var(--color-accent);
+  outline: 2px solid var(--color-accent);
 
-  outline-offset: 3px;
+  outline-offset: 2px;
+}
+
+.edit-account__input:focus,
+.edit-account__input--standalone:focus,
+.edit-account__select:focus {
+  outline: none;
 }
 
 /* =========================================================
@@ -913,18 +978,19 @@
 
 @media (max-width: 900px) {
   .edit-account__container {
-    padding:
-      34px 24px 60px;
+    padding: 34px 22px 54px;
   }
 
   .edit-account__profile {
-    padding:
-      26px 28px;
+    padding: 23px 24px;
   }
 
   .edit-account__details {
-    padding:
-      30px 28px;
+    padding: 27px 24px;
+  }
+
+  .edit-account__fields {
+    gap: 17px;
   }
 }
 
@@ -934,38 +1000,44 @@
 
 @media (max-width: 640px) {
   .edit-account__container {
-    padding:
-      26px 16px 48px;
+    padding: 25px 14px 44px;
   }
 
   .edit-account__back {
-    margin-bottom: 24px;
+    margin-bottom: 19px;
+
+    font-size: 12px;
   }
 
   .edit-account__header {
-    padding-bottom: 24px;
+    padding-bottom: 22px;
   }
 
-  .edit-account__title {
-    font-size: 31px;
-  }
-
-  .edit-account__description {
+  .edit-account__eyebrow,
+  .edit-account__section-eyebrow {
     font-size: 10px;
   }
 
+  .edit-account__title {
+    font-size: 32px;
+  }
+
+  .edit-account__description {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
   .edit-account__form {
-    margin-top: 22px;
+    margin-top: 21px;
 
     border-left: 0;
     border-right: 0;
   }
 
   .edit-account__profile {
-    padding:
-      24px 0;
+    padding: 21px 0;
 
-    gap: 14px;
+    gap: 13px;
   }
 
   .edit-account__avatar {
@@ -982,26 +1054,55 @@
   }
 
   .edit-account__profile-email {
-    font-size: 9px;
+    font-size: 12px;
   }
 
   .edit-account__details {
-    padding:
-      26px 0 28px;
+    padding: 25px 0 27px;
   }
 
   .edit-account__section-heading {
-    margin-bottom: 23px;
+    margin-bottom: 20px;
+  }
+
+  .edit-account__section-icon {
+    width: 37px;
+    height: 37px;
+
+    flex-basis: 37px;
   }
 
   .edit-account__section-title {
-    font-size: 22px;
+    font-size: 23px;
   }
 
   .edit-account__fields {
     grid-template-columns: 1fr;
 
-    gap: 19px;
+    gap: 16px;
+  }
+
+  .edit-account__label {
+    margin-bottom: 6px;
+
+    font-size: 13px;
+  }
+
+  .edit-account__input-wrap,
+  .edit-account__input--standalone,
+  .edit-account__select {
+    height: 45px;
+  }
+
+  .edit-account__input,
+  .edit-account__input--standalone,
+  .edit-account__select-value,
+  .edit-account__select-placeholder {
+    font-size: 14px;
+  }
+
+  .edit-account__help {
+    font-size: 11px;
   }
 
   .edit-account__actions {
@@ -1019,10 +1120,11 @@
 
     min-width: 0;
 
-    padding:
-      0 11px;
+    min-height: 44px;
 
-    font-size: 8px;
+    padding: 0 11px;
+
+    font-size: 12px;
   }
 
   .edit-account__save-button {
@@ -1030,20 +1132,27 @@
   }
 
   .edit-account__note {
-    margin-top: 14px;
+    margin-top: 13px;
+  }
+
+  .edit-account__note p {
+    font-size: 11px;
   }
 
   .edit-account__state {
-    min-height: 450px;
+    min-height: 430px;
   }
 
   .edit-account__state-content {
-    padding:
-      34px 22px;
+    padding: 32px 20px;
   }
 
   .edit-account__state-title {
     font-size: 28px;
+  }
+
+  .edit-account__state-description {
+    font-size: 12px;
   }
 }
 
@@ -1053,12 +1162,11 @@
 
 @media (max-width: 380px) {
   .edit-account__container {
-    padding:
-      22px 13px 42px;
+    padding: 21px 12px 40px;
   }
 
   .edit-account__title {
-    font-size: 28px;
+    font-size: 29px;
   }
 
   .edit-account__actions {
@@ -1071,7 +1179,7 @@
   }
 
   .edit-account__calendar {
-    width: calc(100vw - 26px);
+    width: calc(100vw - 24px);
   }
 }
 
