@@ -12,7 +12,7 @@ export default function StoreLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white text-[#171717] antialiased">
       {/* <AnnouncementBar /> */}
 
       <Header />
@@ -20,14 +20,18 @@ export default function StoreLayout({
       <main
         className="
           min-h-screen
-          bg-[var(--color-ivory)]
-          pt-[72px]
-          sm:pt-[76px]
-          md:pt-[80px]
-          lg:pt-[84px]
+          w-full
+          overflow-x-hidden
+          bg-white
+          pt-[64px]
+          sm:pt-[68px]
+          md:pt-[72px]
+          lg:pt-[76px]
         "
       >
-        {children}
+        <div className="w-full">
+          {children}
+        </div>
 
         <CookieConsent />
       </main>
@@ -37,23 +41,25 @@ export default function StoreLayout({
       <QuickHelp />
 
       <WhatsAppBubble />
+
       <Toaster
-  position="bottom-center"
-  toastOptions={{
-    duration: 3200,
-    style: {
-      background: "#3f2d2a",
-      color: "#ffffff",
-      border: "1px solid #6f4b47",
-      borderRadius: "0",
-      padding: "10px 14px",
-      fontFamily: "var(--font-body, sans-serif)",
-      fontSize: "11px",
-      boxShadow:
-        "0 10px 30px rgba(63, 45, 42, 0.18)",
-    },
-  }}
-/>
+        position="bottom-center"
+        toastOptions={{
+          duration: 3200,
+          style: {
+            background: "#171717",
+            color: "#ffffff",
+            border: "1px solid #303030",
+            borderRadius: "10px",
+            padding: "12px 16px",
+            fontFamily: "var(--font-body, sans-serif)",
+            fontSize: "12px",
+            fontWeight: 500,
+            lineHeight: "1.4",
+            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.14)",
+          },
+        }}
+      />
     </div>
   );
 }
