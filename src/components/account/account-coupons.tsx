@@ -188,7 +188,7 @@ export function AccountCoupons() {
           </div>
 
           <div className="account-coupons__heading-row">
-            <div>
+            <div className="account-coupons__heading-content">
               <h1 className="account-coupons__title">
                 My Coupons
               </h1>
@@ -343,7 +343,9 @@ export function AccountCoupons() {
                       key={coupon.code}
                       className="account-coupon"
                     >
-                      {/* TOP */}
+                      {/* ===================================
+                          TOP
+                      =================================== */}
 
                       <div className="account-coupon__top">
                         <div className="account-coupon__icon">
@@ -367,7 +369,9 @@ export function AccountCoupons() {
                         )}
                       </div>
 
-                      {/* OFFER */}
+                      {/* ===================================
+                          OFFER
+                      =================================== */}
 
                       <div className="account-coupon__offer">
                         <p className="account-coupon__discount">
@@ -380,7 +384,9 @@ export function AccountCoupons() {
                         </h2>
                       </div>
 
-                      {/* DETAILS */}
+                      {/* ===================================
+                          DETAILS
+                      =================================== */}
 
                       <div className="account-coupon__details">
                         {coupon.minimumOrderValue > 0 && (
@@ -425,7 +431,9 @@ export function AccountCoupons() {
                         </div>
                       </div>
 
-                      {/* CODE + ACTIONS */}
+                      {/* ===================================
+                          CODE + ACTIONS
+                      =================================== */}
 
                       <div className="account-coupon__footer">
                         <div className="account-coupon__code">
@@ -493,6 +501,7 @@ export function AccountCoupons() {
 
                             <span
                               aria-hidden="true"
+                              className="account-coupon__use-arrow"
                             >
                               →
                             </span>
@@ -500,7 +509,9 @@ export function AccountCoupons() {
                         </div>
                       </div>
 
-                      {/* EXPIRY */}
+                      {/* ===================================
+                          EXPIRY
+                      =================================== */}
 
                       <div className="account-coupon__expiry">
                         <CalendarDays
