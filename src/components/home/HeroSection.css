@@ -295,80 +295,182 @@
 }
 
 /* =========================================================
-   CTA
+   INTERACTIVE CTA
 ========================================================= */
 
 .aayesha-hero__cta {
+  position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 13px;
 
-  min-height: 43px;
+  min-width: 158px;
+  min-height: 46px;
 
-  margin-top: 27px;
-  padding: 0 16px 0 18px;
+  margin-top: 28px;
+  padding: 0 8px 0 19px;
 
-  border: 1px solid
-    rgba(250, 247, 244, 0.62);
+  overflow: hidden;
 
-  background: rgba(51, 37, 34, 0.25);
+  border: 1px solid rgba(250, 247, 244, 0.62);
+
+  background: rgba(51, 37, 34, 0.18);
 
   color: #faf7f4;
 
   font-family: var(--font-body);
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 600;
 
-  line-height: 1;
   letter-spacing: 0.19em;
+  line-height: 1;
 
   text-decoration: none;
   text-transform: uppercase;
 
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   transition:
-    background 260ms ease,
-    border-color 260ms ease,
-    color 260ms ease,
-    transform 260ms ease;
+    color 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 420ms ease,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 420ms ease;
 }
 
+/* =========================================================
+   CTA SLIDING BACKGROUND
+========================================================= */
+
+.aayesha-hero__cta::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: #d2bea0;
+
+  transform: translateX(-101%);
+
+  transition:
+    transform 480ms cubic-bezier(0.77, 0, 0.175, 1);
+
+  z-index: 0;
+}
+
+/* =========================================================
+   CTA TEXT
+========================================================= */
+
+.aayesha-hero__cta > span:first-child {
+  position: relative;
+  z-index: 2;
+
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================================
+   CTA ARROW
+========================================================= */
+
 .aayesha-hero__cta-icon {
+  position: relative;
+  z-index: 2;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
+  width: 29px;
+  height: 29px;
+
+  margin-left: 6px;
+
+  border: 1px solid
+    rgba(250, 247, 244, 0.45);
+
+  border-radius: 50%;
+
+  background: rgba(250, 247, 244, 0.08);
+
+  color: #faf7f4;
+
+  transform: translateX(0);
+
   transition:
-    transform 260ms ease;
+    transform 480ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    background 420ms ease,
+    color 420ms ease,
+    border-color 420ms ease;
 }
+
+.aayesha-hero__cta-icon svg {
+  transition:
+    transform 420ms
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================================
+   CTA HOVER
+========================================================= */
 
 .aayesha-hero__cta:hover {
   border-color: #d2bea0;
 
-  background: #d2bea0;
   color: #332522;
 
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(39, 27, 25, 0.18);
+}
+
+.aayesha-hero__cta:hover::before {
+  transform: translateX(0);
+}
+
+.aayesha-hero__cta:hover
+  > span:first-child {
+  transform: translateX(2px);
 }
 
 .aayesha-hero__cta:hover
   .aayesha-hero__cta-icon {
+  border-color: #332522;
+
+  background: #332522;
+
+  color: #faf7f4;
+
   transform: translateX(3px);
 }
 
-.aayesha-hero__cta:active {
-  background: #b39a79;
-  color: #332522;
-
-  transform: translateY(0);
+.aayesha-hero__cta:hover
+  .aayesha-hero__cta-icon svg {
+  transform: translateX(2px);
 }
+
+/* =========================================================
+   CTA ACTIVE
+========================================================= */
+
+.aayesha-hero__cta:active {
+  transform: translateY(-1px) scale(0.985);
+
+  box-shadow:
+    0 6px 15px rgba(39, 27, 25, 0.14);
+}
+
+/* =========================================================
+   CTA FOCUS
+========================================================= */
 
 .aayesha-hero__cta:focus-visible {
   outline: 2px solid #d2bea0;
-  outline-offset: 4px;
+  outline-offset: 5px;
 }
 
 /* =========================================================
@@ -554,7 +656,7 @@
 }
 
 /* =========================================================
-   ACTION BUTTONS
+   NAVIGATION ACTIONS
 ========================================================= */
 
 .aayesha-hero__actions {
@@ -612,6 +714,7 @@
   border-color: #d2bea0;
 
   background: #d2bea0;
+
   color: #332522;
 
   transform: translateY(-1px);
@@ -620,6 +723,7 @@
 .aayesha-hero__nav-button:active,
 .aayesha-hero__pause:active {
   background: #b39a79;
+
   color: #332522;
 
   transform: scale(0.96);
@@ -706,7 +810,7 @@
 
 @media (max-width: 767px) {
   .aayesha-hero__viewport {
-    height: calc(100svh - 0px);
+    height: 100svh;
     min-height: 590px;
     max-height: 760px;
   }
@@ -806,22 +910,28 @@
   }
 
   /* -------------------------------------------------------
-     CTA
+     MOBILE CTA
   ------------------------------------------------------- */
 
   .aayesha-hero__cta {
-    min-height: 40px;
+    min-width: 148px;
+    min-height: 43px;
 
-    margin-top: 20px;
+    margin-top: 21px;
 
     padding:
-      0 14px
-      0 15px;
-
-    gap: 10px;
+      0 7px
+      0 16px;
 
     font-size: 8.5px;
     letter-spacing: 0.16em;
+  }
+
+  .aayesha-hero__cta-icon {
+    width: 27px;
+    height: 27px;
+
+    margin-left: 4px;
   }
 
   .aayesha-hero__cta-icon svg {
@@ -948,7 +1058,10 @@
   .aayesha-hero__slide,
   .aayesha-hero__image,
   .aayesha-hero__cta,
+  .aayesha-hero__cta::before,
+  .aayesha-hero__cta > span:first-child,
   .aayesha-hero__cta-icon,
+  .aayesha-hero__cta-icon svg,
   .aayesha-hero__nav-button,
   .aayesha-hero__pause,
   .aayesha-hero__indicator span,
