@@ -357,21 +357,29 @@ export function LoginForm() {
       =================================================== */}
 
       <div className="login-form__register">
-        <p className="login-form__register-text">
-          New to Aayesha Fashion?
-        </p>
+  <div className="login-form__register-copy">
+    <p className="login-form__register-label">
+      New to Aayesha Fashion?
+    </p>
 
-        <Link
-          href="/register"
-          className="login-form__register-link"
-        >
-          Create an account
-          <ArrowRight
-            aria-hidden="true"
-            className="login-form__register-icon"
-          />
-        </Link>
-      </div>
+    <p className="login-form__register-title">
+      Create your account
+    </p>
+  </div>
+
+  <Link
+    href="/register"
+    className="login-form__register-link"
+  >
+    <span>Create Account</span>
+
+    <ArrowRight
+      className="login-form__register-icon"
+      size={15}
+      strokeWidth={1.6}
+    />
+  </Link>
+</div>
     </form>
   );
 }
