@@ -211,7 +211,16 @@ export function LoginForm() {
             type="email"
             value={email}
             placeholder="you@example.com"
-            autoComplete="email"
+
+            /*
+             * Login identifier rather than
+             * general contact/address information.
+             *
+             * This helps browsers treat the field
+             * as a credential username field.
+             */
+            autoComplete="username"
+
             inputMode="email"
             onChange={(event) => {
               setEmail(event.target.value);
