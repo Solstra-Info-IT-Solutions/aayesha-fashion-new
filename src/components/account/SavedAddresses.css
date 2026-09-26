@@ -1,13 +1,12 @@
 /* =========================================================
    AAYESHA FASHION
-   SAVED ADDRESSES — EDITORIAL ACCOUNT SYSTEM
+   SAVED ADDRESSES — COMPACT EDITORIAL SYSTEM
 ========================================================= */
 
 .saved-addresses {
   width: 100%;
   min-height: 100%;
-  padding: 42px 32px 72px;
-
+  padding: 34px 28px 54px;
   color: var(--color-text);
 }
 
@@ -15,7 +14,7 @@
 .saved-addresses__grid,
 .saved-addresses__feedback,
 .saved-addresses__footer {
-  width: min(1180px, 100%);
+  width: min(1120px, 100%);
   margin-inline: auto;
 }
 
@@ -27,11 +26,9 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  gap: 28px;
 
-  gap: 30px;
-
-  padding-bottom: 30px;
-
+  padding-bottom: 22px;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -42,13 +39,13 @@
 .saved-addresses__eyebrow-row {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
 }
 
 .saved-addresses__eyebrow-line {
-  width: 25px;
+  width: 22px;
   height: 1px;
-
+  flex: 0 0 22px;
   background: var(--color-accent);
 }
 
@@ -62,37 +59,34 @@
 
   font-size: 8px;
   font-weight: 600;
-
   line-height: 1;
 
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 
   color: var(--color-accent);
 }
 
 .saved-addresses__title {
-  margin: 9px 0 0;
+  margin: 7px 0 0;
 
   font-family:
     var(--font-display),
     Georgia,
     serif;
 
-  font-size: clamp(34px, 4vw, 48px);
+  font-size: clamp(30px, 3.4vw, 42px);
   font-weight: 500;
-
-  line-height: 1.03;
-
+  line-height: 1.05;
   letter-spacing: -0.035em;
 
   color: var(--color-text);
 }
 
 .saved-addresses__description {
-  max-width: 520px;
+  max-width: 510px;
 
-  margin: 11px 0 0;
+  margin: 9px 0 0;
 
   font-family:
     var(--font-body),
@@ -100,7 +94,7 @@
     sans-serif;
 
   font-size: 10px;
-  line-height: 1.7;
+  line-height: 1.65;
 
   color: var(--color-text-secondary);
 }
@@ -110,15 +104,14 @@
 ========================================================= */
 
 .saved-addresses__button {
-  min-height: 44px;
+  min-height: 40px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  gap: 8px;
-
-  padding: 0 17px;
+  gap: 7px;
+  padding: 0 15px;
 
   border: 1px solid;
 
@@ -127,72 +120,57 @@
     Arial,
     sans-serif;
 
-  font-size: 8.5px;
+  font-size: 8px;
   font-weight: 600;
-
   line-height: 1;
 
-  letter-spacing: 0.13em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
-
   text-decoration: none;
 
   cursor: pointer;
 
   transition:
-    background-color 200ms ease,
-    border-color 200ms ease,
-    color 200ms ease,
-    transform 200ms ease;
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .saved-addresses__button--primary {
   border-color: var(--color-text);
-
   background: var(--color-text);
-
   color: var(--color-text-inverse);
 }
 
 .saved-addresses__button--primary:hover {
   border-color: var(--color-accent-dark);
-
   background: var(--color-accent-dark);
-
   transform: translateY(-1px);
 }
 
 .saved-addresses__button--secondary {
   border-color: var(--color-border-dark);
-
   background: transparent;
-
   color: var(--color-text);
 }
 
 .saved-addresses__button--secondary:hover {
   border-color: var(--color-text);
-
   background: var(--color-bg-soft);
-
   transform: translateY(-1px);
 }
 
 .saved-addresses__button--small {
-  min-height: 36px;
-
-  padding-inline: 13px;
-
+  min-height: 34px;
+  padding-inline: 12px;
   font-size: 7.5px;
 }
 
 .saved-addresses__button:focus-visible,
 .saved-address-card__action:focus-visible,
 .saved-addresses__back-link:focus-visible {
-  outline:
-    1px solid
-    var(--color-accent);
-
+  outline: 1px solid var(--color-accent);
   outline-offset: 3px;
 }
 
@@ -205,34 +183,28 @@
   align-items: center;
   justify-content: space-between;
 
-  gap: 20px;
+  gap: 16px;
+  margin-top: 15px;
+  padding: 10px 12px;
 
-  margin-top: 18px;
-
-  padding: 11px 13px;
-
-  border: 1px solid rgba(154, 93, 88, 0.22);
-
-  background: rgba(154, 93, 88, 0.045);
+  border: 1px solid rgba(154, 93, 88, 0.2);
+  background: rgba(154, 93, 88, 0.04);
 }
 
 .saved-addresses__feedback-content {
   display: flex;
   align-items: center;
-
-  gap: 9px;
+  gap: 8px;
 
   min-width: 0;
 }
 
 .saved-addresses__feedback-dot {
-  width: 6px;
-  height: 6px;
-
-  flex: 0 0 6px;
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
 
   border-radius: 50%;
-
   background: var(--color-danger, #9a5d58);
 }
 
@@ -245,7 +217,7 @@
     sans-serif;
 
   font-size: 8.5px;
-  line-height: 1.5;
+  line-height: 1.45;
 
   color: var(--color-danger, #9a5d58);
 }
@@ -256,13 +228,10 @@
 
 .saved-addresses__grid {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 14px;
-
-  margin-top: 22px;
+  gap: 13px;
+  margin-top: 18px;
 }
 
 /* =========================================================
@@ -276,30 +245,28 @@
   flex-direction: column;
 
   min-width: 0;
-
   overflow: hidden;
 
   border: 1px solid var(--color-border);
-
   background: var(--color-surface);
 
   transition:
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    transform 220ms ease;
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .saved-address-card:hover {
   border-color: var(--color-border-dark);
 
   box-shadow:
-    0 10px 28px rgba(68, 47, 43, 0.055);
+    0 8px 22px rgba(68, 47, 43, 0.05);
 
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .saved-address-card--default {
-  border-color: rgba(154, 93, 88, 0.38);
+  border-color: rgba(154, 93, 88, 0.35);
 }
 
 /* =========================================================
@@ -311,9 +278,9 @@
   align-items: flex-start;
   justify-content: space-between;
 
-  gap: 18px;
+  gap: 14px;
 
-  padding: 20px 20px 17px;
+  padding: 15px 16px 13px;
 
   border-bottom: 1px solid var(--color-border);
 }
@@ -327,7 +294,7 @@
   align-items: center;
   flex-wrap: wrap;
 
-  gap: 8px;
+  gap: 7px;
 }
 
 .saved-address-card__name {
@@ -338,12 +305,10 @@
     Georgia,
     serif;
 
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 500;
-
   line-height: 1.1;
-
-  letter-spacing: -0.018em;
+  letter-spacing: -0.015em;
 
   color: var(--color-text);
 }
@@ -352,13 +317,11 @@
   display: inline-flex;
   align-items: center;
 
-  gap: 5px;
+  gap: 4px;
+  padding: 4px 6px;
 
-  padding: 5px 7px;
-
-  border: 1px solid rgba(154, 93, 88, 0.22);
-
-  background: rgba(154, 93, 88, 0.06);
+  border: 1px solid rgba(154, 93, 88, 0.2);
+  background: rgba(154, 93, 88, 0.055);
 
   font-family:
     var(--font-body),
@@ -368,14 +331,14 @@
   font-size: 6.5px;
   font-weight: 600;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
 
   color: var(--color-accent);
 }
 
 .saved-address-card__phone {
-  margin: 6px 0 0;
+  margin: 5px 0 0;
 
   font-family:
     var(--font-body),
@@ -383,22 +346,22 @@
     sans-serif;
 
   font-size: 8.5px;
+  line-height: 1.4;
 
   color: var(--color-text-muted);
 }
 
 .saved-address-card__location-icon {
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
 
-  flex: 0 0 35px;
+  flex: 0 0 32px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   border: 1px solid var(--color-accent-soft);
-
   background: var(--color-bg-soft);
 
   color: var(--color-accent);
@@ -410,16 +373,14 @@
 
 .saved-address-card__body {
   flex: 1;
-
-  padding: 20px;
+  padding: 15px 16px;
 }
 
 .saved-address-card__address {
   display: flex;
   flex-direction: column;
 
-  gap: 6px;
-
+  gap: 4px;
   margin: 0;
 
   font-family:
@@ -427,9 +388,8 @@
     Arial,
     sans-serif;
 
-  font-size: 9.5px;
+  font-size: 9px;
   font-style: normal;
-
   line-height: 1.55;
 
   color: var(--color-text-secondary);
@@ -441,33 +401,30 @@
 
 .saved-address-card__pincode {
   display: inline-flex;
-
   width: fit-content;
 
-  margin-top: 3px;
-
-  padding: 4px 7px;
+  margin-top: 2px;
+  padding: 3px 6px;
 
   border: 1px solid var(--color-border);
-
   background: var(--color-bg-soft);
 
-  font-size: 7.5px;
+  font-size: 7px;
   font-weight: 600;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 
   color: var(--color-text);
 }
 
 .saved-address-card__landmark {
-  margin-top: 4px;
-
-  padding-top: 9px;
+  margin-top: 5px;
+  padding-top: 7px;
 
   border-top: 1px solid var(--color-border);
 
   font-size: 7.5px;
+  line-height: 1.45;
 
   color: var(--color-text-muted);
 }
@@ -478,24 +435,22 @@
 
 .saved-address-card__actions {
   display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   border-top: 1px solid var(--color-border);
 }
 
 .saved-address-card__action {
-  min-height: 46px;
+  min-height: 39px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  gap: 6px;
+  gap: 5px;
+  padding: 0 5px;
 
   border: 0;
-
   background: transparent;
 
   font-family:
@@ -503,23 +458,21 @@
     Arial,
     sans-serif;
 
-  font-size: 7.5px;
+  font-size: 7px;
   font-weight: 600;
-
   line-height: 1;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 
   color: var(--color-text-secondary);
 
   text-decoration: none;
-
   cursor: pointer;
 
   transition:
-    background-color 180ms ease,
-    color 180ms ease;
+    background-color 160ms ease,
+    color 160ms ease;
 }
 
 .saved-address-card__action
@@ -529,19 +482,16 @@
 
 .saved-address-card__action:hover:not(:disabled) {
   background: var(--color-bg-soft);
-
   color: var(--color-accent);
 }
 
 .saved-address-card__action--danger:hover:not(:disabled) {
   background: rgba(154, 93, 88, 0.045);
-
   color: var(--color-danger, #9a5d58);
 }
 
 .saved-address-card__action:disabled {
   cursor: not-allowed;
-
   opacity: 0.48;
 }
 
@@ -550,13 +500,12 @@
 ========================================================= */
 
 .saved-address-card__spinner {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
 
   display: block;
 
   border: 1px solid var(--color-border-dark);
-
   border-top-color: var(--color-accent);
 
   border-radius: 50%;
@@ -580,14 +529,12 @@
 ========================================================= */
 
 .saved-addresses__empty {
-  width: min(580px, 100%);
+  width: min(540px, 100%);
 
-  margin: 42px auto 0;
-
-  padding: 55px 35px;
+  margin: 30px auto 0;
+  padding: 38px 28px;
 
   border: 1px solid var(--color-border);
-
   background: var(--color-surface);
 
   text-align: center;
@@ -595,8 +542,8 @@
 
 .saved-addresses__empty-icon,
 .saved-addresses__state-icon {
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
 
   margin-inline: auto;
 
@@ -605,38 +552,35 @@
   justify-content: center;
 
   border: 1px solid var(--color-accent-soft);
-
   background: var(--color-bg-soft);
 
   color: var(--color-accent);
 }
 
 .saved-addresses__empty .saved-addresses__eyebrow {
-  margin-top: 19px;
+  margin-top: 15px;
 }
 
 .saved-addresses__empty-title {
-  margin: 9px 0 0;
+  margin: 8px 0 0;
 
   font-family:
     var(--font-display),
     Georgia,
     serif;
 
-  font-size: 29px;
+  font-size: 25px;
   font-weight: 500;
-
   line-height: 1.1;
-
   letter-spacing: -0.025em;
 
   color: var(--color-text);
 }
 
 .saved-addresses__empty-description {
-  max-width: 390px;
+  max-width: 370px;
 
-  margin: 11px auto 22px;
+  margin: 9px auto 19px;
 
   font-family:
     var(--font-body),
@@ -644,7 +588,7 @@
     sans-serif;
 
   font-size: 9px;
-  line-height: 1.7;
+  line-height: 1.65;
 
   color: var(--color-text-secondary);
 }
@@ -654,7 +598,7 @@
 ========================================================= */
 
 .saved-addresses--auth {
-  min-height: 550px;
+  min-height: 500px;
 
   display: flex;
   flex-direction: column;
@@ -666,30 +610,29 @@
   text-align: center;
 }
 
-.saved-addresses--auth .saved-addresses__state-icon {
-  margin-bottom: 18px;
+.saved-addresses--auth
+  .saved-addresses__state-icon {
+  margin-bottom: 15px;
 }
 
 .saved-addresses__state-title {
-  margin: 9px 0 0;
+  margin: 8px 0 0;
 
   font-family:
     var(--font-display),
     Georgia,
     serif;
 
-  font-size: 32px;
+  font-size: 29px;
   font-weight: 500;
-
   line-height: 1.08;
-
   letter-spacing: -0.025em;
 }
 
 .saved-addresses__state-description {
-  max-width: 400px;
+  max-width: 390px;
 
-  margin: 11px auto 22px;
+  margin: 9px auto 19px;
 
   font-family:
     var(--font-body),
@@ -697,7 +640,7 @@
     sans-serif;
 
   font-size: 9px;
-  line-height: 1.7;
+  line-height: 1.65;
 
   color: var(--color-text-secondary);
 }
@@ -710,9 +653,8 @@
   display: flex;
   justify-content: flex-end;
 
-  margin-top: 24px;
-
-  padding-top: 17px;
+  margin-top: 20px;
+  padding-top: 14px;
 
   border-top: 1px solid var(--color-border);
 }
@@ -728,10 +670,10 @@
     Arial,
     sans-serif;
 
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 600;
 
-  letter-spacing: 0.13em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 
   color: var(--color-text-secondary);
@@ -739,13 +681,12 @@
   text-decoration: none;
 
   transition:
-    color 180ms ease,
-    gap 180ms ease;
+    color 160ms ease,
+    gap 160ms ease;
 }
 
 .saved-addresses__back-link:hover {
   gap: 7px;
-
   color: var(--color-accent);
 }
 
@@ -758,22 +699,20 @@
 }
 
 .saved-addresses__grid {
-  min-height: 100px;
+  min-height: 90px;
 }
 
 .saved-addresses__card-skeleton {
-  min-height: 240px;
+  min-height: 190px;
 
-  padding: 22px;
+  padding: 18px;
 
   border: 1px solid var(--color-border);
-
   background: var(--color-surface);
 }
 
 .saved-addresses__skeleton {
   position: relative;
-
   overflow: hidden;
 
   background: var(--color-bg-soft);
@@ -800,34 +739,32 @@
 }
 
 .saved-addresses__skeleton--title {
-  width: 260px;
-  height: 34px;
+  width: 220px;
+  height: 27px;
 }
 
 .saved-addresses__skeleton--description {
-  width: 430px;
+  width: 400px;
   max-width: 80%;
 
-  height: 11px;
-
-  margin-top: 12px;
+  height: 9px;
+  margin-top: 10px;
 }
 
 .saved-addresses__skeleton--card-title {
-  width: 150px;
-  height: 20px;
+  width: 135px;
+  height: 18px;
 }
 
 .saved-addresses__skeleton--line {
   width: 85%;
-  height: 10px;
-
-  margin-top: 18px;
+  height: 8px;
+  margin-top: 14px;
 }
 
 .saved-addresses__skeleton--line-short {
   width: 55%;
-  margin-top: 9px;
+  margin-top: 8px;
 }
 
 @keyframes saved-address-skeleton {
@@ -842,12 +779,15 @@
 
 @media (max-width: 900px) {
   .saved-addresses {
-    padding:
-      34px 24px 60px;
+    padding: 30px 22px 48px;
   }
 
   .saved-addresses__grid {
     grid-template-columns: 1fr;
+  }
+
+  .saved-addresses__header {
+    gap: 20px;
   }
 }
 
@@ -857,36 +797,36 @@
 
 @media (max-width: 640px) {
   .saved-addresses {
-    padding:
-      25px 16px 48px;
+    padding: 22px 15px 40px;
   }
 
   .saved-addresses__header {
     display: block;
-
-    padding-bottom: 23px;
+    padding-bottom: 20px;
   }
 
   .saved-addresses__title {
-    font-size: 32px;
+    font-size: 30px;
   }
 
   .saved-addresses__description {
+    max-width: 100%;
     font-size: 9px;
+    line-height: 1.6;
   }
 
   .saved-addresses__header
     > .saved-addresses__button {
     width: 100%;
-
-    margin-top: 19px;
+    margin-top: 15px;
   }
 
   .saved-addresses__feedback {
     align-items: flex-start;
     flex-direction: column;
 
-    gap: 11px;
+    gap: 9px;
+    margin-top: 13px;
   }
 
   .saved-addresses__feedback
@@ -895,49 +835,64 @@
   }
 
   .saved-addresses__grid {
-    gap: 11px;
-
-    margin-top: 18px;
+    gap: 10px;
+    margin-top: 15px;
   }
 
+  /* Compact card */
+
   .saved-address-card__header {
-    padding:
-      18px 16px 15px;
+    gap: 10px;
+    padding: 14px 14px 12px;
   }
 
   .saved-address-card__body {
-    padding:
-      18px 16px;
+    padding: 14px;
   }
 
   .saved-address-card__name {
-    font-size: 19px;
+    font-size: 17px;
+  }
+
+  .saved-address-card__phone {
+    font-size: 8px;
+  }
+
+  .saved-address-card__location-icon {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+
+  .saved-address-card__address {
+    font-size: 8.8px;
+    line-height: 1.5;
+  }
+
+  .saved-address-card__landmark {
+    font-size: 7.2px;
   }
 
   .saved-address-card__actions {
-    grid-template-columns:
-      repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .saved-address-card__action {
-    min-height: 44px;
+    min-height: 38px;
+    gap: 4px;
+    padding-inline: 3px;
 
-    gap: 5px;
-
-    padding-inline: 5px;
-
-    font-size: 6.7px;
+    font-size: 6.8px;
+    letter-spacing: 0.065em;
   }
 
   .saved-addresses__empty {
-    margin-top: 25px;
-
-    padding:
-      42px 20px;
+    margin-top: 20px;
+    padding: 32px 18px;
   }
 
   .saved-addresses__empty-title {
-    font-size: 27px;
+    font-size: 24px;
   }
 
   .saved-addresses__footer {
@@ -951,62 +906,74 @@
 
 @media (max-width: 420px) {
   .saved-addresses {
-    padding:
-      21px 13px 42px;
+    padding: 19px 12px 34px;
   }
 
   .saved-addresses__title {
-    font-size: 29px;
+    font-size: 28px;
+  }
+
+  .saved-addresses__header {
+    padding-bottom: 17px;
   }
 
   .saved-address-card__header {
-    gap: 10px;
+    gap: 8px;
+    padding: 13px 12px 11px;
+  }
+
+  .saved-address-card__body {
+    padding: 13px 12px;
   }
 
   .saved-address-card__name-row {
     align-items: flex-start;
     flex-direction: column;
+    gap: 5px;
+  }
 
-    gap: 7px;
+  .saved-address-card__name {
+    font-size: 16px;
+  }
+
+  .saved-address-card__default-badge {
+    padding: 3px 5px;
+    font-size: 6px;
   }
 
   .saved-address-card__location-icon {
-    width: 32px;
-    height: 32px;
-
-    flex-basis: 32px;
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
   }
 
   .saved-address-card__action {
-    min-height: 48px;
-
-    font-size: 6.2px;
-  }
-
-  .saved-address-card__action svg {
-    width: 13px;
-    height: 13px;
+    min-height: 37px;
+    font-size: 6.3px;
   }
 
   .saved-addresses__empty {
-    padding:
-      38px 17px;
-  }
-
-  .saved-addresses__empty-title {
-    font-size: 25px;
+    padding: 28px 16px;
   }
 }
 
 /* =========================================================
-   REDUCED MOTION
+   ACCESSIBILITY / REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .saved-addresses *,
-  .saved-addresses {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .saved-address-card,
+  .saved-addresses__button,
+  .saved-address-card__action,
+  .saved-addresses__back-link {
+    transition: none;
+  }
+
+  .saved-addresses__skeleton::after {
+    animation: none;
+  }
+
+  .saved-address-card__spinner {
+    animation: none;
   }
 }
