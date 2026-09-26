@@ -1,42 +1,51 @@
 /* =========================================================
    AAYESHA FASHION
    NEW ARRIVALS
-   Premium Editorial Product Section
-========================================================= */
+   Editorial / Contemporary Luxury
+   ========================================================= */
 
 .new-arrivals {
   position: relative;
+
   width: 100%;
 
-  padding: 110px 0 120px;
+  padding: 110px 0 100px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--color-bg, #fffdfb) 0%,
+      var(--color-bg-soft, #f8f3f0) 100%
+    );
+
+  color: var(--color-text, #3f2d2a);
 
   overflow: hidden;
-
-  background: var(--color-surface-soft);
-  color: var(--color-text);
 }
 
 /* =========================================================
-   BACKGROUND DETAILS
-========================================================= */
+   SUBTLE DECORATIVE BACKGROUND
+   ========================================================= */
 
 .new-arrivals::before {
   content: "";
 
   position: absolute;
-
   top: 0;
-  left: 0;
+  right: 8%;
 
-  width: 38%;
-  height: 1px;
+  width: 1px;
+  height: 100%;
 
-  background:
-    linear-gradient(
-      90deg,
-      rgba(51, 37, 34, 0.22),
-      transparent
-    );
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-border, #d9cbc5) 18%,
+    var(--color-border, #d9cbc5) 82%,
+    transparent
+  );
+
+  opacity: 0.45;
 
   pointer-events: none;
 }
@@ -45,45 +54,47 @@
   content: "";
 
   position: absolute;
+  top: 70px;
+  left: -120px;
 
-  width: 360px;
-  height: 360px;
+  width: 300px;
+  height: 300px;
 
-  right: -210px;
-  top: 18%;
+  border: 1px solid
+    var(--color-border, #d9cbc5);
 
   border-radius: 50%;
 
-  background: rgba(210, 190, 160, 0.08);
-
-  filter: blur(55px);
+  opacity: 0.18;
 
   pointer-events: none;
 }
 
 /* =========================================================
    INNER
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__inner {
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 /* =========================================================
-   SECTION HEADER
-========================================================= */
+   HEADER
+   ========================================================= */
 
 .new-arrivals__header {
   display: flex;
-
   align-items: flex-end;
   justify-content: space-between;
-
   gap: 60px;
 
-  margin-bottom: 50px;
+  margin-bottom: 54px;
 }
+
+/* =========================================================
+   HEADING
+   ========================================================= */
 
 .new-arrivals__heading {
   min-width: 0;
@@ -91,947 +102,714 @@
 
 /* =========================================================
    EYEBROW
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__eyebrow-wrap {
   display: flex;
-
   align-items: center;
+  gap: 12px;
 
-  gap: 10px;
-
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .new-arrivals__eyebrow-line {
-  width: 30px;
+  display: block;
+
+  width: 34px;
   height: 1px;
 
-  background: var(--color-secondary);
-
-  transition:
-    width 500ms
-    cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.new-arrivals__header:hover
-  .new-arrivals__eyebrow-line {
-  width: 48px;
+  background: var(
+    --color-accent,
+    #6f4b47
+  );
 }
 
 .new-arrivals__eyebrow {
   margin: 0;
 
-  color: var(--color-secondary);
+  font-family: var(
+    --font-body,
+    sans-serif
+  );
 
-  font-family: var(--font-body);
-
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 600;
+  line-height: 1.4;
 
-  line-height: 1;
-
-  letter-spacing: 0.28em;
-
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+
+  color: var(
+    --color-accent,
+    #6f4b47
+  );
 }
 
 /* =========================================================
    TITLE
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__title {
-  max-width: 650px;
+  max-width: 720px;
 
   margin: 0;
 
-  color: var(--color-text);
-
-  font-family: var(--font-display);
+  font-family: var(
+    --font-display,
+    Georgia,
+    serif
+  );
 
   font-size: clamp(
-    2.55rem,
-    4vw,
-    4.15rem
+    3rem,
+    6vw,
+    6.5rem
   );
 
   font-weight: 400;
-
-  line-height: 0.94;
+  line-height: 0.9;
 
   letter-spacing: -0.045em;
 
-  white-space: nowrap;
+  color: var(
+    --color-text,
+    #3f2d2a
+  );
 }
 
 .new-arrivals__title span {
-  display: inline;
-
-  margin-left: 0.1em;
-
-  color: var(--color-secondary);
-
-  font-style: italic;
+  color: var(
+    --color-accent,
+    #6f4b47
+  );
 }
 
 /* =========================================================
    INTRO
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__intro-wrap {
   display: flex;
-
+  flex-direction: column;
   align-items: flex-end;
 
-  gap: 25px;
+  width: 270px;
 
-  width: min(100%, 350px);
-
-  padding-bottom: 3px;
+  flex: 0 0 auto;
 }
 
 .new-arrivals__intro {
-  max-width: 290px;
-
   margin: 0;
 
-  color: var(--color-text-secondary);
+  font-family: var(
+    --font-body,
+    sans-serif
+  );
 
-  font-family: var(--font-body);
-
-  font-size: 10.5px;
-
+  font-size: 11px;
   font-weight: 400;
+  line-height: 1.8;
 
-  line-height: 1.75;
-
-  letter-spacing: 0.015em;
+  color: var(
+    --color-text-secondary,
+    #6f625d
+  );
 }
 
 .new-arrivals__intro-mark {
-  flex-shrink: 0;
+  display: block;
 
-  color: rgba(51, 37, 34, 0.32);
+  margin-top: 20px;
 
-  font-family: var(--font-body);
+  font-family: var(
+    --font-body,
+    sans-serif
+  );
 
-  font-size: 7px;
-
+  font-size: 8px;
   font-weight: 600;
 
-  line-height: 1;
+  letter-spacing: 0.18em;
 
-  letter-spacing: 0.16em;
-
-  white-space: nowrap;
+  color: var(
+    --color-text-muted,
+    #8d817b
+  );
 }
 
 /* =========================================================
    PRODUCTS
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__products {
-  position: relative;
-
   width: 100%;
-
-  z-index: 2;
 }
 
 /* =========================================================
-   PRODUCT AREA DECORATION
-========================================================= */
-
-.new-arrivals__products::before {
-  content: "";
-
-  position: absolute;
-
-  top: -18px;
-  left: 0;
-
-  width: 42px;
-  height: 1px;
-
-  background: var(--color-secondary);
-
-  opacity: 0.55;
-
-  pointer-events: none;
-}
-
-/* =========================================================
-   FOOTER CTA
-========================================================= */
+   FOOTER
+   ========================================================= */
 
 .new-arrivals__footer {
-  display: grid;
-
-  grid-template-columns:
-    minmax(30px, 1fr)
-    auto
-    minmax(30px, 1fr);
-
+  display: flex;
   align-items: center;
-
-  gap: 26px;
 
   width: 100%;
 
-  margin-top: 58px;
+  margin-top: 48px;
 }
 
 .new-arrivals__footer-line {
-  width: 100%;
+  flex: 1;
+
   height: 1px;
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      var(--color-border-dark)
-    );
-
-  opacity: 0.55;
+  background: var(
+    --color-border,
+    #d9cbc5
+  );
 }
-
-.new-arrivals__footer-line:last-child {
-  background:
-    linear-gradient(
-      90deg,
-      var(--color-border-dark),
-      transparent
-    );
-}
-
-/* =========================================================
-   VIEW ALL CTA
-========================================================= */
 
 .new-arrivals__all-link {
-  position: relative;
-
   display: inline-flex;
-
   align-items: center;
-  justify-content: center;
+  gap: 12px;
 
-  min-height: 48px;
+  margin: 0 22px;
 
-  padding: 0 8px 0 21px;
-
-  overflow: hidden;
-
-  border: 1px solid
-    var(--color-border-dark);
-
-  background: var(--color-text);
-
-  color: var(--color-surface);
-
-  font-family: var(--font-body);
-
-  font-size: 8px;
-
-  font-weight: 600;
-
-  line-height: 1;
-
-  letter-spacing: 0.2em;
+  color: var(
+    --color-text,
+    #3f2d2a
+  );
 
   text-decoration: none;
 
-  text-transform: uppercase;
-
-  white-space: nowrap;
-
-  box-shadow:
-    0 7px 18px
-      rgba(51, 37, 34, 0.08);
-
   transition:
-    transform 450ms
-      cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 450ms ease,
-    border-color 350ms ease;
+    color 180ms ease,
+    gap 220ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
 }
-
-/* =========================================================
-   CTA HOVER BACKGROUND
-========================================================= */
-
-.new-arrivals__all-link::before {
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  background: var(--color-secondary);
-
-  transform: translateX(-101%);
-
-  transition:
-    transform 500ms
-      cubic-bezier(0.77, 0, 0.175, 1);
-
-  z-index: 0;
-}
-
-/* =========================================================
-   CTA LABEL
-========================================================= */
 
 .new-arrivals__all-label {
-  position: relative;
+  font-family: var(
+    --font-body,
+    sans-serif
+  );
 
-  z-index: 2;
+  font-size: 9px;
+  font-weight: 600;
 
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  padding: 0;
-
-  color: inherit;
-
-  transition:
-    color 350ms ease,
-    transform 450ms
-      cubic-bezier(0.22, 1, 0.36, 1);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-/* =========================================================
-   CTA ICON
-========================================================= */
-
 .new-arrivals__all-icon {
-  position: relative;
-
-  z-index: 2;
-
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
 
   width: 30px;
   height: 30px;
 
-  margin-left: 11px;
-
   border: 1px solid
-    rgba(250, 247, 244, 0.4);
-
+    var(--color-border-dark, #b9a7a0);
   border-radius: 50%;
 
-  background:
-    rgba(250, 247, 244, 0.07);
-
-  color: var(--color-surface);
-
   transition:
-    transform 450ms
-      cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 350ms ease,
-    border-color 350ms ease,
-    color 350ms ease;
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 220ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
 }
-
-.new-arrivals__all-icon svg {
-  transition:
-    transform 450ms
-      cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* =========================================================
-   CTA HOVER
-========================================================= */
 
 .new-arrivals__all-link:hover {
-  border-color: var(--color-secondary);
+  color: var(
+    --color-accent,
+    #6f4b47
+  );
 
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 14px 30px
-      rgba(51, 37, 34, 0.18);
-}
-
-.new-arrivals__all-link:hover::before {
-  transform: translateX(0);
-}
-
-.new-arrivals__all-link:hover
-  .new-arrivals__all-label {
-  color: var(--color-text);
-
-  transform: translateX(2px);
+  gap: 16px;
 }
 
 .new-arrivals__all-link:hover
   .new-arrivals__all-icon {
-  border-color: var(--color-text);
+  border-color: var(
+    --color-accent,
+    #6f4b47
+  );
 
-  background: var(--color-text);
+  background: var(
+    --color-accent,
+    #6f4b47
+  );
 
-  color: var(--color-surface);
+  color: #ffffff;
 
-  transform:
-    translate(3px, -2px)
-    rotate(5deg);
-}
-
-.new-arrivals__all-link:hover
-  .new-arrivals__all-icon svg {
-  transform:
-    translate(2px, -2px);
-}
-
-/* =========================================================
-   CTA ACTIVE
-========================================================= */
-
-.new-arrivals__all-link:active {
-  transform:
-    translateY(-1px)
-    scale(0.985);
+  transform: rotate(45deg);
 }
 
 /* =========================================================
-   CTA FOCUS
-========================================================= */
-
-.new-arrivals__all-link:focus-visible {
-  outline: 2px solid var(--focus-ring);
-
-  outline-offset: 5px;
-}
-
-/* =========================================================
-   EMPTY / COMING SOON
-========================================================= */
+   EMPTY STATE
+   ========================================================= */
 
 .new-arrivals__empty {
-  position: relative;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
 
-  min-height: 390px;
+  min-height: 480px;
 
-  padding: 70px 20px;
-
-  overflow: hidden;
-
-  border: 1px solid
-    var(--color-border);
-
-  background:
-    radial-gradient(
-      circle at 50% 0%,
-      rgba(169, 130, 130, 0.13),
-      transparent 45%
-    ),
-    var(--color-surface);
-}
-
-.new-arrivals__empty::before {
-  content: "";
-
-  position: absolute;
-
-  top: 25px;
-  right: 25px;
-  bottom: 25px;
-  left: 25px;
-
-  border: 1px solid
-    rgba(51, 37, 34, 0.07);
-
-  pointer-events: none;
+  border-top: 1px solid
+    var(--color-border, #d9cbc5);
+  border-bottom: 1px solid
+    var(--color-border, #d9cbc5);
 }
 
 .new-arrivals__empty-inner {
-  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
-  z-index: 2;
+  max-width: 500px;
 
-  max-width: 460px;
+  padding: 60px 24px;
 
   text-align: center;
 }
 
 /* =========================================================
    EMPTY MARK
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__empty-mark {
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   gap: 5px;
 
-  width: 44px;
-  height: 44px;
-
-  margin: 0 auto 20px;
-
-  border: 1px solid
-    var(--color-border-dark);
-
-  border-radius: 50%;
-
-  transition:
-    transform 500ms
-      cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.new-arrivals__empty:hover
-  .new-arrivals__empty-mark {
-  transform: rotate(12deg);
+  margin-bottom: 30px;
 }
 
 .new-arrivals__empty-mark span {
   display: block;
 
-  width: 3px;
-  height: 3px;
+  width: 4px;
+  height: 4px;
 
   border-radius: 50%;
 
-  background: var(--color-secondary);
+  background: var(
+    --color-accent,
+    #6f4b47
+  );
+}
+
+.new-arrivals__empty-mark span:nth-child(2) {
+  width: 7px;
+  height: 7px;
 }
 
 /* =========================================================
    EMPTY EYEBROW
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__empty-eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
 
-  color: var(--color-secondary);
-
-  font-family: var(--font-body);
+  font-family: var(
+    --font-body,
+    sans-serif
+  );
 
   font-size: 8px;
-
   font-weight: 600;
 
-  line-height: 1;
-
-  letter-spacing: 0.25em;
-
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+
+  color: var(
+    --color-accent,
+    #6f4b47
+  );
 }
 
 /* =========================================================
    EMPTY TITLE
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__empty-title {
   margin: 0;
 
-  color: var(--color-text);
+  font-family: var(
+    --font-display,
+    Georgia,
+    serif
+  );
 
-  font-family: var(--font-display);
-
-  font-size: 2.7rem;
+  font-size: clamp(
+    2rem,
+    4vw,
+    3.6rem
+  );
 
   font-weight: 400;
+  line-height: 0.98;
 
-  line-height: 0.95;
+  letter-spacing: -0.03em;
 
-  letter-spacing: -0.025em;
+  color: var(
+    --color-text,
+    #3f2d2a
+  );
 }
 
 /* =========================================================
    EMPTY DESCRIPTION
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__empty-description {
-  max-width: 370px;
+  max-width: 390px;
 
-  margin: 18px auto 0;
+  margin: 18px 0 0;
 
-  color: var(--color-text-secondary);
-
-  font-family: var(--font-body);
+  font-family: var(
+    --font-body,
+    sans-serif
+  );
 
   font-size: 11px;
+  line-height: 1.8;
 
-  line-height: 1.7;
+  color: var(
+    --color-text-secondary,
+    #6f625d
+  );
 }
 
 /* =========================================================
    EMPTY CTA
-========================================================= */
+   ========================================================= */
 
 .new-arrivals__empty-cta {
-  display: flex;
-
-  justify-content: center;
-
-  margin-top: 28px;
+  margin-top: 30px;
 }
 
 .new-arrivals__empty-link {
-  position: relative;
-
   display: inline-flex;
-
   align-items: center;
+  gap: 12px;
 
-  min-height: 46px;
-
-  padding: 0 7px 0 20px;
-
-  overflow: hidden;
-
-  border: 1px solid
-    var(--color-border-dark);
-
-  background: var(--color-text);
-
-  color: var(--color-surface);
-
-  font-family: var(--font-body);
-
-  font-size: 8px;
-
-  font-weight: 600;
-
-  line-height: 1;
-
-  letter-spacing: 0.18em;
+  color: var(
+    --color-text,
+    #3f2d2a
+  );
 
   text-decoration: none;
 
-  text-transform: uppercase;
-
   transition:
-    transform 400ms
-      cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 400ms ease,
-    border-color 300ms ease;
-}
-
-.new-arrivals__empty-link::before {
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  background: var(--color-secondary);
-
-  transform: translateX(-101%);
-
-  transition:
-    transform 450ms
-      cubic-bezier(0.77, 0, 0.175, 1);
+    color 180ms ease,
+    gap 220ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
 }
 
 .new-arrivals__empty-label {
-  position: relative;
+  font-family: var(
+    --font-body,
+    sans-serif
+  );
 
-  z-index: 2;
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .new-arrivals__empty-icon {
-  position: relative;
-
-  z-index: 2;
-
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
 
-  width: 29px;
-  height: 29px;
-
-  margin-left: 10px;
+  width: 30px;
+  height: 30px;
 
   border: 1px solid
-    rgba(250, 247, 244, 0.4);
-
+    var(--color-border-dark, #b9a7a0);
   border-radius: 50%;
 
-  color: var(--color-surface);
-
   transition:
-    transform 400ms
-      cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 300ms ease,
-    color 300ms ease;
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 220ms ease;
 }
 
 .new-arrivals__empty-link:hover {
-  border-color: var(--color-secondary);
+  gap: 16px;
 
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 12px 26px
-      rgba(51, 37, 34, 0.16);
-}
-
-.new-arrivals__empty-link:hover::before {
-  transform: translateX(0);
+  color: var(
+    --color-accent,
+    #6f4b47
+  );
 }
 
 .new-arrivals__empty-link:hover
   .new-arrivals__empty-icon {
-  background: var(--color-text);
+  border-color: var(
+    --color-accent,
+    #6f4b47
+  );
 
-  color: var(--color-surface);
+  background: var(
+    --color-accent,
+    #6f4b47
+  );
 
-  transform:
-    translate(3px, -2px)
-    rotate(5deg);
+  color: #ffffff;
+
+  transform: rotate(45deg);
+}
+
+/* =========================================================
+   LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1199px) {
+  .new-arrivals {
+    padding: 90px 0 84px;
+  }
+
+  .new-arrivals__header {
+    gap: 40px;
+  }
+
+  .new-arrivals__intro-wrap {
+    width: 240px;
+  }
+
+  .new-arrivals__title {
+    font-size: clamp(
+      3rem,
+      7vw,
+      5.5rem
+    );
+  }
 }
 
 /* =========================================================
    TABLET
-========================================================= */
+   ========================================================= */
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .new-arrivals {
-    padding: 90px 0 100px;
+    padding: 72px 0 70px;
+  }
+
+  .new-arrivals::before,
+  .new-arrivals::after {
+    display: none;
   }
 
   .new-arrivals__header {
-    gap: 35px;
+    align-items: flex-start;
+    flex-direction: column;
 
-    margin-bottom: 42px;
+    gap: 22px;
+
+    margin-bottom: 36px;
+  }
+
+  .new-arrivals__eyebrow-wrap {
+    margin-bottom: 14px;
   }
 
   .new-arrivals__title {
-    font-size: 3.2rem;
+    font-size: clamp(
+      2.8rem,
+      11vw,
+      4.5rem
+    );
   }
 
   .new-arrivals__intro-wrap {
-    width: 300px;
+    align-items: flex-start;
+
+    width: 100%;
+    max-width: 430px;
   }
 
-  .new-arrivals__intro {
-    max-width: 270px;
+  .new-arrivals__intro-mark {
+    margin-top: 12px;
+  }
+
+  .new-arrivals__footer {
+    margin-top: 36px;
+  }
+
+  .new-arrivals__all-link {
+    margin: 0 14px;
+  }
+
+  .new-arrivals__empty {
+    min-height: 420px;
   }
 }
 
 /* =========================================================
    MOBILE
-========================================================= */
+   ========================================================= */
 
-@media (max-width: 767px) {
+@media (max-width: 639px) {
   .new-arrivals {
-    padding: 72px 0 82px;
+    padding: 60px 0 58px;
   }
 
   .new-arrivals__header {
-    display: block;
+    gap: 20px;
 
-    margin-bottom: 32px;
+    margin-bottom: 30px;
   }
 
   .new-arrivals__eyebrow-wrap {
-    margin-bottom: 13px;
+    gap: 9px;
+    margin-bottom: 12px;
+  }
+
+  .new-arrivals__eyebrow-line {
+    width: 24px;
   }
 
   .new-arrivals__eyebrow {
-    font-size: 7px;
+    font-size: 8px;
+    letter-spacing: 0.16em;
   }
 
   .new-arrivals__title {
-    max-width: 100%;
+    font-size: clamp(
+      2.5rem,
+      13vw,
+      3.7rem
+    );
 
-    font-size: 2.35rem;
-
-    line-height: 0.95;
-
-    white-space: normal;
-  }
-
-  .new-arrivals__title span {
-    display: block;
-
-    margin-left: 0;
-
-    margin-top: 3px;
-  }
-
-  .new-arrivals__intro-wrap {
-    width: 100%;
-
-    margin-top: 17px;
-
-    padding-bottom: 0;
+    line-height: 0.92;
   }
 
   .new-arrivals__intro {
-    max-width: 320px;
-
-    font-size: 10px;
-
-    line-height: 1.7;
+    font-size: 10.5px;
+    line-height: 1.75;
   }
 
   .new-arrivals__intro-mark {
-    display: none;
+    font-size: 7.5px;
   }
 
-  /* =======================================================
-     CTA
-  ======================================================= */
-
   .new-arrivals__footer {
-    grid-template-columns:
-      minmax(8px, 1fr)
-      auto
-      minmax(8px, 1fr);
+    margin-top: 30px;
+  }
 
+  .new-arrivals__all-link {
     gap: 9px;
 
-    margin-top: 40px;
+    margin: 0 11px;
   }
 
-  .new-arrivals__all-link {
-    min-height: 45px;
-
-    padding-left: 16px;
-
-    font-size: 7px;
-
+  .new-arrivals__all-label {
+    font-size: 8px;
     letter-spacing: 0.13em;
-  }
-
-  .new-arrivals__all-icon {
-    width: 28px;
-    height: 28px;
-
-    margin-left: 8px;
-  }
-
-  /* =======================================================
-     EMPTY
-  ======================================================= */
-
-  .new-arrivals__empty {
-    min-height: 340px;
-
-    padding: 60px 18px;
-  }
-
-  .new-arrivals__empty::before {
-    top: 17px;
-    right: 17px;
-    bottom: 17px;
-    left: 17px;
-  }
-
-  .new-arrivals__empty-title {
-    font-size: 2.25rem;
-  }
-
-  .new-arrivals__empty-description {
-    font-size: 10px;
-  }
-}
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 420px) {
-  .new-arrivals {
-    padding-top: 64px;
-
-    padding-bottom: 72px;
-  }
-
-  .new-arrivals__title {
-    font-size: 2rem;
-  }
-
-  .new-arrivals__intro {
-    font-size: 9.5px;
-  }
-
-  .new-arrivals__footer {
-    margin-top: 32px;
-
-    gap: 6px;
-  }
-
-  .new-arrivals__all-link {
-    min-height: 43px;
-
-    padding-left: 13px;
-
-    font-size: 6.5px;
-
-    letter-spacing: 0.105em;
   }
 
   .new-arrivals__all-icon {
     width: 27px;
     height: 27px;
+  }
 
-    margin-left: 7px;
+  .new-arrivals__empty {
+    min-height: 390px;
+  }
+
+  .new-arrivals__empty-inner {
+    padding: 46px 18px;
   }
 
   .new-arrivals__empty-title {
-    font-size: 2rem;
+    font-size: clamp(
+      1.9rem,
+      9vw,
+      2.6rem
+    );
   }
 
-  .new-arrivals__empty-link {
-    min-height: 44px;
-
-    padding-left: 15px;
-
-    font-size: 7px;
-  }
-
-  .new-arrivals__empty-icon {
-    width: 28px;
-    height: 28px;
+  .new-arrivals__empty-description {
+    font-size: 10.5px;
   }
 }
 
 /* =========================================================
-   TOUCH DEVICES
-========================================================= */
+   SMALL MOBILE
+   ========================================================= */
 
-@media (hover: none) and (pointer: coarse) {
-  .new-arrivals__all-link:active,
-  .new-arrivals__empty-link:active {
-    transform:
-      translateY(-1px)
-      scale(0.985);
+@media (max-width: 390px) {
+  .new-arrivals {
+    padding: 52px 0 52px;
+  }
+
+  .new-arrivals__title {
+    font-size: 2.45rem;
+  }
+
+  .new-arrivals__footer-line {
+    min-width: 20px;
+  }
+
+  .new-arrivals__all-link {
+    margin: 0 8px;
+  }
+
+  .new-arrivals__all-label {
+    font-size: 7.5px;
+  }
+
+  .new-arrivals__empty {
+    min-height: 360px;
   }
 }
 
 /* =========================================================
    REDUCED MOTION
-========================================================= */
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .new-arrivals__eyebrow-line,
   .new-arrivals__all-link,
-  .new-arrivals__all-link::before,
-  .new-arrivals__all-label,
   .new-arrivals__all-icon,
-  .new-arrivals__all-icon svg,
-  .new-arrivals__empty-mark,
   .new-arrivals__empty-link,
-  .new-arrivals__empty-link::before,
   .new-arrivals__empty-icon {
     transition: none;
+  }
+
+  .new-arrivals__all-link:hover,
+  .new-arrivals__empty-link:hover {
+    gap: 12px;
+  }
+
+  .new-arrivals__all-link:hover
+    .new-arrivals__all-icon,
+  .new-arrivals__empty-link:hover
+    .new-arrivals__empty-icon {
+    transform: none;
   }
 }
