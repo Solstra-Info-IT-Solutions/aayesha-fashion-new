@@ -1,24 +1,36 @@
 /* =========================================================
    AAYESHA FASHION
    PRODUCT REVIEWS
-   Editorial / Quiet Indian Luxury
+   Editorial / Quiet Luxury
    ========================================================= */
 
 .product-reviews {
+  position: relative;
+
   width: 100%;
 
-  padding: 22px 0;
+  padding: 24px 0;
 
-  border-top: 1px solid var(--color-border, #d9cbc5);
-  border-bottom: 1px solid var(--color-border, #d9cbc5);
+  border-top: 1px solid
+    var(--color-border, #d9cbc5);
+
+  border-bottom: 1px solid
+    var(--color-border, #d9cbc5);
 
   background: transparent;
 }
 
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
 .product-reviews__content {
   display: flex;
   align-items: center;
-  gap: 14px;
+
+  gap: 16px;
+
+  width: 100%;
 }
 
 /* =========================================================
@@ -30,15 +42,25 @@
   align-items: center;
   justify-content: center;
 
-  width: 38px;
-  height: 38px;
+  flex: 0 0 auto;
 
-  flex: 0 0 38px;
+  width: 40px;
+  height: 40px;
 
-  border: 1px solid var(--color-border-dark, #b9a7a0);
+  border: 1px solid
+    var(--color-border-dark, #b9a7a0);
 
-  background: var(--color-bg-soft, #f1eae6);
-  color: var(--color-accent, #6f4b47);
+  color:
+    var(--color-accent, #6f4b47);
+
+  background:
+    var(--color-surface, #fbf8f5);
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .product-reviews__icon svg {
@@ -46,8 +68,23 @@
   height: 17px;
 
   color: currentColor;
+}
 
-  stroke-width: 1.5;
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.product-reviews:hover
+  .product-reviews__icon {
+  border-color:
+    var(--color-accent, #6f4b47);
+
+  background:
+    var(--color-accent, #6f4b47);
+
+  color: #ffffff;
+
+  transform: translateY(-1px);
 }
 
 /* =========================================================
@@ -58,31 +95,88 @@
   min-width: 0;
 }
 
+/* =========================================================
+   TITLE
+   ========================================================= */
+
 .product-reviews__title {
   margin: 0;
 
-  font-family: var(--font-body, sans-serif);
+  font-family:
+    var(--font-body, Arial, sans-serif);
+
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
+
   line-height: 1.4;
 
-  letter-spacing: 0.13em;
+  letter-spacing: 0.16em;
+
   text-transform: uppercase;
 
-  color: var(--color-text, #3f2d2a);
+  color:
+    var(--color-text, #3f2d2a);
 }
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
 
 .product-reviews__description {
   max-width: 520px;
 
   margin: 5px 0 0;
 
-  font-family: var(--font-body, sans-serif);
+  font-family:
+    var(--font-body, Arial, sans-serif);
+
   font-size: 11px;
   font-weight: 400;
+
   line-height: 1.65;
 
-  color: var(--color-text-secondary, #6f625d);
+  color:
+    var(--color-text-muted, #8d817b);
+}
+
+/* =========================================================
+   FOCUS / ACCESSIBILITY
+   ========================================================= */
+
+.product-reviews:focus-within {
+  border-color:
+    var(--color-accent, #6f4b47);
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .product-reviews {
+    padding: 21px 0;
+  }
+
+  .product-reviews__content {
+    gap: 13px;
+  }
+
+  .product-reviews__icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .product-reviews__title {
+    font-size: 9.5px;
+
+    letter-spacing: 0.14em;
+  }
+
+  .product-reviews__description {
+    font-size: 10.5px;
+
+    line-height: 1.6;
+  }
 }
 
 /* =========================================================
@@ -91,18 +185,18 @@
 
 @media (max-width: 639px) {
   .product-reviews {
-    padding: 18px 0;
+    padding: 19px 0;
   }
 
   .product-reviews__content {
-    gap: 11px;
+    align-items: flex-start;
+
+    gap: 12px;
   }
 
   .product-reviews__icon {
-    width: 34px;
-    height: 34px;
-
-    flex-basis: 34px;
+    width: 36px;
+    height: 36px;
   }
 
   .product-reviews__icon svg {
@@ -111,14 +205,17 @@
   }
 
   .product-reviews__title {
-    font-size: 9px;
+    font-size: 8.5px;
+
+    letter-spacing: 0.13em;
   }
 
   .product-reviews__description {
     margin-top: 4px;
 
     font-size: 10px;
-    line-height: 1.6;
+
+    line-height: 1.55;
   }
 }
 
@@ -127,15 +224,21 @@
    ========================================================= */
 
 @media (max-width: 390px) {
+  .product-reviews {
+    padding: 17px 0;
+  }
+
   .product-reviews__content {
-    gap: 9px;
+    gap: 10px;
   }
 
   .product-reviews__icon {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
+  }
 
-    flex-basis: 32px;
+  .product-reviews__title {
+    font-size: 8px;
   }
 
   .product-reviews__description {
@@ -148,7 +251,7 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .product-reviews * {
-    scroll-behavior: auto;
+  .product-reviews__icon {
+    transition: none;
   }
 }

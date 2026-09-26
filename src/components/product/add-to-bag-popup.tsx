@@ -2,9 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Check, ShoppingBag, X } from "lucide-react";
+import {
+  Check,
+  ShoppingBag,
+  X,
+} from "lucide-react";
 
 import type { Product } from "@/types/product";
+
 import "./AddToBagPopup.css";
 
 type AddToBagPopupProps = {
@@ -14,6 +19,10 @@ type AddToBagPopupProps = {
   onClose: () => void;
 };
 
+/* =========================================================
+   PRICE FORMATTER
+========================================================= */
+
 function formatPrice(price: number) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -21,6 +30,10 @@ function formatPrice(price: number) {
     maximumFractionDigits: 0,
   }).format(price);
 }
+
+/* =========================================================
+   COMPONENT
+========================================================= */
 
 export function AddToBagPopup({
   open,
@@ -40,10 +53,20 @@ export function AddToBagPopup({
       aria-labelledby="add-to-bag-popup-title"
       onClick={onClose}
     >
+      {/* ===================================================
+          DIALOG
+      =================================================== */}
+
       <div
         className="add-to-bag-popup__dialog"
-        onClick={(event) => event.stopPropagation()}
+        onClick={(event) =>
+          event.stopPropagation()
+        }
       >
+        {/* =================================================
+            CLOSE
+        ================================================= */}
+
         <button
           type="button"
           className="add-to-bag-popup__close"
@@ -56,12 +79,21 @@ export function AddToBagPopup({
           />
         </button>
 
+        {/* =================================================
+            SUCCESS HEADER
+        ================================================= */}
+
         <div className="add-to-bag-popup__success">
-          <span className="add-to-bag-popup__success-icon">
-            <Check aria-hidden="true" />
+
+          <span
+            className="add-to-bag-popup__success-icon"
+            aria-hidden="true"
+          >
+            <Check />
           </span>
 
-          <div>
+          <div className="add-to-bag-popup__success-content">
+
             <p className="add-to-bag-popup__eyebrow">
               Aayesha Fashion
             </p>
@@ -72,54 +104,90 @@ export function AddToBagPopup({
             >
               Added to Your Bag
             </h2>
+
           </div>
+
         </div>
 
+        {/* =================================================
+            PRODUCT
+        ================================================= */}
+
         <div className="add-to-bag-popup__product">
+
           <div className="add-to-bag-popup__image">
+
             <Image
               src={image}
               alt={product.name}
               fill
               sizes="96px"
+              className="add-to-bag-popup__image-element"
             />
+
           </div>
 
           <div className="add-to-bag-popup__product-info">
+
+            <p className="add-to-bag-popup__product-label">
+              Selected item
+            </p>
+
             <p className="add-to-bag-popup__product-name">
               {product.name}
             </p>
 
             <p className="add-to-bag-popup__product-price">
-              {formatPrice(product.pricing.sellingPrice)}
+              {formatPrice(
+                product.pricing.sellingPrice,
+              )}
             </p>
 
             <p className="add-to-bag-popup__quantity">
               Quantity: 1
             </p>
+
           </div>
+
         </div>
 
+        {/* =================================================
+            ACTIONS
+        ================================================= */}
+
         <div className="add-to-bag-popup__actions">
+
+          {/* CONTINUE SHOPPING */}
+
           <button
             type="button"
             className="add-to-bag-popup__continue"
             onClick={onClose}
           >
-            Continue Shopping
+            <span>
+              Continue Shopping
+            </span>
           </button>
+
+          {/* VIEW BAG */}
 
           <Link
             href="/cart"
             className="add-to-bag-popup__view-bag"
             onClick={onClose}
           >
-            <ShoppingBag
-              aria-hidden="true"
-            />
+            <span className="add-to-bag-popup__view-bag-label">
+              View Bag
+            </span>
 
-            View Bag
+            <span
+              className="add-to-bag-popup__view-bag-icon"
+              aria-hidden="true"
+            >
+              <ShoppingBag />
+            </span>
           </Link>
+
         </div>
       </div>
     </div>

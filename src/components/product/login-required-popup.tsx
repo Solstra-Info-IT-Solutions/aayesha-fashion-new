@@ -7,15 +7,28 @@ import {
 
 import { createPortal } from "react-dom";
 
-import { X } from "lucide-react";
+import {
+  ArrowUpRight,
+  LogIn,
+  X,
+} from "lucide-react";
+
 import { useRouter } from "next/navigation";
 
 import "./LoginRequiredPopup.css";
+
+/* =========================================================
+   TYPES
+========================================================= */
 
 type LoginRequiredPopupProps = {
   open: boolean;
   onClose: () => void;
 };
+
+/* =========================================================
+   COMPONENT
+========================================================= */
 
 export function LoginRequiredPopup({
   open,
@@ -26,9 +39,21 @@ export function LoginRequiredPopup({
   const [mounted, setMounted] =
     useState(false);
 
+  /* =======================================================
+     PORTAL MOUNT
+  ======================================================= */
+
   useEffect(() => {
     setMounted(true);
+
+    return () => {
+      setMounted(false);
+    };
   }, []);
+
+  /* =======================================================
+     ESCAPE + BODY LOCK
+  ======================================================= */
 
   useEffect(() => {
     if (!open) {
@@ -64,14 +89,23 @@ export function LoginRequiredPopup({
     };
   }, [open, onClose]);
 
-  if (!open || !mounted) {
-    return null;
-  }
+  /* =======================================================
+     LOGIN
+  ======================================================= */
 
   const handleLogin = () => {
     onClose();
+
     router.push("/login");
   };
+
+  /* =======================================================
+     RENDER
+  ======================================================= */
+
+  if (!open || !mounted) {
+    return null;
+  }
 
   const popup = (
     <div
@@ -81,12 +115,29 @@ export function LoginRequiredPopup({
       aria-labelledby="login-required-title"
       onClick={onClose}
     >
+      {/* =================================================
+          DIALOG
+      ================================================= */}
+
       <div
         className="login-required-popup__dialog"
         onClick={(event) =>
           event.stopPropagation()
         }
       >
+        {/* =================================================
+            TOP ACCENT
+        ================================================= */}
+
+        <div
+          className="login-required-popup__accent"
+          aria-hidden="true"
+        />
+
+        {/* =================================================
+            CLOSE
+        ================================================= */}
+
         <button
           type="button"
           onClick={onClose}
@@ -101,15 +152,29 @@ export function LoginRequiredPopup({
           />
         </button>
 
+        {/* =================================================
+            CONTENT
+        ================================================= */}
+
         <div className="login-required-popup__content">
+          {/* BRAND */}
+
           <p className="login-required-popup__eyebrow">
             Aayesha Fashion
           </p>
 
-          <span
-            className="login-required-popup__rule"
+          {/* DECORATIVE MARK */}
+
+          <div
+            className="login-required-popup__mark"
             aria-hidden="true"
-          />
+          >
+            <span />
+            <span />
+            <span />
+          </div>
+
+          {/* TITLE */}
 
           <h2
             id="login-required-title"
@@ -118,20 +183,51 @@ export function LoginRequiredPopup({
             Login Required
           </h2>
 
+          {/* DESCRIPTION */}
+
           <p className="login-required-popup__description">
             Please login to your account to
             add products to your wishlist.
           </p>
         </div>
 
+        {/* =================================================
+            ACTIONS
+        ================================================= */}
+
         <div className="login-required-popup__actions">
+          {/* LOGIN */}
+
           <button
             type="button"
             onClick={handleLogin}
             className="login-required-popup__button login-required-popup__button--primary"
           >
-            Login
+            <span className="login-required-popup__button-content">
+              <span>
+                Login
+              </span>
+
+              <span
+                className="login-required-popup__button-icon"
+                aria-hidden="true"
+              >
+                <LogIn
+                  size={15}
+                  strokeWidth={1.4}
+                />
+              </span>
+            </span>
+
+            <ArrowUpRight
+              className="login-required-popup__button-arrow"
+              size={15}
+              strokeWidth={1.35}
+              aria-hidden="true"
+            />
           </button>
+
+          {/* CONTINUE SHOPPING */}
 
           <button
             type="button"

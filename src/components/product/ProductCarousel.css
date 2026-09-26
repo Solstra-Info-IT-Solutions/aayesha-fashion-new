@@ -1,7 +1,7 @@
 /* =========================================================
    AAYESHA FASHION
    PRODUCT CAROUSEL
-   Editorial / Quiet Luxury
+   Editorial / Interactive Luxury
    ========================================================= */
 
 .product-carousel {
@@ -15,11 +15,11 @@
 
 .product-carousel__track {
   display: flex;
-  gap: 18px;
+  gap: 20px;
 
   width: 100%;
 
-  padding: 2px 0 8px;
+  padding: 4px 0 14px;
 
   overflow-x: auto;
   overflow-y: hidden;
@@ -42,11 +42,24 @@
    ========================================================= */
 
 .product-carousel__item {
-  flex: 0 0 calc(25% - 14px);
+  flex: 0 0 calc(25% - 15px);
 
   min-width: 0;
 
   scroll-snap-align: start;
+
+  transition:
+    transform 400ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 300ms ease;
+}
+
+/* =========================================================
+   ITEM HOVER
+   ========================================================= */
+
+.product-carousel__item:hover {
+  transform: translateY(-4px);
 }
 
 /* =========================================================
@@ -75,28 +88,55 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 24px;
 
-  margin-top: 24px;
-
-  padding-top: 14px;
+  margin-top: 26px;
+  padding-top: 16px;
 
   border-top: 1px solid var(--color-border, #d9cbc5);
 }
 
 /* =========================================================
-   HINT
+   CONTROL COPY
    ========================================================= */
+
+.product-carousel__control-copy {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.product-carousel__control-eyebrow {
+  display: block;
+
+  font-family: var(--font-body, sans-serif);
+
+  font-size: 8px;
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  color: var(--color-accent, #6f4b47);
+}
 
 .product-carousel__hint {
   margin: 0;
 
   font-family: var(--font-body, sans-serif);
+
   font-size: 9px;
-  font-weight: 600;
+  font-weight: 500;
+
   line-height: 1.4;
 
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 
   color: var(--color-text-muted, #8d817b);
@@ -110,7 +150,12 @@
   display: flex;
   align-items: center;
 
-  border: 1px solid var(--color-border-dark, #b9a7a0);
+  overflow: hidden;
+
+  border: 1px solid
+    var(--color-border-dark, #b9a7a0);
+
+  background: var(--color-surface, #fbf8f5);
 }
 
 /* =========================================================
@@ -118,52 +163,63 @@
    ========================================================= */
 
 .product-carousel__button {
+  position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: 48px;
-  height: 42px;
+  width: 50px;
+  height: 44px;
 
   padding: 0;
 
   border: 0;
   border-radius: 0;
 
-  background: var(--color-surface, #fbf8f5);
+  background: transparent;
+
   color: var(--color-text, #3f2d2a);
 
   cursor: pointer;
 
+  overflow: hidden;
+
   transition:
-    background-color 180ms ease,
-    color 180ms ease,
+    background-color 260ms ease,
+    color 260ms ease,
     transform 180ms ease;
 }
 
+/*
+ * Subtle animated background layer.
+ */
+
+.product-carousel__button::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: var(--color-accent, #6f4b47);
+
+  transform: scaleY(0);
+
+  transform-origin: bottom;
+
+  transition:
+    transform 300ms
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================================
+   BUTTON DIVIDER
+   ========================================================= */
+
 .product-carousel__button
   + .product-carousel__button {
-  border-left: 1px solid var(--color-border-dark, #b9a7a0);
-}
-
-.product-carousel__button:hover {
-  background: var(--color-accent, #6f4b47);
-  color: #ffffff;
-}
-
-.product-carousel__button:active {
-  background: #7f5953;
-  color: #ffffff;
-
-  transform: scale(0.96);
-}
-
-.product-carousel__button:focus-visible {
-  position: relative;
-  z-index: 1;
-
-  outline: 2px solid var(--color-accent, #6f4b47);
-  outline-offset: 3px;
+  border-left: 1px solid
+    var(--color-border-dark, #b9a7a0);
 }
 
 /* =========================================================
@@ -171,28 +227,73 @@
    ========================================================= */
 
 .product-carousel__icon {
-  width: 16px;
-  height: 16px;
+  position: relative;
+  z-index: 1;
+
+  width: 17px;
+  height: 17px;
 
   flex: 0 0 auto;
 
   color: currentColor;
 
-  stroke-width: 1.35;
+  stroke-width: 1.25;
 
   transition:
-    transform 180ms ease,
-    color 180ms ease;
+    transform 280ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    color 220ms ease;
 }
 
-.product-carousel__button:first-child:hover
-  .product-carousel__icon {
-  transform: translateX(-2px);
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.product-carousel__button:hover {
+  color: #ffffff;
 }
 
-.product-carousel__button:last-child:hover
+.product-carousel__button:hover::before {
+  transform: scaleY(1);
+}
+
+.product-carousel__button--previous:hover
   .product-carousel__icon {
-  transform: translateX(2px);
+  transform: translateX(-3px);
+}
+
+.product-carousel__button--next:hover
+  .product-carousel__icon {
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   ACTIVE
+   ========================================================= */
+
+.product-carousel__button:active {
+  transform: scale(0.94);
+}
+
+.product-carousel__button:active::before {
+  background: var(
+    --color-accent-dark,
+    #3f2d2a
+  );
+}
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.product-carousel__button:focus-visible {
+  position: relative;
+  z-index: 3;
+
+  outline: 2px solid
+    var(--color-accent, #6f4b47);
+
+  outline-offset: 3px;
 }
 
 /* =========================================================
@@ -201,11 +302,11 @@
 
 @media (max-width: 1199px) {
   .product-carousel__item {
-    flex: 0 0 calc(33.333% - 12px);
+    flex: 0 0 calc(33.333% - 14px);
   }
 
   .product-carousel__track {
-    gap: 16px;
+    gap: 18px;
   }
 }
 
@@ -215,25 +316,23 @@
 
 @media (max-width: 767px) {
   .product-carousel__item {
-    flex: 0 0 calc(50% - 8px);
+    flex: 0 0 calc(50% - 9px);
   }
 
   .product-carousel__track {
-    gap: 14px;
+    gap: 18px;
 
-    padding-bottom: 6px;
-
-    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
   }
 
   .product-carousel__controls {
-    margin-top: 20px;
-    padding-top: 12px;
+    margin-top: 22px;
+    padding-top: 14px;
   }
 
   .product-carousel__button {
-    width: 44px;
-    height: 40px;
+    width: 46px;
+    height: 42px;
   }
 }
 
@@ -247,28 +346,41 @@
   }
 
   .product-carousel__track {
-    gap: 12px;
+    gap: 14px;
 
-    margin-right: -1px;
+    padding-bottom: 8px;
 
     scroll-padding-left: 0;
+  }
+
+  .product-carousel__item:hover {
+    transform: none;
   }
 
   .product-carousel__controls {
     gap: 16px;
 
-    margin-top: 18px;
-    padding-top: 11px;
+    margin-top: 20px;
+    padding-top: 13px;
+  }
+
+  .product-carousel__control-copy {
+    gap: 3px;
+  }
+
+  .product-carousel__control-eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.16em;
   }
 
   .product-carousel__hint {
-    font-size: 8px;
-    letter-spacing: 0.13em;
+    font-size: 7.5px;
+    letter-spacing: 0.1em;
   }
 
   .product-carousel__button {
-    width: 40px;
-    height: 38px;
+    width: 42px;
+    height: 40px;
   }
 
   .product-carousel__icon {
@@ -286,17 +398,31 @@
     flex-basis: 82%;
   }
 
-  .product-carousel__controls {
-    margin-top: 16px;
+  .product-carousel__track {
+    gap: 12px;
   }
 
-  .product-carousel__button {
-    width: 38px;
-    height: 36px;
+  .product-carousel__controls {
+    margin-top: 18px;
+    padding-top: 11px;
+  }
+
+  .product-carousel__control-eyebrow {
+    font-size: 6.5px;
   }
 
   .product-carousel__hint {
-    font-size: 7.5px;
+    font-size: 7px;
+  }
+
+  .product-carousel__button {
+    width: 39px;
+    height: 37px;
+  }
+
+  .product-carousel__icon {
+    width: 14px;
+    height: 14px;
   }
 }
 
@@ -309,14 +435,24 @@
     scroll-behavior: auto;
   }
 
+  .product-carousel__item,
   .product-carousel__button,
-  .product-carousel__icon {
+  .product-carousel__icon,
+  .product-carousel__button::before {
     transition: none;
   }
 
-  .product-carousel__button:first-child:hover
+  .product-carousel__item:hover {
+    transform: none;
+  }
+
+  .product-carousel__button:hover::before {
+    transform: none;
+  }
+
+  .product-carousel__button--previous:hover
     .product-carousel__icon,
-  .product-carousel__button:last-child:hover
+  .product-carousel__button--next:hover
     .product-carousel__icon {
     transform: none;
   }

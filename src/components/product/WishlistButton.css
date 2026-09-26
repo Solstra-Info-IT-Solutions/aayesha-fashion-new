@@ -5,31 +5,50 @@
    ========================================================= */
 
 .wishlist-button {
+  position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
 
   padding: 0;
 
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  border-radius: 0;
+  border: 1px solid var(--color-border, #d9cbc5);
+  border-radius: 50%;
 
-  background: rgba(63, 45, 42, 0.46);
-  color: #ffffff;
+  background: var(--color-surface, #fffdfb);
+  color: var(--color-text, #3f2d2a);
 
   cursor: pointer;
 
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  overflow: hidden;
 
   transition:
-    background-color 200ms ease,
-    border-color 200ms ease,
-    color 200ms ease,
-    transform 200ms ease;
+    color 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================================
+   SUBTLE INNER HIGHLIGHT
+   ========================================================= */
+
+.wishlist-button::before {
+  content: "";
+
+  position: absolute;
+  inset: 3px;
+
+  border: 1px solid transparent;
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  transition: border-color 220ms ease;
 }
 
 /* =========================================================
@@ -37,16 +56,15 @@
    ========================================================= */
 
 .wishlist-button__icon {
-  width: 18px;
-  height: 18px;
+  position: relative;
+  z-index: 1;
 
   flex: 0 0 auto;
 
-  color: currentColor;
-
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    fill 180ms ease;
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    fill 180ms ease,
+    color 180ms ease;
 }
 
 /* =========================================================
@@ -54,10 +72,16 @@
    ========================================================= */
 
 .wishlist-button:hover:not(:disabled) {
-  border-color: #ffffff;
+  border-color: var(--color-accent, #6f4b47);
 
-  background: var(--color-accent, #6f4b47);
-  color: #ffffff;
+  background: var(--color-bg-soft, #f7f1ee);
+  color: var(--color-accent, #6f4b47);
+
+  transform: translateY(-1px);
+}
+
+.wishlist-button:hover:not(:disabled)::before {
+  border-color: var(--color-border, #d9cbc5);
 }
 
 .wishlist-button:hover:not(:disabled)
@@ -76,28 +100,40 @@
   color: #ffffff;
 }
 
-.wishlist-button--active:hover:not(:disabled) {
-  border-color: var(--color-accent-dark, #3f2d2a);
+.wishlist-button--active::before {
+  border-color: rgba(255, 255, 255, 0.2);
+}
 
-  background: var(--color-accent-dark, #3f2d2a);
+.wishlist-button--active:hover:not(:disabled) {
+  background: var(--color-text, #3f2d2a);
+  border-color: var(--color-text, #3f2d2a);
   color: #ffffff;
+}
+
+.wishlist-button--active
+  .wishlist-button__icon {
+  transform: scale(1.04);
 }
 
 /* =========================================================
-   CLICK
+   PRESS
    ========================================================= */
 
 .wishlist-button:active:not(:disabled) {
-  background: #7f5953;
-  border-color: #7f5953;
-  color: #ffffff;
-
-  transform: scale(0.96);
+  transform: scale(0.94);
 }
 
-.wishlist-button:active:not(:disabled)
-  .wishlist-button__icon {
+.wishlist-button--active:active:not(:disabled) {
   transform: scale(0.94);
+}
+
+/* =========================================================
+   DISABLED / INITIALIZING
+   ========================================================= */
+
+.wishlist-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* =========================================================
@@ -105,29 +141,22 @@
    ========================================================= */
 
 .wishlist-button:focus-visible {
-  outline: 2px solid #ffffff;
-  outline-offset: 3px;
-}
-
-.wishlist-button--inactive:focus-visible {
-  outline-color: var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: 4px;
 }
 
 /* =========================================================
-   DISABLED
+   SMALL / COMPACT VARIANT
    ========================================================= */
 
-.wishlist-button:disabled {
-  cursor: not-allowed;
-
-  color: #ffffff;
-
-  opacity: 0.48;
+.product-card .wishlist-button {
+  width: 40px;
+  height: 40px;
 }
 
-.wishlist-button:disabled
-  .wishlist-button__icon {
-  color: #ffffff;
+.product-card .wishlist-button__icon {
+  width: 17px;
+  height: 17px;
 }
 
 /* =========================================================
@@ -136,11 +165,21 @@
 
 @media (max-width: 639px) {
   .wishlist-button {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
   }
 
   .wishlist-button__icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .product-card .wishlist-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .product-card .wishlist-button__icon {
     width: 16px;
     height: 16px;
   }
@@ -152,11 +191,16 @@
 
 @media (max-width: 390px) {
   .wishlist-button {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
   }
 
-  .wishlist-button__icon {
+  .product-card .wishlist-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .product-card .wishlist-button__icon {
     width: 15px;
     height: 15px;
   }
@@ -168,13 +212,19 @@
 
 @media (prefers-reduced-motion: reduce) {
   .wishlist-button,
+  .wishlist-button::before,
   .wishlist-button__icon {
     transition: none;
   }
 
+  .wishlist-button:hover:not(:disabled),
+  .wishlist-button:active:not(:disabled) {
+    transform: none;
+  }
+
   .wishlist-button:hover:not(:disabled)
     .wishlist-button__icon,
-  .wishlist-button:active:not(:disabled)
+  .wishlist-button--active
     .wishlist-button__icon {
     transform: none;
   }

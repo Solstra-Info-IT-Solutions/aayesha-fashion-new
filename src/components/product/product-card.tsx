@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+
 import {
+  ArrowUpRight,
   Minus,
   Plus,
   ShoppingBag,
 } from "lucide-react";
+
 import {
   useCallback,
   useEffect,
@@ -59,11 +62,12 @@ export function ProductCard({
   const primaryMedia =
     getPrimaryProductMedia(product);
 
-  const secondaryMedia = product.media.find(
-    (media) =>
-      media.type === "image" &&
-      media.id !== primaryMedia?.id,
-  );
+  const secondaryMedia =
+    product.media.find(
+      (media) =>
+        media.type === "image" &&
+        media.id !== primaryMedia?.id,
+    );
 
   /* =======================================================
      AUTH
@@ -111,14 +115,13 @@ export function ProductCard({
   const hasBadge =
     product.merchandising.badges.length > 0;
 
-  const badge =
-    hasBadge
-      ? product.merchandising.badges[0]
-          .replace(/-/g, " ")
-          .replace(/\b\w/g, (letter) =>
-            letter.toUpperCase(),
-          )
-      : null;
+  const badge = hasBadge
+    ? product.merchandising.badges[0]
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (letter) =>
+          letter.toUpperCase(),
+        )
+    : null;
 
   /* =======================================================
      LOAD CART QUANTITY
@@ -132,6 +135,7 @@ export function ProductCard({
       ) {
         setCartQuantity(0);
         setCartInitialized(true);
+
         return;
       }
 
@@ -177,6 +181,7 @@ export function ProductCard({
 
       if (!isAuthenticated) {
         setShowLoginPopup(true);
+
         return false;
       }
 
@@ -187,166 +192,168 @@ export function ProductCard({
      ADD TO CART
   ======================================================= */
 
-  const handleAddToCart = async () => {
-    if (
-      availability.isSoldOut ||
-      availability.availableQuantity <= 0 ||
-      cartLoading
-    ) {
-      return;
-    }
+  const handleAddToCart =
+    async () => {
+      if (
+        availability.isSoldOut ||
+        availability.availableQuantity <= 0 ||
+        cartLoading
+      ) {
+        return;
+      }
 
-    if (!requireAuthentication()) {
-      return;
-    }
+      if (!requireAuthentication()) {
+        return;
+      }
 
-    try {
-      setCartLoading(true);
+      try {
+        setCartLoading(true);
 
-      const cart = await addToCart(
-        product._id,
-        1,
-      );
-
-      const item = cart.items.find(
-        (cartItem) =>
-          cartItem.productId ===
+        const cart = await addToCart(
           product._id,
-      );
+          1,
+        );
 
-      setCartQuantity(
-        item?.quantity ?? 1,
-      );
+        const item = cart.items.find(
+          (cartItem) =>
+            cartItem.productId ===
+            product._id,
+        );
 
-      setShowAddedPopup(true);
-    } catch (error) {
-      console.error(
-        "ADD TO CART ERROR:",
-        error,
-      );
-    } finally {
-      setCartLoading(false);
-    }
-  };
+        setCartQuantity(
+          item?.quantity ?? 1,
+        );
+
+        setShowAddedPopup(true);
+      } catch (error) {
+        console.error(
+          "ADD TO CART ERROR:",
+          error,
+        );
+      } finally {
+        setCartLoading(false);
+      }
+    };
 
   /* =======================================================
      INCREASE
   ======================================================= */
 
-  const handleIncrease = async () => {
-    if (
-      availability.isSoldOut ||
-      cartLoading ||
-      cartQuantity <= 0
-    ) {
-      return;
-    }
+  const handleIncrease =
+    async () => {
+      if (
+        availability.isSoldOut ||
+        cartLoading ||
+        cartQuantity <= 0
+      ) {
+        return;
+      }
 
-    if (!requireAuthentication()) {
-      return;
-    }
+      if (!requireAuthentication()) {
+        return;
+      }
 
-    const nextQuantity =
-      cartQuantity + 1;
+      const nextQuantity =
+        cartQuantity + 1;
 
-    /*
-     * Don't allow the card to exceed
-     * the currently available inventory.
-     */
-    if (
-      nextQuantity >
-      availability.availableQuantity
-    ) {
-      return;
-    }
+      if (
+        nextQuantity >
+        availability.availableQuantity
+      ) {
+        return;
+      }
 
-    try {
-      setCartLoading(true);
+      try {
+        setCartLoading(true);
 
-      const cart =
-        await updateCartItem(
-          product._id,
-          nextQuantity,
+        const cart =
+          await updateCartItem(
+            product._id,
+            nextQuantity,
+          );
+
+        const item = cart.items.find(
+          (cartItem) =>
+            cartItem.productId ===
+            product._id,
         );
 
-      const item = cart.items.find(
-        (cartItem) =>
-          cartItem.productId ===
-          product._id,
-      );
-
-      setCartQuantity(
-        item?.quantity ?? nextQuantity,
-      );
-    } catch (error) {
-      console.error(
-        "UPDATE CART ERROR:",
-        error,
-      );
-    } finally {
-      setCartLoading(false);
-    }
-  };
+        setCartQuantity(
+          item?.quantity ??
+            nextQuantity,
+        );
+      } catch (error) {
+        console.error(
+          "UPDATE CART ERROR:",
+          error,
+        );
+      } finally {
+        setCartLoading(false);
+      }
+    };
 
   /* =======================================================
      DECREASE
   ======================================================= */
 
-  const handleDecrease = async () => {
-    if (
-      cartLoading ||
-      cartQuantity <= 0
-    ) {
-      return;
-    }
-
-    if (!requireAuthentication()) {
-      return;
-    }
-
-    try {
-      setCartLoading(true);
-
-      /*
-       * Quantity 1 → remove product
-       */
-      if (cartQuantity === 1) {
-        await removeFromCart(
-          product._id,
-        );
-
-        setCartQuantity(0);
-
+  const handleDecrease =
+    async () => {
+      if (
+        cartLoading ||
+        cartQuantity <= 0
+      ) {
         return;
       }
 
-      const nextQuantity =
-        cartQuantity - 1;
+      if (!requireAuthentication()) {
+        return;
+      }
 
-      const cart =
-        await updateCartItem(
-          product._id,
-          nextQuantity,
+      try {
+        setCartLoading(true);
+
+        /*
+         * Quantity 1 → remove product
+         */
+
+        if (cartQuantity === 1) {
+          await removeFromCart(
+            product._id,
+          );
+
+          setCartQuantity(0);
+
+          return;
+        }
+
+        const nextQuantity =
+          cartQuantity - 1;
+
+        const cart =
+          await updateCartItem(
+            product._id,
+            nextQuantity,
+          );
+
+        const item = cart.items.find(
+          (cartItem) =>
+            cartItem.productId ===
+            product._id,
         );
 
-      const item = cart.items.find(
-        (cartItem) =>
-          cartItem.productId ===
-          product._id,
-      );
-
-      setCartQuantity(
-        item?.quantity ?? nextQuantity,
-      );
-    } catch (error) {
-      console.error(
-        "UPDATE CART ERROR:",
-        error,
-      );
-    } finally {
-      setCartLoading(false);
-    }
-  };
+        setCartQuantity(
+          item?.quantity ??
+            nextQuantity,
+        );
+      } catch (error) {
+        console.error(
+          "UPDATE CART ERROR:",
+          error,
+        );
+      } finally {
+        setCartLoading(false);
+      }
+    };
 
   /* =======================================================
      BUTTON STATE
@@ -366,8 +373,13 @@ export function ProductCard({
       <article
         className={[
           "product-card",
+
           availability.isSoldOut
             ? "product-card--sold-out"
+            : "",
+
+          showQuantity
+            ? "product-card--in-cart"
             : "",
         ]
           .filter(Boolean)
@@ -422,42 +434,65 @@ export function ProductCard({
               aria-hidden="true"
               className="product-card__image-shade"
             />
+
+            <span
+              aria-hidden="true"
+              className="product-card__view-indicator"
+            >
+              <ArrowUpRight
+                size={17}
+                strokeWidth={1.25}
+              />
+            </span>
           </Link>
 
-          {/* BADGE */}
+          {/* =================================================
+              TOP META
+          ================================================= */}
 
-          {badge && (
-            <span className="product-card__badge">
-              {badge}
-            </span>
-          )}
+          <div className="product-card__top">
+            {badge && (
+              <span className="product-card__badge">
+                {badge}
+              </span>
+            )}
 
-          {/* WISHLIST */}
-
-          <div className="product-card__wishlist">
-            <WishlistButton
-              productId={product._id}
-              productName={product.name}
-            />
+            <div className="product-card__wishlist">
+              <WishlistButton
+                productId={product._id}
+                productName={product.name}
+              />
+            </div>
           </div>
 
-          {/* SOLD OUT */}
+          {/* =================================================
+              SOLD OUT
+          ================================================= */}
 
           {availability.isSoldOut && (
             <div className="product-card__sold-out">
-              SOLD OUT
+              <span>
+                Sold Out
+              </span>
             </div>
           )}
 
-          {/* IMAGE LINK INDICATOR */}
+          {/* =================================================
+              IMAGE BOTTOM LABEL
+          ================================================= */}
 
           {!availability.isSoldOut && (
-            <span
-              aria-hidden="true"
-              className="product-card__image-arrow"
-            >
-              ↗
-            </span>
+            <div className="product-card__media-caption">
+              <span>
+                Discover
+              </span>
+
+              <ArrowUpRight
+                size={14}
+                strokeWidth={1.25}
+                aria-hidden="true"
+              />
+            </div>
           )}
         </div>
 
@@ -466,6 +501,24 @@ export function ProductCard({
         ================================================= */}
 
         <div className="product-card__content">
+          {/* PRODUCT META */}
+
+          <div className="product-card__meta">
+            <span className="product-card__meta-label">
+              Aayesha Collection
+            </span>
+
+            {!availability.isSoldOut &&
+              availability.availableQuantity >
+                0 &&
+              availability.availableQuantity <=
+                5 && (
+                <span className="product-card__stock">
+                  Few left
+                </span>
+              )}
+          </div>
+
           {/* PRODUCT NAME */}
 
           <Link
@@ -475,13 +528,25 @@ export function ProductCard({
             <h3 className="product-card__title">
               {product.name}
             </h3>
+
+            <span
+              aria-hidden="true"
+              className="product-card__title-arrow"
+            >
+              <ArrowUpRight
+                size={15}
+                strokeWidth={1.25}
+              />
+            </span>
           </Link>
 
           {/* PRICE */}
 
-          <ProductPrice
-            product={product}
-          />
+          <div className="product-card__price">
+            <ProductPrice
+              product={product}
+            />
+          </div>
 
           {/* =================================================
               CART ACTION
@@ -493,7 +558,9 @@ export function ProductCard({
               disabled
               className="product-card__cart-button product-card__cart-button--sold-out"
             >
-              <span>SOLD OUT</span>
+              <span>
+                Sold Out
+              </span>
             </button>
           ) : showQuantity ? (
             <div
@@ -571,6 +638,7 @@ export function ProductCard({
               }
               className={[
                 "product-card__cart-button",
+
                 cartLoading
                   ? "product-card__cart-button--loading"
                   : "",
@@ -587,8 +655,8 @@ export function ProductCard({
 
                 <span>
                   {cartLoading
-                    ? "ADDING..."
-                    : "ADD TO BAG"}
+                    ? "Adding..."
+                    : "Add to Bag"}
                 </span>
               </span>
 
@@ -596,7 +664,10 @@ export function ProductCard({
                 aria-hidden="true"
                 className="product-card__cart-button-arrow"
               >
-                ↗
+                <ArrowUpRight
+                  size={16}
+                  strokeWidth={1.3}
+                />
               </span>
             </button>
           )}

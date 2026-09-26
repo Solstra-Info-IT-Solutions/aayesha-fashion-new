@@ -1,7 +1,7 @@
 /* =========================================================
    AAYESHA FASHION
    WISHLIST GRID
-   Editorial / Quiet Indian Luxury
+   Editorial / Quiet Luxury
    ========================================================= */
 
 .wishlist-grid {
@@ -16,18 +16,18 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  gap: 32px;
 
-  gap: 24px;
+  margin-bottom: 42px;
 
-  margin-bottom: 38px;
+  padding-bottom: 22px;
 
-  padding-bottom: 18px;
-
-  border-bottom: 1px solid var(--color-border, #d9cbc5);
+  border-bottom: 1px solid
+    var(--color-border, #d9cbc5);
 }
 
 .wishlist-grid__eyebrow {
-  margin: 0;
+  margin: 0 0 8px;
 
   font-family: var(--font-body, sans-serif);
   font-size: 9px;
@@ -41,16 +41,22 @@
 }
 
 .wishlist-grid__title {
-  margin: 7px 0 0;
+  margin: 0;
 
   font-family: var(
     --font-display,
-    "Cormorant Garamond",
+    Georgia,
     serif
   );
-  font-size: clamp(34px, 4vw, 48px);
-  font-weight: 500;
-  line-height: 0.98;
+
+  font-size: clamp(
+    2rem,
+    4vw,
+    3.5rem
+  );
+
+  font-weight: 400;
+  line-height: 0.95;
 
   letter-spacing: -0.025em;
 
@@ -67,24 +73,23 @@
   font-weight: 600;
   line-height: 1.4;
 
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 
   color: var(--color-text-muted, #8d817b);
 }
 
 /* =========================================================
-   PRODUCTS
+   PRODUCT GRID
    ========================================================= */
 
 .wishlist-grid__products {
   display: grid;
+
   grid-template-columns: repeat(4, minmax(0, 1fr));
 
   column-gap: 24px;
-  row-gap: 52px;
-
-  width: 100%;
+  row-gap: 58px;
 }
 
 /* =========================================================
@@ -96,9 +101,11 @@
   justify-content: center;
 
   margin-top: 64px;
+
   padding-top: 28px;
 
-  border-top: 1px solid var(--color-border, #d9cbc5);
+  border-top: 1px solid
+    var(--color-border, #d9cbc5);
 }
 
 /* =========================================================
@@ -107,86 +114,113 @@
 
 .wishlist-grid__empty {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
 
-  width: 100%;
+  max-width: 580px;
 
-  padding: 72px 24px;
+  margin: 0 auto;
 
-  border-top: 1px solid var(--color-border, #d9cbc5);
-  border-bottom: 1px solid var(--color-border, #d9cbc5);
+  padding: 72px 24px 78px;
 
   text-align: center;
-
-  background: var(--color-bg-soft, #f1eae6);
 }
+
+/* =========================================================
+   EMPTY ICON
+   ========================================================= */
 
 .wishlist-grid__empty-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: 68px;
-  height: 68px;
+  width: 72px;
+  height: 72px;
 
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 
-  border: 1px solid var(--color-border-dark, #b9a7a0);
+  border: 1px solid
+    var(--color-border-dark, #c4b3ac);
 
-  background: var(--color-surface, #ffffff);
+  border-radius: 50%;
 
+  background: var(--color-bg-soft, #f7f1ee);
   color: var(--color-accent, #6f4b47);
 }
 
 .wishlist-grid__empty-icon svg {
-  color: currentColor;
-  stroke: currentColor;
+  transition:
+    transform 240ms
+      cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.wishlist-grid__empty-title {
-  max-width: 600px;
+.wishlist-grid__empty:hover
+  .wishlist-grid__empty-icon svg {
+  transform: scale(1.08);
+}
 
-  margin: 8px 0 0;
+/* =========================================================
+   EMPTY TITLE
+   ========================================================= */
+
+.wishlist-grid__empty-title {
+  margin: 0;
 
   font-family: var(
     --font-display,
-    "Cormorant Garamond",
+    Georgia,
     serif
   );
-  font-size: clamp(34px, 4vw, 52px);
-  font-weight: 500;
-  line-height: 0.98;
+
+  font-size: clamp(
+    2rem,
+    5vw,
+    3.5rem
+  );
+
+  font-weight: 400;
+  line-height: 1;
 
   letter-spacing: -0.025em;
 
   color: var(--color-text, #3f2d2a);
 }
 
-.wishlist-grid__empty-description {
-  max-width: 420px;
+/* =========================================================
+   EMPTY DESCRIPTION
+   ========================================================= */
 
-  margin: 16px auto 0;
+.wishlist-grid__empty-description {
+  max-width: 410px;
+
+  margin: 18px auto 0;
 
   font-family: var(--font-body, sans-serif);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.8;
 
   color: var(--color-text-secondary, #6f625d);
 }
 
+/* =========================================================
+   EMPTY ACTION
+   ========================================================= */
+
 .wishlist-grid__empty-action {
-  margin-top: 30px;
+  margin-top: 32px;
 }
 
 /* =========================================================
-   BUTTON ICON SAFETY
+   LARGE DESKTOP
    ========================================================= */
 
-.wishlist-grid__footer svg,
-.wishlist-grid__empty-action svg {
-  flex: 0 0 auto;
+@media (max-width: 1279px) {
+  .wishlist-grid__products {
+    column-gap: 20px;
+    row-gap: 48px;
+  }
 }
 
 /* =========================================================
@@ -194,15 +228,55 @@
    ========================================================= */
 
 @media (max-width: 1023px) {
+  .wishlist-grid__header {
+    margin-bottom: 34px;
+  }
+
   .wishlist-grid__products {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(
+      3,
+      minmax(0, 1fr)
+    );
 
     column-gap: 18px;
     row-gap: 44px;
   }
 
+  .wishlist-grid__footer {
+    margin-top: 52px;
+  }
+}
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 767px) {
   .wishlist-grid__header {
-    margin-bottom: 32px;
+    align-items: flex-start;
+
+    margin-bottom: 28px;
+
+    padding-bottom: 18px;
+  }
+
+  .wishlist-grid__products {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+    column-gap: 14px;
+    row-gap: 38px;
+  }
+
+  .wishlist-grid__footer {
+    margin-top: 44px;
+    padding-top: 22px;
+  }
+
+  .wishlist-grid__empty {
+    padding: 58px 20px 64px;
   }
 }
 
@@ -212,53 +286,55 @@
 
 @media (max-width: 639px) {
   .wishlist-grid__header {
-    align-items: flex-end;
+    gap: 16px;
 
-    gap: 14px;
-
-    margin-bottom: 28px;
-    padding-bottom: 14px;
+    margin-bottom: 24px;
   }
 
   .wishlist-grid__eyebrow {
+    margin-bottom: 6px;
+
     font-size: 8px;
     letter-spacing: 0.15em;
   }
 
   .wishlist-grid__title {
-    margin-top: 6px;
-
-    font-size: 34px;
+    font-size: clamp(
+      1.75rem,
+      8vw,
+      2.4rem
+    );
   }
 
   .wishlist-grid__count {
-    padding-bottom: 2px;
+    padding-top: 4px;
 
     font-size: 8px;
     letter-spacing: 0.1em;
+
+    white-space: nowrap;
   }
 
   .wishlist-grid__products {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
     column-gap: 10px;
-    row-gap: 34px;
+    row-gap: 32px;
   }
 
   .wishlist-grid__footer {
-    margin-top: 46px;
-    padding-top: 22px;
+    margin-top: 38px;
   }
 
   .wishlist-grid__empty {
-    padding: 56px 18px;
+    min-height: 420px;
+
+    padding: 48px 18px 56px;
   }
 
   .wishlist-grid__empty-icon {
-    width: 58px;
-    height: 58px;
+    width: 62px;
+    height: 62px;
 
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 
   .wishlist-grid__empty-icon svg {
@@ -267,20 +343,24 @@
   }
 
   .wishlist-grid__empty-title {
-    font-size: 36px;
+    font-size: clamp(
+      1.8rem,
+      9vw,
+      2.5rem
+    );
   }
 
   .wishlist-grid__empty-description {
     max-width: 330px;
 
-    margin-top: 13px;
+    margin-top: 14px;
 
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.7;
   }
 
   .wishlist-grid__empty-action {
-    margin-top: 25px;
+    margin-top: 26px;
   }
 }
 
@@ -291,27 +371,24 @@
 @media (max-width: 390px) {
   .wishlist-grid__products {
     column-gap: 8px;
-    row-gap: 30px;
+    row-gap: 28px;
   }
 
-  .wishlist-grid__title {
-    font-size: 31px;
+  .wishlist-grid__header {
+    margin-bottom: 20px;
   }
 
   .wishlist-grid__count {
-    font-size: 7px;
+    font-size: 7.5px;
+  }
+
+  .wishlist-grid__footer {
+    margin-top: 34px;
   }
 
   .wishlist-grid__empty {
-    padding: 48px 14px;
-  }
-
-  .wishlist-grid__empty-title {
-    font-size: 32px;
-  }
-
-  .wishlist-grid__empty-description {
-    font-size: 9.5px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 }
 
@@ -320,7 +397,7 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .wishlist-grid * {
-    scroll-behavior: auto;
+  .wishlist-grid__empty-icon svg {
+    transition: none;
   }
 }

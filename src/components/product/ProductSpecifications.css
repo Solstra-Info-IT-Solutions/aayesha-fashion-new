@@ -1,7 +1,7 @@
 /* =========================================================
    AAYESHA FASHION
    PRODUCT SPECIFICATIONS
-   Editorial / Quiet Indian Luxury
+   Editorial / Quiet Luxury
    ========================================================= */
 
 .product-specifications {
@@ -10,24 +10,36 @@
   border-top: 1px solid var(--color-border, #d9cbc5);
 
   background: transparent;
+
+  font-family: var(--font-body, sans-serif);
 }
 
 /* =========================================================
-   ROW
+   SPECIFICATION ROW
    ========================================================= */
 
 .product-specifications__row {
   display: grid;
-  grid-template-columns: minmax(130px, 0.75fr) minmax(0, 1.25fr);
+  grid-template-columns: minmax(130px, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
   gap: 24px;
 
-  min-height: 48px;
+  min-height: 58px;
 
-  padding: 13px 0;
+  padding: 12px 0;
 
   border-bottom: 1px solid var(--color-border, #d9cbc5);
 
-  align-items: center;
+  transition:
+    background-color 180ms ease,
+    padding 180ms ease;
+}
+
+.product-specifications__row:hover {
+  padding-left: 8px;
+  padding-right: 8px;
+
+  background: rgba(111, 75, 71, 0.025);
 }
 
 /* =========================================================
@@ -36,11 +48,12 @@
 
 .product-specifications__label {
   font-family: var(--font-body, sans-serif);
+
   font-size: 9px;
   font-weight: 600;
-  line-height: 1.45;
+  line-height: 1.4;
 
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 
   color: var(--color-text-muted, #8d817b);
@@ -54,13 +67,40 @@
   min-width: 0;
 
   font-family: var(--font-body, sans-serif);
-  font-size: 11px;
+
+  font-size: 12px;
   font-weight: 500;
   line-height: 1.55;
 
   color: var(--color-text, #3f2d2a);
 
+  text-align: right;
+
   overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   PRICE VALUES
+   ========================================================= */
+
+.product-specifications__value::first-letter {
+  color: inherit;
+}
+
+/* =========================================================
+   FIRST ROW
+   ========================================================= */
+
+.product-specifications__row:first-child {
+  padding-top: 18px;
+}
+
+/* =========================================================
+   LAST ROW
+   ========================================================= */
+
+.product-specifications__row:last-child {
+  padding-bottom: 18px;
 }
 
 /* =========================================================
@@ -69,11 +109,19 @@
 
 @media (max-width: 767px) {
   .product-specifications__row {
-    grid-template-columns: minmax(115px, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(120px, 0.75fr) minmax(0, 1.25fr);
+
+    min-height: 54px;
 
     gap: 18px;
+  }
 
-    padding: 12px 0;
+  .product-specifications__label {
+    font-size: 8.5px;
+  }
+
+  .product-specifications__value {
+    font-size: 11.5px;
   }
 }
 
@@ -83,22 +131,37 @@
 
 @media (max-width: 639px) {
   .product-specifications__row {
-    grid-template-columns: minmax(105px, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(105px, 0.9fr) minmax(0, 1.1fr);
+
+    min-height: 52px;
 
     gap: 14px;
-
-    min-height: 44px;
 
     padding: 11px 0;
   }
 
+  .product-specifications__row:first-child {
+    padding-top: 16px;
+  }
+
+  .product-specifications__row:last-child {
+    padding-bottom: 16px;
+  }
+
   .product-specifications__label {
     font-size: 8px;
-    letter-spacing: 0.1em;
+
+    letter-spacing: 0.11em;
   }
 
   .product-specifications__value {
-    font-size: 10px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .product-specifications__row:hover {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
 
@@ -108,7 +171,7 @@
 
 @media (max-width: 390px) {
   .product-specifications__row {
-    grid-template-columns: 92px minmax(0, 1fr);
+    grid-template-columns: minmax(95px, 0.85fr) minmax(0, 1.15fr);
 
     gap: 12px;
   }
@@ -118,7 +181,7 @@
   }
 
   .product-specifications__value {
-    font-size: 9.5px;
+    font-size: 10.5px;
   }
 }
 
@@ -127,7 +190,7 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .product-specifications * {
-    scroll-behavior: auto;
+  .product-specifications__row {
+    transition: none;
   }
 }

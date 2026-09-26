@@ -5,16 +5,16 @@
    ========================================================= */
 
 .quantity-selector {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) 42px;
+  display: inline-flex;
+  align-items: center;
 
-  width: 126px;
-  min-height: 48px;
+  height: 46px;
+  min-width: 132px;
 
-  border: 1px solid var(--color-border-dark, #bcaea8);
+  border: 1px solid var(--color-border-dark, #cdbdb6);
+  background: var(--color-surface, #fffdfb);
 
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #3f2d2a);
+  overflow: hidden;
 }
 
 /* =========================================================
@@ -22,12 +22,12 @@
    ========================================================= */
 
 .quantity-selector__button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: 100%;
-  min-height: 46px;
+  width: 42px;
+  height: 100%;
 
   padding: 0;
 
@@ -35,7 +35,7 @@
   border-radius: 0;
 
   background: transparent;
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-text, #3f2d2a);
 
   cursor: pointer;
 
@@ -44,45 +44,19 @@
     color 180ms ease;
 }
 
-.quantity-selector__button:first-child {
-  border-right: 1px solid var(--color-border, #d8cbc5);
-}
-
-.quantity-selector__button:last-child {
-  border-left: 1px solid var(--color-border, #d8cbc5);
-}
-
 .quantity-selector__button:hover:not(:disabled) {
+  background: var(--color-bg-soft, #f7f1ee);
+  color: var(--color-accent, #6f4b47);
+}
+
+.quantity-selector__button:active:not(:disabled) {
   background: var(--color-accent, #6f4b47);
   color: #ffffff;
 }
 
-.quantity-selector__button:active:not(:disabled) {
-  background: var(--color-accent-dark, #3f2d2a);
-  color: #ffffff;
-}
-
-.quantity-selector__button:focus-visible {
-  position: relative;
-  z-index: 2;
-
-  outline: 2px solid var(--color-accent, #6f4b47);
-  outline-offset: -2px;
-}
-
 .quantity-selector__button:disabled {
-  cursor: not-allowed;
-
-  color: var(--color-text-muted, #8a7c76);
-
   opacity: 0.3;
-}
-
-.quantity-selector__button svg {
-  width: 14px;
-  height: 14px;
-
-  color: currentColor;
+  cursor: not-allowed;
 }
 
 /* =========================================================
@@ -90,29 +64,38 @@
    ========================================================= */
 
 .quantity-selector__value {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  min-width: 0;
+  min-width: 46px;
+  height: 100%;
 
-  color: var(--color-text, #3f2d2a);
+  border-left: 1px solid var(--color-border, #d9cbc5);
+  border-right: 1px solid var(--color-border, #d9cbc5);
 
-  font-family: var(--font-body, Arial, sans-serif);
-  font-size: 10px;
-  font-weight: 700;
+  font-family: var(--font-body, sans-serif);
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1;
 
   letter-spacing: 0.08em;
+
+  color: var(--color-text, #3f2d2a);
+
+  user-select: none;
 }
 
 /* =========================================================
-   HOVER / ACTIVE SAFETY
+   FOCUS
    ========================================================= */
 
-.quantity-selector__button:hover:not(:disabled) svg,
-.quantity-selector__button:active:not(:disabled) svg {
-  color: #ffffff;
+.quantity-selector__button:focus-visible {
+  position: relative;
+  z-index: 2;
+
+  outline: 2px solid var(--color-accent, #6f4b47);
+  outline-offset: -3px;
 }
 
 /* =========================================================
@@ -121,23 +104,17 @@
 
 @media (max-width: 639px) {
   .quantity-selector {
-    grid-template-columns: 38px minmax(0, 1fr) 38px;
-
-    width: 114px;
-    min-height: 45px;
+    height: 44px;
+    min-width: 124px;
   }
 
   .quantity-selector__button {
-    min-height: 43px;
-  }
-
-  .quantity-selector__button svg {
-    width: 13px;
-    height: 13px;
+    width: 40px;
   }
 
   .quantity-selector__value {
-    font-size: 9px;
+    min-width: 44px;
+    font-size: 11px;
   }
 }
 
@@ -147,13 +124,17 @@
 
 @media (max-width: 390px) {
   .quantity-selector {
-    grid-template-columns: 34px minmax(0, 1fr) 34px;
-
-    width: 102px;
+    height: 42px;
+    min-width: 118px;
   }
 
   .quantity-selector__button {
-    min-height: 43px;
+    width: 38px;
+  }
+
+  .quantity-selector__value {
+    min-width: 42px;
+    font-size: 10.5px;
   }
 }
 

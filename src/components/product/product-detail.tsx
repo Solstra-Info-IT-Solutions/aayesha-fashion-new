@@ -27,19 +27,21 @@ import { RecentlyViewed } from "@/components/recently-viewed/recently-viewed";
 import { WishlistButton } from "./wishlist-button";
 
 import {
+  ArrowUpRight,
+  Check,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   Minus,
   Plus,
+  RotateCcw,
+  ShieldCheck,
   ShoppingBag,
   Truck,
-  ShieldCheck,
-  RotateCcw,
   MapPin,
-  Check,
-  ArrowUpRight,
 } from "lucide-react";
+
+import { addRecentlyViewed } from "@/lib/recently-viewed/recently-viewed";
 
 import "./ProductDetail.css";
 
@@ -47,8 +49,6 @@ interface ProductDetailProps {
   product: Product;
   recommendations?: Product[];
 }
-
-import { addRecentlyViewed } from "@/lib/recently-viewed/recently-viewed";
 
 /* ============================================================
    SAFE PRODUCT NORMALIZER
@@ -61,31 +61,23 @@ function normalizeProduct(product: Product): Product {
     ...source,
 
     _id: source._id ?? source.id ?? "",
-
     id: source.id ?? source._id ?? "",
-
     slug: source.slug ?? "",
-
     name: source.name ?? "Product",
-
     categoryId: source.categoryId ?? "",
 
     pricing: {
       mrp: source.pricing?.mrp ?? 0,
-
       sellingPrice:
         source.pricing?.sellingPrice ?? 0,
-
       currency:
         source.pricing?.currency ?? "INR",
     },
 
     inventory: {
       stock: source.inventory?.stock ?? 0,
-
       reserved:
         source.inventory?.reserved ?? 0,
-
       lowStockThreshold:
         source.inventory?.lowStockThreshold ?? 2,
     },
@@ -93,11 +85,9 @@ function normalizeProduct(product: Product): Product {
     content: {
       description:
         source.content?.description ?? "",
-
       descriptionFormat:
         source.content?.descriptionFormat ??
         "plain",
-
       richContent:
         source.content?.richContent,
     },
@@ -109,21 +99,18 @@ function normalizeProduct(product: Product): Product {
     merchandising: {
       isNew:
         source.merchandising?.isNew ?? false,
-
       isFeatured:
         source.merchandising?.isFeatured ??
         false,
-
       isBestSeller:
         source.merchandising?.isBestSeller ??
         false,
 
-      badges:
-        Array.isArray(
-          source.merchandising?.badges,
-        )
-          ? source.merchandising.badges
-          : [],
+      badges: Array.isArray(
+        source.merchandising?.badges,
+      )
+        ? source.merchandising.badges
+        : [],
 
       ranking:
         source.merchandising?.ranking,
@@ -132,13 +119,11 @@ function normalizeProduct(product: Product): Product {
     seo: source.seo
       ? {
           ...source.seo,
-
-          keywords:
-            Array.isArray(
-              source.seo.keywords,
-            )
-              ? source.seo.keywords
-              : [],
+          keywords: Array.isArray(
+            source.seo.keywords,
+          )
+            ? source.seo.keywords
+            : [],
         }
       : undefined,
 
@@ -157,7 +142,7 @@ function normalizeProduct(product: Product): Product {
 }
 
 /* ============================================================
-   FORMAT PRICE
+   PRICE
 ============================================================ */
 
 function formatPrice(value: number): string {
@@ -201,7 +186,7 @@ export function ProductDetail({
   );
 
   /* ==========================================================
-     SAFE PRODUCT
+     SAFE DATA
   ========================================================== */
 
   const safeProduct = useMemo(
@@ -233,9 +218,7 @@ export function ProductDetail({
     useState(1);
 
   const [openSection, setOpenSection] =
-    useState<string | null>(
-      "description",
-    );
+    useState<string | null>("description");
 
   const [pincode, setPincode] =
     useState("");
@@ -273,7 +256,7 @@ export function ProductDetail({
   );
 
   /* ==========================================================
-     PRODUCT MEDIA
+     MEDIA
   ========================================================== */
 
   const media = Array.isArray(
@@ -292,7 +275,7 @@ export function ProductDetail({
     null;
 
   /* ==========================================================
-     LOAD CATEGORY
+     CATEGORY
   ========================================================== */
 
   useEffect(() => {
@@ -343,7 +326,7 @@ export function ProductDetail({
   }, [safeProduct.categoryId]);
 
   /* ==========================================================
-     RESET PRODUCT STATE
+     RESET
   ========================================================== */
 
   useEffect(() => {
@@ -360,7 +343,9 @@ export function ProductDetail({
       return;
     }
 
-    addRecentlyViewed(safeProduct._id);
+    addRecentlyViewed(
+      safeProduct._id,
+    );
   }, [safeProduct._id]);
 
   /* ==========================================================
@@ -498,7 +483,9 @@ export function ProductDetail({
      ACCORDION
   ========================================================== */
 
-  function toggleSection(section: string) {
+  function toggleSection(
+    section: string,
+  ) {
     setOpenSection((current) =>
       current === section
         ? null
@@ -524,12 +511,14 @@ export function ProductDetail({
 
   return (
     <main className="product-detail">
+
       {/* =====================================================
           PRODUCT HERO
       ===================================================== */}
 
       <section className="product-detail__hero">
         <div className="product-detail__container">
+
           {/* Breadcrumb */}
 
           <nav
@@ -555,9 +544,19 @@ export function ProductDetail({
                   /
                 </span>
 
-                <span className="product-detail__breadcrumb-item">
+                <button
+                  type="button"
+                  className="product-detail__breadcrumb-link"
+                  onClick={() =>
+                    router.push(
+                      `/shop?category=${encodeURIComponent(
+                        safeProduct.categoryId,
+                      )}`,
+                    )
+                  }
+                >
                   {categoryName}
-                </span>
+                </button>
               </>
             )}
 
@@ -573,14 +572,18 @@ export function ProductDetail({
             </span>
           </nav>
 
-          {/* Main Product Grid */}
+          {/* =================================================
+              MAIN PRODUCT GRID
+          ================================================= */}
 
           <div className="product-detail__main-grid">
+
             {/* =================================================
                 MEDIA
             ================================================= */}
 
             <div className="product-detail__media-column">
+
               <div
                 className={[
                   "product-detail__media-layout",
@@ -591,6 +594,7 @@ export function ProductDetail({
                   .filter(Boolean)
                   .join(" ")}
               >
+
                 {/* Thumbnail Rail */}
 
                 {media.length > 1 && (
@@ -639,6 +643,15 @@ export function ProductDetail({
                             }
                             className="product-detail__thumbnail-image"
                           />
+
+                          <span className="product-detail__thumbnail-index">
+                            {String(
+                              index + 1,
+                            ).padStart(
+                              2,
+                              "0",
+                            )}
+                          </span>
                         </button>
                       ),
                     )}
@@ -648,6 +661,7 @@ export function ProductDetail({
                 {/* Main Media */}
 
                 <div className="product-detail__main-media">
+
                   {currentMedia?.src ? (
                     <img
                       src={currentMedia.src}
@@ -665,46 +679,7 @@ export function ProductDetail({
                     </div>
                   )}
 
-                  {/* Image Controls */}
-
-                  {media.length > 1 && (
-                    <>
-                      <button
-                        type="button"
-                        onClick={
-                          previousImage
-                        }
-                        aria-label="Previous image"
-                        className="product-detail__image-control product-detail__image-control--previous"
-                      >
-                        <ChevronLeft
-                          aria-hidden="true"
-                        />
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={
-                          nextImage
-                        }
-                        aria-label="Next image"
-                        className="product-detail__image-control product-detail__image-control--next"
-                      >
-                        <ChevronRight
-                          aria-hidden="true"
-                        />
-                      </button>
-
-                      <div
-                        className="product-detail__image-counter"
-                        aria-live="polite"
-                      >
-                        {selectedImage + 1}
-                        {" / "}
-                        {media.length}
-                      </div>
-                    </>
-                  )}
+                  <div className="product-detail__media-overlay" />
 
                   {/* Badge */}
 
@@ -724,6 +699,71 @@ export function ProductDetail({
                         )}
                     </div>
                   )}
+
+                  {/* Image Counter */}
+
+                  {media.length > 1 && (
+                    <div
+                      className="product-detail__image-counter"
+                      aria-live="polite"
+                    >
+                      <span>
+                        {String(
+                          selectedImage + 1,
+                        ).padStart(
+                          2,
+                          "0",
+                        )}
+                      </span>
+
+                      <span className="product-detail__image-counter-divider">
+                        /
+                      </span>
+
+                      <span>
+                        {String(
+                          media.length,
+                        ).padStart(
+                          2,
+                          "0",
+                        )}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Navigation */}
+
+                  {media.length > 1 && (
+                    <div className="product-detail__image-controls">
+
+                      <button
+                        type="button"
+                        onClick={
+                          previousImage
+                        }
+                        aria-label="Previous image"
+                        className="product-detail__image-control"
+                      >
+                        <ChevronLeft
+                          aria-hidden="true"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={
+                          nextImage
+                        }
+                        aria-label="Next image"
+                        className="product-detail__image-control"
+                      >
+                        <ChevronRight
+                          aria-hidden="true"
+                        />
+                      </button>
+
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -734,7 +774,8 @@ export function ProductDetail({
 
             <div className="product-detail__information">
               <div className="product-detail__information-inner">
-                {/* Editorial Label */}
+
+                {/* Editorial label */}
 
                 <div className="product-detail__eyebrow">
                   <span className="product-detail__eyebrow-line" />
@@ -746,7 +787,9 @@ export function ProductDetail({
                 {/* Title */}
 
                 <div className="product-detail__title-row">
+
                   <div className="product-detail__title-content">
+
                     {categoryName && (
                       <p className="product-detail__category">
                         {categoryName}
@@ -756,6 +799,7 @@ export function ProductDetail({
                     <h1 className="product-detail__title">
                       {safeProduct.name}
                     </h1>
+
                   </div>
 
                   <div className="product-detail__title-actions">
@@ -764,19 +808,29 @@ export function ProductDetail({
                         safeProduct.name
                       }
                     />
+
                     <WishlistButton
-  productId={safeProduct._id}
-  productName={safeProduct.name}
-  className="product-detail__wishlist"
-/>
-                    
+                      productId={
+                        safeProduct._id
+                      }
+                      productName={
+                        safeProduct.name
+                      }
+                      className="product-detail__wishlist"
+                    />
                   </div>
                 </div>
+
+                {/* Intro divider */}
+
+                <div className="product-detail__title-divider" />
 
                 {/* Price */}
 
                 <div className="product-detail__price-section">
+
                   <div className="product-detail__price-row">
+
                     <span className="product-detail__selling-price">
                       {formatPrice(
                         sellingPrice,
@@ -787,7 +841,9 @@ export function ProductDetail({
                       sellingPrice && (
                       <>
                         <span className="product-detail__mrp">
-                          {formatPrice(mrp)}
+                          {formatPrice(
+                            mrp,
+                          )}
                         </span>
 
                         {discount > 0 && (
@@ -797,6 +853,7 @@ export function ProductDetail({
                         )}
                       </>
                     )}
+
                   </div>
 
                   <p className="product-detail__tax-note">
@@ -808,9 +865,11 @@ export function ProductDetail({
                 {/* Availability */}
 
                 <div className="product-detail__availability">
-                  <span className="product-detail__meta-label">
+
+                  <div className="product-detail__availability-label">
+                    <span className="product-detail__status-dot" />
                     Availability
-                  </span>
+                  </div>
 
                   <span
                     className={[
@@ -832,12 +891,15 @@ export function ProductDetail({
                         ? `Only ${maxStock} left`
                         : `${maxStock} available`}
                   </span>
+
                 </div>
 
                 {/* Purchase */}
 
                 <div className="product-detail__purchase">
+
                   <div className="product-detail__purchase-heading">
+
                     <div>
                       <span className="product-detail__meta-label">
                         Quantity
@@ -854,12 +916,15 @@ export function ProductDetail({
                         ? `${maxStock} in stock`
                         : "Unavailable"}
                     </span>
+
                   </div>
 
                   <div className="product-detail__purchase-row">
+
                     {/* Quantity */}
 
                     <div className="product-detail__quantity">
+
                       <button
                         type="button"
                         onClick={
@@ -881,7 +946,12 @@ export function ProductDetail({
                         className="product-detail__quantity-value"
                         aria-live="polite"
                       >
-                        {quantity}
+                        {String(
+                          quantity,
+                        ).padStart(
+                          2,
+                          "0",
+                        )}
                       </span>
 
                       <button
@@ -901,6 +971,7 @@ export function ProductDetail({
                           aria-hidden="true"
                         />
                       </button>
+
                     </div>
 
                     {/* Add To Bag */}
@@ -918,6 +989,7 @@ export function ProductDetail({
                       className="product-detail__add-button"
                     >
                       <span className="product-detail__add-button-main">
+
                         <ShoppingBag
                           aria-hidden="true"
                         />
@@ -927,6 +999,7 @@ export function ProductDetail({
                             ? "Adding..."
                             : "Add to Bag"}
                         </span>
+
                       </span>
 
                       <span
@@ -936,6 +1009,7 @@ export function ProductDetail({
                         ↗
                       </span>
                     </button>
+
                   </div>
 
                   {/* Buy Now */}
@@ -952,16 +1026,25 @@ export function ProductDetail({
                     }
                     className="product-detail__buy-button"
                   >
-                    {buyingNow
-                      ? "Processing..."
-                      : "Buy Now"}
+                    <span>
+                      {buyingNow
+                        ? "Processing..."
+                        : "Buy Now"}
+                    </span>
+
+                    <ArrowUpRight
+                      aria-hidden="true"
+                    />
                   </button>
+
                 </div>
 
                 {/* Delivery */}
 
                 <div className="product-detail__delivery">
+
                   <div className="product-detail__delivery-header">
+
                     <div className="product-detail__delivery-icon-wrap">
                       <MapPin
                         aria-hidden="true"
@@ -969,7 +1052,9 @@ export function ProductDetail({
                     </div>
 
                     <div className="product-detail__delivery-content">
+
                       <div className="product-detail__delivery-heading">
+
                         <p className="product-detail__delivery-title">
                           Check Delivery
                         </p>
@@ -977,6 +1062,7 @@ export function ProductDetail({
                         <span>
                           India
                         </span>
+
                       </div>
 
                       <p className="product-detail__delivery-description">
@@ -987,6 +1073,7 @@ export function ProductDetail({
                       </p>
 
                       <div className="product-detail__delivery-form">
+
                         <label
                           htmlFor="product-delivery-pincode"
                           className="sr-only"
@@ -1043,6 +1130,7 @@ export function ProductDetail({
                         >
                           Check
                         </button>
+
                       </div>
 
                       {deliveryChecked && (
@@ -1060,6 +1148,7 @@ export function ProductDetail({
                           </span>
                         </div>
                       )}
+
                     </div>
                   </div>
                 </div>
@@ -1067,6 +1156,7 @@ export function ProductDetail({
                 {/* Service Features */}
 
                 <div className="product-detail__service-features">
+
                   <div className="product-detail__service-feature">
                     <Truck
                       aria-hidden="true"
@@ -1114,7 +1204,9 @@ export function ProductDetail({
                       </p>
                     </div>
                   </div>
+
                 </div>
+
               </div>
             </div>
           </div>
@@ -1126,12 +1218,17 @@ export function ProductDetail({
       ===================================================== */}
 
       <section className="product-detail__information-section">
+
         <div className="product-detail__container">
+
           <div className="product-detail__details-grid">
+
             {/* Accordions */}
 
             <div className="product-detail__accordions">
+
               <div className="product-detail__section-intro">
+
                 <div className="product-detail__eyebrow">
                   <span className="product-detail__eyebrow-line" />
                   <span>
@@ -1142,12 +1239,20 @@ export function ProductDetail({
                 <h2 className="product-detail__section-title">
                   Product Details
                 </h2>
+
+                <p className="product-detail__section-description">
+                  Everything you need to know
+                  about this piece.
+                </p>
+
               </div>
 
               <div className="product-detail__accordion-list">
+
                 {/* Description */}
 
                 <div className="product-detail__accordion">
+
                   <button
                     type="button"
                     onClick={() =>
@@ -1162,6 +1267,10 @@ export function ProductDetail({
                     className="product-detail__accordion-trigger"
                   >
                     <span>
+                      <small>
+                        01
+                      </small>
+
                       Description
                     </span>
 
@@ -1179,6 +1288,7 @@ export function ProductDetail({
                   {openSection ===
                     "description" && (
                     <div className="product-detail__accordion-content">
+
                       {safeProduct.content
                         ?.description ? (
                         <div
@@ -1196,13 +1306,16 @@ export function ProductDetail({
                           updated soon.
                         </p>
                       )}
+
                     </div>
                   )}
+
                 </div>
 
                 {/* Product Details */}
 
                 <div className="product-detail__accordion">
+
                   <button
                     type="button"
                     onClick={() =>
@@ -1217,6 +1330,10 @@ export function ProductDetail({
                     className="product-detail__accordion-trigger"
                   >
                     <span>
+                      <small>
+                        02
+                      </small>
+
                       Product Details
                     </span>
 
@@ -1234,6 +1351,7 @@ export function ProductDetail({
                   {openSection ===
                     "details" && (
                     <div className="product-detail__details-table">
+
                       {[
                         [
                           "Category",
@@ -1246,7 +1364,8 @@ export function ProductDetail({
                         ],
                         [
                           "Currency",
-                          safeProduct.pricing
+                          safeProduct
+                            .pricing
                             ?.currency ??
                             "INR",
                         ],
@@ -1272,13 +1391,16 @@ export function ProductDetail({
                           </div>
                         ),
                       )}
+
                     </div>
                   )}
+
                 </div>
 
                 {/* Shipping */}
 
                 <div className="product-detail__accordion">
+
                   <button
                     type="button"
                     onClick={() =>
@@ -1293,6 +1415,10 @@ export function ProductDetail({
                     className="product-detail__accordion-trigger"
                   >
                     <span>
+                      <small>
+                        03
+                      </small>
+
                       Shipping & Delivery
                     </span>
 
@@ -1318,11 +1444,13 @@ export function ProductDetail({
                       address.
                     </p>
                   )}
+
                 </div>
 
                 {/* Returns */}
 
                 <div className="product-detail__accordion">
+
                   <button
                     type="button"
                     onClick={() =>
@@ -1337,6 +1465,10 @@ export function ProductDetail({
                     className="product-detail__accordion-trigger"
                   >
                     <span>
+                      <small>
+                        04
+                      </small>
+
                       Returns & Exchange
                     </span>
 
@@ -1361,13 +1493,16 @@ export function ProductDetail({
                       product.
                     </p>
                   )}
+
                 </div>
+
               </div>
             </div>
 
             {/* Brand Panel */}
 
             <aside className="product-detail__brand-panel">
+
               <div className="product-detail__brand-mark">
                 AA
               </div>
@@ -1392,6 +1527,7 @@ export function ProductDetail({
               <div className="product-detail__brand-divider" />
 
               <div className="product-detail__brand-meta">
+
                 <div>
                   <p className="product-detail__brand-meta-label">
                     Price
@@ -1415,8 +1551,11 @@ export function ProductDetail({
                       : "Currently unavailable"}
                   </p>
                 </div>
+
               </div>
+
             </aside>
+
           </div>
         </div>
       </section>
@@ -1428,11 +1567,16 @@ export function ProductDetail({
       {safeRecommendations.length >
         0 && (
         <section className="product-detail__recommendations">
+
           <div className="product-detail__container">
+
             <div className="product-detail__recommendations-header">
+
               <div>
+
                 <div className="product-detail__eyebrow">
                   <span className="product-detail__eyebrow-line" />
+
                   <span>
                     You May Also Like
                   </span>
@@ -1441,6 +1585,7 @@ export function ProductDetail({
                 <h2 className="product-detail__section-title">
                   More from this edit
                 </h2>
+
               </div>
 
               <button
@@ -1462,9 +1607,11 @@ export function ProductDetail({
                   aria-hidden="true"
                 />
               </button>
+
             </div>
 
             <div className="product-detail__recommendation-grid">
+
               {safeRecommendations.map(
                 (item) => {
                   const image =
@@ -1472,7 +1619,9 @@ export function ProductDetail({
                       item.media,
                     )
                       ? item.media.find(
-                          (mediaItem) =>
+                          (
+                            mediaItem,
+                          ) =>
                             mediaItem?.type ===
                               "image" &&
                             Boolean(
@@ -1492,7 +1641,9 @@ export function ProductDetail({
                       }
                       className="product-detail__recommendation"
                     >
+
                       <div className="product-detail__recommendation-media">
+
                         {image ? (
                           <img
                             src={image.src}
@@ -1511,9 +1662,11 @@ export function ProductDetail({
                         <span className="product-detail__recommendation-arrow">
                           ↗
                         </span>
+
                       </div>
 
                       <div className="product-detail__recommendation-content">
+
                         <p className="product-detail__recommendation-name">
                           {item.name}
                         </p>
@@ -1525,12 +1678,16 @@ export function ProductDetail({
                               0,
                           )}
                         </p>
+
                       </div>
+
                     </button>
                   );
                 },
               )}
+
             </div>
+
           </div>
         </section>
       )}
@@ -1540,8 +1697,11 @@ export function ProductDetail({
       ===================================================== */}
 
       <RecentlyViewed
-        currentProductId={safeProduct._id}
+        currentProductId={
+          safeProduct._id
+        }
       />
+
     </main>
   );
 }

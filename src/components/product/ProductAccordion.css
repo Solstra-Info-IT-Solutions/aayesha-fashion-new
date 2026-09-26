@@ -7,7 +7,22 @@
 .product-accordion {
   width: 100%;
 
-  border-top: 1px solid var(--color-border, #d9cbc5);
+  border-top: 1px solid
+    var(--color-border, #d9cbc5);
+
+  background: transparent;
+
+  transition:
+    background-color 220ms ease;
+}
+
+/* =========================================================
+   OPEN STATE
+   ========================================================= */
+
+.product-accordion--open {
+  background:
+    rgba(111, 75, 71, 0.018);
 }
 
 /* =========================================================
@@ -16,8 +31,10 @@
 
 .product-accordion__trigger {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
+
   gap: 24px;
 
   width: 100%;
@@ -26,26 +43,46 @@
   padding: 0;
 
   border: 0;
-  border-bottom: 1px solid var(--color-border, #d9cbc5);
+
+  border-bottom: 1px solid
+    var(--color-border, #d9cbc5);
 
   background: transparent;
-  color: var(--color-text, #3f2d2a);
+
+  color:
+    var(--color-text, #3f2d2a);
 
   text-align: left;
 
   cursor: pointer;
 
   transition:
-    color 180ms ease,
-    background-color 180ms ease;
+    color 220ms ease,
+    background-color 220ms ease,
+    padding 260ms
+      cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* =========================================================
+   TRIGGER HOVER
+   ========================================================= */
+
 .product-accordion__trigger:hover {
-  color: var(--color-accent, #6f4b47);
+  color:
+    var(--color-accent, #6f4b47);
+
+  background:
+    rgba(111, 75, 71, 0.025);
+
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .product-accordion__trigger:active {
   color: #7f5953;
+
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 /* =========================================================
@@ -55,20 +92,61 @@
 .product-accordion__title {
   display: block;
 
-  font-family: var(--font-body, sans-serif);
+  font-family:
+    var(--font-body, sans-serif);
+
   font-size: 11px;
   font-weight: 600;
+
   line-height: 1.4;
 
   letter-spacing: 0.12em;
+
   text-transform: uppercase;
 
   color: currentColor;
+
+  transition:
+    letter-spacing 220ms ease;
+}
+
+.product-accordion__trigger:hover
+  .product-accordion__title {
+  letter-spacing: 0.145em;
+}
+
+/* =========================================================
+   INDICATOR
+========================================================= */
+
+.product-accordion__indicator {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  border: 1px solid
+    var(--color-border, #d9cbc5);
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  transition:
+    background-color 260ms ease,
+    border-color 260ms ease,
+    transform 300ms
+      cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* =========================================================
    ICON
-   ========================================================= */
+========================================================= */
 
 .product-accordion__icon {
   width: 18px;
@@ -76,33 +154,95 @@
 
   flex: 0 0 auto;
 
-  color: var(--color-text-secondary, #6f625d);
+  color:
+    var(
+      --color-text-secondary,
+      #6f625d
+    );
 
   stroke-width: 1.35;
 
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    color 180ms ease;
+    transform 350ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    color 220ms ease;
+}
+
+.product-accordion__trigger:hover
+  .product-accordion__indicator {
+  border-color:
+    var(--color-accent, #6f4b47);
+
+  background:
+    var(--color-accent, #6f4b47);
+
+  transform: scale(1.04);
 }
 
 .product-accordion__trigger:hover
   .product-accordion__icon {
-  color: var(--color-accent, #6f4b47);
+  color: #ffffff;
 }
 
 .product-accordion__icon--open {
   transform: rotate(180deg);
 
-  color: var(--color-accent, #6f4b47);
+  color:
+    var(--color-accent, #6f4b47);
+}
+
+/* =========================================================
+   OPEN INDICATOR
+========================================================= */
+
+.product-accordion--open
+  .product-accordion__indicator {
+  border-color:
+    var(--color-accent, #6f4b47);
+
+  background:
+    var(--color-accent, #6f4b47);
+}
+
+.product-accordion--open
+  .product-accordion__icon {
+  color: #ffffff;
 }
 
 /* =========================================================
    FOCUS
-   ========================================================= */
+========================================================= */
 
 .product-accordion__trigger:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid
+    var(--color-accent, #6f4b47);
+
   outline-offset: 4px;
+}
+
+/* =========================================================
+   CONTENT WRAPPER
+   ========================================================= */
+
+.product-accordion__content-wrapper {
+  display: grid;
+
+  grid-template-rows: 0fr;
+
+  opacity: 0;
+
+  overflow: hidden;
+
+  transition:
+    grid-template-rows 360ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease;
+}
+
+.product-accordion__content-wrapper--open {
+  grid-template-rows: 1fr;
+
+  opacity: 1;
 }
 
 /* =========================================================
@@ -110,23 +250,47 @@
    ========================================================= */
 
 .product-accordion__content {
-  padding: 22px 0 24px;
+  min-height: 0;
 
-  border-bottom: 1px solid var(--color-border, #d9cbc5);
+  overflow: hidden;
 
-  font-family: var(--font-body, sans-serif);
+  padding: 0;
+
+  border-bottom: 1px solid
+    var(--color-border, #d9cbc5);
+
+  font-family:
+    var(--font-body, sans-serif);
+
   font-size: 12px;
   font-weight: 400;
+
   line-height: 1.75;
 
-  color: var(--color-text-secondary, #6f625d);
+  color:
+    var(
+      --color-text-secondary,
+      #6f625d
+    );
 
-  animation: product-accordion-content-in 220ms ease-out both;
+  transform: translateY(-6px);
+
+  transition:
+    padding 360ms
+      cubic-bezier(0.22, 1, 0.36, 1),
+    transform 360ms
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-accordion__content-wrapper--open
+  .product-accordion__content {
+  padding: 22px 0 24px;
+
+  transform: translateY(0);
 }
 
 /* =========================================================
    CONTENT ELEMENTS
-   Keep rich children readable without changing markup
    ========================================================= */
 
 .product-accordion__content p {
@@ -140,6 +304,7 @@
 .product-accordion__content ul,
 .product-accordion__content ol {
   margin: 0;
+
   padding-left: 18px;
 }
 
@@ -149,21 +314,38 @@
 
 .product-accordion__content strong {
   font-weight: 600;
-  color: var(--color-text, #3f2d2a);
+
+  color:
+    var(--color-text, #3f2d2a);
 }
 
 .product-accordion__content a {
-  color: var(--color-accent, #6f4b47);
+  color:
+    var(--color-accent, #6f4b47);
+
   text-decoration: underline;
+
   text-underline-offset: 3px;
+
+  transition:
+    color 180ms ease;
+}
+
+.product-accordion__content a:hover {
+  color:
+    var(
+      --color-accent-dark,
+      #3f2d2a
+    );
 }
 
 /* =========================================================
-   TABLE SUPPORT
-   ========================================================= */
+   TABLE
+========================================================= */
 
 .product-accordion__content table {
   width: 100%;
+
   border-collapse: collapse;
 }
 
@@ -171,20 +353,29 @@
 .product-accordion__content td {
   padding: 10px 12px;
 
-  border-bottom: 1px solid var(--color-border, #d9cbc5);
+  border-bottom: 1px solid
+    var(--color-border, #d9cbc5);
 
   text-align: left;
+
   vertical-align: top;
 }
 
 .product-accordion__content th {
   font-weight: 600;
-  color: var(--color-text, #3f2d2a);
+
+  color:
+    var(--color-text, #3f2d2a);
+}
+
+.product-accordion__content tr:last-child
+  td {
+  border-bottom: 0;
 }
 
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 639px) {
   .product-accordion__trigger {
@@ -193,9 +384,27 @@
     gap: 16px;
   }
 
+  .product-accordion__trigger:hover {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
   .product-accordion__title {
     font-size: 10px;
+
     letter-spacing: 0.1em;
+  }
+
+  .product-accordion__trigger:hover
+    .product-accordion__title {
+    letter-spacing: 0.12em;
+  }
+
+  .product-accordion__indicator {
+    width: 32px;
+    height: 32px;
+
+    flex-basis: 32px;
   }
 
   .product-accordion__icon {
@@ -203,15 +412,20 @@
     height: 17px;
   }
 
-  .product-accordion__content {
+  .product-accordion__content-wrapper--open
+    .product-accordion__content {
     padding: 18px 0 20px;
+  }
 
+  .product-accordion__content {
     font-size: 11.5px;
+
     line-height: 1.7;
   }
 
   .product-accordion__content table {
     display: block;
+
     overflow-x: auto;
 
     white-space: nowrap;
@@ -220,15 +434,29 @@
 
 /* =========================================================
    SMALL MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 390px) {
   .product-accordion__trigger {
     min-height: 56px;
+
+    gap: 12px;
   }
 
   .product-accordion__title {
     font-size: 9.5px;
+  }
+
+  .product-accordion__indicator {
+    width: 30px;
+    height: 30px;
+
+    flex-basis: 30px;
+  }
+
+  .product-accordion__icon {
+    width: 16px;
+    height: 16px;
   }
 
   .product-accordion__content {
@@ -237,30 +465,18 @@
 }
 
 /* =========================================================
-   ANIMATION
-   ========================================================= */
-
-@keyframes product-accordion-content-in {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* =========================================================
    REDUCED MOTION
-   ========================================================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+  .product-accordion,
   .product-accordion__trigger,
+  .product-accordion__title,
+  .product-accordion__indicator,
   .product-accordion__icon,
-  .product-accordion__content {
+  .product-accordion__content-wrapper,
+  .product-accordion__content,
+  .product-accordion__content a {
     transition: none;
-    animation: none;
   }
 }

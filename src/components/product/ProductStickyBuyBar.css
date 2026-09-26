@@ -1,7 +1,7 @@
 /* =========================================================
    AAYESHA FASHION
    PRODUCT STICKY BUY BAR
-   Editorial / Quiet Indian Luxury
+   Editorial / Quiet Luxury
    ========================================================= */
 
 .product-sticky-buy-bar {
@@ -10,17 +10,32 @@
   bottom: 0;
   left: 0;
 
-  z-index: 900;
+  z-index: 9000;
 
   width: 100%;
 
-  padding: 10px 16px;
+  padding:
+    12px
+    max(20px, env(safe-area-inset-right))
+    calc(12px + env(safe-area-inset-bottom))
+    max(20px, env(safe-area-inset-left));
 
-  border-top: 1px solid var(--color-border-dark, #b9a7a0);
+  background: rgba(251, 248, 245, 0.96);
 
-  background: rgba(247, 243, 240, 0.97);
+  border-top: 1px solid
+    var(--color-border, #d9cbc5);
 
-  box-shadow: 0 -8px 30px rgba(63, 45, 42, 0.08);
+  box-shadow:
+    0 -12px 36px rgba(63, 45, 42, 0.08);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  animation:
+    product-sticky-buy-bar-in
+    260ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
 }
 
 /* =========================================================
@@ -32,12 +47,11 @@
   align-items: center;
   justify-content: space-between;
 
-  width: 100%;
-  max-width: 1180px;
+  gap: 24px;
+
+  width: min(100%, 1440px);
 
   margin: 0 auto;
-
-  gap: 24px;
 }
 
 /* =========================================================
@@ -49,8 +63,13 @@
 
   display: flex;
   align-items: baseline;
-  gap: 14px;
+
+  gap: 18px;
 }
+
+/* =========================================================
+   PRODUCT NAME
+   ========================================================= */
 
 .product-sticky-buy-bar__name {
   min-width: 0;
@@ -59,31 +78,43 @@
 
   overflow: hidden;
 
-  font-family: var(--font-body, sans-serif);
-  font-size: 10px;
+  font-family:
+    var(--font-body, sans-serif);
+
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 
-  color: var(--color-text, #3f2d2a);
+  color:
+    var(--color-text, #3f2d2a);
 
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* =========================================================
+   PRICE
+   ========================================================= */
 
 .product-sticky-buy-bar__price {
   flex: 0 0 auto;
 
   margin: 0;
 
-  font-family: var(--font-body, sans-serif);
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.4;
+  font-family:
+    var(--font-display, "Cormorant Garamond", serif);
 
-  color: var(--color-accent, #6f4b47);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+
+  letter-spacing: -0.015em;
+
+  color:
+    var(--color-text, #3f2d2a);
 }
 
 /* =========================================================
@@ -91,30 +122,37 @@
    ========================================================= */
 
 .product-sticky-buy-bar__button {
+  flex: 0 0 auto;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 auto;
-
-  min-width: 190px;
-  min-height: 46px;
-
-  padding: 0 22px;
-
   gap: 10px;
 
-  border: 1px solid var(--color-accent, #6f4b47);
+  min-width: 190px;
+  min-height: 48px;
 
-  background: var(--color-accent, #6f4b47);
-  color: var(--color-text-inverse, #ffffff);
+  padding: 0 24px;
 
-  font-family: var(--font-body, sans-serif);
-  font-size: 9px;
+  border: 1px solid
+    var(--color-accent, #6f4b47);
+
+  border-radius: 0;
+
+  background:
+    var(--color-accent, #6f4b47);
+
+  color: #ffffff;
+
+  font-family:
+    var(--font-body, sans-serif);
+
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
 
-  letter-spacing: 0.16em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 
   cursor: pointer;
@@ -122,44 +160,70 @@
   transition:
     background-color 180ms ease,
     border-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
+    transform 180ms ease,
+    opacity 180ms ease;
 }
+
+/* =========================================================
+   BUTTON HOVER
+   ========================================================= */
+
+.product-sticky-buy-bar__button:hover:not(:disabled) {
+  border-color:
+    var(--color-text, #3f2d2a);
+
+  background:
+    var(--color-text, #3f2d2a);
+
+  color: #ffffff;
+}
+
+/* =========================================================
+   BUTTON ACTIVE
+   ========================================================= */
+
+.product-sticky-buy-bar__button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   BUTTON DISABLED
+   ========================================================= */
+
+.product-sticky-buy-bar__button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   BUTTON FOCUS
+   ========================================================= */
+
+.product-sticky-buy-bar__button:focus-visible {
+  outline: 2px solid
+    var(--color-accent, #6f4b47);
+
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   ICON
+   ========================================================= */
 
 .product-sticky-buy-bar__button svg {
   flex: 0 0 auto;
 
   color: currentColor;
-  stroke: currentColor;
+
+  stroke-width: 1.5;
+
+  transition:
+    transform 180ms ease;
 }
 
-.product-sticky-buy-bar__button:hover:not(:disabled) {
-  border-color: var(--color-accent-dark, #3f2d2a);
-
-  background: var(--color-accent-dark, #3f2d2a);
-  color: #ffffff;
-}
-
-.product-sticky-buy-bar__button:active:not(:disabled) {
-  background: #7f5953;
-  border-color: #7f5953;
-  color: #ffffff;
-
-  transform: translateY(1px);
-}
-
-.product-sticky-buy-bar__button:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
-  outline-offset: 3px;
-}
-
-.product-sticky-buy-bar__button:disabled {
-  border-color: var(--color-accent, #6f4b47);
-
-  background: var(--color-accent, #6f4b47);
-  color: rgba(255, 255, 255, 0.62);
-
-  cursor: not-allowed;
+.product-sticky-buy-bar__button:hover:not(:disabled) svg {
+  transform: translateY(-1px);
 }
 
 /* =========================================================
@@ -168,7 +232,11 @@
 
 @media (max-width: 767px) {
   .product-sticky-buy-bar {
-    padding: 9px 14px;
+    padding:
+      10px
+      max(16px, env(safe-area-inset-right))
+      calc(10px + env(safe-area-inset-bottom))
+      max(16px, env(safe-area-inset-left));
   }
 
   .product-sticky-buy-bar__inner {
@@ -176,14 +244,24 @@
   }
 
   .product-sticky-buy-bar__product {
-    gap: 10px;
+    gap: 12px;
+  }
+
+  .product-sticky-buy-bar__name {
+    font-size: 9px;
+  }
+
+  .product-sticky-buy-bar__price {
+    font-size: 20px;
   }
 
   .product-sticky-buy-bar__button {
-    min-width: 170px;
-    min-height: 44px;
+    min-width: 165px;
+    min-height: 46px;
 
     padding-inline: 18px;
+
+    font-size: 9px;
   }
 }
 
@@ -193,11 +271,11 @@
 
 @media (max-width: 639px) {
   .product-sticky-buy-bar {
-    padding: 8px 12px;
-
-    padding-bottom: calc(
-      8px + env(safe-area-inset-bottom)
-    );
+    padding:
+      9px
+      max(12px, env(safe-area-inset-right))
+      calc(9px + env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
   }
 
   .product-sticky-buy-bar__inner {
@@ -211,33 +289,41 @@
   }
 
   .product-sticky-buy-bar__name {
-    max-width: 150px;
+    display: block;
+
+    max-width: 145px;
+
+    margin-bottom: 4px;
 
     font-size: 8px;
-    letter-spacing: 0.08em;
+
+    letter-spacing: 0.09em;
   }
 
   .product-sticky-buy-bar__price {
-    margin-top: 4px;
+    display: block;
 
-    font-size: 10px;
+    font-size: 19px;
   }
 
   .product-sticky-buy-bar__button {
-    min-width: 148px;
-    min-height: 44px;
+    min-width: 0;
+    width: 150px;
+
+    min-height: 45px;
 
     padding: 0 14px;
 
-    gap: 7px;
+    gap: 8px;
 
-    font-size: 8px;
-    letter-spacing: 0.12em;
+    font-size: 8.5px;
+
+    letter-spacing: 0.11em;
   }
 
   .product-sticky-buy-bar__button svg {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -247,30 +333,55 @@
 
 @media (max-width: 390px) {
   .product-sticky-buy-bar {
-    padding-inline: 10px;
+    padding:
+      8px
+      max(10px, env(safe-area-inset-right))
+      calc(8px + env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-left));
   }
 
   .product-sticky-buy-bar__inner {
-    gap: 8px;
+    gap: 10px;
   }
 
   .product-sticky-buy-bar__name {
-    max-width: 125px;
+    max-width: 120px;
 
     font-size: 7.5px;
   }
 
   .product-sticky-buy-bar__price {
-    font-size: 9.5px;
+    font-size: 18px;
   }
 
   .product-sticky-buy-bar__button {
-    min-width: 132px;
-    min-height: 42px;
+    width: 136px;
+
+    min-height: 43px;
 
     padding-inline: 10px;
 
-    font-size: 7.5px;
+    font-size: 8px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 340px) {
+  .product-sticky-buy-bar__name {
+    max-width: 95px;
+  }
+
+  .product-sticky-buy-bar__button {
+    width: 125px;
+
+    padding-inline: 8px;
+  }
+
+  .product-sticky-buy-bar__button svg {
+    display: none;
   }
 }
 
@@ -279,11 +390,30 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .product-sticky-buy-bar__button {
-    transition: none;
+  .product-sticky-buy-bar {
+    animation: none;
   }
 
-  .product-sticky-buy-bar__button:active:not(:disabled) {
-    transform: none;
+  .product-sticky-buy-bar__button,
+  .product-sticky-buy-bar__button svg {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes product-sticky-buy-bar-in {
+  from {
+    opacity: 0;
+
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
   }
 }

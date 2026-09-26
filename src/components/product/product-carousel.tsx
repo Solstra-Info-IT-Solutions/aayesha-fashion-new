@@ -1,7 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+} from "lucide-react";
 
 import type { Product } from "@/types/product";
 import { ProductCard } from "@/components/product/product-card";
@@ -26,16 +29,24 @@ export function ProductCarousel({
       return;
     }
 
-    const amount =
-      container.clientWidth *
-      (window.innerWidth >= 1280
-        ? 0.76
-        : window.innerWidth >= 1024
-          ? 0.82
-          : 0.82);
+    const firstItem =
+      container.querySelector<HTMLElement>(
+        ".product-carousel__item",
+      );
+
+    const itemWidth =
+      firstItem?.getBoundingClientRect().width ??
+      container.clientWidth * 0.76;
+
+    const gap = 20;
+
+    const amount = itemWidth + gap;
 
     container.scrollBy({
-      left: direction === "next" ? amount : -amount,
+      left:
+        direction === "next"
+          ? amount
+          : -amount,
       behavior: "smooth",
     });
   }
@@ -46,6 +57,10 @@ export function ProductCarousel({
 
   return (
     <div className="product-carousel">
+      {/* =====================================================
+          CAROUSEL TRACK
+      ===================================================== */}
+
       <div
         ref={scrollRef}
         role="region"
@@ -71,21 +86,33 @@ export function ProductCarousel({
         />
       </div>
 
+      {/* =====================================================
+          CONTROLS
+      ===================================================== */}
+
       {products.length > 1 && (
         <div className="product-carousel__controls">
-          <p className="product-carousel__hint">
-            Swipe to explore
-          </p>
+          <div className="product-carousel__control-copy">
+            <span className="product-carousel__control-eyebrow">
+              Aayesha Collection
+            </span>
+
+            <p className="product-carousel__hint">
+              Swipe to explore
+            </p>
+          </div>
 
           <div className="product-carousel__actions">
             <button
               type="button"
               onClick={() => scroll("prev")}
               aria-label="Previous products"
-              className="product-carousel__button"
+              className="product-carousel__button product-carousel__button--previous"
             >
               <ArrowLeft
                 className="product-carousel__icon"
+                size={17}
+                strokeWidth={1.25}
                 aria-hidden="true"
               />
             </button>
@@ -94,10 +121,12 @@ export function ProductCarousel({
               type="button"
               onClick={() => scroll("next")}
               aria-label="Next products"
-              className="product-carousel__button"
+              className="product-carousel__button product-carousel__button--next"
             >
               <ArrowRight
                 className="product-carousel__icon"
+                size={17}
+                strokeWidth={1.25}
                 aria-hidden="true"
               />
             </button>

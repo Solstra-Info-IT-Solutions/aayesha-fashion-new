@@ -1,7 +1,7 @@
 /* =========================================================
    AAYESHA FASHION
    PRODUCT TRUST BADGES
-   Editorial / Quiet Indian Luxury
+   Editorial / Quiet Luxury
    ========================================================= */
 
 .product-trust {
@@ -13,7 +13,7 @@
   border-top: 1px solid var(--color-border, #d9cbc5);
   border-left: 1px solid var(--color-border, #d9cbc5);
 
-  background: var(--color-bg-soft, #f1eae6);
+  background: var(--color-surface, #fbf8f5);
 }
 
 /* =========================================================
@@ -21,26 +21,45 @@
    ========================================================= */
 
 .product-trust__item {
+  position: relative;
+
   display: flex;
   align-items: flex-start;
 
-  min-width: 0;
-  min-height: 88px;
+  gap: 14px;
 
-  padding: 18px;
+  min-height: 104px;
 
-  border-right: 1px solid var(--color-border, #d9cbc5);
-  border-bottom: 1px solid var(--color-border, #d9cbc5);
+  padding: 20px 18px;
+
+  border-right: 0;
+  border-bottom: 0;
 
   background: transparent;
+
+  transition:
+    background-color 180ms ease,
+    padding 180ms ease;
 }
 
+/* =========================================================
+   BORDERS
+   ========================================================= */
+
 .product-trust__item--right-border {
-  border-right-color: var(--color-border, #d9cbc5);
+  border-right: 1px solid var(--color-border, #d9cbc5);
 }
 
 .product-trust__item--bottom-border {
-  border-bottom-color: var(--color-border, #d9cbc5);
+  border-bottom: 1px solid var(--color-border, #d9cbc5);
+}
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.product-trust__item:hover {
+  background: rgba(111, 75, 71, 0.025);
 }
 
 /* =========================================================
@@ -48,6 +67,8 @@
    ========================================================= */
 
 .product-trust__icon {
+  flex: 0 0 auto;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -55,22 +76,27 @@
   width: 34px;
   height: 34px;
 
-  flex: 0 0 34px;
-
-  margin-right: 12px;
-
   border: 1px solid var(--color-border-dark, #b9a7a0);
 
-  background: var(--color-surface, #ffffff);
+  background: transparent;
+
   color: var(--color-accent, #6f4b47);
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
-.product-trust__icon svg {
-  width: 16px;
-  height: 16px;
+.product-trust__item:hover .product-trust__icon {
+  border-color: var(--color-accent, #6f4b47);
 
-  color: currentColor;
-  stroke: currentColor;
+  background: var(--color-accent, #6f4b47);
+
+  color: #ffffff;
+
+  transform: translateY(-1px);
 }
 
 /* =========================================================
@@ -81,43 +107,41 @@
   min-width: 0;
 }
 
+/* =========================================================
+   TITLE
+   ========================================================= */
+
 .product-trust__title {
-  margin: 1px 0 0;
+  margin: 1px 0 6px;
 
   font-family: var(--font-body, sans-serif);
+
   font-size: 9px;
   font-weight: 600;
-  line-height: 1.45;
+  line-height: 1.4;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 
   color: var(--color-text, #3f2d2a);
 }
 
-.product-trust__text {
-  margin: 5px 0 0;
-
-  font-family: var(--font-body, sans-serif);
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 1.55;
-
-  color: var(--color-text-secondary, #6f625d);
-}
-
 /* =========================================================
-   HOVER
+   DESCRIPTION
    ========================================================= */
 
-.product-trust__item {
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease;
-}
+.product-trust__text {
+  max-width: 180px;
 
-.product-trust__item:hover {
-  background: var(--color-surface, #ffffff);
+  margin: 0;
+
+  font-family: var(--font-body, sans-serif);
+
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+
+  color: var(--color-text-secondary, #6f625d);
 }
 
 /* =========================================================
@@ -126,18 +150,21 @@
 
 @media (max-width: 767px) {
   .product-trust__item {
-    min-height: 82px;
+    min-height: 96px;
 
-    padding: 15px;
+    gap: 12px;
+
+    padding: 17px 15px;
   }
 
   .product-trust__icon {
     width: 32px;
     height: 32px;
+  }
 
-    flex-basis: 32px;
-
-    margin-right: 10px;
+  .product-trust__icon svg {
+    width: 16px;
+    height: 16px;
   }
 
   .product-trust__title {
@@ -145,7 +172,8 @@
   }
 
   .product-trust__text {
-    font-size: 9.5px;
+    font-size: 10.5px;
+    line-height: 1.55;
   }
 }
 
@@ -155,34 +183,34 @@
 
 @media (max-width: 639px) {
   .product-trust__item {
-    min-height: 76px;
+    min-height: 92px;
 
-    padding: 13px 11px;
+    gap: 10px;
+
+    padding: 15px 12px;
   }
 
   .product-trust__icon {
     width: 30px;
     height: 30px;
-
-    flex-basis: 30px;
-
-    margin-right: 8px;
   }
 
   .product-trust__icon svg {
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
   }
 
   .product-trust__title {
+    margin-top: 0;
+    margin-bottom: 5px;
+
     font-size: 7.5px;
-    letter-spacing: 0.08em;
+
+    letter-spacing: 0.1em;
   }
 
   .product-trust__text {
-    margin-top: 4px;
-
-    font-size: 9px;
+    font-size: 10px;
     line-height: 1.5;
   }
 }
@@ -193,18 +221,21 @@
 
 @media (max-width: 390px) {
   .product-trust__item {
-    min-height: 72px;
+    min-height: 88px;
 
-    padding: 11px 9px;
+    gap: 8px;
+
+    padding: 13px 10px;
   }
 
   .product-trust__icon {
     width: 28px;
     height: 28px;
+  }
 
-    flex-basis: 28px;
-
-    margin-right: 7px;
+  .product-trust__icon svg {
+    width: 14px;
+    height: 14px;
   }
 
   .product-trust__title {
@@ -212,7 +243,29 @@
   }
 
   .product-trust__text {
-    font-size: 8.5px;
+    font-size: 9.5px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 340px) {
+  .product-trust__item {
+    display: block;
+
+    min-height: 0;
+
+    padding: 14px 9px;
+  }
+
+  .product-trust__icon {
+    margin-bottom: 9px;
+  }
+
+  .product-trust__text {
+    max-width: none;
   }
 }
 
@@ -221,7 +274,12 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .product-trust__item {
+  .product-trust__item,
+  .product-trust__icon {
     transition: none;
+  }
+
+  .product-trust__item:hover .product-trust__icon {
+    transform: none;
   }
 }
