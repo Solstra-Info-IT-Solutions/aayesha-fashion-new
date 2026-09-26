@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -15,15 +13,26 @@ import "./NewArrivals.css";
 ========================================================= */
 
 export async function NewArrivals() {
-  const response = await getProducts({
-    page: 1,
-    limit: 8,
-    isNew: true,
-    status: "active",
-    sort: "newest",
-  });
+  let newArrivals = [];
 
-  const newArrivals = response.products;
+  try {
+    const response = await getProducts({
+      page: 1,
+      limit: 8,
+      isNew: true,
+      status: "active",
+      sort: "newest",
+    });
+
+    newArrivals = response?.products ?? [];
+  } catch (error) {
+    console.error(
+      "NEW ARRIVALS API ERROR:",
+      error,
+    );
+
+    newArrivals = [];
+  }
 
   return (
     <section
@@ -39,7 +48,6 @@ export async function NewArrivals() {
           ================================================= */}
 
           <header className="new-arrivals__header">
-
             <div className="new-arrivals__heading">
 
               <div className="new-arrivals__eyebrow-wrap">
@@ -79,7 +87,6 @@ export async function NewArrivals() {
               </span>
 
             </div>
-
           </header>
 
           {/* =================================================
@@ -133,7 +140,6 @@ export async function NewArrivals() {
               </div>
             </>
           ) : (
-
             /* =================================================
                EMPTY / COMING SOON
             ================================================= */
@@ -141,8 +147,6 @@ export async function NewArrivals() {
             <div className="new-arrivals__empty">
 
               <div className="new-arrivals__empty-inner">
-
-                {/* Decorative Mark */}
 
                 <div
                   className="new-arrivals__empty-mark"
@@ -153,27 +157,19 @@ export async function NewArrivals() {
                   <span />
                 </div>
 
-                {/* Eyebrow */}
-
                 <p className="new-arrivals__empty-eyebrow">
                   New Arrivals
                 </p>
 
-                {/* Title */}
-
                 <h3 className="new-arrivals__empty-title">
                   Something new is coming.
                 </h3>
-
-                {/* Description */}
 
                 <p className="new-arrivals__empty-description">
                   Our latest styles are on their
                   way. Explore the current
                   collection while you wait.
                 </p>
-
-                {/* CTA */}
 
                 <div className="new-arrivals__empty-cta">
 
