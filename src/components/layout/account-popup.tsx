@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+
 import {
   ChevronRight,
   LogOut,
@@ -13,18 +14,25 @@ import {
   UserCog,
   X,
 } from "lucide-react";
+
 import toast from "react-hot-toast";
 
 import { useAuthStore } from "@/store/auth-store";
 import { deleteCustomerAccount } from "@/lib/customer-api";
 
 import { AccountConfirmDialog } from "@/components/account/account-confirm-dialog";
+
 import "./AccountPopup.css";
 
 type AccountPopupProps = {
   isOpen: boolean;
   onClose: () => void;
 };
+
+
+/* =========================================================
+   ACCOUNT NAVIGATION
+========================================================= */
 
 const accountLinks = [
   {
@@ -53,12 +61,22 @@ const accountLinks = [
   },
 ];
 
+
+/* =========================================================
+   ACCOUNT POPUP
+========================================================= */
+
 export function AccountPopup({
   isOpen,
   onClose,
 }: AccountPopupProps) {
   const router = useRouter();
   const pathname = usePathname();
+
+
+  /* =======================================================
+     AUTH STATE
+  ======================================================= */
 
   const user = useAuthStore(
     (state) => state.user,
@@ -72,6 +90,11 @@ export function AccountPopup({
     (state) => state.logout,
   );
 
+
+  /* =======================================================
+     LOCAL STATE
+  ======================================================= */
+
   const [confirmType, setConfirmType] = useState<
     "delete" | "logout" | null
   >(null);
@@ -79,9 +102,19 @@ export function AccountPopup({
   const [isProcessing, setIsProcessing] =
     useState(false);
 
+
+  /* =======================================================
+     SAFETY
+  ======================================================= */
+
   if (!isOpen || !user) {
     return null;
   }
+
+
+  /* =======================================================
+     USER INITIALS
+  ======================================================= */
 
   const initials =
     user.name
@@ -93,6 +126,11 @@ export function AccountPopup({
       )
       .join("") || "A";
 
+
+  /* =======================================================
+     CLOSE CONFIRMATION
+  ======================================================= */
+
   const closeConfirmDialog = () => {
     if (isProcessing) {
       return;
@@ -100,6 +138,11 @@ export function AccountPopup({
 
     setConfirmType(null);
   };
+
+
+  /* =======================================================
+     LOGOUT
+  ======================================================= */
 
   const handleLogoutConfirm = async () => {
     if (isProcessing) {
@@ -116,6 +159,7 @@ export function AccountPopup({
       );
 
       setConfirmType(null);
+
       onClose();
 
       router.push("/");
@@ -129,6 +173,11 @@ export function AccountPopup({
     }
   };
 
+
+  /* =======================================================
+     DELETE ACCOUNT
+  ======================================================= */
+
   const handleDeleteConfirm = async () => {
     if (isProcessing) {
       return;
@@ -140,16 +189,20 @@ export function AccountPopup({
       );
 
       setConfirmType(null);
+
       onClose();
 
       router.push("/login");
+
       return;
     }
 
     setIsProcessing(true);
 
     try {
-      await deleteCustomerAccount(accessToken);
+      await deleteCustomerAccount(
+        accessToken,
+      );
 
       /*
        * The delete API has already invalidated
@@ -169,9 +222,13 @@ export function AccountPopup({
       );
 
       setConfirmType(null);
+
       onClose();
 
-      router.push("/?accountDeleted=1");
+      router.push(
+        "/?accountDeleted=1",
+      );
+
       router.refresh();
     } catch (error) {
       const message =
@@ -185,26 +242,40 @@ export function AccountPopup({
     }
   };
 
+
+  /* =========================================================
+     RENDER
+  ========================================================= */
+
   return (
     <>
       {/* =====================================================
           ACCOUNT POPUP
       ====================================================== */}
 
-      <div className="account-popup">
+      <div
+        className="account-popup"
+        role="dialog"
+        aria-label="Customer account menu"
+      >
         <div className="account-popup__surface">
-          {/* Luxury accent */}
+
+          {/* =================================================
+              ACCENT
+          ================================================= */}
 
           <span
             aria-hidden="true"
             className="account-popup__accent"
           />
 
+
           {/* =================================================
               PROFILE HEADER
           ================================================= */}
 
           <div className="account-popup__profile">
+
             {/* Close */}
 
             <button
@@ -219,10 +290,13 @@ export function AccountPopup({
               />
             </button>
 
+
             {/* Profile */}
 
             <div className="account-popup__identity">
+
               <div className="account-popup__avatar">
+
                 <span
                   aria-hidden="true"
                   className="account-popup__avatar-glow"
@@ -231,9 +305,12 @@ export function AccountPopup({
                 <span className="account-popup__initials">
                   {initials}
                 </span>
+
               </div>
 
+
               <div className="account-popup__user">
+
                 <p className="account-popup__name">
                   {user.name}
                 </p>
@@ -241,8 +318,11 @@ export function AccountPopup({
                 <p className="account-popup__email">
                   {user.email}
                 </p>
+
               </div>
+
             </div>
+
 
             {/* Account CTA */}
 
@@ -251,7 +331,8 @@ export function AccountPopup({
               onClick={onClose}
               className="account-popup__cta"
             >
-              <span>
+              <span className="account-popup__cta-content">
+
                 <span className="account-popup__cta-label">
                   My Account
                 </span>
@@ -259,6 +340,7 @@ export function AccountPopup({
                 <span className="account-popup__cta-text">
                   View your account
                 </span>
+
               </span>
 
               <span className="account-popup__cta-icon">
@@ -268,13 +350,16 @@ export function AccountPopup({
                 />
               </span>
             </Link>
+
           </div>
+
 
           {/* =================================================
               ACCOUNT NAVIGATION
           ================================================= */}
 
           <div className="account-popup__navigation">
+
             {accountLinks.map((item) => {
               const Icon = item.icon;
 
@@ -296,6 +381,7 @@ export function AccountPopup({
                       : ""
                   }`}
                 >
+
                   <span className="account-popup__nav-icon">
                     <Icon
                       size={16}
@@ -303,7 +389,9 @@ export function AccountPopup({
                     />
                   </span>
 
+
                   <span className="account-popup__nav-content">
+
                     <span className="account-popup__nav-title">
                       {item.label}
                     </span>
@@ -311,7 +399,9 @@ export function AccountPopup({
                     <span className="account-popup__nav-description">
                       {item.description}
                     </span>
+
                   </span>
+
 
                   <span className="account-popup__nav-arrow">
                     <ChevronRight
@@ -319,16 +409,20 @@ export function AccountPopup({
                       strokeWidth={1.2}
                     />
                   </span>
+
                 </Link>
               );
             })}
+
           </div>
+
 
           {/* =================================================
               ACCOUNT ACTIONS
           ================================================= */}
 
           <div className="account-popup__actions">
+
             {/* Delete */}
 
             <button
@@ -337,8 +431,12 @@ export function AccountPopup({
                 setConfirmType("delete")
               }
               disabled={isProcessing}
-              className="account-popup__action account-popup__action--delete"
+              className="
+                account-popup__action
+                account-popup__action--delete
+              "
             >
+
               <span className="account-popup__action-icon">
                 <Trash2
                   size={16}
@@ -347,6 +445,7 @@ export function AccountPopup({
               </span>
 
               <span className="account-popup__action-content">
+
                 <span className="account-popup__action-title">
                   Delete Account
                 </span>
@@ -354,10 +453,13 @@ export function AccountPopup({
                 <span className="account-popup__action-description">
                   Permanently remove your account
                 </span>
+
               </span>
+
             </button>
 
-            {/* Sign out */}
+
+            {/* Sign Out */}
 
             <button
               type="button"
@@ -365,8 +467,12 @@ export function AccountPopup({
                 setConfirmType("logout")
               }
               disabled={isProcessing}
-              className="account-popup__action account-popup__action--logout"
+              className="
+                account-popup__action
+                account-popup__action--logout
+              "
             >
+
               <span className="account-popup__action-icon">
                 <LogOut
                   size={16}
@@ -375,6 +481,7 @@ export function AccountPopup({
               </span>
 
               <span className="account-popup__action-content">
+
                 <span className="account-popup__action-title">
                   Sign Out
                 </span>
@@ -382,11 +489,16 @@ export function AccountPopup({
                 <span className="account-popup__action-description">
                   Sign out from this device
                 </span>
+
               </span>
+
             </button>
+
           </div>
+
         </div>
       </div>
+
 
       {/* =====================================================
           CONFIRMATION DIALOG
@@ -402,6 +514,7 @@ export function AccountPopup({
         loading={isProcessing}
         onCancel={closeConfirmDialog}
         onConfirm={() => {
+
           if (confirmType === "delete") {
             void handleDeleteConfirm();
             return;
@@ -410,8 +523,10 @@ export function AccountPopup({
           if (confirmType === "logout") {
             void handleLogoutConfirm();
           }
+
         }}
       />
+
     </>
   );
 }
