@@ -1,31 +1,47 @@
+/* =========================================================
+   AAYESHA FASHION — FRESH PRODUCT DETAIL PAGE
+   Self-contained PDP component.
+   Keeps existing product, cart, auth, wishlist and category APIs.
+========================================================= */
+
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
+  Check,
   ChevronDown,
   ChevronUp,
+  Copy,
   Heart,
+  MapPin,
   Minus,
   Plus,
-  Share2,
-  ShoppingBag,
-  Truck,
   RotateCcw,
+  Share2,
   ShieldCheck,
+  ShoppingBag,
   Sparkles,
+  Truck,
   X,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
-import type { Product } from "@/types/product";
+import type { Product, ProductMedia } from "@/types/product";
+import {
+  getAvailableStock,
+  getInventoryStatus,
+} from "@/types/product";
+import { getCategories } from "@/services/category.service";
 import { addToCart } from "@/services/cart.service";
 import { useAuthStore } from "@/store/auth-store";
 import { useWishlistStore } from "@/store/wishlist-store";
 import { LoginRequiredPopup } from "@/components/product/login-required-popup";
+import { ProductCard } from "@/components/product/product-card";
 
 import "./ProductDetail.css";
 
@@ -34,52 +50,55 @@ interface ProductDetailProps {
   recommendations?: Product[];
 }
 
-const money = (value = 0) => `₹${value.toLocaleString("en-IN")}`;
+type DetailRow = {
+  label: string;
+  value: string;
+};
 
-function stockOf(product: Product) {
-  return Math.max(
-    0,
-    (product.inventory?.stock ?? 0) -
-      (product.inventory?.reserved ?? 0),
-  );
+const money = (value = 0) =>
+  `₹${Number(value).toLocaleString("en-IN")}`;
+
+function getDiscount(mrp: number, price: number) {
+  if (!mrp || price >= mrp) return 0;
+  return Math.round(((mrp - price) / mrp) * 100);
 }
 
-function discountOf(product: Product) {
-  const mrp = product.pricing?.mrp ?? 0;
-  const price = product.pricing?.sellingPrice ?? 0;
-  return mrp > price && mrp > 0
-    ? Math.round(((mrp - price) / mrp) * 100)
-    : 0;
+function sortMedia(media: ProductMedia[] = []) {
+  return [...media]
+    .filter(Boolean)
+    .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
 }
 
-function mediaOf(product: Product) {
-  return [...(product.media ?? [])].sort(
-    (a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0),
-  );
-}
-
-function detailsOf(product: Product) {
-  const source = product.content?.description ?? "";
-  return source
+function parseDescription(description = ""): DetailRow[] {
+  return description
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter(Boolean)
     .map((line) => {
-      const match = line.match(
-        /^[-*]?\s*\**([^:*]+?)\**\s*:\s*\**(.+?)\**$/,
+      const clean = line.replace(/^[-*]\s*/, "").trim();
+      const match = clean.match(
+        /^\**([^:*]+?)\**\s*:\s*\**(.+?)\**$/,
       );
-      return match
-        ? {
-            label: match[1].replace(/\*\*/g, "").trim(),
-            value: match[2].replace(/\*\*/g, "").trim(),
-          }
-        : null;
+
+      if (!match) return null;
+
+      return {
+        label: match[1].replace(/\*\*/g, "").trim(),
+        value: match[2].replace(/\*\*/g, "").trim(),
+      };
     })
+    .filter(Boolean) as DetailRow[];
+}
+
+function getParagraphs(description = "") {
+  return description
+    .split(/\r?\n\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean)
     .filter(
-      (
-        item,
-      ): item is { label: string; value: string } =>
-        Boolean(item),
+      (item) =>
+        !item.startsWith("**Product Content**") &&
+        !item.startsWith("- **"),
     );
 }
 
@@ -87,28 +106,12 @@ export function ProductDetail({
   product,
   recommendations = [],
 }: ProductDetailProps) {
-  const media = mediaOf(product);
-  const stock = stockOf(product);
-  const discount = discountOf(product);
-  const details = useMemo(
-    () => detailsOf(product),
-    [product],
-  );
+  const router = useRouter();
 
-  const [active, setActive] = useState(0);
-  const [quantity, setQuantity] = useState(1);
-  const [adding, setAdding] = useState(false);
-  const [buying, setBuying] = useState(false);
-  const [login, setLogin] = useState(false);
-  const [share, setShare] = useState(false);
-  const [detailsOpen, setDetailsOpen] = useState(true);
-  const [shippingOpen, setShippingOpen] = useState(false);
-  const [returnsOpen, setReturnsOpen] = useState(false);
-
-  const authenticated = useAuthStore(
+  const isAuthenticated = useAuthStore(
     (state) => state.isAuthenticated,
   );
-  const initialized = useAuthStore(
+  const isInitialized = useAuthStore(
     (state) => state.isInitialized,
   );
 
@@ -120,35 +123,151 @@ export function ProductDetail({
   );
 
   const productId = product._id || product.id;
-  const wishlisted = wishlistIds.includes(productId);
-  const available = product.status === "active" && stock > 0;
-  const currentMedia = media[active];
+  const media = useMemo(
+    () => sortMedia(product.media),
+    [product.media],
+  );
 
-  const requireAuth = () => {
-    if (!initialized) return false;
-    if (!authenticated) {
-      setLogin(true);
+  const stock = getAvailableStock(product);
+  const inventoryStatus = getInventoryStatus(product);
+  const mrp = product.pricing?.mrp ?? 0;
+  const sellingPrice = product.pricing?.sellingPrice ?? 0;
+  const discount = getDiscount(mrp, sellingPrice);
+  const available = product.status === "active" && stock > 0;
+  const wishlisted = wishlistIds.includes(productId);
+
+  const detailRows = useMemo(
+    () => parseDescription(product.content?.description ?? ""),
+    [product.content?.description],
+  );
+
+  const paragraphs = useMemo(
+    () => getParagraphs(product.content?.description ?? ""),
+    [product.content?.description],
+  );
+
+  const [categoryName, setCategoryName] = useState("");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [adding, setAdding] = useState(false);
+  const [buying, setBuying] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [openSection, setOpenSection] = useState<string | null>(
+    "details",
+  );
+  const [pincode, setPincode] = useState("");
+  const [deliveryChecked, setDeliveryChecked] = useState(false);
+
+  const activeMedia = media[activeIndex] ?? null;
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadCategory() {
+      if (!product.categoryId) {
+        setCategoryName("");
+        return;
+      }
+
+      try {
+        const categories = await getCategories();
+        const category = categories.find(
+          (item) => item.id === product.categoryId,
+        );
+
+        if (!cancelled) {
+          setCategoryName(category?.name ?? "");
+        }
+      } catch (error) {
+        console.error("Failed to load product category:", error);
+
+        if (!cancelled) {
+          setCategoryName("");
+        }
+      }
+    }
+
+    void loadCategory();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [product.categoryId]);
+
+  useEffect(() => {
+    setActiveIndex(0);
+    setQuantity(1);
+    setDeliveryChecked(false);
+  }, [productId]);
+
+  useEffect(() => {
+    if (!lightboxOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setLightboxOpen(false);
+      if (event.key === "ArrowLeft") previousMedia();
+      if (event.key === "ArrowRight") nextMedia();
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  });
+
+  function previousMedia() {
+    if (media.length <= 1) return;
+
+    setActiveIndex((current) =>
+      current <= 0 ? media.length - 1 : current - 1,
+    );
+  }
+
+  function nextMedia() {
+    if (media.length <= 1) return;
+
+    setActiveIndex((current) =>
+      current >= media.length - 1 ? 0 : current + 1,
+    );
+  }
+
+  function requireAuth() {
+    if (!isInitialized) return false;
+
+    if (!isAuthenticated) {
+      setLoginOpen(true);
       return false;
     }
-    return true;
-  };
 
-  const add = async () => {
+    return true;
+  }
+
+  async function handleAddToCart() {
     if (!available) {
       toast.error("This product is currently unavailable.");
       return;
     }
+
     if (adding || buying || !requireAuth()) return;
 
     try {
       setAdding(true);
       await addToCart(productId, quantity);
+
       toast.success(
         quantity > 1
           ? `${quantity} × ${product.name} added to your bag.`
           : `${product.name} added to your bag.`,
       );
     } catch (error) {
+      console.error("ADD TO CART ERROR:", error);
+
       toast.error(
         error instanceof Error
           ? error.message
@@ -157,45 +276,56 @@ export function ProductDetail({
     } finally {
       setAdding(false);
     }
-  };
+  }
 
-  const buy = async () => {
+  async function handleBuyNow() {
     if (!available) {
       toast.error("This product is currently unavailable.");
       return;
     }
+
     if (adding || buying || !requireAuth()) return;
 
     try {
       setBuying(true);
       await addToCart(productId, quantity);
-      window.location.href = "/cart";
+      router.push("/checkout");
     } catch (error) {
+      console.error("BUY NOW ERROR:", error);
+
       toast.error(
         error instanceof Error
           ? error.message
           : "Unable to continue to checkout.",
       );
+
       setBuying(false);
     }
-  };
+  }
 
-  const wishlist = () => {
+  function handleWishlist() {
     if (!requireAuth()) return;
+
     toggleWishlist(productId);
+
     toast.success(
       wishlisted
         ? "Removed from wishlist."
         : "Added to wishlist.",
     );
-  };
+  }
 
-  const shareProduct = async () => {
-    const url =
-      typeof window !== "undefined"
-        ? window.location.href
-        : "";
-    if (!url) return;
+  async function copyProductLink() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success("Product link copied.");
+    } catch {
+      toast.error("Unable to copy the product link.");
+    }
+  }
+
+  async function nativeShare() {
+    const url = window.location.href;
 
     if (navigator.share) {
       try {
@@ -206,272 +336,352 @@ export function ProductDetail({
         });
         return;
       } catch (error) {
-        if ((error as DOMException)?.name === "AbortError") {
-          return;
-        }
+        if ((error as DOMException)?.name === "AbortError") return;
       }
     }
 
-    try {
-      await navigator.clipboard.writeText(url);
-      toast.success("Product link copied.");
-    } catch {
-      toast.error("Unable to copy the product link.");
+    await copyProductLink();
+  }
+
+  function shareWhatsApp() {
+    const message = `Take a look at ${product.name} from Aayesha Fashion.\n\n${window.location.href}`;
+
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  }
+
+  function checkDelivery() {
+    const valid = /^[1-9][0-9]{5}$/.test(pincode);
+    setDeliveryChecked(valid);
+
+    if (!valid) {
+      toast.error("Please enter a valid 6-digit pincode.");
     }
-  };
+  }
 
-  const previous = () =>
-    setActive((value) =>
-      value <= 0 ? Math.max(media.length - 1, 0) : value - 1,
+  function toggleSection(section: string) {
+    setOpenSection((current) =>
+      current === section ? null : section,
     );
+  }
 
-  const next = () =>
-    setActive((value) =>
-      value >= media.length - 1 ? 0 : value + 1,
-    );
+  const trustItems = [
+    {
+      icon: Truck,
+      title: "Reliable Delivery",
+      text: "Secure delivery across India",
+    },
+    {
+      icon: RotateCcw,
+      title: "Easy Exchange",
+      text: "Support for eligible orders",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Secure Shopping",
+      text: "Protected checkout experience",
+    },
+    {
+      icon: Sparkles,
+      title: "Curated Quality",
+      text: "Thoughtfully selected designs",
+    },
+  ];
 
   return (
     <>
-      <main className="min-h-screen bg-[#f8f5f2] pb-20 text-[#352826]">
-        <div className="border-b border-[#352826]/10">
-          <div className="mx-auto max-w-[1500px] px-4 py-4 text-[9px] uppercase tracking-[.2em] text-[#806d67] sm:px-6 lg:px-10">
-            <Link href="/">Home</Link>
-            <span className="mx-2">/</span>
+      <main className="product-detail">
+        {/* =====================================================
+            BREADCRUMB
+        ===================================================== */}
+        <div className="product-detail__breadcrumb-wrap">
+          <div className="product-detail__container product-detail__breadcrumb">
             <Link href="/shop">Shop</Link>
-            <span className="mx-2">/</span>
-            <span>{product.name}</span>
+            {categoryName && (
+              <>
+                <span>/</span>
+                <span>{categoryName}</span>
+              </>
+            )}
+            <span>/</span>
+            <span className="product-detail__breadcrumb-current">
+              {product.name}
+            </span>
           </div>
         </div>
 
-        <section className="mx-auto max-w-[1500px] px-4 py-6 sm:px-6 lg:px-10 lg:py-10">
-          <div className="grid gap-10 lg:grid-cols-[1.12fr_.88fr] lg:gap-16">
-            <div className="grid grid-cols-[72px_1fr] gap-3 sm:grid-cols-[90px_1fr]">
-              <div className="flex max-h-[760px] flex-col gap-3 overflow-auto">
-                {media.map((item, index) => (
-                  <button
-                    key={item.id || `${item.src}-${index}`}
-                    type="button"
-                    onClick={() => setActive(index)}
-                    className={`relative aspect-[.78] overflow-hidden bg-[#e9dfda] ${
-                      index === active
-                        ? "ring-1 ring-[#352826] ring-offset-2"
-                        : "opacity-60 hover:opacity-100"
-                    }`}
-                  >
-                    {item.type === "video" ? (
-                      <video
-                        src={item.src}
-                        poster={item.poster}
-                        muted
-                        playsInline
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <Image
-                        src={item.thumbnail || item.src}
-                        alt={item.alt || product.name}
-                        fill
-                        sizes="90px"
-                        className="object-cover"
-                      />
-                    )}
-                  </button>
-                ))}
-              </div>
-
-              <div className="relative aspect-[.78] overflow-hidden bg-[#e9dfda]">
-                {currentMedia?.type === "video" ? (
-                  <video
-                    src={currentMedia.src}
-                    poster={currentMedia.poster}
-                    controls
-                    playsInline
-                    className="h-full w-full object-cover"
-                  />
-                ) : currentMedia ? (
-                  <Image
-                    src={currentMedia.src}
-                    alt={currentMedia.alt || product.name}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 65vw"
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="flex h-full items-center justify-center text-xs uppercase tracking-[.18em]">
-                    Image unavailable
+        {/* =====================================================
+            HERO
+        ===================================================== */}
+        <section className="product-detail__main">
+          <div className="product-detail__grid">
+            {/* =================================================
+                GALLERY
+            ================================================= */}
+            <div className="product-detail__gallery">
+              <div className="product-detail__media">
+                {media.length > 1 && (
+                  <div className="product-detail__thumbnails">
+                    {media.map((item, index) => (
+                      <button
+                        key={item.id || `${item.src}-${index}`}
+                        type="button"
+                        onClick={() => setActiveIndex(index)}
+                        className={[
+                          "product-detail__thumbnail",
+                          index === activeIndex
+                            ? "product-detail__thumbnail--active"
+                            : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
+                        aria-label={`View product media ${index + 1}`}
+                      >
+                        {item.type === "video" ? (
+                          <video
+                            src={item.src}
+                            poster={item.poster}
+                            muted
+                            playsInline
+                          />
+                        ) : (
+                          <Image
+                            src={item.thumbnail || item.src}
+                            alt={item.alt || product.name}
+                            fill
+                            sizes="100px"
+                          />
+                        )}
+                        <span className="product-detail__thumbnail-index">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </button>
+                    ))}
                   </div>
                 )}
 
-                {media.length > 1 && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={previous}
-                      aria-label="Previous product image"
-                      className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90"
-                    >
-                      <ArrowLeft size={16} />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={next}
-                      aria-label="Next product image"
-                      className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90"
-                    >
-                      <ArrowRight size={16} />
-                    </button>
-                  </>
-                )}
+                <div
+                  className="product-detail__media-stage"
+                  onDoubleClick={() => setLightboxOpen(true)}
+                >
+                  {product.merchandising?.isNew && (
+                    <span className="product-detail__media-badge">
+                      New Arrival
+                    </span>
+                  )}
 
-                <div className="absolute bottom-4 right-4 bg-[#352826]/80 px-3 py-2 text-[8px] tracking-[.18em] text-white">
-                  {String(active + 1).padStart(2, "0")} /{" "}
-                  {String(Math.max(media.length, 1)).padStart(2, "0")}
+                  {activeMedia?.type === "video" ? (
+                    <video
+                      src={activeMedia.src}
+                      poster={activeMedia.poster}
+                      controls
+                      playsInline
+                      className="product-detail__media-element"
+                    />
+                  ) : activeMedia ? (
+                    <Image
+                      src={activeMedia.src}
+                      alt={activeMedia.alt || product.name}
+                      fill
+                      priority
+                      sizes="(max-width: 760px) 100vw, 65vw"
+                      className="product-detail__media-element"
+                    />
+                  ) : (
+                    <div className="product-detail__media-placeholder">
+                      <span>No image available</span>
+                    </div>
+                  )}
+
+                  {media.length > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={previousMedia}
+                        aria-label="Previous product media"
+                        className="product-detail__media-nav product-detail__media-nav--prev"
+                      >
+                        <ArrowLeft size={17} />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={nextMedia}
+                        aria-label="Next product media"
+                        className="product-detail__media-nav product-detail__media-nav--next"
+                      >
+                        <ArrowRight size={17} />
+                      </button>
+                    </>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setLightboxOpen(true)}
+                    className="product-detail__view-button"
+                  >
+                    View full screen
+                  </button>
+
+                  <div className="product-detail__media-count">
+                    {String(activeIndex + 1).padStart(2, "0")}{" "}
+                    /{" "}
+                    {String(Math.max(media.length, 1)).padStart(2, "0")}
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="lg:sticky lg:top-8 lg:self-start">
-              <div className="flex items-start justify-between gap-5">
-                <div>
-                  <div className="mb-4 flex items-center gap-3">
-                    <span className="h-px w-8 bg-[#352826]" />
-                    <p className="text-[9px] font-bold uppercase tracking-[.24em] text-[#806d67]">
-                      Aayesha Fashion
-                    </p>
-                  </div>
-
-                  <h1 className="max-w-[650px] font-serif text-[clamp(2.2rem,4.5vw,4.7rem)] leading-[.94] tracking-[-.045em]">
-                    {product.name}
-                  </h1>
+            {/* =================================================
+                PRODUCT INFO
+            ================================================= */}
+            <aside className="product-detail__info">
+              <div className="product-detail__brand-row">
+                <div className="product-detail__eyebrow">
+                  Aayesha Fashion
                 </div>
 
                 <button
                   type="button"
-                  onClick={wishlist}
-                  disabled={!initialized}
-                  aria-label="Toggle wishlist"
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#352826]/15"
+                  onClick={handleWishlist}
+                  disabled={!isInitialized}
+                  aria-label={
+                    wishlisted
+                      ? "Remove from wishlist"
+                      : "Add to wishlist"
+                  }
+                  aria-pressed={wishlisted}
+                  className={[
+                    "product-detail__round-action",
+                    wishlisted
+                      ? "product-detail__round-action--active"
+                      : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                 >
                   <Heart
                     size={19}
-                    strokeWidth={1.3}
-                    fill={
-                      wishlisted ? "currentColor" : "none"
-                    }
+                    strokeWidth={1.35}
+                    fill={wishlisted ? "currentColor" : "none"}
                   />
                 </button>
               </div>
 
-              <p className="mt-6 max-w-xl text-[13px] leading-7 text-[#6d5b56] sm:text-sm">
+              <h1 className="product-detail__title">
+                {product.name}
+              </h1>
+
+              <p className="product-detail__description">
                 {product.content?.description ||
                   "A thoughtfully crafted piece from the Aayesha Fashion collection."}
               </p>
 
-              <div className="mt-8 border-y border-[#352826]/10 py-6">
-                <div className="flex flex-wrap items-end gap-3">
-                  <span className="font-serif text-3xl sm:text-4xl">
-                    {money(product.pricing?.sellingPrice)}
-                  </span>
-                  {product.pricing?.mrp >
-                    product.pricing?.sellingPrice && (
-                    <span className="text-sm text-[#9a8983] line-through">
-                      {money(product.pricing.mrp)}
+              <div className="product-detail__price-block">
+                <div className="product-detail__price-row">
+                  <strong className="product-detail__price">
+                    {money(sellingPrice)}
+                  </strong>
+
+                  {mrp > sellingPrice && (
+                    <span className="product-detail__mrp">
+                      {money(mrp)}
                     </span>
                   )}
+
                   {discount > 0 && (
-                    <span className="bg-[#352826] px-2 py-1 text-[8px] font-bold uppercase tracking-[.14em] text-white">
+                    <span className="product-detail__discount">
                       {discount}% OFF
                     </span>
                   )}
                 </div>
-                <p className="mt-2 text-[9px] uppercase tracking-[.14em] text-[#8a7872]">
+
+                <p className="product-detail__tax">
                   Inclusive of applicable taxes
                 </p>
               </div>
 
-              <div className="mt-6 flex items-center justify-between border-b border-[#352826]/10 pb-6">
-                <div>
-                  <p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#806d67]">
-                    Availability
-                  </p>
-                  <p className="mt-2 text-sm">
-                    {stock <= 0
-                      ? "Currently sold out"
-                      : stock <=
-                          (product.inventory?.lowStockThreshold ?? 2)
-                        ? `Only ${stock} left in stock`
-                        : "In stock · Ready to ship"}
-                  </p>
-                </div>
-                <span
-                  className={`h-2.5 w-2.5 rounded-full ${
-                    stock > 0 ? "bg-[#53694f]" : "bg-[#9b6a62]"
-                  }`}
-                />
+              <div
+                className={[
+                  "product-detail__stock",
+                  `product-detail__stock--${inventoryStatus}`,
+                ].join(" ")}
+              >
+                <span className="product-detail__stock-dot" />
+
+                {inventoryStatus === "low-stock"
+                  ? `Only ${stock} left in stock`
+                  : inventoryStatus === "in-stock"
+                    ? "In stock · Ready to ship"
+                    : "Currently sold out"}
               </div>
 
-              <div className="mt-7">
-                <div className="mb-3 flex items-center justify-between">
-                  <span className="text-[9px] font-bold uppercase tracking-[.18em] text-[#806d67]">
-                    Quantity
-                  </span>
+              {/* PURCHASE */}
+              <div className="product-detail__purchase">
+                <div className="product-detail__purchase-label-row">
+                  <span>Quantity</span>
+
                   <button
                     type="button"
-                    onClick={() => setShare(true)}
-                    className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.17em]"
+                    onClick={() => setShareOpen(true)}
+                    className="product-detail__text-action"
                   >
                     <Share2 size={15} />
                     Share
                   </button>
                 </div>
 
-                <div className="flex gap-3">
-                  <div className="flex h-14 border border-[#352826]/15 bg-white/50">
+                <div className="product-detail__purchase-row">
+                  <div className="product-detail__quantity">
                     <button
                       type="button"
+                      disabled={quantity <= 1 || adding || buying}
                       onClick={() =>
-                        setQuantity((value) =>
-                          Math.max(1, value - 1),
+                        setQuantity((current) =>
+                          Math.max(1, current - 1),
                         )
                       }
-                      disabled={quantity <= 1 || adding || buying}
-                      className="w-12 disabled:opacity-30"
+                      aria-label="Decrease quantity"
                     >
-                      <Minus size={15} className="mx-auto" />
+                      <Minus size={15} />
                     </button>
-                    <span className="flex w-8 items-center justify-center text-sm">
+
+                    <span className="product-detail__quantity-value">
                       {quantity}
                     </span>
+
                     <button
                       type="button"
-                      onClick={() =>
-                        setQuantity((value) =>
-                          Math.min(Math.max(stock, 1), value + 1),
-                        )
-                      }
                       disabled={
                         !available ||
                         quantity >= stock ||
                         adding ||
                         buying
                       }
-                      className="w-12 disabled:opacity-30"
+                      onClick={() =>
+                        setQuantity((current) =>
+                          Math.min(stock, current + 1),
+                        )
+                      }
+                      aria-label="Increase quantity"
                     >
-                      <Plus size={15} className="mx-auto" />
+                      <Plus size={15} />
                     </button>
                   </div>
 
                   <button
                     type="button"
-                    onClick={() => void add()}
+                    onClick={() => void handleAddToCart()}
                     disabled={
                       !available ||
                       adding ||
                       buying ||
-                      !initialized
+                      !isInitialized
                     }
-                    className="flex h-14 flex-1 items-center justify-center gap-3 bg-[#352826] text-[9px] font-bold uppercase tracking-[.2em] text-white disabled:opacity-50"
+                    className="product-detail__add-button"
                   >
                     <ShoppingBag size={17} />
                     {adding
@@ -484,82 +694,154 @@ export function ProductDetail({
 
                 <button
                   type="button"
-                  onClick={() => void buy()}
+                  onClick={() => void handleBuyNow()}
                   disabled={
                     !available ||
                     adding ||
                     buying ||
-                    !initialized
+                    !isInitialized
                   }
-                  className="mt-3 h-14 w-full border border-[#352826] text-[9px] font-bold uppercase tracking-[.2em] hover:bg-[#352826] hover:text-white disabled:opacity-40"
+                  className="product-detail__buy-button"
                 >
                   {buying ? "Processing..." : "Buy Now"}
                 </button>
               </div>
 
-              <div className="mt-8 grid grid-cols-2 border-y border-[#352826]/10">
-                {[
-                  [Truck, "Delivery", "Secure delivery across India"],
-                  [RotateCcw, "Exchange", "Support for eligible orders"],
-                  [ShieldCheck, "Secure", "Protected checkout"],
-                  [Sparkles, "Quality", "Thoughtfully selected designs"],
-                ].map(([Icon, title, text], index) => {
-                  const ItemIcon = Icon as typeof Truck;
+              {/* DELIVERY CHECK */}
+              <div className="product-detail__delivery">
+                <div className="product-detail__delivery-icon">
+                  <MapPin size={16} />
+                </div>
+
+                <div className="product-detail__delivery-copy">
+                  <p>Check delivery</p>
+                  <span>
+                    Enter your pincode to check delivery availability.
+                  </span>
+
+                  <div className="product-detail__pincode">
+                    <input
+                      value={pincode}
+                      onChange={(event) => {
+                        setPincode(
+                          event.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, 6),
+                        );
+                        setDeliveryChecked(false);
+                      }}
+                      inputMode="numeric"
+                      maxLength={6}
+                      placeholder="Enter pincode"
+                      aria-label="Delivery pincode"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={checkDelivery}
+                    >
+                      Check
+                    </button>
+                  </div>
+
+                  {deliveryChecked && (
+                    <p className="product-detail__delivery-success">
+                      <Check size={13} />
+                      Delivery available to {pincode}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* TRUST */}
+              <div className="product-detail__trust">
+                {trustItems.map((item, index) => {
+                  const Icon = item.icon;
+
                   return (
                     <div
-                      key={String(title)}
-                      className={`flex gap-3 p-4 sm:p-5 ${
+                      key={item.title}
+                      className={[
+                        "product-detail__trust-item",
+                        index % 2 === 0
+                          ? "product-detail__trust-item--right"
+                          : "",
                         index < 2
-                          ? "border-b border-[#352826]/10"
-                          : ""
-                      } ${index % 2 === 0 ? "border-r border-[#352826]/10" : ""}`}
+                          ? "product-detail__trust-item--bottom"
+                          : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
                     >
-                      <ItemIcon size={17} className="shrink-0" />
+                      <span className="product-detail__trust-icon">
+                        <Icon size={17} strokeWidth={1.4} />
+                      </span>
+
                       <div>
-                        <p className="text-[9px] font-bold uppercase tracking-[.13em]">
-                          {String(title)}
+                        <p className="product-detail__trust-title">
+                          {item.title}
                         </p>
-                        <p className="mt-1 text-[10px] leading-5 text-[#806d67]">
-                          {String(text)}
+                        <p className="product-detail__trust-text">
+                          {item.text}
                         </p>
                       </div>
                     </div>
                   );
                 })}
               </div>
-            </div>
+            </aside>
           </div>
         </section>
 
-        <section className="border-y border-[#352826]/10 bg-[#eee6e1]">
-          <div className="mx-auto max-w-[1500px] px-4 py-14 sm:px-6 sm:py-20 lg:px-10">
-            <div className="grid gap-12 lg:grid-cols-[.7fr_1.3fr] lg:gap-20">
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-[.22em] text-[#806d67]">
+        {/* =====================================================
+            DETAILS EDITORIAL SECTION
+        ===================================================== */}
+        <section className="product-detail__editorial">
+          <div className="product-detail__container">
+            <div className="product-detail__editorial-grid">
+              <div className="product-detail__editorial-heading">
+                <p className="product-detail__section-eyebrow">
                   The Details
                 </p>
-                <h2 className="mt-4 max-w-md font-serif text-4xl leading-[.98] tracking-[-.035em] sm:text-6xl">
-                  Designed to be remembered.
+
+                <h2>
+                  Made for moments
+                  <br />
+                  worth remembering.
                 </h2>
+
+                <span className="product-detail__editorial-mark">
+                  AAYESHA / 01
+                </span>
               </div>
 
-              <div>
-                <p className="max-w-3xl text-[13px] leading-8 text-[#604f4a] sm:text-[15px]">
-                  {product.content?.description ||
-                    "Every detail of this piece is presented with the craftsmanship and occasion in mind."}
-                </p>
+              <div className="product-detail__editorial-content">
+                {paragraphs.length > 0 ? (
+                  paragraphs.map((paragraph, index) => (
+                    <p key={`${paragraph}-${index}`}>
+                      {paragraph.replace(/\*\*/g, "")}
+                    </p>
+                  ))
+                ) : (
+                  <p>
+                    Every detail of this piece is presented with
+                    craftsmanship, comfort and occasion in mind.
+                  </p>
+                )}
 
-                {details.length > 0 && (
-                  <div className="mt-10 border-t border-[#352826]/15">
-                    {details.map((item) => (
+                {detailRows.length > 0 && (
+                  <div className="product-detail__details-grid">
+                    {detailRows.map((row) => (
                       <div
-                        key={`${item.label}-${item.value}`}
-                        className="grid grid-cols-[.65fr_1.35fr] gap-5 border-b border-[#352826]/10 py-4 text-[11px] sm:text-xs"
+                        key={`${row.label}-${row.value}`}
+                        className="product-detail__detail"
                       >
-                        <span className="font-semibold uppercase tracking-[.12em] text-[#806d67]">
-                          {item.label}
+                        <span className="product-detail__detail-label">
+                          {row.label}
                         </span>
-                        <span>{item.value}</span>
+                        <span className="product-detail__detail-value">
+                          {row.value}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -569,151 +851,259 @@ export function ProductDetail({
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1000px] px-4 py-14 sm:px-6 sm:py-20">
-          {[
-            ["Product Details", detailsOpen, setDetailsOpen, product.content?.description || "Product details are currently unavailable."],
-            ["Shipping & Delivery", shippingOpen, setShippingOpen, "Secure delivery across India. Delivery updates are provided during checkout."],
-            ["Returns & Exchange", returnsOpen, setReturnsOpen, "Exchange and return support is available for eligible orders according to the applicable order policy."],
-          ].map(([title, open, setOpen, text]) => (
-            <div key={String(title)} className="border-t border-[#352826]/15">
-              <button
-                type="button"
-                onClick={() =>
-                  (setOpen as React.Dispatch<React.SetStateAction<boolean>>)(
-                    !Boolean(open),
-                  )
-                }
-                className="flex w-full items-center justify-between border-b border-[#352826]/15 py-6 text-left"
-              >
-                <span className="text-[10px] font-bold uppercase tracking-[.2em]">
-                  {String(title)}
-                </span>
-                {Boolean(open) ? <ChevronUp size={17} /> : <ChevronDown size={17} />}
-              </button>
-              {Boolean(open) && (
-                <div className="border-b border-[#352826]/15 py-6 text-[12px] leading-7 text-[#6d5b56]">
-                  {String(text)}
+        {/* =====================================================
+            ACCORDIONS
+        ===================================================== */}
+        <section className="product-detail__accordions">
+          <div className="product-detail__container product-detail__accordion-container">
+            {[
+              {
+                id: "details",
+                title: "Product Details",
+                content:
+                  product.content?.description ||
+                  "Product details are currently unavailable.",
+              },
+              {
+                id: "shipping",
+                title: "Shipping & Delivery",
+                content:
+                  "Secure delivery across India. Delivery updates are provided during order processing.",
+              },
+              {
+                id: "returns",
+                title: "Returns & Exchange",
+                content:
+                  "Exchange and return support is available for eligible orders according to the applicable order policy.",
+              },
+            ].map((section) => {
+              const open = openSection === section.id;
+
+              return (
+                <div
+                  key={section.id}
+                  className="product-detail__accordion"
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleSection(section.id)}
+                    aria-expanded={open}
+                    className="product-detail__accordion-trigger"
+                  >
+                    <span>{section.title}</span>
+
+                    {open ? (
+                      <ChevronUp size={18} />
+                    ) : (
+                      <ChevronDown size={18} />
+                    )}
+                  </button>
+
+                  {open && (
+                    <div className="product-detail__accordion-body">
+                      {section.content}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </section>
 
+        {/* =====================================================
+            RECOMMENDATIONS
+        ===================================================== */}
         {recommendations.length > 0 && (
-          <section className="border-t border-[#352826]/10 bg-[#f1ebe7]">
-            <div className="mx-auto max-w-[1500px] px-4 py-14 sm:px-6 lg:px-10">
-              <p className="text-[9px] font-bold uppercase tracking-[.22em] text-[#806d67]">
-                Curated for you
-              </p>
-              <h2 className="mt-3 font-serif text-4xl sm:text-5xl">
-                You may also like.
-              </h2>
+          <section className="product-detail__recommendations">
+            <div className="product-detail__container">
+              <div className="product-detail__recommendations-heading">
+                <div>
+                  <p className="product-detail__section-eyebrow">
+                    Curated for you
+                  </p>
 
-              <div className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                {recommendations.slice(0, 4).map((item) => {
-                  const image = mediaOf(item).find(
-                    (m) => m.type === "image",
-                  );
+                  <h2>You may also like.</h2>
 
-                  return (
-                    <Link
-                      key={item.id || item._id}
-                      href={`/products/${item._id || item.id}`}
-                      className="group"
-                    >
-                      <div className="relative aspect-[.78] overflow-hidden bg-[#e5dcd7]">
-                        {image && (
-                          <Image
-                            src={image.src}
-                            alt={image.alt || item.name}
-                            fill
-                            sizes="25vw"
-                            className="object-cover transition duration-700 group-hover:scale-[1.035]"
-                          />
-                        )}
-                      </div>
-                      <p className="mt-4 line-clamp-2 text-[11px] leading-5">
-                        {item.name}
-                      </p>
-                      <p className="mt-2 text-xs">
-                        {money(item.pricing?.sellingPrice)}
-                      </p>
-                    </Link>
-                  );
-                })}
+                  <p>
+                    Explore more pieces selected to complement
+                    your current choice.
+                  </p>
+                </div>
+
+                <Link href="/shop">
+                  View collection <ArrowRight size={15} />
+                </Link>
+              </div>
+
+              <div className="product-detail__recommendations-grid">
+                {recommendations.slice(0, 4).map((item) => (
+                  <ProductCard
+                    key={item.id || item._id}
+                    product={item}
+                  />
+                ))}
               </div>
             </div>
           </section>
         )}
       </main>
 
-      {share && (
+      {/* =======================================================
+          MOBILE STICKY BUY BAR
+      ======================================================= */}
+      <div className="product-detail__sticky-buy">
+        <div className="product-detail__sticky-buy-inner">
+          <div className="product-detail__sticky-product">
+            <span>{product.name}</span>
+            <strong>{money(sellingPrice)}</strong>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => void handleAddToCart()}
+            disabled={!available || adding || buying || !isInitialized}
+          >
+            <ShoppingBag size={16} />
+            {adding ? "Adding..." : available ? "Add to Bag" : "Sold Out"}
+          </button>
+        </div>
+      </div>
+
+      {/* =======================================================
+          SHARE MODAL
+      ======================================================= */}
+      {shareOpen && (
         <div
-          className="fixed inset-0 z-[100] flex items-end justify-center bg-black/40 p-0 backdrop-blur-sm sm:items-center sm:p-6"
-          onClick={() => setShare(false)}
+          className="product-detail__modal-backdrop"
+          role="presentation"
+          onClick={() => setShareOpen(false)}
         >
           <div
-            className="w-full max-w-md bg-[#f8f5f2] p-6 shadow-2xl sm:p-8"
+            className="product-detail__share-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Share product"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex justify-between">
+            <div className="product-detail__modal-head">
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-[.2em]">
+                <p className="product-detail__section-eyebrow">
                   Aayesha Fashion
                 </p>
-                <h3 className="mt-2 font-serif text-3xl">
-                  Share this piece
-                </h3>
+                <h3>Share this piece</h3>
               </div>
+
               <button
                 type="button"
-                onClick={() => setShare(false)}
-                aria-label="Close"
+                onClick={() => setShareOpen(false)}
+                aria-label="Close share dialog"
               >
-                <X size={19} />
+                <X size={18} />
               </button>
             </div>
 
-            <p className="mt-6 text-xs leading-6 text-[#6d5b56]">
+            <p className="product-detail__share-name">
               {product.name}
             </p>
 
-            <button
-              type="button"
-              onClick={() => void shareProduct()}
-              className="mt-6 flex w-full items-center justify-center gap-3 bg-[#352826] px-5 py-4 text-[9px] font-bold uppercase tracking-[.2em] text-white"
-            >
-              <Share2 size={17} />
-              Share / Copy Product Link
-            </button>
+            <div className="product-detail__share-actions">
+              <button type="button" onClick={() => void nativeShare()}>
+                <Share2 size={17} />
+                <span>Share</span>
+              </button>
+
+              <button type="button" onClick={shareWhatsApp}>
+                <span className="product-detail__whatsapp-icon">W</span>
+                <span>WhatsApp</span>
+              </button>
+
+              <button type="button" onClick={() => void copyProductLink()}>
+                <Copy size={17} />
+                <span>Copy link</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =======================================================
+          FULLSCREEN MEDIA
+      ======================================================= */}
+      {lightboxOpen && activeMedia && (
+        <div
+          className="product-detail__lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${product.name} fullscreen gallery`}
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxOpen(false)}
+            className="product-detail__lightbox-close"
+            aria-label="Close gallery"
+          >
+            <X size={21} />
+          </button>
+
+          <div className="product-detail__lightbox-top">
+            <span>AAYESHA / PRODUCT VIEW</span>
+            <strong>{product.name}</strong>
+          </div>
+
+          <div className="product-detail__lightbox-stage">
+            {activeMedia.type === "video" ? (
+              <video
+                src={activeMedia.src}
+                poster={activeMedia.poster}
+                controls
+                autoPlay
+                playsInline
+              />
+            ) : (
+              <Image
+                src={activeMedia.src}
+                alt={activeMedia.alt || product.name}
+                fill
+                sizes="100vw"
+                className="product-detail__lightbox-image"
+                priority
+              />
+            )}
+
+            {media.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={previousMedia}
+                  className="product-detail__lightbox-nav product-detail__lightbox-nav--prev"
+                  aria-label="Previous media"
+                >
+                  <ArrowLeft size={20} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={nextMedia}
+                  className="product-detail__lightbox-nav product-detail__lightbox-nav--next"
+                  aria-label="Next media"
+                >
+                  <ArrowRight size={20} />
+                </button>
+              </>
+            )}
+          </div>
+
+          <div className="product-detail__lightbox-counter">
+            {String(activeIndex + 1).padStart(2, "0")} /{" "}
+            {String(media.length).padStart(2, "0")}
           </div>
         </div>
       )}
 
       <LoginRequiredPopup
-        open={login}
-        onClose={() => setLogin(false)}
+        open={loginOpen}
+        onClose={() => setLoginOpen(false)}
       />
-
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#352826]/10 bg-[#f8f5f2]/95 p-3 shadow-[0_-8px_30px_rgba(53,40,38,.08)] backdrop-blur lg:hidden">
-        <div className="mx-auto flex max-w-xl items-center gap-3">
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-[10px]">{product.name}</p>
-            <p className="mt-1 text-sm font-semibold">
-              {money(product.pricing?.sellingPrice)}
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => void add()}
-            disabled={!available || adding || buying || !initialized}
-            className="flex h-12 items-center gap-2 bg-[#352826] px-5 text-[8px] font-bold uppercase tracking-[.16em] text-white disabled:opacity-50"
-          >
-            <ShoppingBag size={16} />
-            {adding ? "Adding" : available ? "Add to Bag" : "Sold Out"}
-          </button>
-        </div>
-      </div>
     </>
   );
 }
