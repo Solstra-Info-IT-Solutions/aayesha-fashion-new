@@ -19,6 +19,7 @@ import {
   Copy,
   Heart,
   MapPin,
+  Minimize2,
   Minus,
   Plus,
   RotateCcw,
@@ -203,12 +204,48 @@ export function ProductDetail({
   }, [productId]);
 
   useEffect(() => {
+    if (!shareOpen && !lightboxOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        if (lightboxOpen) {
+          setLightboxOpen(false);
+        } else {
+          setShareOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [shareOpen, lightboxOpen]);
+
+  useEffect(() => {
     if (!lightboxOpen) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setLightboxOpen(false);
-      if (event.key === "ArrowLeft") previousMedia();
-      if (event.key === "ArrowRight") nextMedia();
+      if (event.key === "Escape") {
+        setLightboxOpen(false);
+      } else if (event.key === "ArrowLeft") {
+        setActiveIndex((current) =>
+          media.length <= 1
+            ? current
+            : current <= 0
+              ? media.length - 1
+              : current - 1,
+        );
+      } else if (event.key === "ArrowRight") {
+        setActiveIndex((current) =>
+          media.length <= 1
+            ? current
+            : current >= media.length - 1
+              ? 0
+              : current + 1,
+        );
+      }
     };
 
     const previousOverflow = document.body.style.overflow;
@@ -219,7 +256,7 @@ export function ProductDetail({
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKeyDown);
     };
-  });
+  }, [lightboxOpen, media.length]);
 
   function previousMedia() {
     if (media.length <= 1) return;
@@ -1036,14 +1073,26 @@ export function ProductDetail({
           aria-modal="true"
           aria-label={`${product.name} fullscreen gallery`}
         >
-          <button
-            type="button"
-            onClick={() => setLightboxOpen(false)}
-            className="product-detail__lightbox-close"
-            aria-label="Close gallery"
-          >
-            <X size={21} />
-          </button>
+          <div className="product-detail__lightbox-actions">
+            <button
+              type="button"
+              onClick={() => setLightboxOpen(false)}
+              className="product-detail__lightbox-exit"
+              aria-label="Exit fullscreen gallery"
+            >
+              <Minimize2 size={15} strokeWidth={1.7} />
+              <span>Exit Fullscreen</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setLightboxOpen(false)}
+              className="product-detail__lightbox-close"
+              aria-label="Close gallery"
+            >
+              <X size={20} strokeWidth={1.7} />
+            </button>
+          </div>
 
           <div className="product-detail__lightbox-top">
             <span>AAYESHA / PRODUCT VIEW</span>

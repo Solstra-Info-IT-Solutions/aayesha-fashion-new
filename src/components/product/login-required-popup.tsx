@@ -110,23 +110,24 @@ export function LoginRequiredPopup({
   const popup = (
     <div
       className="login-required-popup"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="login-required-title"
-      onClick={onClose}
+      role="presentation"
+      onMouseDown={(event) => {
+        if (
+          event.target === event.currentTarget
+        ) {
+          onClose();
+        }
+      }}
     >
-      {/* =================================================
-          DIALOG
-      ================================================= */}
-
       <div
         className="login-required-popup__dialog"
-        onClick={(event) =>
-          event.stopPropagation()
-        }
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="login-required-title"
+        aria-describedby="login-required-description"
       >
         {/* =================================================
-            TOP ACCENT
+            DECORATIVE TOP LINE
         ================================================= */}
 
         <div
@@ -141,13 +142,12 @@ export function LoginRequiredPopup({
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close"
+          aria-label="Close login dialog"
           className="login-required-popup__close"
         >
           <X
-            className="login-required-popup__close-icon"
-            size={18}
-            strokeWidth={1.4}
+            size={16}
+            strokeWidth={1.5}
             aria-hidden="true"
           />
         </button>
@@ -159,9 +159,21 @@ export function LoginRequiredPopup({
         <div className="login-required-popup__content">
           {/* BRAND */}
 
-          <p className="login-required-popup__eyebrow">
-            Aayesha Fashion
-          </p>
+          <div className="login-required-popup__brand">
+            <span
+              className="login-required-popup__brand-line"
+              aria-hidden="true"
+            />
+
+            <span>
+              AAYESHA
+            </span>
+
+            <span
+              className="login-required-popup__brand-line"
+              aria-hidden="true"
+            />
+          </div>
 
           {/* DECORATIVE MARK */}
 
@@ -180,14 +192,19 @@ export function LoginRequiredPopup({
             id="login-required-title"
             className="login-required-popup__title"
           >
-            Login Required
+            Keep your favourites
+            close.
           </h2>
 
           {/* DESCRIPTION */}
 
-          <p className="login-required-popup__description">
-            Please login to your account to
-            add products to your wishlist.
+          <p
+            id="login-required-description"
+            className="login-required-popup__description"
+          >
+            Sign in to save pieces to
+            your wishlist and revisit
+            them whenever you like.
           </p>
         </div>
 
@@ -201,30 +218,32 @@ export function LoginRequiredPopup({
           <button
             type="button"
             onClick={handleLogin}
-            className="login-required-popup__button login-required-popup__button--primary"
+            className="
+              login-required-popup__button
+              login-required-popup__button--primary
+            "
           >
-            <span className="login-required-popup__button-content">
-              <span>
-                Login
-              </span>
-
-              <span
-                className="login-required-popup__button-icon"
-                aria-hidden="true"
-              >
+            <span className="login-required-popup__button-left">
+              <span className="login-required-popup__button-icon">
                 <LogIn
                   size={15}
-                  strokeWidth={1.4}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
                 />
               </span>
+
+              <span>Login to continue</span>
             </span>
 
-            <ArrowUpRight
+            <span
               className="login-required-popup__button-arrow"
-              size={15}
-              strokeWidth={1.35}
               aria-hidden="true"
-            />
+            >
+              <ArrowUpRight
+                size={16}
+                strokeWidth={1.4}
+              />
+            </span>
           </button>
 
           {/* CONTINUE SHOPPING */}
@@ -232,11 +251,29 @@ export function LoginRequiredPopup({
           <button
             type="button"
             onClick={onClose}
-            className="login-required-popup__button login-required-popup__button--secondary"
+            className="
+              login-required-popup__secondary
+            "
           >
-            Continue Shopping
+            <span>
+              Continue Shopping
+            </span>
+
+            <span
+              className="login-required-popup__secondary-line"
+              aria-hidden="true"
+            />
           </button>
         </div>
+
+        {/* =================================================
+            FOOTNOTE
+        ================================================= */}
+
+        <p className="login-required-popup__note">
+          Your wishlist is available across
+          your account.
+        </p>
       </div>
     </div>
   );
