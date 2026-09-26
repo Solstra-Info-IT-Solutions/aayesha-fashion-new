@@ -54,9 +54,13 @@ function InputField({
           ? Phone
           : null;
 
+  const inputId =
+    label.toLowerCase().replace(/\s+/g, "-");
+
   return (
     <div className="register-form__field">
       <label
+        htmlFor={inputId}
         className="register-form__label"
       >
         {label}
@@ -71,6 +75,7 @@ function InputField({
         ) : null}
 
         <input
+          id={inputId}
           type={type}
           value={value}
           placeholder={placeholder}
@@ -89,6 +94,7 @@ function InputField({
     </div>
   );
 }
+
 
 /* =========================================================
    PASSWORD FIELD
@@ -112,9 +118,13 @@ function PasswordField({
   const [showPassword, setShowPassword] =
     useState(false);
 
+  const inputId =
+    label.toLowerCase().replace(/\s+/g, "-");
+
   return (
     <div className="register-form__field">
       <label
+        htmlFor={inputId}
         className="register-form__label"
       >
         {label}
@@ -122,6 +132,7 @@ function PasswordField({
 
       <div className="register-form__input-wrap">
         <input
+          id={inputId}
           type={
             showPassword
               ? "text"
@@ -168,6 +179,7 @@ function PasswordField({
   );
 }
 
+
 /* =========================================================
    PASSWORD RULES
 ========================================================= */
@@ -205,10 +217,24 @@ function PasswordRules({
   ];
 
   return (
-    <div className="register-form__rules">
-      <span className="register-form__rules-title">
-        Password requirements
-      </span>
+    <div
+      className="register-form__rules"
+      aria-label="Password requirements"
+    >
+      <div className="register-form__rules-header">
+        <span className="register-form__rules-title">
+          Password requirements
+        </span>
+
+        <span className="register-form__rules-count">
+          {
+            rules.filter(
+              (rule) => rule.valid,
+            ).length
+          }
+          /{rules.length}
+        </span>
+      </div>
 
       <div className="register-form__rules-grid">
         {rules.map((rule) => (
@@ -220,10 +246,12 @@ function PasswordRules({
                 : ""
             }`}
           >
-            <span className="register-form__rule-icon">
+            <span
+              className="register-form__rule-icon"
+              aria-hidden="true"
+            >
               {rule.valid ? (
                 <Check
-                  aria-hidden="true"
                   className="register-form__rule-check"
                 />
               ) : null}
@@ -238,6 +266,7 @@ function PasswordRules({
     </div>
   );
 }
+
 
 /* =========================================================
    REGISTER FORM
@@ -330,6 +359,7 @@ export function RegisterForm() {
     return "";
   };
 
+
   /* =======================================================
      FIELD CHANGE
   ======================================================= */
@@ -346,6 +376,7 @@ export function RegisterForm() {
 
     clearError();
   };
+
 
   /* =======================================================
      SUBMIT
@@ -391,23 +422,41 @@ export function RegisterForm() {
   const errorMessage =
     localError || storeError;
 
+
+  /* =======================================================
+     RENDER
+  ======================================================= */
+
   return (
     <form
       onSubmit={handleSubmit}
       noValidate
       className="register-form"
     >
+
+      {/* ===================================================
+          FORM INTRO
+      =================================================== */}
+
+      <div className="register-form__intro">
+        <div className="register-form__intro-line" />
+
+        <span className="register-form__intro-label">
+          Create your account
+        </span>
+      </div>
+
+
       {/* ===================================================
           PERSONAL INFORMATION
       =================================================== */}
 
-      <div className="register-form__section">
-        <div className="register-form__section-heading">
-          <span className="register-form__section-number">
-            01
-          </span>
+      <section className="register-form__section">
 
-          <div>
+        <div className="register-form__section-heading">
+
+          <div className="register-form__section-copy">
+
             <span className="register-form__section-eyebrow">
               Your details
             </span>
@@ -415,10 +464,19 @@ export function RegisterForm() {
             <h2 className="register-form__section-title">
               Personal information
             </h2>
+
+            <p className="register-form__section-description">
+              Tell us a little about yourself
+              to get started.
+            </p>
+
           </div>
+
         </div>
 
+
         <div className="register-form__fields">
+
           <InputField
             label="Full name"
             value={name}
@@ -464,20 +522,21 @@ export function RegisterForm() {
               )
             }
           />
+
         </div>
-      </div>
+      </section>
+
 
       {/* ===================================================
           SECURITY
       =================================================== */}
 
-      <div className="register-form__section">
-        <div className="register-form__section-heading">
-          <span className="register-form__section-number">
-            02
-          </span>
+      <section className="register-form__section register-form__section--security">
 
-          <div>
+        <div className="register-form__section-heading">
+
+          <div className="register-form__section-copy">
+
             <span className="register-form__section-eyebrow">
               Account security
             </span>
@@ -485,11 +544,21 @@ export function RegisterForm() {
             <h2 className="register-form__section-title">
               Create your password
             </h2>
+
+            <p className="register-form__section-description">
+              Choose a secure password for
+              your Aayesha Fashion account.
+            </p>
+
           </div>
+
         </div>
 
+
         <div className="register-form__fields">
-          <div>
+
+          <div className="register-form__password-group">
+
             <PasswordField
               label="Password"
               value={password}
@@ -506,7 +575,9 @@ export function RegisterForm() {
             <PasswordRules
               password={password}
             />
+
           </div>
+
 
           <PasswordField
             label="Confirm password"
@@ -520,8 +591,10 @@ export function RegisterForm() {
               )
             }
           />
+
         </div>
-      </div>
+      </section>
+
 
       {/* ===================================================
           ERROR
@@ -532,13 +605,23 @@ export function RegisterForm() {
           role="alert"
           className="register-form__error"
         >
-          <span className="register-form__error-mark">
+          <span
+            className="register-form__error-mark"
+            aria-hidden="true"
+          >
             !
           </span>
 
-          <p>{errorMessage}</p>
+          <div className="register-form__error-content">
+            <span className="register-form__error-title">
+              Unable to create account
+            </span>
+
+            <p>{errorMessage}</p>
+          </div>
         </div>
       ) : null}
+
 
       {/* ===================================================
           TERMS
@@ -550,6 +633,7 @@ export function RegisterForm() {
         practices.
       </p>
 
+
       {/* ===================================================
           SUBMIT
       =================================================== */}
@@ -559,10 +643,20 @@ export function RegisterForm() {
         disabled={isLoading}
         className="register-form__submit"
       >
-        {isLoading
-          ? "Creating account..."
-          : "Create account"}
+        <span className="register-form__submit-label">
+          {isLoading
+            ? "Creating account..."
+            : "Create account"}
+        </span>
+
+        <span
+          className="register-form__submit-arrow"
+          aria-hidden="true"
+        >
+          →
+        </span>
       </button>
+
     </form>
   );
 }
