@@ -1,48 +1,52 @@
 /* =========================================================
-   AAYESHA HERO
-   Premium editorial fashion banner
+   AAYESHA FASHION
+   HERO SECTION
+   Premium Editorial Fashion Experience
 ========================================================= */
 
 .aayesha-hero {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: var(--color-primary);
-   margin-top: 0;
-  border-top: 0;
-  border-bottom: 0;
+  background: #332522;
 }
+
+/* =========================================================
+   VIEWPORT
+========================================================= */
 
 .aayesha-hero__viewport {
   position: relative;
   width: 100%;
-  height: min(88svh, 860px);
-  min-height: 620px;
+  height: min(86svh, 820px);
+  min-height: 600px;
   overflow: hidden;
   touch-action: pan-y;
-   margin-top: 0;
-  border-top: 0;
 }
 
 /* =========================================================
-   SLIDE
+   SLIDES
 ========================================================= */
 
 .aayesha-hero__slide {
   position: absolute;
   inset: 0;
   z-index: 0;
+
   overflow: hidden;
+
   opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 900ms ease;
   visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 750ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 750ms ease;
 }
 
 .aayesha-hero__slide--active {
   z-index: 1;
+
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -71,7 +75,9 @@
 .aayesha-hero__image {
   object-fit: cover;
   object-position: center center;
+
   transform: scale(1.035);
+
   transition:
     transform 7s cubic-bezier(0.2, 0.65, 0.2, 1);
 }
@@ -82,33 +88,41 @@
 }
 
 /* =========================================================
-   WARM EDITORIAL OVERLAY
+   EDITORIAL OVERLAY
 ========================================================= */
 
 .aayesha-hero__overlay {
   position: absolute;
   inset: 0;
+
   background:
     linear-gradient(
       90deg,
-      rgba(51, 37, 34, 0.62) 0%,
-      rgba(51, 37, 34, 0.3) 32%,
-      rgba(51, 37, 34, 0.04) 68%,
-      rgba(51, 37, 34, 0.08) 100%
+      rgba(39, 27, 25, 0.72) 0%,
+      rgba(39, 27, 25, 0.48) 22%,
+      rgba(39, 27, 25, 0.18) 48%,
+      rgba(39, 27, 25, 0.04) 72%,
+      rgba(39, 27, 25, 0.12) 100%
     );
+
+  pointer-events: none;
 }
 
 .aayesha-hero__bottom-fade {
   position: absolute;
-  inset-inline: 0;
+  right: 0;
   bottom: 0;
-  height: 45%;
+  left: 0;
+
+  height: 42%;
+
   background:
     linear-gradient(
       to top,
-      rgba(51, 37, 34, 0.42),
-      rgba(51, 37, 34, 0)
+      rgba(39, 27, 25, 0.58),
+      rgba(39, 27, 25, 0)
     );
+
   pointer-events: none;
 }
 
@@ -120,19 +134,27 @@
   position: absolute;
   inset: 0;
   z-index: 5;
+
   display: flex;
   align-items: flex-end;
+
   pointer-events: none;
 }
 
 .aayesha-hero__content-inner {
   width: min(100%, 1440px);
   margin: 0 auto;
+
   padding:
     0 64px
-    116px;
+    108px;
+
   pointer-events: auto;
 }
+
+/* =========================================================
+   CONTENT REVEAL
+========================================================= */
 
 .aayesha-hero__content-inner > * {
   opacity: 0;
@@ -144,52 +166,68 @@
   > * {
   animation:
     aayeshaHeroReveal
-    850ms
+    760ms
     cubic-bezier(0.22, 1, 0.36, 1)
     forwards;
 }
 
 .aayesha-hero__slide--active
-  .aayesha-hero__content-inner
-  .aayesha-hero__eyebrow {
-  animation-delay: 120ms;
+  .aayesha-hero__eyebrow-wrap {
+  animation-delay: 90ms;
 }
 
 .aayesha-hero__slide--active
-  .aayesha-hero__content-inner
   .aayesha-hero__title {
-  animation-delay: 190ms;
+  animation-delay: 160ms;
 }
 
 .aayesha-hero__slide--active
-  .aayesha-hero__content-inner
   .aayesha-hero__subtitle {
-  animation-delay: 260ms;
+  animation-delay: 230ms;
 }
 
 .aayesha-hero__slide--active
-  .aayesha-hero__content-inner
   .aayesha-hero__description {
-  animation-delay: 310ms;
+  animation-delay: 280ms;
 }
 
 .aayesha-hero__slide--active
-  .aayesha-hero__content-inner
   .aayesha-hero__cta {
-  animation-delay: 370ms;
+  animation-delay: 350ms;
 }
 
 /* =========================================================
    EYEBROW
 ========================================================= */
 
+.aayesha-hero__eyebrow-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: fit-content;
+  margin-bottom: 15px;
+}
+
+.aayesha-hero__eyebrow-line {
+  display: block;
+
+  width: 30px;
+  height: 1px;
+
+  background: #d2bea0;
+}
+
 .aayesha-hero__eyebrow {
-  margin: 0 0 13px;
+  margin: 0;
+
   color: rgba(250, 247, 244, 0.82);
+
   font-family: var(--font-body);
   font-size: 8.5px;
   font-weight: 600;
   line-height: 1.2;
+
   letter-spacing: 0.28em;
   text-transform: uppercase;
 }
@@ -199,18 +237,22 @@
 ========================================================= */
 
 .aayesha-hero__title {
-  max-width: 650px;
+  max-width: 680px;
   margin: 0;
+
   color: #faf7f4;
+
   font-family: var(--font-display);
   font-size: clamp(
-    2.35rem,
-    3.6vw,
-    3.75rem
+    2.45rem,
+    4vw,
+    4rem
   );
   font-weight: 400;
+
   line-height: 0.94;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.038em;
+
   text-wrap: balance;
 }
 
@@ -219,14 +261,18 @@
 ========================================================= */
 
 .aayesha-hero__subtitle {
-  max-width: 470px;
+  max-width: 480px;
+
   margin: 18px 0 0;
-  color: rgba(250, 247, 244, 0.92);
+
+  color: rgba(250, 247, 244, 0.94);
+
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 400;
+
   line-height: 1.65;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.01em;
 }
 
 /* =========================================================
@@ -234,12 +280,18 @@
 ========================================================= */
 
 .aayesha-hero__description {
-  max-width: 440px;
-  margin: 10px 0 0;
+  max-width: 430px;
+
+  margin: 9px 0 0;
+
   color: rgba(250, 247, 244, 0.68);
+
   font-family: var(--font-body);
   font-size: 10.75px;
+  font-weight: 400;
+
   line-height: 1.7;
+  letter-spacing: 0.01em;
 }
 
 /* =========================================================
@@ -249,42 +301,68 @@
 .aayesha-hero__cta {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 27px;
+  justify-content: center;
+  gap: 13px;
+
   min-height: 43px;
-  padding:
-    0 17px
-    0 18px;
+
+  margin-top: 27px;
+  padding: 0 16px 0 18px;
+
   border: 1px solid
     rgba(250, 247, 244, 0.62);
-  background: rgba(51, 37, 34, 0.28);
+
+  background: rgba(51, 37, 34, 0.25);
+
   color: #faf7f4;
+
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 600;
+
   line-height: 1;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.19em;
+
   text-decoration: none;
   text-transform: uppercase;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+
   transition:
-    background 300ms ease,
-    border-color 300ms ease,
-    color 300ms ease,
-    transform 300ms ease;
+    background 260ms ease,
+    border-color 260ms ease,
+    color 260ms ease,
+    transform 260ms ease;
+}
+
+.aayesha-hero__cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 260ms ease;
 }
 
 .aayesha-hero__cta:hover {
   border-color: #d2bea0;
+
   background: #d2bea0;
   color: #332522;
+
   transform: translateY(-2px);
+}
+
+.aayesha-hero__cta:hover
+  .aayesha-hero__cta-icon {
+  transform: translateX(3px);
 }
 
 .aayesha-hero__cta:active {
   background: #b39a79;
   color: #332522;
+
   transform: translateY(0);
 }
 
@@ -299,23 +377,34 @@
 
 .aayesha-hero__side-label {
   position: absolute;
+
   top: 50%;
-  right: 27px;
+  right: 26px;
+
   z-index: 10;
+
   display: flex;
   flex-direction: column;
   gap: 7px;
-  color: rgba(250, 247, 244, 0.58);
+
+  color: rgba(250, 247, 244, 0.56);
+
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 600;
-  letter-spacing: 0.28em;
+
   line-height: 1;
+  letter-spacing: 0.28em;
+
   text-align: center;
+
   writing-mode: vertical-rl;
+
   transform:
     translateY(-50%)
     rotate(180deg);
+
+  pointer-events: none;
 }
 
 /* =========================================================
@@ -324,14 +413,23 @@
 
 .aayesha-hero__controls {
   position: absolute;
+
   right: 64px;
-  bottom: 37px;
+  bottom: 35px;
   left: 64px;
+
   z-index: 20;
+
   display: grid;
-  grid-template-columns: 120px 1fr auto;
+  grid-template-columns:
+    120px
+    1fr
+    auto;
+
   align-items: center;
-  gap: 28px;
+
+  gap: 26px;
+
   pointer-events: none;
 }
 
@@ -354,32 +452,43 @@
 .aayesha-hero__counter {
   display: flex;
   align-items: center;
+
   flex-shrink: 0;
-  color: rgba(250, 247, 244, 0.9);
+
+  color: rgba(250, 247, 244, 0.88);
+
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 500;
-  letter-spacing: 0.16em;
+
+  letter-spacing: 0.15em;
 }
 
 .aayesha-hero__counter-divider {
   margin: 0 5px;
-  color: rgba(250, 247, 244, 0.35);
+
+  color: rgba(250, 247, 244, 0.34);
 }
 
 .aayesha-hero__progress-track {
   position: relative;
-  width: 62px;
+
+  width: 58px;
   height: 1px;
+
   overflow: hidden;
-  background: rgba(250, 247, 244, 0.28);
+
+  background: rgba(250, 247, 244, 0.26);
 }
 
 .aayesha-hero__progress-fill {
   position: absolute;
   inset: 0 auto 0 0;
+
   display: block;
+
   background: #d2bea0;
+
   transition:
     width 500ms
     cubic-bezier(0.22, 1, 0.36, 1);
@@ -393,36 +502,49 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 7px;
 }
 
 .aayesha-hero__indicator {
   display: flex;
+  align-items: center;
+
   width: 27px;
   height: 20px;
-  align-items: center;
+
   padding: 0;
+
   border: 0;
+
   background: transparent;
+
   cursor: pointer;
 }
 
 .aayesha-hero__indicator span {
   display: block;
+
   width: 100%;
   height: 1px;
-  background: rgba(250, 247, 244, 0.32);
+
+  background: rgba(250, 247, 244, 0.3);
+
   transition:
-    background 300ms ease,
-    transform 300ms ease;
+    background 260ms ease,
+    transform 260ms ease,
+    width 260ms ease;
 }
 
-.aayesha-hero__indicator:hover span {
-  background: rgba(250, 247, 244, 0.7);
+.aayesha-hero__indicator:hover
+  span {
+  background: rgba(250, 247, 244, 0.72);
 }
 
-.aayesha-hero__indicator--active span {
+.aayesha-hero__indicator--active
+  span {
   background: #d2bea0;
+
   transform: scaleY(2);
 }
 
@@ -438,6 +560,7 @@
 .aayesha-hero__actions {
   display: flex;
   align-items: center;
+
   gap: 7px;
 }
 
@@ -446,45 +569,59 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   flex-shrink: 0;
+
   padding: 0;
+
   border: 1px solid
     rgba(250, 247, 244, 0.38);
+
   background: rgba(51, 37, 34, 0.2);
+
   color: #faf7f4;
+
   cursor: pointer;
+
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+
   transition:
-    background 250ms ease,
-    border-color 250ms ease,
-    color 250ms ease,
-    transform 250ms ease;
+    background 240ms ease,
+    border-color 240ms ease,
+    color 240ms ease,
+    transform 240ms ease;
 }
 
 .aayesha-hero__nav-button {
-  width: 39px;
-  height: 39px;
+  width: 38px;
+  height: 38px;
 }
 
 .aayesha-hero__pause {
-  width: 32px;
-  height: 32px;
+  width: 31px;
+  height: 31px;
+
   margin-left: 3px;
+
   border-radius: 50%;
 }
 
 .aayesha-hero__nav-button:hover,
 .aayesha-hero__pause:hover {
   border-color: #d2bea0;
+
   background: #d2bea0;
   color: #332522;
+
+  transform: translateY(-1px);
 }
 
 .aayesha-hero__nav-button:active,
 .aayesha-hero__pause:active {
   background: #b39a79;
   color: #332522;
+
   transform: scale(0.96);
 }
 
@@ -492,6 +629,28 @@
 .aayesha-hero__pause:focus-visible {
   outline: 2px solid #d2bea0;
   outline-offset: 3px;
+}
+
+/* =========================================================
+   SCREEN READER ONLY
+========================================================= */
+
+.sr-only {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+
+  white-space: nowrap;
+
+  border: 0;
 }
 
 /* =========================================================
@@ -523,12 +682,16 @@
   .aayesha-hero__content-inner {
     padding:
       0 40px
-      105px;
+      100px;
+  }
+
+  .aayesha-hero__title {
+    max-width: 580px;
   }
 
   .aayesha-hero__controls {
     right: 40px;
-    bottom: 31px;
+    bottom: 30px;
     left: 40px;
   }
 
@@ -544,9 +707,13 @@
 @media (max-width: 767px) {
   .aayesha-hero__viewport {
     height: calc(100svh - 0px);
-    min-height: 600px;
-    max-height: none;
+    min-height: 590px;
+    max-height: 760px;
   }
+
+  /* -------------------------------------------------------
+     MOBILE IMAGE
+  ------------------------------------------------------- */
 
   .aayesha-hero__desktop-image {
     display: none;
@@ -561,53 +728,76 @@
     transform: scale(1.025);
   }
 
+  /* -------------------------------------------------------
+     MOBILE OVERLAY
+  ------------------------------------------------------- */
+
   .aayesha-hero__overlay {
     background:
       linear-gradient(
         180deg,
-        rgba(51, 37, 34, 0.08) 0%,
-        rgba(51, 37, 34, 0.12) 42%,
-        rgba(51, 37, 34, 0.68) 100%
+        rgba(39, 27, 25, 0.04) 0%,
+        rgba(39, 27, 25, 0.08) 34%,
+        rgba(39, 27, 25, 0.32) 58%,
+        rgba(39, 27, 25, 0.78) 100%
       );
   }
 
   .aayesha-hero__bottom-fade {
-    height: 54%;
+    height: 58%;
+
     background:
       linear-gradient(
         to top,
-        rgba(51, 37, 34, 0.5),
-        rgba(51, 37, 34, 0)
+        rgba(39, 27, 25, 0.58),
+        rgba(39, 27, 25, 0)
       );
   }
+
+  /* -------------------------------------------------------
+     CONTENT
+  ------------------------------------------------------- */
 
   .aayesha-hero__content-inner {
     padding:
       0 22px
-      126px;
+      118px;
+  }
+
+  .aayesha-hero__eyebrow-wrap {
+    gap: 8px;
+
+    margin-bottom: 11px;
+  }
+
+  .aayesha-hero__eyebrow-line {
+    width: 23px;
   }
 
   .aayesha-hero__eyebrow {
-    margin-bottom: 10px;
-    font-size: 8px;
-    letter-spacing: 0.25em;
+    font-size: 7.5px;
+    letter-spacing: 0.23em;
   }
 
   .aayesha-hero__title {
     max-width: 100%;
+
     font-size: clamp(
-      2rem,
-      8.5vw,
-      2.85rem
+      2.1rem,
+      9vw,
+      2.95rem
     );
-    line-height: 0.93;
+
+    line-height: 0.94;
     letter-spacing: -0.035em;
   }
 
   .aayesha-hero__subtitle {
     max-width: 330px;
+
     margin-top: 13px;
-    font-size: 12px;
+
+    font-size: 11.5px;
     line-height: 1.55;
   }
 
@@ -615,20 +805,43 @@
     display: none;
   }
 
+  /* -------------------------------------------------------
+     CTA
+  ------------------------------------------------------- */
+
   .aayesha-hero__cta {
-    margin-top: 20px;
     min-height: 40px;
-    padding-inline: 15px;
-    font-size: 9px;
-    letter-spacing: 0.17em;
+
+    margin-top: 20px;
+
+    padding:
+      0 14px
+      0 15px;
+
+    gap: 10px;
+
+    font-size: 8.5px;
+    letter-spacing: 0.16em;
   }
+
+  .aayesha-hero__cta-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* -------------------------------------------------------
+     CONTROLS
+  ------------------------------------------------------- */
 
   .aayesha-hero__controls {
     right: 22px;
-    bottom: 24px;
+    bottom: 22px;
     left: 22px;
+
     display: flex;
+    align-items: center;
     justify-content: space-between;
+
     gap: 12px;
   }
 
@@ -638,11 +851,13 @@
 
   .aayesha-hero__indicators {
     justify-content: flex-start;
+
     gap: 5px;
   }
 
   .aayesha-hero__indicator {
     width: 22px;
+    height: 18px;
   }
 
   .aayesha-hero__actions {
@@ -650,13 +865,13 @@
   }
 
   .aayesha-hero__nav-button {
-    width: 36px;
-    height: 36px;
+    width: 35px;
+    height: 35px;
   }
 
   .aayesha-hero__pause {
-    width: 30px;
-    height: 30px;
+    width: 29px;
+    height: 29px;
   }
 }
 
@@ -666,27 +881,62 @@
 
 @media (max-width: 420px) {
   .aayesha-hero__viewport {
-    min-height: 570px;
+    min-height: 560px;
   }
 
   .aayesha-hero__content-inner {
     padding:
       0 18px
-      118px;
+      112px;
   }
 
   .aayesha-hero__title {
     font-size: 2.55rem;
   }
 
+  .aayesha-hero__subtitle {
+    max-width: 300px;
+
+    font-size: 11px;
+  }
+
   .aayesha-hero__controls {
     right: 18px;
-    bottom: 19px;
+    bottom: 18px;
     left: 18px;
   }
 
   .aayesha-hero__pause {
     display: none;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media (max-width: 360px) {
+  .aayesha-hero__viewport {
+    min-height: 530px;
+  }
+
+  .aayesha-hero__content-inner {
+    padding:
+      0 16px
+      105px;
+  }
+
+  .aayesha-hero__title {
+    font-size: 2.25rem;
+  }
+
+  .aayesha-hero__cta {
+    min-height: 38px;
+  }
+
+  .aayesha-hero__nav-button {
+    width: 33px;
+    height: 33px;
   }
 }
 
@@ -698,6 +948,7 @@
   .aayesha-hero__slide,
   .aayesha-hero__image,
   .aayesha-hero__cta,
+  .aayesha-hero__cta-icon,
   .aayesha-hero__nav-button,
   .aayesha-hero__pause,
   .aayesha-hero__indicator span,

@@ -94,11 +94,10 @@ export function HeroSection({
       return;
     }
 
-    const interval =
-      window.setInterval(
-        nextSlide,
-        AUTOPLAY_DELAY,
-      );
+    const interval = window.setInterval(
+      nextSlide,
+      AUTOPLAY_DELAY,
+    );
 
     return () => {
       window.clearInterval(interval);
@@ -249,9 +248,9 @@ export function HeroSection({
                 .filter(Boolean)
                 .join(" ")}
             >
-              {/* -------------------------------------------
+              {/* =================================================
                   IMAGE
-              ------------------------------------------- */}
+              ================================================= */}
 
               <div className="aayesha-hero__media">
                 <div className="aayesha-hero__desktop-image">
@@ -279,23 +278,34 @@ export function HeroSection({
                   />
                 </div>
 
-                {/* Warm editorial overlay */}
-                <div className="aayesha-hero__overlay" />
+                <div
+                  className="aayesha-hero__overlay"
+                  aria-hidden="true"
+                />
 
-                {/* Subtle bottom depth */}
-                <div className="aayesha-hero__bottom-fade" />
+                <div
+                  className="aayesha-hero__bottom-fade"
+                  aria-hidden="true"
+                />
               </div>
 
-              {/* -------------------------------------------
+              {/* =================================================
                   EDITORIAL CONTENT
-              ------------------------------------------- */}
+              ================================================= */}
 
               <div className="aayesha-hero__content">
                 <div className="aayesha-hero__content-inner">
                   {slide.eyebrow && (
-                    <p className="aayesha-hero__eyebrow">
-                      {slide.eyebrow}
-                    </p>
+                    <div className="aayesha-hero__eyebrow-wrap">
+                      <span
+                        className="aayesha-hero__eyebrow-line"
+                        aria-hidden="true"
+                      />
+
+                      <p className="aayesha-hero__eyebrow">
+                        {slide.eyebrow}
+                      </p>
+                    </div>
                   )}
 
                   <h1 className="aayesha-hero__title">
@@ -324,20 +334,28 @@ export function HeroSection({
                           {slide.buttonLabel}
                         </span>
 
-                        <ArrowRight
-                          size={15}
-                          strokeWidth={1.4}
-                        />
+                        <span
+                          className="aayesha-hero__cta-icon"
+                          aria-hidden="true"
+                        >
+                          <ArrowRight
+                            size={15}
+                            strokeWidth={1.5}
+                          />
+                        </span>
                       </a>
                     )}
                 </div>
               </div>
 
-              {/* -------------------------------------------
-                  EDITORIAL SIDE LABEL
-              ------------------------------------------- */}
+              {/* =================================================
+                  SIDE LABEL
+              ================================================= */}
 
-              <div className="aayesha-hero__side-label">
+              <div
+                className="aayesha-hero__side-label"
+                aria-hidden="true"
+              >
                 <span>AAYESHA</span>
                 <span>WOMENSWEAR</span>
               </div>
@@ -351,28 +369,28 @@ export function HeroSection({
 
         {totalSlides > 1 && (
           <div className="aayesha-hero__controls">
-            {/* Progress */}
             <div
               className="aayesha-hero__progress"
               aria-label="Slide navigation"
             >
               <div className="aayesha-hero__counter">
                 <span>
-                  {String(activeIndex + 1).padStart(
-                    2,
-                    "0",
-                  )}
+                  {String(
+                    activeIndex + 1,
+                  ).padStart(2, "0")}
                 </span>
 
-                <span className="aayesha-hero__counter-divider">
+                <span
+                  className="aayesha-hero__counter-divider"
+                  aria-hidden="true"
+                >
                   /
                 </span>
 
                 <span>
-                  {String(totalSlides).padStart(
-                    2,
-                    "0",
-                  )}
+                  {String(
+                    totalSlides,
+                  ).padStart(2, "0")}
                 </span>
               </div>
 
@@ -390,8 +408,10 @@ export function HeroSection({
               </div>
             </div>
 
-            {/* Indicators */}
-            <div className="aayesha-hero__indicators">
+            <div
+              className="aayesha-hero__indicators"
+              aria-label="Choose banner"
+            >
               {slides.map(
                 (slide, index) => {
                   const isActive =
@@ -428,7 +448,6 @@ export function HeroSection({
               )}
             </div>
 
-            {/* Navigation */}
             <div className="aayesha-hero__actions">
               <button
                 type="button"
@@ -438,7 +457,7 @@ export function HeroSection({
               >
                 <ArrowLeft
                   size={16}
-                  strokeWidth={1.3}
+                  strokeWidth={1.4}
                 />
               </button>
 
@@ -450,7 +469,7 @@ export function HeroSection({
               >
                 <ArrowRight
                   size={16}
-                  strokeWidth={1.3}
+                  strokeWidth={1.4}
                 />
               </button>
 
@@ -471,12 +490,12 @@ export function HeroSection({
                 {isPaused ? (
                   <Play
                     size={13}
-                    strokeWidth={1.3}
+                    strokeWidth={1.4}
                   />
                 ) : (
                   <Pause
                     size={13}
-                    strokeWidth={1.3}
+                    strokeWidth={1.4}
                   />
                 )}
               </button>
@@ -509,7 +528,9 @@ export function HeroSection({
 
           {activeSlide.buttonLabel &&
             activeSlide.href && (
-              <a href={activeSlide.href}>
+              <a
+                href={activeSlide.href}
+              >
                 {activeSlide.buttonLabel}
               </a>
             )}
