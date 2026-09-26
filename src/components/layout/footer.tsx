@@ -53,7 +53,7 @@ const footerNavigation = {
 
 
 /* ============================================================
-   LEGAL
+   LEGAL / POLICIES
 ============================================================ */
 
 const legalLinks = [
@@ -124,9 +124,9 @@ export function Footer() {
       <Container>
         <div className="site-footer__inner">
 
-          {/* =========================================
+          {/* =================================================
               BRAND INTRO
-          ========================================= */}
+          ================================================= */}
 
           <section className="site-footer__intro">
             <div className="site-footer__intro-heading">
@@ -149,15 +149,15 @@ export function Footer() {
           </section>
 
 
-          {/* =========================================
+          {/* =================================================
               MAIN FOOTER
-          ========================================= */}
+          ================================================= */}
 
           <section className="site-footer__main">
 
-            {/* =========================================
+            {/* ===============================================
                 BRAND
-            ========================================= */}
+            =============================================== */}
 
             <div className="site-footer__brand-column">
 
@@ -185,6 +185,10 @@ export function Footer() {
 
               </Link>
 
+
+              {/* =========================================
+                  SOCIAL
+              ========================================= */}
 
               {socialLinks.length > 0 && (
                 <div className="site-footer__social">
@@ -224,21 +228,43 @@ export function Footer() {
             </div>
 
 
-            {/* =========================================
-                NAVIGATION
-                Collections removed
-            ========================================= */}
+            {/* ===============================================
+                THREE NAVIGATION GRIDS
+
+                1. Shop
+                2. Information
+                3. Policies
+            =============================================== */}
 
             <div className="site-footer__columns">
+
+              {/* =========================================
+                  SHOP
+              ========================================= */}
 
               <FooterColumn
                 title="Shop"
                 links={footerNavigation.shop}
               />
 
+
+              {/* =========================================
+                  INFORMATION
+              ========================================= */}
+
               <FooterColumn
                 title="Information"
                 links={footerNavigation.information}
+              />
+
+
+              {/* =========================================
+                  POLICIES
+              ========================================= */}
+
+              <FooterColumn
+                title="Policies"
+                links={legalLinks}
               />
 
             </div>
@@ -246,9 +272,9 @@ export function Footer() {
           </section>
 
 
-          {/* =========================================
+          {/* =================================================
               CUSTOMER CARE
-          ========================================= */}
+          ================================================= */}
 
           <section className="site-footer__customer-care">
 
@@ -278,6 +304,10 @@ export function Footer() {
               </div>
             )}
 
+
+            {/* =============================================
+                WHATSAPP / PHONE
+            ============================================= */}
 
             <div className="site-footer__contact">
 
@@ -330,9 +360,9 @@ export function Footer() {
           </section>
 
 
-          {/* =========================================
+          {/* =================================================
               NEWSLETTER
-          ========================================= */}
+          ================================================= */}
 
           <section className="site-footer__newsletter">
 
@@ -374,9 +404,9 @@ export function Footer() {
           </section>
 
 
-          {/* =========================================
-              LEGAL
-          ========================================= */}
+          {/* =================================================
+              COPYRIGHT
+          ================================================= */}
 
           <section className="site-footer__legal">
 
@@ -384,23 +414,6 @@ export function Footer() {
               © {currentYear} {siteConfig.name}.
               All rights reserved.
             </p>
-
-
-            <div className="site-footer__legal-links">
-
-              {legalLinks.map((link) => (
-
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="site-footer__legal-link"
-                >
-                  {link.label}
-                </Link>
-
-              ))}
-
-            </div>
 
           </section>
 
@@ -437,7 +450,10 @@ function FooterColumn({
       </div>
 
 
-      <nav className="site-footer__column-links">
+      <nav
+        className="site-footer__column-links"
+        aria-label={`${title} navigation`}
+      >
 
         {links.map((link) => (
 
@@ -455,6 +471,7 @@ function FooterColumn({
               size={13}
               strokeWidth={1.4}
               className="site-footer__column-arrow"
+              aria-hidden="true"
             />
 
           </Link>
