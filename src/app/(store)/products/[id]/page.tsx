@@ -10,7 +10,7 @@ import { getCategories } from "@/services/category.service";
 
 import { ProductJsonLd } from "@/components/seo/product-json-ld";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
-import { ProductDetail } from "@/components/product/product-detail";
+import ProductDetail from "@/components/product/product-detail";
 
 import type { Product } from "@/types/product";
 
