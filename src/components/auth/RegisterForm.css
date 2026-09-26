@@ -957,3 +957,169 @@
 .register-form__field {
   min-width: 0;
 }
+
+/* =========================================================
+   LOGIN / EXISTING ACCOUNT
+========================================================= */
+
+.register-form__login {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  gap: 16px;
+
+  margin: 14px 0 0;
+  padding: 13px 14px;
+
+  border: 1px solid #ddd4d1;
+  border-radius: 7px;
+
+  background: #faf8f7;
+}
+
+.register-form__login-copy {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  gap: 2px;
+}
+
+.register-form__login-label {
+  color: #746965;
+
+  font-size: 10px;
+  font-weight: 500;
+
+  line-height: 14px;
+}
+
+.register-form__login-title {
+  color: #3d322f;
+
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  line-height: 20px;
+}
+
+.register-form__login-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  min-height: 38px;
+
+  padding: 0 13px;
+
+  flex: 0 0 auto;
+
+  border: 1px solid #bdaaa5;
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  color: #784a43;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  line-height: 14px;
+
+  letter-spacing: 0.07em;
+
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.register-form__login-link:hover {
+  border-color: #92584f;
+
+  background: #92584f;
+
+  color: #ffffff;
+}
+
+.register-form__login-link:focus,
+.register-form__login-link:focus-visible {
+  outline: none;
+
+  box-shadow: none;
+}
+
+.register-form__login-icon {
+  width: 15px;
+  height: 15px;
+
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON ICON
+   SAME VISUAL LANGUAGE AS LOGIN
+========================================================= */
+
+.register-form__submit-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 37px;
+  height: 37px;
+
+  flex: 0 0 37px;
+
+  border-radius: 6px;
+
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.register-form__submit-icon {
+  display: block;
+
+  width: 17px;
+  height: 17px;
+
+  color: #ffffff;
+
+  stroke-width: 1.8;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+  .register-form__login {
+    align-items: stretch;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding: 13px;
+  }
+
+  .register-form__login-copy {
+    text-align: left;
+  }
+
+  .register-form__login-link {
+    width: 100%;
+
+    min-height: 40px;
+  }
+}

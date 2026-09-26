@@ -5,7 +5,10 @@ import {
   useState,
 } from "react";
 
+import Link from "next/link";
+
 import {
+  ArrowRight,
   Eye,
   EyeOff,
   UserRound,
@@ -210,9 +213,7 @@ function PasswordRules({
     },
     {
       label: "One special character",
-      valid: /[^A-Za-z0-9]/.test(
-        password,
-      ),
+      valid: /[^A-Za-z0-9]/.test(password),
     },
   ];
 
@@ -653,9 +654,43 @@ export function RegisterForm() {
           className="register-form__submit-arrow"
           aria-hidden="true"
         >
-          →
+          <ArrowRight
+            className="register-form__submit-icon"
+            size={17}
+            strokeWidth={1.8}
+          />
         </span>
       </button>
+
+
+      {/* ===================================================
+          LOGIN
+      =================================================== */}
+
+      <div className="register-form__login">
+        <div className="register-form__login-copy">
+          <span className="register-form__login-label">
+            Already have an account?
+          </span>
+
+          <span className="register-form__login-title">
+            Welcome back to Aayesha Fashion
+          </span>
+        </div>
+
+        <Link
+          href="/login"
+          className="register-form__login-link"
+        >
+          <span>Sign in</span>
+
+          <ArrowRight
+            className="register-form__login-icon"
+            size={15}
+            strokeWidth={1.7}
+          />
+        </Link>
+      </div>
 
     </form>
   );
