@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { getProducts } from "@/services/product.service";
+import type { Product } from "@/types/product";
 
 import { ProductCarousel } from "@/components/product/product-carousel";
 import { Container } from "@/components/shared/container";
@@ -13,7 +14,7 @@ import "./NewArrivals.css";
 ========================================================= */
 
 export async function NewArrivals() {
-  let newArrivals = [];
+  let newArrivals: Product[] = [];
 
   try {
     const response = await getProducts({
@@ -48,6 +49,7 @@ export async function NewArrivals() {
           ================================================= */}
 
           <header className="new-arrivals__header">
+
             <div className="new-arrivals__heading">
 
               <div className="new-arrivals__eyebrow-wrap">
@@ -87,6 +89,7 @@ export async function NewArrivals() {
               </span>
 
             </div>
+
           </header>
 
           {/* =================================================
@@ -140,6 +143,7 @@ export async function NewArrivals() {
               </div>
             </>
           ) : (
+
             /* =================================================
                EMPTY / COMING SOON
             ================================================= */
@@ -147,6 +151,8 @@ export async function NewArrivals() {
             <div className="new-arrivals__empty">
 
               <div className="new-arrivals__empty-inner">
+
+                {/* Decorative Mark */}
 
                 <div
                   className="new-arrivals__empty-mark"
@@ -157,19 +163,27 @@ export async function NewArrivals() {
                   <span />
                 </div>
 
+                {/* Eyebrow */}
+
                 <p className="new-arrivals__empty-eyebrow">
                   New Arrivals
                 </p>
 
+                {/* Title */}
+
                 <h3 className="new-arrivals__empty-title">
                   Something new is coming.
                 </h3>
+
+                {/* Description */}
 
                 <p className="new-arrivals__empty-description">
                   Our latest styles are on their
                   way. Explore the current
                   collection while you wait.
                 </p>
+
+                {/* CTA */}
 
                 <div className="new-arrivals__empty-cta">
 
