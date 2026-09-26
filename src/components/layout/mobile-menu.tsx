@@ -274,7 +274,7 @@ export function MobileMenu({
         {isOpen ? (
           <X
             size={20}
-            strokeWidth={1.15}
+            strokeWidth={1.6}
             className="
               mobile-menu-trigger__icon
               mobile-menu-trigger__icon--close
@@ -283,7 +283,7 @@ export function MobileMenu({
         ) : (
           <Menu
             size={20}
-            strokeWidth={1.15}
+            strokeWidth={1.6}
             className="mobile-menu-trigger__icon"
           />
         )}
@@ -307,9 +307,7 @@ export function MobileMenu({
       `}
       aria-hidden={!isOpen}
     >
-      {/* ===================================================
-          BACKDROP
-      =================================================== */}
+      {/* BACKDROP */}
 
       <button
         type="button"
@@ -319,9 +317,7 @@ export function MobileMenu({
         className="mobile-menu__backdrop"
       />
 
-      {/* ===================================================
-          DRAWER
-      =================================================== */}
+      {/* DRAWER */}
 
       <aside
         className="mobile-menu__drawer"
@@ -329,20 +325,6 @@ export function MobileMenu({
         aria-modal="true"
         aria-label="Mobile navigation"
       >
-        {/* =================================================
-            EDITORIAL FRAME
-        ================================================= */}
-
-        <span
-          aria-hidden="true"
-          className="mobile-menu__frame mobile-menu__frame--top"
-        />
-
-        <span
-          aria-hidden="true"
-          className="mobile-menu__frame mobile-menu__frame--bottom"
-        />
-
         {/* =================================================
             TOP ACCENT
         ================================================= */}
@@ -386,7 +368,7 @@ export function MobileMenu({
           >
             <X
               size={18}
-              strokeWidth={1.15}
+              strokeWidth={1.6}
             />
           </button>
         </header>
@@ -396,6 +378,7 @@ export function MobileMenu({
         ================================================= */}
 
         <div className="mobile-menu__content">
+
           {/* =================================================
               ACCOUNT
           ================================================= */}
@@ -407,13 +390,6 @@ export function MobileMenu({
                 onClick={onClose}
                 className="mobile-account-card"
               >
-                <span
-                  aria-hidden="true"
-                  className="mobile-account-card__number"
-                >
-                  01
-                </span>
-
                 <span className="mobile-account-card__avatar">
                   {initials}
                 </span>
@@ -434,8 +410,8 @@ export function MobileMenu({
 
                 <span className="mobile-account-card__arrow">
                   <ArrowUpRight
-                    size={16}
-                    strokeWidth={1.2}
+                    size={17}
+                    strokeWidth={1.6}
                   />
                 </span>
               </Link>
@@ -448,7 +424,7 @@ export function MobileMenu({
                     </p>
 
                     <h2 className="mobile-guest-account__title">
-                      Welcome to Aayesha.
+                      Welcome to Aayesha
                     </h2>
 
                     <p className="mobile-guest-account__description">
@@ -462,7 +438,7 @@ export function MobileMenu({
                   <span className="mobile-guest-account__icon">
                     <UserRound
                       size={19}
-                      strokeWidth={1.1}
+                      strokeWidth={1.5}
                     />
                   </span>
                 </div>
@@ -481,7 +457,7 @@ export function MobileMenu({
 
                     <ArrowUpRight
                       size={14}
-                      strokeWidth={1.25}
+                      strokeWidth={1.6}
                     />
                   </Link>
 
@@ -519,7 +495,7 @@ export function MobileMenu({
                   </p>
 
                   <p className="mobile-menu__section-subtitle">
-                    Your personal space
+                    Manage your account
                   </p>
                 </div>
 
@@ -531,8 +507,8 @@ export function MobileMenu({
                   View Account
 
                   <ArrowUpRight
-                    size={12}
-                    strokeWidth={1.2}
+                    size={13}
+                    strokeWidth={1.6}
                   />
                 </Link>
               </div>
@@ -557,8 +533,8 @@ export function MobileMenu({
 
                         <span className="mobile-account-link__icon">
                           <Icon
-                            size={15}
-                            strokeWidth={1.2}
+                            size={16}
+                            strokeWidth={1.5}
                           />
                         </span>
 
@@ -574,8 +550,8 @@ export function MobileMenu({
 
                         <span className="mobile-account-link__arrow">
                           <ChevronRight
-                            size={15}
-                            strokeWidth={1.15}
+                            size={16}
+                            strokeWidth={1.6}
                           />
                         </span>
                       </Link>
@@ -600,8 +576,8 @@ export function MobileMenu({
 
                   <span className="mobile-account-link__icon">
                     <LogOut
-                      size={15}
-                      strokeWidth={1.2}
+                      size={16}
+                      strokeWidth={1.5}
                     />
                   </span>
 
@@ -650,13 +626,15 @@ export function MobileMenu({
                   />
 
                   <span>
-                    The Collection
+                    Shop the collection
                   </span>
                 </div>
               </div>
 
               <span className="mobile-menu__section-index">
-                04
+                {String(
+                  mainNavigation.length,
+                ).padStart(2, "0")}
               </span>
             </div>
 
@@ -690,8 +668,8 @@ export function MobileMenu({
 
                       <span className="mobile-navigation-item__icon">
                         <Icon
-                          size={16}
-                          strokeWidth={1.15}
+                          size={17}
+                          strokeWidth={1.5}
                         />
                       </span>
 
@@ -707,8 +685,8 @@ export function MobileMenu({
 
                       <span className="mobile-navigation-item__arrow">
                         <ArrowUpRight
-                          size={15}
-                          strokeWidth={1.15}
+                          size={16}
+                          strokeWidth={1.5}
                         />
                       </span>
                     </Link>
@@ -735,7 +713,7 @@ export function MobileMenu({
                 </p>
 
                 <p className="mobile-menu__section-subtitle">
-                  Find your way around
+                  Everything you need
                 </p>
               </div>
             </div>
@@ -752,8 +730,8 @@ export function MobileMenu({
 
                 <span className="mobile-quick-item__main">
                   <Search
-                    size={16}
-                    strokeWidth={1.15}
+                    size={17}
+                    strokeWidth={1.5}
                   />
 
                   <span className="mobile-quick-item__content">
@@ -782,8 +760,8 @@ export function MobileMenu({
 
                 <span className="mobile-quick-item__main">
                   <Heart
-                    size={16}
-                    strokeWidth={1.15}
+                    size={17}
+                    strokeWidth={1.5}
                   />
 
                   <span className="mobile-quick-item__content">
@@ -816,8 +794,8 @@ export function MobileMenu({
 
                 <span className="mobile-quick-item__main">
                   <UserRound
-                    size={16}
-                    strokeWidth={1.15}
+                    size={17}
+                    strokeWidth={1.5}
                   />
 
                   <span className="mobile-quick-item__content">
@@ -834,8 +812,8 @@ export function MobileMenu({
                 </span>
 
                 <ChevronRight
-                  size={15}
-                  strokeWidth={1.15}
+                  size={16}
+                  strokeWidth={1.5}
                   className="mobile-quick-item__arrow"
                 />
               </Link>
@@ -843,13 +821,13 @@ export function MobileMenu({
           </section>
 
           {/* =================================================
-              EDITORIAL STATEMENT
+              BRAND STATEMENT
           ================================================= */}
 
           <section className="mobile-menu__editorial">
             <div className="mobile-menu__editorial-top">
               <span className="mobile-menu__editorial-label">
-                AAYESHA / 01
+                AAYESHA
               </span>
 
               <span className="mobile-menu__editorial-label">
@@ -865,9 +843,9 @@ export function MobileMenu({
             </div>
 
             <p className="mobile-menu__editorial-title">
-              Made for moments
+              Contemporary style,
               <br />
-              worth remembering.
+              thoughtfully curated.
             </p>
 
             <div className="mobile-menu__editorial-signature">
@@ -907,8 +885,8 @@ export function MobileMenu({
                 className="mobile-menu__footer-action"
               >
                 <UserRound
-                  size={15}
-                  strokeWidth={1.15}
+                  size={16}
+                  strokeWidth={1.5}
                 />
               </Link>
             </div>
