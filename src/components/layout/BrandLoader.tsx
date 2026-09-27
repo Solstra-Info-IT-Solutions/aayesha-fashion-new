@@ -1,87 +1,78 @@
-"use client";
+ "use client";
 
 import { useEffect, useState } from "react";
+
 import "./BrandLoader.css";
 
-interface BrandLoaderProps {
-  minimumDuration?: number;
-}
+type BrandLoaderProps = {
+  onComplete?: () => void;
+};
 
-export default function BrandLoader({
-  minimumDuration = 4200,
+export function BrandLoader({
+  onComplete,
 }: BrandLoaderProps) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = useState(1);
+  const [progress, setProgress] = useState(0);
+  const [complete, setComplete] = useState(false);
 
   useEffect(() => {
-    const startDelay = 500;
-    const startTime = performance.now() + startDelay;
+    let cancelled = false;
+    const startedAt = Date.now();
 
-    let frame: number;
-    let exitTimer: ReturnType<typeof setTimeout>;
-
-    const animate = (time: number) => {
-      // Small initial delay
-      if (time < startTime) {
-        setProgress(1);
-        frame = requestAnimationFrame(animate);
+    const updateProgress = () => {
+      if (cancelled) {
         return;
       }
 
-      const elapsed = time - startTime;
+      const elapsed = Date.now() - startedAt;
 
-      const rawProgress = Math.min(
-        elapsed / minimumDuration,
-        1
+      /*
+       * Smooth visual progress. The loader should feel fast
+       * without artificially holding the page for too long.
+       */
+      const nextProgress = Math.min(
+        100,
+        Math.round(
+          100 *
+            (1 -
+              Math.exp(-elapsed / 650)),
+        ),
       );
 
-      // Smooth 1 → 100 progression
-      const easedProgress =
-        rawProgress < 0.5
-          ? 2 * rawProgress * rawProgress
-          : 1 -
-            Math.pow(-2 * rawProgress + 2, 2) / 2;
+      setProgress(nextProgress);
 
-      const currentProgress = Math.max(
-        1,
-        Math.min(
-          100,
-          Math.round(easedProgress * 100)
-        )
-      );
+      if (nextProgress >= 100) {
+        setComplete(true);
 
-      setProgress(currentProgress);
+        window.setTimeout(() => {
+          if (!cancelled) {
+            onComplete?.();
+          }
+        }, 450);
 
-      if (rawProgress < 1) {
-        frame = requestAnimationFrame(animate);
-      } else {
-        setProgress(100);
-
-        // Hold at 100% before closing
-        exitTimer = setTimeout(() => {
-          setIsLoading(false);
-        }, 1100);
+        return;
       }
+
+      window.requestAnimationFrame(updateProgress);
     };
 
-    frame = requestAnimationFrame(animate);
+    const frame =
+      window.requestAnimationFrame(
+        updateProgress,
+      );
 
     return () => {
-      cancelAnimationFrame(frame);
-      clearTimeout(exitTimer);
+      cancelled = true;
+      window.cancelAnimationFrame(frame);
     };
-  }, [minimumDuration]);
-
-  if (!isLoading) {
-    return null;
-  }
+  }, [onComplete]);
 
   return (
-    <div className="aayesha-loader">
-      {/* =====================================================
-          ATMOSPHERIC BACKGROUND
-      ===================================================== */}
-
+    <div
+      className="aayesha-loader"
+      aria-label="Aayesha Fashion loading"
+      role="status"
+      aria-live="polite"
+    >
       <div
         className="aayesha-loader__texture"
         aria-hidden="true"
@@ -97,10 +88,6 @@ export default function BrandLoader({
         aria-hidden="true"
       />
 
-      {/* =====================================================
-          EDITORIAL FRAME
-      ===================================================== */}
-
       <div
         className="aayesha-loader__outer-frame"
         aria-hidden="true"
@@ -111,36 +98,21 @@ export default function BrandLoader({
         aria-hidden="true"
       />
 
-      {/* =====================================================
-          TOP METADATA
-      ===================================================== */}
+      <div className="aayesha-loader__header">
+        <span>AAYESHA</span>
+        <span>FASHION</span>
+      </div>
 
-      <header className="aayesha-loader__header">
-        <span>AA</span>
-
-        <span>
-          CONTEMPORARY INDIAN FASHION
-        </span>
-
-        <span>2026</span>
-      </header>
-
-      {/* =====================================================
-          MAIN BRAND SHOWCASE
-      ===================================================== */}
-
-      <main className="aayesha-loader__center">
+      <div className="aayesha-loader__center">
         <div className="aayesha-loader__collection">
-          THE NEW EDIT
+          <span className="aayesha-loader__collection-line" />
+          <span>THE COLLECTION</span>
+          <span className="aayesha-loader__collection-line" />
         </div>
-
-        {/* ===================================================
-            BRAND WORDMARK
-        =================================================== */}
 
         <div className="aayesha-loader__wordmark-wrap">
           <h1 className="aayesha-loader__wordmark">
-            AAYESHA
+            Aayesha
           </h1>
 
           <span
@@ -149,44 +121,25 @@ export default function BrandLoader({
           />
         </div>
 
-        {/* ===================================================
-            BRAND DIVIDER
-        =================================================== */}
-
         <div className="aayesha-loader__brand-rule">
           <span />
         </div>
 
-        {/* ===================================================
-            TAGLINE
-        =================================================== */}
-
         <p className="aayesha-loader__tagline">
-          Made for moments worth remembering.
+          The art of elegance.
         </p>
-
-        {/* ===================================================
-            PROGRESS
-        =================================================== */}
 
         <div className="aayesha-loader__loading">
           <div className="aayesha-loader__loading-top">
+            <span>LOADING COLLECTION</span>
             <span>
-              CURATING THE COLLECTION
-            </span>
-
-            <span className="aayesha-loader__progress-number">
-              {progress}%
+              {String(progress).padStart(2, "0")}%
             </span>
           </div>
 
           <div
             className="aayesha-loader__progress-track"
-            role="progressbar"
-            aria-valuemin={1}
-            aria-valuemax={100}
-            aria-valuenow={progress}
-            aria-label="Loading collection"
+            aria-hidden="true"
           >
             <div
               className="aayesha-loader__progress-bar"
@@ -195,87 +148,70 @@ export default function BrandLoader({
               }}
             />
           </div>
+
+          <div className="aayesha-loader__loading-bottom">
+            <span>CURATING YOUR EXPERIENCE</span>
+            <span>
+              {complete
+                ? "READY"
+                : "PLEASE WAIT"}
+            </span>
+          </div>
         </div>
-      </main>
-
-      {/* =====================================================
-          SIDE EDITORIAL INFORMATION
-      ===================================================== */}
-
-      <div
-        className="
-          aayesha-loader__vertical
-          aayesha-loader__vertical--left
-        "
-      >
-        AA / 01 WOMENSWEAR
       </div>
 
       <div
-        className="
-          aayesha-loader__vertical
-          aayesha-loader__vertical--right
-        "
+        className="aayesha-loader__vertical aayesha-loader__vertical--left"
+        aria-hidden="true"
       >
-        THE EDIT INDIA
+        <span>AAYESHA</span>
+        <span>EST. 2024</span>
       </div>
 
-      {/* =====================================================
-          BOTTOM BRAND
-      ===================================================== */}
+      <div
+        className="aayesha-loader__vertical aayesha-loader__vertical--right"
+        aria-hidden="true"
+      >
+        <span>FASHION</span>
+        <span>INDIA</span>
+      </div>
 
       <div className="aayesha-loader__bottom-brand">
-        AAYESHA FASHION
+        <span className="aayesha-loader__bottom-rule" />
+        <span>AAYESHA FASHION</span>
+        <span className="aayesha-loader__bottom-rule" />
       </div>
 
-      {/* =====================================================
-          CORNER DETAILS
-      ===================================================== */}
-
       <span
-        className="
-          aayesha-loader__corner
-          aayesha-loader__corner--tl
-        "
+        className="aayesha-loader__corner aayesha-loader__corner--tl"
         aria-hidden="true"
       />
-
       <span
-        className="
-          aayesha-loader__corner
-          aayesha-loader__corner--tr
-        "
+        className="aayesha-loader__corner aayesha-loader__corner--tr"
         aria-hidden="true"
       />
-
       <span
-        className="
-          aayesha-loader__corner
-          aayesha-loader__corner--bl
-        "
+        className="aayesha-loader__corner aayesha-loader__corner--bl"
         aria-hidden="true"
       />
-
       <span
-        className="
-          aayesha-loader__corner
-          aayesha-loader__corner--br
-        "
+        className="aayesha-loader__corner aayesha-loader__corner--br"
         aria-hidden="true"
       />
-
-      {/* =====================================================
-          FINAL REVEAL STATE
-      ===================================================== */}
 
       <div
-        className={`aayesha-loader__final-reveal ${
-          progress >= 100
+        className={[
+          "aayesha-loader__final-reveal",
+          complete
             ? "aayesha-loader__final-reveal--complete"
-            : ""
-        }`}
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
         aria-hidden="true"
       />
     </div>
   );
 }
+
+export default BrandLoader;
