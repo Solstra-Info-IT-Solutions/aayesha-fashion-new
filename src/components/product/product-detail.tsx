@@ -7,6 +7,7 @@
 "use client";
 
 import Image from "next/image";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -147,8 +148,12 @@ export function ProductDetail({
     [product.content?.description],
   );
 
-  const [isFullscreen, setIsFullscreen] =
-  useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   const [categoryName, setCategoryName] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -352,7 +357,7 @@ const [loginAction, setLoginAction] =
     }
   }
 
-  const handleWishlist() {
+  function handleWishlist() {
     if (!requireAuth("wishlist")) return;
 
     toggleWishlist(productId);
@@ -1076,97 +1081,93 @@ const [loginAction, setLoginAction] =
       )}
 
       {/* =======================================================
-    FULLSCREEN MEDIA
-======================================================= */}
-{lightboxOpen && activeMedia && (
-  <div
-    className="product-detail__lightbox"
-    role="dialog"
-    aria-modal="true"
-    aria-label={`${product.name} fullscreen gallery`}
-  >
-    {/* TOP ACTIONS */}
-    <div className="product-detail__lightbox-actions">
-      <button
-        type="button"
-        onClick={() => setLightboxOpen(false)}
-        className="product-detail__lightbox-close"
-        aria-label="Close fullscreen gallery"
-      >
-        <X
-          size={22}
-          strokeWidth={1.8}
-          aria-hidden="true"
-        />
-      </button>
-    </div>
+          FULLSCREEN MEDIA
+      ======================================================= */}
+      {lightboxOpen && activeMedia && mounted
+        ? createPortal(
+            <div
+              className="product-detail__lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${product.name} fullscreen gallery`}
+        >
+          <div className="product-detail__lightbox-actions">
+            <button
+              type="button"
+              onClick={() => setLightboxOpen(false)}
+              className="product-detail__lightbox-exit"
+              aria-label="Exit fullscreen gallery"
+            >
+              <Minimize2 size={15} strokeWidth={1.7} />
+              <span>Exit Fullscreen</span>
+            </button>
 
-    {/* PRODUCT HEADER */}
-    <div className="product-detail__lightbox-top">
-      <span>AAYESHA / PRODUCT VIEW</span>
+            <button
+              type="button"
+              onClick={() => setLightboxOpen(false)}
+              className="product-detail__lightbox-close"
+              aria-label="Close gallery"
+            >
+              <X size={20} strokeWidth={1.7} />
+            </button>
+          </div>
 
-      <strong>{product.name}</strong>
-    </div>
+          <div className="product-detail__lightbox-top">
+            <span>AAYESHA / PRODUCT VIEW</span>
+            <strong>{product.name}</strong>
+          </div>
 
-    {/* IMAGE STAGE */}
-    <div className="product-detail__lightbox-stage">
-      {activeMedia.type === "video" ? (
-        <video
-          src={activeMedia.src}
-          poster={activeMedia.poster}
-          controls
-          autoPlay
-          playsInline
-        />
-      ) : (
-        <Image
-          src={activeMedia.src}
-          alt={activeMedia.alt || product.name}
-          fill
-          sizes="100vw"
-          className="product-detail__lightbox-image"
-          priority
-        />
-      )}
+          <div className="product-detail__lightbox-stage">
+            {activeMedia.type === "video" ? (
+              <video
+                src={activeMedia.src}
+                poster={activeMedia.poster}
+                controls
+                autoPlay
+                playsInline
+              />
+            ) : (
+              <Image
+                src={activeMedia.src}
+                alt={activeMedia.alt || product.name}
+                fill
+                sizes="100vw"
+                className="product-detail__lightbox-image"
+                priority
+              />
+            )}
 
-      {/* PREVIOUS */}
-      {media.length > 1 && (
-        <>
-          <button
-            type="button"
-            onClick={previousMedia}
-            className="
-              product-detail__lightbox-nav
-              product-detail__lightbox-nav--prev
-            "
-            aria-label="Previous media"
-          >
-            <ArrowLeft size={20} />
-          </button>
+            {media.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={previousMedia}
+                  className="product-detail__lightbox-nav product-detail__lightbox-nav--prev"
+                  aria-label="Previous media"
+                >
+                  <ArrowLeft size={20} />
+                </button>
 
-          {/* NEXT */}
-          <button
-            type="button"
-            onClick={nextMedia}
-            className="
-              product-detail__lightbox-nav
-              product-detail__lightbox-nav--next
-            "
-            aria-label="Next media"
-          >
-            <ArrowRight size={20} />
-          </button>
-        </>
-      )}
-    </div>
+                <button
+                  type="button"
+                  onClick={nextMedia}
+                  className="product-detail__lightbox-nav product-detail__lightbox-nav--next"
+                  aria-label="Next media"
+                >
+                  <ArrowRight size={20} />
+                </button>
+              </>
+            )}
+          </div>
 
-    {/* COUNTER */}
-    <div className="product-detail__lightbox-counter">
-      {String(activeIndex + 1).padStart(2, "0")} /{" "}
-      {String(Math.max(media.length, 1)).padStart(2, "0")}
-    </div>
-  </div>
-)}
+          <div className="product-detail__lightbox-counter">
+            {String(activeIndex + 1).padStart(2, "0")} /{" "}
+            {String(media.length).padStart(2, "0")}
+          </div>
+            </div>,
+            document.body,
+          )
+        : null}
 
       <LoginRequiredPopup
   open={loginOpen}
