@@ -69,6 +69,10 @@ export function WishlistButton({
   const [showLoginPopup, setShowLoginPopup] =
     useState(false);
 
+  /* =======================================================
+     HYDRATION
+  ======================================================= */
+
   useEffect(() => {
     setHydrated(true);
   }, []);
@@ -81,37 +85,44 @@ export function WishlistButton({
     hydrated && isInWishlist;
 
   /* =======================================================
-     TOGGLE WISHLIST
+     WISHLIST TOGGLE
   ======================================================= */
 
   const handleToggle = () => {
     /*
-     * Wait until auth has been initialized.
+     * Wait until authentication state
+     * has been initialized.
      */
     if (!isInitialized) {
       return;
     }
 
     /*
-     * Wishlist requires login.
+     * Wishlist requires authentication.
      */
     if (!isAuthenticated) {
       setShowLoginPopup(true);
       return;
     }
 
+    /*
+     * Toggle wishlist only when
+     * the user is authenticated.
+     */
     toggle(productId);
   };
 
   /* =======================================================
-     CLASS
+     BUTTON CLASS
   ======================================================= */
 
   const buttonClassName = [
     "wishlist-button",
+
     active
       ? "wishlist-button--active"
       : "wishlist-button--inactive",
+
     className,
   ]
     .filter(Boolean)
@@ -148,11 +159,16 @@ export function WishlistButton({
         />
       </button>
 
+      {/* ===================================================
+          WISHLIST LOGIN POPUP
+      =================================================== */}
+
       <LoginRequiredPopup
         open={showLoginPopup}
         onClose={() =>
           setShowLoginPopup(false)
         }
+        action="wishlist"
       />
     </>
   );
