@@ -11,34 +11,34 @@
    ========================================================= */
 
 .mobile-menu {
-  --mm-primary: #211c1a;
-  --mm-secondary: #5d514b;
-  --mm-muted: #756861;
-  --mm-subtle: #8d8078;
+  --mm-primary: #242021;
+  --mm-secondary: #4D4646;
+  --mm-muted: #6D5F61;
+  --mm-subtle: #817676;
 
-  --mm-background: #fbf8f6;
-  --mm-surface: #ffffff;
-  --mm-surface-soft: #f8f3f0;
-  --mm-surface-muted: #f1e9e5;
+  --mm-background: #FFFFFF;
+  --mm-surface: #FFFFFF;
+  --mm-surface-soft: #FFF8F8;
+  --mm-surface-muted: #FBE8E9;
 
-  --mm-border: #e3d9d4;
-  --mm-border-strong: #cdbdb5;
+  --mm-border: #E8D6D7;
+  --mm-border-strong: #DCC7C9;
 
-  --mm-accent: #a86f60;
-  --mm-accent-dark: #7e5045;
-  --mm-accent-soft: #f3e5e0;
-  --mm-accent-light: #fbf3f0;
+  --mm-accent: #C98F93;
+  --mm-accent-dark: #C98F93;
+  --mm-accent-soft: #FFF0F2;
+  --mm-accent-light: #FFF8F8;
 
-  --mm-danger: #a34e4e;
+  --mm-danger: #C98F93;
 
   --mm-shadow-sm:
-    0 2px 8px rgba(35, 27, 23, 0.05);
+    0 2px 8px rgba(20, 22, 21, 0.05);
 
   --mm-shadow-md:
-    0 8px 24px rgba(35, 27, 23, 0.09);
+    0 8px 24px rgba(20, 22, 21, 0.09);
 
   --mm-shadow-lg:
-    0 18px 50px rgba(35, 27, 23, 0.16);
+    0 18px 50px rgba(20, 22, 21, 0.16);
 
   --mm-radius-sm: 7px;
   --mm-radius-md: 10px;
@@ -155,7 +155,7 @@
 
   background: var(--mm-accent);
 
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .mobile-menu-trigger:focus-visible {
@@ -220,7 +220,7 @@
 
   border: 0;
 
-  background: rgba(24, 19, 17, 0.48);
+  background: rgba(20, 22, 21, 0.48);
 
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -361,7 +361,7 @@
 
   flex: 0 0 30px;
 
-  border: 1px solid #d7b8ae;
+  border: 1px solid #E8D6D7;
 
   border-radius: 8px;
 
@@ -386,7 +386,7 @@
 
   background: var(--mm-accent);
 
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .mobile-menu__brand-copy {
@@ -466,7 +466,7 @@
 }
 
 .mobile-menu__close:hover {
-  border-color: #d8b8ae;
+  border-color: #E8D6D7;
 
   background: var(--mm-accent-soft);
 
@@ -478,7 +478,7 @@
 
   background: var(--mm-accent);
 
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .mobile-menu__close:focus-visible {
@@ -571,7 +571,7 @@
 }
 
 .mobile-account-card:hover {
-  border-color: #d9bbb1;
+  border-color: #E8D6D7;
 
   background: var(--mm-accent-light);
 }
@@ -599,7 +599,7 @@
 
   flex: 0 0 38px;
 
-  border: 1px solid #ddc1b8;
+  border: 1px solid #F4D6D8;
 
   border-radius: 50%;
 
@@ -702,7 +702,7 @@
 
   background: var(--mm-accent);
 
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 
@@ -806,7 +806,7 @@
 
   flex: 0 0 32px;
 
-  border: 1px solid #dfc3b9;
+  border: 1px solid #F4D6D8;
 
   border-radius: 8px;
 
@@ -1033,7 +1033,7 @@
 }
 
 .mobile-account-link:hover .mobile-account-link__icon {
-  border-color: #d9bbb1;
+  border-color: #E8D6D7;
 
   background: var(--mm-accent-soft);
 
@@ -1086,7 +1086,7 @@
 .mobile-account-link--logout:hover {
   color: var(--mm-danger);
 
-  background: #fff5f5;
+  background: #FFF8F8;
 }
 
 
@@ -1171,7 +1171,7 @@
 }
 
 .mobile-navigation-item:hover .mobile-navigation-item__icon {
-  border-color: #d9bbb1;
+  border-color: #E8D6D7;
 
   background: var(--mm-accent-soft);
 
@@ -1245,7 +1245,7 @@
 
   background: var(--mm-accent);
 
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 
@@ -1341,7 +1341,7 @@
 }
 
 .mobile-quick-item:hover {
-  border-color: #d9bbb1;
+  border-color: #E8D6D7;
 
   background: var(--mm-accent-light);
 }
@@ -1587,7 +1587,7 @@
   background: var(--mm-surface);
 
   box-shadow:
-    0 -3px 12px rgba(24, 22, 22, 0.04);
+    0 -3px 12px rgba(20, 22, 21, 0.04);
 }
 
 .mobile-menu__footer-account {
@@ -1671,7 +1671,7 @@
 
   background: var(--mm-accent);
 
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .mobile-menu__footer-action:focus-visible {
@@ -2240,7 +2240,7 @@
   }
 
   .mobile-menu__brand:hover .mobile-menu__brand-mark {
-    border-color: #d9bbb1;
+    border-color: #E8D6D7;
 
     background: var(--mm-accent-soft);
 

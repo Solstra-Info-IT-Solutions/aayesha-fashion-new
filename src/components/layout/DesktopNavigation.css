@@ -21,7 +21,7 @@
 
   padding: 8px 0;
 
-  color: var(--color-primary, #342825);
+  color: var(--color-primary, #1a1a1a);
 
   text-decoration: none;
 
@@ -33,11 +33,11 @@
 }
 
 .desktop-navigation__link:hover {
-  color: var(--color-clay, #8f655d);
+  color: var(--color-clay, #e88fa0);
 }
 
 .desktop-navigation__link:focus-visible {
-  outline: 2px solid var(--color-clay, #8f655d);
+  outline: 2px solid var(--color-clay, #e88fa0);
   outline-offset: 5px;
 }
 
@@ -102,7 +102,7 @@
   width: 4px;
   height: 1px;
 
-  background: var(--color-clay, #8f655d);
+  background: var(--color-clay, #e88fa0);
 
   opacity: 0;
 

@@ -7,20 +7,20 @@
 .aayesha-header {
   --header-height: 72px;
 
-  --mf-black: #111111;
-  --mf-white: #ffffff;
-  --mf-surface: #f8f8f7;
-  --mf-surface-2: #f3f3f1;
-  --mf-border: #e6e6e4;
-  --mf-border-dark: #cfcfcd;
+  --mf-black: #141615;
+  --mf-white: #FFFFFF;
+  --mf-surface: #FFF8F8;
+  --mf-surface-2: #FFF0F2;
+  --mf-border: #E8D6D7;
+  --mf-border-dark: #DCC7C9;
 
-  --mf-text: #171717;
-  --mf-text-secondary: #555555;
-  --mf-text-muted: #777777;
+  --mf-text: #141615;
+  --mf-text-secondary: #4D4646;
+  --mf-text-muted: #817676;
 
-  --mf-accent: #b76e79;
-  --mf-accent-dark: #96545f;
-  --mf-accent-soft: #f5e8ea;
+  --mf-accent: #E4B6B8;
+  --mf-accent-dark: #C98F93;
+  --mf-accent-soft: #FBE8E9;
 
   position: fixed;
   top: 0;
@@ -38,7 +38,7 @@
 
   color: var(--mf-text);
 
-  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.02);
+  box-shadow: 0 1px 0 rgba(20, 22, 21, 0.02);
 
   overflow: visible;
 }
@@ -85,7 +85,7 @@
   border-bottom-color: var(--mf-border);
 
   box-shadow:
-    0 4px 18px rgba(17, 17, 17, 0.06);
+    0 4px 18px rgba(20, 22, 21, 0.06);
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -371,7 +371,7 @@
 
   background: var(--mf-accent-soft);
 
-  border-color: #efd9dd;
+  border-color: #F4D6D8;
 }
 
 /* =========================================================
@@ -429,7 +429,7 @@
 
   border-radius: 50%;
 
-  background: #4f9b68;
+  background: #C98F93;
 
   border: 2px solid var(--mf-white);
 
@@ -496,7 +496,7 @@
 
   border: 0;
 
-  background: rgba(17, 17, 17, 0.35);
+  background: rgba(20, 22, 21, 0.35);
 
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
@@ -523,7 +523,7 @@
   border-bottom: 1px solid var(--mf-border);
 
   box-shadow:
-    0 12px 32px rgba(17, 17, 17, 0.10);
+    0 12px 32px rgba(20, 22, 21, 0.10);
 }
 
 /* =========================================================
@@ -792,7 +792,7 @@
     border-bottom-color: var(--mf-border);
 
     box-shadow:
-      0 3px 14px rgba(17, 17, 17, 0.055);
+      0 3px 14px rgba(20, 22, 21, 0.055);
 
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
