@@ -5,7 +5,7 @@
 /* =========================================================
    AAYESHA — GLOBAL DESIGN SYSTEM
    Contemporary Indian Fashion
-   Theme: Dusty Rose / Clay / Espresso / Champagne
+   Theme: Logo Blush / Ivory / Black
    ========================================================= */
 
 :root {
@@ -13,46 +13,46 @@
      BRAND COLORS
      ======================================================= */
 
-  --color-primary: #332522;
-  --color-primary-hover: #241916;
-  --color-primary-active: #1b1210;
+  --color-primary: #141615;
+  --color-primary-hover: #242021;
+  --color-primary-active: #101111;
 
-  --color-secondary: #8f655d;
-  --color-secondary-light: #b58b82;
+  --color-secondary: #C98F93;
+  --color-secondary-light: #E4B6B8;
 
-  --color-accent: #b39a79;
-  --color-accent-light: #d2bea0;
+  --color-accent: #E4B6B8;
+  --color-accent-light: #F4D6D8;
 
-  --color-rose: #a98282;
-  --color-clay: #8f655d;
-  --color-burgundy: #713f43;
-  --color-espresso: #332522;
+  --color-rose: #C98F93;
+  --color-clay: #C98F93;
+  --color-burgundy: #C98F93;
+  --color-espresso: #141615;
 
   /* Main surfaces */
 
-  --color-canvas: #faf9f7;
-  --color-surface: #ffffff;
-  --color-surface-soft: #f5efec;
-  --color-surface-muted: #eee5e1;
+  --color-canvas: #FFF8F8;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #FFF0F2;
+  --color-surface-muted: #FBE8E9;
 
   /* Dark surfaces */
 
-  --color-surface-dark: #332522;
-  --color-surface-dark-soft: #493733;
+  --color-surface-dark: #141615;
+  --color-surface-dark-soft: #242021;
 
   /* Text */
 
-  --color-text: #332522;
-  --color-text-secondary: #6f625e;
-  --color-text-muted: #9a8d88;
-  --color-text-light: #c9bdb8;
-  --color-text-inverse: #faf7f4;
+  --color-text: #141615;
+  --color-text-secondary: #4D4646;
+  --color-text-muted: #817676;
+  --color-text-light: #A39595;
+  --color-text-inverse: #FFFFFF;
 
   /* Borders */
 
-  --color-border: #e5dcd8;
-  --color-border-light: #eee8e5;
-  --color-border-dark: #b8aaa5;
+  --color-border: #E8D6D7;
+  --color-border-light: #F1E5E5;
+  --color-border-dark: #DCC7C9;
 
   /* =======================================================
      COMPATIBILITY ALIASES
@@ -77,14 +77,14 @@
   --button-primary-bg: var(--color-primary);
   --button-primary-bg-hover: var(--color-primary-hover);
   --button-primary-bg-active: var(--color-primary-active);
-  --button-primary-text: #ffffff;
+  --button-primary-text: #FFFFFF;
 
   --button-secondary-bg: transparent;
   --button-secondary-bg-hover: var(--color-primary);
   --button-secondary-bg-active: var(--color-primary-active);
 
   --button-secondary-text: var(--color-primary);
-  --button-secondary-text-hover: #ffffff;
+  --button-secondary-text-hover: #FFFFFF;
 
   --button-secondary-border: var(--color-primary);
 
@@ -92,11 +92,11 @@
   --button-soft-bg-hover: var(--color-secondary);
 
   --button-soft-text: var(--color-primary);
-  --button-soft-text-hover: #ffffff;
+  --button-soft-text-hover: #FFFFFF;
 
-  --button-ghost-bg-hover: rgba(143, 101, 93, 0.08);
+  --button-ghost-bg-hover: rgba(201, 143, 147, 0.08);
 
-  --focus-ring: rgba(143, 101, 93, 0.35);
+  --focus-ring: rgba(201, 143, 147, 0.35);
 
 
   /* =======================================================
@@ -260,16 +260,16 @@
      ======================================================= */
 
   --shadow-xs:
-    0 1px 3px rgba(51, 37, 34, 0.04);
+    0 1px 3px rgba(20, 22, 21, 0.04);
 
   --shadow-sm:
-    0 4px 16px rgba(51, 37, 34, 0.06);
+    0 4px 16px rgba(20, 22, 21, 0.06);
 
   --shadow-md:
-    0 12px 32px rgba(51, 37, 34, 0.09);
+    0 12px 32px rgba(20, 22, 21, 0.09);
 
   --shadow-lg:
-    0 24px 60px rgba(51, 37, 34, 0.13);
+    0 24px 60px rgba(20, 22, 21, 0.13);
 
 
   /* =======================================================
@@ -324,13 +324,13 @@
      ======================================================= */
 
   --overlay-dark:
-    rgba(51, 37, 34, 0.38);
+    rgba(20, 22, 21, 0.38);
 
   --overlay-dark-heavy:
-    rgba(51, 37, 34, 0.62);
+    rgba(20, 22, 21, 0.62);
 
   --overlay-light:
-    rgba(250, 249, 247, 0.88);
+    rgba(255, 248, 248, 0.88);
 
 
   /* =======================================================
