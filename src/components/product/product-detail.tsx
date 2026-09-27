@@ -288,9 +288,9 @@ const [loginAction, setLoginAction] =
     );
   }
 
-  const requireAuth = (
-  action: "cart" | "wishlist" = "cart",
-) => {
+ function requireAuth(
+  action: LoginRequiredAction = "cart",
+) {
   if (!isInitialized) {
     return false;
   }
@@ -298,12 +298,11 @@ const [loginAction, setLoginAction] =
   if (!isAuthenticated) {
     setLoginAction(action);
     setLoginOpen(true);
-
     return false;
   }
 
   return true;
-};
+}
 
   async function handleAddToCart() {
     if (!available) {

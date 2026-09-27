@@ -1,30 +1,28 @@
 /* =========================================================
    LOGIN REQUIRED POPUP
+   AAYESHA FASHION
 ========================================================= */
 
 .login-required-popup {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 99999;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 24px;
+  padding: 20px;
 
-  background:
-    rgba(24, 20, 18, 0.52);
+  background: rgba(25, 17, 15, 0.58);
 
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 
   animation:
-    login-popup-overlay-in
-    180ms
-    ease-out;
+    login-popup-overlay-in 220ms
+    cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 
 /* =========================================================
    DIALOG
@@ -34,545 +32,923 @@
   position: relative;
 
   width: min(100%, 430px);
+  max-height: calc(100dvh - 40px);
 
-  overflow: hidden;
-
-  background:
-    #fffdf9;
-
-  border: 1px solid
-    rgba(42, 35, 30, 0.12);
-
-  box-shadow:
-    0 30px 80px
-      rgba(28, 23, 19, 0.20),
-    0 10px 30px
-      rgba(28, 23, 19, 0.10);
-
-  padding:
-    42px 38px 28px;
-
-  animation:
-    login-popup-dialog-in
-    220ms
-    cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    );
-}
-
-
-/* =========================================================
-   TOP ACCENT
-========================================================= */
-
-.login-required-popup__accent {
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 3px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   background:
     linear-gradient(
-      90deg,
-      transparent 0%,
-      var(--color-accent, #9c755d) 22%,
-      var(--color-accent, #9c755d) 78%,
-      transparent 100%
+      145deg,
+      #fffdfb 0%,
+      #fff9f6 52%,
+      #f8efeb 100%
     );
+
+  border: 1px solid rgba(112, 76, 65, 0.12);
+
+  border-radius: 26px;
+
+  box-shadow:
+    0 30px 80px rgba(37, 22, 18, 0.22),
+    0 8px 25px rgba(37, 22, 18, 0.1);
+
+  animation:
+    login-popup-dialog-in 300ms
+    cubic-bezier(0.22, 1, 0.36, 1);
+
+  scrollbar-width: none;
 }
 
+.login-required-popup__dialog::-webkit-scrollbar {
+  display: none;
+}
 
 /* =========================================================
-   CLOSE BUTTON
+   TOP BAR
+========================================================= */
+
+.login-required-popup__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 20px 0;
+}
+
+.login-required-popup__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #50362f;
+
+  font-family:
+    var(--font-body, sans-serif);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+}
+
+.login-required-popup__brand-dot {
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 auto;
+
+  border-radius: 999px;
+
+  background: #8f6356;
+
+  box-shadow:
+    0 0 0 4px
+      rgba(143, 99, 86, 0.1);
+}
+
+/* =========================================================
+   CLOSE
 ========================================================= */
 
 .login-required-popup__close {
-  position: absolute;
-
-  top: 16px;
-  right: 16px;
-
   width: 34px;
   height: 34px;
+
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid
+    rgba(80, 54, 47, 0.1);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.72);
+
+  color: #50362f;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.login-required-popup__close:hover {
+  transform: rotate(90deg);
+
+  background: #fff;
+
+  border-color:
+    rgba(80, 54, 47, 0.2);
+}
+
+/* =========================================================
+   VISUAL
+========================================================= */
+
+.login-required-popup__visual {
+  position: relative;
+
+  height: 175px;
+
+  margin: 8px 18px 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 1px solid
-    rgba(42, 35, 30, 0.10);
+  overflow: hidden;
 
-  background: rgba(255, 255, 255, 0.75);
+  border-radius: 20px;
 
-  color:
-    var(--color-text, #26211e);
-
-  cursor: pointer;
-
-  transition:
-    background 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
-}
-
-.login-required-popup__close:hover {
   background:
-    #f4eee8;
-
-  border-color:
-    rgba(42, 35, 30, 0.18);
-
-  transform:
-    rotate(4deg);
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255, 255, 255, 0.96),
+      rgba(244, 228, 221, 0.7) 45%,
+      rgba(235, 211, 201, 0.5) 100%
+    );
 }
 
-.login-required-popup__close:focus-visible {
-  outline:
-    2px solid
-    var(--color-accent, #9c755d);
+/* =========================================================
+   ORB
+========================================================= */
 
-  outline-offset: 3px;
+.login-required-popup__orb {
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(239, 211, 201, 0.28) 55%,
+      transparent 72%
+    );
+
+  filter: blur(2px);
 }
 
+/* =========================================================
+   VISUAL CARD
+========================================================= */
+
+.login-required-popup__visual-card {
+  position: relative;
+  z-index: 2;
+
+  width: 104px;
+  height: 118px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(250, 239, 234, 0.88)
+    );
+
+  border: 1px solid
+    rgba(112, 76, 65, 0.12);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 18px 35px
+      rgba(86, 52, 43, 0.13);
+
+  transform: rotate(-2deg);
+
+  animation:
+    login-popup-card-float
+    4s ease-in-out infinite;
+}
+
+.login-required-popup__visual-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #8f6356;
+
+  background:
+    rgba(255, 255, 255, 0.88);
+
+  border: 1px solid
+    rgba(143, 99, 86, 0.12);
+
+  box-shadow:
+    0 8px 18px
+      rgba(86, 52, 43, 0.08);
+}
+
+.login-required-popup__visual-line {
+  width: 54px;
+  height: 4px;
+
+  margin-top: 15px;
+
+  border-radius: 10px;
+
+  background:
+    rgba(143, 99, 86, 0.16);
+}
+
+.login-required-popup__visual-line--short {
+  width: 34px;
+
+  margin-top: 7px;
+
+  opacity: 0.7;
+}
+
+/* =========================================================
+   SPARKLES
+========================================================= */
+
+.login-required-popup__sparkle {
+  position: absolute;
+
+  z-index: 3;
+
+  display: flex;
+
+  color: #9d6d5c;
+}
+
+.login-required-popup__sparkle--one {
+  top: 35px;
+  right: 28%;
+}
+
+.login-required-popup__sparkle--two {
+  bottom: 34px;
+  left: 29%;
+}
 
 /* =========================================================
    CONTENT
 ========================================================= */
 
 .login-required-popup__content {
+  padding:
+    22px 30px 0;
+
   text-align: center;
 }
 
-
-/* =========================================================
-   BRAND
-========================================================= */
-
-.login-required-popup__brand {
-  display: flex;
+.login-required-popup__eyebrow {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
 
-  color:
-    var(--color-accent, #9c755d);
+  margin: 0 0 10px;
+
+  color: #9a7164;
 
   font-family:
-    var(
-      --font-body,
-      Arial,
-      sans-serif
-    );
+    var(--font-body, sans-serif);
 
   font-size: 9px;
   font-weight: 700;
 
-  letter-spacing:
-    0.28em;
+  letter-spacing: 0.17em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 }
-
-.login-required-popup__brand-line {
-  width: 24px;
-  height: 1px;
-
-  background:
-    currentColor;
-
-  opacity: 0.55;
-}
-
-
-/* =========================================================
-   DECORATIVE MARK
-========================================================= */
-
-.login-required-popup__mark {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 6px;
-
-  margin:
-    24px auto 18px;
-}
-
-.login-required-popup__mark span {
-  display: block;
-
-  width: 4px;
-  height: 4px;
-
-  border-radius: 50%;
-
-  background:
-    var(--color-accent, #9c755d);
-
-  opacity: 0.65;
-}
-
-.login-required-popup__mark span:nth-child(2) {
-  width: 7px;
-  height: 7px;
-
-  opacity: 1;
-}
-
-
-/* =========================================================
-   TITLE
-========================================================= */
 
 .login-required-popup__title {
   margin: 0;
 
-  max-width: 320px;
-
-  margin-inline: auto;
-
-  color:
-    var(--color-text, #26211e);
+  color: #3e2b26;
 
   font-family:
-    var(
-      --font-display,
-      Georgia,
-      serif
-    );
+    var(--font-display, Georgia, serif);
 
   font-size:
-    clamp(
-      28px,
-      5vw,
-      36px
-    );
+    clamp(27px, 7vw, 34px);
 
   font-weight: 500;
 
-  line-height:
-    1.05;
+  line-height: 1.05;
 
-  letter-spacing:
-    -0.025em;
+  letter-spacing: -0.035em;
 }
 
-
-/* =========================================================
-   DESCRIPTION
-========================================================= */
-
 .login-required-popup__description {
-  max-width: 315px;
+  max-width: 330px;
 
   margin:
-    15px auto 0;
+    12px auto 0;
 
-  color:
-    var(
-      --color-text-muted,
-      #77706b
-    );
+  color: #806d66;
 
   font-family:
-    var(
-      --font-body,
-      Arial,
-      sans-serif
-    );
+    var(--font-body, sans-serif);
 
   font-size: 12px;
 
-  line-height: 1.75;
-
-  letter-spacing:
-    0.01em;
+  line-height: 1.7;
 }
-
 
 /* =========================================================
    ACTIONS
 ========================================================= */
 
 .login-required-popup__actions {
-  margin-top: 28px;
-
   display: flex;
   flex-direction: column;
+  gap: 9px;
 
-  gap: 12px;
+  padding:
+    22px 30px 0;
 }
 
-
 /* =========================================================
-   PRIMARY BUTTON
+   PRIMARY
 ========================================================= */
 
-.login-required-popup__button--primary {
+.login-required-popup__primary {
+  position: relative;
+
   width: 100%;
   min-height: 50px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
-  padding:
-    0 13px 0 17px;
-
-  border: 1px solid
-    var(--color-text, #26211e);
+  border: 0;
+  border-radius: 13px;
 
   background:
-    var(--color-text, #26211e);
-
-  color:
-    #ffffff;
-
-  font-family:
-    var(
-      --font-body,
-      Arial,
-      sans-serif
+    linear-gradient(
+      135deg,
+      #67483e,
+      #8b6154
     );
 
-  font-size: 10px;
+  color: #fff;
+
+  font-family:
+    var(--font-body, sans-serif);
+
+  font-size: 11px;
   font-weight: 700;
 
-  letter-spacing:
-    0.12em;
+  letter-spacing: 0.08em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 9px 20px
+      rgba(103, 72, 62, 0.2);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.login-required-popup__primary:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 13px 27px
+      rgba(103, 72, 62, 0.26);
+}
+
+.login-required-popup__primary
+  > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.login-required-popup__primary-icon {
+  width: 24px;
+  height: 24px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.13);
+}
+
+.login-required-popup__primary-arrow {
+  position: absolute;
+
+  right: 16px;
+
+  transition:
+    transform 180ms ease;
+}
+
+.login-required-popup__primary:hover
+  .login-required-popup__primary-arrow {
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   SECONDARY
+========================================================= */
+
+.login-required-popup__secondary {
+  min-height: 44px;
+
+  border: 1px solid
+    rgba(80, 54, 47, 0.13);
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.58);
+
+  color: #624940;
+
+  font-family:
+    var(--font-body, sans-serif);
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
 
   cursor: pointer;
 
   transition:
     background 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
-}
-
-.login-required-popup__button--primary:hover {
-  background:
-    var(
-      --color-accent,
-      #9c755d
-    );
-
-  border-color:
-    var(
-      --color-accent,
-      #9c755d
-    );
-
-  transform:
-    translateY(-1px);
-}
-
-.login-required-popup__button--primary:active {
-  transform:
-    translateY(0);
-}
-
-.login-required-popup__button--primary:focus-visible {
-  outline:
-    2px solid
-    var(--color-accent, #9c755d);
-
-  outline-offset: 3px;
-}
-
-
-/* =========================================================
-   BUTTON LEFT
-========================================================= */
-
-.login-required-popup__button-left {
-  display: flex;
-  align-items: center;
-
-  gap: 10px;
-}
-
-
-/* =========================================================
-   BUTTON ICON
-========================================================= */
-
-.login-required-popup__button-icon {
-  width: 28px;
-  height: 28px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border:
-    1px solid
-    rgba(255, 255, 255, 0.20);
-
-  background:
-    rgba(255, 255, 255, 0.08);
-}
-
-
-/* =========================================================
-   BUTTON ARROW
-========================================================= */
-
-.login-required-popup__button-arrow {
-  width: 30px;
-  height: 30px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border:
-    1px solid
-    rgba(255, 255, 255, 0.18);
-
-  transition:
-    transform 180ms ease;
-}
-
-.login-required-popup__button--primary:hover
-.login-required-popup__button-arrow {
-  transform:
-    translate(2px, -2px);
-}
-
-
-/* =========================================================
-   SECONDARY BUTTON
-========================================================= */
-
-.login-required-popup__secondary {
-  align-self: center;
-
-  display: inline-flex;
-  align-items: center;
-  flex-direction: column;
-
-  gap: 4px;
-
-  padding: 4px 0;
-
-  border: 0;
-
-  background: transparent;
-
-  color:
-    var(
-      --color-text-muted,
-      #77706b
-    );
-
-  font-family:
-    var(
-      --font-body,
-      Arial,
-      sans-serif
-    );
-
-  font-size: 9px;
-  font-weight: 600;
-
-  letter-spacing:
-    0.14em;
-
-  text-transform:
-    uppercase;
-
-  cursor: pointer;
+    border-color 180ms ease;
 }
 
 .login-required-popup__secondary:hover {
-  color:
-    var(
-      --color-text,
-      #26211e
-    );
+  background: #fff;
+
+  border-color:
+    rgba(80, 54, 47, 0.22);
 }
-
-.login-required-popup__secondary:focus-visible {
-  outline:
-    2px solid
-    var(--color-accent, #9c755d);
-
-  outline-offset: 4px;
-}
-
 
 /* =========================================================
-   SECONDARY UNDERLINE
+   FOOTER
 ========================================================= */
 
-.login-required-popup__secondary-line {
-  width: 100%;
+.login-required-popup__footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding:
+    18px 30px 20px;
+}
+
+.login-required-popup__footer span {
+  flex: 1;
+
   height: 1px;
 
   background:
-    currentColor;
-
-  transform-origin:
-    left;
-
-  transition:
-    transform 180ms ease;
+    rgba(80, 54, 47, 0.08);
 }
 
-.login-required-popup__secondary:hover
-.login-required-popup__secondary-line {
-  transform:
-    scaleX(0.55);
-}
+.login-required-popup__footer p {
+  margin: 0;
 
-
-/* =========================================================
-   NOTE
-========================================================= */
-
-.login-required-popup__note {
-  margin:
-    24px 0 0;
-
-  padding-top:
-    16px;
-
-  border-top:
-    1px solid
-    rgba(42, 35, 30, 0.08);
-
-  color:
-    #9a928c;
+  color: #b09991;
 
   font-family:
-    var(
-      --font-body,
-      Arial,
-      sans-serif
-    );
+    var(--font-body, sans-serif);
 
-  font-size: 9px;
+  font-size: 7px;
+  font-weight: 700;
 
-  line-height: 1.6;
-
-  text-align: center;
-
-  letter-spacing:
-    0.02em;
+  letter-spacing: 0.2em;
 }
 
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .login-required-popup {
+    padding: 16px;
+  }
+
+  .login-required-popup__dialog {
+    width: min(100%, 420px);
+  }
+
+  .login-required-popup__visual {
+    height: 155px;
+  }
+
+  .login-required-popup__content {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
+
+  .login-required-popup__actions {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
+
+  .login-required-popup__footer {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .login-required-popup {
+    align-items: flex-end;
+
+    padding:
+      0 8px
+      max(8px, env(safe-area-inset-right))
+      max(8px, env(safe-area-inset-bottom))
+      max(8px, env(safe-area-inset-left));
+
+    background:
+      rgba(25, 17, 15, 0.5);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* -------------------------------------------------------
+     BOTTOM SHEET
+  ------------------------------------------------------- */
+
+  .login-required-popup__dialog {
+    width: 100%;
+    max-width: none;
+
+    max-height:
+      calc(
+        100dvh -
+        max(8px, env(safe-area-inset-top))
+      );
+
+    border-radius:
+      25px 25px 18px 18px;
+
+    animation:
+      login-popup-mobile-in 320ms
+      cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* -------------------------------------------------------
+     TOP
+  ------------------------------------------------------- */
+
+  .login-required-popup__top {
+    padding:
+      14px 16px 0;
+  }
+
+  .login-required-popup__brand {
+    font-size: 8px;
+
+    letter-spacing: 0.17em;
+  }
+
+  .login-required-popup__close {
+    width: 36px;
+    height: 36px;
+
+    /* Better touch target */
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  /* -------------------------------------------------------
+     VISUAL
+  ------------------------------------------------------- */
+
+  .login-required-popup__visual {
+    height: 135px;
+
+    margin:
+      6px 12px 0;
+
+    border-radius: 18px;
+  }
+
+  .login-required-popup__orb {
+    width: 145px;
+    height: 145px;
+  }
+
+  .login-required-popup__visual-card {
+    width: 88px;
+    height: 98px;
+
+    padding-top: 17px;
+
+    border-radius: 16px;
+  }
+
+  .login-required-popup__visual-icon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .login-required-popup__visual-icon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .login-required-popup__visual-line {
+    width: 46px;
+
+    margin-top: 11px;
+  }
+
+  .login-required-popup__visual-line--short {
+    width: 29px;
+
+    margin-top: 6px;
+  }
+
+  .login-required-popup__sparkle--one {
+    top: 27px;
+    right: 25%;
+  }
+
+  .login-required-popup__sparkle--two {
+    bottom: 25px;
+    left: 25%;
+  }
+
+  /* -------------------------------------------------------
+     CONTENT
+  ------------------------------------------------------- */
+
+  .login-required-popup__content {
+    padding:
+      17px 20px 0;
+  }
+
+  .login-required-popup__eyebrow {
+    margin-bottom: 8px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.14em;
+  }
+
+  .login-required-popup__title {
+    max-width: 320px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size:
+      clamp(25px, 8vw, 30px);
+
+    line-height: 1.08;
+  }
+
+  .login-required-popup__description {
+    max-width: 320px;
+
+    margin-top: 9px;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+  }
+
+  /* -------------------------------------------------------
+     ACTIONS
+  ------------------------------------------------------- */
+
+  .login-required-popup__actions {
+    gap: 8px;
+
+    padding:
+      18px 20px 0;
+  }
+
+  .login-required-popup__primary {
+    min-height: 48px;
+
+    border-radius: 12px;
+
+    font-size: 10px;
+
+    letter-spacing: 0.065em;
+
+    -webkit-tap-highlight-color:
+      transparent;
+  }
+
+  .login-required-popup__primary-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .login-required-popup__primary-arrow {
+    right: 14px;
+  }
+
+  .login-required-popup__secondary {
+    min-height: 43px;
+
+    border-radius: 11px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.065em;
+
+    -webkit-tap-highlight-color:
+      transparent;
+  }
+
+  /* -------------------------------------------------------
+     FOOTER
+  ------------------------------------------------------- */
+
+  .login-required-popup__footer {
+    gap: 8px;
+
+    padding:
+      15px 20px
+      max(16px, env(safe-area-inset-bottom));
+  }
+
+  .login-required-popup__footer p {
+    font-size: 6px;
+
+    letter-spacing: 0.16em;
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+  .login-required-popup__visual {
+    height: 118px;
+  }
+
+  .login-required-popup__visual-card {
+    width: 78px;
+    height: 88px;
+
+    padding-top: 14px;
+  }
+
+  .login-required-popup__visual-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .login-required-popup__visual-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .login-required-popup__content {
+    padding-top: 14px;
+  }
+
+  .login-required-popup__title {
+    font-size: 24px;
+  }
+
+  .login-required-popup__description {
+    font-size: 10px;
+
+    line-height: 1.55;
+  }
+
+  .login-required-popup__actions {
+    padding-top: 15px;
+  }
+
+  .login-required-popup__primary {
+    min-height: 46px;
+  }
+
+  .login-required-popup__secondary {
+    min-height: 41px;
+  }
+}
+
+/* =========================================================
+   LANDSCAPE MOBILE
+========================================================= */
+
+@media (max-height: 560px) and (max-width: 768px) {
+  .login-required-popup {
+    align-items: center;
+  }
+
+  .login-required-popup__dialog {
+    max-height:
+      calc(100dvh - 16px);
+
+    border-radius: 22px;
+  }
+
+  .login-required-popup__visual {
+    height: 95px;
+
+    margin-top: 4px;
+  }
+
+  .login-required-popup__visual-card {
+    width: 70px;
+    height: 78px;
+
+    padding-top: 11px;
+  }
+
+  .login-required-popup__visual-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .login-required-popup__visual-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .login-required-popup__visual-line {
+    margin-top: 7px;
+
+    height: 3px;
+  }
+
+  .login-required-popup__content {
+    padding-top: 10px;
+  }
+
+  .login-required-popup__description {
+    margin-top: 7px;
+  }
+
+  .login-required-popup__actions {
+    padding-top: 12px;
+  }
+
+  .login-required-popup__footer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .login-required-popup,
+  .login-required-popup__dialog,
+  .login-required-popup__visual-card {
+    animation: none;
+  }
+
+  .login-required-popup__close,
+  .login-required-popup__primary,
+  .login-required-popup__secondary {
+    transition: none;
+  }
+}
 
 /* =========================================================
    ANIMATIONS
@@ -593,8 +969,8 @@
     opacity: 0;
 
     transform:
-      translateY(14px)
-      scale(0.97);
+      translateY(18px)
+      scale(0.96);
   }
 
   to {
@@ -606,119 +982,33 @@
   }
 }
 
+@keyframes login-popup-mobile-in {
+  from {
+    opacity: 0;
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 640px) {
-  .login-required-popup {
-    align-items: flex-end;
-
-    padding: 0;
+    transform:
+      translateY(100%);
   }
 
-  .login-required-popup__dialog {
-    width: 100%;
+  to {
+    opacity: 1;
 
-    max-height:
-      calc(100dvh - 18px);
-
-    overflow-y: auto;
-
-    padding:
-      38px 22px 22px;
-
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-
-    box-shadow:
-      0 -20px 60px
-      rgba(28, 23, 19, 0.18);
-
-    animation:
-      login-popup-mobile-in
-      240ms
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      );
-  }
-
-  .login-required-popup__close {
-    top: 13px;
-    right: 13px;
-
-    width: 32px;
-    height: 32px;
-  }
-
-  .login-required-popup__brand {
-    font-size: 8px;
-  }
-
-  .login-required-popup__title {
-    max-width: 290px;
-
-    font-size: 30px;
-  }
-
-  .login-required-popup__description {
-    max-width: 300px;
-
-    font-size: 11.5px;
-  }
-
-  .login-required-popup__actions {
-    margin-top: 24px;
-  }
-
-  .login-required-popup__button--primary {
-    min-height: 48px;
-  }
-
-  .login-required-popup__note {
-    margin-top: 20px;
-    padding-top: 13px;
+    transform:
+      translateY(0);
   }
 }
 
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 380px) {
-  .login-required-popup__dialog {
-    padding-inline: 18px;
+@keyframes login-popup-card-float {
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(-2deg);
   }
 
-  .login-required-popup__title {
-    font-size: 27px;
-  }
-
-  .login-required-popup__description {
-    font-size: 11px;
-  }
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .login-required-popup,
-  .login-required-popup__dialog {
-    animation: none;
-  }
-
-  .login-required-popup__close,
-  .login-required-popup__button--primary,
-  .login-required-popup__button-arrow {
-    transition: none;
+  50% {
+    transform:
+      translateY(-5px)
+      rotate(0deg);
   }
 }
