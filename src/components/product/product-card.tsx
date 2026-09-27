@@ -1,23 +1,12 @@
+/* ProductCard.tsx */
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
-
-import {
-  ArrowUpRight,
-  Minus,
-  Plus,
-  ShoppingBag,
-} from "lucide-react";
-
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { Minus, Plus, ShoppingBag } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 
 import type { Product } from "@/types/product";
-
 import {
   getProductAvailability,
   getPrimaryProductMedia,
@@ -31,7 +20,6 @@ import {
 } from "@/services/cart.service";
 
 import { useAuthStore } from "@/store/auth-store";
-
 import { WishlistButton } from "@/components/product/wishlist-button";
 import { LoginRequiredPopup } from "@/components/product/login-required-popup";
 import { AddToBagPopup } from "@/components/product/add-to-bag-popup";
@@ -39,39 +27,23 @@ import { ProductPrice } from "@/components/product/product-price";
 
 import "./ProductCard.css";
 
-/* =========================================================
-   TYPES
-========================================================= */
-
 type ProductCardProps = {
   product: Product;
   priority?: boolean;
 };
 
-/* =========================================================
-   COMPONENT
-========================================================= */
-
 export function ProductCard({
   product,
   priority = false,
 }: ProductCardProps) {
-  const availability =
-    getProductAvailability(product);
+  const availability = getProductAvailability(product);
+  const primaryMedia = getPrimaryProductMedia(product);
 
-  const primaryMedia =
-    getPrimaryProductMedia(product);
-
-  const secondaryMedia =
-    product.media.find(
-      (media) =>
-        media.type === "image" &&
-        media.id !== primaryMedia?.id,
-    );
-
-  /* =======================================================
-     AUTH
-  ======================================================= */
+  const secondaryMedia = product.media.find(
+    (media) =>
+      media.type === "image" &&
+      media.id !== primaryMedia?.id,
+  );
 
   const isAuthenticated = useAuthStore(
     (state) => state.isAuthenticated,
@@ -81,303 +53,180 @@ export function ProductCard({
     (state) => state.isInitialized,
   );
 
-  /* =======================================================
-     LOCAL STATE
-  ======================================================= */
-
-  const [cartQuantity, setCartQuantity] =
-    useState(0);
-
-  const [cartLoading, setCartLoading] =
-    useState(false);
-
-  const [cartInitialized, setCartInitialized] =
-    useState(false);
-
-  const [showLoginPopup, setShowLoginPopup] =
-    useState(false);
-
-  const [showAddedPopup, setShowAddedPopup] =
-    useState(false);
-
-  /* =======================================================
-     PRODUCT MEDIA SAFETY
-  ======================================================= */
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const [cartLoading, setCartLoading] = useState(false);
+  const [cartInitialized, setCartInitialized] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [showAddedPopup, setShowAddedPopup] = useState(false);
 
   if (!primaryMedia) {
     return null;
   }
 
-  /* =======================================================
-     BADGE
-  ======================================================= */
-
-  const hasBadge =
-    product.merchandising.badges.length > 0;
+  const hasBadge = product.merchandising.badges.length > 0;
 
   const badge = hasBadge
     ? product.merchandising.badges[0]
         .replace(/-/g, " ")
-        .replace(/\b\w/g, (letter) =>
-          letter.toUpperCase(),
-        )
+        .replace(/\b\w/g, (letter) => letter.toUpperCase())
     : null;
 
-  /* =======================================================
-     LOAD CART QUANTITY
-  ======================================================= */
+  const syncCartQuantity = useCallback(async () => {
+    if (!isInitialized || !isAuthenticated) {
+      setCartQuantity(0);
+      setCartInitialized(true);
+      return;
+    }
 
-  const syncCartQuantity =
-    useCallback(async () => {
-      if (
-        !isInitialized ||
-        !isAuthenticated
-      ) {
-        setCartQuantity(0);
-        setCartInitialized(true);
+    try {
+      const cart = await getCart();
 
-        return;
-      }
+      const item = cart.items.find(
+        (cartItem) => cartItem.productId === product._id,
+      );
 
-      try {
-        const cart = await getCart();
-
-        const item = cart.items.find(
-          (cartItem) =>
-            cartItem.productId ===
-            product._id,
-        );
-
-        setCartQuantity(
-          item?.quantity ?? 0,
-        );
-      } catch (error) {
-        console.error(
-          "PRODUCT CARD CART SYNC ERROR:",
-          error,
-        );
-      } finally {
-        setCartInitialized(true);
-      }
-    }, [
-      isAuthenticated,
-      isInitialized,
-      product._id,
-    ]);
+      setCartQuantity(item?.quantity ?? 0);
+    } catch (error) {
+      console.error("PRODUCT CARD CART SYNC ERROR:", error);
+    } finally {
+      setCartInitialized(true);
+    }
+  }, [isAuthenticated, isInitialized, product._id]);
 
   useEffect(() => {
     void syncCartQuantity();
   }, [syncCartQuantity]);
 
-  /* =======================================================
-     LOGIN CHECK
-  ======================================================= */
+  const requireAuthentication = () => {
+    if (!isInitialized) {
+      return false;
+    }
 
-  const requireAuthentication =
-    () => {
-      if (!isInitialized) {
-        return false;
-      }
+    if (!isAuthenticated) {
+      setShowLoginPopup(true);
+      return false;
+    }
 
-      if (!isAuthenticated) {
-        setShowLoginPopup(true);
+    return true;
+  };
 
-        return false;
-      }
+  const handleAddToCart = async () => {
+    if (
+      availability.isSoldOut ||
+      availability.availableQuantity <= 0 ||
+      cartLoading
+    ) {
+      return;
+    }
 
-      return true;
-    };
+    if (!requireAuthentication()) {
+      return;
+    }
 
-  /* =======================================================
-     ADD TO CART
-  ======================================================= */
+    try {
+      setCartLoading(true);
 
-  const handleAddToCart =
-    async () => {
-      if (
-        availability.isSoldOut ||
-        availability.availableQuantity <= 0 ||
-        cartLoading
-      ) {
+      const cart = await addToCart(product._id, 1);
+
+      const item = cart.items.find(
+        (cartItem) => cartItem.productId === product._id,
+      );
+
+      setCartQuantity(item?.quantity ?? 1);
+      setShowAddedPopup(true);
+    } catch (error) {
+      console.error("ADD TO CART ERROR:", error);
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  const handleIncrease = async () => {
+    if (
+      availability.isSoldOut ||
+      cartLoading ||
+      cartQuantity <= 0 ||
+      cartQuantity >= availability.availableQuantity
+    ) {
+      return;
+    }
+
+    if (!requireAuthentication()) {
+      return;
+    }
+
+    try {
+      setCartLoading(true);
+
+      const nextQuantity = cartQuantity + 1;
+
+      const cart = await updateCartItem(
+        product._id,
+        nextQuantity,
+      );
+
+      const item = cart.items.find(
+        (cartItem) => cartItem.productId === product._id,
+      );
+
+      setCartQuantity(item?.quantity ?? nextQuantity);
+    } catch (error) {
+      console.error("UPDATE CART ERROR:", error);
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  const handleDecrease = async () => {
+    if (cartLoading || cartQuantity <= 0) {
+      return;
+    }
+
+    if (!requireAuthentication()) {
+      return;
+    }
+
+    try {
+      setCartLoading(true);
+
+      if (cartQuantity === 1) {
+        await removeFromCart(product._id);
+        setCartQuantity(0);
         return;
       }
 
-      if (!requireAuthentication()) {
-        return;
-      }
+      const nextQuantity = cartQuantity - 1;
 
-      try {
-        setCartLoading(true);
+      const cart = await updateCartItem(
+        product._id,
+        nextQuantity,
+      );
 
-        const cart = await addToCart(
-          product._id,
-          1,
-        );
+      const item = cart.items.find(
+        (cartItem) => cartItem.productId === product._id,
+      );
 
-        const item = cart.items.find(
-          (cartItem) =>
-            cartItem.productId ===
-            product._id,
-        );
-
-        setCartQuantity(
-          item?.quantity ?? 1,
-        );
-
-        setShowAddedPopup(true);
-      } catch (error) {
-        console.error(
-          "ADD TO CART ERROR:",
-          error,
-        );
-      } finally {
-        setCartLoading(false);
-      }
-    };
-
-  /* =======================================================
-     INCREASE
-  ======================================================= */
-
-  const handleIncrease =
-    async () => {
-      if (
-        availability.isSoldOut ||
-        cartLoading ||
-        cartQuantity <= 0
-      ) {
-        return;
-      }
-
-      if (!requireAuthentication()) {
-        return;
-      }
-
-      const nextQuantity =
-        cartQuantity + 1;
-
-      if (
-        nextQuantity >
-        availability.availableQuantity
-      ) {
-        return;
-      }
-
-      try {
-        setCartLoading(true);
-
-        const cart =
-          await updateCartItem(
-            product._id,
-            nextQuantity,
-          );
-
-        const item = cart.items.find(
-          (cartItem) =>
-            cartItem.productId ===
-            product._id,
-        );
-
-        setCartQuantity(
-          item?.quantity ??
-            nextQuantity,
-        );
-      } catch (error) {
-        console.error(
-          "UPDATE CART ERROR:",
-          error,
-        );
-      } finally {
-        setCartLoading(false);
-      }
-    };
-
-  /* =======================================================
-     DECREASE
-  ======================================================= */
-
-  const handleDecrease =
-    async () => {
-      if (
-        cartLoading ||
-        cartQuantity <= 0
-      ) {
-        return;
-      }
-
-      if (!requireAuthentication()) {
-        return;
-      }
-
-      try {
-        setCartLoading(true);
-
-        /*
-         * Quantity 1 → remove product
-         */
-
-        if (cartQuantity === 1) {
-          await removeFromCart(
-            product._id,
-          );
-
-          setCartQuantity(0);
-
-          return;
-        }
-
-        const nextQuantity =
-          cartQuantity - 1;
-
-        const cart =
-          await updateCartItem(
-            product._id,
-            nextQuantity,
-          );
-
-        const item = cart.items.find(
-          (cartItem) =>
-            cartItem.productId ===
-            product._id,
-        );
-
-        setCartQuantity(
-          item?.quantity ??
-            nextQuantity,
-        );
-      } catch (error) {
-        console.error(
-          "UPDATE CART ERROR:",
-          error,
-        );
-      } finally {
-        setCartLoading(false);
-      }
-    };
-
-  /* =======================================================
-     BUTTON STATE
-  ======================================================= */
+      setCartQuantity(item?.quantity ?? nextQuantity);
+    } catch (error) {
+      console.error("UPDATE CART ERROR:", error);
+    } finally {
+      setCartLoading(false);
+    }
+  };
 
   const showQuantity =
     cartInitialized &&
     isAuthenticated &&
     cartQuantity > 0;
 
-  /* =======================================================
-     RENDER
-  ======================================================= */
-
   return (
     <>
       <article
         className={[
           "product-card",
-
           availability.isSoldOut
             ? "product-card--sold-out"
             : "",
-
           showQuantity
             ? "product-card--in-cart"
             : "",
@@ -385,10 +234,6 @@ export function ProductCard({
           .filter(Boolean)
           .join(" ")}
       >
-        {/* =================================================
-            MEDIA
-        ================================================= */}
-
         <div className="product-card__media">
           <Link
             href={`/products/${product._id}`}
@@ -397,10 +242,7 @@ export function ProductCard({
           >
             <Image
               src={primaryMedia.src}
-              alt={
-                primaryMedia.alt ??
-                product.name
-              }
+              alt={primaryMedia.alt ?? product.name}
               fill
               priority={priority}
               sizes="
@@ -415,10 +257,7 @@ export function ProductCard({
             {secondaryMedia && (
               <Image
                 src={secondaryMedia.src}
-                alt={
-                  secondaryMedia.alt ??
-                  product.name
-                }
+                alt={secondaryMedia.alt ?? product.name}
                 fill
                 sizes="
                   (max-width: 639px) 46vw,
@@ -434,21 +273,7 @@ export function ProductCard({
               aria-hidden="true"
               className="product-card__image-shade"
             />
-
-            <span
-              aria-hidden="true"
-              className="product-card__view-indicator"
-            >
-              <ArrowUpRight
-                size={17}
-                strokeWidth={1.25}
-              />
-            </span>
           </Link>
-
-          {/* =================================================
-              TOP META
-          ================================================= */}
 
           <div className="product-card__top">
             {badge && (
@@ -465,61 +290,33 @@ export function ProductCard({
             </div>
           </div>
 
-          {/* =================================================
-              SOLD OUT
-          ================================================= */}
-
           {availability.isSoldOut && (
             <div className="product-card__sold-out">
-              <span>
-                Sold Out
-              </span>
+              <span>Sold Out</span>
             </div>
           )}
 
-          {/* =================================================
-              IMAGE BOTTOM LABEL
-          ================================================= */}
-
           {!availability.isSoldOut && (
             <div className="product-card__media-caption">
-              <span>
-                Discover
-              </span>
-
-              <ArrowUpRight
-                size={14}
-                strokeWidth={1.25}
-                aria-hidden="true"
-              />
+              <span>Available now</span>
             </div>
           )}
         </div>
 
-        {/* =================================================
-            CONTENT
-        ================================================= */}
-
         <div className="product-card__content">
-          {/* PRODUCT META */}
-
           <div className="product-card__meta">
             <span className="product-card__meta-label">
               Aayesha Collection
             </span>
 
             {!availability.isSoldOut &&
-              availability.availableQuantity >
-                0 &&
-              availability.availableQuantity <=
-                5 && (
+              availability.availableQuantity > 0 &&
+              availability.availableQuantity <= 5 && (
                 <span className="product-card__stock">
                   Few left
                 </span>
               )}
           </div>
-
-          {/* PRODUCT NAME */}
 
           <Link
             href={`/products/${product._id}`}
@@ -528,29 +325,11 @@ export function ProductCard({
             <h3 className="product-card__title">
               {product.name}
             </h3>
-
-            <span
-              aria-hidden="true"
-              className="product-card__title-arrow"
-            >
-              <ArrowUpRight
-                size={15}
-                strokeWidth={1.25}
-              />
-            </span>
           </Link>
 
-          {/* PRICE */}
-
           <div className="product-card__price">
-            <ProductPrice
-              product={product}
-            />
+            <ProductPrice product={product} />
           </div>
-
-          {/* =================================================
-              CART ACTION
-          ================================================= */}
 
           {availability.isSoldOut ? (
             <button
@@ -558,9 +337,7 @@ export function ProductCard({
               disabled
               className="product-card__cart-button product-card__cart-button--sold-out"
             >
-              <span>
-                Sold Out
-              </span>
+              Sold Out
             </button>
           ) : showQuantity ? (
             <div
@@ -575,9 +352,7 @@ export function ProductCard({
             >
               <button
                 type="button"
-                onClick={() =>
-                  void handleDecrease()
-                }
+                onClick={() => void handleDecrease()}
                 disabled={cartLoading}
                 aria-label={`Decrease ${product.name} quantity`}
                 className="product-card__quantity-button"
@@ -599,17 +374,12 @@ export function ProductCard({
                   strokeWidth={1.4}
                   aria-hidden="true"
                 />
-
-                <span>
-                  {cartQuantity}
-                </span>
+                <span>{cartQuantity}</span>
               </div>
 
               <button
                 type="button"
-                onClick={() =>
-                  void handleIncrease()
-                }
+                onClick={() => void handleIncrease()}
                 disabled={
                   cartLoading ||
                   cartQuantity >=
@@ -628,9 +398,7 @@ export function ProductCard({
           ) : (
             <button
               type="button"
-              onClick={() =>
-                void handleAddToCart()
-              }
+              onClick={() => void handleAddToCart()}
               disabled={
                 cartLoading ||
                 !isInitialized ||
@@ -638,7 +406,6 @@ export function ProductCard({
               }
               className={[
                 "product-card__cart-button",
-
                 cartLoading
                   ? "product-card__cart-button--loading"
                   : "",
@@ -646,56 +413,31 @@ export function ProductCard({
                 .filter(Boolean)
                 .join(" ")}
             >
-              <span className="product-card__cart-button-main">
-                <ShoppingBag
-                  size={15}
-                  strokeWidth={1.4}
-                  aria-hidden="true"
-                />
-
-                <span>
-                  {cartLoading
-                    ? "Adding..."
-                    : "Add to Bag"}
-                </span>
-              </span>
-
-              <span
+              <ShoppingBag
+                size={15}
+                strokeWidth={1.4}
                 aria-hidden="true"
-                className="product-card__cart-button-arrow"
-              >
-                <ArrowUpRight
-                  size={16}
-                  strokeWidth={1.3}
-                />
+              />
+
+              <span>
+                {cartLoading ? "Adding..." : "Add to Bag"}
               </span>
             </button>
           )}
         </div>
       </article>
 
-      {/* =====================================================
-          LOGIN REQUIRED
-      ===================================================== */}
-
       <LoginRequiredPopup
         open={showLoginPopup}
-        onClose={() =>
-          setShowLoginPopup(false)
-        }
+        onClose={() => setShowLoginPopup(false)}
+        action="cart"
       />
-
-      {/* =====================================================
-          ADD TO BAG
-      ===================================================== */}
 
       <AddToBagPopup
         open={showAddedPopup}
         product={product}
         image={primaryMedia.src}
-        onClose={() =>
-          setShowAddedPopup(false)
-        }
+        onClose={() => setShowAddedPopup(false)}
       />
     </>
   );
