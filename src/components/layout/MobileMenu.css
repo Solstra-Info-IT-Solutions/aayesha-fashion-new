@@ -2412,3 +2412,69 @@
   ) {
   color: var(--mm-secondary);
 }
+
+/* =========================================================
+   AAYESHA FASHION — SOFT LOGO BUTTON THEME
+   Button colors intentionally softened to match the logo.
+   ========================================================= */
+
+/* Primary button treatment */
+.mobile-menu .mobile-guest-account__button {
+  background: #F4D6D8;
+  border-color: #E4B6B8;
+  color: #141615;
+}
+
+.mobile-menu .mobile-guest-account__button:hover {
+  background: #E4B6B8;
+  border-color: #C98F93;
+  color: #141615;
+}
+
+.mobile-menu .mobile-guest-account__button:active {
+  background: #C98F93;
+  border-color: #C98F93;
+  color: #FFFFFF;
+}
+
+/* Hamburger / close controls */
+.mobile-menu .mobile-menu-trigger:active,
+.mobile-menu .mobile-menu__close:active {
+  background: #E4B6B8;
+  border-color: #C98F93;
+  color: #141615;
+}
+
+/* Small interactive icon buttons */
+.mobile-menu .mobile-menu__brand:hover .mobile-menu__brand-mark,
+.mobile-menu .mobile-account-card:hover .mobile-account-card__arrow,
+.mobile-menu .mobile-navigation-item:hover .mobile-navigation-item__arrow,
+.mobile-menu .mobile-menu__footer-action:hover {
+  background: #F4D6D8;
+  border-color: #E4B6B8;
+  color: #141615;
+}
+
+/* Active states for small controls */
+.mobile-menu .mobile-account-card:active .mobile-account-card__arrow,
+.mobile-menu .mobile-navigation-item:active .mobile-navigation-item__arrow {
+  background: #E4B6B8;
+  border-color: #C98F93;
+  color: #141615;
+}
+
+/* Keep focus indicators soft and brand-consistent */
+.mobile-menu .mobile-menu-trigger:focus-visible,
+.mobile-menu .mobile-menu__close:focus-visible,
+.mobile-menu .mobile-guest-account__button:focus-visible {
+  outline-color: #C98F93;
+}
+
+/* Prevent any button from inheriting a dark browser/default text color */
+.mobile-menu button {
+  color: #141615;
+}
+
+.mobile-menu button:disabled {
+  color: #817676;
+}
