@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   Check,
-  ChevronDown,
   MapPin,
   Plus,
   RefreshCw,
@@ -19,7 +18,12 @@ import {
 } from "@/lib/customer-api";
 
 import type { CheckoutAddress as CheckoutAddressType } from "@/types/checkout";
+
 import "./CheckoutAddress.css";
+
+/* =========================================================
+   COMPONENT
+========================================================= */
 
 export function CheckoutAddress() {
   const address = useCheckoutStore(
@@ -64,14 +68,15 @@ export function CheckoutAddress() {
   const selectedSavedAddress = useMemo(
     () =>
       savedAddresses.find(
-        (item) => item.id === selectedAddressId,
+        (item) =>
+          item.id === selectedAddressId,
       ) ?? null,
     [savedAddresses, selectedAddressId],
   );
 
-  /* ==========================================================
+  /* =========================================================
      LOAD SAVED ADDRESSES
-  ========================================================== */
+  ========================================================= */
 
   useEffect(() => {
     if (
@@ -118,6 +123,7 @@ export function CheckoutAddress() {
         setSelectedAddressId(
           defaultAddress.id,
         );
+
         setShowManualForm(false);
 
         applySavedAddress(
@@ -155,9 +161,9 @@ export function CheckoutAddress() {
     setContact,
   ]);
 
-  /* ==========================================================
+  /* =========================================================
      SELECT SAVED ADDRESS
-  ========================================================== */
+  ========================================================= */
 
   const handleSavedAddressSelect = (
     savedAddress: CustomerAddress,
@@ -175,9 +181,9 @@ export function CheckoutAddress() {
     );
   };
 
-  /* ==========================================================
-     SWITCH TO MANUAL ADDRESS
-  ========================================================== */
+  /* =========================================================
+     MANUAL ADDRESS
+  ========================================================= */
 
   const handleManualAddress = () => {
     setSelectedAddressId(null);
@@ -195,18 +201,16 @@ export function CheckoutAddress() {
       savedAddresses.length > 0 ||
       !!addressError);
 
-  /* ==========================================================
+  /* =========================================================
      AUTHENTICATED CUSTOMER VIEW
-  ========================================================== */
+  ========================================================= */
 
   if (shouldShowSavedAddressView) {
     return (
       <section className="checkout-address">
-        {/* HEADER */}
-
         <header className="checkout-address__header">
           <div className="checkout-address__step">
-            02
+            <span>02</span>
           </div>
 
           <div className="checkout-address__header-content">
@@ -221,8 +225,8 @@ export function CheckoutAddress() {
                 </h2>
 
                 <p className="checkout-address__description">
-                  Select a saved address or add a new
-                  delivery address.
+                  Select a saved address or add a
+                  new delivery address.
                 </p>
               </div>
 
@@ -236,27 +240,33 @@ export function CheckoutAddress() {
           </div>
         </header>
 
-        {/* CONTENT */}
-
         <div className="checkout-address__content">
           {isLoadingAddresses ? (
             <AddressLoadingState />
           ) : (
             <>
-              {/* ERROR */}
+              {/* =================================================
+                  ERROR
+              ================================================= */}
 
               {addressError ? (
                 <div className="checkout-address__error">
-                  <div>
-                    <p className="checkout-address__error-title">
-                      We couldn&apos;t load your saved
-                      addresses.
-                    </p>
+                  <div className="checkout-address__error-content">
+                    <span className="checkout-address__error-icon">
+                      !
+                    </span>
 
-                    <p className="checkout-address__error-description">
-                      You can still enter a new delivery
-                      address below.
-                    </p>
+                    <div>
+                      <p className="checkout-address__error-title">
+                        We couldn&apos;t load your
+                        saved addresses.
+                      </p>
+
+                      <p className="checkout-address__error-description">
+                        You can still enter a new
+                        delivery address below.
+                      </p>
+                    </div>
                   </div>
 
                   <button
@@ -268,7 +278,7 @@ export function CheckoutAddress() {
                   >
                     <RefreshCw
                       size={15}
-                      strokeWidth={1.5}
+                      strokeWidth={1.6}
                     />
 
                     <span>Retry</span>
@@ -276,21 +286,27 @@ export function CheckoutAddress() {
                 </div>
               ) : null}
 
-              {/* SAVED ADDRESSES */}
+              {/* =================================================
+                  SAVED ADDRESSES
+              ================================================= */}
 
               {!addressError &&
               savedAddresses.length > 0 ? (
                 <div className="checkout-address__saved">
                   <div className="checkout-address__section-heading">
-                    <p className="checkout-address__section-label">
-                      Saved Addresses
-                    </p>
+                    <div>
+                      <p className="checkout-address__section-label">
+                        Saved Addresses
+                      </p>
+
+                      <p className="checkout-address__section-description">
+                        Choose where you would like
+                        your order delivered.
+                      </p>
+                    </div>
 
                     <span className="checkout-address__section-count">
-                      {savedAddresses.length}{" "}
-                      {savedAddresses.length === 1
-                        ? "address"
-                        : "addresses"}
+                      {savedAddresses.length}
                     </span>
                   </div>
 
@@ -303,80 +319,115 @@ export function CheckoutAddress() {
 
                         return (
                           <button
-                            key={savedAddress.id}
+                            key={
+                              savedAddress.id
+                            }
                             type="button"
                             onClick={() =>
                               handleSavedAddressSelect(
                                 savedAddress,
                               )
                             }
-                            aria-pressed={isSelected}
-                            className={`checkout-address-card ${
+                            aria-pressed={
+                              isSelected
+                            }
+                            className={[
+                              "checkout-address-card",
                               isSelected
                                 ? "checkout-address-card--selected"
-                                : ""
-                            }`}
+                                : "",
+                            ]
+                              .filter(Boolean)
+                              .join(" ")}
                           >
-                            <div className="checkout-address-card__inner">
-                              <span
-                                className={`checkout-address-card__indicator ${
+                            <div className="checkout-address-card__top">
+                              <div
+                                className={[
+                                  "checkout-address-card__radio",
                                   isSelected
-                                    ? "checkout-address-card__indicator--selected"
-                                    : ""
-                                }`}
-                                aria-hidden="true"
+                                    ? "checkout-address-card__radio--selected"
+                                    : "",
+                                ]
+                                  .filter(Boolean)
+                                  .join(" ")}
                               >
                                 {isSelected ? (
                                   <Check
                                     size={12}
-                                    strokeWidth={2.5}
+                                    strokeWidth={2.6}
                                   />
                                 ) : null}
-                              </span>
+                              </div>
 
-                              <div className="checkout-address-card__details">
-                                <div className="checkout-address-card__name-row">
-                                  <p className="checkout-address-card__name">
-                                    {savedAddress.name}
-                                  </p>
+                              <div className="checkout-address-card__type">
+                                <MapPin
+                                  size={15}
+                                  strokeWidth={1.5}
+                                />
 
-                                  {savedAddress.isDefault ? (
-                                    <span className="checkout-address-card__default">
-                                      Default
-                                    </span>
-                                  ) : null}
-                                </div>
+                                <span>
+                                  Delivery Address
+                                </span>
+                              </div>
 
-                                <p className="checkout-address-card__phone">
-                                  {savedAddress.phone}
+                              {savedAddress.isDefault ? (
+                                <span className="checkout-address-card__default">
+                                  Default
+                                </span>
+                              ) : null}
+                            </div>
+
+                            <div className="checkout-address-card__body">
+                              <div className="checkout-address-card__identity">
+                                <p className="checkout-address-card__name">
+                                  {
+                                    savedAddress.name
+                                  }
                                 </p>
 
-                                <p className="checkout-address-card__address">
-                                  {savedAddress.addressLine}
-
-                                  {savedAddress.landmark
-                                    ? `, ${savedAddress.landmark}`
-                                    : ""}
-
-                                  <br />
-
-                                  {savedAddress.city}
-                                  {", "}
-                                  {savedAddress.state}{" "}
-                                  {savedAddress.pincode}
+                                <p className="checkout-address-card__phone">
+                                  {
+                                    savedAddress.phone
+                                  }
                                 </p>
                               </div>
 
-                              <MapPin
-                                size={18}
-                                strokeWidth={1.35}
-                                className={`checkout-address-card__pin ${
-                                  isSelected
-                                    ? "checkout-address-card__pin--selected"
-                                    : ""
-                                }`}
-                              />
+                              <p className="checkout-address-card__address">
+                                {
+                                  savedAddress.addressLine
+                                }
+
+                                {savedAddress.landmark
+                                  ? `, ${savedAddress.landmark}`
+                                  : ""}
+
+                                <br />
+
+                                {
+                                  savedAddress.city
+                                }
+                                {", "}
+                                {
+                                  savedAddress.state
+                                }{" "}
+                                {
+                                  savedAddress.pincode
+                                }
+                              </p>
                             </div>
+
+                            <span
+                              className={[
+                                "checkout-address-card__selected-label",
+                                isSelected
+                                  ? "checkout-address-card__selected-label--visible"
+                                  : "",
+                              ]
+                                .filter(Boolean)
+                                .join(" ")}
+                            >
+                              Selected
+                            </span>
                           </button>
                         );
                       },
@@ -385,49 +436,53 @@ export function CheckoutAddress() {
                 </div>
               ) : null}
 
-              {/* ADD NEW ADDRESS */}
+              {/* =================================================
+                  ADD NEW ADDRESS
+              ================================================= */}
 
               <button
                 type="button"
                 onClick={handleManualAddress}
-                aria-expanded={showManualForm}
-                className={`checkout-address__add ${
+                aria-expanded={
+                  showManualForm
+                }
+                className={[
+                  "checkout-address__add",
                   showManualForm
                     ? "checkout-address__add--active"
-                    : ""
-                }`}
+                    : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
-                <span className="checkout-address__add-content">
-                  <span className="checkout-address__add-icon">
-                    <Plus
-                      size={17}
-                      strokeWidth={1.4}
-                    />
+                <span className="checkout-address__add-icon">
+                  <Plus
+                    size={18}
+                    strokeWidth={1.6}
+                  />
+                </span>
+
+                <span className="checkout-address__add-copy">
+                  <span className="checkout-address__add-title">
+                    Add a new address
                   </span>
 
-                  <span>
-                    <span className="checkout-address__add-title">
-                      Add a new address
-                    </span>
-
-                    <span className="checkout-address__add-description">
-                      Enter a different delivery address.
-                    </span>
+                  <span className="checkout-address__add-description">
+                    Enter a different delivery
+                    address
                   </span>
                 </span>
 
-                <ChevronDown
-                  size={17}
-                  strokeWidth={1.4}
-                  className={`checkout-address__add-chevron ${
-                    showManualForm
-                      ? "checkout-address__add-chevron--open"
-                      : ""
-                  }`}
-                />
+                <span className="checkout-address__add-state">
+                  {showManualForm
+                    ? "Editing"
+                    : "Add"}
+                </span>
               </button>
 
-              {/* MANUAL FORM */}
+              {/* =================================================
+                  MANUAL FORM
+              ================================================= */}
 
               {showManualForm ? (
                 <ManualAddressForm
@@ -436,33 +491,48 @@ export function CheckoutAddress() {
                 />
               ) : null}
 
-              {/* SELECTED ADDRESS SUMMARY */}
+              {/* =================================================
+                  SELECTED SUMMARY
+              ================================================= */}
 
               {selectedSavedAddress &&
               !showManualForm ? (
                 <div className="checkout-address__selected">
-                  <p className="checkout-address__section-label">
-                    Selected delivery address
-                  </p>
-
-                  <div className="checkout-address__selected-meta">
-                    <p>
-                      {selectedSavedAddress.name}
-                    </p>
-
-                    <span>·</span>
-
-                    <p>
-                      {selectedSavedAddress.phone}
-                    </p>
+                  <div className="checkout-address__selected-icon">
+                    <Check
+                      size={16}
+                      strokeWidth={2}
+                    />
                   </div>
 
-                  <p className="checkout-address__selected-location">
-                    {selectedSavedAddress.city}
-                    {", "}
-                    {selectedSavedAddress.state}{" "}
-                    {selectedSavedAddress.pincode}
-                  </p>
+                  <div>
+                    <p className="checkout-address__selected-label">
+                      Delivery address selected
+                    </p>
+
+                    <p className="checkout-address__selected-name">
+                      {
+                        selectedSavedAddress.name
+                      }{" "}
+                      <span>•</span>{" "}
+                      {
+                        selectedSavedAddress.phone
+                      }
+                    </p>
+
+                    <p className="checkout-address__selected-location">
+                      {
+                        selectedSavedAddress.city
+                      }
+                      {", "}
+                      {
+                        selectedSavedAddress.state
+                      }{" "}
+                      {
+                        selectedSavedAddress.pincode
+                      }
+                    </p>
+                  </div>
                 </div>
               ) : null}
             </>
@@ -472,15 +542,15 @@ export function CheckoutAddress() {
     );
   }
 
-  /* ==========================================================
+  /* =========================================================
      GUEST / MANUAL ADDRESS VIEW
-  ========================================================== */
+  ========================================================= */
 
   return (
     <section className="checkout-address">
       <header className="checkout-address__header">
         <div className="checkout-address__step">
-          02
+          <span>02</span>
         </div>
 
         <div className="checkout-address__header-content">
@@ -493,8 +563,8 @@ export function CheckoutAddress() {
           </h2>
 
           <p className="checkout-address__description">
-            Enter the address where you&apos;d like your
-            order delivered.
+            Enter the address where you&apos;d like
+            your order delivered.
           </p>
         </div>
       </header>
@@ -524,6 +594,18 @@ function ManualAddressForm({
 }) {
   return (
     <div className="checkout-address__manual-form">
+      <div className="checkout-address__form-heading">
+        <div>
+          <p className="checkout-address__section-label">
+            New Delivery Address
+          </p>
+
+          <p className="checkout-address__section-description">
+            Enter your complete delivery details.
+          </p>
+        </div>
+      </div>
+
       <ManualAddressFields
         address={address}
         setAddress={setAddress}
@@ -670,7 +752,14 @@ function SaveAddressCheckbox({
         }
       />
 
-      <span>
+      <span className="checkout-address__save-box">
+        <Check
+          size={12}
+          strokeWidth={2.4}
+        />
+      </span>
+
+      <span className="checkout-address__save-text">
         Save this address for future orders
       </span>
     </label>
@@ -693,10 +782,16 @@ function AddressLoadingState() {
           key={item}
           className="checkout-address-loading__card"
         >
-          <div className="checkout-address-loading__line checkout-address-loading__line--short" />
-          <div className="checkout-address-loading__line checkout-address-loading__line--medium" />
+          <div className="checkout-address-loading__top">
+            <span />
+            <span />
+            <span />
+          </div>
+
+          <div className="checkout-address-loading__line checkout-address-loading__line--name" />
+          <div className="checkout-address-loading__line checkout-address-loading__line--phone" />
           <div className="checkout-address-loading__line" />
-          <div className="checkout-address-loading__line checkout-address-loading__line--large" />
+          <div className="checkout-address-loading__line checkout-address-loading__line--wide" />
         </div>
       ))}
     </div>
@@ -890,8 +985,6 @@ function Field({
           placeholder={placeholder}
           inputMode={inputMode}
         />
-
-        <span className="checkout-field__focus-line" />
       </span>
     </label>
   );

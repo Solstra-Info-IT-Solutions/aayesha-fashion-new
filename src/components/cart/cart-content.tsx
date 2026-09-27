@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
-  ChevronLeft,
   Minus,
   Plus,
   ShoppingBag,
@@ -24,7 +23,6 @@ import "./CartContent.css";
 
 export function CartContent() {
   const [cart, setCart] = useState<Cart | null>(null);
-
   const [isLoading, setIsLoading] = useState(true);
 
   const [updatingProductId, setUpdatingProductId] =
@@ -35,6 +33,10 @@ export function CartContent() {
 
   const [isClearing, setIsClearing] = useState(false);
 
+  /* =========================================================
+     LOAD CART
+  ========================================================= */
+
   useEffect(() => {
     let cancelled = false;
 
@@ -44,9 +46,7 @@ export function CartContent() {
       try {
         const response = await getCart();
 
-        if (cancelled) {
-          return;
-        }
+        if (cancelled) return;
 
         setCart(response);
       } catch (error) {
@@ -69,6 +69,10 @@ export function CartContent() {
     };
   }, []);
 
+  /* =========================================================
+     CART DATA
+  ========================================================= */
+
   const cartItems = cart?.items ?? [];
 
   const summary = useMemo(() => {
@@ -81,7 +85,8 @@ export function CartContent() {
         }
 
         const quantity = item.quantity;
-        const sellingPrice = product.pricing.sellingPrice;
+        const sellingPrice =
+          product.pricing.sellingPrice;
         const mrp = product.pricing.mrp;
 
         result.itemCount += quantity;
@@ -105,6 +110,10 @@ export function CartContent() {
 
   const formatPrice = (value: number) =>
     `₹${value.toLocaleString("en-IN")}`;
+
+  /* =========================================================
+     UPDATE QUANTITY
+  ========================================================= */
 
   const handleUpdateQuantity = async (
     productId: string,
@@ -138,6 +147,10 @@ export function CartContent() {
     }
   };
 
+  /* =========================================================
+     REMOVE ITEM
+  ========================================================= */
+
   const handleRemoveItem = async (
     productId: string,
   ) => {
@@ -166,6 +179,10 @@ export function CartContent() {
     }
   };
 
+  /* =========================================================
+     CLEAR CART
+  ========================================================= */
+
   const handleClearCart = async () => {
     try {
       setIsClearing(true);
@@ -188,25 +205,30 @@ export function CartContent() {
     }
   };
 
+  /* =========================================================
+     LOADING
+  ========================================================= */
+
   if (isLoading) {
     return (
       <section className="cart-page cart-page--loading">
         <div className="cart-page__container">
-          <div className="cart-page__loading-header">
-            <div className="cart-skeleton cart-skeleton--eyebrow" />
+          <div className="cart-loading-header">
+            <span />
             <div className="cart-skeleton cart-skeleton--title" />
+            <span />
           </div>
 
-          <div className="cart-page__loading-layout">
-            <div className="cart-page__loading-items">
+          <div className="cart-loading-layout">
+            <div className="cart-loading-items">
               {[1, 2].map((item) => (
                 <div
                   key={item}
-                  className="cart-loading-item"
+                  className="cart-loading-card"
                 >
                   <div className="cart-skeleton cart-skeleton--image" />
 
-                  <div className="cart-loading-item__content">
+                  <div className="cart-loading-card__content">
                     <div className="cart-skeleton cart-skeleton--small" />
                     <div className="cart-skeleton cart-skeleton--product-title" />
                     <div className="cart-skeleton cart-skeleton--meta" />
@@ -224,28 +246,32 @@ export function CartContent() {
     );
   }
 
+  /* =========================================================
+     EMPTY CART
+  ========================================================= */
+
   if (!cartItems.length) {
     return (
       <section className="cart-page cart-page--empty">
-        <div className="cart-empty">
-          <div className="cart-empty__icon">
+        <div className="cart-empty-card">
+          <div className="cart-empty-card__icon">
             <ShoppingBag
-              size={24}
-              strokeWidth={1.25}
+              size={25}
+              strokeWidth={1.35}
             />
           </div>
 
-          <p className="cart-eyebrow">
-            Your Aayesha edit
-          </p>
+          <span className="cart-eyebrow">
+            AAYESHA FASHION
+          </span>
 
-          <h1 className="cart-empty__title">
+          <h1 className="cart-empty-card__title">
             Your bag is empty.
           </h1>
 
-          <p className="cart-empty__description">
-            Discover thoughtfully designed pieces from
-            the latest Aayesha collection.
+          <p className="cart-empty-card__description">
+            Discover thoughtfully designed pieces
+            from the latest Aayesha collection.
           </p>
 
           <Link
@@ -259,58 +285,90 @@ export function CartContent() {
     );
   }
 
+  /* =========================================================
+     MAIN CART
+  ========================================================= */
+
   return (
     <main className="cart-page">
       <div className="cart-page__container">
-        {/* HEADER */}
+
+        {/* ===================================================
+            HEADER
+        =================================================== */}
 
         <header className="cart-header">
           <Link
             href="/shop"
             className="cart-header__back"
           >
-            <ChevronLeft
-              size={16}
-              strokeWidth={1.4}
-            />
-
-            <span>Continue Shopping</span>
+            Continue Shopping
           </Link>
 
           <div className="cart-header__main">
             <div>
-              <p className="cart-eyebrow">
-                Aayesha Fashion
-              </p>
+              <span className="cart-eyebrow">
+                AAYESHA FASHION
+              </span>
 
               <h1 className="cart-header__title">
                 Your Bag
               </h1>
+
+              <p className="cart-header__subtitle">
+                Your selected pieces, ready when you are.
+              </p>
             </div>
 
             <div className="cart-header__meta">
-              <p>
-                {summary.itemCount}{" "}
+              <span className="cart-header__count">
+                {summary.itemCount}
+              </span>
+
+              <span>
                 {summary.itemCount === 1
                   ? "item"
                   : "items"}
-              </p>
+              </span>
 
               {savings > 0 && (
-                <span>
+                <strong>
                   You save {formatPrice(savings)}
-                </span>
+                </strong>
               )}
             </div>
           </div>
         </header>
 
-        {/* MAIN */}
+        {/* ===================================================
+            CONTENT
+        =================================================== */}
 
         <div className="cart-layout">
-          {/* ITEMS */}
+
+          {/* =================================================
+              ITEMS
+          ================================================= */}
 
           <section className="cart-items">
+            <div className="cart-items__heading">
+              <div>
+                <span className="cart-section-label">
+                  Your Selection
+                </span>
+
+                <h2>
+                  Selected Pieces
+                </h2>
+              </div>
+
+              <span className="cart-items__number">
+                {cartItems.length
+                  .toString()
+                  .padStart(2, "0")}
+              </span>
+            </div>
+
             <div className="cart-items__list">
               {cartItems.map((item) => {
                 const product = item.product;
@@ -328,7 +386,8 @@ export function CartContent() {
                 const price =
                   product.pricing.sellingPrice;
 
-                const mrp = product.pricing.mrp;
+                const mrp =
+                  product.pricing.mrp;
 
                 const discount =
                   mrp > 0
@@ -374,7 +433,7 @@ export function CartContent() {
                             product.name
                           }
                           fill
-                          sizes="(max-width: 639px) 112px, (max-width: 1023px) 150px, 180px"
+                          sizes="(max-width: 639px) 120px, (max-width: 1023px) 180px, 230px"
                           className="cart-item__image-element"
                         />
                       ) : (
@@ -382,16 +441,23 @@ export function CartContent() {
                           No image
                         </div>
                       )}
+
+                      {discount > 0 && (
+                        <span className="cart-item__discount-badge">
+                          {discount}% OFF
+                        </span>
+                      )}
                     </Link>
 
                     {/* DETAILS */}
 
                     <div className="cart-item__details">
+
                       <div className="cart-item__top">
                         <div className="cart-item__identity">
-                          <p className="cart-item__label">
-                            Product
-                          </p>
+                          <span className="cart-item__label">
+                            AAYESHA EDIT
+                          </span>
 
                           <Link
                             href={`/products/${product._id}`}
@@ -399,6 +465,10 @@ export function CartContent() {
                           >
                             {product.name}
                           </Link>
+
+                          <span className="cart-item__sku">
+                            SKU {product.id}
+                          </span>
                         </div>
 
                         <button
@@ -413,15 +483,13 @@ export function CartContent() {
                           className="cart-item__remove"
                         >
                           <Trash2
-                            size={17}
-                            strokeWidth={1.35}
+                            size={16}
+                            strokeWidth={1.45}
                           />
                         </button>
                       </div>
 
-                      <p className="cart-item__sku">
-                        SKU: {product.id}
-                      </p>
+                      {/* PRICE */}
 
                       <div className="cart-item__pricing">
                         <span className="cart-item__price">
@@ -429,25 +497,20 @@ export function CartContent() {
                         </span>
 
                         {mrp > price && (
-                          <>
-                            <span className="cart-item__mrp">
-                              {formatPrice(mrp)}
-                            </span>
-
-                            {discount > 0 && (
-                              <span className="cart-item__discount">
-                                {discount}% Off
-                              </span>
-                            )}
-                          </>
+                          <span className="cart-item__mrp">
+                            {formatPrice(mrp)}
+                          </span>
                         )}
                       </div>
 
+                      {/* BOTTOM */}
+
                       <div className="cart-item__bottom">
+
                         <div className="cart-item__quantity">
-                          <p className="cart-item__label">
+                          <span className="cart-item__label">
                             Quantity
-                          </p>
+                          </span>
 
                           <div className="cart-quantity">
                             <button
@@ -455,13 +518,11 @@ export function CartContent() {
                               onClick={() =>
                                 void handleUpdateQuantity(
                                   item.productId,
-                                  item.quantity -
-                                    1,
+                                  item.quantity - 1,
                                 )
                               }
                               disabled={
-                                item.quantity <=
-                                  1 ||
+                                item.quantity <= 1 ||
                                 isUpdating ||
                                 isRemoving
                               }
@@ -469,8 +530,8 @@ export function CartContent() {
                               className="cart-quantity__button"
                             >
                               <Minus
-                                size={14}
-                                strokeWidth={1.4}
+                                size={13}
+                                strokeWidth={1.5}
                               />
                             </button>
 
@@ -485,8 +546,7 @@ export function CartContent() {
                               onClick={() =>
                                 void handleUpdateQuantity(
                                   item.productId,
-                                  item.quantity +
-                                    1,
+                                  item.quantity + 1,
                                 )
                               }
                               disabled={
@@ -499,23 +559,26 @@ export function CartContent() {
                               className="cart-quantity__button"
                             >
                               <Plus
-                                size={14}
-                                strokeWidth={1.4}
+                                size={13}
+                                strokeWidth={1.5}
                               />
                             </button>
                           </div>
                         </div>
 
                         <div className="cart-item__total">
-                          <p className="cart-item__label">
+                          <span className="cart-item__label">
                             Item Total
-                          </p>
+                          </span>
 
-                          <p>
+                          <strong>
                             {formatPrice(itemTotal)}
-                          </p>
+                          </strong>
                         </div>
+
                       </div>
+
+                      {/* STOCK */}
 
                       {availableStock > 0 &&
                         availableStock <=
@@ -528,8 +591,7 @@ export function CartContent() {
 
                       {availableStock === 0 && (
                         <p className="cart-item__notice cart-item__notice--error">
-                          This product is currently
-                          unavailable.
+                          This product is currently unavailable.
                         </p>
                       )}
 
@@ -537,9 +599,9 @@ export function CartContent() {
                         availableStock &&
                         availableStock > 0 && (
                           <p className="cart-item__notice cart-item__notice--error">
-                            Only {availableStock} units are
-                            currently available. Please
-                            reduce the quantity.
+                            Only {availableStock} units
+                            are currently available.
+                            Please reduce the quantity.
                           </p>
                         )}
                     </div>
@@ -547,6 +609,8 @@ export function CartContent() {
                 );
               })}
             </div>
+
+            {/* CLEAR */}
 
             <button
               type="button"
@@ -562,16 +626,29 @@ export function CartContent() {
             </button>
           </section>
 
-          {/* SUMMARY */}
+          {/* =================================================
+              SUMMARY
+          ================================================= */}
 
           <aside className="cart-summary">
             <div className="cart-summary__card">
-              <div className="cart-summary__heading">
-                <p className="cart-eyebrow">
-                  Order Summary
-                </p>
 
-                <h2>Review your selection</h2>
+              <div className="cart-summary__top">
+                <span className="cart-section-label">
+                  Order Summary
+                </span>
+
+                <h2>
+                  Review your selection
+                </h2>
+
+                <p>
+                  {summary.itemCount}{" "}
+                  {summary.itemCount === 1
+                    ? "piece"
+                    : "pieces"}{" "}
+                  selected for checkout.
+                </p>
               </div>
 
               <div className="cart-summary__rows">
@@ -601,11 +678,11 @@ export function CartContent() {
 
               <div className="cart-summary__total">
                 <div>
-                  <p>Subtotal</p>
+                  <span>Subtotal</span>
 
-                  <span>
+                  <small>
                     Inclusive of applicable taxes
-                  </span>
+                  </small>
                 </div>
 
                 <strong>
@@ -621,20 +698,21 @@ export function CartContent() {
               </Link>
 
               <p className="cart-summary__secure">
-                Secure checkout · Payment and delivery
-                options available at checkout
+                Secure checkout · Payment and
+                delivery options available at checkout
               </p>
             </div>
 
             <div className="cart-care">
-              <p className="cart-care__title">
-                Aayesha Care
-              </p>
+              <span className="cart-care__label">
+                AAYESHA CARE
+              </span>
 
-              <p className="cart-care__description">
-                Your selected product is preserved in
-                your bag. Final inventory availability is
-                confirmed before order placement.
+              <p>
+                Your selected pieces are preserved
+                in your bag. Final inventory
+                availability is confirmed before
+                order placement.
               </p>
             </div>
           </aside>
@@ -643,6 +721,10 @@ export function CartContent() {
     </main>
   );
 }
+
+/* =========================================================
+   SUMMARY ROW
+========================================================= */
 
 function SummaryRow({
   label,

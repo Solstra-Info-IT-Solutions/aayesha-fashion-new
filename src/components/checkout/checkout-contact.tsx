@@ -2,9 +2,25 @@
 
 import type { ChangeEvent } from "react";
 
+import {
+  Mail,
+  Phone,
+  ShieldCheck,
+} from "lucide-react";
+
 import { useCheckoutStore } from "@/store/checkout-store";
 
 import "./CheckoutContact.css";
+
+/* =========================================================
+   TYPES
+========================================================= */
+
+type ContactField = "email" | "phone";
+
+/* =========================================================
+   COMPONENT
+========================================================= */
 
 export function CheckoutContact() {
   const contact = useCheckoutStore(
@@ -16,45 +32,83 @@ export function CheckoutContact() {
   );
 
   const update =
-    (field: "email" | "phone") =>
+    (field: ContactField) =>
     (event: ChangeEvent<HTMLInputElement>) => {
       setContact({
         [field]: event.target.value,
       });
     };
 
+  const updatePhone = (
+    event: ChangeEvent<HTMLInputElement>,
+  ) => {
+    setContact({
+      phone: event.target.value
+        .replace(/\D/g, "")
+        .slice(0, 10),
+    });
+  };
+
   return (
-    <section className="checkout-contact">
+    <section
+      className="checkout-contact"
+      aria-labelledby="checkout-contact-title"
+    >
+      {/* =====================================================
+          CARD HEADER
+      ===================================================== */}
+
       <header className="checkout-contact__header">
         <div className="checkout-contact__step">
-          01
+          <span>01</span>
         </div>
 
         <div className="checkout-contact__header-content">
-          <p className="checkout-contact__eyebrow">
-            Contact
-          </p>
+          <div className="checkout-contact__eyebrow-row">
+            <span
+              className="checkout-contact__eyebrow-dot"
+              aria-hidden="true"
+            />
 
-          <h2 className="checkout-contact__title">
+            <p className="checkout-contact__eyebrow">
+              Contact Information
+            </p>
+          </div>
+
+          <h2
+            id="checkout-contact-title"
+            className="checkout-contact__title"
+          >
             Your details
           </h2>
 
           <p className="checkout-contact__description">
-            We&apos;ll use these details to confirm your order
-            and keep you updated on its delivery.
+            Enter your contact details so we can
+            confirm your order and keep you updated
+            throughout delivery.
           </p>
         </div>
       </header>
 
+      {/* =====================================================
+          FORM CONTENT
+      ===================================================== */}
+
       <div className="checkout-contact__content">
         <div className="checkout-contact__fields">
+          {/* EMAIL */}
+
           <Field
             label="Email address"
             type="email"
             placeholder="you@example.com"
             value={contact.email}
             onChange={update("email")}
+            icon={<Mail size={17} strokeWidth={1.5} />}
+            autoComplete="email"
           />
+
+          {/* PHONE */}
 
           <Field
             label="Phone number"
@@ -62,29 +116,48 @@ export function CheckoutContact() {
             inputMode="numeric"
             placeholder="10-digit mobile number"
             value={contact.phone}
-            onChange={(event) =>
-              setContact({
-                phone: event.target.value
-                  .replace(/\D/g, "")
-                  .slice(0, 10),
-              })
-            }
+            onChange={updatePhone}
+            icon={<Phone size={17} strokeWidth={1.5} />}
+            autoComplete="tel"
+            maxLength={10}
           />
         </div>
 
-        <div className="checkout-contact__privacy">
-          <span className="checkout-contact__privacy-line" />
+        {/* ===================================================
+            PRIVACY NOTE
+        =================================================== */}
 
-          <p>
-            Your contact information is kept secure and is
-            used only for order confirmation and delivery
-            communication.
-          </p>
+        <div className="checkout-contact__privacy">
+          <div
+            className="checkout-contact__privacy-icon"
+            aria-hidden="true"
+          >
+            <ShieldCheck
+              size={16}
+              strokeWidth={1.5}
+            />
+          </div>
+
+          <div className="checkout-contact__privacy-content">
+            <p className="checkout-contact__privacy-title">
+              Your information is secure
+            </p>
+
+            <p className="checkout-contact__privacy-text">
+              Your contact information is used only
+              for order confirmation, delivery
+              communication and essential updates.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
+/* =========================================================
+   FIELD
+========================================================= */
 
 function Field({
   label,
@@ -93,6 +166,9 @@ function Field({
   value,
   onChange,
   inputMode,
+  icon,
+  autoComplete,
+  maxLength,
 }: {
   label: string;
   type: string;
@@ -102,6 +178,9 @@ function Field({
     event: ChangeEvent<HTMLInputElement>,
   ) => void;
   inputMode?: "text" | "numeric" | "tel" | "email";
+  icon: React.ReactNode;
+  autoComplete?: string;
+  maxLength?: number;
 }) {
   return (
     <label className="checkout-contact__field">
@@ -110,15 +189,27 @@ function Field({
       </span>
 
       <span className="checkout-contact__field-control">
+        <span
+          className="checkout-contact__field-icon"
+          aria-hidden="true"
+        >
+          {icon}
+        </span>
+
         <input
           type={type}
           inputMode={inputMode}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          autoComplete={autoComplete}
+          maxLength={maxLength}
         />
 
-        <span className="checkout-contact__field-focus" />
+        <span
+          className="checkout-contact__field-focus"
+          aria-hidden="true"
+        />
       </span>
     </label>
   );

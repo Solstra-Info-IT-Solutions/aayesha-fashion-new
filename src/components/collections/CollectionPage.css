@@ -1,126 +1,167 @@
-/* ==========================================================
-   AAYESHA FASHION
+/* =========================================================
    COLLECTION PAGE
-========================================================== */
+   Aayesha Fashion — Premium Collection UI
+========================================================= */
 
 .collection-page {
-  min-height: 100vh;
+  --collection-bg: #faf8f7;
+  --collection-surface: #ffffff;
+  --collection-surface-soft: #fcfaf9;
 
-  background: #f7f2ee;
-  color: #3f2d2a;
+  --collection-border: #e9e2df;
+  --collection-border-strong: #ddd4d0;
+
+  --collection-text: #241f1d;
+  --collection-text-soft: #665e5a;
+  --collection-text-muted: #928984;
+
+  --collection-accent: #a85d68;
+  --collection-accent-dark: #874751;
+  --collection-accent-soft: #f7edef;
+
+  min-height: 100vh;
+  background: var(--collection-bg);
+  color: var(--collection-text);
 }
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .collection-page__container {
-  width: 100%;
-  max-width: 1440px;
-
-  margin-inline: auto;
-
-  padding-inline: 48px;
+  width: min(1400px, calc(100% - 48px));
+  margin: 0 auto;
 }
 
-/* ==========================================================
+/* =========================================================
    HERO
-========================================================== */
+========================================================= */
 
 .collection-page__hero {
   position: relative;
-
   overflow: hidden;
 
-  border-bottom: 1px solid #ddd1cb;
+  padding: 72px 0 62px;
 
-  background: #f7f2ee;
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(168, 93, 104, 0.08),
+      transparent 30%
+    ),
+    var(--collection-bg);
 }
 
 .collection-page__hero-inner {
   position: relative;
 
   display: grid;
-  grid-template-columns:
-    minmax(0, 1fr)
-    270px;
-  gap: 80px;
-
-  min-height: 510px;
+  grid-template-columns: minmax(0, 1fr) 280px;
 
   align-items: end;
+  gap: 70px;
 
-  padding-top: 75px;
-  padding-bottom: 68px;
+  min-height: 340px;
+
+  padding: 52px 58px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--collection-border);
+  border-radius: 32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(252, 248, 247, 0.92)
+    );
+
+  box-shadow:
+    0 20px 60px rgba(55, 42, 36, 0.055);
 }
+
+/* =========================================================
+   HERO INTRO
+========================================================= */
 
 .collection-page__intro {
   position: relative;
   z-index: 2;
 
-  max-width: 850px;
+  max-width: 760px;
 }
 
 .collection-page__eyebrow {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 10px;
 
-  color: #6f4b47;
+  margin: 0 0 18px;
 
-  font-family: var(--font-body);
-  font-size: 8px;
+  color: var(--collection-accent);
+
+  font-size: 11px;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
   text-transform: uppercase;
 }
 
 .collection-page__eyebrow-line {
-  width: 34px;
+  width: 30px;
   height: 1px;
 
-  background: #9b7069;
+  background: var(--collection-accent);
 }
 
 .collection-page__title {
-  margin: 18px 0 0;
+  max-width: 780px;
 
-  color: #3f2d2a;
+  margin: 0;
 
-  font-family: var(--font-display);
-  font-size: clamp(
-    54px,
-    7vw,
-    96px
-  );
-  font-weight: 400;
-  line-height: 0.86;
-  letter-spacing: -0.045em;
+  color: var(--collection-text);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 6vw, 82px);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
 }
 
 .collection-page__description {
-  max-width: 680px;
+  max-width: 620px;
 
-  margin: 27px 0 0;
+  margin: 24px 0 0;
 
-  color: #756560;
+  color: var(--collection-text-soft);
 
-  font-family: var(--font-body);
-  font-size: 12px;
-  line-height: 1.9;
+  font-size: 14px;
+  line-height: 1.85;
 }
 
 .collection-page__mood {
-  margin: 18px 0 0;
+  display: inline-flex;
+  align-items: center;
 
-  color: #9b7069;
+  margin: 20px 0 0;
+  padding: 8px 13px;
 
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-style: italic;
-  line-height: 1.3;
+  border: 1px solid #eadcdf;
+  border-radius: 999px;
+
+  background: var(--collection-accent-soft);
+
+  color: var(--collection-accent-dark);
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-/* ==========================================================
+/* =========================================================
    COLLECTION NAVIGATION
-========================================================== */
+========================================================= */
 
 .collection-page__navigation {
   position: relative;
@@ -128,229 +169,224 @@
 
   align-self: end;
 
-  padding-bottom: 4px;
+  padding: 18px;
+
+  border: 1px solid var(--collection-border);
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.76);
+
+  backdrop-filter: blur(12px);
 }
 
 .collection-page__navigation-label {
-  margin: 0 0 13px;
+  margin: 0 0 12px;
 
-  color: #998681;
+  color: var(--collection-text-muted);
 
-  font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .collection-page__links {
-  border-top: 1px solid #d8c9c3;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
 .collection-page__link {
   display: flex;
-  min-height: 48px;
-
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
 
-  padding: 0;
+  min-height: 42px;
 
-  border-bottom: 1px solid #d8c9c3;
+  padding: 0 13px;
 
-  color: #756560;
+  border: 1px solid transparent;
+  border-radius: 11px;
 
-  font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  color: var(--collection-text-soft);
 
   text-decoration: none;
 
+  font-size: 12px;
+  font-weight: 600;
+
   transition:
+    background 180ms ease,
+    border-color 180ms ease,
     color 180ms ease,
-    padding-left 180ms ease;
+    transform 180ms ease;
 }
 
 .collection-page__link:hover {
-  padding-left: 5px;
+  color: var(--collection-text);
 
-  color: #3f2d2a;
-}
+  background: var(--collection-surface-soft);
 
-.collection-page__link:active {
-  color: #6f4b47;
-}
+  border-color: var(--collection-border);
 
-.collection-page__link:focus-visible {
-  outline: 2px solid #9b7069;
-  outline-offset: 3px;
+  transform: translateX(2px);
 }
 
 .collection-page__link--active {
-  color: #3f2d2a;
-  font-weight: 700;
+  color: #ffffff;
+
+  background: var(--collection-text);
+
+  border-color: var(--collection-text);
 }
 
-.collection-page__link-icon {
-  flex: 0 0 auto;
+.collection-page__link--active:hover {
+  color: #ffffff;
 
-  color: #9b7069;
+  background: #000000;
 
-  transition:
-    transform 180ms ease,
-    color 180ms ease;
+  border-color: #000000;
+
+  transform: none;
 }
 
-.collection-page__link:hover
-  .collection-page__link-icon {
-  color: #6f4b47;
-  transform: translate(2px, -2px);
-}
-
-/* ==========================================================
+/* =========================================================
    HERO MARK
-========================================================== */
+========================================================= */
 
 .collection-page__hero-mark {
   position: absolute;
-  right: -75px;
-  bottom: -160px;
+  right: -20px;
+  bottom: -58px;
 
-  display: flex;
-  width: 390px;
-  height: 390px;
+  color: rgba(168, 93, 104, 0.055);
 
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid #d9cbc5;
-  border-radius: 50%;
-
-  color: #d7c7c0;
-
-  font-family: var(--font-display);
-  font-size: 96px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 260px;
+  font-weight: 600;
+  letter-spacing: -0.12em;
   line-height: 1;
 
   pointer-events: none;
+  user-select: none;
 }
 
-.collection-page__hero-mark::before {
-  content: "";
-
-  position: absolute;
-
-  width: 310px;
-  height: 310px;
-
-  border: 1px solid #e2d7d2;
-  border-radius: 50%;
-}
-
-/* ==========================================================
+/* =========================================================
    TOOLBAR
-========================================================== */
+========================================================= */
 
 .collection-page__toolbar {
-  border-bottom: 1px solid #ddd1cb;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 
-  background: #fbf8f5;
+  border-top: 1px solid var(--collection-border);
+  border-bottom: 1px solid var(--collection-border);
+
+  background: rgba(250, 248, 247, 0.94);
+
+  backdrop-filter: blur(16px);
 }
 
 .collection-page__toolbar-inner {
   display: flex;
-  min-height: 62px;
-
   align-items: center;
   justify-content: space-between;
+
+  min-height: 72px;
+
   gap: 20px;
 }
 
 .collection-page__count {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 9px;
 
-  font-family: var(--font-body);
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 12px;
 }
 
 .collection-page__count-title {
-  color: #3f2d2a;
+  color: var(--collection-text);
+
+  font-weight: 700;
 }
 
 .collection-page__count-divider {
-  color: #b8a49d;
+  color: var(--collection-border-strong);
 }
 
 .collection-page__count-value {
-  color: #998681;
+  color: var(--collection-text-muted);
 }
+
+/* =========================================================
+   SHOP ALL BUTTON
+========================================================= */
 
 .collection-page__shop-link {
   display: inline-flex;
-  min-height: 34px;
-
   align-items: center;
-  gap: 9px;
+  justify-content: center;
 
-  color: #6f4b47;
+  min-height: 40px;
 
-  font-family: var(--font-body);
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  padding: 0 18px;
+
+  border: 1px solid var(--collection-text);
+  border-radius: 10px;
+
+  background: var(--collection-text);
+  color: #ffffff;
 
   text-decoration: none;
 
-  transition: color 180ms ease;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .collection-page__shop-link:hover {
-  color: #3f2d2a;
+  background: #000000;
+  border-color: #000000;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 20px rgba(36, 31, 29, 0.14);
 }
 
-.collection-page__shop-link:focus-visible {
-  outline: 2px solid #9b7069;
-  outline-offset: 4px;
+.collection-page__shop-link:active {
+  transform: translateY(0);
 }
 
-.collection-page__shop-icon {
-  transition: transform 180ms ease;
-}
-
-.collection-page__shop-link:hover
-  .collection-page__shop-icon {
-  transform: translateX(3px);
-}
-
-/* ==========================================================
-   PRODUCTS
-========================================================== */
+/* =========================================================
+   PRODUCTS SECTION
+========================================================= */
 
 .collection-page__products {
-  background: #ffffff;
+  padding: 42px 0 76px;
 }
 
 .collection-page__product-layout {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
-  gap: 52px;
 
-  padding-top: 52px;
-  padding-bottom: 90px;
+  align-items: start;
+
+  gap: 30px;
 }
+
+/* =========================================================
+   FILTERS
+========================================================= */
 
 .collection-page__filters {
   min-width: 0;
@@ -358,343 +394,448 @@
 
 .collection-page__filters-inner {
   position: sticky;
-  top: 116px;
+  top: 96px;
+
+  padding: 18px;
+
+  border: 1px solid var(--collection-border);
+  border-radius: 20px;
+
+  background: var(--collection-surface);
+
+  box-shadow:
+    0 10px 30px rgba(55, 42, 36, 0.035);
 }
+
+/* =========================================================
+   PRODUCT GRID
+========================================================= */
 
 .collection-page__grid {
   min-width: 0;
 }
 
-/* ==========================================================
-   CONTINUE
-========================================================== */
+/*
+ * Product grid components can define their own columns.
+ * These rules prevent the parent layout from causing overflow.
+ */
+
+.collection-page__grid > * {
+  min-width: 0;
+}
+
+/* =========================================================
+   CONTINUE EXPLORING
+========================================================= */
 
 .collection-page__continue {
-  border-top: 1px solid #ddd1cb;
-
-  background: #eee4df;
+  padding: 0 0 80px;
 }
 
 .collection-page__continue-inner {
   display: flex;
-  min-height: 270px;
-
   align-items: center;
   justify-content: space-between;
-  gap: 60px;
 
-  padding: 55px 0;
+  gap: 50px;
+
+  padding: 44px 48px;
+
+  border: 1px solid var(--collection-border);
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #fcf8f7
+    );
+
+  box-shadow:
+    0 16px 48px rgba(55, 42, 36, 0.045);
+}
+
+.collection-page__continue-copy {
+  max-width: 620px;
 }
 
 .collection-page__continue-eyebrow {
-  margin: 0;
+  margin: 0 0 10px;
 
-  color: #6f4b47;
+  color: var(--collection-accent);
 
-  font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.23em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .collection-page__continue-title {
-  max-width: 560px;
+  margin: 0;
 
-  margin: 14px 0 0;
+  color: var(--collection-text);
 
-  color: #3f2d2a;
-
-  font-family: var(--font-display);
-  font-size: 38px;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.025em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.12;
 }
+
+/* =========================================================
+   CTA BUTTONS
+========================================================= */
 
 .collection-page__continue-actions {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
 
-  width: 230px;
+  gap: 10px;
+
+  flex-shrink: 0;
 }
 
-/* ==========================================================
-   CONTINUE ACTIONS
-========================================================== */
-
 .collection-page__action {
-  display: flex;
-  min-height: 50px;
+  min-height: 46px;
 
-  align-items: stretch;
-  justify-content: space-between;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  border: 1px solid #6f4b47;
+  padding: 0 20px;
 
-  font-family: var(--font-body);
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  border-radius: 11px;
 
   text-decoration: none;
 
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+
   transition:
-    background-color 180ms ease,
+    background 180ms ease,
     border-color 180ms ease,
-    color 180ms ease;
-}
-
-.collection-page__action > span:first-child {
-  display: flex;
-
-  flex: 1;
-
-  align-items: center;
-
-  padding: 0 17px;
-}
-
-.collection-page__action-icon {
-  width: 48px;
-  height: 48px;
-
-  padding: 0 15px;
-
-  border-left: 1px solid currentColor;
-
-  transition:
-    background-color 180ms ease,
-    transform 180ms ease;
-}
-
-.collection-page__action:hover
-  .collection-page__action-icon {
-  transform: translate(2px, -2px);
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .collection-page__action--primary {
-  background: #6f4b47;
+  border: 1px solid var(--collection-text);
+
+  background: var(--collection-text);
   color: #ffffff;
 }
 
 .collection-page__action--primary:hover {
-  border-color: #3f2d2a;
-  background: #3f2d2a;
+  background: #000000;
+  border-color: #000000;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 22px rgba(36, 31, 29, 0.14);
 }
 
 .collection-page__action--secondary {
-  border-top: 0;
+  border: 1px solid var(--collection-border-strong);
 
-  background: transparent;
-  color: #6f4b47;
+  background: #ffffff;
+  color: var(--collection-text);
 }
 
 .collection-page__action--secondary:hover {
-  background: #e3d7d2;
-  color: #3f2d2a;
+  border-color: var(--collection-text);
+
+  background: var(--collection-surface-soft);
+
+  transform: translateY(-1px);
 }
 
 .collection-page__action:active {
-  background: #7f5953;
-  color: #ffffff;
+  transform: translateY(0);
 }
 
-.collection-page__action:focus-visible {
-  outline: 2px solid #9b7069;
-  outline-offset: 4px;
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.collection-page a:focus-visible,
+.collection-page button:focus-visible,
+.collection-page input:focus-visible,
+.collection-page select:focus-visible {
+  outline: 2px solid var(--collection-accent);
+  outline-offset: 3px;
 }
 
-/* ==========================================================
-   LARGE TABLET
-========================================================== */
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 1100px) {
   .collection-page__container {
-    padding-inline: 32px;
+    width: min(100% - 36px, 920px);
+  }
+
+  .collection-page__hero {
+    padding: 48px 0;
   }
 
   .collection-page__hero-inner {
-    grid-template-columns:
-      minmax(0, 1fr)
-      230px;
+    grid-template-columns: minmax(0, 1fr) 240px;
 
-    gap: 50px;
+    gap: 36px;
+
+    padding: 42px;
   }
 
   .collection-page__product-layout {
-    grid-template-columns: 200px minmax(0, 1fr);
-    gap: 38px;
-  }
-}
+    grid-template-columns: 190px minmax(0, 1fr);
 
-/* ==========================================================
-   TABLET
-========================================================== */
-
-@media (max-width: 900px) {
-  .collection-page__hero-inner {
-    grid-template-columns: 1fr;
-
-    min-height: auto;
-
-    padding-top: 65px;
-    padding-bottom: 60px;
-  }
-
-  .collection-page__navigation {
-    max-width: 420px;
-    margin-top: 45px;
-  }
-
-  .collection-page__hero-mark {
-    right: -100px;
-    bottom: -170px;
-  }
-
-  .collection-page__product-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .collection-page__filters {
-    display: none;
-  }
-}
-
-/* ==========================================================
-   MOBILE
-========================================================== */
-
-@media (max-width: 640px) {
-  .collection-page__container {
-    padding-inline: 20px;
-  }
-
-  .collection-page__hero-inner {
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
-
-  .collection-page__title {
-    font-size: 54px;
-  }
-
-  .collection-page__description {
-    margin-top: 21px;
-
-    font-size: 11px;
-    line-height: 1.8;
-  }
-
-  .collection-page__mood {
-    font-size: 16px;
-  }
-
-  .collection-page__navigation {
-    margin-top: 38px;
-  }
-
-  .collection-page__hero-mark {
-    right: -150px;
-    bottom: -170px;
-
-    width: 330px;
-    height: 330px;
-
-    font-size: 75px;
-  }
-
-  .collection-page__hero-mark::before {
-    width: 260px;
-    height: 260px;
-  }
-
-  .collection-page__toolbar-inner {
-    min-height: 56px;
-  }
-
-  .collection-page__count {
-    font-size: 7px;
-    gap: 7px;
-  }
-
-  .collection-page__shop-link {
-    font-size: 7px;
-  }
-
-  .collection-page__product-layout {
-    padding-top: 32px;
-    padding-bottom: 65px;
+    gap: 22px;
   }
 
   .collection-page__continue-inner {
+    padding: 38px;
+  }
+}
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+  .collection-page__hero-inner {
+    grid-template-columns: 1fr;
+
+    align-items: start;
+
     min-height: auto;
 
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 28px;
-
-    padding: 45px 0;
+    padding: 38px;
   }
 
-  .collection-page__continue-title {
-    font-size: 31px;
+  .collection-page__navigation {
+    width: min(100%, 360px);
+  }
+
+  .collection-page__hero-mark {
+    right: -10px;
+    bottom: -50px;
+
+    font-size: 210px;
+  }
+
+  .collection-page__product-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-page__filters-inner {
+    position: static;
+  }
+
+  .collection-page__continue-inner {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .collection-page__continue-actions {
     width: 100%;
   }
-
-  .collection-page__action {
-    width: 100%;
-  }
 }
 
-/* ==========================================================
-   SMALL MOBILE
-========================================================== */
+/* =========================================================
+   MOBILE
+========================================================= */
 
-@media (max-width: 390px) {
+@media (max-width: 640px) {
   .collection-page__container {
-    padding-inline: 16px;
+    width: calc(100% - 28px);
   }
 
-  .collection-page__title {
-    font-size: 48px;
+  .collection-page__hero {
+    padding: 22px 0 28px;
   }
 
   .collection-page__hero-inner {
-    padding-top: 42px;
+    padding: 30px 24px;
+
+    border-radius: 24px;
+  }
+
+  .collection-page__title {
+    font-size: clamp(42px, 13vw, 58px);
   }
 
   .collection-page__description {
-    font-size: 10px;
+    margin-top: 18px;
+
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .collection-page__navigation {
+    width: 100%;
+    padding: 14px;
+
+    border-radius: 17px;
+  }
+
+  .collection-page__links {
+    flex-direction: row;
+  }
+
+  .collection-page__link {
+    flex: 1;
+
+    justify-content: center;
+
+    min-height: 40px;
+    padding: 0 10px;
+
+    text-align: center;
   }
 
   .collection-page__hero-mark {
-    right: -175px;
+    display: none;
+  }
+
+  /* ---------------------------------------------------------
+     TOOLBAR
+  --------------------------------------------------------- */
+
+  .collection-page__toolbar-inner {
+    min-height: 62px;
+  }
+
+  .collection-page__count {
+    gap: 6px;
+
+    font-size: 11px;
+  }
+
+  .collection-page__count-title {
+    max-width: 120px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .collection-page__shop-link {
+    min-height: 36px;
+
+    padding: 0 13px;
+
+    border-radius: 9px;
+
+    font-size: 10px;
+  }
+
+  /* ---------------------------------------------------------
+     PRODUCTS
+  --------------------------------------------------------- */
+
+  .collection-page__products {
+    padding: 24px 0 48px;
+  }
+
+  .collection-page__product-layout {
+    gap: 18px;
+  }
+
+  .collection-page__filters-inner {
+    padding: 14px;
+
+    border-radius: 17px;
+  }
+
+  /* ---------------------------------------------------------
+     CONTINUE
+  --------------------------------------------------------- */
+
+  .collection-page__continue {
+    padding-bottom: 50px;
+  }
+
+  .collection-page__continue-inner {
+    gap: 26px;
+
+    padding: 30px 24px;
+
+    border-radius: 22px;
   }
 
   .collection-page__continue-title {
-    font-size: 28px;
+    font-size: 30px;
+  }
+
+  .collection-page__continue-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .collection-page__action {
+    width: 100%;
+
+    min-height: 48px;
   }
 }
 
-/* ==========================================================
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+  .collection-page__container {
+    width: calc(100% - 22px);
+  }
+
+  .collection-page__hero-inner {
+    padding: 26px 19px;
+  }
+
+  .collection-page__title {
+    font-size: 40px;
+  }
+
+  .collection-page__links {
+    flex-direction: column;
+  }
+
+  .collection-page__link {
+    width: 100%;
+  }
+
+  .collection-page__toolbar-inner {
+    gap: 10px;
+  }
+
+  .collection-page__count-value {
+    display: none;
+  }
+
+  .collection-page__continue-inner {
+    padding: 26px 20px;
+  }
+
+  .collection-page__continue-title {
+    font-size: 27px;
+  }
+}
+
+/* =========================================================
    REDUCED MOTION
-========================================================== */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .collection-page__back,
-  .collection-page__link,
-  .collection-page__link-icon,
-  .collection-page__shop-link,
-  .collection-page__shop-icon,
-  .collection-page__action,
-  .collection-page__action-icon {
-    transition: none;
+  .collection-page *,
+  .collection-page *::before,
+  .collection-page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,10 +1,5 @@
 import Link from "next/link";
 
-import {
-  ArrowRight,
-  ArrowUpRight,
-} from "lucide-react";
-
 import type {
   Product,
   ProductSort,
@@ -82,9 +77,7 @@ export function CollectionPage({
                 <div className="collection-page__eyebrow">
                   <span className="collection-page__eyebrow-line" />
 
-                  <span>
-                    {eyebrow}
-                  </span>
+                  <span>{eyebrow}</span>
                 </div>
 
                 <h1 className="collection-page__title">
@@ -102,47 +95,41 @@ export function CollectionPage({
                 )}
               </div>
 
+              {/* COLLECTION SWITCHER */}
+
               <div className="collection-page__navigation">
                 <p className="collection-page__navigation-label">
                   Explore collections
                 </p>
 
                 <div className="collection-page__links">
-                  {collectionLinks.map(
-                    (item) => {
-                      const isActive =
-                        item.href ===
-                        `/collections/${currentSlug}`;
+                  {collectionLinks.map((item) => {
+                    const isActive =
+                      item.href ===
+                      `/collections/${currentSlug}`;
 
-                      return (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          aria-current={
-                            isActive
-                              ? "page"
-                              : undefined
-                          }
-                          className={`collection-page__link ${
-                            isActive
-                              ? "collection-page__link--active"
-                              : ""
-                          }`}
-                        >
-                          <span>
-                            {item.label}
-                          </span>
-
-                          <ArrowUpRight
-                            size={14}
-                            strokeWidth={1.3}
-                            className="collection-page__link-icon"
-                            aria-hidden="true"
-                          />
-                        </Link>
-                      );
-                    },
-                  )}
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        aria-current={
+                          isActive
+                            ? "page"
+                            : undefined
+                        }
+                        className={[
+                          "collection-page__link",
+                          isActive
+                            ? "collection-page__link--active"
+                            : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
+                      >
+                        <span>{item.label}</span>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -187,14 +174,7 @@ export function CollectionPage({
                 href="/shop"
                 className="collection-page__shop-link"
               >
-                <span>Shop all</span>
-
-                <ArrowRight
-                  size={14}
-                  strokeWidth={1.3}
-                  className="collection-page__shop-icon"
-                  aria-hidden="true"
-                />
+                Shop all
               </Link>
             </div>
           </div>
@@ -241,6 +221,7 @@ export function CollectionPage({
 
                 <h2 className="collection-page__continue-title">
                   Discover more from
+                  <br />
                   Aayesha Fashion.
                 </h2>
               </div>
@@ -250,32 +231,14 @@ export function CollectionPage({
                   href="/collections/new-arrivals"
                   className="collection-page__action collection-page__action--primary"
                 >
-                  <span>
-                    New Arrivals
-                  </span>
-
-                  <ArrowUpRight
-                    size={14}
-                    strokeWidth={1.3}
-                    className="collection-page__action-icon"
-                    aria-hidden="true"
-                  />
+                  New Arrivals
                 </Link>
 
                 <Link
                   href="/collections/best-sellers"
                   className="collection-page__action collection-page__action--secondary"
                 >
-                  <span>
-                    Best Sellers
-                  </span>
-
-                  <ArrowUpRight
-                    size={14}
-                    strokeWidth={1.3}
-                    className="collection-page__action-icon"
-                    aria-hidden="true"
-                  />
+                  Best Sellers
                 </Link>
               </div>
             </div>

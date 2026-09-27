@@ -16,15 +16,20 @@ import { CheckoutPayment } from "@/components/checkout/checkout-payment";
 import { CheckoutCoupon } from "@/components/checkout/checkout-coupon";
 import { CheckoutSummary } from "@/components/checkout/checkout-summary";
 import { CheckoutPlaceOrder } from "@/components/checkout/checkout-place-order";
+
 import "./CheckoutPage.css";
+
+/* =========================================================
+   COMPONENT
+========================================================= */
 
 export function CheckoutPage() {
   const [hasItems, setHasItems] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  /* ==========================================================
-     LOAD CART FROM BACKEND
-  ========================================================== */
+  /* =======================================================
+     LOAD CART
+  ======================================================= */
 
   useEffect(() => {
     let cancelled = false;
@@ -61,9 +66,9 @@ export function CheckoutPage() {
     };
   }, []);
 
-  /* ==========================================================
+  /* =======================================================
      LOADING
-  ========================================================== */
+  ======================================================= */
 
   if (isLoading) {
     return (
@@ -71,15 +76,20 @@ export function CheckoutPage() {
         <div className="checkout-page__container">
           <div className="checkout-page__loading-header">
             <div className="checkout-page__skeleton checkout-page__skeleton--eyebrow" />
+
             <div className="checkout-page__skeleton checkout-page__skeleton--title" />
+
             <div className="checkout-page__skeleton checkout-page__skeleton--description" />
           </div>
 
           <div className="checkout-page__loading-layout">
             <div className="checkout-page__loading-steps">
               <div className="checkout-page__skeleton checkout-page__skeleton--step" />
+
               <div className="checkout-page__skeleton checkout-page__skeleton--step" />
+
               <div className="checkout-page__skeleton checkout-page__skeleton--step" />
+
               <div className="checkout-page__skeleton checkout-page__skeleton--step" />
             </div>
 
@@ -90,15 +100,18 @@ export function CheckoutPage() {
     );
   }
 
-  /* ==========================================================
+  /* =======================================================
      EMPTY CART
-  ========================================================== */
+  ======================================================= */
 
   if (!hasItems) {
     return (
       <main className="checkout-page checkout-page--empty">
         <div className="checkout-page__empty">
-          <div className="checkout-page__empty-icon">
+          <div
+            className="checkout-page__empty-icon"
+            aria-hidden="true"
+          >
             <ShieldCheck
               size={22}
               strokeWidth={1.25}
@@ -106,7 +119,7 @@ export function CheckoutPage() {
           </div>
 
           <p className="checkout-page__eyebrow">
-            Checkout
+            Aayesha Fashion
           </p>
 
           <h1 className="checkout-page__empty-title">
@@ -114,8 +127,8 @@ export function CheckoutPage() {
           </h1>
 
           <p className="checkout-page__empty-description">
-            Add something beautiful before continuing
-            to checkout.
+            Add something beautiful before
+            continuing to checkout.
           </p>
 
           <Link
@@ -129,46 +142,60 @@ export function CheckoutPage() {
     );
   }
 
-  /* ==========================================================
+  /* =======================================================
      CHECKOUT
-  ========================================================== */
+  ======================================================= */
 
   return (
     <main className="checkout-page">
       <div className="checkout-page__container">
-        {/* ====================================================
+        {/* =================================================
             HEADER
-        ==================================================== */}
+        ================================================= */}
 
         <header className="checkout-page__header">
           <div className="checkout-page__header-top">
             <Link
               href="/cart"
               className="checkout-page__back"
+              aria-label="Back to shopping bag"
             >
-              <ChevronLeft
-                className="checkout-page__back-icon"
-                size={16}
-                strokeWidth={1.5}
-              />
+              <span className="checkout-page__back-icon">
+                <ChevronLeft
+                  size={15}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+              </span>
 
               <span>Back to Bag</span>
             </Link>
 
             <div className="checkout-page__secure">
-              <ShieldCheck
-                size={16}
-                strokeWidth={1.4}
-              />
+              <span
+                className="checkout-page__secure-icon"
+                aria-hidden="true"
+              >
+                <ShieldCheck
+                  size={15}
+                  strokeWidth={1.35}
+                />
+              </span>
 
               <span>Secure Checkout</span>
             </div>
           </div>
 
           <div className="checkout-page__heading">
-            <p className="checkout-page__eyebrow">
-              Aayesha Fashion
-            </p>
+            <div className="checkout-page__brand">
+              <span className="checkout-page__brand-line" />
+
+              <p className="checkout-page__eyebrow">
+                Aayesha Fashion
+              </p>
+
+              <span className="checkout-page__brand-line" />
+            </div>
 
             <h1 className="checkout-page__title">
               Checkout
@@ -181,12 +208,14 @@ export function CheckoutPage() {
           </div>
         </header>
 
-        {/* ====================================================
-            CHECKOUT BODY
-        ==================================================== */}
+        {/* =================================================
+            CHECKOUT LAYOUT
+        ================================================= */}
 
         <div className="checkout-page__layout">
-          {/* LEFT — CHECKOUT STEPS */}
+          {/* =================================================
+              LEFT — CHECKOUT STEPS
+          ================================================= */}
 
           <div className="checkout-page__steps">
             <CheckoutContact />
@@ -202,10 +231,17 @@ export function CheckoutPage() {
             <CheckoutPlaceOrder />
           </div>
 
-          {/* RIGHT — ORDER SUMMARY */}
+          {/* =================================================
+              RIGHT — ORDER SUMMARY
+          ================================================= */}
 
-          <aside className="checkout-page__summary">
-            <CheckoutSummary />
+          <aside
+            className="checkout-page__summary"
+            aria-label="Order summary"
+          >
+            <div className="checkout-page__summary-sticky">
+              <CheckoutSummary />
+            </div>
           </aside>
         </div>
       </div>

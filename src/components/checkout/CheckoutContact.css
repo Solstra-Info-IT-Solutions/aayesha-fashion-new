@@ -1,303 +1,459 @@
+/* =========================================================
+   CHECKOUT CONTACT
+========================================================= */
+
 .checkout-contact {
   width: 100%;
-  padding: 0;
-  color: #3f2d2a;
-  font-family: var(--font-body, "Inter", sans-serif);
+  background: #ffffff;
+  border: 1px solid rgba(35, 30, 27, 0.09);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 30px rgba(35, 30, 27, 0.045),
+    0 2px 8px rgba(35, 30, 27, 0.025);
 }
 
-/* ─────────────────────────────────────────
+/* =========================================================
    HEADER
-───────────────────────────────────────── */
+========================================================= */
 
 .checkout-contact__header {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 20px;
-  align-items: start;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #d9ccc6;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 28px 30px 26px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250, 247, 243, 0.96),
+      rgba(255, 255, 255, 1)
+    );
+  border-bottom: 1px solid rgba(35, 30, 27, 0.07);
 }
 
+/* =========================================================
+   STEP
+========================================================= */
+
 .checkout-contact__step {
+  flex: 0 0 42px;
   width: 42px;
   height: 42px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 1px solid #b98279;
-  color: #6f4b47;
+  border-radius: 50%;
 
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  background: #2d2926;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+
+  box-shadow:
+    0 5px 14px rgba(45, 41, 38, 0.15);
 }
+
+.checkout-contact__step span {
+  transform: translateY(0.5px);
+}
+
+/* =========================================================
+   HEADER CONTENT
+========================================================= */
 
 .checkout-contact__header-content {
   min-width: 0;
+  flex: 1;
+}
+
+.checkout-contact__eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+
+.checkout-contact__eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a77b63;
 }
 
 .checkout-contact__eyebrow {
-  margin: 1px 0 7px;
+  margin: 0;
 
-  color: #95645e;
+  color: #8b776b;
 
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.2em;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.3;
+
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .checkout-contact__title {
   margin: 0;
 
-  color: #3f2d2a;
+  color: #27221f;
 
-  font-family: var(--font-display, "Cormorant Garamond", serif);
-  font-size: clamp(28px, 3vw, 38px);
-  font-weight: 500;
-  line-height: 0.98;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(22px, 2.2vw, 29px);
+  font-weight: 400;
+  line-height: 1.15;
+
   letter-spacing: -0.025em;
 }
 
 .checkout-contact__description {
-  max-width: 540px;
-  margin: 11px 0 0;
+  max-width: 570px;
+  margin: 9px 0 0;
 
-  color: #796b67;
+  color: #81766f;
 
-  font-size: 12px;
-  line-height: 1.7;
+  font-size: 13px;
+  line-height: 1.65;
 }
 
-/* ─────────────────────────────────────────
+/* =========================================================
    CONTENT
-───────────────────────────────────────── */
+========================================================= */
 
 .checkout-contact__content {
-  padding-top: 30px;
+  padding: 28px 30px 30px;
 }
+
+/* =========================================================
+   FIELDS
+========================================================= */
 
 .checkout-contact__fields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 26px;
+  gap: 18px;
 }
 
-/* ─────────────────────────────────────────
+/* =========================================================
    FIELD
-───────────────────────────────────────── */
+========================================================= */
 
 .checkout-contact__field {
   display: block;
   min-width: 0;
-  cursor: text;
 }
 
 .checkout-contact__field-label {
   display: block;
-  margin-bottom: 9px;
+  margin: 0 0 8px 2px;
 
-  color: #554541;
+  color: #403a36;
 
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  letter-spacing: 0.04em;
 }
+
+/* =========================================================
+   FIELD CONTROL
+========================================================= */
 
 .checkout-contact__field-control {
   position: relative;
-  display: block;
-}
 
-.checkout-contact__field-control input {
+  display: flex;
+  align-items: center;
+
   width: 100%;
-  height: 48px;
-  display: block;
+  height: 52px;
 
-  padding: 0 1px;
+  border: 1px solid rgba(45, 39, 35, 0.13);
+  border-radius: 12px;
 
-  border: 0;
-  border-bottom: 1px solid #bfb0aa;
-  border-radius: 0;
-  outline: none;
+  background: #fff;
 
-  background: transparent;
-  color: #3f2d2a;
-
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 48px;
+  overflow: hidden;
 
   transition:
     border-color 180ms ease,
-    color 180ms ease;
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.checkout-contact__field-control:hover {
+  border-color: rgba(45, 39, 35, 0.22);
+}
+
+.checkout-contact__field-control:focus-within {
+  border-color: #a77b63;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 0 3px rgba(167, 123, 99, 0.09);
+}
+
+/* =========================================================
+   FIELD ICON
+========================================================= */
+
+.checkout-contact__field-icon {
+  flex: 0 0 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+
+  color: #9a8a80;
+
+  transition: color 180ms ease;
+}
+
+.checkout-contact__field-control:focus-within
+  .checkout-contact__field-icon {
+  color: #8f6854;
+}
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.checkout-contact__field-control input {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0 15px 0 0;
+
+  border: 0;
+  outline: none;
+
+  background: transparent;
+
+  color: #302b28;
+
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .checkout-contact__field-control input::placeholder {
-  color: #aaa09b;
+  color: #b4aaa4;
   opacity: 1;
-  font-weight: 400;
 }
 
-.checkout-contact__field-control input:hover {
-  border-bottom-color: #8f7770;
+.checkout-contact__field-control input:focus::placeholder {
+  color: #c0b8b3;
 }
 
-.checkout-contact__field-control input:focus {
-  border-bottom-color: #6f4b47;
-}
+/* =========================================================
+   FOCUS ACCENT
+========================================================= */
 
 .checkout-contact__field-focus {
   position: absolute;
-  right: 0;
-  bottom: -1px;
   left: 0;
+  bottom: 0;
 
-  height: 1px;
+  width: 0;
+  height: 2px;
 
-  background: #6f4b47;
+  background: #a77b63;
 
-  transform: scaleX(0);
-  transform-origin: center;
-
-  pointer-events: none;
-
-  transition: transform 220ms ease;
+  transition: width 220ms ease;
 }
 
-.checkout-contact__field-control input:focus
-  + .checkout-contact__field-focus {
-  transform: scaleX(1);
+.checkout-contact__field-control:focus-within
+  .checkout-contact__field-focus {
+  width: 100%;
 }
 
-/* ─────────────────────────────────────────
-   PRIVACY NOTE
-───────────────────────────────────────── */
+/* =========================================================
+   PRIVACY
+========================================================= */
 
 .checkout-contact__privacy {
   display: flex;
   align-items: flex-start;
   gap: 12px;
 
-  margin-top: 30px;
-  padding-top: 18px;
+  margin-top: 24px;
+  padding: 15px 16px;
 
-  border-top: 1px solid #e4dad5;
+  border: 1px solid rgba(45, 39, 35, 0.07);
+  border-radius: 13px;
+
+  background: #faf8f6;
 }
 
-.checkout-contact__privacy-line {
-  flex: 0 0 22px;
-  width: 22px;
-  height: 1px;
-  margin-top: 7px;
+.checkout-contact__privacy-icon {
+  flex: 0 0 31px;
 
-  background: #b98279;
+  width: 31px;
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #94715f;
+
+  border: 1px solid rgba(45, 39, 35, 0.07);
 }
 
-.checkout-contact__privacy p {
-  max-width: 620px;
+.checkout-contact__privacy-content {
+  min-width: 0;
+}
+
+.checkout-contact__privacy-title {
+  margin: 0 0 3px;
+
+  color: #514943;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.checkout-contact__privacy-text {
   margin: 0;
 
-  color: #8b7d78;
+  color: #8d837d;
 
-  font-size: 10px;
-  line-height: 1.7;
-  letter-spacing: 0.01em;
+  font-size: 11px;
+  line-height: 1.55;
 }
 
-/* ─────────────────────────────────────────
+/* =========================================================
    TABLET
-───────────────────────────────────────── */
+========================================================= */
 
-@media (max-width: 767px) {
+@media (max-width: 760px) {
+  .checkout-contact {
+    border-radius: 18px;
+  }
+
   .checkout-contact__header {
-    grid-template-columns: 36px minmax(0, 1fr);
-    gap: 15px;
-    padding-bottom: 24px;
+    padding: 23px 20px 21px;
+    gap: 14px;
   }
 
   .checkout-contact__step {
-    width: 36px;
-    height: 36px;
-    font-size: 9px;
-  }
-
-  .checkout-contact__title {
-    font-size: 31px;
-  }
-
-  .checkout-contact__description {
-    max-width: 100%;
-    margin-top: 9px;
-    font-size: 11px;
-    line-height: 1.65;
+    flex-basis: 37px;
+    width: 37px;
+    height: 37px;
+    font-size: 10px;
   }
 
   .checkout-contact__content {
-    padding-top: 24px;
+    padding: 22px 20px 23px;
   }
 
   .checkout-contact__fields {
     grid-template-columns: 1fr;
-    gap: 22px;
-  }
-
-  .checkout-contact__field-control input {
-    height: 46px;
-    line-height: 46px;
-  }
-
-  .checkout-contact__privacy {
-    margin-top: 26px;
-    padding-top: 16px;
+    gap: 16px;
   }
 }
 
-/* ─────────────────────────────────────────
-   SMALL MOBILE
-───────────────────────────────────────── */
+/* =========================================================
+   MOBILE
+========================================================= */
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
+  .checkout-contact {
+    border-radius: 16px;
+    box-shadow:
+      0 5px 20px rgba(35, 30, 27, 0.04);
+  }
+
   .checkout-contact__header {
-    grid-template-columns: 34px minmax(0, 1fr);
-    gap: 13px;
+    padding: 20px 16px 19px;
+    gap: 12px;
   }
 
   .checkout-contact__step {
+    flex-basis: 34px;
     width: 34px;
     height: 34px;
+
+    font-size: 9px;
+  }
+
+  .checkout-contact__eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.13em;
   }
 
   .checkout-contact__title {
-    font-size: 28px;
+    font-size: 22px;
+  }
+
+  .checkout-contact__description {
+    margin-top: 7px;
+    font-size: 11.5px;
+    line-height: 1.55;
+  }
+
+  .checkout-contact__content {
+    padding: 19px 16px 20px;
+  }
+
+  .checkout-contact__field-label {
+    margin-bottom: 7px;
+    font-size: 10px;
+  }
+
+  .checkout-contact__field-control {
+    height: 49px;
+    border-radius: 11px;
+  }
+
+  .checkout-contact__field-icon {
+    flex-basis: 42px;
+  }
+
+  .checkout-contact__field-control input {
+    padding-right: 12px;
+    font-size: 12px;
   }
 
   .checkout-contact__privacy {
     gap: 9px;
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 11px;
   }
 
-  .checkout-contact__privacy-line {
-    flex-basis: 16px;
-    width: 16px;
+  .checkout-contact__privacy-icon {
+    flex-basis: 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
   }
 
-  .checkout-contact__privacy p {
-    font-size: 9px;
+  .checkout-contact__privacy-title {
+    font-size: 10px;
   }
-}
 
-/* ─────────────────────────────────────────
-   REDUCED MOTION
-───────────────────────────────────────── */
-
-@media (prefers-reduced-motion: reduce) {
-  .checkout-contact__field-control input,
-  .checkout-contact__field-focus {
-    transition: none;
+  .checkout-contact__privacy-text {
+    font-size: 10px;
+    line-height: 1.5;
   }
 }

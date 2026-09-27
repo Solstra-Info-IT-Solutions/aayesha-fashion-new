@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import {
   Check,
   CheckCircle2,
-  ChevronRight,
   LockKeyhole,
   ShoppingBag,
 } from "lucide-react";
@@ -174,6 +173,7 @@ export function CheckoutPlaceOrder() {
         }
 
         setItems(nextItems);
+
         setSubtotal(
           calculatedSubtotal,
         );
@@ -719,19 +719,26 @@ export function CheckoutPlaceOrder() {
       ? "Express Delivery"
       : "Standard Delivery";
 
+  /* ==========================================================
+     RENDER
+  ========================================================== */
+
   return (
     <section className="checkout-place-order">
+
       {/* ======================================================
           HEADER
       ====================================================== */}
 
       <header className="checkout-place-order__header">
         <div className="checkout-place-order__heading">
+
           <div className="checkout-place-order__step">
             05
           </div>
 
           <div className="checkout-place-order__heading-content">
+
             <p className="checkout-place-order__eyebrow">
               Complete Order
             </p>
@@ -744,21 +751,32 @@ export function CheckoutPlaceOrder() {
               Review your selections before completing
               your purchase.
             </p>
+
           </div>
         </div>
       </header>
 
+      {/* ======================================================
+          MAIN CARD
+      ====================================================== */}
+
       <div className="checkout-place-order__content">
+
         {/* ====================================================
             SECURITY PANEL
         ==================================================== */}
 
         <div className="checkout-place-order__security">
+
           <div className="checkout-place-order__security-icon">
-            <LockKeyhole />
+            <LockKeyhole
+              size={18}
+              strokeWidth={1.5}
+            />
           </div>
 
           <div className="checkout-place-order__security-copy">
+
             <p className="checkout-place-order__security-title">
               Secure order placement
             </p>
@@ -768,9 +786,15 @@ export function CheckoutPlaceOrder() {
               and the final amount is verified by our
               server.
             </p>
+
           </div>
 
-          <CheckCircle2 className="checkout-place-order__security-check" />
+          <CheckCircle2
+            className="checkout-place-order__security-check"
+            size={18}
+            strokeWidth={1.5}
+          />
+
         </div>
 
         {/* ====================================================
@@ -778,11 +802,15 @@ export function CheckoutPlaceOrder() {
         ==================================================== */}
 
         <div className="checkout-place-order__details">
+
           <ReviewRow
             label="Payment method"
             value={paymentLabel}
             icon={
-              <CheckCircle2 />
+              <CheckCircle2
+                size={14}
+                strokeWidth={1.5}
+              />
             }
             success
           />
@@ -793,9 +821,12 @@ export function CheckoutPlaceOrder() {
             meta={
               shipping === 0
                 ? "Free"
-                : `₹${shipping}`
+                : `₹${shipping.toLocaleString(
+                    "en-IN",
+                  )}`
             }
           />
+
         </div>
 
         {/* ====================================================
@@ -804,9 +835,14 @@ export function CheckoutPlaceOrder() {
 
         {couponCode ? (
           <div className="checkout-place-order__coupon">
+
             <div className="checkout-place-order__coupon-main">
+
               <span className="checkout-place-order__coupon-icon">
-                <Check />
+                <Check
+                  size={15}
+                  strokeWidth={1.6}
+                />
               </span>
 
               <div>
@@ -818,9 +854,11 @@ export function CheckoutPlaceOrder() {
                   {couponCode}
                 </p>
               </div>
+
             </div>
 
             <div className="checkout-place-order__coupon-savings">
+
               {couponDiscount > 0 ? (
                 <span>
                   − ₹
@@ -836,7 +874,9 @@ export function CheckoutPlaceOrder() {
                   Free shipping
                 </span>
               ) : null}
+
             </div>
+
           </div>
         ) : null}
 
@@ -845,7 +885,9 @@ export function CheckoutPlaceOrder() {
         ==================================================== */}
 
         <div className="checkout-place-order__total">
+
           <div className="checkout-place-order__total-copy">
+
             <p className="checkout-place-order__total-eyebrow">
               Payable total
             </p>
@@ -853,6 +895,7 @@ export function CheckoutPlaceOrder() {
             <p className="checkout-place-order__total-note">
               Final amount verified securely by the server.
             </p>
+
           </div>
 
           <p className="checkout-place-order__total-value">
@@ -861,6 +904,7 @@ export function CheckoutPlaceOrder() {
               "en-IN",
             )}
           </p>
+
         </div>
 
         {/* ====================================================
@@ -871,21 +915,39 @@ export function CheckoutPlaceOrder() {
           type="button"
           onClick={handlePlaceOrder}
           disabled={isOrderDisabled}
-          className="checkout-place-order__button"
+          className={[
+            "checkout-place-order__button",
+            placingOrder
+              ? "checkout-place-order__button--loading"
+              : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
         >
+
           <span className="checkout-place-order__button-icon">
-            <ShoppingBag />
+
+            {placingOrder ? (
+              <span className="checkout-place-order__spinner" />
+            ) : (
+              <ShoppingBag
+                size={19}
+                strokeWidth={1.45}
+              />
+            )}
+
           </span>
 
           <span className="checkout-place-order__button-copy">
+
             <span className="checkout-place-order__button-label">
               {loadingCart
                 ? "Preparing order..."
                 : placingOrder
                   ? "Placing order..."
                   : payment === "cod"
-                    ? "Place COD order"
-                    : "Online payment unavailable"}
+                    ? "Place COD Order"
+                    : "Online Payment Unavailable"}
             </span>
 
             {!loadingCart &&
@@ -898,13 +960,9 @@ export function CheckoutPlaceOrder() {
                 )}
               </span>
             ) : null}
+
           </span>
 
-          {!loadingCart &&
-          !placingOrder &&
-          payment === "cod" ? (
-            <ChevronRight className="checkout-place-order__button-arrow" />
-          ) : null}
         </button>
 
         {/* ====================================================
@@ -912,12 +970,17 @@ export function CheckoutPlaceOrder() {
         ==================================================== */}
 
         <div className="checkout-place-order__trust">
-          <LockKeyhole />
+
+          <LockKeyhole
+            size={14}
+            strokeWidth={1.5}
+          />
 
           <p>
             Your order is protected by secure server-side
             validation and idempotent order processing.
           </p>
+
         </div>
 
         {/* ====================================================
@@ -929,6 +992,7 @@ export function CheckoutPlaceOrder() {
           Fashion&apos;s applicable terms, shipping and
           return policies.
         </p>
+
       </div>
     </section>
   );
@@ -953,7 +1017,9 @@ function ReviewRow({
 }) {
   return (
     <div className="checkout-place-order__review-row">
+
       <div className="checkout-place-order__review-left">
+
         <p className="checkout-place-order__review-label">
           {label}
         </p>
@@ -961,9 +1027,11 @@ function ReviewRow({
         <p className="checkout-place-order__review-value">
           {value}
         </p>
+
       </div>
 
       <div className="checkout-place-order__review-right">
+
         {meta ? (
           <span className="checkout-place-order__review-meta">
             {meta}
@@ -984,7 +1052,9 @@ function ReviewRow({
             {icon}
           </span>
         ) : null}
+
       </div>
+
     </div>
   );
 }

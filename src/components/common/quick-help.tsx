@@ -15,6 +15,10 @@ import { useState } from "react";
 
 import "./QuickHelp.css";
 
+/* =========================================================
+   HELP ITEMS
+========================================================= */
+
 const helpItems = [
   {
     label: "Track an Order",
@@ -42,19 +46,47 @@ const helpItems = [
   },
 ];
 
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 export function QuickHelp() {
   const [open, setOpen] = useState(false);
 
+  /* =======================================================
+     CLOSE PANEL
+  ======================================================= */
+
+  const closeHelp = () => {
+    setOpen(false);
+  };
+
+  /* =======================================================
+     TOGGLE PANEL
+  ======================================================= */
+
+  const toggleHelp = () => {
+    setOpen((current) => !current);
+  };
+
   return (
     <>
+      {/* =====================================================
+          BACKDROP
+      ===================================================== */}
+
       {open && (
         <button
           type="button"
           aria-label="Close quick help"
           className="quick-help__backdrop"
-          onClick={() => setOpen(false)}
+          onClick={closeHelp}
         />
       )}
+
+      {/* =====================================================
+          QUICK HELP
+      ===================================================== */}
 
       <div
         className={[
@@ -64,13 +96,22 @@ export function QuickHelp() {
           .filter(Boolean)
           .join(" ")}
       >
+        {/* ===================================================
+            HELP PANEL
+        =================================================== */}
+
         {open && (
           <div
+            id="quick-help-panel"
             className="quick-help__panel"
             role="dialog"
             aria-modal="false"
             aria-labelledby="quick-help-title"
           >
+            {/* ===============================================
+                HEADER
+            =============================================== */}
+
             <div className="quick-help__panel-header">
               <div>
                 <p className="quick-help__eyebrow">
@@ -87,7 +128,7 @@ export function QuickHelp() {
 
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={closeHelp}
                 aria-label="Close quick help"
                 className="quick-help__close"
               >
@@ -99,6 +140,10 @@ export function QuickHelp() {
               </button>
             </div>
 
+            {/* ===============================================
+                HELP ITEMS
+            =============================================== */}
+
             <div className="quick-help__items">
               {helpItems.map((item) => {
                 const Icon = item.icon;
@@ -107,9 +152,11 @@ export function QuickHelp() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    onClick={() => setOpen(false)}
+                    onClick={closeHelp}
                     className="quick-help__item"
                   >
+                    {/* ICON */}
+
                     <span
                       aria-hidden="true"
                       className="quick-help__item-icon"
@@ -120,6 +167,8 @@ export function QuickHelp() {
                       />
                     </span>
 
+                    {/* CONTENT */}
+
                     <span className="quick-help__item-content">
                       <span className="quick-help__item-label">
                         {item.label}
@@ -129,6 +178,8 @@ export function QuickHelp() {
                         {item.description}
                       </span>
                     </span>
+
+                    {/* NAVIGATION INDICATOR */}
 
                     <ChevronRight
                       className="quick-help__item-arrow"
@@ -141,6 +192,10 @@ export function QuickHelp() {
               })}
             </div>
 
+            {/* ===============================================
+                FOOTER
+            =============================================== */}
+
             <div className="quick-help__panel-footer">
               <span>
                 Need something else?
@@ -148,7 +203,7 @@ export function QuickHelp() {
 
               <Link
                 href="/contact"
-                onClick={() => setOpen(false)}
+                onClick={closeHelp}
               >
                 Contact us
               </Link>
@@ -156,11 +211,15 @@ export function QuickHelp() {
           </div>
         )}
 
+        {/* ===================================================
+            TRIGGER
+        =================================================== */}
+
         <button
           type="button"
-          onClick={() => setOpen((current) => !current)}
+          onClick={toggleHelp}
           aria-expanded={open}
-          aria-controls="quick-help-title"
+          aria-controls="quick-help-panel"
           aria-label={
             open
               ? "Close quick help"
@@ -168,6 +227,8 @@ export function QuickHelp() {
           }
           className="quick-help__trigger"
         >
+          {/* TRIGGER ICON */}
+
           <span
             aria-hidden="true"
             className="quick-help__trigger-icon"
@@ -184,6 +245,8 @@ export function QuickHelp() {
               />
             )}
           </span>
+
+          {/* TRIGGER LABEL */}
 
           <span className="quick-help__trigger-label">
             Quick Help

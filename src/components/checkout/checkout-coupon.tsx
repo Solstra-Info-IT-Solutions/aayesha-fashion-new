@@ -6,6 +6,13 @@ import {
 } from "react";
 
 import {
+  Check,
+  CirclePercent,
+  Tag,
+  X,
+} from "lucide-react";
+
+import {
   useSearchParams,
 } from "next/navigation";
 
@@ -31,6 +38,10 @@ import "./CheckoutCoupon.css";
 
 export function CheckoutCoupon() {
   const searchParams = useSearchParams();
+
+  /* =======================================================
+     CHECKOUT STORE
+  ======================================================= */
 
   const couponCode = useCheckoutStore(
     (state) => state.couponCode,
@@ -74,6 +85,10 @@ export function CheckoutCoupon() {
         state.setCouponDiscountType,
     );
 
+  /* =======================================================
+     LOCAL STATE
+  ======================================================= */
+
   const [input, setInput] = useState(
     couponCode,
   );
@@ -98,23 +113,17 @@ export function CheckoutCoupon() {
   const [applying, setApplying] =
     useState(false);
 
-  /* =========================================================
-     KEEP INPUT IN SYNC WITH STORE
-  ========================================================= */
+  /* =======================================================
+     KEEP INPUT IN SYNC
+  ======================================================= */
 
   useEffect(() => {
     setInput(couponCode);
   }, [couponCode]);
 
-  /* =========================================================
+  /* =======================================================
      READ COUPON FROM URL
-     
-     Example:
-     /checkout?coupon=WELCOME10
-     
-     This only pre-fills the field.
-     It does NOT apply the coupon automatically.
-  ========================================================= */
+  ======================================================= */
 
   useEffect(() => {
     const queryCoupon =
@@ -144,9 +153,9 @@ export function CheckoutCoupon() {
     setCouponCode,
   ]);
 
-  /* =========================================================
-     LOAD CART FROM BACKEND
-  ========================================================= */
+  /* =======================================================
+     LOAD CART
+  ======================================================= */
 
   useEffect(() => {
     let cancelled = false;
@@ -173,7 +182,8 @@ export function CheckoutCoupon() {
         for (const item of cart.items) {
           calculatedSubtotal +=
             Number(
-              item.product.pricing.sellingPrice,
+              item.product.pricing
+                .sellingPrice,
             ) * item.quantity;
         }
 
@@ -215,9 +225,9 @@ export function CheckoutCoupon() {
     };
   }, []);
 
-  /* =========================================================
+  /* =======================================================
      CLEAR COUPON
-  ========================================================= */
+  ======================================================= */
 
   const clearCoupon = () => {
     setCouponCode("");
@@ -227,9 +237,9 @@ export function CheckoutCoupon() {
     setInput("");
   };
 
-  /* =========================================================
+  /* =======================================================
      APPLY COUPON
-  ========================================================= */
+  ======================================================= */
 
   const applyCoupon = async () => {
     const code = input
@@ -331,53 +341,88 @@ export function CheckoutCoupon() {
     }
   };
 
-  /* =========================================================
+  /* =======================================================
+     APPLIED STATE
+  ======================================================= */
+
+  const hasDiscount =
+    couponDiscount > 0 ||
+    couponShippingDiscount > 0;
+
+  const hasCoupon =
+    Boolean(couponCode);
+
+  /* =======================================================
      RENDER
-  ========================================================= */
+  ======================================================= */
 
   return (
-    <section className="checkout-coupon">
-      {/* HEADER */}
+    <section
+      className="checkout-coupon"
+      aria-labelledby="checkout-coupon-title"
+    >
+      {/* ===================================================
+          HEADER
+      =================================================== */}
 
       <header className="checkout-coupon__header">
-        <div className="checkout-coupon__heading">
-          <div className="checkout-coupon__step">
-            04
-          </div>
-
-          <div className="checkout-coupon__heading-content">
-            <p className="checkout-coupon__eyebrow">
-              Offers
-            </p>
-
-            <h2 className="checkout-coupon__title">
-              Have a coupon?
-            </h2>
-
-            <p className="checkout-coupon__description">
-              Apply an available offer to your
-              order.
-            </p>
-          </div>
+        <div className="checkout-coupon__step">
+          <span>04</span>
         </div>
 
-        {couponCode ? (
-          <button
-            type="button"
-            onClick={clearCoupon}
-            disabled={applying}
-            className="checkout-coupon__remove"
+        <div className="checkout-coupon__heading-content">
+          <div className="checkout-coupon__eyebrow-row">
+            <span
+              className="checkout-coupon__eyebrow-dot"
+              aria-hidden="true"
+            />
+
+            <p className="checkout-coupon__eyebrow">
+              Offers & Savings
+            </p>
+          </div>
+
+          <h2
+            id="checkout-coupon-title"
+            className="checkout-coupon__title"
           >
-            Remove
-          </button>
-        ) : null}
+            Have a coupon?
+          </h2>
+
+          <p className="checkout-coupon__description">
+            Apply an available offer to unlock
+            savings on your order.
+          </p>
+        </div>
       </header>
 
-      {/* COUPON FORM */}
+      {/* ===================================================
+          CONTENT
+      =================================================== */}
 
       <div className="checkout-coupon__content">
-        <div className="checkout-coupon__form">
-          <div className="checkout-coupon__input-wrap">
+        {/* =================================================
+            COUPON INPUT CARD
+        ================================================= */}
+
+        <div
+          className={[
+            "checkout-coupon__input-card",
+            hasCoupon
+              ? "checkout-coupon__input-card--applied"
+              : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
+          <div className="checkout-coupon__input-icon">
+            <Tag
+              size={18}
+              strokeWidth={1.5}
+            />
+          </div>
+
+          <div className="checkout-coupon__input-content">
             <label
               htmlFor="checkout-coupon-code"
               className="checkout-coupon__label"
@@ -405,7 +450,7 @@ export function CheckoutCoupon() {
                 applying ||
                 loadingCart
               }
-              placeholder="Enter code"
+              placeholder="ENTER CODE"
               aria-label="Coupon code"
               autoComplete="off"
               className="checkout-coupon__input"
@@ -419,44 +464,35 @@ export function CheckoutCoupon() {
             }
             disabled={
               applying ||
-              loadingCart
+              loadingCart ||
+              !input.trim()
             }
             className="checkout-coupon__apply"
           >
-            <span>
-              {applying
-                ? "Applying..."
-                : "Apply"}
-            </span>
+            {applying
+              ? "Applying..."
+              : "Apply"}
           </button>
         </div>
 
-        {/* APPLIED COUPON */}
+        {/* =================================================
+            APPLIED COUPON
+        ================================================= */}
 
-        {couponCode &&
-        couponDiscount > 0 ||
-        couponShippingDiscount > 0 ? (
+        {hasCoupon &&
+        hasDiscount ? (
           <div
             className="checkout-coupon__applied"
             role="status"
             aria-live="polite"
           >
-            <div className="checkout-coupon__applied-main">
-              <span className="checkout-coupon__success-icon">
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M5 10.5L8.2 13.5L15 6.5"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
+            <div className="checkout-coupon__applied-left">
+              <div className="checkout-coupon__success-icon">
+                <Check
+                  size={16}
+                  strokeWidth={2}
+                />
+              </div>
 
               <div className="checkout-coupon__applied-copy">
                 <span className="checkout-coupon__applied-label">
@@ -469,7 +505,7 @@ export function CheckoutCoupon() {
               </div>
             </div>
 
-            <div className="checkout-coupon__benefits">
+            <div className="checkout-coupon__applied-right">
               {couponDiscount > 0 ? (
                 <span className="checkout-coupon__benefit">
                   Save ₹
@@ -485,18 +521,46 @@ export function CheckoutCoupon() {
                   Free shipping
                 </span>
               ) : null}
+
+              <button
+                type="button"
+                onClick={clearCoupon}
+                disabled={applying}
+                className="checkout-coupon__remove"
+                aria-label="Remove coupon"
+              >
+                <X
+                  size={15}
+                  strokeWidth={1.6}
+                />
+              </button>
             </div>
           </div>
         ) : null}
 
-        {/* SUPPORTING NOTE */}
+        {/* =================================================
+            SUPPORTING INFORMATION
+        ================================================= */}
 
-        {!couponCode ? (
-          <p className="checkout-coupon__note">
-            Coupon eligibility is checked against
-            your current bag, delivery method and
-            account details.
-          </p>
+        {!hasCoupon ? (
+          <div className="checkout-coupon__note">
+            <div
+              className="checkout-coupon__note-icon"
+              aria-hidden="true"
+            >
+              <CirclePercent
+                size={15}
+                strokeWidth={1.5}
+              />
+            </div>
+
+            <p>
+              Coupon eligibility is checked
+              against your current bag,
+              delivery method and account
+              details.
+            </p>
+          </div>
         ) : null}
       </div>
     </section>

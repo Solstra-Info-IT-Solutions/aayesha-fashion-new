@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 
 import type { Category } from "@/types/category";
 import type { Product } from "@/types/product";
@@ -25,6 +24,10 @@ export function CategoryBrowser({
     (category) => category.id === selectedCategoryId,
   );
 
+  /* =========================================================
+     EMPTY CATEGORIES
+  ========================================================= */
+
   if (categories.length === 0) {
     return (
       <section className="category-browser category-browser--empty">
@@ -47,12 +50,18 @@ export function CategoryBrowser({
 
   return (
     <main className="category-browser">
-      {/* PAGE HEADER */}
+      {/* =====================================================
+          PAGE HEADER
+      ===================================================== */}
+
       <section className="category-browser__header">
         <div className="category-browser__container">
           <div className="category-browser__header-content">
             <div className="category-browser__eyebrow-row">
-              <span className="category-browser__eyebrow-line" />
+              <span
+                className="category-browser__eyebrow-line"
+                aria-hidden="true"
+              />
 
               <span className="category-browser__eyebrow">
                 Aayesha Fashion
@@ -75,7 +84,10 @@ export function CategoryBrowser({
         </div>
       </section>
 
-      {/* CATEGORY NAVIGATION */}
+      {/* =====================================================
+          CATEGORY NAVIGATION
+      ===================================================== */}
+
       <section className="category-browser__navigation">
         <div className="category-browser__container">
           <nav
@@ -93,11 +105,14 @@ export function CategoryBrowser({
                     category.id,
                   )}`}
                   scroll={false}
-                  className={`category-browser__nav-item ${
+                  className={[
+                    "category-browser__nav-item",
                     isSelected
                       ? "category-browser__nav-item--active"
-                      : ""
-                  }`}
+                      : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                   aria-current={
                     isSelected ? "page" : undefined
                   }
@@ -105,7 +120,10 @@ export function CategoryBrowser({
                   <span>{category.name}</span>
 
                   {isSelected && (
-                    <span className="category-browser__nav-indicator" />
+                    <span
+                      className="category-browser__nav-indicator"
+                      aria-hidden="true"
+                    />
                   )}
                 </Link>
               );
@@ -114,7 +132,10 @@ export function CategoryBrowser({
         </div>
       </section>
 
-      {/* SELECTED CATEGORY */}
+      {/* =====================================================
+          SELECTED CATEGORY PRODUCTS
+      ===================================================== */}
+
       <section className="category-browser__products">
         <div className="category-browser__container">
           <header className="category-browser__section-header">
@@ -138,7 +159,10 @@ export function CategoryBrowser({
             )}
           </header>
 
-          {/* PRODUCTS */}
+          {/* =================================================
+              PRODUCTS
+          ================================================= */}
+
           {products.length > 0 ? (
             <div className="category-browser__product-grid">
               {products.map((product) => (
@@ -149,8 +173,21 @@ export function CategoryBrowser({
               ))}
             </div>
           ) : (
+            /* =================================================
+               NO PRODUCTS
+            ================================================= */
+
             <div className="category-browser__no-products">
               <div className="category-browser__no-products-inner">
+                <div
+                  className="category-browser__no-products-mark"
+                  aria-hidden="true"
+                >
+                  <span />
+                  <span />
+                  <span />
+                </div>
+
                 <p className="category-browser__no-products-eyebrow">
                   Coming soon
                 </p>
@@ -164,16 +201,15 @@ export function CategoryBrowser({
                   added soon.
                 </p>
 
+                {/* =================================================
+                    PROPER CTA BUTTON
+                ================================================= */}
+
                 <Link
                   href="/shop"
-                  className="category-browser__shop-link"
+                  className="category-browser__shop-button"
                 >
-                  <span>Shop all products</span>
-
-                  <ArrowUpRight
-                    size={16}
-                    strokeWidth={1.35}
-                  />
+                  <span>Shop All Products</span>
                 </Link>
               </div>
             </div>

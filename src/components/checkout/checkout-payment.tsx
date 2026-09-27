@@ -6,6 +6,7 @@ import {
   Banknote,
   Check,
   CreditCard,
+  ShieldCheck,
 } from "lucide-react";
 
 import { useCheckoutStore } from "@/store/checkout-store";
@@ -23,69 +24,87 @@ export function CheckoutPayment() {
 
   return (
     <section className="checkout-payment">
-      {/* HEADER */}
+      {/* =================================================
+          HEADER
+      ================================================= */}
 
       <header className="checkout-payment__header">
-        <div className="checkout-payment__heading">
-          <div className="checkout-payment__step">
-            04
-          </div>
+        <div className="checkout-payment__step">
+          04
+        </div>
 
-          <div className="checkout-payment__heading-content">
+        <div className="checkout-payment__heading-content">
+          <div className="checkout-payment__eyebrow-row">
+            <span className="checkout-payment__eyebrow-line" />
+
             <p className="checkout-payment__eyebrow">
               Payment
             </p>
-
-            <h2 className="checkout-payment__title">
-              Choose payment method
-            </h2>
-
-            <p className="checkout-payment__description">
-              Select your preferred way to complete
-              the purchase.
-            </p>
           </div>
+
+          <h2 className="checkout-payment__title">
+            Choose payment method
+          </h2>
+
+          <p className="checkout-payment__description">
+            Select your preferred way to complete
+            the purchase.
+          </p>
         </div>
       </header>
 
-      {/* OPTIONS */}
+      {/* =================================================
+          PAYMENT OPTIONS
+      ================================================= */}
 
       <div className="checkout-payment__content">
-        <div className="checkout-payment__options">
+        <div
+          className="checkout-payment__options"
+          role="group"
+          aria-label="Payment methods"
+        >
           <PaymentOption
             id="cod"
             label="Cash on Delivery"
             description="Pay when your order arrives"
+            meta="Available on delivery"
             icon={<Banknote />}
             active={selected === "cod"}
-            onClick={() =>
-              setPayment("cod")
-            }
+            onClick={() => setPayment("cod")}
           />
 
           <PaymentOption
             id="online"
             label="Online Payment"
             description="Cards, UPI and supported payment methods"
+            meta="Secure online checkout"
             icon={<CreditCard />}
             active={selected === "online"}
-            onClick={() =>
-              setPayment("online")
-            }
+            onClick={() => setPayment("online")}
           />
         </div>
 
-        {/* SECURITY NOTE */}
+        {/* =================================================
+            SECURITY NOTE
+        ================================================= */}
 
         <div className="checkout-payment__security">
-          <span className="checkout-payment__security-line" />
+          <div
+            className="checkout-payment__security-icon"
+            aria-hidden="true"
+          >
+            <ShieldCheck
+              size={16}
+              strokeWidth={1.35}
+            />
+          </div>
 
           <div className="checkout-payment__security-content">
-            <div className="checkout-payment__security-title">
+            <p className="checkout-payment__security-title">
               Secure checkout
-            </div>
+            </p>
 
-            <p>
+            <p className="checkout-payment__security-description">
               Your selected payment method will be
               securely processed when the order is
               placed.
@@ -97,10 +116,15 @@ export function CheckoutPayment() {
   );
 }
 
+/* =========================================================
+   PAYMENT OPTION
+========================================================= */
+
 function PaymentOption({
   id,
   label,
   description,
+  meta,
   icon,
   active,
   onClick,
@@ -108,6 +132,7 @@ function PaymentOption({
   id: string;
   label: string;
   description: string;
+  meta: string;
   icon: ReactNode;
   active: boolean;
   onClick: () => void;
@@ -128,35 +153,39 @@ function PaymentOption({
         .filter(Boolean)
         .join(" ")}
     >
-      {/* LEFT */}
+      {/* ICON */}
 
-      <span className="checkout-payment__option-main">
-        <span
-          className={[
-            "checkout-payment__icon",
-            active
-              ? "checkout-payment__icon--active"
-              : "",
-          ]
-            .filter(Boolean)
-            .join(" ")}
-          aria-hidden="true"
-        >
-          {icon}
+      <span
+        className={[
+          "checkout-payment__icon",
+          active
+            ? "checkout-payment__icon--active"
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        aria-hidden="true"
+      >
+        {icon}
+      </span>
+
+      {/* CONTENT */}
+
+      <span className="checkout-payment__option-copy">
+        <span className="checkout-payment__option-title">
+          {label}
         </span>
 
-        <span className="checkout-payment__option-copy">
-          <span className="checkout-payment__option-title">
-            {label}
-          </span>
+        <span className="checkout-payment__option-description">
+          {description}
+        </span>
 
-          <span className="checkout-payment__option-description">
-            {description}
-          </span>
+        <span className="checkout-payment__option-meta">
+          {meta}
         </span>
       </span>
 
-      {/* SELECT INDICATOR */}
+      {/* CHECK */}
 
       <span
         className={[
@@ -169,7 +198,12 @@ function PaymentOption({
           .join(" ")}
         aria-hidden="true"
       >
-        <Check />
+        {active && (
+          <Check
+            size={13}
+            strokeWidth={1.8}
+          />
+        )}
       </span>
     </button>
   );
