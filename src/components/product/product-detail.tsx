@@ -42,7 +42,10 @@ import { getCategories } from "@/services/category.service";
 import { addToCart } from "@/services/cart.service";
 import { useAuthStore } from "@/store/auth-store";
 import { useWishlistStore } from "@/store/wishlist-store";
-import { LoginRequiredPopup } from "@/components/product/login-required-popup";
+import {
+  LoginRequiredPopup,
+  type LoginRequiredAction,
+} from "@/components/product/login-required-popup";
 import { ProductCard } from "@/components/product/product-card";
 
 import "./ProductDetail.css";
@@ -164,7 +167,7 @@ export function ProductDetail({
   const [shareOpen, setShareOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 const [loginAction, setLoginAction] =
-  useState<"cart" | "wishlist">("cart");
+  useState<LoginRequiredAction>("cart");
 
   const [openSection, setOpenSection] = useState<string | null>(
     "details",

@@ -30,14 +30,7 @@ export type LoginRequiredAction =
 type LoginRequiredPopupProps = {
   open: boolean;
   onClose: () => void;
-
-  /**
-   * Defaults to "cart".
-   *
-   * Use actionType="wishlist" only when the popup
-   * is triggered from wishlist functionality.
-   */
-  actionType?: LoginRequiredAction;
+  action?: LoginRequiredAction;
 };
 
 /* =========================================================
@@ -47,7 +40,7 @@ type LoginRequiredPopupProps = {
 export function LoginRequiredPopup({
   open,
   onClose,
-  actionType = "cart",
+  action = "cart",
 }: LoginRequiredPopupProps) {
   const router = useRouter();
 
@@ -105,11 +98,11 @@ export function LoginRequiredPopup({
   }, [open, onClose]);
 
   /* =======================================================
-     CONTENT
+     ACTION CONTEXT
   ======================================================= */
 
   const isWishlist =
-    actionType === "wishlist";
+    action === "wishlist";
 
   const title = isWishlist
     ? "Login to Save"
