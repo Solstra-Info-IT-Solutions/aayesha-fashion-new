@@ -10,9 +10,8 @@
   margin: 0 auto;
   padding: 42px 28px 64px;
 
-  color: #332725;
+  color: var(--color-text);
 }
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -20,7 +19,6 @@
 .address-form__header {
   margin-bottom: 30px;
 }
-
 .address-form__back {
   display: inline-flex;
   align-items: center;
@@ -28,7 +26,7 @@
 
   margin-bottom: 22px;
 
-  color: #746762;
+  color: var(--color-text-secondary);
 
   font-family:
     var(--font-body),
@@ -45,12 +43,10 @@
     color 160ms ease,
     gap 160ms ease;
 }
-
 .address-form__back:hover {
   gap: 10px;
-  color: #8b5f59;
+  color: var(--color-clay);
 }
-
 .address-form__hero {
   display: flex;
   align-items: flex-start;
@@ -59,9 +55,8 @@
 
   padding-bottom: 25px;
 
-  border-bottom: 1px solid #e3d9d5;
+  border-bottom: 1px solid var(--color-border);
 }
-
 .address-form__hero-icon {
   display: flex;
   align-items: center;
@@ -72,13 +67,12 @@
 
   flex: 0 0 44px;
 
-  border: 1px solid #d9c3bc;
+  border: 1px solid var(--color-border);
 
-  background: #f8f1ee;
+  background: var(--color-error-soft);
 
-  color: #8b5f59;
+  color: var(--color-clay);
 }
-
 .address-form__eyebrow {
   margin: 0 0 7px;
 
@@ -94,9 +88,8 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
 
-  color: #8b5f59;
+  color: var(--color-clay);
 }
-
 .address-form__title {
   margin: 0;
 
@@ -112,9 +105,8 @@
 
   letter-spacing: -0.025em;
 
-  color: #332725;
+  color: var(--color-text);
 }
-
 .address-form__description {
   max-width: 620px;
 
@@ -129,9 +121,8 @@
   font-weight: 400;
   line-height: 1.6;
 
-  color: #71635e;
+  color: var(--color-text-secondary);
 }
-
 /* =========================================================
    PAGE ERROR
 ========================================================= */
@@ -146,13 +137,12 @@
 
   padding: 13px 15px;
 
-  border: 1px solid #dfbeba;
+  border: 1px solid rgba(149, 92, 86, 0.35);
 
-  background: #fff7f6;
+  background: var(--color-error-soft);
 
-  color: #934f4a;
+  color: var(--color-clay);
 }
-
 .address-form__page-error p {
   margin: 0;
 
@@ -164,7 +154,6 @@
   font-size: 13px;
   line-height: 1.5;
 }
-
 /* =========================================================
    BODY
 ========================================================= */
@@ -175,11 +164,10 @@
 
   overflow: hidden;
 
-  border: 1px solid #e1d6d1;
+  border: 1px solid var(--color-border);
 
-  background: #ffffff;
+  background: var(--color-surface);
 }
-
 /* =========================================================
    SECTION
 ========================================================= */
@@ -187,13 +175,11 @@
 .address-form__section {
   padding: 28px 30px 32px;
 
-  border-bottom: 1px solid #ebe3df;
+  border-bottom: 1px solid var(--color-border-light);
 }
-
 .address-form__section:last-child {
   border-bottom: 0;
 }
-
 .address-form__section-heading {
   display: flex;
   align-items: flex-start;
@@ -202,11 +188,9 @@
 
   margin-bottom: 24px;
 }
-
 .address-form__section-number {
   display: none;
 }
-
 .address-form__section-title {
   margin: 0;
 
@@ -222,9 +206,8 @@
 
   letter-spacing: -0.015em;
 
-  color: #3d302d;
+  color: var(--color-text);
 }
-
 .address-form__section-description {
   max-width: 620px;
 
@@ -238,9 +221,8 @@
   font-size: 13px;
   line-height: 1.55;
 
-  color: #786b66;
+  color: var(--color-text-secondary);
 }
-
 /* =========================================================
    FIELDS
 ========================================================= */
@@ -250,12 +232,10 @@
 
   gap: 18px;
 }
-
 .address-form__fields--two {
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 }
-
 /* =========================================================
    FIELD
 ========================================================= */
@@ -263,7 +243,6 @@
 .address-field {
   min-width: 0;
 }
-
 .address-field__label {
   display: flex;
   align-items: baseline;
@@ -281,16 +260,14 @@
   font-weight: 600;
   line-height: 1.35;
 
-  color: #403431;
+  color: var(--color-text);
 }
-
 .address-field__optional {
   font-size: 11px;
   font-weight: 400;
 
-  color: #92847e;
+  color: var(--color-text-secondary);
 }
-
 /* =========================================================
    INPUTS
 ========================================================= */
@@ -300,13 +277,13 @@
 .address-field__select {
   width: 100%;
 
-  border: 1px solid #d8ccc7;
+  border: 1px solid var(--color-border);
 
   border-radius: 4px;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #332725;
+  color: var(--color-text);
 
   font-family:
     var(--font-body),
@@ -323,13 +300,11 @@
     background-color 160ms ease,
     box-shadow 160ms ease;
 }
-
 .address-field__input {
   height: 46px;
 
   padding: 0 13px;
 }
-
 .address-field__textarea {
   min-height: 92px;
 
@@ -339,7 +314,6 @@
 
   line-height: 1.55;
 }
-
 .address-field__select {
   height: 46px;
 
@@ -347,19 +321,16 @@
 
   cursor: pointer;
 }
-
 .address-field__input::placeholder,
 .address-field__textarea::placeholder {
-  color: #a1948e;
+  color: var(--color-text-secondary);
   opacity: 1;
 }
-
 .address-field__input:hover,
 .address-field__textarea:hover,
 .address-field__select:hover {
-  border-color: #bda9a2;
+  border-color: var(--color-border);
 }
-
 /* =========================================================
    FOCUS
    No heavy browser focus border
@@ -368,14 +339,13 @@
 .address-field__input:focus,
 .address-field__textarea:focus,
 .address-field__select:focus {
-  border-color: #a87870;
+  border-color: var(--color-clay);
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   box-shadow:
     0 0 0 2px rgba(168, 120, 112, 0.12);
 }
-
 /* =========================================================
    ERROR INPUT
 ========================================================= */
@@ -383,18 +353,16 @@
 .address-field__input--error,
 .address-field__textarea--error,
 .address-field__select--error {
-  border-color: #b65f58;
+  border-color: var(--color-clay);
 }
-
 .address-field__input--error:focus,
 .address-field__textarea--error:focus,
 .address-field__select--error:focus {
-  border-color: #b65f58;
+  border-color: var(--color-clay);
 
   box-shadow:
     0 0 0 2px rgba(182, 95, 88, 0.1);
 }
-
 /* =========================================================
    PHONE
 ========================================================= */
@@ -405,7 +373,6 @@
 
   width: 100%;
 }
-
 .address-field__phone-prefix {
   display: flex;
   align-items: center;
@@ -415,14 +382,14 @@
 
   padding: 0 10px;
 
-  border: 1px solid #d8ccc7;
+  border: 1px solid var(--color-border);
   border-right: 0;
 
   border-radius: 4px 0 0 4px;
 
-  background: #f9f5f3;
+  background: var(--color-canvas);
 
-  color: #625550;
+  color: var(--color-text-secondary);
 
   font-family:
     var(--font-body),
@@ -432,11 +399,9 @@
   font-size: 13px;
   font-weight: 600;
 }
-
 .address-field__phone .address-field__input {
   border-radius: 0 4px 4px 0;
 }
-
 /* =========================================================
    FIELD ERROR
 ========================================================= */
@@ -452,9 +417,8 @@
   font-size: 12px;
   line-height: 1.4;
 
-  color: #a4524c;
+  color: var(--color-clay);
 }
-
 /* =========================================================
    DEFAULT ADDRESS
 ========================================================= */
@@ -469,11 +433,11 @@
 
   padding: 14px 15px;
 
-  border: 1px solid #ded1cc;
+  border: 1px solid var(--color-border);
 
   border-radius: 5px;
 
-  background: #fcfaf9;
+  background: var(--color-surface);
 
   cursor: pointer;
 
@@ -481,17 +445,14 @@
     border-color 160ms ease,
     background-color 160ms ease;
 }
-
 .address-default:hover {
-  border-color: #c6ada5;
+  border-color: var(--color-border);
 }
-
 .address-default--active {
-  border-color: #b68b82;
+  border-color: var(--color-clay);
 
-  background: #faf3f1;
+  background: var(--color-error-soft);
 }
-
 .address-default__check {
   display: flex;
   align-items: center;
@@ -502,30 +463,27 @@
 
   flex: 0 0 21px;
 
-  border: 1px solid #bba7a0;
+  border: 1px solid var(--color-clay);
 
   border-radius: 3px;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   color: transparent;
 }
-
 .address-default--active
 .address-default__check {
-  border-color: #8b5f59;
+  border-color: var(--color-clay);
 
-  background: #8b5f59;
+  background: var(--color-clay);
 
   color: #ffffff;
 }
-
 .address-default__content {
   min-width: 0;
 
   flex: 1;
 }
-
 .address-default__title {
   display: block;
 
@@ -538,9 +496,8 @@
   font-weight: 600;
   line-height: 1.4;
 
-  color: #3d302d;
+  color: var(--color-text);
 }
-
 .address-default__description {
   display: block;
 
@@ -554,34 +511,32 @@
   font-size: 12px;
   line-height: 1.45;
 
-  color: #796b65;
+  color: var(--color-text-secondary);
 }
-
 .address-default__badge {
   flex: 0 0 auto;
 
   padding: 5px 8px;
 
-  border: 1px solid #d6bdb6;
+  border: 1px solid var(--color-border);
 
   border-radius: 3px;
 
-  background: #fffaf8;
+  background: var(--color-surface);
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
 
   letter-spacing: 0.06em;
   text-transform: uppercase;
 
-  color: #8b5f59;
+  color: var(--color-clay);
 }
-
 /* =========================================================
    ACTIONS
 ========================================================= */
@@ -595,7 +550,6 @@
 
   padding: 22px 0 0;
 }
-
 .address-form__secondary-action,
 .address-form__save-action {
   min-height: 44px;
@@ -608,7 +562,7 @@
 
   padding: 0 18px;
 
-  border: 1px solid #cdbdb7;
+  border: 1px solid var(--color-border-dark);
 
   border-radius: 4px;
 
@@ -631,43 +585,37 @@
     border-color 160ms ease,
     color 160ms ease;
 }
-
 .address-form__secondary-action {
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #554743;
+  color: var(--color-text-secondary);
 }
-
 .address-form__secondary-action:hover {
-  border-color: #a88c84;
+  border-color: var(--color-clay);
 
-  background: #faf6f4;
+  background: var(--color-surface);
 
-  color: #3f302d;
+  color: var(--color-text);
 }
-
 .address-form__save-action {
   min-width: 150px;
 
-  border-color: #8b5f59;
+  border-color: var(--color-clay);
 
-  background: #8b5f59;
+  background: var(--color-clay);
 
   color: #ffffff;
 }
-
 .address-form__save-action:hover:not(:disabled) {
-  border-color: #704b46;
+  border-color: var(--color-clay);
 
-  background: #704b46;
+  background: var(--color-clay);
 }
-
 .address-form__save-action:disabled {
   cursor: not-allowed;
 
   opacity: 0.55;
 }
-
 /* =========================================================
    PRIMARY ACTION / EMPTY STATE
 ========================================================= */
@@ -681,10 +629,10 @@
 
   padding: 0 18px;
 
-  border: 1px solid #8b5f59;
+  border: 1px solid var(--color-clay);
   border-radius: 4px;
 
-  background: #8b5f59;
+  background: var(--color-clay);
 
   color: #ffffff;
 
@@ -702,13 +650,11 @@
     background-color 160ms ease,
     border-color 160ms ease;
 }
-
 .address-form__primary-action:hover {
-  border-color: #704b46;
+  border-color: var(--color-clay);
 
-  background: #704b46;
+  background: var(--color-clay-deep);
 }
-
 /* =========================================================
    LOADING
 ========================================================= */
@@ -718,13 +664,11 @@
   max-width: 1180px;
   margin: 0 auto;
 }
-
 .address-form__loading-header {
   padding-bottom: 26px;
 
-  border-bottom: 1px solid #e3d9d5;
+  border-bottom: 1px solid var(--color-border);
 }
-
 .address-form__loading-fields {
   display: grid;
 
@@ -735,7 +679,6 @@
 
   margin-top: 28px;
 }
-
 .address-form__skeleton {
   position: relative;
 
@@ -743,13 +686,12 @@
 
   min-height: 46px;
 
-  border: 1px solid #e5dcd8;
+  border: 1px solid var(--color-border-light);
 
   border-radius: 4px;
 
-  background: #eee8e5;
+  background: var(--color-surface-soft);
 }
-
 .address-form__skeleton::after {
   content: "";
 
@@ -771,13 +713,11 @@
     1.6s
     infinite;
 }
-
 .address-form__skeleton--eyebrow {
   width: 110px;
   height: 10px;
   min-height: 10px;
 }
-
 .address-form__skeleton--title {
   width: min(420px, 70%);
   height: 42px;
@@ -785,7 +725,6 @@
 
   margin-top: 12px;
 }
-
 .address-form__skeleton--description {
   width: min(520px, 85%);
   height: 13px;
@@ -793,17 +732,15 @@
 
   margin-top: 10px;
 }
-
 .address-form__skeleton--field {
   height: 70px;
 }
 
 @keyframes address-skeleton-shimmer {
-  100% {
+100% {
     transform: translateX(100%);
   }
 }
-
 /* =========================================================
    EMPTY STATE
 ========================================================= */
@@ -815,13 +752,12 @@
 
   padding: 42px 30px;
 
-  border: 1px solid #e0d5d0;
+  border: 1px solid var(--color-border);
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   text-align: center;
 }
-
 .address-form__empty-icon {
   display: flex;
   align-items: center;
@@ -832,19 +768,17 @@
 
   margin: 0 auto 17px;
 
-  border: 1px solid #d8c1ba;
+  border: 1px solid var(--color-border);
 
   border-radius: 50%;
 
-  background: #f8f1ee;
+  background: var(--color-error-soft);
 
-  color: #8b5f59;
+  color: var(--color-clay);
 }
-
 .address-form__empty .address-form__eyebrow {
   margin-bottom: 8px;
 }
-
 .address-form__empty-title {
   margin: 0;
 
@@ -860,9 +794,8 @@
 
   letter-spacing: -0.02em;
 
-  color: #3d302d;
+  color: var(--color-text);
 }
-
 .address-form__empty-description {
   max-width: 410px;
 
@@ -876,9 +809,8 @@
   font-size: 13px;
   line-height: 1.6;
 
-  color: #756762;
+  color: var(--color-text-secondary);
 }
-
 /* =========================================================
    FOCUS / ACCESSIBILITY
 ========================================================= */
@@ -888,11 +820,10 @@
 .address-form__save-action:focus-visible,
 .address-form__primary-action:focus-visible,
 .address-default:focus-visible {
-  outline: 2px solid #a87870;
+  outline: 2px solid var(--color-clay);
 
   outline-offset: 2px;
 }
-
 .address-field__input:focus-visible,
 .address-field__textarea:focus-visible,
 .address-field__select:focus-visible {
@@ -904,19 +835,16 @@
 ========================================================= */
 
 @media (max-width: 900px) {
-  .address-form {
+.address-form {
     padding: 34px 22px 54px;
   }
-
-  .address-form__section {
+.address-form__section {
     padding: 26px 24px 30px;
   }
-
-  .address-form__section-heading {
+.address-form__section-heading {
     margin-bottom: 21px;
   }
-
-  .address-form__fields {
+.address-form__fields {
     gap: 16px;
   }
 }
@@ -926,117 +854,95 @@
 ========================================================= */
 
 @media (max-width: 640px) {
-  .address-form {
+.address-form {
     padding: 25px 14px 44px;
   }
-
-  .address-form__header {
+.address-form__header {
     margin-bottom: 24px;
   }
-
-  .address-form__back {
+.address-form__back {
     margin-bottom: 18px;
 
     font-size: 12px;
   }
-
-  .address-form__hero {
+.address-form__hero {
     gap: 11px;
 
     padding-bottom: 21px;
   }
-
-  .address-form__hero-icon {
+.address-form__hero-icon {
     width: 40px;
     height: 40px;
 
     flex-basis: 40px;
   }
-
-  .address-form__eyebrow {
+.address-form__eyebrow {
     margin-bottom: 6px;
 
     font-size: 10px;
   }
-
-  .address-form__title {
+.address-form__title {
     font-size: 32px;
   }
-
-  .address-form__description {
+.address-form__description {
     margin-top: 8px;
 
     font-size: 13px;
     line-height: 1.55;
   }
-
-  .address-form__body {
+.address-form__body {
     border-left: 0;
     border-right: 0;
   }
-
-  .address-form__section {
+.address-form__section {
     padding: 23px 0 27px;
   }
-
-  .address-form__section-heading {
+.address-form__section-heading {
     margin-bottom: 20px;
   }
-
-  .address-form__section-title {
+.address-form__section-title {
     font-size: 24px;
   }
-
-  .address-form__section-description {
+.address-form__section-description {
     font-size: 12px;
   }
-
-  .address-form__fields--two {
+.address-form__fields--two {
     grid-template-columns: 1fr;
   }
-
-  .address-form__fields {
+.address-form__fields {
     gap: 16px;
   }
-
-  .address-field__label {
+.address-field__label {
     margin-bottom: 6px;
 
     font-size: 13px;
   }
-
-  .address-field__input,
+.address-field__input,
   .address-field__select {
     height: 45px;
 
     font-size: 14px;
   }
-
-  .address-field__textarea {
+.address-field__textarea {
     min-height: 88px;
 
     font-size: 14px;
   }
-
-  .address-default {
+.address-default {
     align-items: flex-start;
 
     padding: 12px;
   }
-
-  .address-default__badge {
+.address-default__badge {
     display: none;
   }
-
-  .address-default__title {
+.address-default__title {
     font-size: 13px;
   }
-
-  .address-default__description {
+.address-default__description {
     font-size: 11px;
   }
-
-  .address-form__actions {
+.address-form__actions {
     display: grid;
 
     grid-template-columns:
@@ -1046,8 +952,7 @@
 
     padding-top: 18px;
   }
-
-  .address-form__secondary-action,
+.address-form__secondary-action,
   .address-form__save-action {
     width: 100%;
 
@@ -1058,22 +963,18 @@
 
     font-size: 11px;
   }
-
-  .address-form__loading-fields {
+.address-form__loading-fields {
     grid-template-columns: 1fr;
   }
-
-  .address-form__empty {
+.address-form__empty {
     margin: 42px auto;
 
     padding: 34px 18px;
   }
-
-  .address-form__empty-title {
+.address-form__empty-title {
     font-size: 27px;
   }
-
-  .address-form__empty-description {
+.address-form__empty-description {
     font-size: 12px;
   }
 }
@@ -1083,31 +984,26 @@
 ========================================================= */
 
 @media (max-width: 380px) {
-  .address-form {
+.address-form {
     padding: 21px 12px 40px;
   }
-
-  .address-form__title {
+.address-form__title {
     font-size: 29px;
   }
-
-  .address-form__hero-icon {
+.address-form__hero-icon {
     width: 37px;
     height: 37px;
 
     flex-basis: 37px;
   }
-
-  .address-field__input,
+.address-field__input,
   .address-field__select {
     height: 44px;
   }
-
-  .address-form__actions {
+.address-form__actions {
     grid-template-columns: 1fr;
   }
-
-  .address-form__secondary-action,
+.address-form__secondary-action,
   .address-form__save-action {
     width: 100%;
   }
@@ -1118,7 +1014,7 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .address-form *,
+.address-form *,
   .address-form {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

@@ -7,7 +7,6 @@
 .wishlist-grid {
   width: 100%;
 }
-
 /* =========================================================
    HEADER
    ========================================================= */
@@ -25,7 +24,6 @@
   border-bottom: 1px solid
     var(--color-border, var(--color-border));
 }
-
 .wishlist-grid__eyebrow {
   margin: 0 0 8px;
 
@@ -39,7 +37,6 @@
 
   color: var(--color-clay);
 }
-
 .wishlist-grid__title {
   margin: 0;
 
@@ -62,7 +59,6 @@
 
   color: var(--color-text, var(--color-text));
 }
-
 .wishlist-grid__count {
   flex: 0 0 auto;
 
@@ -78,7 +74,6 @@
 
   color: var(--color-text-muted, var(--color-text-secondary));
 }
-
 /* =========================================================
    PRODUCT GRID
    ========================================================= */
@@ -91,7 +86,6 @@
   column-gap: 24px;
   row-gap: 58px;
 }
-
 /* =========================================================
    FOOTER
    ========================================================= */
@@ -107,7 +101,6 @@
   border-top: 1px solid
     var(--color-border, var(--color-border));
 }
-
 /* =========================================================
    EMPTY STATE
    ========================================================= */
@@ -125,7 +118,6 @@
 
   text-align: center;
 }
-
 /* =========================================================
    EMPTY ICON
    ========================================================= */
@@ -148,18 +140,15 @@
   background: var(--color-bg-soft, var(--color-canvas));
   color: var(--color-clay);
 }
-
 .wishlist-grid__empty-icon svg {
   transition:
     transform 240ms
       cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 .wishlist-grid__empty:hover
   .wishlist-grid__empty-icon svg {
   transform: scale(1.08);
 }
-
 /* =========================================================
    EMPTY TITLE
    ========================================================= */
@@ -186,7 +175,6 @@
 
   color: var(--color-text, var(--color-text));
 }
-
 /* =========================================================
    EMPTY DESCRIPTION
    ========================================================= */
@@ -203,7 +191,6 @@
 
   color: var(--color-text-secondary, var(--color-text-secondary));
 }
-
 /* =========================================================
    EMPTY ACTION
    ========================================================= */
@@ -217,7 +204,7 @@
    ========================================================= */
 
 @media (max-width: 1279px) {
-  .wishlist-grid__products {
+.wishlist-grid__products {
     column-gap: 20px;
     row-gap: 48px;
   }
@@ -228,11 +215,10 @@
    ========================================================= */
 
 @media (max-width: 1023px) {
-  .wishlist-grid__header {
+.wishlist-grid__header {
     margin-bottom: 34px;
   }
-
-  .wishlist-grid__products {
+.wishlist-grid__products {
     grid-template-columns: repeat(
       3,
       minmax(0, 1fr)
@@ -241,8 +227,7 @@
     column-gap: 18px;
     row-gap: 44px;
   }
-
-  .wishlist-grid__footer {
+.wishlist-grid__footer {
     margin-top: 52px;
   }
 }
@@ -252,15 +237,14 @@
    ========================================================= */
 
 @media (max-width: 767px) {
-  .wishlist-grid__header {
+.wishlist-grid__header {
     align-items: flex-start;
 
     margin-bottom: 28px;
 
     padding-bottom: 18px;
   }
-
-  .wishlist-grid__products {
+.wishlist-grid__products {
     grid-template-columns: repeat(
       2,
       minmax(0, 1fr)
@@ -269,13 +253,11 @@
     column-gap: 14px;
     row-gap: 38px;
   }
-
-  .wishlist-grid__footer {
+.wishlist-grid__footer {
     margin-top: 44px;
     padding-top: 22px;
   }
-
-  .wishlist-grid__empty {
+.wishlist-grid__empty {
     padding: 58px 20px 64px;
   }
 }
@@ -285,28 +267,25 @@
    ========================================================= */
 
 @media (max-width: 639px) {
-  .wishlist-grid__header {
+.wishlist-grid__header {
     gap: 16px;
 
     margin-bottom: 24px;
   }
-
-  .wishlist-grid__eyebrow {
+.wishlist-grid__eyebrow {
     margin-bottom: 6px;
 
     font-size: 10px;
     letter-spacing: 0.15em;
   }
-
-  .wishlist-grid__title {
+.wishlist-grid__title {
     font-size: clamp(
       1.75rem,
       8vw,
       2.4rem
     );
   }
-
-  .wishlist-grid__count {
+.wishlist-grid__count {
     padding-top: 4px;
 
     font-size: 10px;
@@ -314,43 +293,36 @@
 
     white-space: nowrap;
   }
-
-  .wishlist-grid__products {
+.wishlist-grid__products {
     column-gap: 10px;
     row-gap: 32px;
   }
-
-  .wishlist-grid__footer {
+.wishlist-grid__footer {
     margin-top: 38px;
   }
-
-  .wishlist-grid__empty {
+.wishlist-grid__empty {
     min-height: 420px;
 
     padding: 48px 18px 56px;
   }
-
-  .wishlist-grid__empty-icon {
+.wishlist-grid__empty-icon {
     width: 62px;
     height: 62px;
 
     margin-bottom: 22px;
   }
-
-  .wishlist-grid__empty-icon svg {
+.wishlist-grid__empty-icon svg {
     width: 24px;
     height: 24px;
   }
-
-  .wishlist-grid__empty-title {
+.wishlist-grid__empty-title {
     font-size: clamp(
       1.8rem,
       9vw,
       2.5rem
     );
   }
-
-  .wishlist-grid__empty-description {
+.wishlist-grid__empty-description {
     max-width: 330px;
 
     margin-top: 14px;
@@ -358,8 +330,7 @@
     font-size: 11px;
     line-height: 1.7;
   }
-
-  .wishlist-grid__empty-action {
+.wishlist-grid__empty-action {
     margin-top: 26px;
   }
 }
@@ -369,24 +340,20 @@
    ========================================================= */
 
 @media (max-width: 390px) {
-  .wishlist-grid__products {
+.wishlist-grid__products {
     column-gap: 8px;
     row-gap: 28px;
   }
-
-  .wishlist-grid__header {
+.wishlist-grid__header {
     margin-bottom: 20px;
   }
-
-  .wishlist-grid__count {
+.wishlist-grid__count {
     font-size: 10px;
   }
-
-  .wishlist-grid__footer {
+.wishlist-grid__footer {
     margin-top: 34px;
   }
-
-  .wishlist-grid__empty {
+.wishlist-grid__empty {
     padding-left: 14px;
     padding-right: 14px;
   }
@@ -397,7 +364,24 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .wishlist-grid__empty-icon svg {
+.wishlist-grid__empty-icon svg {
     transition: none;
   }
+}
+
+/* The footer link uses the "darkOutline" button variant (white on
+   transparent), which is invisible on ivory. Re-skin it with the
+   secondary button colours without touching the markup. */
+.wishlist-grid__footer a {
+  border-color: var(--color-border-dark);
+
+  color: var(--color-clay-deep);
+}
+
+.wishlist-grid__footer a:hover {
+  border-color: var(--color-clay);
+
+  background: var(--color-clay);
+
+  color: #ffffff;
 }
