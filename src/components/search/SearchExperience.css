@@ -93,6 +93,14 @@
   letter-spacing: -0.04em;
 }
 
+.search-atelier__title {
+  text-wrap: balance;
+}
+
+.search-atelier__submit-icon {
+  display: none;
+}
+
 .search-atelier__title em {
   color: var(--color-clay);
 
@@ -869,17 +877,111 @@
   }
 
   .search-atelier__form {
-    min-height: 60px;
+    min-height: 58px;
 
-    padding: 6px 6px 6px 16px;
+    gap: 4px;
+
+    padding: 5px 5px 5px 16px;
+  }
+
+  /* The submit button carries its own icon on phones */
+
+  .search-atelier__form-icon {
+    display: none;
   }
 
   .search-atelier__input {
+    height: 46px;
+
+    /* 16px stops iOS zooming into the field */
     font-size: 16px;
+
+    text-overflow: ellipsis;
   }
 
   .search-atelier__submit {
-    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    min-height: 48px;
+
+    padding: 0;
+  }
+
+  .search-atelier__submit-label {
+    display: none;
+  }
+
+  .search-atelier__submit-icon {
+    display: block;
+  }
+
+  .search-atelier__clear {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* Keyboard shortcuts mean nothing on a phone */
+
+  .search-atelier__shortcuts {
+    display: none;
+  }
+
+  .search-atelier__hero {
+    padding-bottom: 28px;
+  }
+
+  .search-atelier__title {
+    font-size: clamp(1.9rem, 9vw, 2.4rem);
+  }
+
+  /* Filters scroll sideways instead of stacking in rows */
+
+  .search-atelier__filters {
+    flex-wrap: nowrap;
+
+    margin-inline: -16px;
+    padding: 0 16px 4px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+  .search-atelier__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .search-atelier__filter {
+    flex: 0 0 auto;
+
+    min-height: 38px;
+
+    padding: 0 14px;
+
+    font-size: 11px;
+  }
+
+  .search-atelier__group-head h2 {
+    font-size: 1.6rem;
+  }
+
+  /* Leave room for the floating help buttons */
+
+  .search-atelier__links a,
+  .search-atelier__card {
+    padding-right: 56px;
+  }
+
+  .search-atelier__card {
+    position: relative;
+  }
+
+  .search-atelier__card > svg {
+    position: absolute;
+    right: 18px;
   }
 
   .search-atelier__grid {
@@ -890,12 +992,6 @@
 
   .search-atelier__tiles {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 380px) {
-  .search-atelier__submit {
-    display: none;
   }
 }
 

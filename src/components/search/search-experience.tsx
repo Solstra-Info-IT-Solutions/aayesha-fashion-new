@@ -13,7 +13,6 @@ import {
 import {
   ArrowUpRight,
   Clock3,
-  CornerDownLeft,
   Search,
   X,
 } from "lucide-react";
@@ -432,7 +431,7 @@ export function SearchExperience({
                   clearInput();
                 }
               }}
-              placeholder="Search pieces, collections, policies…"
+              placeholder="Search pieces, help, more…"
               aria-label="Search the Aayesha website"
               autoComplete="off"
               enterKeyHint="search"
@@ -452,9 +451,19 @@ export function SearchExperience({
 
             <button
               type="submit"
+              aria-label="Search"
               className="search-atelier__submit"
             >
-              Search
+              <span className="search-atelier__submit-label">
+                Search
+              </span>
+
+              <Search
+                size={20}
+                strokeWidth={1.7}
+                aria-hidden="true"
+                className="search-atelier__submit-icon"
+              />
             </button>
           </form>
 
@@ -469,15 +478,10 @@ export function SearchExperience({
                 </>
               )
             ) : (
-              <>
-                Press{" "}
-                <kbd>/</kbd> to search from anywhere on this
-                page, <kbd>Esc</kbd> to clear.{" "}
-                <CornerDownLeft
-                  size={12}
-                  aria-hidden="true"
-                />
-              </>
+              <span className="search-atelier__shortcuts">
+                Press <kbd>/</kbd> to search from anywhere on
+                this page, <kbd>Esc</kbd> to clear.
+              </span>
             )}
           </p>
         </div>
