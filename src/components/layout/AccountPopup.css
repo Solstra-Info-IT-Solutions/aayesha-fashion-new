@@ -821,7 +821,7 @@
 ========================================================= */
 
 .account-popup__action--delete:hover {
-  background: rgba(149, 92, 86, 0.07);
+  background: var(--color-error-soft);
 
   border-color:
     rgba(171, 72, 72, 0.13);
@@ -829,7 +829,7 @@
 
 .account-popup__action--delete:hover
   .account-popup__action-icon {
-  background: rgba(149, 92, 86, 0.07);
+  background: var(--color-error-soft);
 
   border-color:
     rgba(171, 72, 72, 0.18);

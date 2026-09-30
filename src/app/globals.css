@@ -68,6 +68,8 @@
   --color-success: #65745f;
   --color-warning: #8a6a48;
   --color-error: #955c56;
+  --color-error-soft: #f5eae6;
+  --color-success-soft: #edf1e9;
 
   /* =======================================================
      COMPATIBILITY ALIASES
