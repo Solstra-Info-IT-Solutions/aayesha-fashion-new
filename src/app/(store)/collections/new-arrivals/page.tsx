@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 
 import { getProducts } from "@/lib/api/products";
+import {
+  getAvailableCollections,
+  getCollectionDefinition,
+  heroImageOf,
+} from "@/lib/collections";
 import type { ProductSort } from "@/types/product";
 
-import { ShopHeader } from "@/components/shop/shop-header";
-import { ShopFilters } from "@/components/shop/shop-filters";
-import { ShopProductGrid } from "@/components/shop/shop-product-grid";
-import "./NewArrivalsPage.css";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
+import { CollectionLanding } from "@/components/collections/collection-landing";
 
 type NewArrivalsPageProps = {
   searchParams: Promise<{
@@ -60,6 +63,8 @@ export default async function NewArrivalsPage({
 }: NewArrivalsPageProps) {
   const params = await searchParams;
 
+  const definition = getCollectionDefinition("new-arrivals");
+
   const categoryId = params.category || undefined;
 
   const sort =
@@ -68,102 +73,46 @@ export default async function NewArrivalsPage({
       ? (params.sort as ProductSort)
       : "newest";
 
-  const minPrice = parseNumber(params.minPrice);
-  const maxPrice = parseNumber(params.maxPrice);
-
-  const inStockOnly =
-    params.availability === "in-stock"
-      ? true
-      : undefined;
-
   const response = await getProducts({
     page: 1,
     limit: 48,
     isNew: true,
     categoryId,
-    minPrice,
-    maxPrice,
-    inStockOnly,
+    minPrice: parseNumber(params.minPrice),
+    maxPrice: parseNumber(params.maxPrice),
+    inStockOnly:
+      params.availability === "in-stock" ? true : undefined,
     search: params.search,
     sort,
   });
 
+  const collections = await getAvailableCollections();
+
   return (
-  <main className="new-arrivals-page">
-    {/* =====================================================
-        HEADER + TOOLBAR
-    ===================================================== */}
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Collections", url: "/collections" },
+          {
+            name: definition.label,
+            url: definition.href,
+          },
+        ]}
+      />
 
-    <section className="new-arrivals-page__hero">
-      <div className="new-arrivals-page__container">
-        <div className="new-arrivals-page__heading">
-          <div className="new-arrivals-page__eyebrow-row">
-            <span className="new-arrivals-page__eyebrow-line" />
-
-            <span className="new-arrivals-page__eyebrow">
-              Collection
-            </span>
-          </div>
-
-          <h1 className="new-arrivals-page__title">
-            New Arrivals
-          </h1>
-        </div>
-      </div>
-    </section>
-
-    {/* =====================================================
-        PRODUCT CONTENT
-    ===================================================== */}
-
-    <section className="new-arrivals-page__content">
-      <div className="new-arrivals-page__container new-arrivals-page__content-container">
-        <div className="new-arrivals-page__layout">
-
-          {/* =================================================
-              FILTERS
-          ================================================= */}
-
-          <aside className="new-arrivals-page__filters">
-            <div className="new-arrivals-page__filters-sticky">
-              <div className="new-arrivals-page__filters-card">
-
-                <div className="new-arrivals-page__filters-header">
-                  <span className="new-arrivals-page__filters-title">
-                    Filters
-                  </span>
-
-                  <span className="new-arrivals-page__filters-label">
-                    Refine
-                  </span>
-                </div>
-
-                <div className="new-arrivals-page__filters-body">
-                  <ShopFilters
-                    products={response.products}
-                    selectedCategory={categoryId}
-                  />
-                </div>
-
-              </div>
-            </div>
-          </aside>
-
-          {/* =================================================
-              PRODUCTS
-          ================================================= */}
-
-          <div className="new-arrivals-page__products">
-            <ShopProductGrid
-              products={response.products}
-              category={categoryId}
-              sort={sort}
-            />
-          </div>
-
-        </div>
-      </div>
-    </section>
-  </main>
-);
+      <CollectionLanding
+        slug={definition.slug}
+        title={definition.label}
+        eyebrow={definition.eyebrow}
+        description={definition.description}
+        mood="Fresh silhouettes, added every season."
+        heroImage={heroImageOf(response.products)}
+        collections={collections}
+        products={response.products}
+        sort={sort}
+        categoryId={categoryId}
+      />
+    </>
+  );
 }

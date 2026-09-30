@@ -7,6 +7,7 @@ import {
   type Product,
 } from "@/types/product";
 import type { Category } from "@/types/category";
+import { collectionDefinitions } from "@/lib/collections";
 
 import {
   CollectionsIndex,
@@ -21,58 +22,6 @@ export const metadata: Metadata = {
     canonical: "/collections",
   },
 };
-
-/* =========================================================
-   COLLECTION DEFINITIONS
-   New Arrivals and Best Sellers are always available. The
-   others exist only when the matching category does, so no
-   card ever links to a missing page.
-========================================================= */
-
-const fixedCollections = [
-  {
-    slug: "new-arrivals",
-    label: "New Arrivals",
-    eyebrow: "Just introduced",
-    description:
-      "Discover the latest pieces added to the Aayesha Fashion collection.",
-    href: "/collections/new-arrivals",
-    filter: { isNew: true },
-  },
-  {
-    slug: "best-sellers",
-    label: "Best Sellers",
-    eyebrow: "Most loved",
-    description:
-      "Explore the pieces our customers return to time and again.",
-    href: "/collections/best-sellers",
-    filter: { isBestSeller: true },
-  },
-] as const;
-
-const categoryCollections = [
-  {
-    slug: "festive",
-    label: "Festive Edit",
-    eyebrow: "For celebrations",
-    description:
-      "Luminous colours and graceful silhouettes for ceremonies and evenings worth dressing for.",
-  },
-  {
-    slug: "ethnic",
-    label: "Ethnic Wear",
-    eyebrow: "Timeless",
-    description:
-      "Indian silhouettes, thoughtfully made and finished by hand.",
-  },
-  {
-    slug: "contemporary",
-    label: "Contemporary",
-    eyebrow: "Modern",
-    description:
-      "Fresh, easy takes on Indian womenswear for everyday.",
-  },
-] as const;
 
 function imageOf(product?: Product): string {
   return (product && getPrimaryProductMedia(product)?.src) || "";
@@ -135,8 +84,28 @@ export default async function CollectionsPage() {
 
   const collections: CollectionSummary[] = [];
 
-  for (const item of fixedCollections) {
-    const summary = await summarise(item.filter);
+  for (const item of collectionDefinitions) {
+    let summary: { image: string; count: number | null };
+    let image = "";
+
+    if (item.kind === "flag") {
+      summary = await summarise(
+        item.slug === "new-arrivals"
+          ? { isNew: true }
+          : { isBestSeller: true },
+      );
+    } else {
+      const category = categories.find(
+        (entry) => entry.slug === item.slug && entry.isActive,
+      );
+
+      if (!category) {
+        continue;
+      }
+
+      summary = await summarise({ categoryId: category.id });
+      image = category.image;
+    }
 
     collections.push({
       slug: item.slug,
@@ -144,29 +113,7 @@ export default async function CollectionsPage() {
       eyebrow: item.eyebrow,
       description: item.description,
       href: item.href,
-      image: summary.image || fallbackImage,
-      count: summary.count,
-    });
-  }
-
-  for (const item of categoryCollections) {
-    const category = categories.find(
-      (entry) => entry.slug === item.slug && entry.isActive,
-    );
-
-    if (!category) {
-      continue;
-    }
-
-    const summary = await summarise({ categoryId: category.id });
-
-    collections.push({
-      slug: item.slug,
-      label: item.label,
-      eyebrow: item.eyebrow,
-      description: item.description,
-      href: `/collections/${item.slug}`,
-      image: category.image || summary.image || fallbackImage,
+      image: image || summary.image || fallbackImage,
       count: summary.count,
     });
   }

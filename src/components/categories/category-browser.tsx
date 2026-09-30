@@ -197,11 +197,10 @@ export function CategoryBrowser({
                         {category.name}
                       </span>
 
-                      {isSelected && (
-                        <span className="category-browser__tile-badge">
-                          Viewing
-                        </span>
-                      )}
+                      <span
+                        className="category-browser__tile-mark"
+                        aria-hidden="true"
+                      />
                     </Link>
                   </li>
                 );
