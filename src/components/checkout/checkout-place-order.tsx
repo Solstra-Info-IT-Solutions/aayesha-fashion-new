@@ -151,6 +151,17 @@ export function CheckoutPlaceOrder() {
      LOAD CART FROM BACKEND
   ========================================================== */
 
+  /* Guests have no cart: reset while rendering (guarded). */
+  if (
+    isAuthInitialized &&
+    !isAuthenticated &&
+    (loadingCart || items.length > 0 || subtotal !== 0)
+  ) {
+    setItems([]);
+    setSubtotal(0);
+    setLoadingCart(false);
+  }
+
   useEffect(() => {
     let cancelled = false;
 
@@ -159,9 +170,6 @@ export function CheckoutPlaceOrder() {
     }
 
     if (!isAuthenticated) {
-      setItems([]);
-      setSubtotal(0);
-      setLoadingCart(false);
       return;
     }
 

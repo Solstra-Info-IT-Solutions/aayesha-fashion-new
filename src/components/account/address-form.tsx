@@ -230,6 +230,17 @@ export function AddressForm({
      AUTH + LOAD EDIT ADDRESS
   ======================================================= */
 
+  /* Create mode has nothing to fetch, so it is never "loading". */
+  if (
+    mode === "create" &&
+    isInitialized &&
+    isAuthenticated &&
+    accessToken &&
+    isLoading
+  ) {
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     if (!isInitialized) {
       return;
@@ -253,11 +264,11 @@ export function AddressForm({
     }
 
     if (mode === "create") {
-      setIsLoading(false);
       return;
     }
 
     if (!addressId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch-on-mount: state updates follow the async request
       setPageError(
         "The address could not be identified.",
       );

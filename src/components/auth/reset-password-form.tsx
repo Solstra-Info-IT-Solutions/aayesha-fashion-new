@@ -197,11 +197,18 @@ export function ResetPasswordForm() {
      SYNC EMAIL
   ======================================================= */
 
-  useEffect(() => {
+  const [
+    previousEmailFromUrl,
+    setPreviousEmailFromUrl,
+  ] = useState(emailFromUrl);
+
+  if (emailFromUrl !== previousEmailFromUrl) {
+    setPreviousEmailFromUrl(emailFromUrl);
+
     if (emailFromUrl) {
       setEmail(emailFromUrl);
     }
-  }, [emailFromUrl]);
+  }
 
   /* =======================================================
      VALIDATION

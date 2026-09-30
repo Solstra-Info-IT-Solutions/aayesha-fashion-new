@@ -78,14 +78,24 @@ export function CheckoutAddress() {
      LOAD SAVED ADDRESSES
   ========================================================= */
 
+  /* Logged out (or not restored yet): clear while rendering (guarded). */
+  if (
+    (!isInitialized ||
+      !isAuthenticated ||
+      !accessToken) &&
+    (savedAddresses.length > 0 ||
+      selectedAddressId !== null)
+  ) {
+    setSavedAddresses([]);
+    setSelectedAddressId(null);
+  }
+
   useEffect(() => {
     if (
       !isInitialized ||
       !isAuthenticated ||
       !accessToken
     ) {
-      setSavedAddresses([]);
-      setSelectedAddressId(null);
       return;
     }
 

@@ -117,9 +117,13 @@ export function CheckoutCoupon() {
      KEEP INPUT IN SYNC
   ======================================================= */
 
-  useEffect(() => {
+  const [previousCouponCode, setPreviousCouponCode] =
+    useState(couponCode);
+
+  if (couponCode !== previousCouponCode) {
+    setPreviousCouponCode(couponCode);
     setInput(couponCode);
-  }, [couponCode]);
+  }
 
   /* =======================================================
      READ COUPON FROM URL
@@ -143,8 +147,10 @@ export function CheckoutCoupon() {
       return;
     }
 
-    setInput(normalizedCoupon);
-
+    /*
+     * The input follows the stored coupon code (see "KEEP INPUT IN
+     * SYNC" above), so only the store needs updating here.
+     */
     setCouponCode(
       normalizedCoupon,
     );

@@ -146,8 +146,12 @@ function CheckoutSuccessContent() {
     (state) => state.isInitialized,
   );
 
-  const [orderNumber, setOrderNumber] =
-    useState("");
+  /* Derived straight from the URL; no state copy needed. */
+  const orderNumber =
+    searchParams
+      .get("orderNumber")
+      ?.trim()
+      .toUpperCase() ?? "";
 
   const [order, setOrder] =
     useState<OrderDetails | null>(null);
@@ -162,28 +166,20 @@ function CheckoutSuccessContent() {
     useState<string | null>(null);
 
   /* ==========================================================
-     READ ORDER NUMBER FROM URL
+     MISSING ORDER NUMBER
   ========================================================== */
 
-  useEffect(() => {
-    const normalizedOrderNumber =
-      searchParams
-        .get("orderNumber")
-        ?.trim()
-        .toUpperCase();
+  const missingOrderNumberMessage =
+    "We could not find an order number for this confirmation page.";
 
-    if (!normalizedOrderNumber) {
-      setOrderNumber("");
-      setError(
-        "We could not find an order number for this confirmation page.",
-      );
-      setLoading(false);
-      return;
-    }
-
-    setOrderNumber(normalizedOrderNumber);
-    setError(null);
-  }, [searchParams]);
+  if (
+    !orderNumber &&
+    (loading ||
+      error !== missingOrderNumberMessage)
+  ) {
+    setLoading(false);
+    setError(missingOrderNumberMessage);
+  }
 
   /* ==========================================================
      LOAD ORDER

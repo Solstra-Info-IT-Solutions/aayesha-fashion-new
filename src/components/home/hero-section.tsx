@@ -12,6 +12,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
 } from "react";
 
 import type { HomepageHeroSlide } from "@/types/homepage";
@@ -24,29 +25,62 @@ interface HeroSectionProps {
   slides: HomepageHeroSlide[];
 }
 
+const REDUCED_MOTION_QUERY =
+  "(prefers-reduced-motion: reduce)";
+
+function subscribeReducedMotion(
+  onChange: () => void,
+) {
+  const mediaQuery = window.matchMedia(
+    REDUCED_MOTION_QUERY,
+  );
+
+  mediaQuery.addEventListener("change", onChange);
+
+  return () =>
+    mediaQuery.removeEventListener("change", onChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
 export function HeroSection({
   slides,
 }: HeroSectionProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [rawActiveIndex, setActiveIndex] = useState(0);
+  /*
+   * Autoplay starts paused for visitors who prefer reduced motion.
+   * The media query is read through useSyncExternalStore (false on
+   * the server, so hydration matches). Once the visitor presses
+   * pause/resume their choice wins over the system setting.
+   */
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    () => false,
+  );
+
+  const [pausedOverride, setPausedOverride] = useState<
+    boolean | null
+  >(null);
+
+  const isPaused = pausedOverride ?? prefersReducedMotion;
 
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
   const totalSlides = slides.length;
 
+  /* If the slide list shrinks, fall back to the first slide. */
+  const activeIndex =
+    totalSlides > 0 && rawActiveIndex >= totalSlides
+      ? 0
+      : rawActiveIndex;
+
   /* =========================================================
      SAFETY
   ========================================================= */
-
-  useEffect(() => {
-    if (
-      activeIndex >= totalSlides &&
-      totalSlides > 0
-    ) {
-      setActiveIndex(0);
-    }
-  }, [activeIndex, totalSlides]);
 
   /* =========================================================
      NAVIGATION
@@ -149,17 +183,6 @@ export function HeroSection({
   /* =========================================================
      REDUCED MOTION
   ========================================================= */
-
-  useEffect(() => {
-    const mediaQuery =
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      );
-
-    if (mediaQuery.matches) {
-      setIsPaused(true);
-    }
-  }, []);
 
   /* =========================================================
      TOUCH / SWIPE
@@ -477,9 +500,7 @@ export function HeroSection({
               <button
                 type="button"
                 onClick={() =>
-                  setIsPaused(
-                    (value) => !value,
-                  )
+                  setPausedOverride(!isPaused)
                 }
                 aria-label={
                   isPaused

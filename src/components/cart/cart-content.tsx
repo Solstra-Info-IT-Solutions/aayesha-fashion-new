@@ -51,6 +51,16 @@ export function CartContent() {
      LOAD CART
   ========================================================= */
 
+  /* Guests have no cart: reset while rendering (guarded). */
+  if (
+    isInitialized &&
+    !isAuthenticated &&
+    (isLoading || cart !== null)
+  ) {
+    setCart(null);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     let cancelled = false;
 
@@ -59,8 +69,6 @@ export function CartContent() {
     }
 
     if (!isAuthenticated) {
-      setCart(null);
-      setIsLoading(false);
       return;
     }
 

@@ -15,6 +15,16 @@ export function CartCount() {
     (state) => state.isAuthenticated,
   );
 
+  const [wasAuthenticated, setWasAuthenticated] = useState(isAuthenticated);
+
+  if (wasAuthenticated !== isAuthenticated) {
+    setWasAuthenticated(isAuthenticated);
+
+    if (!isAuthenticated) {
+      setCount(0);
+    }
+  }
+
   useEffect(() => {
     let cancelled = false;
 
@@ -24,8 +34,6 @@ export function CartCount() {
      * "Authentication is required" error on every page load.
      */
     if (!isAuthenticated) {
-      setCount(0);
-
       return () => {
         cancelled = true;
       };

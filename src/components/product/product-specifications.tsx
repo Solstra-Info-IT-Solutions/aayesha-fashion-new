@@ -15,7 +15,8 @@ interface ProductSpecificationsProps {
 export function ProductSpecifications({
   product,
 }: ProductSpecificationsProps) {
-  const [categoryName, setCategoryName] = useState("");
+  const [loadedCategoryName, setCategoryName] = useState("");
+  const categoryName = product.categoryId ? loadedCategoryName : "";
 
   useEffect(() => {
     let cancelled = false;
@@ -45,8 +46,6 @@ export function ProductSpecifications({
 
     if (product.categoryId) {
       loadCategory();
-    } else {
-      setCategoryName("");
     }
 
     return () => {

@@ -16,18 +16,18 @@ import {
 } from "@/lib/recent-searches/recent-searches";
 
 import "./RecentSearches.css";
+import { useIsClient } from "@/hooks/use-is-client";
 
 export function RecentSearches() {
+  /*
+   * Read once on the client. Nothing is rendered until
+   * useIsClient() flips after hydration, so server and first
+   * client render still match.
+   */
   const [searches, setSearches] =
-    useState<string[]>([]);
+    useState<string[]>(() => getRecentSearches());
 
-  const [mounted, setMounted] =
-    useState(false);
-
-  useEffect(() => {
-    setSearches(getRecentSearches());
-    setMounted(true);
-  }, []);
+  const mounted = useIsClient();
 
   if (!mounted || searches.length === 0) {
     return null;

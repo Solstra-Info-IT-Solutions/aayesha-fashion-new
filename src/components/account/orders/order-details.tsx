@@ -222,6 +222,24 @@ export function OrderDetails({
      LOAD ORDER
   ========================================================== */
 
+  /*
+   * Guests have nothing to load. Reset while rendering (guarded, so
+   * it settles immediately) instead of calling setState
+   * synchronously inside the effect below.
+   */
+  const isGuest =
+    isInitialized &&
+    (!isAuthenticated || !accessToken);
+
+  if (
+    isGuest &&
+    (isLoading ||
+      error !== "Please login to view this order.")
+  ) {
+    setIsLoading(false);
+    setError("Please login to view this order.");
+  }
+
   useEffect(() => {
     if (!isInitialized) {
       return;
@@ -231,10 +249,6 @@ export function OrderDetails({
       !isAuthenticated ||
       !accessToken
     ) {
-      setIsLoading(false);
-      setError(
-        "Please login to view this order.",
-      );
       return;
     }
 

@@ -19,6 +19,7 @@ import {
 import { useRouter } from "next/navigation";
 
 import "./LoginRequiredPopup.css";
+import { useIsClient } from "@/hooks/use-is-client";
 
 /* =========================================================
    TYPES
@@ -45,20 +46,11 @@ export function LoginRequiredPopup({
 }: LoginRequiredPopupProps) {
   const router = useRouter();
 
-  const [mounted, setMounted] =
-    useState(false);
+  const mounted = useIsClient();
 
   /* =======================================================
      PORTAL
   ======================================================= */
-
-  useEffect(() => {
-    setMounted(true);
-
-    return () => {
-      setMounted(false);
-    };
-  }, []);
 
   /* =======================================================
      ESCAPE + BODY LOCK

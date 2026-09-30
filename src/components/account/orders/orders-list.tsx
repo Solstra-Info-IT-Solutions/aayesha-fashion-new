@@ -238,6 +238,19 @@ export function OrdersList() {
      LOAD ORDERS
   ========================================================== */
 
+  /*
+   * Guests have nothing to load. Reset while rendering (guarded, so
+   * it settles immediately) instead of calling setState
+   * synchronously inside the effect below.
+   */
+  const isGuest =
+    isInitialized &&
+    (!isAuthenticated || !accessToken);
+
+  if (isGuest && isLoading) {
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     if (!isInitialized) {
       return;
@@ -247,7 +260,6 @@ export function OrdersList() {
       !isAuthenticated ||
       !accessToken
     ) {
-      setIsLoading(false);
       return;
     }
 

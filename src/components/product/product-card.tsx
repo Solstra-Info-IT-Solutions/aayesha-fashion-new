@@ -91,6 +91,7 @@ export function ProductCard({
   }, [isAuthenticated, isInitialized, product._id]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch-on-mount: state updates follow the async request
     void syncCartQuantity();
   }, [syncCartQuantity]);
 

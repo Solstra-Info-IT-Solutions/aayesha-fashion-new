@@ -105,6 +105,20 @@ export function SavedAddresses() {
      INITIAL LOAD
   ======================================================= */
 
+  /*
+   * Guests have nothing to load. Reset while rendering (guarded, so
+   * it settles immediately) instead of calling setState
+   * synchronously inside the effect below.
+   */
+  const isGuest =
+    isInitialized &&
+    (!isAuthenticated || !accessToken);
+
+  if (isGuest && (isLoading || addresses.length > 0)) {
+    setAddresses([]);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     if (!isInitialized) {
       return;
@@ -114,11 +128,10 @@ export function SavedAddresses() {
       !isAuthenticated ||
       !accessToken
     ) {
-      setAddresses([]);
-      setIsLoading(false);
       return;
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch-on-mount: state updates follow the async request
     void loadAddresses();
   }, [
     isInitialized,

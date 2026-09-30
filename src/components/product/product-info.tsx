@@ -25,7 +25,8 @@ export function ProductInfo({
   quantity,
   onQuantityChange,
 }: ProductInfoProps) {
-  const [categoryLabel, setCategoryLabel] = useState("");
+  const [loadedCategoryLabel, setCategoryLabel] = useState("");
+  const categoryLabel = product.categoryId ? loadedCategoryLabel : "";
 
   useEffect(() => {
     let cancelled = false;
@@ -52,8 +53,6 @@ export function ProductInfo({
 
     if (product.categoryId) {
       loadCategory();
-    } else {
-      setCategoryLabel("");
     }
 
     return () => {
