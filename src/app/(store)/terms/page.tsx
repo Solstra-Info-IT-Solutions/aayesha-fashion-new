@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <ContentPage
+      group="policies"
+      currentHref="/terms"
+      variant="policy"
       eyebrow="Legal · The House"
       title="Terms & Conditions"
       description="These Terms & Conditions establish the framework for using the Aayesha Fashion website and purchasing products through it. They explain how the website may be used, how orders are placed and fulfilled, how customer accounts and information are handled, and the responsibilities that apply throughout the shopping experience."

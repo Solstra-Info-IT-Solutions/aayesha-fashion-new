@@ -3,6 +3,10 @@
 import { useMemo } from "react";
 
 import Link from "next/link";
+import {
+  usePathname,
+  useSearchParams,
+} from "next/navigation";
 
 import { SlidersHorizontal } from "lucide-react";
 
@@ -26,64 +30,32 @@ interface ShopProductGridProps {
   sort?: ProductSort;
 }
 
-function getUrlParams() {
-  if (typeof window === "undefined") {
-    return {
-      availability: null,
-    };
-  }
-
-  const params = new URLSearchParams(
-    window.location.search,
-  );
-
-  return {
-    availability:
-      params.get("availability"),
-  };
-}
-
-function getCollectionContext() {
-  if (typeof window === "undefined") {
-    return {
-      isNew: false,
-      isBestSeller: false,
-    };
-  }
-
-  const pathname = window.location.pathname;
-  const params = new URLSearchParams(
-    window.location.search,
-  );
-
-  return {
-    isNew:
-      pathname ===
-        "/collections/new-arrivals" ||
-      params.get("isNew") === "true",
-
-    isBestSeller:
-      pathname ===
-        "/collections/best-sellers" ||
-      params.get("isBestSeller") ===
-        "true",
-  };
-}
-
 export function ShopProductGrid({
   products,
   category,
   sort = "relevance",
 }: ShopProductGridProps) {
-  const urlParams = useMemo(
-    () => getUrlParams(),
-    [products, category, sort],
-  );
+  /*
+   * Read from the router rather than window, so the server and the
+   * browser filter the list in exactly the same way.
+   */
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const collectionContext = useMemo(
-    () => getCollectionContext(),
-    [products, category, sort],
-  );
+  const availability = searchParams.get("availability");
+  const isNewParam = searchParams.get("isNew");
+  const isBestSellerParam = searchParams.get("isBestSeller");
+
+  const urlParams = { availability };
+
+  const collectionContext = {
+    isNew:
+      pathname === "/collections/new-arrivals" ||
+      isNewParam === "true",
+    isBestSeller:
+      pathname === "/collections/best-sellers" ||
+      isBestSellerParam === "true",
+  };
 
   const filteredProducts = useMemo(() => {
     let result = products.filter(

@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 export default function ReturnsPage() {
   return (
     <ContentPage
+      group="information"
+      currentHref="/returns"
+      variant="info"
       eyebrow="Customer Care · Returns"
       title="Returns & Exchange"
       description="We want every Aayesha Fashion purchase to feel considered from discovery to delivery. This guide explains how returns and exchanges work, what condition a product should be in, how to raise a request, what happens after we receive a returned item and the information you may need throughout the process."

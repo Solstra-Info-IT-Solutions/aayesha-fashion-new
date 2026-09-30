@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 
 import type { Product } from "@/types/product";
-import { getInventoryStatus } from "@/types/product";
 
 import { getCategories } from "@/services/category.service";
 import type { Category } from "@/types/category";
@@ -38,17 +37,6 @@ type FilterSectionKey =
   | "price"
   | "availability";
 
-type Availability =
-  | "in-stock"
-  | "out-of-stock";
-
-const availabilityLabels: Record<
-  Availability,
-  string
-> = {
-  "in-stock": "In Stock",
-  "out-of-stock": "Out of Stock",
-};
 
 const priceRanges = [
   {
@@ -160,6 +148,16 @@ export function ShopFilters({
   const pathname = usePathname();
   const search = useSearchParams().toString();
 
+  const urlParams = new URLSearchParams(search);
+
+  const activeCount =
+    (urlParams.get("category") ? 1 : 0) +
+    (urlParams.get("minPrice") ? 1 : 0) +
+    (urlParams.get("availability") ? 1 : 0);
+
+  const inStockOnly =
+    urlParams.get("availability") === "in-stock";
+
   const [openSections, setOpenSections] =
     useState<FilterSectionKey[]>([
       "category",
@@ -223,25 +221,6 @@ export function ShopFilters({
     );
   }, [categories, products]);
 
-  const availabilityOptions =
-    useMemo<Availability[]>(() => {
-      const values =
-        new Set<Availability>();
-
-      products.forEach((product) => {
-        const status =
-          getInventoryStatus(product);
-
-        values.add(
-          status === "out-of-stock"
-            ? "out-of-stock"
-            : "in-stock",
-        );
-      });
-
-      return Array.from(values);
-    }, [products]);
-
   function toggleSection(
     section: FilterSectionKey,
   ) {
@@ -297,30 +276,39 @@ export function ShopFilters({
           : "shop-filters shop-filters--desktop"
       }
     >
+      {(!mobile || activeCount > 0) && (
       <header className="shop-filters__header">
         <div>
-          <p className="shop-filters__eyebrow">
-            Refine
-          </p>
-
           <h2 className="shop-filters__title">
-            Shop by
+            Filters
           </h2>
+
+          {activeCount > 0 && (
+            <p className="shop-filters__applied">
+              {activeCount} applied
+            </p>
+          )}
         </div>
 
-        <button
-          type="button"
-          onClick={resetFilters}
-          className="shop-filters__reset"
-        >
-          <RotateCcw
-            size={12}
-            strokeWidth={1.4}
-          />
+        {activeCount > 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              resetFilters();
+              onClose?.();
+            }}
+            className="shop-filters__reset"
+          >
+            <RotateCcw
+              size={12}
+              strokeWidth={1.6}
+            />
 
-          <span>Reset</span>
-        </button>
+            <span>Clear all</span>
+          </button>
+        )}
       </header>
+      )}
 
       <div className="shop-filters__sections">
         <FilterSection
@@ -346,6 +334,11 @@ export function ShopFilters({
                       category.id,
                   ).length;
 
+                /* Categories with nothing to show only add noise. */
+                if (count === 0 && !active) {
+                  return null;
+                }
+
                 return (
                   <Link
                     key={category.id}
@@ -363,14 +356,7 @@ export function ShopFilters({
                     }`}
                   >
                     <span className="shop-filters__category-name">
-                      <span
-                        className="shop-filters__category-dot"
-                        aria-hidden="true"
-                      />
-
-                      <span>
-                        {category.name}
-                      </span>
+                      {category.name}
                     </span>
 
                     <span className="shop-filters__count">
@@ -392,7 +378,7 @@ export function ShopFilters({
             toggleSection("price")
           }
         >
-          <div className="shop-filters__list">
+          <div className="shop-filters__chips shop-filters__chips--price">
             {priceRanges.map((range) => {
               const active =
                 selectedPrice ===
@@ -401,9 +387,9 @@ export function ShopFilters({
               return (
                 <label
                   key={range.label}
-                  className={`shop-filters__price ${
+                  className={`shop-filters__chip ${
                     active
-                      ? "shop-filters__price--active"
+                      ? "shop-filters__chip--selected"
                       : ""
                   }`}
                 >
@@ -415,23 +401,19 @@ export function ShopFilters({
                         : "desktop-price"
                     }
                     checked={active}
-                    onChange={() =>
+                    onChange={() => {
                       handlePriceChange(
                         range.label,
                         range.min,
                         range.max,
-                      )
-                    }
+                      );
+
+                      onClose?.();
+                    }}
+                    className="shop-filters__chip-input"
                   />
 
-                  <span
-                    className="shop-filters__radio"
-                    aria-hidden="true"
-                  />
-
-                  <span className="shop-filters__price-label">
-                    {range.label}
-                  </span>
+                  {range.label}
                 </label>
               );
             })}
@@ -451,64 +433,41 @@ export function ShopFilters({
             )
           }
         >
-          <div className="shop-filters__list">
-            {availabilityOptions.map(
-              (status) => (
-                <Link
-                  key={status}
-                  href={
-                    status === "in-stock"
-                      ? buildFilterHref(
-                          "availability",
-                          status,
-                          search,
-                          pathname,
-                        )
-                      : buildFilterHref(
-                          "availability",
-                          "",
-                          search,
-                          pathname,
-                        )
-                  }
-                  onClick={onClose}
-                  className="shop-filters__availability"
-                >
-                  <span
-                    className={`shop-filters__availability-dot ${
-                      status === "in-stock"
-                        ? "shop-filters__availability-dot--available"
-                        : "shop-filters__availability-dot--sold"
-                    }`}
-                    aria-hidden="true"
-                  />
+          <div className="shop-filters__chips">
+            <Link
+              href={buildFilterHref(
+                "availability",
+                "",
+                search,
+                pathname,
+              )}
+              onClick={onClose}
+              aria-current={
+                !inStockOnly ? "true" : undefined
+              }
+              className="shop-filters__chip"
+            >
+              All
+            </Link>
 
-                  <span>
-                    {availabilityLabels[
-                      status
-                    ]}
-                  </span>
-                </Link>
-              ),
-            )}
+            <Link
+              href={buildFilterHref(
+                "availability",
+                "in-stock",
+                search,
+                pathname,
+              )}
+              onClick={onClose}
+              aria-current={
+                inStockOnly ? "true" : undefined
+              }
+              className="shop-filters__chip"
+            >
+              In stock
+            </Link>
           </div>
         </FilterSection>
       </div>
-
-      {!mobile && (
-        <div className="shop-filters__note">
-          <p className="shop-filters__note-title">
-            Find your signature style
-          </p>
-
-          <p className="shop-filters__note-text">
-            Explore refined silhouettes
-            designed for celebrations,
-            everyday elegance and modern
-            Indian dressing.
-          </p>
-        </div>
-      )}
     </aside>
   );
 }

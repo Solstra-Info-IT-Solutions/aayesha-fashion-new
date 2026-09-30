@@ -13,6 +13,9 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <ContentPage
+      group="policies"
+      currentHref="/privacy-policy"
+      variant="policy"
       eyebrow="Legal · Privacy"
       title="Privacy Policy"
       description="At Aayesha Fashion, privacy is part of a thoughtful customer experience. This policy explains what information may be collected when you browse, shop, create an account or communicate with us, how that information may be used, the circumstances in which it may be shared, and the choices that may be available to you."

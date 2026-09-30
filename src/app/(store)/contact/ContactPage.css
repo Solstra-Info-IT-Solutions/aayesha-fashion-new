@@ -361,3 +361,21 @@
     transition-duration: 0.01ms !important;
   }
 } 
+/* =========================================================
+   REFINEMENTS — match the redesigned content pages
+========================================================= */
+
+.contact-page__care-card {
+  border-radius: 14px;
+
+  background: var(--color-surface);
+}
+
+.contact-page__care-note p {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.contact-page__care-description {
+  font-size: 14px;
+}

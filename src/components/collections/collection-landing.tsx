@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { SlidersHorizontal, X } from "lucide-react";
 
 import type { Product, ProductSort } from "@/types/product";
 
@@ -51,6 +53,37 @@ export function CollectionLanding({
   categoryId,
 }: CollectionLandingProps) {
   const [query, setQuery] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
+  const searchParams = useSearchParams();
+
+  const activeFilters = ["category", "minPrice", "availability"].filter(
+    (key) => searchParams.get(key),
+  ).length;
+
+  /* Bottom sheet: lock page scroll and close on Escape. */
+  useEffect(() => {
+    if (!filtersOpen) {
+      return;
+    }
+
+    const previous = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setFiltersOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previous;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [filtersOpen]);
 
   const trimmed = query.trim();
 
@@ -157,13 +190,34 @@ export function CollectionLanding({
         aria-label={`Search ${title}`}
       >
         <div className="collection-landing__container">
-          <PageSearch
-            value={query}
-            onChange={setQuery}
-            label={`Search within ${title}`}
-            placeholder={`Search ${title}…`}
-            status={status}
-          />
+          <div className="collection-landing__toolbar-row">
+            <PageSearch
+              value={query}
+              onChange={setQuery}
+              label={`Search within ${title}`}
+              placeholder={`Search ${title}…`}
+              status={status}
+            />
+
+            <button
+              type="button"
+              onClick={() => setFiltersOpen(true)}
+              aria-haspopup="dialog"
+              className="collection-landing__filters-button"
+            >
+              <SlidersHorizontal
+                size={17}
+                strokeWidth={1.6}
+                aria-hidden="true"
+              />
+              Filters
+              {activeFilters > 0 && (
+                <span className="collection-landing__filters-badge">
+                  {activeFilters}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       </section>
 
@@ -239,6 +293,61 @@ export function CollectionLanding({
           </div>
         </div>
       </section>
+
+      {/* =====================================================
+          FILTERS — BOTTOM SHEET (phones and tablets)
+      ===================================================== */}
+
+      {filtersOpen && (
+        <div
+          className="collection-landing__sheet"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Filters"
+        >
+          <button
+            type="button"
+            aria-label="Close filters"
+            onClick={() => setFiltersOpen(false)}
+            className="collection-landing__sheet-backdrop"
+          />
+
+          <div className="collection-landing__sheet-panel">
+            <header className="collection-landing__sheet-header">
+              <h2>Filters</h2>
+
+              <button
+                type="button"
+                onClick={() => setFiltersOpen(false)}
+                aria-label="Close filters"
+                className="collection-landing__sheet-close"
+              >
+                <X size={20} strokeWidth={1.6} />
+              </button>
+            </header>
+
+            <div className="collection-landing__sheet-body">
+              <ShopFilters
+                products={products}
+                selectedCategory={categoryId}
+                mobile
+                onClose={() => setFiltersOpen(false)}
+              />
+            </div>
+
+            <footer className="collection-landing__sheet-footer">
+              <button
+                type="button"
+                onClick={() => setFiltersOpen(false)}
+                className="home-cta"
+              >
+                Show {visibleProducts.length}{" "}
+                {visibleProducts.length === 1 ? "piece" : "pieces"}
+              </button>
+            </footer>
+          </div>
+        </div>
+      )}
 
       {/* =====================================================
           CONTINUE EXPLORING

@@ -13,6 +13,9 @@ export const metadata: Metadata = {
 export default function RefundPolicyPage() {
   return (
     <ContentPage
+      group="policies"
+      currentHref="/refund-policy"
+      variant="policy"
       eyebrow="Legal · Customer Care"
       title="Refund Policy"
       description="At Aayesha Fashion, we want the post-purchase experience to feel as considered as the shopping experience itself. This Refund Policy explains when a refund may be available, how returned products may be assessed, how approved refunds are processed, and what customers can expect when a refund request is reviewed."
