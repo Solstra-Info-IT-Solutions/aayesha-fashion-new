@@ -9,26 +9,23 @@
 
   overflow: hidden;
 
-  background: var(--color-text);
-  color: var(--color-surface);
+  background: var(--color-surface-soft);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text);
 
   padding: 38px 0 16px;
 }
-
 .site-footer *,
 .site-footer *::before,
 .site-footer *::after {
   box-sizing: border-box;
 }
-
 .site-footer__inner {
   width: 100%;
   max-width: 1280px;
 
   margin: 0 auto;
 }
-
-
 /* =========================================================
    INTRO
 ========================================================= */
@@ -44,9 +41,8 @@
   padding-bottom: 26px;
 
   border-bottom: 1px solid
-    rgba(252, 238, 241, 0.14);
+    var(--color-border);
 }
-
 .site-footer__eyebrow {
   margin: 0 0 7px;
 
@@ -54,7 +50,7 @@
 
   font-family: var(--font-body);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
 
   line-height: 1.2;
@@ -63,11 +59,10 @@
 
   text-transform: uppercase;
 }
-
 .site-footer__intro-title {
   margin: 0;
 
-  color: var(--color-surface);
+  color: var(--color-text);
 
   font-family: var(--font-display);
 
@@ -83,24 +78,21 @@
 
   letter-spacing: -0.035em;
 }
-
 .site-footer__intro-title span {
   color: var(--color-secondary);
 
   font-style: italic;
 }
-
 .site-footer__intro-description {
   width: 100%;
   max-width: 360px;
 
   margin: 0;
 }
-
 .site-footer__intro-description p {
   margin: 0;
 
-  color: rgba(252, 238, 241, 0.72);
+  color: var(--color-text-secondary);
 
   font-family: var(--font-body);
 
@@ -108,8 +100,6 @@
 
   line-height: 1.6;
 }
-
-
 /* =========================================================
    MAIN FOOTER
 ========================================================= */
@@ -125,12 +115,9 @@
 
   padding: 28px 0;
 }
-
 .site-footer__brand-column {
   min-width: 0;
 }
-
-
 /* =========================================================
    BRAND
 ========================================================= */
@@ -144,7 +131,6 @@
 
   text-decoration: none;
 }
-
 .site-footer__brand-image-wrap {
   display: flex;
 
@@ -161,18 +147,12 @@
   overflow: hidden;
 
   border: 1px solid
-    rgba(252, 238, 241, 0.25);
+    var(--color-border-dark);
 
   border-radius: 50%;
 
-  background: rgba(
-    255,
-    255,
-    255,
-    0.025
-  );
+  background: var(--color-surface);
 }
-
 .site-footer__brand-image {
   width: 100%;
   height: 100%;
@@ -181,9 +161,8 @@
 
   object-fit: contain;
 }
-
 .site-footer__brand-name {
-  color: var(--color-surface);
+  color: var(--color-text);
 
   font-family: var(--font-display);
 
@@ -193,12 +172,9 @@
 
   line-height: 1;
 }
-
 .site-footer__brand-tagline {
   display: none;
 }
-
-
 /* =========================================================
    SOCIAL
 ========================================================= */
@@ -206,15 +182,14 @@
 .site-footer__social {
   margin-top: 16px;
 }
-
 .site-footer__micro-label {
   margin: 0 0 7px;
 
-  color: rgba(252, 238, 241, 0.58);
+  color: var(--color-text-secondary);
 
   font-family: var(--font-body);
 
-  font-size: 8px;
+  font-size: 10px;
 
   font-weight: 700;
 
@@ -224,7 +199,6 @@
 
   text-transform: uppercase;
 }
-
 .site-footer__social-list {
   display: flex;
 
@@ -232,7 +206,6 @@
 
   gap: 7px;
 }
-
 .site-footer__social-link {
   display: inline-flex;
 
@@ -245,11 +218,11 @@
   flex: 0 0 31px;
 
   border: 1px solid
-    rgba(252, 238, 241, 0.22);
+    var(--color-border-dark);
 
   border-radius: 50%;
 
-  color: rgba(252, 238, 241, 0.82);
+  color: var(--color-text-secondary);
 
   background: transparent;
 
@@ -260,16 +233,13 @@
     border-color 0.18s ease,
     color 0.18s ease;
 }
-
 .site-footer__social-link:hover {
   border-color: var(--color-secondary);
 
   background: var(--color-secondary);
 
-  color: var(--color-text);
+  color: #ffffff;
 }
-
-
 /* =========================================================
    THREE NAVIGATION GRIDS
 ========================================================= */
@@ -284,12 +254,9 @@
 
   min-width: 0;
 }
-
 .site-footer__column {
   min-width: 0;
 }
-
-
 /* =========================================================
    COLUMN HEADER
 ========================================================= */
@@ -304,17 +271,15 @@
   padding-bottom: 8px;
 
   border-bottom: 1px solid
-    rgba(252, 238, 241, 0.18);
+    var(--color-border-dark);
 }
-
 .site-footer__column-number {
   display: none !important;
 }
-
 .site-footer__column-title {
   margin: 0;
 
-  color: var(--color-surface);
+  color: var(--color-text);
 
   font-family: var(--font-body);
 
@@ -328,8 +293,6 @@
 
   text-transform: uppercase;
 }
-
-
 /* =========================================================
    COLUMN LINKS
 ========================================================= */
@@ -343,7 +306,6 @@
 
   gap: 5px;
 }
-
 .site-footer__column-link {
   position: relative;
 
@@ -359,7 +321,7 @@
 
   padding: 4px 0;
 
-  color: rgba(252, 238, 241, 0.78);
+  color: var(--color-text-secondary);
 
   font-family: var(--font-body);
 
@@ -375,7 +337,6 @@
     color 0.18s ease,
     padding-left 0.18s ease;
 }
-
 .site-footer__column-link::after {
   content: "";
 
@@ -391,22 +352,17 @@
 
   transition: width 0.18s ease;
 }
-
 .site-footer__column-link:hover {
   padding-left: 4px;
 
-  color: var(--color-surface);
+  color: var(--color-text);
 }
-
 .site-footer__column-link:hover::after {
   width: 16px;
 }
-
 .site-footer__column-arrow {
   display: none;
 }
-
-
 /* =========================================================
    CUSTOMER CARE
 ========================================================= */
@@ -421,16 +377,14 @@
   padding: 14px 0;
 
   border-top: 1px solid
-    rgba(252, 238, 241, 0.12);
+    var(--color-border);
 
   border-bottom: 1px solid
-    rgba(252, 238, 241, 0.12);
+    var(--color-border);
 }
-
 .site-footer__contact {
   min-width: 0;
 }
-
 .site-footer__contact-link {
   display: inline-flex;
 
@@ -440,7 +394,7 @@
 
   max-width: 100%;
 
-  color: rgba(252, 238, 241, 0.82);
+  color: var(--color-text-secondary);
 
   font-family: var(--font-body);
 
@@ -456,12 +410,9 @@
 
   transition: color 0.18s ease;
 }
-
 .site-footer__contact-link:hover {
   color: var(--color-secondary);
 }
-
-
 /* =========================================================
    NEWSLETTER
 ========================================================= */
@@ -478,13 +429,12 @@
   padding: 22px 0;
 
   border-bottom: 1px solid
-    rgba(252, 238, 241, 0.12);
+    var(--color-border);
 }
-
 .site-footer__newsletter-title {
   margin: 0;
 
-  color: var(--color-surface);
+  color: var(--color-text);
 
   font-family: var(--font-display);
 
@@ -496,13 +446,11 @@
 
   letter-spacing: -0.025em;
 }
-
 .site-footer__newsletter-title span {
   color: var(--color-secondary);
 
   font-style: italic;
 }
-
 .site-footer__newsletter-link {
   display: inline-flex;
 
@@ -512,11 +460,11 @@
 
   flex: 0 0 auto;
 
-  color: var(--color-surface);
+  color: var(--color-text);
 
   font-family: var(--font-body);
 
-  font-size: 9px;
+  font-size: 10px;
 
   font-weight: 700;
 
@@ -530,11 +478,9 @@
 
   transition: color 0.18s ease;
 }
-
 .site-footer__newsletter-link:hover {
   color: var(--color-secondary);
 }
-
 .site-footer__newsletter-icon {
   display: inline-flex;
 
@@ -548,7 +494,7 @@
   flex: 0 0 30px;
 
   border: 1px solid
-    rgba(252, 238, 241, 0.25);
+    var(--color-border-dark);
 
   border-radius: 50%;
 
@@ -559,17 +505,14 @@
     border-color 0.18s ease,
     color 0.18s ease;
 }
-
 .site-footer__newsletter-link:hover
   .site-footer__newsletter-icon {
   border-color: var(--color-secondary);
 
   background: var(--color-secondary);
 
-  color: var(--color-text);
+  color: #ffffff;
 }
-
-
 /* =========================================================
    COPYRIGHT
 ========================================================= */
@@ -585,20 +528,17 @@
 
   padding-top: 11px;
 }
-
 .site-footer__copyright {
   margin: 0;
 
-  color: rgba(252, 238, 241, 0.52);
+  color: var(--color-text-secondary);
 
   font-family: var(--font-body);
 
-  font-size: 9px;
+  font-size: 10px;
 
   line-height: 1.4;
 }
-
-
 /* =========================================================
    HIDE OLD BOTTOM POLICY LINKS
    Policies now live in the third grid.
@@ -607,7 +547,6 @@
 .site-footer__legal-links {
   display: none;
 }
-
 .site-footer__legal-link {
   display: none;
 }
@@ -618,21 +557,18 @@
 ========================================================= */
 
 @media (max-width: 1023px) {
-  .site-footer {
+.site-footer {
     padding: 32px 0 15px;
   }
-
-  .site-footer__intro {
+.site-footer__intro {
     gap: 35px;
 
     padding-bottom: 23px;
   }
-
-  .site-footer__intro-title {
+.site-footer__intro-title {
     font-size: 2.25rem;
   }
-
-  .site-footer__main {
+.site-footer__main {
     grid-template-columns:
       170px
       minmax(0, 1fr);
@@ -641,16 +577,13 @@
 
     padding: 24px 0;
   }
-
-  .site-footer__columns {
+.site-footer__columns {
     gap: 25px;
   }
-
-  .site-footer__column-link {
+.site-footer__column-link {
     font-size: 11px;
   }
-
-  .site-footer__customer-care {
+.site-footer__customer-care {
     gap: 30px;
   }
 }
@@ -661,12 +594,10 @@
 ========================================================= */
 
 @media (max-width: 767px) {
-  .site-footer {
+.site-footer {
     padding: 26px 0 13px;
   }
-
-
-  /* -----------------------------------------
+/* -----------------------------------------
      INTRO
   ----------------------------------------- */
 
@@ -675,25 +606,20 @@
 
     padding-bottom: 20px;
   }
-
-  .site-footer__intro-title {
+.site-footer__intro-title {
     font-size: 1.7rem;
   }
-
-  .site-footer__intro-description {
+.site-footer__intro-description {
     max-width: 310px;
 
     margin-top: 8px;
   }
-
-  .site-footer__intro-description p {
-    font-size: 9px;
+.site-footer__intro-description p {
+    font-size: 10px;
 
     line-height: 1.5;
   }
-
-
-  /* -----------------------------------------
+/* -----------------------------------------
      MAIN
   ----------------------------------------- */
 
@@ -702,9 +628,7 @@
 
     padding: 20px 0;
   }
-
-
-  /* -----------------------------------------
+/* -----------------------------------------
      BRAND
   ----------------------------------------- */
 
@@ -716,24 +640,19 @@
 
     margin-right: 8px;
   }
-
-  .site-footer__brand-name {
+.site-footer__brand-name {
     font-size: 1.2rem;
   }
-
-  .site-footer__social {
+.site-footer__social {
     margin-top: 12px;
   }
-
-  .site-footer__social-link {
+.site-footer__social-link {
     width: 28px;
     height: 28px;
 
     flex-basis: 28px;
   }
-
-
-  /* -----------------------------------------
+/* -----------------------------------------
      THREE GRIDS
   ----------------------------------------- */
 
@@ -745,45 +664,37 @@
 
     margin-top: 22px;
   }
-
-  .site-footer__column-heading {
+.site-footer__column-heading {
     min-height: 25px;
 
     padding-bottom: 6px;
   }
-
-  .site-footer__column-title {
-    font-size: 7px;
+.site-footer__column-title {
+    font-size: 10px;
 
     letter-spacing: 0.07em;
   }
-
-  .site-footer__column-links {
+.site-footer__column-links {
     padding-top: 7px;
 
     gap: 4px;
   }
-
-  .site-footer__column-link {
+.site-footer__column-link {
     padding: 2px 0;
 
-    color: rgba(252, 238, 241, 0.76);
+    color: var(--color-text-secondary);
 
-    font-size: 8px;
+    font-size: 10px;
 
     line-height: 1.35;
   }
-
-  .site-footer__column-link::after {
+.site-footer__column-link::after {
     display: none;
   }
-
-  .site-footer__column-link:hover {
+.site-footer__column-link:hover {
     padding-left: 0;
   }
-
-
-  /* -----------------------------------------
+/* -----------------------------------------
      CUSTOMER CARE
   ----------------------------------------- */
 
@@ -792,19 +703,15 @@
 
     padding: 12px 0;
   }
-
-  .site-footer__micro-label {
+.site-footer__micro-label {
     margin-bottom: 4px;
 
-    font-size: 6.5px;
+    font-size: 10px;
   }
-
-  .site-footer__contact-link {
-    font-size: 8px;
+.site-footer__contact-link {
+    font-size: 10px;
   }
-
-
-  /* -----------------------------------------
+/* -----------------------------------------
      NEWSLETTER
   ----------------------------------------- */
 
@@ -813,35 +720,29 @@
 
     gap: 15px;
   }
-
-  .site-footer__newsletter-title {
+.site-footer__newsletter-title {
     font-size: 1.25rem;
   }
-
-  .site-footer__newsletter-link {
+.site-footer__newsletter-link {
     gap: 5px;
 
-    font-size: 6.5px;
+    font-size: 10px;
   }
-
-  .site-footer__newsletter-icon {
+.site-footer__newsletter-icon {
     width: 27px;
     height: 27px;
 
     flex-basis: 27px;
   }
-
-
-  /* -----------------------------------------
+/* -----------------------------------------
      COPYRIGHT
   ----------------------------------------- */
 
   .site-footer__legal {
     padding-top: 9px;
   }
-
-  .site-footer__copyright {
-    font-size: 7px;
+.site-footer__copyright {
+    font-size: 10px;
   }
 }
 
@@ -851,55 +752,44 @@
 ========================================================= */
 
 @media (max-width: 420px) {
-  .site-footer {
+.site-footer {
     padding-top: 22px;
   }
-
-  .site-footer__intro {
+.site-footer__intro {
     padding-bottom: 17px;
   }
-
-  .site-footer__intro-title {
+.site-footer__intro-title {
     font-size: 1.5rem;
   }
-
-  .site-footer__intro-description {
+.site-footer__intro-description {
     margin-top: 6px;
   }
-
-  .site-footer__intro-description p {
-    font-size: 8px;
+.site-footer__intro-description p {
+    font-size: 10px;
   }
-
-  .site-footer__main {
+.site-footer__main {
     padding: 17px 0;
   }
-
-  .site-footer__columns {
+.site-footer__columns {
     gap: 8px;
 
     margin-top: 18px;
   }
-
-  .site-footer__column-title {
-    font-size: 6.5px;
+.site-footer__column-title {
+    font-size: 10px;
   }
-
-  .site-footer__column-link {
-    font-size: 7.5px;
+.site-footer__column-link {
+    font-size: 10px;
   }
-
-  .site-footer__customer-care {
+.site-footer__customer-care {
     gap: 14px;
 
     padding: 10px 0;
   }
-
-  .site-footer__newsletter {
+.site-footer__newsletter {
     padding: 17px 0;
   }
-
-  .site-footer__newsletter-title {
+.site-footer__newsletter-title {
     font-size: 1.12rem;
   }
 }
@@ -910,36 +800,28 @@
 ========================================================= */
 
 @media (max-width: 340px) {
-  .site-footer {
+.site-footer {
     padding-top: 19px;
   }
-
-  .site-footer__intro-title {
+.site-footer__intro-title {
     font-size: 1.38rem;
   }
-
-  .site-footer__intro-description p {
-    font-size: 7.8px;
+.site-footer__intro-description p {
+    font-size: 10px;
   }
-
-  .site-footer__columns {
+.site-footer__columns {
     gap: 6px;
   }
-
-  .site-footer__column-title {
-    font-size: 6px;
+.site-footer__column-title {
+    font-size: 10px;
   }
-
-  .site-footer__column-link {
-    font-size: 7px;
+.site-footer__column-link {
+    font-size: 10px;
   }
-
-  .site-footer__newsletter-title {
+.site-footer__newsletter-title {
     font-size: 1rem;
   }
 }
-
-
 /* =========================================================
    ACCESSIBILITY
 ========================================================= */
@@ -951,8 +833,6 @@
 
   border-radius: 3px;
 }
-
-
 /* =========================================================
    OVERFLOW SAFETY
 ========================================================= */
@@ -967,7 +847,6 @@
 .site-footer__legal {
   max-width: 100%;
 }
-
 .site-footer a,
 .site-footer p,
 .site-footer h2,
@@ -981,7 +860,7 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .site-footer *,
+.site-footer *,
   .site-footer *::before,
   .site-footer *::after {
     transition: none !important;

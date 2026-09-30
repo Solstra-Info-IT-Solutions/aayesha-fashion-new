@@ -12,10 +12,10 @@
   padding: 24px 0;
 
   border-top: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   border-bottom: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   background: transparent;
 }
@@ -48,13 +48,13 @@
   height: 40px;
 
   border: 1px solid
-    var(--color-border-dark, #b9a7a0);
+    var(--color-border-dark, var(--color-clay));
 
   color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   background:
-    var(--color-surface, #fbf8f5);
+    var(--color-surface, var(--color-surface));
 
   transition:
     background-color 180ms ease,
@@ -77,10 +77,10 @@
 .product-reviews:hover
   .product-reviews__icon {
   border-color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   background:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   color: #ffffff;
 
@@ -115,7 +115,7 @@
   text-transform: uppercase;
 
   color:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 }
 
 /* =========================================================
@@ -136,7 +136,7 @@
   line-height: 1.65;
 
   color:
-    var(--color-text-muted, #8d817b);
+    var(--color-text-muted, var(--color-text-secondary));
 }
 
 /* =========================================================
@@ -145,7 +145,7 @@
 
 .product-reviews:focus-within {
   border-color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 /* =========================================================
@@ -167,7 +167,7 @@
   }
 
   .product-reviews__title {
-    font-size: 9.5px;
+    font-size: 10px;
 
     letter-spacing: 0.14em;
   }
@@ -205,7 +205,7 @@
   }
 
   .product-reviews__title {
-    font-size: 8.5px;
+    font-size: 10px;
 
     letter-spacing: 0.13em;
   }
@@ -238,11 +238,11 @@
   }
 
   .product-reviews__title {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .product-reviews__description {
-    font-size: 9.5px;
+    font-size: 10px;
   }
 }
 

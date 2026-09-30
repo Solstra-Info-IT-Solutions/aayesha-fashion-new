@@ -11,7 +11,6 @@
   color: var(--color-text);
   background: var(--color-bg);
 }
-
 /* ==========================================================
    HEADER
 ========================================================== */
@@ -25,30 +24,26 @@
   padding-bottom: 22px;
   border-bottom: 1px solid var(--color-border);
 }
-
 .orders-list__heading {
   min-width: 0;
 }
-
 .orders-list__eyebrow-row {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 9px;
 }
-
 .orders-list__eyebrow-line {
   width: 22px;
   height: 1px;
   flex: 0 0 22px;
-  background: var(--color-accent);
+  background: var(--color-clay);
 }
-
 .orders-list__eyebrow {
   margin: 0;
 
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
 
@@ -57,7 +52,6 @@
 
   color: var(--color-accent-dark);
 }
-
 .orders-list__title {
   margin: 0;
 
@@ -69,7 +63,6 @@
 
   color: var(--color-text);
 }
-
 .orders-list__description {
   max-width: 500px;
 
@@ -81,7 +74,6 @@
 
   color: var(--color-text-secondary);
 }
-
 /* ==========================================================
    BUTTONS
 ========================================================== */
@@ -102,7 +94,7 @@
   overflow: hidden;
 
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.11em;
@@ -117,7 +109,6 @@
     background-color 180ms ease,
     transform 180ms ease;
 }
-
 .orders-list__button span {
   display: inline-flex;
   align-items: center;
@@ -125,7 +116,6 @@
 
   padding: 0 13px;
 }
-
 .orders-list__button svg {
   display: block;
 
@@ -144,48 +134,40 @@
     color 180ms ease,
     transform 180ms ease;
 }
-
 .orders-list__button--secondary {
   flex: 0 0 auto;
 
   color: var(--color-text);
   background: var(--color-surface);
 }
-
 .orders-list__button--secondary:hover {
   color: var(--color-text-inverse);
   border-color: var(--color-accent-dark);
   background: var(--color-accent-dark);
 }
-
 .orders-list__button--secondary:hover svg {
   color: var(--color-text-inverse);
   background: rgba(255, 255, 255, 0.08);
 }
-
 .orders-list__button--primary {
-  color: var(--color-text-inverse);
+  color: #ffffff;
   border-color: var(--color-accent-dark);
   background: var(--color-accent-dark);
 }
-
 .orders-list__button--primary:hover {
-  color: var(--color-text-inverse);
-  border-color: var(--color-text);
-  background: var(--color-text);
+  color: #ffffff;
+  border-color: var(--color-clay-deep);
+  background: var(--color-clay-deep);
 }
-
 .orders-list__button--primary:hover svg {
-  color: var(--color-text-inverse);
+  color: #ffffff;
   background: rgba(255, 255, 255, 0.08);
 }
-
 .orders-list__button:focus-visible,
 .order-list-card__view:focus-visible {
-  outline: 1px solid var(--color-accent);
+  outline: 1px solid var(--color-clay);
   outline-offset: 3px;
 }
-
 /* ==========================================================
    COUNT
 ========================================================== */
@@ -197,19 +179,17 @@
   gap: 12px;
   margin: 19px 0 13px;
 }
-
 .orders-list__count-line {
   height: 1px;
   flex: 1;
 
   background: var(--color-border);
 }
-
 .orders-list__count {
   flex: 0 0 auto;
 
   font-family: var(--font-body);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.16em;
@@ -217,7 +197,6 @@
 
   color: var(--color-text-muted);
 }
-
 /* ==========================================================
    ORDER ITEMS
 ========================================================== */
@@ -227,7 +206,6 @@
   flex-direction: column;
   gap: 9px;
 }
-
 /* ==========================================================
    ORDER CARD
 ========================================================== */
@@ -241,7 +219,6 @@
     transform 180ms ease,
     box-shadow 180ms ease;
 }
-
 .order-list-card:hover {
   border-color: var(--color-border-dark);
 
@@ -250,11 +227,9 @@
   box-shadow:
     0 8px 22px rgba(72, 53, 47, 0.05);
 }
-
 .order-list-card__inner {
   width: 100%;
 }
-
 /* ==========================================================
    META
 ========================================================== */
@@ -274,7 +249,6 @@
 
   background: var(--color-bg-soft);
 }
-
 .order-list-card__meta-left {
   display: flex;
   align-items: center;
@@ -282,12 +256,11 @@
   gap: 15px;
   min-width: 0;
 }
-
 .order-list-card__meta-label {
   margin: 0 0 4px;
 
   font-family: var(--font-body);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.13em;
@@ -296,7 +269,6 @@
 
   color: var(--color-text-muted);
 }
-
 .order-list-card__number {
   margin: 0;
 
@@ -308,7 +280,6 @@
 
   color: var(--color-text);
 }
-
 .order-list-card__meta-divider {
   width: 1px;
   height: 25px;
@@ -317,7 +288,6 @@
 
   background: var(--color-border);
 }
-
 .order-list-card__date {
   display: inline-flex;
   align-items: center;
@@ -325,11 +295,10 @@
   gap: 6px;
 
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
 
   color: var(--color-text-secondary);
 }
-
 .order-list-card__date svg {
   flex: 0 0 auto;
 
@@ -338,7 +307,6 @@
 
   color: var(--color-accent-dark);
 }
-
 .order-list-card__status {
   display: inline-flex;
   align-items: center;
@@ -352,7 +320,7 @@
   border-radius: 0;
 
   font-family: var(--font-body);
-  font-size: 6.8px;
+  font-size: 10px;
   font-weight: 700;
 
   letter-spacing: 0.1em;
@@ -361,27 +329,22 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-
 .orders-list__status--success {
-  color: #60745c;
+  color: var(--color-success);
   background: rgba(96, 116, 92, 0.07);
 }
-
 .orders-list__status--danger {
-  color: #9b625c;
+  color: var(--color-clay);
   background: rgba(155, 98, 92, 0.07);
 }
-
 .orders-list__status--warning {
-  color: #967b52;
+  color: var(--color-clay);
   background: rgba(150, 123, 82, 0.07);
 }
-
 .orders-list__status--progress {
   color: var(--color-accent-dark);
   background: var(--color-accent-soft);
 }
-
 /* ==========================================================
    ORDER CONTENT
 ========================================================== */
@@ -396,7 +359,6 @@
 
   padding: 17px 16px;
 }
-
 .order-list-card__product {
   display: flex;
   align-items: center;
@@ -405,7 +367,6 @@
 
   min-width: 0;
 }
-
 .order-list-card__image {
   position: relative;
 
@@ -423,7 +384,6 @@
   background: var(--color-bg-soft);
   border: 1px solid var(--color-border);
 }
-
 .order-list-card__image img {
   width: 100%;
   height: 100%;
@@ -432,14 +392,12 @@
 
   object-fit: cover;
 }
-
 .order-list-card__image > svg {
   width: 20px;
   height: 20px;
 
   color: var(--color-text-muted);
 }
-
 .order-list-card__quantity {
   position: absolute;
 
@@ -461,21 +419,19 @@
   color: #fff;
 
   font-family: var(--font-body);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 700;
 
   line-height: 1;
 }
-
 .order-list-card__product-info {
   min-width: 0;
 }
-
 .order-list-card__brand {
   margin: 0 0 6px;
 
   font-family: var(--font-body);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.14em;
@@ -485,7 +441,6 @@
 
   color: var(--color-accent-dark);
 }
-
 .order-list-card__product-name {
   max-width: 500px;
 
@@ -505,17 +460,15 @@
 
   color: var(--color-text);
 }
-
 .order-list-card__more {
   margin: 6px 0 0;
 
   font-family: var(--font-body);
-  font-size: 8.5px;
+  font-size: 10px;
   line-height: 1.4;
 
   color: var(--color-text-muted);
 }
-
 /* ==========================================================
    SUMMARY
 ========================================================== */
@@ -526,16 +479,14 @@
 
   gap: 18px;
 }
-
 .order-list-card__total {
   min-width: 90px;
 }
-
 .order-list-card__total p {
   margin: 0 0 5px;
 
   font-family: var(--font-body);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.12em;
@@ -545,7 +496,6 @@
 
   color: var(--color-text-muted);
 }
-
 .order-list-card__total strong {
   display: block;
 
@@ -557,7 +507,6 @@
 
   color: var(--color-text);
 }
-
 .order-list-card__view {
   display: inline-flex;
   align-items: center;
@@ -575,7 +524,7 @@
   background: transparent;
 
   font-family: var(--font-body);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.1em;
@@ -591,7 +540,6 @@
     background-color 180ms ease,
     border-color 180ms ease;
 }
-
 .order-list-card__view svg {
   width: 13px;
   height: 13px;
@@ -600,18 +548,15 @@
 
   transition: transform 180ms ease;
 }
-
 .order-list-card__view:hover {
   color: var(--color-text-inverse);
   border-color: var(--color-accent-dark);
   background: var(--color-accent-dark);
 }
-
 .order-list-card__view:hover svg {
   color: var(--color-text-inverse);
   transform: translateX(2px);
 }
-
 /* ==========================================================
    EMPTY / AUTH / ERROR STATE
 ========================================================== */
@@ -623,7 +568,6 @@
   align-items: center;
   justify-content: center;
 }
-
 .orders-list__state-card {
   width: 100%;
   max-width: 470px;
@@ -635,7 +579,6 @@
   border: 1px solid var(--color-border);
   background: var(--color-surface);
 }
-
 .orders-list__state-icon {
   width: 46px;
   height: 46px;
@@ -651,17 +594,14 @@
   color: var(--color-accent-dark);
   background: var(--color-bg-soft);
 }
-
 .orders-list__state-icon svg {
   width: 20px;
   height: 20px;
 }
-
 .orders-list__state-card .orders-list__eyebrow-row {
   justify-content: center;
   margin-bottom: 9px;
 }
-
 .orders-list__state-title {
   margin: 0;
 
@@ -674,23 +614,20 @@
 
   color: var(--color-text);
 }
-
 .orders-list__state-description {
   max-width: 390px;
 
   margin: 10px auto 20px;
 
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   line-height: 1.65;
 
   color: var(--color-text-secondary);
 }
-
 .orders-list__state-card .orders-list__button {
   margin: 0 auto;
 }
-
 /* ==========================================================
    LOADING
 ========================================================== */
@@ -698,13 +635,11 @@
 .orders-list__loading {
   width: 100%;
 }
-
 .orders-list__loading-header {
   padding-bottom: 22px;
 
   border-bottom: 1px solid var(--color-border);
 }
-
 .orders-list__loading-card {
   margin-top: 18px;
 
@@ -713,7 +648,6 @@
   border: 1px solid var(--color-border);
   background: var(--color-surface);
 }
-
 .orders-list__loading-items {
   display: flex;
   flex-direction: column;
@@ -721,14 +655,12 @@
   gap: 8px;
   margin-top: 16px;
 }
-
 .orders-list__skeleton {
   position: relative;
   overflow: hidden;
 
   background: var(--color-bg-soft);
 }
-
 .orders-list__skeleton::after {
   position: absolute;
   inset: 0;
@@ -747,36 +679,31 @@
 
   animation: orders-list-shimmer 1.6s infinite;
 }
-
 .orders-list__skeleton--eyebrow {
   width: 70px;
   height: 7px;
   margin-bottom: 11px;
 }
-
 .orders-list__skeleton--title {
   width: 180px;
   height: 36px;
 }
-
 .orders-list__skeleton--description {
   width: min(400px, 80%);
   height: 9px;
   margin-top: 11px;
 }
-
 .orders-list__skeleton--section-title {
   width: 90px;
   height: 9px;
 }
-
 .orders-list__skeleton--order {
   width: 100%;
   height: 92px;
 }
 
 @keyframes orders-list-shimmer {
-  100% {
+100% {
     transform: translateX(100%);
   }
 }
@@ -786,36 +713,31 @@
 ========================================================== */
 
 @media (max-width: 900px) {
-  .orders-list {
+.orders-list {
     padding: 30px 20px 46px;
   }
-
-  .orders-list__header {
+.orders-list__header {
     align-items: flex-start;
 
     flex-direction: column;
 
     gap: 18px;
   }
-
-  .orders-list__button--secondary {
+.orders-list__button--secondary {
     align-self: flex-start;
   }
-
-  .order-list-card__content {
+.order-list-card__content {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-
-  .order-list-card__summary {
+.order-list-card__summary {
     justify-content: space-between;
 
     padding-top: 14px;
 
     border-top: 1px solid var(--color-border);
   }
-
-  .order-list-card__product-name {
+.order-list-card__product-name {
     max-width: 100%;
   }
 }
@@ -825,76 +747,61 @@
 ========================================================== */
 
 @media (max-width: 640px) {
-  .orders-list {
+.orders-list {
     padding: 23px 14px 38px;
   }
-
-  .orders-list__header {
+.orders-list__header {
     padding-bottom: 18px;
   }
-
-  .orders-list__eyebrow-row {
+.orders-list__eyebrow-row {
     gap: 7px;
     margin-bottom: 8px;
   }
-
-  .orders-list__eyebrow-line {
+.orders-list__eyebrow-line {
     width: 18px;
     flex-basis: 18px;
   }
-
-  .orders-list__eyebrow {
-    font-size: 7px;
+.orders-list__eyebrow {
+    font-size: 10px;
   }
-
-  .orders-list__title {
+.orders-list__title {
     font-size: 32px;
   }
-
-  .orders-list__description {
+.orders-list__description {
     max-width: 100%;
     margin-top: 7px;
 
-    font-size: 9px;
+    font-size: 10px;
     line-height: 1.6;
   }
-
-  .orders-list__button {
+.orders-list__button {
     width: 100%;
     min-height: 37px;
   }
-
-  .orders-list__button--secondary {
+.orders-list__button--secondary {
     align-self: stretch;
   }
-
-  .orders-list__button span {
+.orders-list__button span {
     flex: 1;
   }
-
-  .orders-list__count-row {
+.orders-list__count-row {
     margin: 17px 0 11px;
     gap: 8px;
   }
-
-  .orders-list__count {
-    font-size: 6.5px;
+.orders-list__count {
+    font-size: 10px;
   }
-
-  .orders-list__items {
+.orders-list__items {
     gap: 8px;
   }
-
-  .order-list-card {
+.order-list-card {
     box-shadow: none;
   }
-
-  .order-list-card:hover {
+.order-list-card:hover {
     transform: none;
     box-shadow: none;
   }
-
-  /* --------------------------------------------------------
+/* --------------------------------------------------------
      MOBILE META
   -------------------------------------------------------- */
 
@@ -909,43 +816,35 @@
 
     padding: 11px 12px;
   }
-
-  .order-list-card__meta-left {
+.order-list-card__meta-left {
     width: 100%;
     gap: 11px;
   }
-
-  .order-list-card__meta-label {
-    font-size: 6.5px;
+.order-list-card__meta-label {
+    font-size: 10px;
   }
-
-  .order-list-card__number {
-    font-size: 9px;
+.order-list-card__number {
+    font-size: 10px;
   }
-
-  .order-list-card__meta-divider {
+.order-list-card__meta-divider {
     height: 22px;
   }
-
-  .order-list-card__date {
-    font-size: 8px;
+.order-list-card__date {
+    font-size: 10px;
   }
-
-  .order-list-card__date svg {
+.order-list-card__date svg {
     width: 12px;
     height: 12px;
   }
-
-  .order-list-card__status {
+.order-list-card__status {
     align-self: flex-start;
 
     min-height: 22px;
     padding-inline: 7px;
 
-    font-size: 6.2px;
+    font-size: 10px;
   }
-
-  /* --------------------------------------------------------
+/* --------------------------------------------------------
      MOBILE CONTENT
   -------------------------------------------------------- */
 
@@ -954,53 +853,45 @@
 
     padding: 14px 12px;
   }
-
-  .order-list-card__product {
+.order-list-card__product {
     align-items: flex-start;
     gap: 11px;
   }
-
-  .order-list-card__image {
+.order-list-card__image {
     width: 60px;
     height: 77px;
 
     flex-basis: 60px;
   }
-
-  .order-list-card__image > svg {
+.order-list-card__image > svg {
     width: 18px;
     height: 18px;
   }
-
-  .order-list-card__quantity {
+.order-list-card__quantity {
     right: 3px;
     bottom: 3px;
 
     min-width: 17px;
     height: 17px;
 
-    font-size: 6.5px;
+    font-size: 10px;
   }
-
-  .order-list-card__brand {
+.order-list-card__brand {
     margin-bottom: 5px;
-    font-size: 6.2px;
+    font-size: 10px;
   }
-
-  .order-list-card__product-name {
+.order-list-card__product-name {
     font-size: 18px;
     line-height: 1.12;
 
     white-space: normal;
   }
-
-  .order-list-card__more {
+.order-list-card__more {
     margin-top: 5px;
 
-    font-size: 7.5px;
+    font-size: 10px;
   }
-
-  /* --------------------------------------------------------
+/* --------------------------------------------------------
      MOBILE SUMMARY
   -------------------------------------------------------- */
 
@@ -1013,28 +904,23 @@
 
     padding-top: 12px;
   }
-
-  .order-list-card__total {
+.order-list-card__total {
     min-width: 0;
   }
-
-  .order-list-card__total p {
+.order-list-card__total p {
     margin-bottom: 4px;
-    font-size: 6.5px;
+    font-size: 10px;
   }
-
-  .order-list-card__total strong {
+.order-list-card__total strong {
     font-size: 12px;
   }
-
-  .order-list-card__view {
+.order-list-card__view {
     width: 100%;
     min-height: 34px;
 
-    font-size: 6.8px;
+    font-size: 10px;
   }
-
-  /* --------------------------------------------------------
+/* --------------------------------------------------------
      MOBILE STATES
   -------------------------------------------------------- */
 
@@ -1042,30 +928,25 @@
     min-height: 440px;
     padding-top: 20px;
   }
-
-  .orders-list__state-card {
+.orders-list__state-card {
     padding: 32px 18px;
   }
-
-  .orders-list__state-icon {
+.orders-list__state-icon {
     width: 42px;
     height: 42px;
 
     margin-bottom: 14px;
   }
-
-  .orders-list__state-title {
+.orders-list__state-title {
     font-size: 27px;
   }
-
-  .orders-list__state-description {
+.orders-list__state-description {
     margin-top: 9px;
     margin-bottom: 17px;
 
-    font-size: 8.5px;
+    font-size: 10px;
   }
-
-  .orders-list__state-card .orders-list__button {
+.orders-list__state-card .orders-list__button {
     width: 100%;
   }
 }
@@ -1075,42 +956,34 @@
 ========================================================== */
 
 @media (max-width: 390px) {
-  .orders-list {
+.orders-list {
     padding-inline: 11px;
   }
-
-  .orders-list__title {
+.orders-list__title {
     font-size: 29px;
   }
-
-  .orders-list__description {
-    font-size: 8.5px;
+.orders-list__description {
+    font-size: 10px;
   }
-
-  .order-list-card__meta-left {
+.order-list-card__meta-left {
     gap: 8px;
   }
-
-  .order-list-card__date {
-    font-size: 7.5px;
+.order-list-card__date {
+    font-size: 10px;
   }
-
-  .order-list-card__image {
+.order-list-card__image {
     width: 56px;
     height: 72px;
 
     flex-basis: 56px;
   }
-
-  .order-list-card__product-name {
+.order-list-card__product-name {
     font-size: 17px;
   }
-
-  .order-list-card__more {
-    font-size: 7px;
+.order-list-card__more {
+    font-size: 10px;
   }
-
-  .order-list-card__view {
+.order-list-card__view {
     min-height: 33px;
   }
 }
@@ -1120,15 +993,14 @@
 ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .order-list-card,
+.order-list-card,
   .orders-list__button,
   .orders-list__button svg,
   .order-list-card__view,
   .order-list-card__view svg {
     transition: none;
   }
-
-  .orders-list__skeleton::after {
+.orders-list__skeleton::after {
     animation: none;
   }
 }

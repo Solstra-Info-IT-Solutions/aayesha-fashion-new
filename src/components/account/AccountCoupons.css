@@ -7,16 +7,14 @@
 .account-coupons {
   width: 100%;
   min-height: 100%;
-  background: #faf7f5;
-  color: #332725;
+  background: var(--color-canvas);
+  color: var(--color-text);
 }
-
 .account-coupons__container {
   width: min(1160px, calc(100% - 40px));
   margin: 0 auto;
   padding: 48px 0 64px;
 }
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -24,7 +22,6 @@
 .account-coupons__header {
   margin-bottom: 32px;
 }
-
 .account-coupons__eyebrow {
   display: flex;
   align-items: center;
@@ -40,17 +37,15 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 
-  color: #8b5f59;
+  color: var(--color-clay);
 }
-
 .account-coupons__eyebrow-line {
   width: 26px;
   height: 1px;
   flex: 0 0 26px;
 
-  background: #a87870;
+  background: var(--color-clay);
 }
-
 .account-coupons__heading-row {
   display: flex;
   align-items: flex-end;
@@ -58,11 +53,9 @@
 
   gap: 32px;
 }
-
 .account-coupons__heading-content {
   min-width: 0;
 }
-
 .account-coupons__title {
   margin: 0;
 
@@ -78,9 +71,8 @@
 
   letter-spacing: -0.025em;
 
-  color: #332725;
+  color: var(--color-text);
 }
-
 .account-coupons__description {
   max-width: 560px;
 
@@ -91,9 +83,8 @@
   font-weight: 400;
   line-height: 1.65;
 
-  color: #6f625e;
+  color: var(--color-text-secondary);
 }
-
 /* =========================================================
    CONTINUE SHOPPING
 ========================================================= */
@@ -109,11 +100,11 @@
 
   padding: 0 15px;
 
-  border: 1px solid #cdbbb5;
+  border: 1px solid var(--color-border);
 
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #493936;
+  color: var(--color-text);
 
   font-family: var(--font-body, sans-serif);
   font-size: 12px;
@@ -129,20 +120,17 @@
     background-color 180ms ease,
     color 180ms ease;
 }
-
 .account-coupons__shop-link:hover {
-  border-color: #8b5f59;
-  background: #8b5f59;
+  border-color: var(--color-clay);
+  background: var(--color-clay);
   color: #ffffff;
 }
-
 .account-coupons__shop-arrow {
   margin-left: 9px;
 
   font-size: 17px;
   line-height: 1;
 }
-
 /* =========================================================
    COUNT
 ========================================================= */
@@ -157,9 +145,8 @@
   font-size: 12px;
   font-weight: 500;
 
-  color: #756762;
+  color: var(--color-text-secondary);
 }
-
 .account-coupons__count::before {
   content: "";
 
@@ -170,9 +157,8 @@
 
   border-radius: 50%;
 
-  background: #a87870;
+  background: var(--color-clay);
 }
-
 /* =========================================================
    COUPON GRID
 ========================================================= */
@@ -187,7 +173,6 @@
 
   gap: 16px;
 }
-
 /* =========================================================
    COUPON CARD
 ========================================================= */
@@ -203,9 +188,9 @@
 
   padding: 18px;
 
-  border: 1px solid #dfd2cd;
+  border: 1px solid var(--color-border);
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   overflow: hidden;
 
@@ -213,14 +198,12 @@
     border-color 180ms ease,
     box-shadow 180ms ease;
 }
-
 .account-coupon:hover {
-  border-color: #c7b0a9;
+  border-color: var(--color-border);
 
   box-shadow:
     0 10px 24px rgba(70, 48, 43, 0.07);
 }
-
 /* =========================================================
    TOP
 ========================================================= */
@@ -235,9 +218,8 @@
 
   padding-bottom: 13px;
 
-  border-bottom: 1px solid #eee6e2;
+  border-bottom: 1px solid var(--color-border-light);
 }
-
 .account-coupon__icon {
   display: flex;
   align-items: center;
@@ -248,13 +230,12 @@
 
   flex: 0 0 32px;
 
-  border: 1px solid #d9c5be;
+  border: 1px solid var(--color-border);
 
-  background: #f8f1ee;
+  background: var(--color-error-soft);
 
-  color: #8b5f59;
+  color: var(--color-clay);
 }
-
 .account-coupon__icon svg {
   width: 15px;
   height: 15px;
@@ -262,7 +243,6 @@
   color: currentColor;
   stroke: currentColor;
 }
-
 .account-coupon__type {
   min-width: 0;
 
@@ -279,9 +259,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  color: #756762;
+  color: var(--color-text-secondary);
 }
-
 .account-coupon__badge {
   margin-left: auto;
 
@@ -289,12 +268,12 @@
 
   padding: 5px 7px;
 
-  border: 1px solid #d3aaa2;
+  border: 1px solid var(--color-border);
 
-  background: #fbf3f1;
+  background: var(--color-error-soft);
 
   font-family: var(--font-body, sans-serif);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1.1;
 
@@ -302,9 +281,8 @@
 
   text-transform: uppercase;
 
-  color: #8b5f59;
+  color: var(--color-clay);
 }
-
 /* =========================================================
    OFFER
 ========================================================= */
@@ -312,7 +290,6 @@
 .account-coupon__offer {
   padding: 17px 0 15px;
 }
-
 .account-coupon__discount {
   margin: 0 0 5px;
 
@@ -328,9 +305,8 @@
 
   letter-spacing: -0.01em;
 
-  color: #704b46;
+  color: var(--color-clay);
 }
-
 .account-coupon__description {
   margin: 0;
 
@@ -341,9 +317,8 @@
   font-weight: 500;
   line-height: 1.45;
 
-  color: #403431;
+  color: var(--color-text);
 }
-
 /* =========================================================
    DETAILS
 ========================================================= */
@@ -357,10 +332,9 @@
 
   padding: 12px 0;
 
-  border-top: 1px solid #eee6e2;
-  border-bottom: 1px solid #eee6e2;
+  border-top: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-light);
 }
-
 .account-coupon__detail {
   display: flex;
   align-items: center;
@@ -372,18 +346,15 @@
   font-size: 11px;
   line-height: 1.4;
 }
-
 .account-coupon__detail span {
-  color: #81736e;
+  color: var(--color-text-secondary);
 }
-
 .account-coupon__detail strong {
   font-weight: 600;
 
-  color: #493936;
+  color: var(--color-text);
   text-align: right;
 }
-
 /* =========================================================
    FOOTER
 ========================================================= */
@@ -397,14 +368,12 @@
 
   padding-top: 14px;
 }
-
 .account-coupon__code {
   display: flex;
   flex-direction: column;
 
   min-width: 0;
 }
-
 .account-coupon__code-label {
   margin-bottom: 4px;
 
@@ -412,9 +381,8 @@
   font-size: 10px;
   font-weight: 500;
 
-  color: #8b7d77;
+  color: var(--color-text-secondary);
 }
-
 .account-coupon__code strong {
   display: block;
 
@@ -436,12 +404,11 @@
 
   letter-spacing: 0.05em;
 
-  color: #493936;
+  color: var(--color-text);
 
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 /* =========================================================
    ACTIONS
 ========================================================= */
@@ -454,7 +421,6 @@
 
   flex: 0 0 auto;
 }
-
 .account-coupon__copy,
 .account-coupon__use {
   display: inline-flex;
@@ -463,7 +429,7 @@
 
   min-height: 34px;
 
-  border: 1px solid #d6c5bf;
+  border: 1px solid var(--color-border);
 
   font-family: var(--font-body, sans-serif);
   font-size: 10px;
@@ -480,52 +446,45 @@
     border-color 160ms ease,
     color 160ms ease;
 }
-
 .account-coupon__copy {
   gap: 5px;
 
   padding: 0 9px;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #675954;
+  color: var(--color-text-secondary);
 }
-
 .account-coupon__copy:hover {
-  border-color: #a87870;
+  border-color: var(--color-clay);
 
-  background: #fbf6f4;
+  background: var(--color-surface);
 
-  color: #704b46;
+  color: var(--color-clay);
 }
-
 .account-coupon__use {
   gap: 6px;
 
   padding: 0 10px;
 
-  border-color: #8b5f59;
+  border-color: var(--color-clay);
 
-  background: #8b5f59;
+  background: var(--color-clay);
 
   color: #ffffff;
 }
-
 .account-coupon__use:hover {
-  border-color: #704b46;
+  border-color: var(--color-clay);
 
-  background: #704b46;
+  background: var(--color-clay);
 }
-
 .account-coupon__copy svg {
   flex: 0 0 auto;
 }
-
 .account-coupon__use-arrow {
   font-size: 14px;
   line-height: 1;
 }
-
 /* =========================================================
    EXPIRY
 ========================================================= */
@@ -543,16 +502,14 @@
   font-weight: 500;
   line-height: 1.35;
 
-  color: #857771;
+  color: var(--color-text-secondary);
 }
-
 .account-coupon__expiry svg {
   flex: 0 0 auto;
 
-  color: #a87870;
+  color: var(--color-clay);
   stroke: currentColor;
 }
-
 /* =========================================================
    SKELETON
 ========================================================= */
@@ -562,51 +519,45 @@
 
   padding: 18px;
 
-  border: 1px solid #dfd2cd;
+  border: 1px solid var(--color-border);
 
-  background: #ffffff;
+  background: var(--color-surface);
 }
-
 .account-coupons__skeleton-top {
   width: 32px;
   height: 32px;
 
   margin-bottom: 20px;
 
-  background: #eee6e2;
+  background: var(--color-surface-soft);
 }
-
 .account-coupons__skeleton-line {
   width: 70%;
   height: 11px;
 
   margin-bottom: 11px;
 
-  background: #eee6e2;
+  background: var(--color-surface-soft);
 }
-
 .account-coupons__skeleton-line--large {
   width: 46%;
   height: 30px;
 
   margin-bottom: 13px;
 }
-
 .account-coupons__skeleton-line--short {
   width: 38%;
 
   margin-bottom: 30px;
 }
-
 .account-coupons__skeleton-button {
   width: 100%;
   height: 38px;
 
   margin-top: 50px;
 
-  background: #eee6e2;
+  background: var(--color-surface-soft);
 }
-
 /* =========================================================
    EMPTY / ERROR STATE
 ========================================================= */
@@ -620,13 +571,12 @@
 
   padding: 52px 24px;
 
-  border: 1px solid #dfd2cd;
+  border: 1px solid var(--color-border);
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   text-align: center;
 }
-
 .account-coupons__state-mark {
   display: flex;
   align-items: center;
@@ -637,11 +587,11 @@
 
   margin-bottom: 17px;
 
-  border: 1px solid #d5c2bb;
+  border: 1px solid var(--color-border);
 
-  background: #f8f1ee;
+  background: var(--color-error-soft);
 
-  color: #8b5f59;
+  color: var(--color-clay);
 
   font-family:
     var(--font-display,
@@ -651,7 +601,6 @@
 
   font-size: 22px;
 }
-
 .account-coupons__state h2 {
   margin: 0;
 
@@ -665,9 +614,8 @@
   font-weight: 500;
   line-height: 1.1;
 
-  color: #3d302d;
+  color: var(--color-text);
 }
-
 .account-coupons__state p {
   max-width: 430px;
 
@@ -677,9 +625,8 @@
   font-size: 13px;
   line-height: 1.6;
 
-  color: #756762;
+  color: var(--color-text-secondary);
 }
-
 .account-coupons__retry {
   display: inline-flex;
   align-items: center;
@@ -689,9 +636,9 @@
 
   padding: 0 15px;
 
-  border: 1px solid #8b5f59;
+  border: 1px solid var(--color-clay);
 
-  background: #8b5f59;
+  background: var(--color-clay);
 
   color: #ffffff;
 
@@ -707,10 +654,9 @@
     background-color 160ms ease,
     border-color 160ms ease;
 }
-
 .account-coupons__retry:hover {
-  border-color: #704b46;
-  background: #704b46;
+  border-color: var(--color-clay);
+  background: var(--color-clay-deep);
 }
 
 /* =========================================================
@@ -718,33 +664,28 @@
 ========================================================= */
 
 @media (max-width: 1023px) {
-  .account-coupons__container {
+.account-coupons__container {
     width: min(900px, calc(100% - 32px));
 
     padding: 40px 0 56px;
   }
-
-  .account-coupons__grid {
+.account-coupons__grid {
     grid-template-columns: repeat(
       2,
       minmax(0, 1fr)
     );
   }
-
-  .account-coupon {
+.account-coupon {
     padding: 17px;
   }
-
-  .account-coupon__footer {
+.account-coupon__footer {
     align-items: stretch;
     flex-direction: column;
   }
-
-  .account-coupon__actions {
+.account-coupon__actions {
     width: 100%;
   }
-
-  .account-coupon__copy,
+.account-coupon__copy,
   .account-coupon__use {
     flex: 1;
   }
@@ -755,112 +696,92 @@
 ========================================================= */
 
 @media (max-width: 640px) {
-  .account-coupons__container {
+.account-coupons__container {
     width: calc(100% - 28px);
 
     padding: 30px 0 44px;
   }
-
-  .account-coupons__header {
+.account-coupons__header {
     margin-bottom: 25px;
   }
-
-  .account-coupons__eyebrow {
+.account-coupons__eyebrow {
     margin-bottom: 10px;
 
     font-size: 10px;
   }
-
-  .account-coupons__heading-row {
+.account-coupons__heading-row {
     align-items: flex-start;
     flex-direction: column;
 
     gap: 17px;
   }
-
-  .account-coupons__title {
+.account-coupons__title {
     font-size: 40px;
   }
-
-  .account-coupons__description {
+.account-coupons__description {
     margin-top: 9px;
 
     font-size: 13px;
     line-height: 1.6;
   }
-
-  .account-coupons__shop-link {
+.account-coupons__shop-link {
     width: 100%;
     min-height: 40px;
   }
-
-  .account-coupons__grid {
+.account-coupons__grid {
     grid-template-columns: 1fr;
 
     gap: 12px;
   }
-
-  .account-coupon {
+.account-coupon {
     padding: 16px;
   }
-
-  .account-coupon__top {
+.account-coupon__top {
     padding-bottom: 11px;
   }
-
-  .account-coupon__icon {
+.account-coupon__icon {
     width: 30px;
     height: 30px;
 
     flex-basis: 30px;
   }
-
-  .account-coupon__type {
+.account-coupon__type {
     font-size: 10px;
   }
-
-  .account-coupon__badge {
-    font-size: 8px;
+.account-coupon__badge {
+    font-size: 10px;
     padding: 4px 6px;
   }
-
-  .account-coupon__offer {
+.account-coupon__offer {
     padding: 15px 0 13px;
   }
-
-  .account-coupon__discount {
+.account-coupon__discount {
     font-size: 27px;
   }
-
-  .account-coupon__description {
+.account-coupon__description {
     min-height: 0;
 
     font-size: 12.5px;
   }
-
-  .account-coupon__details {
+.account-coupon__details {
     gap: 6px;
   }
-
-  .account-coupon__detail {
+.account-coupon__detail {
     font-size: 10.5px;
   }
-
-  .account-coupon__footer {
+.account-coupon__footer {
     gap: 11px;
 
     padding-top: 12px;
   }
-
-  .account-coupon__actions {
+.account-coupon__actions {
     display: grid;
 
     grid-template-columns: 1fr 1fr;
 
     gap: 7px;
   }
-
-  .account-coupon__copy,
+.account-coupon__copy,
   .account-coupon__use {
     width: 100%;
 
@@ -868,36 +789,30 @@
 
     font-size: 10px;
   }
-
-  .account-coupon__code strong {
+.account-coupon__code strong {
     max-width: 190px;
 
     font-size: 13px;
   }
-
-  .account-coupon__expiry {
+.account-coupon__expiry {
     margin-top: 10px;
 
     font-size: 10px;
   }
-
-  .account-coupons__skeleton {
+.account-coupons__skeleton {
     min-height: 260px;
 
     padding: 16px;
   }
-
-  .account-coupons__state {
+.account-coupons__state {
     min-height: 250px;
 
     padding: 42px 18px;
   }
-
-  .account-coupons__state h2 {
+.account-coupons__state h2 {
     font-size: 27px;
   }
-
-  .account-coupons__state p {
+.account-coupons__state p {
     font-size: 12px;
   }
 }
@@ -907,34 +822,28 @@
 ========================================================= */
 
 @media (max-width: 380px) {
-  .account-coupons__container {
+.account-coupons__container {
     width: calc(100% - 22px);
 
     padding-top: 25px;
   }
-
-  .account-coupons__title {
+.account-coupons__title {
     font-size: 35px;
   }
-
-  .account-coupon {
+.account-coupon {
     padding: 14px;
   }
-
-  .account-coupon__badge {
+.account-coupon__badge {
     display: none;
   }
-
-  .account-coupon__actions {
+.account-coupon__actions {
     grid-template-columns: 1fr;
   }
-
-  .account-coupon__copy,
+.account-coupon__copy,
   .account-coupon__use {
     min-height: 35px;
   }
 }
-
 /* =========================================================
    ACCESSIBILITY
 ========================================================= */
@@ -943,6 +852,6 @@
 .account-coupon__use:focus-visible,
 .account-coupons__shop-link:focus-visible,
 .account-coupons__retry:focus-visible {
-  outline: 2px solid #a87870;
+  outline: 2px solid var(--color-clay);
   outline-offset: 2px;
 }

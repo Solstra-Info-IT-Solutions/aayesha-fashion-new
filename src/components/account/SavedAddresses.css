@@ -9,7 +9,6 @@
   padding: 34px 28px 54px;
   color: var(--color-text);
 }
-
 .saved-addresses__header,
 .saved-addresses__grid,
 .saved-addresses__feedback,
@@ -17,7 +16,6 @@
   width: min(1120px, 100%);
   margin-inline: auto;
 }
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -31,24 +29,20 @@
   padding-bottom: 22px;
   border-bottom: 1px solid var(--color-border);
 }
-
 .saved-addresses__heading {
   min-width: 0;
 }
-
 .saved-addresses__eyebrow-row {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .saved-addresses__eyebrow-line {
   width: 22px;
   height: 1px;
   flex: 0 0 22px;
-  background: var(--color-accent);
+  background: var(--color-clay);
 }
-
 .saved-addresses__eyebrow {
   margin: 0;
 
@@ -57,16 +51,15 @@
     Arial,
     sans-serif;
 
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
 
   letter-spacing: 0.16em;
   text-transform: uppercase;
 
-  color: var(--color-accent);
+  color: var(--color-clay);
 }
-
 .saved-addresses__title {
   margin: 7px 0 0;
 
@@ -82,7 +75,6 @@
 
   color: var(--color-text);
 }
-
 .saved-addresses__description {
   max-width: 510px;
 
@@ -98,7 +90,6 @@
 
   color: var(--color-text-secondary);
 }
-
 /* =========================================================
    BUTTONS
 ========================================================= */
@@ -120,7 +111,7 @@
     Arial,
     sans-serif;
 
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
 
@@ -136,44 +127,36 @@
     color 180ms ease,
     transform 180ms ease;
 }
-
 .saved-addresses__button--primary {
-  border-color: var(--color-text);
-  background: var(--color-text);
-  color: var(--color-text-inverse);
+  border-color: var(--color-clay);
+  background: var(--color-clay);
+  color: #ffffff;
 }
-
 .saved-addresses__button--primary:hover {
   border-color: var(--color-accent-dark);
   background: var(--color-accent-dark);
-  transform: translateY(-1px);
 }
-
 .saved-addresses__button--secondary {
   border-color: var(--color-border-dark);
   background: transparent;
   color: var(--color-text);
 }
-
 .saved-addresses__button--secondary:hover {
   border-color: var(--color-text);
   background: var(--color-bg-soft);
   transform: translateY(-1px);
 }
-
 .saved-addresses__button--small {
   min-height: 34px;
   padding-inline: 12px;
-  font-size: 7.5px;
+  font-size: 10px;
 }
-
 .saved-addresses__button:focus-visible,
 .saved-address-card__action:focus-visible,
 .saved-addresses__back-link:focus-visible {
-  outline: 1px solid var(--color-accent);
+  outline: 1px solid var(--color-clay);
   outline-offset: 3px;
 }
-
 /* =========================================================
    FEEDBACK
 ========================================================= */
@@ -190,7 +173,6 @@
   border: 1px solid rgba(154, 93, 88, 0.2);
   background: rgba(154, 93, 88, 0.04);
 }
-
 .saved-addresses__feedback-content {
   display: flex;
   align-items: center;
@@ -198,16 +180,14 @@
 
   min-width: 0;
 }
-
 .saved-addresses__feedback-dot {
   width: 5px;
   height: 5px;
   flex: 0 0 5px;
 
   border-radius: 50%;
-  background: var(--color-danger, #9a5d58);
+  background: var(--color-danger, var(--color-clay));
 }
-
 .saved-addresses__feedback p {
   margin: 0;
 
@@ -216,12 +196,11 @@
     Arial,
     sans-serif;
 
-  font-size: 8.5px;
+  font-size: 10px;
   line-height: 1.45;
 
-  color: var(--color-danger, #9a5d58);
+  color: var(--color-danger, var(--color-clay));
 }
-
 /* =========================================================
    ADDRESS GRID
 ========================================================= */
@@ -233,7 +212,6 @@
   gap: 13px;
   margin-top: 18px;
 }
-
 /* =========================================================
    ADDRESS CARD
 ========================================================= */
@@ -255,7 +233,6 @@
     box-shadow 180ms ease,
     transform 180ms ease;
 }
-
 .saved-address-card:hover {
   border-color: var(--color-border-dark);
 
@@ -264,11 +241,9 @@
 
   transform: translateY(-1px);
 }
-
 .saved-address-card--default {
   border-color: rgba(154, 93, 88, 0.35);
 }
-
 /* =========================================================
    CARD HEADER
 ========================================================= */
@@ -284,11 +259,9 @@
 
   border-bottom: 1px solid var(--color-border);
 }
-
 .saved-address-card__identity {
   min-width: 0;
 }
-
 .saved-address-card__name-row {
   display: flex;
   align-items: center;
@@ -296,7 +269,6 @@
 
   gap: 7px;
 }
-
 .saved-address-card__name {
   margin: 0;
 
@@ -312,7 +284,6 @@
 
   color: var(--color-text);
 }
-
 .saved-address-card__default-badge {
   display: inline-flex;
   align-items: center;
@@ -328,15 +299,14 @@
     Arial,
     sans-serif;
 
-  font-size: 6.5px;
+  font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.09em;
   text-transform: uppercase;
 
-  color: var(--color-accent);
+  color: var(--color-clay);
 }
-
 .saved-address-card__phone {
   margin: 5px 0 0;
 
@@ -345,12 +315,11 @@
     Arial,
     sans-serif;
 
-  font-size: 8.5px;
+  font-size: 10px;
   line-height: 1.4;
 
   color: var(--color-text-muted);
 }
-
 .saved-address-card__location-icon {
   width: 32px;
   height: 32px;
@@ -364,9 +333,8 @@
   border: 1px solid var(--color-accent-soft);
   background: var(--color-bg-soft);
 
-  color: var(--color-accent);
+  color: var(--color-clay);
 }
-
 /* =========================================================
    ADDRESS BODY
 ========================================================= */
@@ -375,7 +343,6 @@
   flex: 1;
   padding: 15px 16px;
 }
-
 .saved-address-card__address {
   display: flex;
   flex-direction: column;
@@ -388,17 +355,15 @@
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 10px;
   font-style: normal;
   line-height: 1.55;
 
   color: var(--color-text-secondary);
 }
-
 .saved-address-card__address > span:first-child {
   color: var(--color-text);
 }
-
 .saved-address-card__pincode {
   display: inline-flex;
   width: fit-content;
@@ -409,26 +374,24 @@
   border: 1px solid var(--color-border);
   background: var(--color-bg-soft);
 
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.08em;
 
   color: var(--color-text);
 }
-
 .saved-address-card__landmark {
   margin-top: 5px;
   padding-top: 7px;
 
   border-top: 1px solid var(--color-border);
 
-  font-size: 7.5px;
+  font-size: 10px;
   line-height: 1.45;
 
   color: var(--color-text-muted);
 }
-
 /* =========================================================
    CARD ACTIONS
 ========================================================= */
@@ -439,7 +402,6 @@
 
   border-top: 1px solid var(--color-border);
 }
-
 .saved-address-card__action {
   min-height: 39px;
 
@@ -458,7 +420,7 @@
     Arial,
     sans-serif;
 
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
 
@@ -474,27 +436,22 @@
     background-color 160ms ease,
     color 160ms ease;
 }
-
 .saved-address-card__action
   + .saved-address-card__action {
   border-left: 1px solid var(--color-border);
 }
-
 .saved-address-card__action:hover:not(:disabled) {
   background: var(--color-bg-soft);
-  color: var(--color-accent);
+  color: var(--color-clay);
 }
-
 .saved-address-card__action--danger:hover:not(:disabled) {
   background: rgba(154, 93, 88, 0.045);
-  color: var(--color-danger, #9a5d58);
+  color: var(--color-danger, var(--color-clay));
 }
-
 .saved-address-card__action:disabled {
   cursor: not-allowed;
   opacity: 0.48;
 }
-
 /* =========================================================
    SPINNER
 ========================================================= */
@@ -506,24 +463,22 @@
   display: block;
 
   border: 1px solid var(--color-border-dark);
-  border-top-color: var(--color-accent);
+  border-top-color: var(--color-clay);
 
   border-radius: 50%;
 
   animation:
     saved-address-spin 0.75s linear infinite;
 }
-
 .saved-address-card__spinner--danger {
-  border-top-color: var(--color-danger, #9a5d58);
+  border-top-color: var(--color-danger, var(--color-clay));
 }
 
 @keyframes saved-address-spin {
-  to {
+to {
     transform: rotate(360deg);
   }
 }
-
 /* =========================================================
    EMPTY STATE
 ========================================================= */
@@ -539,7 +494,6 @@
 
   text-align: center;
 }
-
 .saved-addresses__empty-icon,
 .saved-addresses__state-icon {
   width: 46px;
@@ -554,13 +508,11 @@
   border: 1px solid var(--color-accent-soft);
   background: var(--color-bg-soft);
 
-  color: var(--color-accent);
+  color: var(--color-clay);
 }
-
 .saved-addresses__empty .saved-addresses__eyebrow {
   margin-top: 15px;
 }
-
 .saved-addresses__empty-title {
   margin: 8px 0 0;
 
@@ -576,7 +528,6 @@
 
   color: var(--color-text);
 }
-
 .saved-addresses__empty-description {
   max-width: 370px;
 
@@ -587,12 +538,11 @@
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 10px;
   line-height: 1.65;
 
   color: var(--color-text-secondary);
 }
-
 /* =========================================================
    AUTH STATE
 ========================================================= */
@@ -609,12 +559,10 @@
 
   text-align: center;
 }
-
 .saved-addresses--auth
   .saved-addresses__state-icon {
   margin-bottom: 15px;
 }
-
 .saved-addresses__state-title {
   margin: 8px 0 0;
 
@@ -628,7 +576,6 @@
   line-height: 1.08;
   letter-spacing: -0.025em;
 }
-
 .saved-addresses__state-description {
   max-width: 390px;
 
@@ -639,12 +586,11 @@
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 10px;
   line-height: 1.65;
 
   color: var(--color-text-secondary);
 }
-
 /* =========================================================
    FOOTER
 ========================================================= */
@@ -658,7 +604,6 @@
 
   border-top: 1px solid var(--color-border);
 }
-
 .saved-addresses__back-link {
   display: inline-flex;
   align-items: center;
@@ -670,7 +615,7 @@
     Arial,
     sans-serif;
 
-  font-size: 7.5px;
+  font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.11em;
@@ -684,12 +629,10 @@
     color 160ms ease,
     gap 160ms ease;
 }
-
 .saved-addresses__back-link:hover {
   gap: 7px;
-  color: var(--color-accent);
+  color: var(--color-clay);
 }
-
 /* =========================================================
    LOADING
 ========================================================= */
@@ -697,11 +640,9 @@
 .saved-addresses__header--loading {
   display: block;
 }
-
 .saved-addresses__grid {
   min-height: 90px;
 }
-
 .saved-addresses__card-skeleton {
   min-height: 190px;
 
@@ -710,14 +651,12 @@
   border: 1px solid var(--color-border);
   background: var(--color-surface);
 }
-
 .saved-addresses__skeleton {
   position: relative;
   overflow: hidden;
 
   background: var(--color-bg-soft);
 }
-
 .saved-addresses__skeleton::after {
   content: "";
 
@@ -737,12 +676,10 @@
   animation:
     saved-address-skeleton 1.4s ease-in-out infinite;
 }
-
 .saved-addresses__skeleton--title {
   width: 220px;
   height: 27px;
 }
-
 .saved-addresses__skeleton--description {
   width: 400px;
   max-width: 80%;
@@ -750,25 +687,22 @@
   height: 9px;
   margin-top: 10px;
 }
-
 .saved-addresses__skeleton--card-title {
   width: 135px;
   height: 18px;
 }
-
 .saved-addresses__skeleton--line {
   width: 85%;
   height: 8px;
   margin-top: 14px;
 }
-
 .saved-addresses__skeleton--line-short {
   width: 55%;
   margin-top: 8px;
 }
 
 @keyframes saved-address-skeleton {
-  100% {
+100% {
     transform: translateX(100%);
   }
 }
@@ -778,15 +712,13 @@
 ========================================================= */
 
 @media (max-width: 900px) {
-  .saved-addresses {
+.saved-addresses {
     padding: 30px 22px 48px;
   }
-
-  .saved-addresses__grid {
+.saved-addresses__grid {
     grid-template-columns: 1fr;
   }
-
-  .saved-addresses__header {
+.saved-addresses__header {
     gap: 20px;
   }
 }
@@ -796,106 +728,87 @@
 ========================================================= */
 
 @media (max-width: 640px) {
-  .saved-addresses {
+.saved-addresses {
     padding: 22px 15px 40px;
   }
-
-  .saved-addresses__header {
+.saved-addresses__header {
     display: block;
     padding-bottom: 20px;
   }
-
-  .saved-addresses__title {
+.saved-addresses__title {
     font-size: 30px;
   }
-
-  .saved-addresses__description {
+.saved-addresses__description {
     max-width: 100%;
-    font-size: 9px;
+    font-size: 10px;
     line-height: 1.6;
   }
-
-  .saved-addresses__header
+.saved-addresses__header
     > .saved-addresses__button {
     width: 100%;
     margin-top: 15px;
   }
-
-  .saved-addresses__feedback {
+.saved-addresses__feedback {
     align-items: flex-start;
     flex-direction: column;
 
     gap: 9px;
     margin-top: 13px;
   }
-
-  .saved-addresses__feedback
+.saved-addresses__feedback
     .saved-addresses__button {
     width: 100%;
   }
-
-  .saved-addresses__grid {
+.saved-addresses__grid {
     gap: 10px;
     margin-top: 15px;
   }
-
-  /* Compact card */
+/* Compact card */
 
   .saved-address-card__header {
     gap: 10px;
     padding: 14px 14px 12px;
   }
-
-  .saved-address-card__body {
+.saved-address-card__body {
     padding: 14px;
   }
-
-  .saved-address-card__name {
+.saved-address-card__name {
     font-size: 17px;
   }
-
-  .saved-address-card__phone {
-    font-size: 8px;
+.saved-address-card__phone {
+    font-size: 10px;
   }
-
-  .saved-address-card__location-icon {
+.saved-address-card__location-icon {
     width: 30px;
     height: 30px;
     flex-basis: 30px;
   }
-
-  .saved-address-card__address {
-    font-size: 8.8px;
+.saved-address-card__address {
+    font-size: 10px;
     line-height: 1.5;
   }
-
-  .saved-address-card__landmark {
-    font-size: 7.2px;
+.saved-address-card__landmark {
+    font-size: 10px;
   }
-
-  .saved-address-card__actions {
+.saved-address-card__actions {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  .saved-address-card__action {
+.saved-address-card__action {
     min-height: 38px;
     gap: 4px;
     padding-inline: 3px;
 
-    font-size: 6.8px;
+    font-size: 10px;
     letter-spacing: 0.065em;
   }
-
-  .saved-addresses__empty {
+.saved-addresses__empty {
     margin-top: 20px;
     padding: 32px 18px;
   }
-
-  .saved-addresses__empty-title {
+.saved-addresses__empty-title {
     font-size: 24px;
   }
-
-  .saved-addresses__footer {
+.saved-addresses__footer {
     justify-content: center;
   }
 }
@@ -905,54 +818,44 @@
 ========================================================= */
 
 @media (max-width: 420px) {
-  .saved-addresses {
+.saved-addresses {
     padding: 19px 12px 34px;
   }
-
-  .saved-addresses__title {
+.saved-addresses__title {
     font-size: 28px;
   }
-
-  .saved-addresses__header {
+.saved-addresses__header {
     padding-bottom: 17px;
   }
-
-  .saved-address-card__header {
+.saved-address-card__header {
     gap: 8px;
     padding: 13px 12px 11px;
   }
-
-  .saved-address-card__body {
+.saved-address-card__body {
     padding: 13px 12px;
   }
-
-  .saved-address-card__name-row {
+.saved-address-card__name-row {
     align-items: flex-start;
     flex-direction: column;
     gap: 5px;
   }
-
-  .saved-address-card__name {
+.saved-address-card__name {
     font-size: 16px;
   }
-
-  .saved-address-card__default-badge {
+.saved-address-card__default-badge {
     padding: 3px 5px;
-    font-size: 6px;
+    font-size: 10px;
   }
-
-  .saved-address-card__location-icon {
+.saved-address-card__location-icon {
     width: 28px;
     height: 28px;
     flex-basis: 28px;
   }
-
-  .saved-address-card__action {
+.saved-address-card__action {
     min-height: 37px;
-    font-size: 6.3px;
+    font-size: 10px;
   }
-
-  .saved-addresses__empty {
+.saved-addresses__empty {
     padding: 28px 16px;
   }
 }
@@ -962,18 +865,16 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .saved-address-card,
+.saved-address-card,
   .saved-addresses__button,
   .saved-address-card__action,
   .saved-addresses__back-link {
     transition: none;
   }
-
-  .saved-addresses__skeleton::after {
+.saved-addresses__skeleton::after {
     animation: none;
   }
-
-  .saved-address-card__spinner {
+.saved-address-card__spinner {
     animation: none;
   }
 }

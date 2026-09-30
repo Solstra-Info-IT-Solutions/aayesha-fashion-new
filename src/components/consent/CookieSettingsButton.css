@@ -2,7 +2,7 @@
   appearance: none;
   border: 0;
   background: transparent;
-  color: var(--color-text-secondary, #665b57);
+  color: var(--color-text-secondary, var(--color-text-secondary));
   font-family: var(--font-body, Arial, sans-serif);
   font-size: 11px;
   font-weight: 600;
@@ -17,15 +17,15 @@
 }
 
 .cookie-settings-button:hover {
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .cookie-settings-button:active {
-  color: var(--color-accent-dark, #3f2d2a);
+  color: var(--color-accent-dark, var(--color-text));
 }
 
 .cookie-settings-button:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: 5px;
 }
 

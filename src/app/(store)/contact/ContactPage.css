@@ -4,9 +4,9 @@
    ========================================================= */
 
 .contact-page__care {
-  background: #f1eae6;
-  border-top: 1px solid #e3d8d2;
-  border-bottom: 1px solid #d8cbc5;
+  background: var(--color-surface-soft);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .contact-page__care-container {
@@ -33,19 +33,19 @@
 .contact-page__care-line {
   width: 24px;
   height: 1px;
-  background: #6f4b47;
+  background: var(--color-clay);
   flex: 0 0 auto;
 }
 
 .contact-page__care-eyebrow {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #6f4b47;
+  color: var(--color-clay);
 }
 
 .contact-page__care-title {
@@ -55,7 +55,7 @@
   font-weight: 500;
   line-height: 0.92;
   letter-spacing: -0.03em;
-  color: #3f2d2a;
+  color: var(--color-text);
 }
 
 .contact-page__care-description {
@@ -64,7 +64,7 @@
   font-family: var(--font-body);
   font-size: 12px;
   line-height: 1.8;
-  color: #665551;
+  color: var(--color-text-secondary);
 }
 
 /* =========================================================
@@ -86,9 +86,9 @@
   justify-content: space-between;
   padding: 23px;
   overflow: hidden;
-  border: 1px solid #d5c7c1;
-  background: #f7f3f0;
-  color: #3f2d2a;
+  border: 1px solid var(--color-border);
+  background: var(--color-canvas);
+  color: var(--color-text);
   transition:
     background-color 220ms ease,
     border-color 220ms ease,
@@ -102,15 +102,15 @@
   left: 0;
   height: 2px;
   content: "";
-  background: #6f4b47;
+  background: var(--color-clay);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 260ms ease;
 }
 
 .contact-page__care-card:hover {
-  background: #fbf8f6;
-  border-color: #bfaea7;
+  background: var(--color-surface);
+  border-color: var(--color-border);
   transform: translateY(-2px);
 }
 
@@ -130,11 +130,11 @@
 
 .contact-page__care-index {
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.16em;
-  color: #8b7974;
+  color: var(--color-clay);
 }
 
 .contact-page__care-action {
@@ -142,14 +142,14 @@
   min-height: 25px;
   align-items: center;
   padding: 0 9px;
-  border: 1px solid #d8cbc5;
+  border: 1px solid var(--color-border);
   font-family: var(--font-body);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #6f4b47;
+  color: var(--color-clay);
 }
 
 /* =========================================================
@@ -163,12 +163,12 @@
 .contact-page__care-label {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #6f4b47;
+  color: var(--color-clay);
 }
 
 .contact-page__care-value {
@@ -178,7 +178,7 @@
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: #3f2d2a;
+  color: var(--color-text);
 }
 
 .contact-page__care-value--email {
@@ -192,14 +192,14 @@
   gap: 7px;
   margin-top: 20px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #bdaaa3;
+  border-bottom: 1px solid var(--color-border);
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.17em;
   text-transform: uppercase;
-  color: #3f2d2a;
+  color: var(--color-text);
   transition:
     color 180ms ease,
     border-color 180ms ease;
@@ -213,8 +213,8 @@
 
 .contact-page__care-card:hover
   .contact-page__care-link {
-  color: #6f4b47;
-  border-color: #6f4b47;
+  color: var(--color-clay);
+  border-color: var(--color-clay);
 }
 
 .contact-page__care-card:hover
@@ -233,7 +233,7 @@
   max-width: 650px;
   margin-top: 25px;
   padding-top: 18px;
-  border-top: 1px solid #d8cbc5;
+  border-top: 1px solid var(--color-border);
 }
 
 .contact-page__care-note-mark {
@@ -241,7 +241,7 @@
   height: 5px;
   margin-top: 6px;
   flex: 0 0 auto;
-  background: #95645e;
+  background: var(--color-clay);
 }
 
 .contact-page__care-note p {
@@ -249,7 +249,7 @@
   font-family: var(--font-body);
   font-size: 10px;
   line-height: 1.7;
-  color: #8b7974;
+  color: var(--color-clay);
 }
 
 /* =========================================================
@@ -257,7 +257,7 @@
    ========================================================= */
 
 .contact-page__care-card:focus-visible {
-  outline: 2px solid #95645e;
+  outline: 2px solid var(--color-clay);
   outline-offset: 4px;
 }
 

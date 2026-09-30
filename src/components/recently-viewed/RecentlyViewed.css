@@ -7,9 +7,9 @@
 .recently-viewed {
   width: 100%;
 
-  border-top: 1px solid var(--color-border, #d9cbc5);
+  border-top: 1px solid var(--color-border, var(--color-border));
 
-  background: var(--color-bg-soft, #f1eae6);
+  background: var(--color-bg-soft, var(--color-surface-soft));
 }
 
 /* =========================================================
@@ -52,14 +52,14 @@
   margin: 0;
 
   font-family: var(--font-body, sans-serif);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1.4;
 
   letter-spacing: 0.18em;
   text-transform: uppercase;
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .recently-viewed__eyebrow-line {
@@ -70,7 +70,7 @@
 
   flex: 0 0 24px;
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
 }
 
 .recently-viewed__title {
@@ -88,7 +88,7 @@
 
   letter-spacing: -0.025em;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 /* =========================================================
@@ -106,12 +106,12 @@
 
   padding: 0 14px;
 
-  border: 1px solid var(--color-border-dark, #b9a7a0);
+  border: 1px solid var(--color-border-dark, var(--color-clay));
 
   background: transparent;
 
   font-family: var(--font-body, sans-serif);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
 
@@ -119,7 +119,7 @@
   text-transform: uppercase;
   text-decoration: none;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 
   transition:
     background-color 180ms ease,
@@ -128,23 +128,23 @@
 }
 
 .recently-viewed__view-all:hover {
-  border-color: var(--color-accent, #6f4b47);
+  border-color: var(--color-clay);
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
 
   color: #ffffff;
 }
 
 .recently-viewed__view-all:active {
-  border-color: #7f5953;
+  border-color: var(--color-clay);
 
-  background: #7f5953;
+  background: var(--color-clay);
 
   color: #ffffff;
 }
 
 .recently-viewed__view-all:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: 3px;
 }
 
@@ -243,7 +243,7 @@
   }
 
   .recently-viewed__eyebrow {
-    font-size: 8px;
+    font-size: 10px;
 
     letter-spacing: 0.15em;
   }
@@ -288,7 +288,7 @@
     .recently-viewed__view-all {
     min-height: 40px;
 
-    font-size: 8px;
+    font-size: 10px;
   }
 }
 
@@ -316,7 +316,7 @@
 
     padding-inline: 12px;
 
-    font-size: 7.5px;
+    font-size: 10px;
   }
 
   .recently-viewed__view-all-arrow {

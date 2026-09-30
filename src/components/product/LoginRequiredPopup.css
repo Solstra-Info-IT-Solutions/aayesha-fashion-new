@@ -37,17 +37,11 @@
   overflow-y: auto;
   overflow-x: hidden;
 
-  background:
-    linear-gradient(
-      145deg,
-      #fffdfb 0%,
-      #fff9f6 52%,
-      #f8efeb 100%
-    );
+  background: var(--color-surface);
 
   border: 1px solid rgba(112, 76, 65, 0.12);
 
-  border-radius: 26px;
+  border-radius: 4px;
 
   box-shadow:
     0 30px 80px rgba(37, 22, 18, 0.22),
@@ -81,12 +75,12 @@
   align-items: center;
   gap: 8px;
 
-  color: #50362f;
+  color: var(--color-clay-deep);
 
   font-family:
     var(--font-body, sans-serif);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
 
   letter-spacing: 0.2em;
@@ -98,9 +92,9 @@
 
   flex: 0 0 auto;
 
-  border-radius: 999px;
+  border-radius: 2px;
 
-  background: #8f6356;
+  background: var(--color-clay);
 
   box-shadow:
     0 0 0 4px
@@ -131,7 +125,7 @@
   background:
     rgba(255, 255, 255, 0.72);
 
-  color: #50362f;
+  color: var(--color-clay-deep);
 
   cursor: pointer;
 
@@ -144,7 +138,7 @@
 .login-required-popup__close:hover {
   transform: rotate(90deg);
 
-  background: #fff;
+  background: var(--color-surface);
 
   border-color:
     rgba(80, 54, 47, 0.2);
@@ -167,7 +161,7 @@
 
   overflow: hidden;
 
-  border-radius: 20px;
+  border-radius: 4px;
 
   background:
     radial-gradient(
@@ -228,7 +222,7 @@
   border: 1px solid
     rgba(112, 76, 65, 0.12);
 
-  border-radius: 18px;
+  border-radius: 4px;
 
   box-shadow:
     0 18px 35px
@@ -251,7 +245,7 @@
 
   border-radius: 50%;
 
-  color: #8f6356;
+  color: var(--color-clay);
 
   background:
     rgba(255, 255, 255, 0.88);
@@ -270,7 +264,7 @@
 
   margin-top: 15px;
 
-  border-radius: 10px;
+  border-radius: 4px;
 
   background:
     rgba(143, 99, 86, 0.16);
@@ -295,7 +289,7 @@
 
   display: flex;
 
-  color: #9d6d5c;
+  color: var(--color-clay);
 }
 
 .login-required-popup__sparkle--one {
@@ -326,12 +320,12 @@
 
   margin: 0 0 10px;
 
-  color: #9a7164;
+  color: var(--color-clay);
 
   font-family:
     var(--font-body, sans-serif);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
 
   letter-spacing: 0.17em;
@@ -342,7 +336,7 @@
 .login-required-popup__title {
   margin: 0;
 
-  color: #3e2b26;
+  color: var(--color-clay-deep);
 
   font-family:
     var(--font-display, Georgia, serif);
@@ -363,7 +357,7 @@
   margin:
     12px auto 0;
 
-  color: #806d66;
+  color: var(--color-clay);
 
   font-family:
     var(--font-body, sans-serif);
@@ -401,13 +395,13 @@
   justify-content: center;
 
   border: 0;
-  border-radius: 13px;
+  border-radius: 4px;
 
   background:
     linear-gradient(
       135deg,
-      #67483e,
-      #8b6154
+      var(--color-clay),
+      var(--color-clay)
     );
 
   color: #fff;
@@ -486,12 +480,12 @@
   border: 1px solid
     rgba(80, 54, 47, 0.13);
 
-  border-radius: 12px;
+  border-radius: 4px;
 
   background:
     rgba(255, 255, 255, 0.58);
 
-  color: #624940;
+  color: var(--color-clay);
 
   font-family:
     var(--font-body, sans-serif);
@@ -511,7 +505,7 @@
 }
 
 .login-required-popup__secondary:hover {
-  background: #fff;
+  background: var(--color-surface);
 
   border-color:
     rgba(80, 54, 47, 0.22);
@@ -542,12 +536,12 @@
 .login-required-popup__footer p {
   margin: 0;
 
-  color: #b09991;
+  color: var(--color-clay);
 
   font-family:
     var(--font-body, sans-serif);
 
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 700;
 
   letter-spacing: 0.2em;
@@ -621,8 +615,7 @@
         max(8px, env(safe-area-inset-top))
       );
 
-    border-radius:
-      25px 25px 18px 18px;
+    border-radius: 4px 25px 18px 18px;
 
     animation:
       login-popup-mobile-in 320ms
@@ -639,7 +632,7 @@
   }
 
   .login-required-popup__brand {
-    font-size: 8px;
+    font-size: 10px;
 
     letter-spacing: 0.17em;
   }
@@ -663,7 +656,7 @@
     margin:
       6px 12px 0;
 
-    border-radius: 18px;
+    border-radius: 4px;
   }
 
   .login-required-popup__orb {
@@ -677,7 +670,7 @@
 
     padding-top: 17px;
 
-    border-radius: 16px;
+    border-radius: 4px;
   }
 
   .login-required-popup__visual-icon {
@@ -724,7 +717,7 @@
   .login-required-popup__eyebrow {
     margin-bottom: 8px;
 
-    font-size: 8px;
+    font-size: 10px;
 
     letter-spacing: 0.14em;
   }
@@ -765,7 +758,7 @@
   .login-required-popup__primary {
     min-height: 48px;
 
-    border-radius: 12px;
+    border-radius: 4px;
 
     font-size: 10px;
 
@@ -787,9 +780,9 @@
   .login-required-popup__secondary {
     min-height: 43px;
 
-    border-radius: 11px;
+    border-radius: 4px;
 
-    font-size: 9px;
+    font-size: 10px;
 
     letter-spacing: 0.065em;
 
@@ -810,7 +803,7 @@
   }
 
   .login-required-popup__footer p {
-    font-size: 6px;
+    font-size: 10px;
 
     letter-spacing: 0.16em;
   }
@@ -882,7 +875,7 @@
     max-height:
       calc(100dvh - 16px);
 
-    border-radius: 22px;
+    border-radius: 4px;
   }
 
   .login-required-popup__visual {

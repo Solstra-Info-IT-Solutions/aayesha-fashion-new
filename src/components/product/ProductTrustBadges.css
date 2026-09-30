@@ -10,10 +10,10 @@
 
   width: 100%;
 
-  border-top: 1px solid var(--color-border, #d9cbc5);
-  border-left: 1px solid var(--color-border, #d9cbc5);
+  border-top: 1px solid var(--color-border, var(--color-border));
+  border-left: 1px solid var(--color-border, var(--color-border));
 
-  background: var(--color-surface, #fbf8f5);
+  background: var(--color-surface, var(--color-surface));
 }
 
 /* =========================================================
@@ -47,11 +47,11 @@
    ========================================================= */
 
 .product-trust__item--right-border {
-  border-right: 1px solid var(--color-border, #d9cbc5);
+  border-right: 1px solid var(--color-border, var(--color-border));
 }
 
 .product-trust__item--bottom-border {
-  border-bottom: 1px solid var(--color-border, #d9cbc5);
+  border-bottom: 1px solid var(--color-border, var(--color-border));
 }
 
 /* =========================================================
@@ -76,11 +76,11 @@
   width: 34px;
   height: 34px;
 
-  border: 1px solid var(--color-border-dark, #b9a7a0);
+  border: 1px solid var(--color-border-dark, var(--color-clay));
 
   background: transparent;
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 
   transition:
     background-color 180ms ease,
@@ -90,9 +90,9 @@
 }
 
 .product-trust__item:hover .product-trust__icon {
-  border-color: var(--color-accent, #6f4b47);
+  border-color: var(--color-clay);
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
 
   color: #ffffff;
 
@@ -116,14 +116,14 @@
 
   font-family: var(--font-body, sans-serif);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1.4;
 
   letter-spacing: 0.12em;
   text-transform: uppercase;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 /* =========================================================
@@ -141,7 +141,7 @@
   font-weight: 400;
   line-height: 1.6;
 
-  color: var(--color-text-secondary, #6f625d);
+  color: var(--color-text-secondary, var(--color-text-secondary));
 }
 
 /* =========================================================
@@ -168,7 +168,7 @@
   }
 
   .product-trust__title {
-    font-size: 8.5px;
+    font-size: 10px;
   }
 
   .product-trust__text {
@@ -204,7 +204,7 @@
     margin-top: 0;
     margin-bottom: 5px;
 
-    font-size: 7.5px;
+    font-size: 10px;
 
     letter-spacing: 0.1em;
   }
@@ -239,11 +239,11 @@
   }
 
   .product-trust__title {
-    font-size: 7px;
+    font-size: 10px;
   }
 
   .product-trust__text {
-    font-size: 9.5px;
+    font-size: 10px;
   }
 }
 

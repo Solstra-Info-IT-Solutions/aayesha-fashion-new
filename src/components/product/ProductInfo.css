@@ -13,7 +13,7 @@
   width: 100%;
   min-width: 0;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 /* =========================================================
@@ -26,7 +26,7 @@
   padding-bottom: 22px;
 
   border-bottom: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 }
 
 .product-info__header-main {
@@ -59,17 +59,14 @@
     sans-serif
   );
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1.4;
 
   letter-spacing: 0.2em;
   text-transform: uppercase;
 
-  color: var(
-    --color-accent,
-    #6f4b47
-  );
+  color: var(--color-clay);
 }
 
 .product-info__category::before {
@@ -113,7 +110,7 @@
 
   color: var(
     --color-text,
-    #3f2d2a
+    var(--color-text)
   );
 
   text-wrap: balance;
@@ -160,7 +157,7 @@
     sans-serif
   );
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
   line-height: 1.5;
 
@@ -168,7 +165,7 @@
 
   color: var(
     --color-text-muted,
-    #8d817b
+    var(--color-text-secondary)
   );
 }
 
@@ -184,10 +181,7 @@
   padding: 18px 20px;
 
   border-left: 2px solid
-    var(
-      --color-accent,
-      #6f4b47
-    );
+    var(--color-clay);
 
   background:
     linear-gradient(
@@ -215,7 +209,7 @@
 
   color: var(
     --color-text-secondary,
-    #6f625d
+    var(--color-text-secondary)
   );
 }
 
@@ -239,10 +233,10 @@
   padding: 24px 0;
 
   border-top: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   border-bottom: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 }
 
 /* =========================================================
@@ -375,7 +369,7 @@
   .product-info__category {
     margin-bottom: 8px;
 
-    font-size: 8px;
+    font-size: 10px;
 
     letter-spacing: 0.17em;
   }
@@ -407,7 +401,7 @@
   .product-info__tax-note {
     width: 100%;
 
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .product-info__description-section {
@@ -446,7 +440,7 @@
   }
 
   .product-info__category {
-    font-size: 7.5px;
+    font-size: 10px;
   }
 
   .product-info__title {
@@ -490,7 +484,7 @@
     border-left-color:
       var(
         --color-accent-dark,
-        #3f2d2a
+        var(--color-text)
       );
 
     background:

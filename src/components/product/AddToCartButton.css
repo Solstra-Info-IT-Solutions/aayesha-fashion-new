@@ -18,12 +18,12 @@
   overflow: hidden;
 
   border: 1px solid
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   border-radius: 0;
 
   background:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   color: #ffffff;
 
@@ -32,7 +32,7 @@
   font-family:
     var(--font-body, Arial, sans-serif);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
 
   line-height: 1;
@@ -71,7 +71,7 @@
   background:
     var(
       --color-accent-dark,
-      #3f2d2a
+      var(--color-text)
     );
 
   transform: translateY(101%);
@@ -212,7 +212,7 @@
 
 .add-to-cart-button:hover:not(:disabled) {
   border-color:
-    var(--color-accent-dark, #3f2d2a);
+    var(--color-accent-dark, var(--color-text));
 
   transform: translateY(-2px);
 
@@ -279,7 +279,7 @@
 
 .add-to-cart-button:focus-visible {
   outline: 2px solid
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   outline-offset: 4px;
 }
@@ -330,10 +330,10 @@
 
 .add-to-cart-button--added {
   border-color:
-    var(--color-accent-dark, #3f2d2a);
+    var(--color-accent-dark, var(--color-text));
 
   background:
-    var(--color-accent-dark, #3f2d2a);
+    var(--color-accent-dark, var(--color-text));
 
   box-shadow:
     0 10px 24px
@@ -434,7 +434,7 @@
 
     min-height: 49px;
 
-    font-size: 8px;
+    font-size: 10px;
 
     letter-spacing: 0.15em;
   }
@@ -460,7 +460,7 @@
 
     min-height: 46px;
 
-    font-size: 7px;
+    font-size: 10px;
 
     letter-spacing: 0.13em;
   }
@@ -511,7 +511,7 @@
 
     min-height: 44px;
 
-    font-size: 7px;
+    font-size: 10px;
   }
 
   .add-to-cart-button__content {

@@ -12,12 +12,12 @@
   background:
     linear-gradient(
       180deg,
-      var(--color-bg-soft, #f8f4f1) 0%,
-      var(--color-bg-soft, #f8f4f1) 100%
+      var(--color-bg-soft, var(--color-canvas)) 0%,
+      var(--color-bg-soft, var(--color-canvas)) 100%
     );
 
   border-top: 1px solid
-    var(--color-border, #dfd2cc);
+    var(--color-border, var(--color-border));
 }
 
 /* =========================================================
@@ -67,7 +67,7 @@
   font-family:
     var(--font-body, Arial, sans-serif);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1.4;
 
@@ -75,7 +75,7 @@
   text-transform: uppercase;
 
   color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 .product-recommendations__eyebrow::before {
@@ -85,7 +85,7 @@
   height: 1px;
 
   background:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 .product-recommendations__title {
@@ -112,7 +112,7 @@
   letter-spacing: -0.035em;
 
   color:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 }
 
 .product-recommendations__description {
@@ -129,7 +129,7 @@
   line-height: 1.8;
 
   color:
-    var(--color-text-muted, #8d817b);
+    var(--color-text-muted, var(--color-text-secondary));
 }
 
 /* =========================================================
@@ -149,7 +149,7 @@
   font-family:
     var(--font-body, Arial, sans-serif);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
 
   line-height: 1.4;
@@ -159,7 +159,7 @@
   text-transform: uppercase;
 
   color:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 
   text-decoration: none;
 
@@ -179,7 +179,7 @@
   height: 1px;
 
   background:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   transform-origin: left center;
 
@@ -195,7 +195,7 @@
 
 .product-recommendations__collection-link:hover {
   color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 .product-recommendations__collection-link:hover::after {
@@ -433,7 +433,7 @@
   }
 
   .product-recommendations__eyebrow {
-    font-size: 8px;
+    font-size: 10px;
 
     letter-spacing: 0.2em;
 
@@ -481,7 +481,7 @@
   }
 
   .product-recommendations__collection-link {
-    font-size: 8px;
+    font-size: 10px;
 
     letter-spacing: 0.16em;
   }

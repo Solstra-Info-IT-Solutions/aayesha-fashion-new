@@ -76,7 +76,7 @@
    ========================================================= */
 
 .product-carousel__track:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: 5px;
 }
 
@@ -94,7 +94,7 @@
   margin-top: 26px;
   padding-top: 16px;
 
-  border-top: 1px solid var(--color-border, #d9cbc5);
+  border-top: 1px solid var(--color-border, var(--color-border));
 }
 
 /* =========================================================
@@ -115,7 +115,7 @@
 
   font-family: var(--font-body, sans-serif);
 
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
 
   line-height: 1.4;
@@ -123,7 +123,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .product-carousel__hint {
@@ -131,7 +131,7 @@
 
   font-family: var(--font-body, sans-serif);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
 
   line-height: 1.4;
@@ -139,7 +139,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 
-  color: var(--color-text-muted, #8d817b);
+  color: var(--color-text-muted, var(--color-text-secondary));
 }
 
 /* =========================================================
@@ -153,9 +153,9 @@
   overflow: hidden;
 
   border: 1px solid
-    var(--color-border-dark, #b9a7a0);
+    var(--color-border-dark, var(--color-clay));
 
-  background: var(--color-surface, #fbf8f5);
+  background: var(--color-surface, var(--color-surface));
 }
 
 /* =========================================================
@@ -179,7 +179,7 @@
 
   background: transparent;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 
   cursor: pointer;
 
@@ -201,7 +201,7 @@
   position: absolute;
   inset: 0;
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
 
   transform: scaleY(0);
 
@@ -219,7 +219,7 @@
 .product-carousel__button
   + .product-carousel__button {
   border-left: 1px solid
-    var(--color-border-dark, #b9a7a0);
+    var(--color-border-dark, var(--color-clay));
 }
 
 /* =========================================================
@@ -278,7 +278,7 @@
 .product-carousel__button:active::before {
   background: var(
     --color-accent-dark,
-    #3f2d2a
+    var(--color-text)
   );
 }
 
@@ -291,7 +291,7 @@
   z-index: 3;
 
   outline: 2px solid
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   outline-offset: 3px;
 }
@@ -369,12 +369,12 @@
   }
 
   .product-carousel__control-eyebrow {
-    font-size: 7px;
+    font-size: 10px;
     letter-spacing: 0.16em;
   }
 
   .product-carousel__hint {
-    font-size: 7.5px;
+    font-size: 10px;
     letter-spacing: 0.1em;
   }
 
@@ -408,11 +408,11 @@
   }
 
   .product-carousel__control-eyebrow {
-    font-size: 6.5px;
+    font-size: 10px;
   }
 
   .product-carousel__hint {
-    font-size: 7px;
+    font-size: 10px;
   }
 
   .product-carousel__button {

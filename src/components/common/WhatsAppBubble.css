@@ -20,10 +20,10 @@
 
   gap: 12px;
 
-  border: 1px solid var(--color-border-dark, #b9a7a0);
+  border: 1px solid var(--color-border-dark, var(--color-clay));
 
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #3f2d2a);
+  background: var(--color-surface, var(--color-surface));
+  color: var(--color-text, var(--color-text));
 
   text-decoration: none;
 
@@ -44,7 +44,7 @@
 
 .whatsapp-bubble__label {
   font-family: var(--font-body, sans-serif);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
 
@@ -68,7 +68,7 @@
 
   flex: 0 0 36px;
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
   color: #ffffff;
 
   transition:
@@ -86,9 +86,9 @@
    ========================================================= */
 
 .whatsapp-bubble:hover {
-  border-color: var(--color-accent, #6f4b47);
+  border-color: var(--color-clay);
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
   color: #ffffff;
 
   box-shadow:
@@ -99,8 +99,8 @@
 
 .whatsapp-bubble:hover
   .whatsapp-bubble__icon {
-  background: #ffffff;
-  color: var(--color-accent, #6f4b47);
+  background: var(--color-surface);
+  color: var(--color-clay);
 }
 
 /* =========================================================
@@ -108,8 +108,8 @@
    ========================================================= */
 
 .whatsapp-bubble:active {
-  background: #7f5953;
-  border-color: #7f5953;
+  background: var(--color-clay);
+  border-color: var(--color-clay);
   color: #ffffff;
 
   transform: translateY(0);
@@ -117,8 +117,8 @@
 
 .whatsapp-bubble:active
   .whatsapp-bubble__icon {
-  background: #ffffff;
-  color: #7f5953;
+  background: var(--color-surface);
+  color: var(--color-clay);
 }
 
 /* =========================================================
@@ -126,7 +126,7 @@
    ========================================================= */
 
 .whatsapp-bubble:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: 4px;
 }
 
@@ -174,7 +174,7 @@
   }
 
   .whatsapp-bubble__label {
-    font-size: 7px;
+    font-size: 10px;
     letter-spacing: 0.11em;
   }
 

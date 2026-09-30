@@ -406,7 +406,7 @@
   border: 1px solid rgba(149, 92, 86, 0.35);
   border-radius: 2px;
 
-  background: rgba(149, 92, 86, 0.07);
+  background: var(--color-error-soft);
 
   color: var(--color-error);
 }
@@ -464,7 +464,7 @@
   border: 1px solid rgba(101, 116, 95, 0.35);
   border-radius: 2px;
 
-  background: rgba(101, 116, 95, 0.10);
+  background: var(--color-success-soft);
 
   color: var(--color-success);
 }

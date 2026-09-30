@@ -21,7 +21,7 @@
   color: var(--color-text);
 
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: clamp(38px, 4vw, 52px);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.025em;
@@ -55,7 +55,7 @@
   color: var(--color-text-secondary);
 
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.17em;
@@ -67,7 +67,7 @@
   height: 6px;
   flex: 0 0 auto;
 
-  background: #6f4b47;
+  background: var(--color-clay);
 }
 
 /* ==========================================================
@@ -94,7 +94,7 @@
   color: var(--color-text);
 
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.14em;
@@ -117,12 +117,12 @@
 }
 
 .shop-header__sort-button:focus-visible {
-  outline: 2px solid #9b7069;
+  outline: 2px solid var(--color-clay);
   outline-offset: 3px;
 }
 
 .shop-header__sort-button--open {
-  border-color: #6f4b47;
+  border-color: var(--color-clay);
 }
 
 .shop-header__sort-label {
@@ -145,7 +145,7 @@
 
 .shop-header__sort-button--open
   .shop-header__sort-icon {
-  color: #6f4b47;
+  color: var(--color-clay);
   transform: rotate(180deg);
 }
 
@@ -212,12 +212,12 @@
 }
 
 .shop-header__sort-option:active {
-  background: #eee5e2;
-  color: #3f2d2a;
+  background: var(--color-surface-soft);
+  color: var(--color-text);
 }
 
 .shop-header__sort-option:focus-visible {
-  outline: 2px solid #9b7069;
+  outline: 2px solid var(--color-clay);
   outline-offset: -2px;
 }
 
@@ -232,7 +232,7 @@
   height: 6px;
   flex: 0 0 auto;
 
-  background: #6f4b47;
+  background: var(--color-clay);
 }
 
 /* ==========================================================
@@ -241,7 +241,7 @@
 
 @media (max-width: 1024px) {
   .shop-header__title {
-    font-size: 34px;
+    font-size: 38px;
   }
 }
 
@@ -255,7 +255,7 @@
   }
 
   .shop-header__title {
-    font-size: 30px;
+    font-size: 34px;
   }
 
   .shop-header__toolbar {
@@ -263,7 +263,7 @@
   }
 
   .shop-header__count {
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 0.14em;
   }
 
@@ -273,7 +273,7 @@
 
     padding: 0 10px;
 
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 0.11em;
   }
 
@@ -288,7 +288,7 @@
 
 @media (max-width: 390px) {
   .shop-header__title {
-    font-size: 28px;
+    font-size: 32px;
   }
 
   .shop-header__count {

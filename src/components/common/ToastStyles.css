@@ -5,11 +5,11 @@
    ========================================================= */
 
 :root {
-  --toast-bg: #3f2d2a;
-  --toast-text: #ffffff;
-  --toast-border: #6f4b47;
-  --toast-success: #6f4b47;
-  --toast-error: #8a514b;
+  --toast-bg: var(--color-text);
+  --toast-text: #f7f3ed;
+  --toast-border: var(--color-clay-deep);
+  --toast-success: var(--color-success);
+  --toast-error: var(--color-error);
 }
 
 /* =========================================================
