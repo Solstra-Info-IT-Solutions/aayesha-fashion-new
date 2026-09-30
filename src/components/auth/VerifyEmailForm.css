@@ -9,7 +9,7 @@
   max-width: 560px;
   margin: 0 auto;
 
-  color: #302825;
+  color: var(--color-text);
 
   font-family:
     var(--font-body),
@@ -41,10 +41,10 @@
   margin: 0 0 22px;
   padding: 13px 14px;
 
-  border: 1px solid #ddd4d1;
-  border-radius: 7px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
 
-  background: #faf8f7;
+  background: var(--color-surface);
 }
 
 
@@ -62,12 +62,12 @@
 
   flex: 0 0 38px;
 
-  border: 1px solid #d1c4c0;
-  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #89554d;
+  color: var(--color-clay);
 }
 
 .verify-email-form__intro-icon-svg {
@@ -93,7 +93,7 @@
 
   margin: 0 0 4px;
 
-  color: #855149;
+  color: var(--color-clay);
 
   font-size: 10px;
   font-weight: 750;
@@ -108,7 +108,7 @@
 .verify-email-form__intro-text {
   margin: 0;
 
-  color: #746965;
+  color: var(--color-text-secondary);
 
   font-size: 12px;
   font-weight: 450;
@@ -141,7 +141,7 @@
   margin: 0 0 8px;
   padding: 0;
 
-  color: #342d2a;
+  color: var(--color-text);
 
   font-size: 12px;
   font-weight: 650;
@@ -175,7 +175,7 @@
 .verify-email-form__otp-meta {
   margin: 0 0 8px;
 
-  color: #927f79;
+  color: var(--color-clay);
 
   font-size: 10px;
   font-weight: 600;
@@ -216,7 +216,7 @@
   width: 16px;
   height: 16px;
 
-  color: #786c68;
+  color: var(--color-text-secondary);
 
   pointer-events: none;
 
@@ -239,14 +239,14 @@
   margin: 0;
   padding: 0 13px 0 41px;
 
-  border: 1px solid #cec4c0 !important;
-  border-radius: 7px;
+  border: 1px solid var(--color-border-dark) !important;
+  border-radius: 2px;
 
   outline: none !important;
 
-  background: #ffffff !important;
+  background: var(--color-surface) !important;
 
-  color: #302825 !important;
+  color: var(--color-text) !important;
 
   font-family:
     var(--font-body),
@@ -270,26 +270,8 @@
 ========================================================= */
 
 .verify-email-form__input:hover {
-  border-color: #bcaeaa !important;
+  border-color: var(--color-border-dark) !important;
 
-  outline: none !important;
-
-  box-shadow: none !important;
-}
-
-.verify-email-form__input:focus,
-.verify-email-form__input:focus-visible,
-.verify-email-form__input:active {
-  border: 1px solid #bcaeaa !important;
-
-  outline: none !important;
-
-  box-shadow: none !important;
-
-  background: #ffffff !important;
-}
-
-.verify-email-form__input-wrap:focus-within {
   outline: none !important;
 
   box-shadow: none !important;
@@ -310,14 +292,14 @@
 
   padding: 0 14px;
 
-  border: 1px solid #cec4c0 !important;
-  border-radius: 7px;
+  border: 1px solid var(--color-border-dark) !important;
+  border-radius: 2px;
 
   outline: none !important;
 
-  background: #ffffff !important;
+  background: var(--color-surface) !important;
 
-  color: #302825 !important;
+  color: var(--color-text) !important;
 
   font-family:
     var(--font-body),
@@ -340,23 +322,11 @@
 }
 
 .verify-email-form__otp:hover {
-  border-color: #bcaeaa !important;
+  border-color: var(--color-border-dark) !important;
 
   outline: none !important;
 
   box-shadow: none !important;
-}
-
-.verify-email-form__otp:focus,
-.verify-email-form__otp:focus-visible,
-.verify-email-form__otp:active {
-  border: 1px solid #bcaeaa !important;
-
-  outline: none !important;
-
-  box-shadow: none !important;
-
-  background: #ffffff !important;
 }
 
 
@@ -365,7 +335,7 @@
 ========================================================= */
 
 .verify-email-form__input::placeholder {
-  color: #827772 !important;
+  color: var(--color-text-secondary) !important;
 
   opacity: 1;
 
@@ -373,7 +343,7 @@
 }
 
 .verify-email-form__otp::placeholder {
-  color: #b7aaa5 !important;
+  color: var(--color-text-muted) !important;
 
   opacity: 1;
 
@@ -390,7 +360,7 @@
 .verify-email-form__hint {
   margin: 7px 0 0;
 
-  color: #877a75;
+  color: var(--color-text-secondary);
 
   font-size: 10px;
   font-weight: 450;
@@ -407,14 +377,14 @@
 .verify-email-form__input:-webkit-autofill:hover,
 .verify-email-form__input:-webkit-autofill:focus,
 .verify-email-form__input:-webkit-autofill:active {
-  -webkit-text-fill-color: #302825 !important;
+  -webkit-text-fill-color: var(--color-text) !important;
 
-  caret-color: #302825;
+  caret-color: var(--color-text);
 
   box-shadow:
-    0 0 0 1000px #ffffff inset !important;
+    0 0 0 1000px var(--color-surface) inset !important;
 
-  border: 1px solid #cec4c0 !important;
+  border: 1px solid var(--color-border-dark) !important;
 }
 
 
@@ -433,12 +403,12 @@
   margin: -2px 0 15px;
   padding: 11px 13px;
 
-  border: 1px solid #e2c5c0;
-  border-radius: 7px;
+  border: 1px solid rgba(149, 92, 86, 0.35);
+  border-radius: 2px;
 
-  background: #fff7f6;
+  background: rgba(149, 92, 86, 0.07);
 
-  color: #7b4841;
+  color: var(--color-error);
 }
 
 .verify-email-form__message-icon {
@@ -451,10 +421,10 @@
 
   flex: 0 0 20px;
 
-  border: 1px solid #a7675e;
+  border: 1px solid rgba(149, 92, 86, 0.6);
   border-radius: 50%;
 
-  color: #874d45;
+  color: var(--color-clay);
 
   font-size: 11px;
   font-weight: 750;
@@ -467,7 +437,7 @@
 
   margin: 1px 0 0;
 
-  color: #7b514b;
+  color: var(--color-clay);
 
   font-size: 11px;
   font-weight: 500;
@@ -491,12 +461,12 @@
   margin: 0 0 15px;
   padding: 11px 13px;
 
-  border: 1px solid #cbdccf;
-  border-radius: 7px;
+  border: 1px solid rgba(101, 116, 95, 0.35);
+  border-radius: 2px;
 
-  background: #f6faf7;
+  background: rgba(101, 116, 95, 0.10);
 
-  color: #496651;
+  color: var(--color-success);
 }
 
 .verify-email-form__success-icon {
@@ -513,7 +483,7 @@
 .verify-email-form__success p {
   margin: 1px 0 0;
 
-  color: #506957;
+  color: var(--color-success);
 
   font-size: 11px;
   font-weight: 500;
@@ -537,12 +507,12 @@
   margin: 0;
   padding: 0 8px 0 18px;
 
-  border: 1px solid #92584f;
-  border-radius: 7px;
+  border: 1px solid var(--color-clay);
+  border-radius: 2px;
 
   outline: none !important;
 
-  background: #92584f;
+  background: var(--color-clay);
 
   color: #ffffff;
 
@@ -553,30 +523,19 @@
     Arial,
     sans-serif;
 
-  box-shadow:
-    0 5px 14px rgba(73, 43, 39, 0.13);
+  box-shadow: none;
 }
 
 .verify-email-form__submit:hover:not(:disabled) {
-  border-color: #7c4942;
+  border-color: var(--color-clay-deep);
 
-  background: #7c4942;
+  background: var(--color-clay-deep);
 }
 
 .verify-email-form__submit:active:not(:disabled) {
-  border-color: #70423c;
+  border-color: var(--color-clay);
 
-  background: #70423c;
-}
-
-.verify-email-form__submit:focus,
-.verify-email-form__submit:focus-visible {
-  border-color: #92584f;
-
-  outline: none !important;
-
-  box-shadow:
-    0 5px 14px rgba(73, 43, 39, 0.13);
+  background: var(--color-clay-deep);
 }
 
 .verify-email-form__submit:disabled {
@@ -664,10 +623,10 @@
   margin: 13px 0 0;
   padding: 12px 13px;
 
-  border: 1px solid #ddd4d1;
-  border-radius: 7px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
 
-  background: #faf8f7;
+  background: var(--color-surface);
 }
 
 .verify-email-form__resend-copy {
@@ -679,9 +638,9 @@
 
   margin: 0 0 3px;
 
-  color: #8b746e;
+  color: var(--color-clay);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
 
   line-height: 13px;
@@ -694,7 +653,7 @@
 .verify-email-form__resend-text {
   margin: 0;
 
-  color: #655a56;
+  color: var(--color-text-secondary);
 
   font-size: 11px;
   font-weight: 500;
@@ -712,7 +671,7 @@
   align-items: center;
   justify-content: center;
 
-  min-height: 37px;
+  min-height: 44px;
 
   flex: 0 0 auto;
 
@@ -720,14 +679,14 @@
 
   padding: 0 12px;
 
-  border: 1px solid #bdaaa5;
-  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
 
   outline: none;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #784a43;
+  color: var(--color-clay);
 
   cursor: pointer;
 
@@ -747,18 +706,11 @@
 }
 
 .verify-email-form__resend-button:hover:not(:disabled) {
-  border-color: #92584f;
+  border-color: var(--color-clay);
 
-  background: #92584f;
+  background: var(--color-clay);
 
   color: #ffffff;
-}
-
-.verify-email-form__resend-button:focus,
-.verify-email-form__resend-button:focus-visible {
-  outline: none;
-
-  box-shadow: none;
 }
 
 .verify-email-form__resend-button:disabled {
@@ -798,10 +750,10 @@
   margin: 14px 0 0;
   padding: 13px 14px;
 
-  border: 1px solid #ded5d2;
-  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
 
-  background: #faf8f7;
+  background: var(--color-surface);
 }
 
 .verify-email-form__change-email p {
@@ -809,7 +761,7 @@
 
   margin: 0;
 
-  color: #655b57;
+  color: var(--color-text-secondary);
 
   font-size: 11px;
   font-weight: 500;
@@ -827,7 +779,7 @@
   align-items: center;
   justify-content: center;
 
-  min-height: 38px;
+  min-height: 44px;
 
   flex: 0 0 auto;
 
@@ -835,12 +787,12 @@
 
   padding: 0 13px;
 
-  border: 1px solid #9a6259;
-  border-radius: 6px;
+  border: 1px solid var(--color-clay);
+  border-radius: 2px;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #814f47;
+  color: var(--color-clay);
 
   font-family:
     var(--font-body),
@@ -860,26 +812,19 @@
 }
 
 .verify-email-form__register-link:hover {
-  border-color: #92584f;
+  border-color: var(--color-clay);
 
-  background: #92584f;
+  background: var(--color-clay);
 
   color: #ffffff;
 }
 
 .verify-email-form__register-link:active {
-  border-color: #7d4942;
+  border-color: var(--color-clay);
 
-  background: #7d4942;
+  background: var(--color-clay);
 
   color: #ffffff;
-}
-
-.verify-email-form__register-link:focus,
-.verify-email-form__register-link:focus-visible {
-  outline: none;
-
-  box-shadow: none;
 }
 
 
@@ -895,18 +840,10 @@
 
   stroke-width: 1.8;
 }
-
-
 /* =========================================================
    GLOBAL FOCUS RESET
 ========================================================= */
 
-.verify-email-form input:focus,
-.verify-email-form input:focus-visible,
-.verify-email-form button:focus,
-.verify-email-form button:focus-visible {
-  outline: none !important;
-}
 
 
 /* =========================================================
@@ -995,7 +932,7 @@
   .verify-email-form__resend-button {
     width: 100%;
 
-    min-height: 40px;
+    min-height: 44px;
   }
 
   /* CREATE ACCOUNT */
@@ -1020,7 +957,7 @@
   .verify-email-form__register-link {
     width: 100%;
 
-    min-height: 40px;
+    min-height: 44px;
   }
 }
 
@@ -1088,7 +1025,7 @@
   }
 
   .verify-email-form__register-link {
-    min-height: 39px;
+    min-height: 44px;
 
     font-size: 10px;
   }
@@ -1147,4 +1084,51 @@
 .verify-email-form__change-email {
   min-width: 0;
   max-width: 100%;
+}
+
+/* =========================================================
+   INTERACTIVE STATES — IVORY / CLAY
+   Soft clay border + ring on fields; clay outline on
+   buttons and links. Replaces the old "no focus styling"
+   reset so keyboard users can see where they are.
+========================================================= */
+
+.verify-email-form__input:hover, .verify-email-form__otp:hover {
+  border-color: var(--color-border-dark) !important;
+}
+
+.verify-email-form__input:focus, .verify-email-form__otp:focus,
+.verify-email-form__input:focus-visible, .verify-email-form__otp:focus-visible,
+.verify-email-form__input-wrap:focus-within .verify-email-form__input {
+  border-color: var(--color-clay) !important;
+  box-shadow: var(--ring-focus) !important;
+  outline: none !important;
+}
+
+.verify-email-form__submit:focus-visible, .verify-email-form__register-link:focus-visible, .verify-email-form__resend-button:focus-visible {
+  outline: 2px solid var(--color-clay);
+  outline-offset: 3px;
+}
+
+.verify-email-form__submit:active:not(:disabled) {
+  background: var(--button-primary-bg-active);
+  border-color: var(--button-primary-bg-active);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verify-email-form * {
+    transition: none !important;
+  }
+}
+
+
+/* Keep "6 digits" on one line beside the label */
+.verify-email-form__otp-header .verify-email-form__label {
+  width: auto;
+  flex: 1 1 auto;
+}
+
+.verify-email-form__otp-meta {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
