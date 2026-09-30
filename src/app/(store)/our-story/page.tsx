@@ -54,6 +54,10 @@ export default function OurStoryPage() {
 
       <div className="our-story-page__content">
         <ContentPage
+          group="information"
+          currentHref="/our-story"
+          variant="policy"
+          embedded
           eyebrow="The House"
           title="Our Story"
           description="Aayesha Fashion is built around a simple belief: Indian fashion can feel deeply rooted and distinctly modern at the same time. Our approach brings together the familiarity of Indian silhouettes with a contemporary understanding of colour, proportion, styling and the way women dress today."

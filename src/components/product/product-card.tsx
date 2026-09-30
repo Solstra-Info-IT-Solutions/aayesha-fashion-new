@@ -302,12 +302,6 @@ export function ProductCard({
               <span>Sold Out</span>
             </div>
           )}
-
-          {!availability.isSoldOut && (
-            <div className="product-card__media-caption">
-              <span>Available now</span>
-            </div>
-          )}
         </div>
 
         <div className="product-card__content">
@@ -329,7 +323,10 @@ export function ProductCard({
             href={`/products/${product._id}`}
             className="product-card__title-link"
           >
-            <h3 className="product-card__title">
+            <h3
+              className="product-card__title"
+              title={product.name}
+            >
               {product.name}
             </h3>
           </Link>

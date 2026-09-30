@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 export default function ShippingPolicyPage() {
   return (
     <ContentPage
+      group="policies"
+      currentHref="/shipping-policy"
+      variant="policy"
       eyebrow="Legal · Shipping"
       title="Shipping Policy"
       description="At Aayesha Fashion, we believe the experience of receiving an order should be as considered as the experience of discovering it. This Shipping Policy explains how orders move from confirmation to dispatch and delivery, what information customers are responsible for providing, how tracking works and how delivery-related situations are handled."

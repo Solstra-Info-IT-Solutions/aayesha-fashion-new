@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 
 import { ChevronDown } from "lucide-react";
 
+import "./FilterSection.css";
+
 interface FilterSectionProps {
   title: string;
   open: boolean;

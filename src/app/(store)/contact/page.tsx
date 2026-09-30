@@ -17,6 +17,10 @@ export default function ContactPage() {
   return (
     <>
       <ContentPage
+        group="information"
+        currentHref="/contact"
+        variant="info"
+        hideHelp
         eyebrow="Customer Care"
         title="Contact Us"
         description="Whether you need help with an order, sizing, delivery, returns or finding the right piece, our customer care team is here to assist."

@@ -1,17 +1,19 @@
 import Link from "next/link";
+import { ArrowUpRight, Mail } from "lucide-react";
+
+import { siteConfig } from "@/config/site";
+import {
+  contentGroups,
+  type ContentGroup,
+} from "@/config/content-pages";
 
 import {
-  ArrowLeft,
-  ArrowRight,
-} from "lucide-react";
+  ContentBody,
+  type ContentSection,
+} from "./content-body";
 
 import "./ContentPage.css";
-
-type ContentSection = {
-  title: string;
-  paragraphs?: string[];
-  items?: string[];
-};
+import "@/components/home/HomeCta.css";
 
 type ContentHighlight = {
   label: string;
@@ -25,9 +27,37 @@ type ContentPageProps = {
   updatedAt?: string;
   sections: ContentSection[];
   highlights?: ContentHighlight[];
-  backHref?: string;
-  backLabel?: string;
+
+  /* Which set of pages this belongs to, and which one it is. */
+  group?: ContentGroup;
+  currentHref?: string;
+
+  /* "policy" reads like a document, "info" like a guide. */
+  variant?: "policy" | "info";
+
+  /* Skip the hero when the page supplies its own. */
+  embedded?: boolean;
+
+  /* Hide the closing help card (the contact page has its own). */
+  hideHelp?: boolean;
+
+  /* Extra content rendered after the sections (contact cards…). */
+  children?: React.ReactNode;
 };
+
+function readingMinutes(sections: ContentSection[]): number {
+  const words = sections
+    .flatMap((section) => [
+      section.title,
+      ...(section.paragraphs ?? []),
+      ...(section.items ?? []),
+    ])
+    .join(" ")
+    .split(/\s+/)
+    .filter(Boolean).length;
+
+  return Math.max(1, Math.round(words / 200));
+}
 
 export function ContentPage({
   eyebrow,
@@ -36,108 +66,118 @@ export function ContentPage({
   updatedAt,
   sections,
   highlights = [],
-  backHref = "/",
-  backLabel = "Back to home",
+  group = "policies",
+  currentHref,
+  variant = "policy",
+  embedded = false,
+  hideHelp = false,
+  children,
 }: ContentPageProps) {
+  const links = contentGroups[group].links;
+
   return (
-    <main className="content-page">
+    <main
+      className={[
+        "content-page",
+        `content-page--${variant}`,
+        embedded ? "content-page--embedded" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {/* =====================================================
           HERO
       ===================================================== */}
 
-      <section className="content-page__hero">
-        <div className="content-page__container">
-          <div className="content-page__hero-inner">
-            <Link
-              href={backHref}
-              className="content-page__back"
+      {!embedded && (
+        <section className="content-page__hero">
+          <div className="content-page__container">
+            <nav
+              aria-label="Breadcrumb"
+              className="content-page__crumbs"
             >
-              <ArrowLeft
-                size={13}
-                strokeWidth={1.3}
-              />
+              <Link href="/">Home</Link>
+              <span aria-hidden="true">/</span>
+              <span aria-current="page">{title}</span>
+            </nav>
 
-              <span>{backLabel}</span>
-            </Link>
-
-            <div className="content-page__hero-copy">
-              <div className="content-page__eyebrow">
-                <span className="content-page__eyebrow-line" />
-
-                <span>
-                  {eyebrow}
-                </span>
-              </div>
-
-              <h1 className="content-page__title">
-                {title}
-              </h1>
-
-              <p className="content-page__description">
-                {description}
-              </p>
-
-              {updatedAt && (
-                <div className="content-page__updated">
-                  <span />
-
-                  <p>
-                    Last updated{" "}
-                    {updatedAt}
-                  </p>
-                </div>
-              )}
+            <div className="content-page__eyebrow">
+              <span aria-hidden="true" />
+              {eyebrow}
             </div>
 
-            <div
-              className="content-page__hero-mark"
-              aria-hidden="true"
+            <h1 className="content-page__title">{title}</h1>
+
+            <p className="content-page__description">
+              {description}
+            </p>
+
+            <ul className="content-page__meta">
+              {updatedAt && <li>Last updated {updatedAt}</li>}
+
+              <li>
+                {sections.length}{" "}
+                {sections.length === 1 ? "section" : "sections"}
+              </li>
+
+              <li>{readingMinutes(sections)} min read</li>
+            </ul>
+
+            <nav
+              aria-label={contentGroups[group].label}
+              className="content-page__switcher"
             >
-              <span>AA</span>
-            </div>
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={
+                    link.href === currentHref ? "page" : undefined
+                  }
+                  className="content-page__pill"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* =====================================================
-          HIGHLIGHTS
+          AT A GLANCE
       ===================================================== */}
 
       {highlights.length > 0 && (
-        <section className="content-page__highlights">
+        <section
+          className="content-page__glance"
+          aria-label="At a glance"
+        >
           <div className="content-page__container">
-            <div
-              className={`content-page__highlight-grid content-page__highlight-grid--${Math.min(
-                highlights.length,
-                3,
-              )}`}
-            >
-              {highlights.map(
-                (
-                  highlight,
-                  index,
-                ) => (
-                  <div
-                    key={`${highlight.label}-${index}`}
-                    className="content-page__highlight"
-                  >
-                    <span className="content-page__highlight-number">
-                      0{index + 1}
-                    </span>
+            <p className="content-page__glance-label">
+              At a glance
+            </p>
 
-                    <div>
-                      <p className="content-page__highlight-label">
-                        {highlight.label}
-                      </p>
+            <ul className="content-page__glance-grid">
+              {highlights.map((highlight, index) => (
+                <li
+                  key={`${highlight.label}-${index}`}
+                  className="content-page__glance-card"
+                >
+                  <span className="content-page__glance-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
 
-                      <p className="content-page__highlight-value">
-                        {highlight.value}
-                      </p>
-                    </div>
-                  </div>
-                ),
-              )}
-            </div>
+                  <p className="content-page__glance-title">
+                    {highlight.label}
+                  </p>
+
+                  <p className="content-page__glance-value">
+                    {highlight.value}
+                  </p>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )}
@@ -148,146 +188,57 @@ export function ContentPage({
 
       <section className="content-page__body">
         <div className="content-page__container">
-          <div className="content-page__body-grid">
-            <aside className="content-page__aside">
-              <div className="content-page__aside-inner">
-                <p className="content-page__aside-brand">
-                  AAYESHA
-                </p>
-
-                <span className="content-page__aside-line" />
-
-                <p className="content-page__aside-copy">
-                  Contemporary Indian
-                  fashion shaped by
-                  considered details,
-                  thoughtful service and
-                  timeless elegance.
-                </p>
-
-                <p className="content-page__aside-caption">
-                  Aayesha Fashion
-                  <br />
-                  Contemporary Indian
-                  Fashion
-                </p>
-              </div>
-            </aside>
-
-            <div className="content-page__sections">
-              {sections.map(
-                (section, index) => (
-                  <article
-                    key={`${section.title}-${index}`}
-                    className="content-page__section"
-                  >
-                    <div className="content-page__section-header">
-                      <span className="content-page__section-number">
-                        {String(
-                          index + 1,
-                        ).padStart(
-                          2,
-                          "0",
-                        )}
-                      </span>
-
-                      <div className="content-page__section-rule" />
-
-                      <h2 className="content-page__section-title">
-                        {section.title}
-                      </h2>
-                    </div>
-
-                    <div className="content-page__section-content">
-                      {section.paragraphs?.map(
-                        (
-                          paragraph,
-                          paragraphIndex,
-                        ) => (
-                          <p
-                            key={
-                              paragraphIndex
-                            }
-                            className="content-page__paragraph"
-                          >
-                            {paragraph}
-                          </p>
-                        ),
-                      )}
-
-                      {section.items &&
-                        section.items.length >
-                          0 && (
-                          <div className="content-page__items">
-                            {section.items.map(
-                              (
-                                item,
-                                itemIndex,
-                              ) => (
-                                <div
-                                  key={
-                                    itemIndex
-                                  }
-                                  className="content-page__item"
-                                >
-                                  <span className="content-page__item-mark">
-                                    —
-                                  </span>
-
-                                  <p>
-                                    {item}
-                                  </p>
-                                </div>
-                              ),
-                            )}
-                          </div>
-                        )}
-                    </div>
-                  </article>
-                ),
-              )}
-            </div>
-          </div>
+          <ContentBody sections={sections} variant={variant} />
         </div>
       </section>
+
+      {children}
 
       {/* =====================================================
-          CTA
+          HELP
       ===================================================== */}
 
-      <section className="content-page__cta">
-        <div className="content-page__container">
-          <div className="content-page__cta-inner">
-            <div className="content-page__cta-copy">
-              <p className="content-page__cta-eyebrow">
-                Continue exploring
-              </p>
+      {!embedded && !hideHelp && (
+        <section className="content-page__help">
+          <div className="content-page__container">
+            <div className="content-page__help-card">
+              <div className="content-page__help-copy">
+                <p className="content-page__help-eyebrow">
+                  Still need help?
+                </p>
 
-              <h2 className="content-page__cta-title">
-                Discover the
-                <br />
-                Aayesha Fashion edit.
-              </h2>
+                <h2 className="content-page__help-title">
+                  Our customer care team is happy to assist.
+                </h2>
+              </div>
+
+              <div className="content-page__help-actions">
+                <Link
+                  href="/contact"
+                  className="home-cta home-cta--light"
+                >
+                  Contact us
+                </Link>
+
+                {siteConfig.contact.email && (
+                  <a
+                    href={`mailto:${siteConfig.contact.email}`}
+                    className="content-page__help-link"
+                  >
+                    <Mail size={15} strokeWidth={1.6} aria-hidden="true" />
+                    {siteConfig.contact.email}
+                    <ArrowUpRight
+                      size={13}
+                      strokeWidth={1.6}
+                      aria-hidden="true"
+                    />
+                  </a>
+                )}
+              </div>
             </div>
-
-            <Link
-              href="/shop"
-              className="content-page__cta-button"
-            >
-              <span>
-                Explore collection
-              </span>
-
-              <span className="content-page__cta-icon">
-                <ArrowRight
-                  size={14}
-                  strokeWidth={1.3}
-                />
-              </span>
-            </Link>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </main>
   );
 }

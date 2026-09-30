@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 export default function ShippingPage() {
   return (
     <ContentPage
+      group="information"
+      currentHref="/shipping"
+      variant="info"
       eyebrow="Customer Care · Shipping"
       title="Shipping & Delivery"
       description="From the moment your order is confirmed to the moment it reaches your doorstep, every delivery is part of the Aayesha Fashion experience. This guide explains order processing, dispatch, tracking, delivery addresses, delays, delivery attempts, package handling and what to do when something does not go as expected."
