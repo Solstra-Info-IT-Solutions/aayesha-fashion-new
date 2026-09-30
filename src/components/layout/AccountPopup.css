@@ -33,15 +33,15 @@
   background:
     linear-gradient(
       180deg,
-      #ffffff 0%,
-      #fdf5f6 100%
+      var(--color-surface) 0%,
+      var(--color-surface) 100%
     );
 
-  color: #1a1a1a;
+  color: var(--color-text);
 
   border: 1px solid rgba(26, 26, 26, 0.08);
 
-  border-radius: 20px;
+  border-radius: 4px;
 
   box-shadow:
     0 24px 70px rgba(26, 26, 26, 0.14),
@@ -65,12 +65,12 @@
   background:
     linear-gradient(
       90deg,
-      #e88fa0 0%,
-      #f4b9c2 48%,
-      #e88fa0 100%
+      var(--color-clay) 0%,
+      var(--color-accent-soft) 48%,
+      var(--color-clay) 100%
     );
 
-  border-radius: 20px 20px 0 0;
+  border-radius: 4px 20px 0 0;
 }
 
 
@@ -111,9 +111,9 @@
 
   border-radius: 50%;
 
-  background: #fbe3e7;
+  background: var(--color-accent-soft);
 
-  color: #4a3d40;
+  color: var(--color-text-secondary);
 
   cursor: pointer;
 
@@ -125,9 +125,9 @@
 }
 
 .account-popup__close:hover {
-  background: #161616;
+  background: var(--color-text);
 
-  border-color: #161616;
+  border-color: var(--color-text);
 
   color: #ffffff;
 
@@ -135,7 +135,7 @@
 }
 
 .account-popup__close:focus-visible {
-  outline: 2px solid #e88fa0;
+  outline: 2px solid var(--color-clay);
   outline-offset: 3px;
 }
 
@@ -180,8 +180,8 @@
   background:
     linear-gradient(
       145deg,
-      #f4b9c2,
-      #e88fa0
+      var(--color-accent-soft),
+      var(--color-clay)
     );
 
   color: #ffffff;
@@ -245,7 +245,7 @@
 
   white-space: nowrap;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 
   font-family:
     var(
@@ -273,7 +273,7 @@
 
   white-space: nowrap;
 
-  color: #7a6870;
+  color: var(--color-text-secondary);
 
   font-family:
     var(
@@ -314,11 +314,11 @@
   border: 1px solid
     rgba(26, 26, 26, 0.08);
 
-  border-radius: 12px;
+  border-radius: 4px;
 
-  background: #fbe3e7;
+  background: var(--color-accent-soft);
 
-  color: #1a1a1a;
+  color: var(--color-text);
 
   text-decoration: none;
 
@@ -329,15 +329,15 @@
 }
 
 .account-popup__cta:hover {
-  background: #161616;
+  background: var(--color-text);
 
-  border-color: #161616;
+  border-color: var(--color-text);
 
   color: #ffffff;
 }
 
 .account-popup__cta:focus-visible {
-  outline: 2px solid #e88fa0;
+  outline: 2px solid var(--color-clay);
 
   outline-offset: 3px;
 }
@@ -379,7 +379,7 @@
 
   line-height: 1.35;
 
-  color: #7a6870;
+  color: var(--color-text-secondary);
 }
 
 .account-popup__cta:hover
@@ -402,9 +402,9 @@
 
   border-radius: 50%;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #4a3d40;
+  color: var(--color-text-secondary);
 
   transition:
     background-color 180ms ease,
@@ -415,9 +415,9 @@
 
 .account-popup__cta:hover
   .account-popup__cta-icon {
-  background: #e88fa0;
+  background: var(--color-clay);
 
-  border-color: #e88fa0;
+  border-color: var(--color-clay);
 
   color: #ffffff;
 
@@ -462,11 +462,11 @@
 
   border: 1px solid transparent;
 
-  border-radius: 12px;
+  border-radius: 4px;
 
   background: transparent;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 
   text-decoration: none;
 
@@ -476,14 +476,14 @@
 }
 
 .account-popup__nav-item:hover {
-  background: #fbe3e7;
+  background: var(--color-accent-soft);
 
   border-color:
     rgba(26, 26, 26, 0.07);
 }
 
 .account-popup__nav-item:focus-visible {
-  outline: 2px solid #e88fa0;
+  outline: 2px solid var(--color-clay);
 
   outline-offset: 2px;
 }
@@ -522,7 +522,7 @@
 
   border-radius: 0 4px 4px 0;
 
-  background: #e88fa0;
+  background: var(--color-clay);
 }
 
 
@@ -541,11 +541,11 @@
   border: 1px solid
     rgba(26, 26, 26, 0.08);
 
-  border-radius: 10px;
+  border-radius: 4px;
 
-  background: #fdf5f6;
+  background: var(--color-surface);
 
-  color: #6b5a5e;
+  color: var(--color-text-secondary);
 
   transition:
     background-color 180ms ease,
@@ -555,19 +555,19 @@
 
 .account-popup__nav-item:hover
   .account-popup__nav-icon {
-  background: #ffffff;
+  background: var(--color-surface);
 
   border-color:
     rgba(232, 143, 160, 0.3);
 
-  color: #e88fa0;
+  color: var(--color-clay);
 }
 
 .account-popup__nav-item--active
   .account-popup__nav-icon {
-  background: #e88fa0;
+  background: var(--color-clay);
 
-  border-color: #e88fa0;
+  border-color: var(--color-clay);
 
   color: #ffffff;
 }
@@ -590,7 +590,7 @@
 
   white-space: nowrap;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 
   font-family:
     var(
@@ -619,7 +619,7 @@
 
   white-space: nowrap;
 
-  color: #7a6870;
+  color: var(--color-text-secondary);
 
   font-family:
     var(
@@ -650,7 +650,7 @@
 
   border-radius: 50%;
 
-  color: #8a7378;
+  color: var(--color-clay);
 
   transition:
     background-color 180ms ease,
@@ -660,16 +660,16 @@
 
 .account-popup__nav-item:hover
   .account-popup__nav-arrow {
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #4a3d40;
+  color: var(--color-text-secondary);
 
   transform: translateX(2px);
 }
 
 .account-popup__nav-item--active
   .account-popup__nav-arrow {
-  color: #e88fa0;
+  color: var(--color-clay);
 }
 
 
@@ -712,11 +712,11 @@
 
   border: 1px solid transparent;
 
-  border-radius: 11px;
+  border-radius: 4px;
 
   background: transparent;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 
   text-align: left;
 
@@ -729,7 +729,7 @@
 }
 
 .account-popup__action:focus-visible {
-  outline: 2px solid #e88fa0;
+  outline: 2px solid var(--color-clay);
 
   outline-offset: 2px;
 }
@@ -756,11 +756,11 @@
   border: 1px solid
     rgba(26, 26, 26, 0.08);
 
-  border-radius: 10px;
+  border-radius: 4px;
 
-  background: #fdf5f6;
+  background: var(--color-surface);
 
-  color: #6b5a5e;
+  color: var(--color-text-secondary);
 
   transition:
     background-color 180ms ease,
@@ -780,7 +780,7 @@
 .account-popup__action-title {
   display: block;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 
   font-family:
     var(
@@ -801,7 +801,7 @@
 
   margin-top: 3px;
 
-  color: #7a6870;
+  color: var(--color-text-secondary);
 
   font-family:
     var(
@@ -810,7 +810,7 @@
       sans-serif
     );
 
-  font-size: 9.5px;
+  font-size: 10px;
 
   line-height: 1.35;
 }
@@ -821,7 +821,7 @@
 ========================================================= */
 
 .account-popup__action--delete:hover {
-  background: #fff6f5;
+  background: rgba(149, 92, 86, 0.07);
 
   border-color:
     rgba(171, 72, 72, 0.13);
@@ -829,17 +829,17 @@
 
 .account-popup__action--delete:hover
   .account-popup__action-icon {
-  background: #fff0ef;
+  background: rgba(149, 92, 86, 0.07);
 
   border-color:
     rgba(171, 72, 72, 0.18);
 
-  color: #a44747;
+  color: var(--color-clay);
 }
 
 .account-popup__action--delete:hover
   .account-popup__action-title {
-  color: #9d4141;
+  color: var(--color-clay);
 }
 
 
@@ -848,7 +848,7 @@
 ========================================================= */
 
 .account-popup__action--logout:hover {
-  background: #fbe3e7;
+  background: var(--color-accent-soft);
 
   border-color:
     rgba(26, 26, 26, 0.08);
@@ -856,12 +856,12 @@
 
 .account-popup__action--logout:hover
   .account-popup__action-icon {
-  background: #ffffff;
+  background: var(--color-surface);
 
   border-color:
     rgba(26, 26, 26, 0.12);
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 
@@ -889,7 +889,7 @@
   background:
     rgba(26, 26, 26, 0.18);
 
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 
@@ -911,7 +911,7 @@
     max-height:
       calc(100svh - 86px);
 
-    border-radius: 18px;
+    border-radius: 4px;
   }
 
   .account-popup__profile {
@@ -944,7 +944,7 @@
     max-height:
       calc(100svh - 74px);
 
-    border-radius: 16px;
+    border-radius: 4px;
   }
 
 
@@ -989,7 +989,7 @@
   .account-popup__email {
     margin-top: 4px;
 
-    font-size: 9.5px;
+    font-size: 10px;
   }
 
 
@@ -1002,7 +1002,7 @@
 
     padding: 11px 12px;
 
-    border-radius: 10px;
+    border-radius: 4px;
   }
 
   .account-popup__cta-label {
@@ -1010,7 +1010,7 @@
   }
 
   .account-popup__cta-text {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .account-popup__cta-icon {
@@ -1043,7 +1043,7 @@
 
     padding: 7px 8px;
 
-    border-radius: 10px;
+    border-radius: 4px;
   }
 
   .account-popup__nav-item--active::before {
@@ -1054,7 +1054,7 @@
     width: 34px;
     height: 34px;
 
-    border-radius: 9px;
+    border-radius: 4px;
   }
 
   .account-popup__nav-title {
@@ -1064,7 +1064,7 @@
   .account-popup__nav-description {
     margin-top: 2px;
 
-    font-size: 8.5px;
+    font-size: 10px;
   }
 
   .account-popup__nav-arrow {
@@ -1094,14 +1094,14 @@
 
     padding: 7px 8px;
 
-    border-radius: 9px;
+    border-radius: 4px;
   }
 
   .account-popup__action-icon {
     width: 34px;
     height: 34px;
 
-    border-radius: 9px;
+    border-radius: 4px;
   }
 
   .account-popup__action-title {
@@ -1111,7 +1111,7 @@
   .account-popup__action-description {
     margin-top: 2px;
 
-    font-size: 8.5px;
+    font-size: 10px;
   }
 }
 
@@ -1157,7 +1157,7 @@
   }
 
   .account-popup__email {
-    font-size: 8.5px;
+    font-size: 10px;
   }
 
   .account-popup__cta {
@@ -1167,11 +1167,11 @@
   }
 
   .account-popup__cta-label {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .account-popup__cta-text {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .account-popup__navigation {
@@ -1197,11 +1197,11 @@
   }
 
   .account-popup__nav-title {
-    font-size: 9.5px;
+    font-size: 10px;
   }
 
   .account-popup__nav-description {
-    font-size: 7.8px;
+    font-size: 10px;
   }
 
   .account-popup__nav-arrow {
@@ -1227,11 +1227,11 @@
   }
 
   .account-popup__action-title {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .account-popup__action-description {
-    font-size: 7.8px;
+    font-size: 10px;
   }
 }
 
@@ -1242,7 +1242,7 @@
 
 .account-popup a:focus-visible,
 .account-popup button:focus-visible {
-  outline: 2px solid #e88fa0;
+  outline: 2px solid var(--color-clay);
 
   outline-offset: 3px;
 }

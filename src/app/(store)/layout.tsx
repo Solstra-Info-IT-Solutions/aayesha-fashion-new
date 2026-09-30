@@ -12,7 +12,7 @@ export default function StoreLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen bg-white text-[#171717] antialiased">
+    <div className="min-h-screen bg-[var(--color-canvas)] text-[var(--color-text)] antialiased">
       {/* <AnnouncementBar /> */}
 
       <Header />
@@ -22,7 +22,7 @@ export default function StoreLayout({
           min-h-screen
           w-full
           overflow-x-hidden
-          bg-white
+          bg-[var(--color-canvas)]
           pt-[64px]
           sm:pt-[68px]
           md:pt-[72px]
@@ -47,16 +47,16 @@ export default function StoreLayout({
         toastOptions={{
           duration: 3200,
           style: {
-            background: "#171717",
-            color: "#ffffff",
-            border: "1px solid #303030",
-            borderRadius: "10px",
+            background: "#3f2d2a",
+            color: "#f7f3ed",
+            border: "1px solid #543c38",
+            borderRadius: "2px",
             padding: "12px 16px",
             fontFamily: "var(--font-body, sans-serif)",
             fontSize: "12px",
             fontWeight: 500,
             lineHeight: "1.4",
-            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.14)",
+            boxShadow: "0 8px 24px rgba(63, 45, 42, 0.16)",
           },
         }}
       />

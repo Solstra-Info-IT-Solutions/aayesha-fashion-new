@@ -21,7 +21,7 @@
 
   padding: 8px 0;
 
-  color: var(--color-primary, #1a1a1a);
+  color: var(--color-primary, var(--color-text));
 
   text-decoration: none;
 
@@ -33,11 +33,11 @@
 }
 
 .desktop-navigation__link:hover {
-  color: var(--color-clay, #e88fa0);
+  color: var(--color-clay, var(--color-clay));
 }
 
 .desktop-navigation__link:focus-visible {
-  outline: 2px solid var(--color-clay, #e88fa0);
+  outline: 2px solid var(--color-clay, var(--color-clay));
   outline-offset: 5px;
 }
 
@@ -102,7 +102,7 @@
   width: 4px;
   height: 1px;
 
-  background: var(--color-clay, #e88fa0);
+  background: var(--color-clay, var(--color-clay));
 
   opacity: 0;
 
@@ -159,7 +159,7 @@
   }
 
   .desktop-navigation__label {
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.11em;
   }
 }

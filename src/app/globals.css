@@ -524,16 +524,6 @@ textarea {
   caret-color: var(--color-secondary);
 }
 
-/* Base focus for bare controls: soft clay border + ring.
-   Component styles (e.g. LoginForm.css) may refine this. */
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: none;
-  border-color: var(--color-secondary);
-  box-shadow: var(--ring-focus);
-}
-
 input[type="checkbox"],
 input[type="radio"] {
   accent-color: var(--color-secondary);
