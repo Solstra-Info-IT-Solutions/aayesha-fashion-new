@@ -1,19 +1,23 @@
 import type { Metadata } from "next";
 
 import { getProducts } from "@/lib/api/products";
+import {
+  getAvailableCollections,
+  getCollectionDefinition,
+  heroImageOf,
+} from "@/lib/collections";
 import type { ProductSort } from "@/types/product";
-import { ShopFilters } from "@/components/shop/shop-filters";
-import { ShopProductGrid } from "@/components/shop/shop-product-grid";
 
-import "./BestSellersPage.css";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
+import { CollectionLanding } from "@/components/collections/collection-landing";
 
 type BestSellersPageProps = {
   searchParams: Promise<{
     category?: string;
     sort?: string;
+    availability?: string;
     minPrice?: string;
     maxPrice?: string;
-    availability?: string;
     search?: string;
   }>;
 };
@@ -59,6 +63,8 @@ export default async function BestSellersPage({
 }: BestSellersPageProps) {
   const params = await searchParams;
 
+  const definition = getCollectionDefinition("best-sellers");
+
   const categoryId = params.category || undefined;
 
   const sort =
@@ -67,90 +73,46 @@ export default async function BestSellersPage({
       ? (params.sort as ProductSort)
       : "best-selling";
 
-  const minPrice = parseNumber(params.minPrice);
-  const maxPrice = parseNumber(params.maxPrice);
-
-  const inStockOnly =
-    params.availability === "in-stock"
-      ? true
-      : undefined;
-
   const response = await getProducts({
     page: 1,
     limit: 48,
     isBestSeller: true,
     categoryId,
-    minPrice,
-    maxPrice,
-    inStockOnly,
+    minPrice: parseNumber(params.minPrice),
+    maxPrice: parseNumber(params.maxPrice),
+    inStockOnly:
+      params.availability === "in-stock" ? true : undefined,
     search: params.search,
     sort,
   });
 
+  const collections = await getAvailableCollections();
+
   return (
-    <main className="best-sellers-page">
-      {/* PAGE HEADER */}
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Collections", url: "/collections" },
+          {
+            name: definition.label,
+            url: definition.href,
+          },
+        ]}
+      />
 
-      <section className="best-sellers-page__header">
-        <div className="best-sellers-page__container">
-          <div className="best-sellers-page__heading">
-            <div className="best-sellers-page__eyebrow-row">
-              <span className="best-sellers-page__eyebrow-line" />
-
-              <span className="best-sellers-page__eyebrow">
-                Collection
-              </span>
-            </div>
-
-            <h1 className="best-sellers-page__title">
-              Best Sellers
-            </h1>
-          </div>
-        </div>
-      </section>
-
-      {/* PRODUCT CONTENT */}
-
-      <section className="best-sellers-page__content">
-        <div className="best-sellers-page__container">
-          <div className="best-sellers-page__layout">
-            {/* FILTERS */}
-
-            <aside className="best-sellers-page__filters">
-              <div className="best-sellers-page__filters-sticky">
-                <div className="best-sellers-page__filters-card">
-                  <div className="best-sellers-page__filters-header">
-                    <span className="best-sellers-page__filters-title">
-                      Filters
-                    </span>
-
-                    <span className="best-sellers-page__filters-label">
-                      Refine
-                    </span>
-                  </div>
-
-                  <div className="best-sellers-page__filters-body">
-                    <ShopFilters
-                      products={response.products}
-                      selectedCategory={categoryId}
-                    />
-                  </div>
-                </div>
-              </div>
-            </aside>
-
-            {/* PRODUCTS */}
-
-            <div className="best-sellers-page__products">
-              <ShopProductGrid
-                products={response.products}
-                category={categoryId}
-                sort={sort}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+      <CollectionLanding
+        slug={definition.slug}
+        title={definition.label}
+        eyebrow={definition.eyebrow}
+        description={definition.description}
+        mood="The pieces that sell out first."
+        heroImage={heroImageOf(response.products)}
+        collections={collections}
+        products={response.products}
+        sort={sort}
+        categoryId={categoryId}
+      />
+    </>
   );
 }

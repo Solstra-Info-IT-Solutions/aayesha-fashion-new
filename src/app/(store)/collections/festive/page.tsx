@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { getCategoryBySlug } from "@/services/category.service";
 import { getProducts } from "@/lib/api/products";
+import {
+  getAvailableCollections,
+  getCollectionDefinition,
+  heroImageOf,
+} from "@/lib/collections";
 
 import type { ProductSort } from "@/types/product";
+import type { Category } from "@/types/category";
 
-import { CollectionPage } from "@/components/collections/collection-page";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
+import { CollectionLanding } from "@/components/collections/collection-landing";
 
 type FestivePageProps = {
   searchParams: Promise<{
@@ -37,13 +45,21 @@ export default async function FestivePage({
 }: FestivePageProps) {
   const params = await searchParams;
 
+  const definition = getCollectionDefinition("festive");
+
   const sort =
     params.sort &&
     validSorts.includes(params.sort as ProductSort)
       ? (params.sort as ProductSort)
       : "featured";
 
-  const category = await getCategoryBySlug("festive");
+  let category: Category;
+
+  try {
+    category = await getCategoryBySlug("festive");
+  } catch {
+    notFound();
+  }
 
   const response = await getProducts({
     page: 1,
@@ -52,15 +68,33 @@ export default async function FestivePage({
     sort,
   });
 
+  const collections = await getAvailableCollections();
+
   return (
-    <CollectionPage
-      title="Festive"
-      eyebrow="The Festive Edit"
-      description="Occasion dressing with a quieter confidence — luminous colours, graceful silhouettes and considered details designed for celebrations, intimate gatherings and unforgettable evenings."
-      categoryId={category.id}
-      products={response.products}
-      sort={sort}
-      mood="For celebrations, ceremonies and everything worth dressing for."
-    />
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Collections", url: "/collections" },
+          {
+            name: definition.label,
+            url: definition.href,
+          },
+        ]}
+      />
+
+      <CollectionLanding
+        slug={definition.slug}
+        title={definition.label}
+        eyebrow={definition.eyebrow}
+        description="Occasion dressing with a quieter confidence — luminous colours, graceful silhouettes and considered details designed for celebrations, intimate gatherings and unforgettable evenings."
+        mood="For celebrations, ceremonies and everything worth dressing for."
+        heroImage={category.image || heroImageOf(response.products)}
+        collections={collections}
+        products={response.products}
+        sort={sort}
+        categoryId={category.id}
+      />
+    </>
   );
 }

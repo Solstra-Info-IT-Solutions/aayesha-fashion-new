@@ -7,7 +7,11 @@ import {
 } from "react";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 
 import {
   RotateCcw,
@@ -78,13 +82,9 @@ const sectionLabels: Record<
   availability: "Availability",
 };
 
-function getCollectionBasePath(): string {
-  if (typeof window === "undefined") {
-    return "/shop";
-  }
-
-  const { pathname } = window.location;
-
+function getCollectionBasePath(
+  pathname: string,
+): string {
   if (
     pathname ===
     "/collections/new-arrivals"
@@ -102,13 +102,17 @@ function getCollectionBasePath(): string {
   return "/shop";
 }
 
+/*
+ * Built from the router's own pathname and query string, so the
+ * same href is produced on the server and in the browser.
+ */
 function buildFilterHref(
   key: string,
   value: string,
+  search: string,
+  pathname: string,
 ): string {
-  const params = new URLSearchParams(
-    window.location.search,
-  );
+  const params = new URLSearchParams(search);
 
   if (value) {
     params.set(key, value);
@@ -117,11 +121,12 @@ function buildFilterHref(
   }
 
   const query = params.toString();
-  const pathname = getCollectionBasePath();
+  const basePath =
+    getCollectionBasePath(pathname);
 
   return query
-    ? `${pathname}?${query}`
-    : pathname;
+    ? `${basePath}?${query}`
+    : basePath;
 }
 
 function getInitialPrice(): string | null {
@@ -152,6 +157,8 @@ export function ShopFilters({
   onClose,
 }: ShopFiltersProps) {
   const router = useRouter();
+  const pathname = usePathname();
+  const search = useSearchParams().toString();
 
   const [openSections, setOpenSections] =
     useState<FilterSectionKey[]>([
@@ -250,7 +257,7 @@ export function ShopFilters({
   function resetFilters() {
     setSelectedPrice(null);
     router.push(
-      getCollectionBasePath(),
+      getCollectionBasePath(pathname),
     );
   }
 
@@ -261,9 +268,7 @@ export function ShopFilters({
   ) {
     setSelectedPrice(label);
 
-    const params = new URLSearchParams(
-      window.location.search,
-    );
+    const params = new URLSearchParams(search);
 
     params.set("minPrice", String(min));
 
@@ -274,12 +279,13 @@ export function ShopFilters({
     }
 
     const query = params.toString();
-    const pathname = getCollectionBasePath();
+    const basePath =
+      getCollectionBasePath(pathname);
 
     router.push(
       query
-        ? `${pathname}?${query}`
-        : pathname,
+        ? `${basePath}?${query}`
+        : basePath,
     );
   }
 
@@ -346,6 +352,8 @@ export function ShopFilters({
                     href={buildFilterHref(
                       "category",
                       category.id,
+                      search,
+                      pathname,
                     )}
                     onClick={onClose}
                     className={`shop-filters__category ${
@@ -453,10 +461,14 @@ export function ShopFilters({
                       ? buildFilterHref(
                           "availability",
                           status,
+                          search,
+                          pathname,
                         )
                       : buildFilterHref(
                           "availability",
                           "",
+                          search,
+                          pathname,
                         )
                   }
                   onClick={onClose}
