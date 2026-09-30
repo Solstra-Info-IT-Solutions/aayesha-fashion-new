@@ -854,3 +854,17 @@
     transform: none;
   }
 }
+
+/* =========================================================
+   CTA SPACING
+========================================================= */
+
+.aayesha-hero__cta {
+  margin-top: 28px;
+}
+
+@media (max-width: 767px) {
+  .aayesha-hero__cta {
+    margin-top: 22px;
+  }
+}

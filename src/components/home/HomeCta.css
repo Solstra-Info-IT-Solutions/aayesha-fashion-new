@@ -97,3 +97,32 @@
     letter-spacing: 0.16em;
   }
 }
+
+/* Left line — CTA — right line */
+
+.home-cta-row--lines {
+  display: grid;
+
+  grid-template-columns:
+    minmax(24px, 1fr)
+    auto
+    minmax(24px, 1fr);
+
+  align-items: center;
+
+  gap: clamp(16px, 3vw, 28px);
+}
+
+.home-cta-row__line {
+  height: 1px;
+
+  background: var(--color-border-dark);
+
+  opacity: 0.65;
+}
+
+@media (max-width: 480px) {
+  .home-cta-row--lines {
+    gap: 12px;
+  }
+}

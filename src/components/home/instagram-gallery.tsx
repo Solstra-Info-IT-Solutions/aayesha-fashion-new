@@ -112,7 +112,8 @@ export function InstagramGallery({
           ========================================= */}
 
           {data.instagramUrl && (
-            <div className="home-cta-row">
+            <div className="home-cta-row home-cta-row--lines">
+              <span className="home-cta-row__line" aria-hidden="true" />
               <Link
                 href={data.instagramUrl}
                 target="_blank"
@@ -121,6 +122,7 @@ export function InstagramGallery({
               >
                 {data.ctaLabel}
               </Link>
+              <span className="home-cta-row__line" aria-hidden="true" />
             </div>
           )}
 

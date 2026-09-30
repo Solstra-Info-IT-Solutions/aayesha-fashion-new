@@ -91,13 +91,15 @@ export async function NewArrivals() {
                   VIEW ALL CTA
               ================================================= */}
 
-              <div className="home-cta-row">
+              <div className="home-cta-row home-cta-row--lines">
+                <span className="home-cta-row__line" aria-hidden="true" />
                 <Link
                   href="/collections/new-arrivals"
                   className="home-cta"
                 >
                   View all new arrivals
                 </Link>
+                <span className="home-cta-row__line" aria-hidden="true" />
               </div>
             </>
           ) : (
