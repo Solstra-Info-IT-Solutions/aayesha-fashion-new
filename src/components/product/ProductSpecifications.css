@@ -7,7 +7,7 @@
 .product-specifications {
   width: 100%;
 
-  border-top: 1px solid var(--color-border, #d9cbc5);
+  border-top: 1px solid var(--color-border, var(--color-border));
 
   background: transparent;
 
@@ -28,7 +28,7 @@
 
   padding: 12px 0;
 
-  border-bottom: 1px solid var(--color-border, #d9cbc5);
+  border-bottom: 1px solid var(--color-border, var(--color-border));
 
   transition:
     background-color 180ms ease,
@@ -49,14 +49,14 @@
 .product-specifications__label {
   font-family: var(--font-body, sans-serif);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1.4;
 
   letter-spacing: 0.14em;
   text-transform: uppercase;
 
-  color: var(--color-text-muted, #8d817b);
+  color: var(--color-text-muted, var(--color-text-secondary));
 }
 
 /* =========================================================
@@ -72,7 +72,7 @@
   font-weight: 500;
   line-height: 1.55;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 
   text-align: right;
 
@@ -117,7 +117,7 @@
   }
 
   .product-specifications__label {
-    font-size: 8.5px;
+    font-size: 10px;
   }
 
   .product-specifications__value {
@@ -149,7 +149,7 @@
   }
 
   .product-specifications__label {
-    font-size: 8px;
+    font-size: 10px;
 
     letter-spacing: 0.11em;
   }
@@ -177,7 +177,7 @@
   }
 
   .product-specifications__label {
-    font-size: 7.5px;
+    font-size: 10px;
   }
 
   .product-specifications__value {

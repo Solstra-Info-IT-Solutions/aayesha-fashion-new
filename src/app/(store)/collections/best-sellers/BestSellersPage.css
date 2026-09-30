@@ -4,20 +4,20 @@
    ========================================================= */
 
 .best-sellers-page {
-  --bs-bg: #f7f3f0;
-  --bs-surface: #fbf9f7;
-  --bs-surface-soft: #f1eae6;
+  --bs-bg: var(--color-canvas);
+  --bs-surface: var(--color-surface);
+  --bs-surface-soft: var(--color-surface-soft);
 
-  --bs-text: #3f2d2a;
-  --bs-text-soft: #665551;
-  --bs-text-muted: #8b7974;
+  --bs-text: var(--color-text);
+  --bs-text-soft: var(--color-text-secondary);
+  --bs-text-muted: var(--color-text-muted);
 
-  --bs-border: #d8cbc5;
-  --bs-border-soft: #e8ded9;
+  --bs-border: var(--color-border);
+  --bs-border-soft: var(--color-border-light);
 
-  --bs-accent: #6f4b47;
-  --bs-accent-dark: #3f2d2a;
-  --bs-accent-rose: #95645e;
+  --bs-accent: var(--color-clay);
+  --bs-accent-dark: var(--color-clay-deep);
+  --bs-accent-rose: var(--color-rose);
 
   min-height: 100vh;
   background: var(--bs-bg);
@@ -63,7 +63,7 @@
     Arial,
     sans-serif
   );
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.2em;
@@ -135,7 +135,7 @@
     Arial,
     sans-serif
   );
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
@@ -149,7 +149,7 @@
     Arial,
     sans-serif
   );
-  font-size: 8px;
+  font-size: 10px;
   line-height: 1;
   letter-spacing: 0.15em;
   text-transform: uppercase;

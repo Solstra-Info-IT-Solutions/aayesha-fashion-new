@@ -12,7 +12,7 @@
   font-weight: 400;
   line-height: 1.8;
 
-  color: var(--color-text-secondary, #6f625d);
+  color: var(--color-text-secondary, var(--color-text-secondary));
 }
 
 /* =========================================================
@@ -26,7 +26,7 @@
 .product-content__paragraph {
   margin: 0 0 16px;
 
-  color: var(--color-text-secondary, #6f625d);
+  color: var(--color-text-secondary, var(--color-text-secondary));
 }
 
 .product-content__paragraph:last-child {
@@ -69,7 +69,7 @@
 
   letter-spacing: -0.015em;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 .product-content__heading:first-child {
@@ -122,7 +122,7 @@
 
   line-height: 1.55;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 /* =========================================================
@@ -180,8 +180,8 @@
     linear-gradient(
       90deg,
       transparent,
-      var(--color-border, #d9cbc5) 20%,
-      var(--color-border, #d9cbc5) 80%,
+      var(--color-border, var(--color-surface-soft)) 20%,
+      var(--color-border, var(--color-surface-soft)) 80%,
       transparent
     );
 }
@@ -228,7 +228,7 @@
   font-weight: 500;
   line-height: 1.2;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 .product-content__rich-html h1 {
@@ -289,7 +289,7 @@
 }
 
 .product-content__rich-html a:hover {
-  color: var(--color-accent-dark, #3f2d2a);
+  color: var(--color-accent-dark, var(--color-text));
 }
 
 /* =========================================================
@@ -301,12 +301,12 @@
 .product-content__rich-html b {
   font-weight: 600;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 .product-content__rich-html em,
 .product-content__rich-html i {
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 /* =========================================================
@@ -338,7 +338,7 @@
   font-style: italic;
   line-height: 1.55;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 /* =========================================================
@@ -356,8 +356,8 @@
     linear-gradient(
       90deg,
       transparent,
-      var(--color-border, #d9cbc5) 20%,
-      var(--color-border, #d9cbc5) 80%,
+      var(--color-border, var(--color-surface-soft)) 20%,
+      var(--color-border, var(--color-surface-soft)) 80%,
       transparent
     );
 }
@@ -381,7 +381,7 @@
   padding: 12px 14px;
 
   border-bottom: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   text-align: left;
   vertical-align: top;
@@ -390,7 +390,7 @@
 .product-content__rich-html th {
   font-weight: 600;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 
   background: rgba(111, 75, 71, 0.035);
 }
@@ -408,7 +408,7 @@
   margin: 20px 0;
 
   border: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 }
 
 /* =========================================================
@@ -427,7 +427,7 @@
 
   font-size: 0.9em;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 .product-content__rich-html pre {
@@ -436,10 +436,10 @@
   margin: 18px 0;
   padding: 18px;
 
-  background: #f3eeea;
+  background: var(--color-surface-soft);
 
   border: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 }
 
 .product-content__rich-html pre code {

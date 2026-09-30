@@ -5,14 +5,14 @@
    ========================================================= */
 
 .product-media-gallery {
-  --gallery-bg: #f7f3ef;
-  --gallery-surface: #fbf8f5;
-  --gallery-border: #ded2cc;
-  --gallery-border-dark: #c8b8b0;
-  --gallery-text: #3f2d2a;
-  --gallery-muted: #796b65;
-  --gallery-accent: #6f4b47;
-  --gallery-accent-dark: #4d3532;
+  --gallery-bg: var(--color-canvas);
+  --gallery-surface: var(--color-surface);
+  --gallery-border: var(--color-border);
+  --gallery-border-dark: var(--color-border-dark);
+  --gallery-text: var(--color-text);
+  --gallery-muted: var(--color-text-secondary);
+  --gallery-accent: var(--color-clay);
+  --gallery-accent-dark: var(--color-clay-deep);
 
   position: relative;
   width: 100%;
@@ -69,7 +69,7 @@
 
   object-fit: cover;
 
-  background: #eee7e2;
+  background: var(--color-surface-soft);
 }
 
 /* =========================================================
@@ -84,7 +84,7 @@
 
   border: 0;
 
-  background: #eee7e2;
+  background: var(--color-surface-soft);
 }
 
 /* =========================================================
@@ -146,7 +146,7 @@
 
 .product-media-gallery__top-meta-label {
   font-family: var(--font-body, sans-serif);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
 
@@ -234,7 +234,7 @@
 .product-media-gallery__counter-current,
 .product-media-gallery__counter-total {
   font-family: var(--font-body, sans-serif);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
 
@@ -508,7 +508,7 @@
   color: var(--gallery-text);
 
   font-family: var(--font-body, sans-serif);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
 
@@ -543,8 +543,8 @@
   background:
     linear-gradient(
       135deg,
-      #f5efeb,
-      #eee5df
+      var(--color-surface-soft),
+      var(--color-surface-soft)
     );
 
   color: var(--gallery-muted);
@@ -577,7 +577,7 @@
   margin: 0;
 
   font-family: var(--font-body, sans-serif);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1.4;
 
@@ -600,9 +600,9 @@
   background:
     linear-gradient(
       110deg,
-      #eee7e2 8%,
-      #f8f3ef 18%,
-      #eee7e2 33%
+      var(--color-surface-soft) 8%,
+      var(--color-canvas) 18%,
+      var(--color-surface-soft) 33%
     );
 
   background-size: 200% 100%;
@@ -626,9 +626,9 @@
   background:
     linear-gradient(
       110deg,
-      #eee7e2 8%,
-      #f8f3ef 18%,
-      #eee7e2 33%
+      var(--color-surface-soft) 8%,
+      var(--color-canvas) 18%,
+      var(--color-surface-soft) 33%
     );
 
   background-size: 200% 100%;
@@ -707,7 +707,7 @@
   }
 
   .product-media-gallery__top-meta-label {
-    font-size: 7px;
+    font-size: 10px;
   }
 
   .product-media-gallery__counter {
@@ -719,7 +719,7 @@
 
   .product-media-gallery__counter-current,
   .product-media-gallery__counter-total {
-    font-size: 7px;
+    font-size: 10px;
   }
 
   .product-media-gallery__zoom {
@@ -772,7 +772,7 @@
     min-width: 19px;
     height: 18px;
 
-    font-size: 6.5px;
+    font-size: 10px;
   }
 }
 

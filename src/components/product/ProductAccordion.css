@@ -8,7 +8,7 @@
   width: 100%;
 
   border-top: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   background: transparent;
 
@@ -45,12 +45,12 @@
   border: 0;
 
   border-bottom: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   background: transparent;
 
   color:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 
   text-align: left;
 
@@ -79,7 +79,7 @@
 }
 
 .product-accordion__trigger:active {
-  color: #7f5953;
+  color: var(--color-clay);
 
   padding-left: 5px;
   padding-right: 5px;
@@ -131,7 +131,7 @@
   flex: 0 0 34px;
 
   border: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   border-radius: 50%;
 
@@ -157,7 +157,7 @@
   color:
     var(
       --color-text-secondary,
-      #6f625d
+      var(--color-text-secondary)
     );
 
   stroke-width: 1.35;
@@ -257,7 +257,7 @@
   padding: 0;
 
   border-bottom: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   font-family:
     var(--font-body, sans-serif);
@@ -270,7 +270,7 @@
   color:
     var(
       --color-text-secondary,
-      #6f625d
+      var(--color-text-secondary)
     );
 
   transform: translateY(-6px);
@@ -316,7 +316,7 @@
   font-weight: 600;
 
   color:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 }
 
 .product-accordion__content a {
@@ -335,7 +335,7 @@
   color:
     var(
       --color-accent-dark,
-      #3f2d2a
+      var(--color-text)
     );
 }
 
@@ -354,7 +354,7 @@
   padding: 10px 12px;
 
   border-bottom: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   text-align: left;
 
@@ -365,7 +365,7 @@
   font-weight: 600;
 
   color:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 }
 
 .product-accordion__content tr:last-child
@@ -444,7 +444,7 @@
   }
 
   .product-accordion__title {
-    font-size: 9.5px;
+    font-size: 10px;
   }
 
   .product-accordion__indicator {

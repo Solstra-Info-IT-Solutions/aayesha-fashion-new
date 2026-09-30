@@ -4,26 +4,25 @@
 ========================================================= */
 
 .collection-page {
-  --collection-bg: #faf8f7;
-  --collection-surface: #ffffff;
-  --collection-surface-soft: #fcfaf9;
+  --collection-bg: var(--color-canvas);
+  --collection-surface: var(--color-surface);
+  --collection-surface-soft: var(--color-canvas);
 
-  --collection-border: #e9e2df;
-  --collection-border-strong: #ddd4d0;
+  --collection-border: var(--color-border);
+  --collection-border-strong: var(--color-border-dark);
 
-  --collection-text: #241f1d;
-  --collection-text-soft: #665e5a;
-  --collection-text-muted: #928984;
+  --collection-text: var(--color-text);
+  --collection-text-soft: var(--color-text-secondary);
+  --collection-text-muted: var(--color-text-muted);
 
-  --collection-accent: #a85d68;
-  --collection-accent-dark: #874751;
-  --collection-accent-soft: #f7edef;
+  --collection-accent: var(--color-clay);
+  --collection-accent-dark: var(--color-clay-deep);
+  --collection-accent-soft: var(--color-accent-soft);
 
   min-height: 100vh;
   background: var(--collection-bg);
   color: var(--collection-text);
 }
-
 /* =========================================================
    CONTAINER
 ========================================================= */
@@ -32,7 +31,6 @@
   width: min(1400px, calc(100% - 48px));
   margin: 0 auto;
 }
-
 /* =========================================================
    HERO
 ========================================================= */
@@ -51,7 +49,6 @@
     ),
     var(--collection-bg);
 }
-
 .collection-page__hero-inner {
   position: relative;
 
@@ -80,7 +77,6 @@
   box-shadow:
     0 20px 60px rgba(55, 42, 36, 0.055);
 }
-
 /* =========================================================
    HERO INTRO
 ========================================================= */
@@ -91,7 +87,6 @@
 
   max-width: 760px;
 }
-
 .collection-page__eyebrow {
   display: flex;
   align-items: center;
@@ -107,14 +102,12 @@
   line-height: 1.4;
   text-transform: uppercase;
 }
-
 .collection-page__eyebrow-line {
   width: 30px;
   height: 1px;
 
   background: var(--collection-accent);
 }
-
 .collection-page__title {
   max-width: 780px;
 
@@ -122,13 +115,12 @@
 
   color: var(--collection-text);
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   font-size: clamp(48px, 6vw, 82px);
   font-weight: 500;
   letter-spacing: -0.055em;
   line-height: 0.98;
 }
-
 .collection-page__description {
   max-width: 620px;
 
@@ -139,7 +131,6 @@
   font-size: 14px;
   line-height: 1.85;
 }
-
 .collection-page__mood {
   display: inline-flex;
   align-items: center;
@@ -147,8 +138,8 @@
   margin: 20px 0 0;
   padding: 8px 13px;
 
-  border: 1px solid #eadcdf;
-  border-radius: 999px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 2px;
 
   background: var(--collection-accent-soft);
 
@@ -158,7 +149,6 @@
   font-weight: 600;
   line-height: 1.4;
 }
-
 /* =========================================================
    COLLECTION NAVIGATION
 ========================================================= */
@@ -172,13 +162,12 @@
   padding: 18px;
 
   border: 1px solid var(--collection-border);
-  border-radius: 20px;
+  border-radius: 4px;
 
   background: rgba(255, 255, 255, 0.76);
 
   backdrop-filter: blur(12px);
 }
-
 .collection-page__navigation-label {
   margin: 0 0 12px;
 
@@ -189,13 +178,11 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-
 .collection-page__links {
   display: flex;
   flex-direction: column;
   gap: 7px;
 }
-
 .collection-page__link {
   display: flex;
   align-items: center;
@@ -206,7 +193,7 @@
   padding: 0 13px;
 
   border: 1px solid transparent;
-  border-radius: 11px;
+  border-radius: 4px;
 
   color: var(--collection-text-soft);
 
@@ -221,7 +208,6 @@
     color 180ms ease,
     transform 180ms ease;
 }
-
 .collection-page__link:hover {
   color: var(--collection-text);
 
@@ -231,25 +217,22 @@
 
   transform: translateX(2px);
 }
-
 .collection-page__link--active {
   color: #ffffff;
 
-  background: var(--collection-text);
+  background: var(--color-clay);
 
-  border-color: var(--collection-text);
+  border-color: var(--color-clay);
 }
-
 .collection-page__link--active:hover {
   color: #ffffff;
 
-  background: #000000;
+  background: var(--color-clay-deep);
 
-  border-color: #000000;
+  border-color: var(--color-clay-deep);
 
   transform: none;
 }
-
 /* =========================================================
    HERO MARK
 ========================================================= */
@@ -261,7 +244,7 @@
 
   color: rgba(168, 93, 104, 0.055);
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   font-size: 260px;
   font-weight: 600;
   letter-spacing: -0.12em;
@@ -270,7 +253,6 @@
   pointer-events: none;
   user-select: none;
 }
-
 /* =========================================================
    TOOLBAR
 ========================================================= */
@@ -287,7 +269,6 @@
 
   backdrop-filter: blur(16px);
 }
-
 .collection-page__toolbar-inner {
   display: flex;
   align-items: center;
@@ -297,7 +278,6 @@
 
   gap: 20px;
 }
-
 .collection-page__count {
   display: flex;
   align-items: center;
@@ -306,21 +286,17 @@
 
   font-size: 12px;
 }
-
 .collection-page__count-title {
   color: var(--collection-text);
 
   font-weight: 700;
 }
-
 .collection-page__count-divider {
   color: var(--collection-border-strong);
 }
-
 .collection-page__count-value {
   color: var(--collection-text-muted);
 }
-
 /* =========================================================
    SHOP ALL BUTTON
 ========================================================= */
@@ -334,10 +310,10 @@
 
   padding: 0 18px;
 
-  border: 1px solid var(--collection-text);
-  border-radius: 10px;
+  border: 1px solid var(--color-clay);
+  border-radius: 4px;
 
-  background: var(--collection-text);
+  background: var(--color-clay);
   color: #ffffff;
 
   text-decoration: none;
@@ -352,21 +328,16 @@
     transform 180ms ease,
     box-shadow 180ms ease;
 }
-
 .collection-page__shop-link:hover {
-  background: #000000;
-  border-color: #000000;
-
-  transform: translateY(-1px);
+  background: var(--color-clay-deep);
+  border-color: var(--color-clay-deep);
 
   box-shadow:
-    0 7px 20px rgba(36, 31, 29, 0.14);
+    0 7px 20px rgba(63, 45, 42, 0.14);
 }
-
 .collection-page__shop-link:active {
   transform: translateY(0);
 }
-
 /* =========================================================
    PRODUCTS SECTION
 ========================================================= */
@@ -374,7 +345,6 @@
 .collection-page__products {
   padding: 42px 0 76px;
 }
-
 .collection-page__product-layout {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
@@ -383,7 +353,6 @@
 
   gap: 30px;
 }
-
 /* =========================================================
    FILTERS
 ========================================================= */
@@ -391,7 +360,6 @@
 .collection-page__filters {
   min-width: 0;
 }
-
 .collection-page__filters-inner {
   position: sticky;
   top: 96px;
@@ -399,14 +367,13 @@
   padding: 18px;
 
   border: 1px solid var(--collection-border);
-  border-radius: 20px;
+  border-radius: 4px;
 
   background: var(--collection-surface);
 
   box-shadow:
     0 10px 30px rgba(55, 42, 36, 0.035);
 }
-
 /* =========================================================
    PRODUCT GRID
 ========================================================= */
@@ -414,7 +381,6 @@
 .collection-page__grid {
   min-width: 0;
 }
-
 /*
  * Product grid components can define their own columns.
  * These rules prevent the parent layout from causing overflow.
@@ -423,7 +389,6 @@
 .collection-page__grid > * {
   min-width: 0;
 }
-
 /* =========================================================
    CONTINUE EXPLORING
 ========================================================= */
@@ -431,7 +396,6 @@
 .collection-page__continue {
   padding: 0 0 80px;
 }
-
 .collection-page__continue-inner {
   display: flex;
   align-items: center;
@@ -442,23 +406,21 @@
   padding: 44px 48px;
 
   border: 1px solid var(--collection-border);
-  border-radius: 26px;
+  border-radius: 4px;
 
   background:
     linear-gradient(
       135deg,
-      #ffffff,
-      #fcf8f7
+      var(--color-surface),
+      var(--color-surface)
     );
 
   box-shadow:
     0 16px 48px rgba(55, 42, 36, 0.045);
 }
-
 .collection-page__continue-copy {
   max-width: 620px;
 }
-
 .collection-page__continue-eyebrow {
   margin: 0 0 10px;
 
@@ -469,19 +431,17 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-
 .collection-page__continue-title {
   margin: 0;
 
   color: var(--collection-text);
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   font-size: clamp(28px, 3vw, 42px);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1.12;
 }
-
 /* =========================================================
    CTA BUTTONS
 ========================================================= */
@@ -495,7 +455,6 @@
 
   flex-shrink: 0;
 }
-
 .collection-page__action {
   min-height: 46px;
 
@@ -505,7 +464,7 @@
 
   padding: 0 20px;
 
-  border-radius: 11px;
+  border-radius: 4px;
 
   text-decoration: none;
 
@@ -520,31 +479,25 @@
     transform 180ms ease,
     box-shadow 180ms ease;
 }
-
 .collection-page__action--primary {
-  border: 1px solid var(--collection-text);
+  border: 1px solid var(--color-clay);
 
-  background: var(--collection-text);
+  background: var(--color-clay);
   color: #ffffff;
 }
-
 .collection-page__action--primary:hover {
-  background: #000000;
-  border-color: #000000;
-
-  transform: translateY(-1px);
+  background: var(--color-clay-deep);
+  border-color: var(--color-clay-deep);
 
   box-shadow:
-    0 8px 22px rgba(36, 31, 29, 0.14);
+    0 8px 22px rgba(63, 45, 42, 0.14);
 }
-
 .collection-page__action--secondary {
   border: 1px solid var(--collection-border-strong);
 
-  background: #ffffff;
+  background: var(--color-surface);
   color: var(--collection-text);
 }
-
 .collection-page__action--secondary:hover {
   border-color: var(--collection-text);
 
@@ -552,11 +505,9 @@
 
   transform: translateY(-1px);
 }
-
 .collection-page__action:active {
   transform: translateY(0);
 }
-
 /* =========================================================
    FOCUS
 ========================================================= */
@@ -574,29 +525,25 @@
 ========================================================= */
 
 @media (max-width: 1100px) {
-  .collection-page__container {
+.collection-page__container {
     width: min(100% - 36px, 920px);
   }
-
-  .collection-page__hero {
+.collection-page__hero {
     padding: 48px 0;
   }
-
-  .collection-page__hero-inner {
+.collection-page__hero-inner {
     grid-template-columns: minmax(0, 1fr) 240px;
 
     gap: 36px;
 
     padding: 42px;
   }
-
-  .collection-page__product-layout {
+.collection-page__product-layout {
     grid-template-columns: 190px minmax(0, 1fr);
 
     gap: 22px;
   }
-
-  .collection-page__continue-inner {
+.collection-page__continue-inner {
     padding: 38px;
   }
 }
@@ -606,7 +553,7 @@
 ========================================================= */
 
 @media (max-width: 800px) {
-  .collection-page__hero-inner {
+.collection-page__hero-inner {
     grid-template-columns: 1fr;
 
     align-items: start;
@@ -615,32 +562,26 @@
 
     padding: 38px;
   }
-
-  .collection-page__navigation {
+.collection-page__navigation {
     width: min(100%, 360px);
   }
-
-  .collection-page__hero-mark {
+.collection-page__hero-mark {
     right: -10px;
     bottom: -50px;
 
     font-size: 210px;
   }
-
-  .collection-page__product-layout {
+.collection-page__product-layout {
     grid-template-columns: 1fr;
   }
-
-  .collection-page__filters-inner {
+.collection-page__filters-inner {
     position: static;
   }
-
-  .collection-page__continue-inner {
+.collection-page__continue-inner {
     align-items: flex-start;
     flex-direction: column;
   }
-
-  .collection-page__continue-actions {
+.collection-page__continue-actions {
     width: 100%;
   }
 }
@@ -650,43 +591,36 @@
 ========================================================= */
 
 @media (max-width: 640px) {
-  .collection-page__container {
+.collection-page__container {
     width: calc(100% - 28px);
   }
-
-  .collection-page__hero {
+.collection-page__hero {
     padding: 22px 0 28px;
   }
-
-  .collection-page__hero-inner {
+.collection-page__hero-inner {
     padding: 30px 24px;
 
-    border-radius: 24px;
+    border-radius: 4px;
   }
-
-  .collection-page__title {
+.collection-page__title {
     font-size: clamp(42px, 13vw, 58px);
   }
-
-  .collection-page__description {
+.collection-page__description {
     margin-top: 18px;
 
     font-size: 13px;
     line-height: 1.75;
   }
-
-  .collection-page__navigation {
+.collection-page__navigation {
     width: 100%;
     padding: 14px;
 
-    border-radius: 17px;
+    border-radius: 4px;
   }
-
-  .collection-page__links {
+.collection-page__links {
     flex-direction: row;
   }
-
-  .collection-page__link {
+.collection-page__link {
     flex: 1;
 
     justify-content: center;
@@ -696,88 +630,75 @@
 
     text-align: center;
   }
-
-  .collection-page__hero-mark {
+.collection-page__hero-mark {
     display: none;
   }
-
-  /* ---------------------------------------------------------
+/* ---------------------------------------------------------
      TOOLBAR
   --------------------------------------------------------- */
 
   .collection-page__toolbar-inner {
     min-height: 62px;
   }
-
-  .collection-page__count {
+.collection-page__count {
     gap: 6px;
 
     font-size: 11px;
   }
-
-  .collection-page__count-title {
+.collection-page__count-title {
     max-width: 120px;
 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  .collection-page__shop-link {
+.collection-page__shop-link {
     min-height: 36px;
 
     padding: 0 13px;
 
-    border-radius: 9px;
+    border-radius: 4px;
 
     font-size: 10px;
   }
-
-  /* ---------------------------------------------------------
+/* ---------------------------------------------------------
      PRODUCTS
   --------------------------------------------------------- */
 
   .collection-page__products {
     padding: 24px 0 48px;
   }
-
-  .collection-page__product-layout {
+.collection-page__product-layout {
     gap: 18px;
   }
-
-  .collection-page__filters-inner {
+.collection-page__filters-inner {
     padding: 14px;
 
-    border-radius: 17px;
+    border-radius: 4px;
   }
-
-  /* ---------------------------------------------------------
+/* ---------------------------------------------------------
      CONTINUE
   --------------------------------------------------------- */
 
   .collection-page__continue {
     padding-bottom: 50px;
   }
-
-  .collection-page__continue-inner {
+.collection-page__continue-inner {
     gap: 26px;
 
     padding: 30px 24px;
 
-    border-radius: 22px;
+    border-radius: 4px;
   }
-
-  .collection-page__continue-title {
+.collection-page__continue-title {
     font-size: 30px;
   }
-
-  .collection-page__continue-actions {
+.collection-page__continue-actions {
     flex-direction: column;
 
     align-items: stretch;
   }
-
-  .collection-page__action {
+.collection-page__action {
     width: 100%;
 
     min-height: 48px;
@@ -789,39 +710,31 @@
 ========================================================= */
 
 @media (max-width: 420px) {
-  .collection-page__container {
+.collection-page__container {
     width: calc(100% - 22px);
   }
-
-  .collection-page__hero-inner {
+.collection-page__hero-inner {
     padding: 26px 19px;
   }
-
-  .collection-page__title {
+.collection-page__title {
     font-size: 40px;
   }
-
-  .collection-page__links {
+.collection-page__links {
     flex-direction: column;
   }
-
-  .collection-page__link {
+.collection-page__link {
     width: 100%;
   }
-
-  .collection-page__toolbar-inner {
+.collection-page__toolbar-inner {
     gap: 10px;
   }
-
-  .collection-page__count-value {
+.collection-page__count-value {
     display: none;
   }
-
-  .collection-page__continue-inner {
+.collection-page__continue-inner {
     padding: 26px 20px;
   }
-
-  .collection-page__continue-title {
+.collection-page__continue-title {
     font-size: 27px;
   }
 }
@@ -831,7 +744,7 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .collection-page *,
+.collection-page *,
   .collection-page *::before,
   .collection-page *::after {
     animation: none !important;

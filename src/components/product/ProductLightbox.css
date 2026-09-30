@@ -17,7 +17,7 @@
 
   overflow: hidden;
 
-  background: #241c1a;
+  background: var(--color-text);
 
   color: #ffffff;
 
@@ -101,7 +101,7 @@
     sans-serif
   );
 
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1.4;
 
@@ -235,8 +235,8 @@
   background:
     linear-gradient(
       135deg,
-      #f6f1ed,
-      #eee5df
+      var(--color-surface-soft),
+      var(--color-surface-soft)
     );
 
   box-shadow:
@@ -294,7 +294,7 @@
 
   object-fit: contain;
 
-  background: #000000;
+  background: var(--color-text);
 
   box-shadow:
     0 30px 90px
@@ -320,7 +320,7 @@
 
   border: 0;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   box-shadow:
     0 30px 90px
@@ -462,7 +462,7 @@
     sans-serif
   );
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
 
@@ -549,7 +549,7 @@
 
 @media (max-width: 639px) {
   .product-lightbox {
-    background: #211918;
+    background: var(--color-text);
   }
 
   .product-lightbox__topbar {
@@ -561,7 +561,7 @@
   .product-lightbox__eyebrow {
     margin-bottom: 5px;
 
-    font-size: 7px;
+    font-size: 10px;
 
     letter-spacing: 0.16em;
   }
@@ -649,7 +649,7 @@
   .product-lightbox__counter {
     gap: 9px;
 
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .product-lightbox__counter-line {

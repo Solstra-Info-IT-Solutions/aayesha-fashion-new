@@ -5,8 +5,8 @@
 
 .collections-page {
   min-height: 100vh;
-  background: #f7f3f0;
-  color: #3f2d2a;
+  background: var(--color-canvas);
+  color: var(--color-text);
 }
 
 /* =========================================================
@@ -25,8 +25,8 @@
    ========================================================= */
 
 .collections-page__intro {
-  background: #f7f3f0;
-  border-bottom: 1px solid #e8ded9;
+  background: var(--color-canvas);
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .collections-page__intro-content {
@@ -44,16 +44,15 @@
   width: 24px;
   height: 1px;
   flex: 0 0 auto;
-  background: #6f4b47;
+  background: var(--color-clay);
 }
-
 .collections-page__eyebrow,
 .collections-page__section-eyebrow,
 .collections-page__collection-eyebrow,
 .collections-page__closing-eyebrow {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.2em;
@@ -61,7 +60,7 @@
 }
 
 .collections-page__eyebrow {
-  color: #6f4b47;
+  color: var(--color-clay);
 }
 
 .collections-page__title {
@@ -71,7 +70,7 @@
   font-weight: 500;
   line-height: 0.9;
   letter-spacing: -0.035em;
-  color: #3f2d2a;
+  color: var(--color-text);
 }
 
 .collections-page__description {
@@ -80,7 +79,7 @@
   font-family: var(--font-body);
   font-size: 13px;
   line-height: 1.8;
-  color: #665551;
+  color: var(--color-text-secondary);
 }
 
 .collections-page__text-link {
@@ -89,14 +88,14 @@
   gap: 8px;
   margin-top: 18px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #bdaaa3;
+  border-bottom: 1px solid var(--color-border);
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #3f2d2a;
+  color: var(--color-text);
   transition:
     color 180ms ease,
     border-color 180ms ease;
@@ -107,8 +106,8 @@
 }
 
 .collections-page__text-link:hover {
-  color: #6f4b47;
-  border-color: #6f4b47;
+  color: var(--color-clay);
+  border-color: var(--color-clay);
 }
 
 .collections-page__text-link:hover svg {
@@ -120,8 +119,8 @@
    ========================================================= */
 
 .collections-page__collection-section {
-  background: #f1eae6;
-  border-bottom: 1px solid #e3d8d2;
+  background: var(--color-surface-soft);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .collections-page__collection-section
@@ -138,7 +137,7 @@
 }
 
 .collections-page__section-eyebrow {
-  color: #6f4b47;
+  color: var(--color-clay);
 }
 
 .collections-page__section-title {
@@ -148,18 +147,18 @@
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.025em;
-  color: #3f2d2a;
+  color: var(--color-text);
 }
 
 .collections-page__section-count {
   padding-bottom: 4px;
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #8b7974;
+  color: var(--color-clay);
 }
 
 /* =========================================================
@@ -180,17 +179,17 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 24px;
-  background: #f7f3f0;
+  background: var(--color-canvas);
   border: 1px solid transparent;
-  color: #3f2d2a;
+  color: var(--color-text);
   transition:
     background-color 220ms ease,
     border-color 220ms ease;
 }
 
 .collections-page__collection-card:hover {
-  background: #fbf8f6;
-  border-color: #d8cbc5;
+  background: var(--color-surface);
+  border-color: var(--color-border);
 }
 
 .collections-page__collection-top {
@@ -201,11 +200,11 @@
 
 .collections-page__collection-number {
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
-  color: #8b7974;
+  color: var(--color-clay);
 }
 
 .collections-page__collection-icon {
@@ -214,8 +213,8 @@
   height: 30px;
   align-items: center;
   justify-content: center;
-  border: 1px solid #d8cbc5;
-  color: #665551;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
   transition:
     border-color 180ms ease,
     color 180ms ease,
@@ -224,8 +223,8 @@
 
 .collections-page__collection-card:hover
   .collections-page__collection-icon {
-  border-color: #6f4b47;
-  background: #6f4b47;
+  border-color: var(--color-clay);
+  background: var(--color-clay);
   color: #ffffff;
 }
 
@@ -234,7 +233,7 @@
 }
 
 .collections-page__collection-eyebrow {
-  color: #6f4b47;
+  color: var(--color-clay);
 }
 
 .collections-page__collection-title {
@@ -244,7 +243,7 @@
   font-weight: 500;
   line-height: 0.92;
   letter-spacing: -0.025em;
-  color: #3f2d2a;
+  color: var(--color-text);
 }
 
 .collections-page__collection-description {
@@ -253,7 +252,7 @@
   font-family: var(--font-body);
   font-size: 11px;
   line-height: 1.75;
-  color: #665551;
+  color: var(--color-text-secondary);
 }
 
 .collections-page__collection-link {
@@ -262,12 +261,12 @@
   gap: 7px;
   margin-top: 15px;
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #3f2d2a;
+  color: var(--color-text);
 }
 
 .collections-page__collection-link svg {
@@ -284,7 +283,7 @@
    ========================================================= */
 
 .collections-page__featured {
-  background: #f7f3f0;
+  background: var(--color-canvas);
 }
 
 .collections-page__featured
@@ -299,7 +298,7 @@
   font-family: var(--font-body);
   font-size: 12px;
   line-height: 1.7;
-  color: #665551;
+  color: var(--color-text-secondary);
 }
 
 .collections-page__view-all {
@@ -307,14 +306,14 @@
   align-items: center;
   gap: 7px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #bdaaa3;
+  border-bottom: 1px solid var(--color-border);
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #3f2d2a;
+  color: var(--color-text);
   transition:
     color 180ms ease,
     border-color 180ms ease;
@@ -325,8 +324,8 @@
 }
 
 .collections-page__view-all:hover {
-  color: #6f4b47;
-  border-color: #6f4b47;
+  color: var(--color-clay);
+  border-color: var(--color-clay);
 }
 
 .collections-page__view-all:hover svg {
@@ -344,27 +343,24 @@
   row-gap: 38px;
   margin-top: 32px;
 }
-
 /* =========================================================
    CLOSING
    ========================================================= */
 
 .collections-page__closing {
-  background: #3f2d2a;
-  color: #ffffff;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-soft);
+  color: var(--color-text);
 }
-
 .collections-page__closing-inner {
   max-width: 900px;
   margin: 0 auto;
   padding: 68px 32px 72px;
   text-align: center;
 }
-
 .collections-page__closing-eyebrow {
-  color: #c49b93;
+  color: var(--color-clay);
 }
-
 .collections-page__closing-title {
   max-width: 620px;
   margin: 13px auto 0;
@@ -373,9 +369,8 @@
   font-weight: 500;
   line-height: 0.92;
   letter-spacing: -0.03em;
-  color: #ffffff;
+  color: var(--color-text);
 }
-
 .collections-page__closing-button {
   display: inline-flex;
   min-height: 40px;
@@ -384,14 +379,14 @@
   gap: 9px;
   margin-top: 25px;
   padding: 10px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.34);
+  border: 1px solid var(--color-border-dark);
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-text);
   transition:
     background-color 180ms ease,
     border-color 180ms ease,
@@ -399,11 +394,10 @@
 }
 
 .collections-page__closing-button:hover {
-  border-color: #c49b93;
-  background: #c49b93;
-  color: #3f2d2a;
+  border-color: var(--color-clay);
+  background: var(--color-clay);
+  color: #ffffff;
 }
-
 /* =========================================================
    FOCUS
    ========================================================= */
@@ -412,7 +406,7 @@
 .collections-page__collection-card:focus-visible,
 .collections-page__view-all:focus-visible,
 .collections-page__closing-button:focus-visible {
-  outline: 2px solid #95645e;
+  outline: 2px solid var(--color-clay);
   outline-offset: 4px;
 }
 
@@ -447,8 +441,7 @@
     column-gap: 16px;
     row-gap: 32px;
   }
-
-  .collections-page__closing-inner {
+.collections-page__closing-inner {
     padding-top: 58px;
     padding-bottom: 62px;
   }
@@ -540,7 +533,7 @@
   }
 
   .collections-page__view-all {
-    font-size: 7.5px;
+    font-size: 10px;
   }
 
   .collections-page__product-grid {
@@ -549,16 +542,13 @@
     row-gap: 25px;
     margin-top: 24px;
   }
-
-  .collections-page__closing-inner {
+.collections-page__closing-inner {
     padding: 50px 20px 54px;
   }
-
-  .collections-page__closing-title {
+.collections-page__closing-title {
     font-size: 2.25rem;
   }
-
-  .collections-page__closing-button {
+.collections-page__closing-button {
     margin-top: 21px;
   }
 }

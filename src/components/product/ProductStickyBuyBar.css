@@ -23,7 +23,7 @@
   background: rgba(251, 248, 245, 0.96);
 
   border-top: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 
   box-shadow:
     0 -12px 36px rgba(63, 45, 42, 0.08);
@@ -89,7 +89,7 @@
   text-transform: uppercase;
 
   color:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -114,7 +114,7 @@
   letter-spacing: -0.015em;
 
   color:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 }
 
 /* =========================================================
@@ -170,10 +170,10 @@
 
 .product-sticky-buy-bar__button:hover:not(:disabled) {
   border-color:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 
   background:
-    var(--color-text, #3f2d2a);
+    var(--color-text, var(--color-text));
 
   color: #ffffff;
 }
@@ -248,7 +248,7 @@
   }
 
   .product-sticky-buy-bar__name {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .product-sticky-buy-bar__price {
@@ -261,7 +261,7 @@
 
     padding-inline: 18px;
 
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 
@@ -295,7 +295,7 @@
 
     margin-bottom: 4px;
 
-    font-size: 8px;
+    font-size: 10px;
 
     letter-spacing: 0.09em;
   }
@@ -316,7 +316,7 @@
 
     gap: 8px;
 
-    font-size: 8.5px;
+    font-size: 10px;
 
     letter-spacing: 0.11em;
   }
@@ -347,7 +347,7 @@
   .product-sticky-buy-bar__name {
     max-width: 120px;
 
-    font-size: 7.5px;
+    font-size: 10px;
   }
 
   .product-sticky-buy-bar__price {
@@ -361,7 +361,7 @@
 
     padding-inline: 10px;
 
-    font-size: 8px;
+    font-size: 10px;
   }
 }
 
