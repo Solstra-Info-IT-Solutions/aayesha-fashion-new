@@ -1,13 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 
 import type { Category } from "@/types/category";
 import type { Product } from "@/types/product";
 
 import { ProductCard } from "@/components/product/product-card";
+import {
+  PageSearch,
+  matchesQuery,
+} from "@/components/common/page-search";
 
 import "./CategoryBrowser.css";
+import "@/components/home/HomeCta.css";
 
 interface CategoryBrowserProps {
   categories: Category[];
@@ -20,9 +28,34 @@ export function CategoryBrowser({
   selectedCategoryId,
   products,
 }: CategoryBrowserProps) {
+  const [query, setQuery] = useState("");
+
   const selectedCategory = categories.find(
     (category) => category.id === selectedCategoryId,
   );
+
+  const trimmed = query.trim();
+
+  const visibleCategories = categories.filter((category) =>
+    matchesQuery(
+      trimmed,
+      category.name,
+      category.slug,
+      category.description,
+    ),
+  );
+
+  const visibleProducts = products.filter((product) =>
+    matchesQuery(trimmed, product.name),
+  );
+
+  const status = trimmed
+    ? `${visibleCategories.length} of ${categories.length} ${
+        categories.length === 1 ? "category" : "categories"
+      } · ${visibleProducts.length} of ${products.length} ${
+        products.length === 1 ? "piece" : "pieces"
+      } in ${selectedCategory?.name ?? "this category"}`
+    : undefined;
 
   /* =========================================================
      EMPTY CATEGORIES
@@ -43,6 +76,10 @@ export function CategoryBrowser({
           <p className="category-browser__empty-description">
             Categories are currently unavailable.
           </p>
+
+          <Link href="/shop" className="home-cta">
+            Shop all pieces
+          </Link>
         </div>
       </section>
     );
@@ -51,84 +88,130 @@ export function CategoryBrowser({
   return (
     <main className="category-browser">
       {/* =====================================================
-          PAGE HEADER
+          HERO + SEARCH
       ===================================================== */}
 
-      <section className="category-browser__header">
+      <section className="category-browser__hero">
         <div className="category-browser__container">
-          <div className="category-browser__header-content">
-            <div className="category-browser__eyebrow-row">
-              <span
-                className="category-browser__eyebrow-line"
-                aria-hidden="true"
-              />
+          <div className="category-browser__eyebrow-row">
+            <span
+              className="category-browser__eyebrow-line"
+              aria-hidden="true"
+            />
 
-              <span className="category-browser__eyebrow">
-                Aayesha Fashion
-              </span>
-            </div>
-
-            <div className="category-browser__title-row">
-              <h1 className="category-browser__title">
-                Categories
-              </h1>
-
-              <p className="category-browser__count">
-                {categories.length}{" "}
-                {categories.length === 1
-                  ? "category"
-                  : "categories"}
-              </p>
-            </div>
+            <span className="category-browser__eyebrow">
+              Aayesha Fashion
+            </span>
           </div>
+
+          <div className="category-browser__title-row">
+            <h1 className="category-browser__title">
+              Shop by <em>category.</em>
+            </h1>
+
+            <p className="category-browser__count">
+              {categories.length}{" "}
+              {categories.length === 1
+                ? "category"
+                : "categories"}
+            </p>
+          </div>
+
+          <p className="category-browser__lead">
+            Every silhouette in one place. Pick a category,
+            or search by name.
+          </p>
+
+          <PageSearch
+            value={query}
+            onChange={setQuery}
+            label="Search categories and pieces"
+            placeholder="Search categories or pieces…"
+            status={status}
+          />
         </div>
       </section>
 
       {/* =====================================================
-          CATEGORY NAVIGATION
+          CATEGORY TILES
       ===================================================== */}
 
-      <section className="category-browser__navigation">
+      <section
+        className="category-browser__atlas"
+        aria-labelledby="category-browser-atlas-title"
+      >
         <div className="category-browser__container">
-          <nav
-            className="category-browser__nav"
-            aria-label="Product categories"
-          >
-            {categories.map((category) => {
-              const isSelected =
-                category.id === selectedCategoryId;
+          <header className="category-browser__section-header">
+            <h2
+              id="category-browser-atlas-title"
+              className="category-browser__section-label"
+            >
+              Categories
+            </h2>
+          </header>
 
-              return (
-                <Link
-                  key={category.id}
-                  href={`/categories?category=${encodeURIComponent(
-                    category.id,
-                  )}`}
-                  scroll={false}
-                  className={[
-                    "category-browser__nav-item",
-                    isSelected
-                      ? "category-browser__nav-item--active"
-                      : "",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                  aria-current={
-                    isSelected ? "page" : undefined
-                  }
-                >
-                  <span>{category.name}</span>
+          {visibleCategories.length > 0 ? (
+            <ul className="category-browser__tiles">
+              {visibleCategories.map((category) => {
+                const isSelected =
+                  category.id === selectedCategoryId;
 
-                  {isSelected && (
-                    <span
-                      className="category-browser__nav-indicator"
-                      aria-hidden="true"
-                    />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
+                return (
+                  <li key={category.id}>
+                    <Link
+                      href={`/categories?category=${encodeURIComponent(
+                        category.id,
+                      )}`}
+                      scroll={false}
+                      aria-current={
+                        isSelected ? "page" : undefined
+                      }
+                      className={[
+                        "category-browser__tile",
+                        isSelected
+                          ? "category-browser__tile--active"
+                          : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                    >
+                      <span className="category-browser__tile-media">
+                        {category.image ? (
+                          <Image
+                            src={category.image}
+                            alt=""
+                            fill
+                            sizes="(max-width: 639px) 40vw, (max-width: 1023px) 25vw, 16vw"
+                            className="category-browser__tile-image"
+                          />
+                        ) : (
+                          <Sparkles
+                            size={22}
+                            strokeWidth={1}
+                            aria-hidden="true"
+                          />
+                        )}
+                      </span>
+
+                      <span className="category-browser__tile-name">
+                        {category.name}
+                      </span>
+
+                      {isSelected && (
+                        <span className="category-browser__tile-badge">
+                          Viewing
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="category-browser__muted">
+              No category matches “{trimmed}”.
+            </p>
+          )}
         </div>
       </section>
 
@@ -136,80 +219,103 @@ export function CategoryBrowser({
           SELECTED CATEGORY PRODUCTS
       ===================================================== */}
 
-      <section className="category-browser__products">
+      <section
+        className="category-browser__products"
+        aria-labelledby="category-browser-products-title"
+      >
         <div className="category-browser__container">
-          <header className="category-browser__section-header">
-            <div className="category-browser__section-heading">
+          <header className="category-browser__products-header">
+            <div>
               <p className="category-browser__eyebrow">
-                Selected category
+                Now viewing
               </p>
 
-              <h2 className="category-browser__section-title">
+              <h2
+                id="category-browser-products-title"
+                className="category-browser__products-title"
+              >
                 {selectedCategory?.name ?? "Collection"}
               </h2>
+
+              {selectedCategory?.description ? (
+                <p className="category-browser__products-description">
+                  {selectedCategory.description}
+                </p>
+              ) : null}
             </div>
 
             {products.length > 0 && (
               <p className="category-browser__product-count">
-                {products.length}{" "}
-                {products.length === 1
-                  ? "product"
-                  : "products"}
+                {visibleProducts.length}{" "}
+                {visibleProducts.length === 1
+                  ? "piece"
+                  : "pieces"}
               </p>
             )}
           </header>
 
-          {/* =================================================
-              PRODUCTS
-          ================================================= */}
-
-          {products.length > 0 ? (
+          {visibleProducts.length > 0 ? (
             <div className="category-browser__product-grid">
-              {products.map((product) => (
+              {visibleProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   product={product}
                 />
               ))}
             </div>
-          ) : (
-            /* =================================================
-               NO PRODUCTS
-            ================================================= */
-
+          ) : products.length > 0 ? (
             <div className="category-browser__no-products">
-              <div className="category-browser__no-products-inner">
-                <div
-                  className="category-browser__no-products-mark"
-                  aria-hidden="true"
+              <p className="category-browser__no-products-eyebrow">
+                No matches
+              </p>
+
+              <h3 className="category-browser__no-products-title">
+                Nothing in {selectedCategory?.name ?? "this category"}{" "}
+                matches “{trimmed}”
+              </h3>
+
+              <div className="category-browser__actions">
+                <button
+                  type="button"
+                  onClick={() => setQuery("")}
+                  className="home-cta"
                 >
-                  <span />
-                  <span />
-                  <span />
-                </div>
-
-                <p className="category-browser__no-products-eyebrow">
-                  Coming soon
-                </p>
-
-                <h3 className="category-browser__no-products-title">
-                  No products available
-                </h3>
-
-                <p className="category-browser__no-products-description">
-                  New pieces for this category will be
-                  added soon.
-                </p>
-
-                {/* =================================================
-                    PROPER CTA BUTTON
-                ================================================= */}
+                  Clear search
+                </button>
 
                 <Link
-                  href="/shop"
-                  className="category-browser__shop-button"
+                  href={`/search?q=${encodeURIComponent(
+                    trimmed,
+                  )}`}
+                  className="category-browser__text-link"
                 >
-                  <span>Shop All Products</span>
+                  Search the whole site
+                  <ArrowUpRight
+                    size={14}
+                    strokeWidth={1.6}
+                    aria-hidden="true"
+                  />
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="category-browser__no-products">
+              <p className="category-browser__no-products-eyebrow">
+                Coming soon
+              </p>
+
+              <h3 className="category-browser__no-products-title">
+                No products available yet
+              </h3>
+
+              <p className="category-browser__muted">
+                New pieces for this category will be added
+                soon.
+              </p>
+
+              <div className="category-browser__actions">
+                <Link href="/shop" className="home-cta">
+                  Shop all pieces
                 </Link>
               </div>
             </div>
