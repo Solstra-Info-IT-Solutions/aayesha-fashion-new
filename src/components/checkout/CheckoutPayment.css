@@ -9,7 +9,7 @@
   padding: 24px;
 
   border: 1px solid rgba(47, 39, 33, 0.08);
-  border-radius: 20px;
+  border-radius: 4px;
 
   background: rgba(255, 255, 255, 0.94);
 
@@ -21,7 +21,6 @@
     border-color 180ms ease,
     box-shadow 180ms ease;
 }
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -33,7 +32,6 @@
 
   margin-bottom: 20px;
 }
-
 .checkout-payment__step {
   flex: 0 0 auto;
 
@@ -45,11 +43,11 @@
   justify-content: center;
 
   border: 1px solid rgba(126, 101, 82, 0.13);
-  border-radius: 10px;
+  border-radius: 4px;
 
-  background: #f5f1ed;
+  background: var(--color-surface-soft);
 
-  color: #866f5d;
+  color: var(--color-clay);
 
   font-family:
     "DM Mono",
@@ -57,15 +55,13 @@
     Consolas,
     monospace;
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.05em;
 }
-
 .checkout-payment__heading-content {
   min-width: 0;
 }
-
 .checkout-payment__eyebrow-row {
   display: flex;
   align-items: center;
@@ -73,18 +69,16 @@
 
   margin-bottom: 5px;
 }
-
 .checkout-payment__eyebrow-line {
   width: 17px;
   height: 1px;
 
   background: rgba(143, 119, 100, 0.4);
 }
-
 .checkout-payment__eyebrow {
   margin: 0;
 
-  color: #a08773;
+  color: var(--color-clay);
 
   font-family:
     "DM Mono",
@@ -92,17 +86,16 @@
     Consolas,
     monospace;
 
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.14em;
 
   text-transform: uppercase;
 }
-
 .checkout-payment__title {
   margin: 0;
 
-  color: #302923;
+  color: var(--color-text);
 
   font-family:
     "Cormorant Garamond",
@@ -114,11 +107,10 @@
   line-height: 1.05;
   letter-spacing: -0.025em;
 }
-
 .checkout-payment__description {
   margin: 6px 0 0;
 
-  color: #8b8179;
+  color: var(--color-text-secondary);
 
   font-family:
     "Inter",
@@ -128,7 +120,6 @@
   font-size: 10px;
   line-height: 1.6;
 }
-
 /* =========================================================
    CONTENT
 ========================================================= */
@@ -136,7 +127,6 @@
 .checkout-payment__content {
   width: 100%;
 }
-
 /* =========================================================
    OPTIONS
 ========================================================= */
@@ -147,7 +137,6 @@
 
   gap: 11px;
 }
-
 /* =========================================================
    OPTION CARD
 ========================================================= */
@@ -165,11 +154,11 @@
   padding: 16px;
 
   border: 1px solid rgba(47, 39, 33, 0.09);
-  border-radius: 15px;
+  border-radius: 4px;
 
-  background: #fff;
+  background: var(--color-surface);
 
-  color: #332c26;
+  color: var(--color-text);
 
   text-align: left;
 
@@ -183,37 +172,33 @@
     box-shadow 180ms ease,
     transform 180ms ease;
 }
-
 .checkout-payment__option:hover {
   border-color: rgba(126, 101, 82, 0.22);
 
-  background: #fdfbf9;
+  background: var(--color-surface);
 
   box-shadow:
     0 7px 20px rgba(47, 39, 33, 0.055);
 
   transform: translateY(-1px);
 }
-
 .checkout-payment__option:focus-visible {
   outline: 2px solid rgba(126, 101, 82, 0.4);
   outline-offset: 3px;
 }
-
 .checkout-payment__option--active {
   border-color: rgba(126, 101, 82, 0.42);
 
   background:
     linear-gradient(
       135deg,
-      #fffdfb,
-      #f8f3ee
+      var(--color-surface),
+      var(--color-canvas)
     );
 
   box-shadow:
     0 8px 24px rgba(126, 101, 82, 0.08);
 }
-
 /* =========================================================
    ICON
 ========================================================= */
@@ -229,33 +214,30 @@
   justify-content: center;
 
   border: 1px solid rgba(47, 39, 33, 0.08);
-  border-radius: 11px;
+  border-radius: 4px;
 
-  background: #f5f2ef;
+  background: var(--color-canvas);
 
-  color: #796758;
+  color: var(--color-clay);
 
   transition:
     background-color 180ms ease,
     color 180ms ease,
     border-color 180ms ease;
 }
-
 .checkout-payment__icon svg {
   width: 18px;
   height: 18px;
 
   stroke-width: 1.35;
 }
-
 .checkout-payment__icon--active {
   border-color: rgba(126, 101, 82, 0.18);
 
-  background: #8b7462;
+  background: var(--color-clay);
 
   color: #ffffff;
 }
-
 /* =========================================================
    COPY
 ========================================================= */
@@ -271,9 +253,8 @@
 
   padding-right: 17px;
 }
-
 .checkout-payment__option-title {
-  color: #342c26;
+  color: var(--color-text);
 
   font-family:
     "Inter",
@@ -284,24 +265,22 @@
   font-weight: 600;
   line-height: 1.35;
 }
-
 .checkout-payment__option-description {
-  color: #887d75;
+  color: var(--color-text-secondary);
 
   font-family:
     "Inter",
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 400;
   line-height: 1.5;
 }
-
 .checkout-payment__option-meta {
   margin-top: 3px;
 
-  color: #aa9582;
+  color: var(--color-clay);
 
   font-family:
     "DM Mono",
@@ -309,14 +288,13 @@
     Consolas,
     monospace;
 
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1.4;
 
   text-transform: uppercase;
 }
-
 /* =========================================================
    CHECK INDICATOR
 ========================================================= */
@@ -336,7 +314,7 @@
   border: 1px solid rgba(47, 39, 33, 0.14);
   border-radius: 50%;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   color: #ffffff;
 
@@ -345,15 +323,13 @@
     border-color 180ms ease,
     transform 180ms ease;
 }
-
 .checkout-payment__indicator--active {
-  border-color: #8b7462;
+  border-color: var(--color-clay);
 
-  background: #8b7462;
+  background: var(--color-clay);
 
   transform: scale(1.03);
 }
-
 /* =========================================================
    SECURITY
 ========================================================= */
@@ -367,11 +343,10 @@
   padding: 12px 13px;
 
   border: 1px solid rgba(87, 106, 91, 0.11);
-  border-radius: 12px;
+  border-radius: 4px;
 
-  background: #f8faf8;
+  background: var(--color-success-soft);
 }
-
 .checkout-payment__security-icon {
   flex: 0 0 auto;
 
@@ -382,42 +357,39 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 8px;
+  border-radius: 2px;
 
-  background: #edf3ed;
+  background: var(--color-success-soft);
 
-  color: #718173;
+  color: var(--color-success);
 }
-
 .checkout-payment__security-content {
   min-width: 0;
 }
-
 .checkout-payment__security-title {
   margin: 0 0 2px;
 
-  color: #566357;
+  color: var(--color-success);
 
   font-family:
     "Inter",
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
 }
-
 .checkout-payment__security-description {
   margin: 0;
 
-  color: #89938a;
+  color: var(--color-success);
 
   font-family:
     "Inter",
     Arial,
     sans-serif;
 
-  font-size: 8px;
+  font-size: 10px;
   line-height: 1.55;
 }
 
@@ -426,13 +398,12 @@
 ========================================================= */
 
 @media (max-width: 700px) {
-  .checkout-payment {
+.checkout-payment {
     padding: 20px;
 
-    border-radius: 18px;
+    border-radius: 4px;
   }
-
-  .checkout-payment__options {
+.checkout-payment__options {
     grid-template-columns: 1fr;
   }
 }
@@ -442,89 +413,75 @@
 ========================================================= */
 
 @media (max-width: 600px) {
-  .checkout-payment {
+.checkout-payment {
     padding: 16px;
 
-    border-radius: 16px;
+    border-radius: 4px;
   }
-
-  .checkout-payment__header {
+.checkout-payment__header {
     gap: 10px;
 
     margin-bottom: 16px;
   }
-
-  .checkout-payment__step {
+.checkout-payment__step {
     width: 30px;
     height: 30px;
 
-    border-radius: 9px;
+    border-radius: 4px;
 
-    font-size: 8px;
+    font-size: 10px;
   }
-
-  .checkout-payment__eyebrow {
-    font-size: 7px;
+.checkout-payment__eyebrow {
+    font-size: 10px;
   }
-
-  .checkout-payment__title {
+.checkout-payment__title {
     font-size: 23px;
   }
-
-  .checkout-payment__description {
+.checkout-payment__description {
     max-width: 290px;
 
-    font-size: 9px;
+    font-size: 10px;
   }
-
-  .checkout-payment__option {
+.checkout-payment__option {
     padding: 13px;
 
     gap: 10px;
 
-    border-radius: 13px;
+    border-radius: 4px;
   }
-
-  .checkout-payment__icon {
+.checkout-payment__icon {
     width: 36px;
     height: 36px;
 
-    border-radius: 10px;
+    border-radius: 4px;
   }
-
-  .checkout-payment__icon svg {
+.checkout-payment__icon svg {
     width: 17px;
     height: 17px;
   }
-
-  .checkout-payment__option-title {
+.checkout-payment__option-title {
     font-size: 10px;
   }
-
-  .checkout-payment__option-description {
-    font-size: 8px;
+.checkout-payment__option-description {
+    font-size: 10px;
   }
-
-  .checkout-payment__option-meta {
-    font-size: 6.5px;
+.checkout-payment__option-meta {
+    font-size: 10px;
   }
-
-  .checkout-payment__indicator {
+.checkout-payment__indicator {
     top: 11px;
     right: 11px;
 
     width: 18px;
     height: 18px;
   }
-
-  .checkout-payment__security {
+.checkout-payment__security {
     margin-top: 12px;
     padding: 10px;
 
-    border-radius: 10px;
+    border-radius: 4px;
   }
-
-  .checkout-payment__security-icon {
+.checkout-payment__security-icon {
     width: 26px;
     height: 26px;
   }
@@ -535,19 +492,16 @@
 ========================================================= */
 
 @media (max-width: 380px) {
-  .checkout-payment {
+.checkout-payment {
     padding: 14px;
   }
-
-  .checkout-payment__title {
+.checkout-payment__title {
     font-size: 21px;
   }
-
-  .checkout-payment__option {
+.checkout-payment__option {
     padding: 11px;
   }
-
-  .checkout-payment__option-copy {
+.checkout-payment__option-copy {
     padding-right: 14px;
   }
 }
@@ -557,7 +511,7 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .checkout-payment__option,
+.checkout-payment__option,
   .checkout-payment__icon,
   .checkout-payment__indicator {
     transition: none;

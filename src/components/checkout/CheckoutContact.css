@@ -4,15 +4,14 @@
 
 .checkout-contact {
   width: 100%;
-  background: #ffffff;
+  background: var(--color-surface);
   border: 1px solid rgba(35, 30, 27, 0.09);
-  border-radius: 22px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow:
     0 8px 30px rgba(35, 30, 27, 0.045),
     0 2px 8px rgba(35, 30, 27, 0.025);
 }
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -30,7 +29,6 @@
     );
   border-bottom: 1px solid rgba(35, 30, 27, 0.07);
 }
-
 /* =========================================================
    STEP
 ========================================================= */
@@ -46,7 +44,7 @@
 
   border-radius: 50%;
 
-  background: #2d2926;
+  background: var(--color-clay);
   color: #ffffff;
 
   font-size: 11px;
@@ -56,11 +54,9 @@
   box-shadow:
     0 5px 14px rgba(45, 41, 38, 0.15);
 }
-
 .checkout-contact__step span {
   transform: translateY(0.5px);
 }
-
 /* =========================================================
    HEADER CONTENT
 ========================================================= */
@@ -69,25 +65,22 @@
   min-width: 0;
   flex: 1;
 }
-
 .checkout-contact__eyebrow-row {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 7px;
 }
-
 .checkout-contact__eyebrow-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #a77b63;
+  background: var(--color-clay);
 }
-
 .checkout-contact__eyebrow {
   margin: 0;
 
-  color: #8b776b;
+  color: var(--color-clay);
 
   font-size: 10px;
   font-weight: 600;
@@ -96,11 +89,10 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-
 .checkout-contact__title {
   margin: 0;
 
-  color: #27221f;
+  color: var(--color-text);
 
   font-family:
     Georgia,
@@ -113,17 +105,15 @@
 
   letter-spacing: -0.025em;
 }
-
 .checkout-contact__description {
   max-width: 570px;
   margin: 9px 0 0;
 
-  color: #81766f;
+  color: var(--color-text-secondary);
 
   font-size: 13px;
   line-height: 1.65;
 }
-
 /* =========================================================
    CONTENT
 ========================================================= */
@@ -131,7 +121,6 @@
 .checkout-contact__content {
   padding: 28px 30px 30px;
 }
-
 /* =========================================================
    FIELDS
 ========================================================= */
@@ -141,7 +130,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
-
 /* =========================================================
    FIELD
 ========================================================= */
@@ -150,12 +138,11 @@
   display: block;
   min-width: 0;
 }
-
 .checkout-contact__field-label {
   display: block;
   margin: 0 0 8px 2px;
 
-  color: #403a36;
+  color: var(--color-text);
 
   font-size: 11px;
   font-weight: 600;
@@ -163,7 +150,6 @@
 
   letter-spacing: 0.04em;
 }
-
 /* =========================================================
    FIELD CONTROL
 ========================================================= */
@@ -178,9 +164,9 @@
   height: 52px;
 
   border: 1px solid rgba(45, 39, 35, 0.13);
-  border-radius: 12px;
+  border-radius: 4px;
 
-  background: #fff;
+  background: var(--color-surface);
 
   overflow: hidden;
 
@@ -189,20 +175,17 @@
     box-shadow 180ms ease,
     background 180ms ease;
 }
-
 .checkout-contact__field-control:hover {
   border-color: rgba(45, 39, 35, 0.22);
 }
-
 .checkout-contact__field-control:focus-within {
-  border-color: #a77b63;
+  border-color: var(--color-clay);
 
-  background: #fff;
+  background: var(--color-surface);
 
   box-shadow:
     0 0 0 3px rgba(167, 123, 99, 0.09);
 }
-
 /* =========================================================
    FIELD ICON
 ========================================================= */
@@ -216,16 +199,14 @@
 
   height: 100%;
 
-  color: #9a8a80;
+  color: var(--color-clay);
 
   transition: color 180ms ease;
 }
-
 .checkout-contact__field-control:focus-within
   .checkout-contact__field-icon {
-  color: #8f6854;
+  color: var(--color-clay);
 }
-
 /* =========================================================
    INPUT
 ========================================================= */
@@ -244,22 +225,19 @@
 
   background: transparent;
 
-  color: #302b28;
+  color: var(--color-text);
 
   font-family: inherit;
   font-size: 13px;
   line-height: 1.4;
 }
-
 .checkout-contact__field-control input::placeholder {
-  color: #b4aaa4;
+  color: var(--color-text-muted);
   opacity: 1;
 }
-
 .checkout-contact__field-control input:focus::placeholder {
-  color: #c0b8b3;
+  color: var(--color-text-muted);
 }
-
 /* =========================================================
    FOCUS ACCENT
 ========================================================= */
@@ -272,16 +250,14 @@
   width: 0;
   height: 2px;
 
-  background: #a77b63;
+  background: var(--color-clay);
 
   transition: width 220ms ease;
 }
-
 .checkout-contact__field-control:focus-within
   .checkout-contact__field-focus {
   width: 100%;
 }
-
 /* =========================================================
    PRIVACY
 ========================================================= */
@@ -295,11 +271,10 @@
   padding: 15px 16px;
 
   border: 1px solid rgba(45, 39, 35, 0.07);
-  border-radius: 13px;
+  border-radius: 4px;
 
-  background: #faf8f6;
+  background: var(--color-surface);
 }
-
 .checkout-contact__privacy-icon {
   flex: 0 0 31px;
 
@@ -310,32 +285,29 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 9px;
+  border-radius: 4px;
 
-  background: #ffffff;
-  color: #94715f;
+  background: var(--color-surface);
+  color: var(--color-clay);
 
   border: 1px solid rgba(45, 39, 35, 0.07);
 }
-
 .checkout-contact__privacy-content {
   min-width: 0;
 }
-
 .checkout-contact__privacy-title {
   margin: 0 0 3px;
 
-  color: #514943;
+  color: var(--color-text-secondary);
 
   font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
 }
-
 .checkout-contact__privacy-text {
   margin: 0;
 
-  color: #8d837d;
+  color: var(--color-text-secondary);
 
   font-size: 11px;
   line-height: 1.55;
@@ -346,27 +318,23 @@
 ========================================================= */
 
 @media (max-width: 760px) {
-  .checkout-contact {
-    border-radius: 18px;
+.checkout-contact {
+    border-radius: 4px;
   }
-
-  .checkout-contact__header {
+.checkout-contact__header {
     padding: 23px 20px 21px;
     gap: 14px;
   }
-
-  .checkout-contact__step {
+.checkout-contact__step {
     flex-basis: 37px;
     width: 37px;
     height: 37px;
     font-size: 10px;
   }
-
-  .checkout-contact__content {
+.checkout-contact__content {
     padding: 22px 20px 23px;
   }
-
-  .checkout-contact__fields {
+.checkout-contact__fields {
     grid-template-columns: 1fr;
     gap: 16px;
   }
@@ -377,82 +345,68 @@
 ========================================================= */
 
 @media (max-width: 480px) {
-  .checkout-contact {
-    border-radius: 16px;
+.checkout-contact {
+    border-radius: 4px;
     box-shadow:
       0 5px 20px rgba(35, 30, 27, 0.04);
   }
-
-  .checkout-contact__header {
+.checkout-contact__header {
     padding: 20px 16px 19px;
     gap: 12px;
   }
-
-  .checkout-contact__step {
+.checkout-contact__step {
     flex-basis: 34px;
     width: 34px;
     height: 34px;
 
-    font-size: 9px;
+    font-size: 10px;
   }
-
-  .checkout-contact__eyebrow {
-    font-size: 9px;
+.checkout-contact__eyebrow {
+    font-size: 10px;
     letter-spacing: 0.13em;
   }
-
-  .checkout-contact__title {
+.checkout-contact__title {
     font-size: 22px;
   }
-
-  .checkout-contact__description {
+.checkout-contact__description {
     margin-top: 7px;
     font-size: 11.5px;
     line-height: 1.55;
   }
-
-  .checkout-contact__content {
+.checkout-contact__content {
     padding: 19px 16px 20px;
   }
-
-  .checkout-contact__field-label {
+.checkout-contact__field-label {
     margin-bottom: 7px;
     font-size: 10px;
   }
-
-  .checkout-contact__field-control {
+.checkout-contact__field-control {
     height: 49px;
-    border-radius: 11px;
+    border-radius: 4px;
   }
-
-  .checkout-contact__field-icon {
+.checkout-contact__field-icon {
     flex-basis: 42px;
   }
-
-  .checkout-contact__field-control input {
+.checkout-contact__field-control input {
     padding-right: 12px;
     font-size: 12px;
   }
-
-  .checkout-contact__privacy {
+.checkout-contact__privacy {
     gap: 9px;
     margin-top: 20px;
     padding: 12px;
-    border-radius: 11px;
+    border-radius: 4px;
   }
-
-  .checkout-contact__privacy-icon {
+.checkout-contact__privacy-icon {
     flex-basis: 28px;
     width: 28px;
     height: 28px;
-    border-radius: 8px;
+    border-radius: 2px;
   }
-
-  .checkout-contact__privacy-title {
+.checkout-contact__privacy-title {
     font-size: 10px;
   }
-
-  .checkout-contact__privacy-text {
+.checkout-contact__privacy-text {
     font-size: 10px;
     line-height: 1.5;
   }

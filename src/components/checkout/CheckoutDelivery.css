@@ -8,15 +8,14 @@
   padding: 26px;
 
   border: 1px solid rgba(35, 30, 26, 0.08);
-  border-radius: 22px;
+  border-radius: 4px;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   box-shadow:
     0 8px 30px rgba(35, 30, 26, 0.045),
     0 2px 8px rgba(35, 30, 26, 0.025);
 }
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -30,7 +29,6 @@
 
   border-bottom: 1px solid rgba(35, 30, 26, 0.07);
 }
-
 .checkout-delivery__step {
   width: 38px;
   height: 38px;
@@ -41,11 +39,11 @@
   justify-content: center;
 
   border: 1px solid rgba(35, 30, 26, 0.1);
-  border-radius: 12px;
+  border-radius: 4px;
 
-  background: #faf8f5;
+  background: var(--color-surface);
 
-  color: #8a7564;
+  color: var(--color-clay);
 
   font-family:
     "DM Mono",
@@ -57,11 +55,9 @@
   font-weight: 500;
   letter-spacing: 0.08em;
 }
-
 .checkout-delivery__heading-content {
   min-width: 0;
 }
-
 .checkout-delivery__eyebrow-row {
   display: flex;
   align-items: center;
@@ -69,7 +65,6 @@
 
   margin-bottom: 7px;
 }
-
 .checkout-delivery__eyebrow-dot {
   width: 5px;
   height: 5px;
@@ -77,13 +72,12 @@
 
   border-radius: 50%;
 
-  background: #a48670;
+  background: var(--color-clay);
 }
-
 .checkout-delivery__eyebrow {
   margin: 0;
 
-  color: #9a897a;
+  color: var(--color-clay);
 
   font-family:
     "DM Mono",
@@ -91,17 +85,16 @@
     Consolas,
     monospace;
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.14em;
   line-height: 1.4;
   text-transform: uppercase;
 }
-
 .checkout-delivery__title {
   margin: 0;
 
-  color: #211d1a;
+  color: var(--color-text);
 
   font-family:
     "Cormorant Garamond",
@@ -113,13 +106,12 @@
   line-height: 1.05;
   letter-spacing: -0.025em;
 }
-
 .checkout-delivery__description {
   max-width: 570px;
 
   margin: 8px 0 0;
 
-  color: #81766e;
+  color: var(--color-text-secondary);
 
   font-family:
     "Inter",
@@ -130,7 +122,6 @@
   font-weight: 400;
   line-height: 1.65;
 }
-
 /* =========================================================
    CONTENT
 ========================================================= */
@@ -138,7 +129,6 @@
 .checkout-delivery__content {
   padding-top: 22px;
 }
-
 /* =========================================================
    OPTIONS
 ========================================================= */
@@ -148,7 +138,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
-
 /* =========================================================
    DELIVERY OPTION CARD
 ========================================================= */
@@ -168,11 +157,11 @@
   padding: 17px;
 
   border: 1px solid rgba(35, 30, 26, 0.09);
-  border-radius: 16px;
+  border-radius: 4px;
 
-  background: #fbfaf8;
+  background: var(--color-surface);
 
-  color: #28231f;
+  color: var(--color-text);
 
   text-align: left;
 
@@ -184,36 +173,31 @@
     box-shadow 180ms ease,
     transform 180ms ease;
 }
-
 .checkout-delivery__option:hover {
   border-color: rgba(126, 101, 82, 0.24);
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   box-shadow:
     0 7px 20px rgba(35, 30, 26, 0.055);
 
   transform: translateY(-1px);
 }
-
 .checkout-delivery__option:active {
   transform: translateY(0);
 }
-
 .checkout-delivery__option--active {
   border-color: rgba(126, 101, 82, 0.34);
 
-  background: #fdfbf9;
+  background: var(--color-surface);
 
   box-shadow:
     0 0 0 3px rgba(126, 101, 82, 0.065),
     0 8px 22px rgba(35, 30, 26, 0.055);
 }
-
 .checkout-delivery__option--active:hover {
   border-color: rgba(126, 101, 82, 0.42);
 }
-
 /* =========================================================
    OPTION MAIN
 ========================================================= */
@@ -226,7 +210,6 @@
 
   gap: 12px;
 }
-
 /* =========================================================
    DELIVERY ICON
 ========================================================= */
@@ -240,32 +223,28 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 11px;
+  border-radius: 4px;
 
-  background: #f0ebe6;
+  background: var(--color-surface-soft);
 
-  color: #806b5b;
+  color: var(--color-clay);
 
   transition:
     background-color 180ms ease,
     color 180ms ease;
 }
-
 .checkout-delivery__icon--active {
-  background: #29231f;
+  background: var(--color-clay);
   color: #ffffff;
 }
-
 .checkout-delivery__option:hover
   .checkout-delivery__icon {
-  background: #eae3dc;
+  background: var(--color-surface-soft);
 }
-
 .checkout-delivery__option:hover
   .checkout-delivery__icon--active {
-  background: #29231f;
+  background: var(--color-clay-deep);
 }
-
 /* =========================================================
    OPTION COPY
 ========================================================= */
@@ -276,7 +255,6 @@
   display: flex;
   flex-direction: column;
 }
-
 .checkout-delivery__option-title-row {
   display: flex;
   align-items: center;
@@ -286,9 +264,8 @@
 
   min-width: 0;
 }
-
 .checkout-delivery__option-title {
-  color: #2b2521;
+  color: var(--color-text);
 
   font-family:
     "Inter",
@@ -299,7 +276,6 @@
   font-weight: 600;
   line-height: 1.4;
 }
-
 .checkout-delivery__priority {
   display: inline-flex;
   align-items: center;
@@ -308,29 +284,28 @@
 
   padding: 0 7px;
 
-  border-radius: 6px;
+  border-radius: 2px;
 
-  background: #f0e7df;
+  background: var(--color-surface-soft);
 
-  color: #856c59;
+  color: var(--color-clay);
 
   font-family:
     "Inter",
     Arial,
     sans-serif;
 
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.03em;
   line-height: 1;
 
   text-transform: uppercase;
 }
-
 .checkout-delivery__option-description {
   margin-top: 4px;
 
-  color: #877c74;
+  color: var(--color-text-secondary);
 
   font-family:
     "Inter",
@@ -341,7 +316,6 @@
   font-weight: 400;
   line-height: 1.5;
 }
-
 .checkout-delivery__estimate {
   display: inline-flex;
   align-items: center;
@@ -349,18 +323,17 @@
 
   margin-top: 8px;
 
-  color: #9a8d84;
+  color: var(--color-text-secondary);
 
   font-family:
     "Inter",
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
   line-height: 1.4;
 }
-
 /* =========================================================
    OPTION SIDE
 ========================================================= */
@@ -374,9 +347,8 @@
 
   gap: 9px;
 }
-
 .checkout-delivery__price {
-  color: #302923;
+  color: var(--color-text);
 
   font-family:
     "DM Mono",
@@ -389,12 +361,10 @@
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
-
 .checkout-delivery__option:first-child
   .checkout-delivery__price {
-  color: #607261;
+  color: var(--color-success);
 }
-
 /* =========================================================
    SELECTION INDICATOR
 ========================================================= */
@@ -410,7 +380,7 @@
   border: 1px solid rgba(35, 30, 26, 0.16);
   border-radius: 50%;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
   color: transparent;
 
@@ -420,17 +390,15 @@
     color 180ms ease,
     transform 180ms ease;
 }
-
 .checkout-delivery__indicator--active {
-  border-color: #29231f;
+  border-color: var(--color-clay);
 
-  background: #29231f;
+  background: var(--color-clay);
 
   color: #ffffff;
 
   transform: scale(1.03);
 }
-
 /* =========================================================
    DELIVERY NOTE
 ========================================================= */
@@ -444,11 +412,10 @@
   padding: 12px 13px;
 
   border: 1px solid rgba(35, 30, 26, 0.055);
-  border-radius: 12px;
+  border-radius: 4px;
 
-  background: #faf9f7;
+  background: var(--color-surface);
 }
-
 .checkout-delivery__note-icon {
   flex: 0 0 auto;
 
@@ -458,13 +425,12 @@
 
   margin-top: 1px;
 
-  color: #9a8879;
+  color: var(--color-clay);
 }
-
 .checkout-delivery__note p {
   margin: 0;
 
-  color: #8b817a;
+  color: var(--color-text-secondary);
 
   font-family:
     "Inter",
@@ -475,7 +441,6 @@
   font-weight: 400;
   line-height: 1.6;
 }
-
 /* =========================================================
    FOCUS
 ========================================================= */
@@ -490,49 +455,42 @@
 ========================================================= */
 
 @media (max-width: 900px) {
-  .checkout-delivery__options {
+.checkout-delivery__options {
     grid-template-columns: 1fr;
   }
-
-  .checkout-delivery__option {
+.checkout-delivery__option {
     min-height: 94px;
   }
 }
 
 @media (max-width: 768px) {
-  .checkout-delivery {
+.checkout-delivery {
     padding: 21px;
-    border-radius: 18px;
+    border-radius: 4px;
   }
-
-  .checkout-delivery__header {
+.checkout-delivery__header {
     gap: 12px;
     padding-bottom: 19px;
   }
-
-  .checkout-delivery__step {
+.checkout-delivery__step {
     width: 34px;
     height: 34px;
     flex-basis: 34px;
-    border-radius: 10px;
+    border-radius: 4px;
   }
-
-  .checkout-delivery__title {
+.checkout-delivery__title {
     font-size: 27px;
   }
-
-  .checkout-delivery__description {
+.checkout-delivery__description {
     font-size: 11px;
     line-height: 1.6;
   }
-
-  .checkout-delivery__content {
+.checkout-delivery__content {
     padding-top: 19px;
   }
-
-  .checkout-delivery__option {
+.checkout-delivery__option {
     padding: 15px;
-    border-radius: 14px;
+    border-radius: 4px;
   }
 }
 
@@ -541,111 +499,92 @@
 ========================================================= */
 
 @media (max-width: 560px) {
-  .checkout-delivery {
+.checkout-delivery {
     margin-top: 14px;
     padding: 17px;
 
-    border-radius: 16px;
+    border-radius: 4px;
   }
-
-  .checkout-delivery__header {
+.checkout-delivery__header {
     gap: 10px;
   }
-
-  .checkout-delivery__step {
+.checkout-delivery__step {
     width: 31px;
     height: 31px;
     flex-basis: 31px;
 
-    border-radius: 9px;
+    border-radius: 4px;
 
-    font-size: 9px;
+    font-size: 10px;
   }
-
-  .checkout-delivery__eyebrow {
-    font-size: 8px;
+.checkout-delivery__eyebrow {
+    font-size: 10px;
   }
-
-  .checkout-delivery__title {
+.checkout-delivery__title {
     font-size: 24px;
   }
-
-  .checkout-delivery__description {
+.checkout-delivery__description {
     margin-top: 6px;
 
     font-size: 10px;
     line-height: 1.55;
   }
-
-  .checkout-delivery__content {
+.checkout-delivery__content {
     padding-top: 16px;
   }
-
-  .checkout-delivery__options {
+.checkout-delivery__options {
     gap: 9px;
   }
-
-  .checkout-delivery__option {
+.checkout-delivery__option {
     align-items: flex-start;
 
     gap: 10px;
 
     padding: 13px;
 
-    border-radius: 13px;
+    border-radius: 4px;
   }
-
-  .checkout-delivery__option-main {
+.checkout-delivery__option-main {
     gap: 10px;
   }
-
-  .checkout-delivery__icon {
+.checkout-delivery__icon {
     width: 34px;
     height: 34px;
     flex-basis: 34px;
 
-    border-radius: 9px;
+    border-radius: 4px;
   }
-
-  .checkout-delivery__option-title {
+.checkout-delivery__option-title {
     font-size: 11px;
   }
-
-  .checkout-delivery__option-description {
-    font-size: 9px;
+.checkout-delivery__option-description {
+    font-size: 10px;
   }
-
-  .checkout-delivery__estimate {
+.checkout-delivery__estimate {
     margin-top: 6px;
-    font-size: 8px;
+    font-size: 10px;
   }
-
-  .checkout-delivery__priority {
+.checkout-delivery__priority {
     min-height: 18px;
     padding: 0 6px;
-    font-size: 7px;
+    font-size: 10px;
   }
-
-  .checkout-delivery__option-side {
+.checkout-delivery__option-side {
     gap: 7px;
   }
-
-  .checkout-delivery__price {
-    font-size: 9px;
+.checkout-delivery__price {
+    font-size: 10px;
   }
-
-  .checkout-delivery__indicator {
+.checkout-delivery__indicator {
     width: 21px;
     height: 21px;
   }
-
-  .checkout-delivery__note {
+.checkout-delivery__note {
     padding: 10px 11px;
-    border-radius: 10px;
+    border-radius: 4px;
   }
-
-  .checkout-delivery__note p {
-    font-size: 9px;
+.checkout-delivery__note p {
+    font-size: 10px;
   }
 }
 
@@ -654,56 +593,45 @@
 ========================================================= */
 
 @media (max-width: 380px) {
-  .checkout-delivery {
+.checkout-delivery {
     padding: 14px;
   }
-
-  .checkout-delivery__step {
+.checkout-delivery__step {
     width: 28px;
     height: 28px;
     flex-basis: 28px;
   }
-
-  .checkout-delivery__title {
+.checkout-delivery__title {
     font-size: 22px;
   }
-
-  .checkout-delivery__description {
-    font-size: 9px;
+.checkout-delivery__description {
+    font-size: 10px;
   }
-
-  .checkout-delivery__option {
+.checkout-delivery__option {
     padding: 11px;
   }
-
-  .checkout-delivery__option-main {
+.checkout-delivery__option-main {
     gap: 8px;
   }
-
-  .checkout-delivery__icon {
+.checkout-delivery__icon {
     width: 31px;
     height: 31px;
     flex-basis: 31px;
   }
-
-  .checkout-delivery__option-title {
+.checkout-delivery__option-title {
     font-size: 10px;
   }
-
-  .checkout-delivery__option-description {
-    font-size: 8px;
+.checkout-delivery__option-description {
+    font-size: 10px;
   }
-
-  .checkout-delivery__estimate {
-    font-size: 7.5px;
+.checkout-delivery__estimate {
+    font-size: 10px;
   }
-
-  .checkout-delivery__priority {
-    font-size: 6.5px;
+.checkout-delivery__priority {
+    font-size: 10px;
   }
-
-  .checkout-delivery__price {
-    font-size: 8px;
+.checkout-delivery__price {
+    font-size: 10px;
   }
 }
 
@@ -712,7 +640,7 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .checkout-delivery__option,
+.checkout-delivery__option,
   .checkout-delivery__icon,
   .checkout-delivery__indicator {
     transition: none;
