@@ -236,7 +236,7 @@ export const metadata: Metadata = {
 
   other: {
     "theme-color":
-      "#fcfbf9",
+      "#f7f3ed",
 
     "color-scheme":
       "light",
@@ -256,10 +256,11 @@ export default function RootLayout({
     <html
       lang="en-IN"
       suppressHydrationWarning
+      className={`${manrope.variable} ${cormorant.variable}`}
     >
       <body
         suppressHydrationWarning
-        className={`${manrope.variable} ${cormorant.variable} antialiased`}
+        className="antialiased"
       >
         <BrandLoader />
         <AuthProvider>
@@ -273,11 +274,14 @@ export default function RootLayout({
 
             style: {
               background:
-                "#1b1d1d",
+                "#3f2d2a",
 
-              color: "#ffffff",
+              color: "#f7f3ed",
 
               borderRadius: "0",
+
+              borderLeft:
+                "2px solid #b39a79",
 
               fontSize: "12px",
 
