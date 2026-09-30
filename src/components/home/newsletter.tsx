@@ -1,12 +1,13 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { ArrowUpRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { Container } from "@/components/shared/container";
 import type { HomepageNewsletter } from "@/types/homepage";
 
 import "./Newsletter.css";
+import "./HomeCta.css";
 
 interface NewsletterProps {
   data: HomepageNewsletter;
@@ -122,17 +123,7 @@ export function Newsletter({
                     type="submit"
                     className="newsletter__button"
                   >
-                    <span>
-                      {data.buttonLabel}
-                    </span>
-
-                    <span className="newsletter__button-icon">
-                      <ArrowUpRight
-                        size={16}
-                        strokeWidth={1.4}
-                        aria-hidden="true"
-                      />
-                    </span>
+                    {data.buttonLabel}
                   </button>
                 </form>
 

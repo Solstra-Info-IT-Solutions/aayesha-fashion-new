@@ -956,3 +956,30 @@
     animation: none;
   }
 }
+/* =========================================================
+   HOME REFINEMENTS
+   Two-line product name with ellipsis, rounded-rectangle CTA
+========================================================= */
+
+.product-card__title {
+  overflow: hidden;
+
+  overflow-wrap: anywhere;
+  text-overflow: ellipsis;
+
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+}
+
+.product-card__cart-button,
+.product-card__quantity {
+  border-radius: 12px;
+}
+
+.product-card__quantity-button:first-child {
+  border-radius: 11px 0 0 11px;
+}
+
+.product-card__quantity-button:last-child {
+  border-radius: 0 11px 11px 0;
+}

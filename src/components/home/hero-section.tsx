@@ -18,6 +18,7 @@ import {
 import type { HomepageHeroSlide } from "@/types/homepage";
 
 import "./HeroSection.css";
+import "./HomeCta.css";
 
 const AUTOPLAY_DELAY = 6000;
 
@@ -352,21 +353,9 @@ export function HeroSection({
                     slide.href && (
                       <a
                         href={slide.href}
-                        className="aayesha-hero__cta"
+                        className="home-cta home-cta--light"
                       >
-                        <span>
-                          {slide.buttonLabel}
-                        </span>
-
-                        <span
-                          className="aayesha-hero__cta-icon"
-                          aria-hidden="true"
-                        >
-                          <ArrowRight
-                            size={15}
-                            strokeWidth={1.5}
-                          />
-                        </span>
+                        {slide.buttonLabel}
                       </a>
                     )}
                 </div>

@@ -606,3 +606,51 @@
     transition: none !important;
   }
 }
+/* =========================================================
+   ICON-ONLY TRIGGER
+   Round icon button, no label. The WhatsApp button sits
+   directly above it (see WhatsAppBubble.css).
+========================================================= */
+
+.quick-help__trigger {
+  justify-content: center;
+
+  width: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  height: 48px;
+
+  padding: 0;
+
+  border-color: var(--color-clay);
+  border-radius: 50%;
+
+  background: var(--color-clay);
+  color: #ffffff;
+}
+
+.quick-help__trigger:hover {
+  border-color: var(--color-clay-deep);
+
+  background: var(--color-clay-deep);
+}
+
+.quick-help__trigger-icon,
+.quick-help__trigger:hover .quick-help__trigger-icon {
+  width: 100%;
+  height: 100%;
+
+  background: transparent;
+  color: #ffffff;
+}
+
+@media (max-width: 560px) {
+  .quick-help__trigger {
+    width: 46px;
+    min-width: 46px;
+    min-height: 46px;
+    height: 46px;
+
+    padding: 0;
+  }
+}

@@ -12,12 +12,12 @@ import {
 } from "react";
 
 import { Container } from "@/components/shared/container";
-import { LinkButton } from "@/components/ui/button";
 
 import { getCategories } from "@/services/category.service";
 import type { Category } from "@/types/category";
 
 import "./FeaturedCategories.css";
+import "./HomeCta.css";
 
 /* =========================================================
    COMPONENT
@@ -108,21 +108,6 @@ export function FeaturedCategories() {
               <span>collections.</span>
             </h2>
           </div>
-
-          <div className="featured-categories__intro-wrap">
-            <p className="featured-categories__intro">
-              Curated silhouettes,
-              contemporary details and
-              timeless Indian craftsmanship.
-            </p>
-
-            <span
-              className="featured-categories__intro-mark"
-              aria-hidden="true"
-            >
-              04
-            </span>
-          </div>
         </header>
 
         {/* =================================================
@@ -169,43 +154,13 @@ export function FeaturedCategories() {
                   EXPLORE ALL
               ================================================= */}
 
-              <div className="featured-categories__footer">
-                <div
-                  className="
-                    featured-categories__footer-line
-                  "
-                  aria-hidden="true"
-                />
-
+              <div className="home-cta-row">
                 <Link
                   href="/categories"
-                  className="
-                    featured-categories__all-link
-                  "
+                  className="home-cta"
                 >
-                  <span className="featured-categories__all-label">
-                    Explore all categories
-                  </span>
-
-                  <span
-                    className="
-                      featured-categories__all-icon
-                    "
-                    aria-hidden="true"
-                  >
-                    <ArrowUpRight
-                      size={16}
-                      strokeWidth={1.25}
-                    />
-                  </span>
+                  Explore all categories
                 </Link>
-
-                <div
-                  className="
-                    featured-categories__footer-line
-                  "
-                  aria-hidden="true"
-                />
               </div>
             </>
           )}
@@ -286,18 +241,6 @@ function CategoryCard({
           <div className="category-card__top">
             <span className="category-card__number">
               {String(index + 1).padStart(2, "0")}
-            </span>
-
-            <span
-              className="
-                category-card__arrow
-              "
-              aria-hidden="true"
-            >
-              <ArrowUpRight
-                size={18}
-                strokeWidth={1.25}
-              />
             </span>
           </div>
 
@@ -381,19 +324,12 @@ function ComingSoon() {
             categories-coming-soon__cta
           "
         >
-          <LinkButton
+          <Link
             href="/categories"
-            variant="secondary"
-            size="md"
-            icon={
-              <ArrowUpRight
-                size={15}
-                strokeWidth={1.3}
-              />
-            }
+            className="home-cta"
           >
             View All Categories
-          </LinkButton>
+          </Link>
         </div>
       </div>
     </div>

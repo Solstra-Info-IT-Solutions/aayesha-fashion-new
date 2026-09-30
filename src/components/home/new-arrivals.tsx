@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 
 import { getProducts } from "@/services/product.service";
 import type { Product } from "@/types/product";
@@ -8,6 +7,7 @@ import { ProductCarousel } from "@/components/product/product-carousel";
 import { Container } from "@/components/shared/container";
 
 import "./NewArrivals.css";
+import "./HomeCta.css";
 
 /* =========================================================
    NEW ARRIVALS
@@ -72,24 +72,6 @@ export async function NewArrivals() {
               </h2>
 
             </div>
-
-            <div className="new-arrivals__intro-wrap">
-
-              <p className="new-arrivals__intro">
-                Discover the latest silhouettes,
-                textures and details newly added
-                to the AAYESHA collection.
-              </p>
-
-              <span
-                className="new-arrivals__intro-mark"
-                aria-hidden="true"
-              >
-                01 — 08
-              </span>
-
-            </div>
-
           </header>
 
           {/* =================================================
@@ -109,37 +91,13 @@ export async function NewArrivals() {
                   VIEW ALL CTA
               ================================================= */}
 
-              <div className="new-arrivals__footer">
-
-                <div
-                  className="new-arrivals__footer-line"
-                  aria-hidden="true"
-                />
-
+              <div className="home-cta-row">
                 <Link
                   href="/collections/new-arrivals"
-                  className="new-arrivals__all-link"
+                  className="home-cta"
                 >
-                  <span className="new-arrivals__all-label">
-                    View all new arrivals
-                  </span>
-
-                  <span
-                    className="new-arrivals__all-icon"
-                    aria-hidden="true"
-                  >
-                    <ArrowUpRight
-                      size={15}
-                      strokeWidth={1.3}
-                    />
-                  </span>
+                  View all new arrivals
                 </Link>
-
-                <div
-                  className="new-arrivals__footer-line"
-                  aria-hidden="true"
-                />
-
               </div>
             </>
           ) : (
@@ -189,21 +147,9 @@ export async function NewArrivals() {
 
                   <Link
                     href="/shop"
-                    className="new-arrivals__empty-link"
+                    className="home-cta"
                   >
-                    <span className="new-arrivals__empty-label">
-                      Explore Shop
-                    </span>
-
-                    <span
-                      className="new-arrivals__empty-icon"
-                      aria-hidden="true"
-                    >
-                      <ArrowUpRight
-                        size={15}
-                        strokeWidth={1.3}
-                      />
-                    </span>
+                    Explore Shop
                   </Link>
 
                 </div>

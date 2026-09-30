@@ -245,12 +245,6 @@ export function QuickHelp() {
               />
             )}
           </span>
-
-          {/* TRIGGER LABEL */}
-
-          <span className="quick-help__trigger-label">
-            Quick Help
-          </span>
         </button>
       </div>
     </>
