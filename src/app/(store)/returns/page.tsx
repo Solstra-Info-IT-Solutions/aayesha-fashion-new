@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/content/content-page";
 
 export const metadata: Metadata = {
-  title: "Returns & Exchange | Aayesha Fashion",
+  title: "Returns & Exchange",
   description:
     "Explore Aayesha Fashion's detailed returns and exchange process, including eligibility, product condition, packaging, exchange requests, quality assessment and customer-care support.",
   alternates: {

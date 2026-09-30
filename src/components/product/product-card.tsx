@@ -39,7 +39,7 @@ export function ProductCard({
   const availability = getProductAvailability(product);
   const primaryMedia = getPrimaryProductMedia(product);
 
-  const secondaryMedia = product.media.find(
+  const secondaryMedia = (product.media ?? []).find(
     (media) =>
       media.type === "image" &&
       media.id !== primaryMedia?.id,
@@ -59,14 +59,11 @@ export function ProductCard({
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showAddedPopup, setShowAddedPopup] = useState(false);
 
-  if (!primaryMedia) {
-    return null;
-  }
-
-  const hasBadge = product.merchandising.badges.length > 0;
+  const hasBadge =
+    (product.merchandising?.badges?.length ?? 0) > 0;
 
   const badge = hasBadge
-    ? product.merchandising.badges[0]
+    ? product.merchandising!.badges[0]
         .replace(/-/g, " ")
         .replace(/\b\w/g, (letter) => letter.toUpperCase())
     : null;
@@ -96,6 +93,15 @@ export function ProductCard({
   useEffect(() => {
     void syncCartQuantity();
   }, [syncCartQuantity]);
+
+  /*
+   * Early return must come AFTER every hook. Returning before
+   * useCallback/useEffect changes the hook count between renders
+   * whenever a product's media appears or disappears.
+   */
+  if (!primaryMedia) {
+    return null;
+  }
 
   const requireAuthentication = () => {
     if (!isInitialized) {

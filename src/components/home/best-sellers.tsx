@@ -7,15 +7,30 @@ import { Container } from "@/components/shared/container";
 import "./BestSellers.css";
 
 export async function BestSellers() {
-  const response = await getProducts({
-    page: 1,
-    limit: 8,
-    isBestSeller: true,
-    status: "active",
-    sort: "best-selling",
-  });
+  /*
+   * One failing section must not take the whole homepage down
+   * (mirrors NewArrivals).
+   */
+  let bestSellers: Awaited<
+    ReturnType<typeof getProducts>
+  >["products"] = [];
 
-  const bestSellers = response.products;
+  try {
+    const response = await getProducts({
+      page: 1,
+      limit: 8,
+      isBestSeller: true,
+      status: "active",
+      sort: "best-selling",
+    });
+
+    bestSellers = response?.products ?? [];
+  } catch (error) {
+    console.error(
+      "BEST SELLERS API ERROR:",
+      error,
+    );
+  }
 
   return (
     <section

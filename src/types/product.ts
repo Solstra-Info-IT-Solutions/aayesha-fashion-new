@@ -434,17 +434,22 @@ export function getProductStartingMrp(
 export function getPrimaryProductMedia(
   product: Product,
 ): ProductMedia | undefined {
+  /* Tolerate malformed API payloads without a media array. */
+  const mediaList = Array.isArray(product.media)
+    ? product.media
+    : [];
+
   return (
-    product.media.find(
+    mediaList.find(
       (media) =>
         media.isPrimary &&
         media.type === "image",
     ) ??
-    product.media.find(
+    mediaList.find(
       (media) =>
         media.type === "image",
     ) ??
-    product.media[0]
+    mediaList[0]
   );
 }
 

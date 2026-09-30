@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/content/content-page";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Aayesha Fashion",
+  title: "Privacy Policy",
   description:
     "Learn how Aayesha Fashion may collect, use, protect and manage personal information across our website, account, shopping, checkout and customer-care experiences.",
   alternates: {

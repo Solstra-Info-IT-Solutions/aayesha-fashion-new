@@ -7,6 +7,7 @@ import {
 } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import {
   RotateCcw,
@@ -150,6 +151,8 @@ export function ShopFilters({
   mobile = false,
   onClose,
 }: ShopFiltersProps) {
+  const router = useRouter();
+
   const [openSections, setOpenSections] =
     useState<FilterSectionKey[]>([
       "category",
@@ -246,8 +249,9 @@ export function ShopFilters({
 
   function resetFilters() {
     setSelectedPrice(null);
-    window.location.href =
-      getCollectionBasePath();
+    router.push(
+      getCollectionBasePath(),
+    );
   }
 
   function handlePriceChange(
@@ -272,9 +276,11 @@ export function ShopFilters({
     const query = params.toString();
     const pathname = getCollectionBasePath();
 
-    window.location.href = query
-      ? `${pathname}?${query}`
-      : pathname;
+    router.push(
+      query
+        ? `${pathname}?${query}`
+        : pathname,
+    );
   }
 
   return (

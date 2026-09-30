@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/content/content-page";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions | Aayesha Fashion",
+  title: "Terms & Conditions",
   description:
     "Read the Aayesha Fashion Terms & Conditions governing website access, accounts, products, orders, payments, shipping, returns, intellectual property and responsible use of the website.",
   alternates: {

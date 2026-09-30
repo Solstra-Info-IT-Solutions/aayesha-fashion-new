@@ -112,12 +112,12 @@ export const metadata: Metadata = {
      CANONICAL
   ======================================================= */
 
-  alternates: {
-    canonical: siteConfig.url,
-    languages: {
-      "en-IN": siteConfig.url,
-    },
-  },
+  /*
+   * No site-wide canonical here: a root-level canonical is inherited
+   * by every page that does not define its own, which pointed
+   * /login, /cart, /collections... at the homepage. The homepage
+   * declares its own in (store)/page.tsx.
+   */
 
   /* =======================================================
      ROBOTS
@@ -256,6 +256,7 @@ export default function RootLayout({
     <html
       lang="en-IN"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${manrope.variable} ${cormorant.variable}`}
     >
       <body

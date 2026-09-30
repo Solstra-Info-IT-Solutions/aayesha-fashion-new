@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/content/content-page";
 
 export const metadata: Metadata = {
-  title: "Refund Policy | Aayesha Fashion",
+  title: "Refund Policy",
   description:
     "Understand the refund process at Aayesha Fashion, including refund eligibility, returned product assessment, cancellations, payment reversals, processing timelines and customer support.",
   alternates: {

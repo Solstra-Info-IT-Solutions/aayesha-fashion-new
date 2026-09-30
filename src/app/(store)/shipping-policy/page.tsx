@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/content/content-page";
 
 export const metadata: Metadata = {
-  title: "Shipping Policy | Aayesha Fashion",
+  title: "Shipping Policy",
   description:
     "Read Aayesha Fashion's detailed Shipping Policy covering order processing, dispatch, delivery timelines, tracking, address accuracy, delivery attempts, damaged shipments and external disruptions.",
   alternates: {

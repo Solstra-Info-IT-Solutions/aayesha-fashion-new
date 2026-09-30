@@ -308,9 +308,10 @@ export function HeroSection({
                     </div>
                   )}
 
-                  <h1 className="aayesha-hero__title">
+                  {/* The sr-only <h1> below carries the page heading. */}
+                  <h2 className="aayesha-hero__title">
                     {slide.title}
-                  </h1>
+                  </h2>
 
                   {slide.subtitle && (
                     <p className="aayesha-hero__subtitle">

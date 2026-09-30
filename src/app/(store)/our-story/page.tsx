@@ -4,7 +4,7 @@ import { ContentPage } from "@/components/content/content-page";
 import "./OurStoryPage.css";
 
 export const metadata: Metadata = {
-  title: "Our Story | Aayesha Fashion",
+  title: "Our Story",
   description:
     "Discover the story, philosophy and design approach behind Aayesha Fashion — a contemporary Indian fashion house creating elegant, refined and wearable styles for the modern woman.",
   alternates: {
