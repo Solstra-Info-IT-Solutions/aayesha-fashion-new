@@ -25,6 +25,14 @@ export function CookiePreferences({
   onClose,
   onSaved,
 }: CookiePreferencesProps) {
+  /*
+   * The form is (re)seeded from storage each time the dialog opens.
+   * This is done by adjusting state while rendering (React's
+   * documented alternative to a synchronous setState in an effect).
+   */
+  const [seededForOpen, setSeededForOpen] =
+    useState(false);
+
   const [
     analytics,
     setAnalytics,
@@ -35,45 +43,23 @@ export function CookiePreferences({
     setMarketing,
   ] = useState(false);
 
-  /* =========================================================
-     LOAD EXISTING PREFERENCES
-  ========================================================= */
+  if (open !== seededForOpen) {
+    setSeededForOpen(open);
 
-  useEffect(() => {
-    if (!open) {
-      return;
-    }
+    if (open) {
+      const source =
+        getCookieConsent() ??
+        getDefaultCookieConsent();
 
-    const existing =
-      getCookieConsent();
-
-    if (existing) {
       setAnalytics(
-        existing.preferences
-          .analytics,
+        source.preferences.analytics,
       );
 
       setMarketing(
-        existing.preferences
-          .marketing,
+        source.preferences.marketing,
       );
-
-      return;
     }
-
-    const defaults =
-      getDefaultCookieConsent();
-
-    setAnalytics(
-      defaults.preferences
-        .analytics,
-    );
-
-    setMarketing(
-      defaults.preferences
-        .marketing,
-    );
-  }, [open]);
+  }
 
   /* =========================================================
      ESCAPE

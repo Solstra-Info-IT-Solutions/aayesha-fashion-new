@@ -61,19 +61,15 @@ export function LoginForm() {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [localError, setLocalError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-
-  /* =======================================================
-     VERIFIED MESSAGE
-  ======================================================= */
-
-  useEffect(() => {
-    if (verified === "1") {
-      setSuccessMessage(
-        "Your email has been verified successfully. Please sign in.",
-      );
-    }
-  }, [verified]);
+  /*
+   * The "verified" banner comes straight from the URL, so it can be
+   * the initial value instead of being copied in by an effect.
+   */
+  const [successMessage, setSuccessMessage] = useState(
+    verified === "1"
+      ? "Your email has been verified successfully. Please sign in."
+      : "",
+  );
 
   /* =======================================================
      VALIDATION

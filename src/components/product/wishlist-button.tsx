@@ -14,6 +14,7 @@ import { useAuthStore } from "@/store/auth-store";
 import { LoginRequiredPopup } from "@/components/product/login-required-popup";
 
 import "./WishlistButton.css";
+import { useIsClient } from "@/hooks/use-is-client";
 
 /* =========================================================
    TYPES
@@ -63,8 +64,7 @@ export function WishlistButton({
      LOCAL STATE
   ======================================================= */
 
-  const [hydrated, setHydrated] =
-    useState(false);
+  const hydrated = useIsClient();
 
   const [showLoginPopup, setShowLoginPopup] =
     useState(false);
@@ -72,10 +72,6 @@ export function WishlistButton({
   /* =======================================================
      HYDRATION
   ======================================================= */
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
 
   /* =======================================================
      ACTIVE STATE

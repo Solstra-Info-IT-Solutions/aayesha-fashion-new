@@ -17,7 +17,7 @@ interface SearchPageProps {
 }
 
 export const metadata: Metadata = {
-  title: "Search | Aayesha Fashion",
+  title: "Search",
   description:
     "Explore Aayesha Fashion and discover contemporary Indian fashion, elegant silhouettes and pieces curated for the modern wardrobe.",
   alternates: {

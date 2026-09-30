@@ -34,19 +34,16 @@ export function Testimonials({
           a.sortOrder - b.sortOrder
       );
 
-  const [activeIndex, setActiveIndex] =
+  const [rawActiveIndex, setActiveIndex] =
     useState(0);
 
   const total = testimonials.length;
 
-  useEffect(() => {
-    if (
-      total > 0 &&
-      activeIndex >= total
-    ) {
-      setActiveIndex(0);
-    }
-  }, [activeIndex, total]);
+  /* If the list shrinks, fall back to the first item. */
+  const activeIndex =
+    total > 0 && rawActiveIndex >= total
+      ? 0
+      : rawActiveIndex;
 
   function next() {
     if (total <= 1) {

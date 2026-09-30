@@ -70,11 +70,6 @@ export function VerifyEmailForm() {
     useState("");
 
   const [
-    resendAvailable,
-    setResendAvailable,
-  ] = useState(true);
-
-  const [
     resendSeconds,
     setResendSeconds,
   ] = useState(0);
@@ -84,15 +79,26 @@ export function VerifyEmailForm() {
     setSuccessMessage,
   ] = useState("");
 
+  /* Resend unlocks when the countdown reaches zero. */
+  const resendAvailable =
+    resendSeconds <= 0;
+
   /* =======================================================
      SYNC EMAIL FROM URL
   ======================================================= */
 
-  useEffect(() => {
+  const [
+    previousEmailFromUrl,
+    setPreviousEmailFromUrl,
+  ] = useState(emailFromUrl);
+
+  if (emailFromUrl !== previousEmailFromUrl) {
+    setPreviousEmailFromUrl(emailFromUrl);
+
     if (emailFromUrl) {
       setEmail(emailFromUrl);
     }
-  }, [emailFromUrl]);
+  }
 
   /* =======================================================
      RESEND TIMER
@@ -100,7 +106,6 @@ export function VerifyEmailForm() {
 
   useEffect(() => {
     if (resendSeconds <= 0) {
-      setResendAvailable(true);
       return;
     }
 
@@ -195,7 +200,6 @@ export function VerifyEmailForm() {
         "A new verification code has been sent.",
       );
 
-      setResendAvailable(false);
       setResendSeconds(60);
       setOtp("");
     } catch {

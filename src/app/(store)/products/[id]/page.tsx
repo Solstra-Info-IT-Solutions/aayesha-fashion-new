@@ -6,6 +6,8 @@ import {
   getProducts,
 } from "@/lib/api/products";
 
+import { ApiError } from "@/lib/api";
+import { siteConfig } from "@/config/site";
 import { getCategories } from "@/services/category.service";
 
 import { ProductJsonLd } from "@/components/seo/product-json-ld";
@@ -24,9 +26,14 @@ interface ProductPageProps {
    SITE URL
 ============================================================ */
 
+/*
+ * One canonical origin for the whole site. The product page used a
+ * different default domain (www.aayeshafashion.com) from every other
+ * page (siteConfig.url), producing conflicting canonical/OG URLs.
+ */
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://www.aayeshafashion.com";
+  siteConfig.url;
 
 /* ============================================================
    NORMALIZE PRODUCT
@@ -270,7 +277,7 @@ export async function generateMetadata({
 
     const title =
       product.seo?.title ||
-      `${product.name} | Aayesha Fashion`;
+      product.name;
 
     const rawDescription =
       product.seo?.description ||
@@ -437,7 +444,20 @@ export default async function ProductPage({
       error,
     );
 
-    notFound();
+    /*
+     * Only a genuine "not found" is a 404. A timeout or 5xx from
+     * the API must surface as an error (retryable, not indexed as a
+     * missing page) instead of quietly turning every product URL
+     * into a 404 during an outage.
+     */
+    if (
+      error instanceof ApiError &&
+      (error.status === 404 || error.status === 400)
+    ) {
+      notFound();
+    }
+
+    throw error;
   }
 
   /* ----------------------------------------------------------

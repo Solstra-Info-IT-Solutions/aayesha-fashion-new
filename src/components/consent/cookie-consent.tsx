@@ -15,12 +15,22 @@ import {
 
 import { CookiePreferences } from "./cookie-preferences";
 
+import { useIsClient } from "@/hooks/use-is-client";
+
 import "./CookieConsent.css";
 
 export function CookieConsent() {
+  /*
+   * The stored choice lives in localStorage, so the banner can only
+   * be decided on the client. useIsClient() is false during SSR and
+   * hydration, which keeps the first client render identical to the
+   * server render.
+   */
+  const isClient = useIsClient();
+
   const [
-    visible,
-    setVisible,
+    dismissed,
+    setDismissed,
   ] = useState(false);
 
   const [
@@ -33,25 +43,13 @@ export function CookieConsent() {
     setConsent,
   ] =
     useState<CookieConsentState | null>(
-      null,
+      () => getCookieConsent(),
     );
 
-  /* =========================================================
-     INITIALISE
-  ========================================================= */
-
-  useEffect(() => {
-    const existingConsent =
-      getCookieConsent();
-
-    if (existingConsent) {
-      setConsent(existingConsent);
-      setVisible(false);
-      return;
-    }
-
-    setVisible(true);
-  }, []);
+  const visible =
+    isClient &&
+    consent === null &&
+    !dismissed;
 
   /* =========================================================
      ACCEPT ALL
@@ -64,7 +62,7 @@ export function CookieConsent() {
 
       setConsent(nextConsent);
 
-      setVisible(false);
+      setDismissed(true);
       setPreferencesOpen(false);
     }, []);
 
@@ -79,7 +77,7 @@ export function CookieConsent() {
 
       setConsent(nextConsent);
 
-      setVisible(false);
+      setDismissed(true);
       setPreferencesOpen(false);
     }, []);
 
@@ -114,7 +112,7 @@ export function CookieConsent() {
         updatedConsent,
       );
 
-      setVisible(false);
+      setDismissed(true);
       setPreferencesOpen(false);
     }, []);
 

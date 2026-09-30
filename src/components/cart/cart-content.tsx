@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { useAuthStore } from "@/store/auth-store";
 import {
   Minus,
   Plus,
@@ -33,12 +34,43 @@ export function CartContent() {
 
   const [isClearing, setIsClearing] = useState(false);
 
+  /*
+   * The session is restored asynchronously after a page load.
+   * Loading the cart before that finishes always fails and made a
+   * hard reload of /cart look like an empty bag.
+   */
+  const isInitialized = useAuthStore(
+    (state) => state.isInitialized,
+  );
+
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated,
+  );
+
   /* =========================================================
      LOAD CART
   ========================================================= */
 
+  /* Guests have no cart: reset while rendering (guarded). */
+  if (
+    isInitialized &&
+    !isAuthenticated &&
+    (isLoading || cart !== null)
+  ) {
+    setCart(null);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     let cancelled = false;
+
+    if (!isInitialized) {
+      return;
+    }
+
+    if (!isAuthenticated) {
+      return;
+    }
 
     async function loadCart() {
       setIsLoading(true);
@@ -67,7 +99,7 @@ export function CartContent() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [isInitialized, isAuthenticated]);
 
   /* =========================================================
      CART DATA

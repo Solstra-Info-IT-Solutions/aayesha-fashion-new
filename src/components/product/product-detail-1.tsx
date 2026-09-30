@@ -208,8 +208,9 @@ export function ProductDetail({
      STATE
   ========================================================== */
 
-  const [categoryName, setCategoryName] =
+  const [loadedCategoryName, setCategoryName] =
     useState("");
+  const categoryName = safeProduct.categoryId ? loadedCategoryName : "";
 
   const [selectedImage, setSelectedImage] =
     useState(0);
@@ -316,8 +317,6 @@ export function ProductDetail({
 
     if (safeProduct.categoryId) {
       void loadCategory();
-    } else {
-      setCategoryName("");
     }
 
     return () => {
@@ -329,10 +328,14 @@ export function ProductDetail({
      RESET
   ========================================================== */
 
-  useEffect(() => {
+  const [resetForProductId, setResetForProductId] =
+    useState(safeProduct._id);
+
+  if (resetForProductId !== safeProduct._id) {
+    setResetForProductId(safeProduct._id);
     setSelectedImage(0);
     setQuantity(1);
-  }, [safeProduct._id]);
+  }
 
   /* ==========================================================
      RECENTLY VIEWED

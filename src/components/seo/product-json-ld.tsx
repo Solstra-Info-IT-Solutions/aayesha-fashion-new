@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/json-ld";
 import type { Product } from "@/types/product";
 import {
   getAvailableStock,
@@ -232,9 +233,7 @@ export function ProductJsonLd({
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html:
-          JSON.stringify(
-            jsonLd,
-          ),
+          serializeJsonLd(jsonLd),
       }}
     />
   );

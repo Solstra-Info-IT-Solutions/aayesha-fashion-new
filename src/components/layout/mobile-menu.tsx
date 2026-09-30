@@ -28,6 +28,7 @@ import { siteConfig } from "@/config/site";
 import { useAuthStore } from "@/store/auth-store";
 
 import "./MobileMenu.css";
+import { useIsClient } from "@/hooks/use-is-client";
 
 /* =========================================================
    TYPES
@@ -116,8 +117,7 @@ export function MobileMenu({
   const [isLoggingOut, setIsLoggingOut] =
     useState(false);
 
-  const [mounted, setMounted] =
-    useState(false);
+  const mounted = useIsClient();
 
   /* =======================================================
      AUTH STATE
@@ -143,14 +143,6 @@ export function MobileMenu({
     isInitialized &&
     isAuthenticated &&
     Boolean(user);
-
-  /* =======================================================
-     MOUNT
-  ======================================================= */
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   /* =======================================================
      BODY SCROLL LOCK

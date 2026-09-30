@@ -76,6 +76,10 @@ export function CheckoutPlaceOrder() {
     (state) => state.isAuthenticated,
   );
 
+  const isAuthInitialized = useAuthStore(
+    (state) => state.isInitialized,
+  );
+
   /* ========================================================
      CHECKOUT
   ======================================================== */
@@ -134,12 +138,40 @@ export function CheckoutPlaceOrder() {
   const idempotencyKeyRef =
     useRef<string | null>(null);
 
+  /*
+   * Set once an order has been created. The button must stay
+   * locked from then until the success page replaces this one;
+   * otherwise a second click during navigation would build a new
+   * order (fresh idempotency key) from the still-mounted cart.
+   */
+  const orderCreatedRef =
+    useRef(false);
+
   /* ==========================================================
      LOAD CART FROM BACKEND
   ========================================================== */
 
+  /* Guests have no cart: reset while rendering (guarded). */
+  if (
+    isAuthInitialized &&
+    !isAuthenticated &&
+    (loadingCart || items.length > 0 || subtotal !== 0)
+  ) {
+    setItems([]);
+    setSubtotal(0);
+    setLoadingCart(false);
+  }
+
   useEffect(() => {
     let cancelled = false;
+
+    if (!isAuthInitialized) {
+      return;
+    }
+
+    if (!isAuthenticated) {
+      return;
+    }
 
     async function loadCart() {
       setLoadingCart(true);
@@ -199,7 +231,7 @@ export function CheckoutPlaceOrder() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [isAuthInitialized, isAuthenticated]);
 
   /* ==========================================================
      CLIENT-SIDE DISPLAY TOTAL
@@ -473,7 +505,8 @@ export function CheckoutPlaceOrder() {
     async () => {
       if (
         placingOrder ||
-        loadingCart
+        loadingCart ||
+        orderCreatedRef.current
       ) {
         return;
       }
@@ -598,6 +631,9 @@ export function CheckoutPlaceOrder() {
         const order =
           response.order;
 
+        orderCreatedRef.current =
+          true;
+
         const publicAccessToken =
           response.publicAccessToken;
 
@@ -695,7 +731,11 @@ export function CheckoutPlaceOrder() {
             : "Unable to place your order. Please try again.",
         );
       } finally {
-        setPlacingOrder(false);
+        if (
+          !orderCreatedRef.current
+        ) {
+          setPlacingOrder(false);
+        }
       }
     };
 

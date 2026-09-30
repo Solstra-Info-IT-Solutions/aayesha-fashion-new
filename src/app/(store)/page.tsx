@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
+
 import { apiFetch } from "@/lib/api";
+import { siteConfig } from "@/config/site";
 import type { HomepageData } from "@/types/homepage";
 
 import { HeroSection } from "@/components/home/hero-section";
@@ -13,6 +16,15 @@ import { Testimonials } from "@/components/home/testimonials";
 import { InstagramGallery } from "@/components/home/instagram-gallery";
 import { Newsletter } from "@/components/home/newsletter";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-IN": siteConfig.url,
+    },
+  },
+};
 
 /* =========================================================
    HOMEPAGE DATA

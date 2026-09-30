@@ -42,7 +42,7 @@ function parseNumber(value?: string) {
 }
 
 export const metadata: Metadata = {
-  title: "Shop Women's Fashion | Aayesha Fashion",
+  title: "Shop Women's Fashion",
 
   description:
     "Explore Aayesha Fashion's curated collection of elegant Indian fashion, contemporary silhouettes, festive wear, and timeless everyday styles.",

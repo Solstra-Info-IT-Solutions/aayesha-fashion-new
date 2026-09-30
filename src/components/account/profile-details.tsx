@@ -265,10 +265,10 @@ export function ProfileDetails() {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      setIsLoading(false);
       return;
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch-on-mount: state updates follow the async request
     void loadProfile();
   }, [
     isAuthenticated,
@@ -629,7 +629,8 @@ export function ProfileDetails() {
      LOADING
   ======================================================= */
 
-  if (isLoading) {
+  /* Guests never load anything, so never show the skeleton. */
+  if (isLoading && isAuthenticated) {
     return (
       <section className="profile-details profile-details--state">
         <div className="profile-details__loading">

@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 
+import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 
 import type {
@@ -95,6 +96,8 @@ export function ShopHeader({
   products = [],
   selectedSort = "relevance",
 }: ShopHeaderProps) {
+  const router = useRouter();
+
   const [sortOpen, setSortOpen] =
     useState(false);
 
@@ -176,11 +179,17 @@ export function ShopHeader({
 
     setSortOpen(false);
 
-    window.location.href =
+    /*
+     * Client navigation: the page re-renders with the new
+     * searchParams instead of reloading the whole document
+     * (which also replayed the brand loader on every sort).
+     */
+    router.push(
       buildCurrentPath(
         pathname,
         params,
-      );
+      ),
+    );
   }
 
   return (

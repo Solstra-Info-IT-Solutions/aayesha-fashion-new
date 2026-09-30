@@ -63,7 +63,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((product) => product.status === "active")
       .filter((product) => !product.seo?.noIndex)
       .map((product) => ({
-        url: absoluteUrl(`/products/${product.slug}`),
+        /*
+         * Must match the canonical + internal links, which are
+         * /products/<_id>. Using the slug produced sitemap URLs whose
+         * canonical pointed somewhere else.
+         */
+        url: absoluteUrl(
+          `/products/${encodeURIComponent(product._id)}`,
+        ),
         lastModified: new Date(
           product.updatedAt ||
             product.publishedAt ||

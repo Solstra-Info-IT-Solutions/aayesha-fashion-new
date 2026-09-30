@@ -49,6 +49,7 @@ import {
 import { ProductCard } from "@/components/product/product-card";
 
 import "./ProductDetail.css";
+import { useIsClient } from "@/hooks/use-is-client";
 
 interface ProductDetailProps {
   product: Product;
@@ -151,12 +152,7 @@ export function ProductDetail({
     [product.content?.description],
   );
 
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
+  const mounted = useIsClient();
 
   const [categoryName, setCategoryName] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -211,11 +207,14 @@ const [loginAction, setLoginAction] =
     };
   }, [product.categoryId]);
 
-  useEffect(() => {
+  const [resetForProductId, setResetForProductId] = useState(productId);
+
+  if (resetForProductId !== productId) {
+    setResetForProductId(productId);
     setActiveIndex(0);
     setQuantity(1);
     setDeliveryChecked(false);
-  }, [productId]);
+  }
 
   useEffect(() => {
     if (!shareOpen && !lightboxOpen) return;

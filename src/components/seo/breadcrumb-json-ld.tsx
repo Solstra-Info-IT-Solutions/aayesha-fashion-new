@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
 
 interface BreadcrumbItem {
@@ -34,7 +35,7 @@ export function BreadcrumbJsonLd({
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(jsonLd),
+        __html: serializeJsonLd(jsonLd),
       }}
     />
   );

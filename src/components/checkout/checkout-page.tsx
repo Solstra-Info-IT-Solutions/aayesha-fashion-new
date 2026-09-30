@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { getCart } from "@/services/cart.service";
+import { useAuthStore } from "@/store/auth-store";
 
 import { CheckoutContact } from "@/components/checkout/checkout-contact";
 import { CheckoutAddress } from "@/components/checkout/checkout-address";
@@ -27,12 +28,39 @@ export function CheckoutPage() {
   const [hasItems, setHasItems] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  /* Wait for the session restore before reading the cart. */
+  const isInitialized = useAuthStore(
+    (state) => state.isInitialized,
+  );
+
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated,
+  );
+
   /* =======================================================
      LOAD CART
   ======================================================= */
 
+  /* Guests have no cart: reset while rendering (guarded). */
+  if (
+    isInitialized &&
+    !isAuthenticated &&
+    (isLoading || hasItems)
+  ) {
+    setHasItems(false);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     let cancelled = false;
+
+    if (!isInitialized) {
+      return;
+    }
+
+    if (!isAuthenticated) {
+      return;
+    }
 
     async function loadCart() {
       try {
@@ -64,7 +92,7 @@ export function CheckoutPage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [isInitialized, isAuthenticated]);
 
   /* =======================================================
      LOADING

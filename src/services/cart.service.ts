@@ -82,17 +82,50 @@ function getAccessToken(): string {
    GET CART
 ========================================================= */
 
+export const CART_UPDATED_EVENT = "aayesha:cart-updated";
+
+/*
+ * Lets passive listeners (e.g. the header cart badge) refresh after
+ * a successful cart mutation without polling or a new store.
+ */
+function notifyCartChanged() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event(CART_UPDATED_EVENT));
+  }
+}
+
+/*
+ * Concurrent GET /carts requests share one network call.
+ * Every ProductCard on a listing page syncs its cart quantity on
+ * mount; without this, an 8-card grid fired 8 identical requests.
+ * The shared promise is dropped as soon as it settles or any cart
+ * mutation starts, so later reads are never served stale data.
+ */
+let inFlightCart: Promise<Cart> | null = null;
+
 export async function getCart(): Promise<Cart> {
+  if (inFlightCart) {
+    return inFlightCart;
+  }
+
   const accessToken =
     getAccessToken();
 
-  return apiFetch<Cart>(
+  const request = apiFetch<Cart>(
     "/carts",
     {
       method: "GET",
       accessToken,
     },
-  );
+  ).finally(() => {
+    if (inFlightCart === request) {
+      inFlightCart = null;
+    }
+  });
+
+  inFlightCart = request;
+
+  return request;
 }
 
 /* =========================================================
@@ -103,10 +136,12 @@ export async function addToCart(
   productId: string,
   quantity = 1,
 ): Promise<Cart> {
+  inFlightCart = null;
+
   const accessToken =
     getAccessToken();
 
-  return apiFetch<Cart>(
+  const cart = await apiFetch<Cart>(
     "/carts",
     {
       method: "POST",
@@ -119,6 +154,10 @@ export async function addToCart(
       }),
     },
   );
+
+  notifyCartChanged();
+
+  return cart;
 }
 
 /* =========================================================
@@ -129,10 +168,12 @@ export async function updateCartItem(
   productId: string,
   quantity: number,
 ): Promise<Cart> {
+  inFlightCart = null;
+
   const accessToken =
     getAccessToken();
 
-  return apiFetch<Cart>(
+  const cart = await apiFetch<Cart>(
     `/carts/${encodeURIComponent(productId)}`,
     {
       method: "PATCH",
@@ -144,6 +185,10 @@ export async function updateCartItem(
       }),
     },
   );
+
+  notifyCartChanged();
+
+  return cart;
 }
 
 /* =========================================================
@@ -153,10 +198,12 @@ export async function updateCartItem(
 export async function removeFromCart(
   productId: string,
 ): Promise<Cart> {
+  inFlightCart = null;
+
   const accessToken =
     getAccessToken();
 
-  return apiFetch<Cart>(
+  const cart = await apiFetch<Cart>(
     `/carts/${encodeURIComponent(productId)}`,
     {
       method: "DELETE",
@@ -164,6 +211,10 @@ export async function removeFromCart(
       accessToken,
     },
   );
+
+  notifyCartChanged();
+
+  return cart;
 }
 
 /* =========================================================
@@ -171,10 +222,12 @@ export async function removeFromCart(
 ========================================================= */
 
 export async function clearCart(): Promise<Cart> {
+  inFlightCart = null;
+
   const accessToken =
     getAccessToken();
 
-  return apiFetch<Cart>(
+  const cart = await apiFetch<Cart>(
     "/carts",
     {
       method: "DELETE",
@@ -182,4 +235,8 @@ export async function clearCart(): Promise<Cart> {
       accessToken,
     },
   );
+
+  notifyCartChanged();
+
+  return cart;
 }
