@@ -215,6 +215,26 @@ export function HeaderActions() {
   };
 
   /* =======================================================
+     WISHLIST
+     Guests are asked to sign in, same as the account icon.
+  ======================================================= */
+
+  const handleWishlistClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
+    if (isInitialized && !loggedIn) {
+      event.preventDefault();
+
+      setSearchOpen(false);
+      setAccountOpen(true);
+
+      return;
+    }
+
+    setAccountOpen(false);
+  };
+
+  /* =======================================================
      ACCOUNT LABEL
   ======================================================= */
 
@@ -309,9 +329,7 @@ export function HeaderActions() {
         <Link
           href="/wishlist"
           aria-label="Wishlist"
-          onClick={() =>
-            setAccountOpen(false)
-          }
+          onClick={handleWishlistClick}
           className="
             header-action-link
             header-action--wishlist
