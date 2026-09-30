@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,6 +27,7 @@ import {
 import { mainNavigation } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { useAuthStore } from "@/store/auth-store";
+import { LoginRequiredPopup } from "@/components/product/login-required-popup";
 
 import "./MobileMenu.css";
 import { useIsClient } from "@/hooks/use-is-client";
@@ -115,6 +117,9 @@ export function MobileMenu({
   const router = useRouter();
 
   const [isLoggingOut, setIsLoggingOut] =
+    useState(false);
+
+  const [showWishlistLogin, setShowWishlistLogin] =
     useState(false);
 
   const mounted = useIsClient();
@@ -338,7 +343,13 @@ export function MobileMenu({
             aria-label="Aayesha Fashion home"
           >
             <span className="mobile-menu__brand-mark">
-              A
+              <Image
+                src="/images/logo.png"
+                alt=""
+                width={56}
+                height={56}
+                className="mobile-menu__brand-logo"
+              />
             </span>
 
             <span className="mobile-menu__brand-copy">
@@ -740,7 +751,14 @@ export function MobileMenu({
 
               <Link
                 href="/wishlist"
-                onClick={onClose}
+                onClick={(event) => {
+                  onClose();
+
+                  if (isInitialized && !isLoggedIn) {
+                    event.preventDefault();
+                    setShowWishlistLogin(true);
+                  }
+                }}
                 className="
                   mobile-quick-item
                   mobile-quick-item--wishlist
@@ -906,6 +924,12 @@ export function MobileMenu({
   return (
     <>
       {hamburger}
+
+      <LoginRequiredPopup
+        open={showWishlistLogin}
+        onClose={() => setShowWishlistLogin(false)}
+        action="wishlist"
+      />
 
       {mounted &&
         createPortal(

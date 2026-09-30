@@ -22,8 +22,16 @@ const navigation = [
     href: "/collections/new-arrivals",
   },
   {
+    label: "Shop",
+    href: "/shop",
+  },
+  {
     label: "Collections",
     href: "/collections",
+  },
+  {
+    label: "Best Sellers",
+    href: "/collections/best-sellers",
   },
   {
     label: "Garara",
