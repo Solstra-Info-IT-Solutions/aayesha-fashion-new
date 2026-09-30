@@ -353,7 +353,7 @@ export function HeroSection({
                     slide.href && (
                       <a
                         href={slide.href}
-                        className="home-cta home-cta--light"
+                        className="home-cta home-cta--light aayesha-hero__cta"
                       >
                         {slide.buttonLabel}
                       </a>

@@ -154,13 +154,15 @@ export function FeaturedCategories() {
                   EXPLORE ALL
               ================================================= */}
 
-              <div className="home-cta-row">
+              <div className="home-cta-row home-cta-row--lines">
+                <span className="home-cta-row__line" aria-hidden="true" />
                 <Link
                   href="/categories"
                   className="home-cta"
                 >
                   Explore all categories
                 </Link>
+                <span className="home-cta-row__line" aria-hidden="true" />
               </div>
             </>
           )}

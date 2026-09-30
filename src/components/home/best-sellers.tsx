@@ -108,13 +108,15 @@ export async function BestSellers() {
         ========================================= */}
 
         {bestSellers.length > 0 && (
-          <div className="home-cta-row">
+          <div className="home-cta-row home-cta-row--lines">
+            <span className="home-cta-row__line" aria-hidden="true" />
             <a
               href="/collections/best-sellers"
               className="home-cta"
             >
               View all best sellers
             </a>
+            <span className="home-cta-row__line" aria-hidden="true" />
           </div>
         )}
 
