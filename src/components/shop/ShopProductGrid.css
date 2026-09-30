@@ -31,7 +31,7 @@
   color: var(--color-text-muted);
 
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
@@ -61,7 +61,7 @@
   color: var(--color-text-secondary);
 
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.16em;
@@ -75,16 +75,16 @@
 }
 
 .shop-product-grid__refine:hover {
-  color: #6f4b47;
+  color: var(--color-clay);
 }
 
 .shop-product-grid__refine:active {
-  color: #3f2d2a;
+  color: var(--color-text);
   transform: translateY(1px);
 }
 
 .shop-product-grid__refine:focus-visible {
-  outline: 2px solid #9b7069;
+  outline: 2px solid var(--color-clay);
   outline-offset: 4px;
 }
 
@@ -125,16 +125,16 @@
   width: 40px;
   height: 1px;
 
-  background: #6f4b47;
+  background: var(--color-clay);
 }
 
 .shop-product-grid__empty-eyebrow {
   margin: 24px 0 0;
 
-  color: #6f4b47;
+  color: var(--color-clay);
 
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.22em;
@@ -173,14 +173,14 @@
   margin-top: 28px;
   padding: 0 24px;
 
-  border: 1px solid #6f4b47;
+  border: 1px solid var(--color-clay);
   border-radius: 0;
 
-  background: #6f4b47;
+  background: var(--color-clay);
   color: #ffffff;
 
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
@@ -195,18 +195,18 @@
 }
 
 .shop-product-grid__empty-button:hover {
-  border-color: #3f2d2a;
-  background: #3f2d2a;
+  border-color: var(--color-text);
+  background: var(--color-text);
 }
 
 .shop-product-grid__empty-button:active {
-  border-color: #7f5953;
-  background: #7f5953;
+  border-color: var(--color-clay);
+  background: var(--color-clay-deep);
   transform: translateY(1px);
 }
 
 .shop-product-grid__empty-button:focus-visible {
-  outline: 2px solid #9b7069;
+  outline: 2px solid var(--color-clay);
   outline-offset: 4px;
 }
 
@@ -306,7 +306,7 @@
   }
 
   .shop-product-grid__eyebrow {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .shop-product-grid__count {
@@ -314,7 +314,7 @@
   }
 
   .shop-product-grid__refine {
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 0.13em;
   }
 

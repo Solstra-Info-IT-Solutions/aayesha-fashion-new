@@ -76,7 +76,7 @@
    ========================================================= */
 
 .product-carousel__track:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: 5px;
 }
 
@@ -123,7 +123,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .product-carousel__hint {
@@ -201,7 +201,7 @@
   position: absolute;
   inset: 0;
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
 
   transform: scaleY(0);
 
@@ -291,7 +291,7 @@
   z-index: 3;
 
   outline: 2px solid
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   outline-offset: 3px;
 }

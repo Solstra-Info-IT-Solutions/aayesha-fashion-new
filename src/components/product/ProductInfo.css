@@ -66,10 +66,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
 
-  color: var(
-    --color-accent,
-    #6f4b47
-  );
+  color: var(--color-clay);
 }
 
 .product-info__category::before {
@@ -184,10 +181,7 @@
   padding: 18px 20px;
 
   border-left: 2px solid
-    var(
-      --color-accent,
-      #6f4b47
-    );
+    var(--color-clay);
 
   background:
     linear-gradient(

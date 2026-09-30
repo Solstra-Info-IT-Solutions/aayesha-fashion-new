@@ -23,21 +23,21 @@
   padding-bottom: 22px;
 
   border-bottom: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 }
 
 .wishlist-grid__eyebrow {
   margin: 0 0 8px;
 
   font-family: var(--font-body, sans-serif);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1.4;
 
   letter-spacing: 0.18em;
   text-transform: uppercase;
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .wishlist-grid__title {
@@ -60,7 +60,7 @@
 
   letter-spacing: -0.025em;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 .wishlist-grid__count {
@@ -69,14 +69,14 @@
   padding-bottom: 3px;
 
   font-family: var(--font-body, sans-serif);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1.4;
 
   letter-spacing: 0.14em;
   text-transform: uppercase;
 
-  color: var(--color-text-muted, #8d817b);
+  color: var(--color-text-muted, var(--color-text-secondary));
 }
 
 /* =========================================================
@@ -105,7 +105,7 @@
   padding-top: 28px;
 
   border-top: 1px solid
-    var(--color-border, #d9cbc5);
+    var(--color-border, var(--color-border));
 }
 
 /* =========================================================
@@ -141,12 +141,12 @@
   margin-bottom: 28px;
 
   border: 1px solid
-    var(--color-border-dark, #c4b3ac);
+    var(--color-border-dark, var(--color-border));
 
   border-radius: 50%;
 
-  background: var(--color-bg-soft, #f7f1ee);
-  color: var(--color-accent, #6f4b47);
+  background: var(--color-bg-soft, var(--color-canvas));
+  color: var(--color-clay);
 }
 
 .wishlist-grid__empty-icon svg {
@@ -184,7 +184,7 @@
 
   letter-spacing: -0.025em;
 
-  color: var(--color-text, #3f2d2a);
+  color: var(--color-text, var(--color-text));
 }
 
 /* =========================================================
@@ -201,7 +201,7 @@
   font-weight: 400;
   line-height: 1.8;
 
-  color: var(--color-text-secondary, #6f625d);
+  color: var(--color-text-secondary, var(--color-text-secondary));
 }
 
 /* =========================================================
@@ -294,7 +294,7 @@
   .wishlist-grid__eyebrow {
     margin-bottom: 6px;
 
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 0.15em;
   }
 
@@ -309,7 +309,7 @@
   .wishlist-grid__count {
     padding-top: 4px;
 
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 0.1em;
 
     white-space: nowrap;
@@ -379,7 +379,7 @@
   }
 
   .wishlist-grid__count {
-    font-size: 7.5px;
+    font-size: 10px;
   }
 
   .wishlist-grid__footer {

@@ -80,7 +80,7 @@
 
   background: transparent;
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 
   transition:
     background-color 180ms ease,
@@ -90,9 +90,9 @@
 }
 
 .product-trust__item:hover .product-trust__icon {
-  border-color: var(--color-accent, #6f4b47);
+  border-color: var(--color-clay);
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
 
   color: #ffffff;
 

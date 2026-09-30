@@ -16,11 +16,11 @@
 
   padding: 0;
 
-  border: 1px solid var(--color-border, #d9cbc5);
+  border: 1px solid var(--color-border, var(--color-border));
   border-radius: 50%;
 
-  background: var(--color-surface, #fffdfb);
-  color: var(--color-text, #3f2d2a);
+  background: var(--color-surface, var(--color-surface));
+  color: var(--color-text, var(--color-text));
 
   cursor: pointer;
 
@@ -72,16 +72,16 @@
    ========================================================= */
 
 .wishlist-button:hover:not(:disabled) {
-  border-color: var(--color-accent, #6f4b47);
+  border-color: var(--color-clay);
 
-  background: var(--color-bg-soft, #f7f1ee);
-  color: var(--color-accent, #6f4b47);
+  background: var(--color-bg-soft, var(--color-canvas));
+  color: var(--color-clay);
 
   transform: translateY(-1px);
 }
 
 .wishlist-button:hover:not(:disabled)::before {
-  border-color: var(--color-border, #d9cbc5);
+  border-color: var(--color-border, var(--color-border));
 }
 
 .wishlist-button:hover:not(:disabled)
@@ -94,9 +94,9 @@
    ========================================================= */
 
 .wishlist-button--active {
-  border-color: var(--color-accent, #6f4b47);
+  border-color: var(--color-clay);
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
   color: #ffffff;
 }
 
@@ -105,8 +105,8 @@
 }
 
 .wishlist-button--active:hover:not(:disabled) {
-  background: var(--color-text, #3f2d2a);
-  border-color: var(--color-text, #3f2d2a);
+  background: var(--color-text, var(--color-text));
+  border-color: var(--color-text, var(--color-text));
   color: #ffffff;
 }
 
@@ -141,7 +141,7 @@
    ========================================================= */
 
 .wishlist-button:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: 4px;
 }
 

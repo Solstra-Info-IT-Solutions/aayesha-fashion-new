@@ -53,7 +53,7 @@
 
   background: var(--color-surface, #ffffff);
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .recent-searches__icon svg {
@@ -72,7 +72,7 @@
   letter-spacing: 0.17em;
   text-transform: uppercase;
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .recent-searches__title {
@@ -125,13 +125,13 @@
 }
 
 .recent-searches__clear:hover {
-  border-color: var(--color-accent, #6f4b47);
+  border-color: var(--color-clay);
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .recent-searches__clear:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: 4px;
 }
 
@@ -197,7 +197,7 @@
 .recent-searches__query svg {
   flex: 0 0 auto;
 
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
   stroke: currentColor;
 }
 
@@ -218,14 +218,14 @@
 }
 
 .recent-searches__query:hover {
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .recent-searches__query:focus-visible {
   position: relative;
   z-index: 1;
 
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: -3px;
 }
 
@@ -260,7 +260,7 @@
 }
 
 .recent-searches__remove:hover {
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
 
   color: #ffffff;
 }
@@ -275,7 +275,7 @@
   position: relative;
   z-index: 1;
 
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: -3px;
 }
 

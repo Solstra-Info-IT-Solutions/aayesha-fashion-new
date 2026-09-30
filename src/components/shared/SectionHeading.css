@@ -19,10 +19,10 @@
 .section-heading__eyebrow {
   margin: 0 0 10px;
 
-  color: #6f4b47;
+  color: var(--color-clay);
 
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.22em;
@@ -79,7 +79,7 @@
   .section-heading__eyebrow {
     margin-bottom: 8px;
 
-    font-size: 7px;
+    font-size: 10px;
   }
 
   .section-heading__title {

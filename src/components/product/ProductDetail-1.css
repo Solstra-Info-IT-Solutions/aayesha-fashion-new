@@ -13,7 +13,7 @@
   --pd-text-secondary: var(--color-text-secondary, #6f625d);
   --pd-text-muted: var(--color-text-muted, #8d817b);
 
-  --pd-accent: var(--color-accent, #6f4b47);
+  --pd-accent: var(--color-clay);
   --pd-accent-dark: var(--color-accent-dark, #3f2d2a);
 
   --pd-border: var(--color-border, #d9cbc5);

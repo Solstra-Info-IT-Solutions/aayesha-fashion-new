@@ -75,7 +75,7 @@
   text-transform: uppercase;
 
   color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 .product-recommendations__eyebrow::before {
@@ -85,7 +85,7 @@
   height: 1px;
 
   background:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 .product-recommendations__title {
@@ -179,7 +179,7 @@
   height: 1px;
 
   background:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   transform-origin: left center;
 
@@ -195,7 +195,7 @@
 
 .product-recommendations__collection-link:hover {
   color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 .product-recommendations__collection-link:hover::after {

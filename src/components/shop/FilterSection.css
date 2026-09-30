@@ -29,17 +29,17 @@
 
 .filter-section__toggle:hover
   .filter-section__title {
-  color: #6f4b47;
+  color: var(--color-clay);
 }
 
 .filter-section__toggle:focus-visible {
-  outline: 2px solid #9b7069;
+  outline: 2px solid var(--color-clay);
   outline-offset: -2px;
 }
 
 .filter-section__title {
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
@@ -59,7 +59,7 @@
 
 .filter-section--open
   .filter-section__icon {
-  color: #6f4b47;
+  color: var(--color-clay);
   transform: rotate(180deg);
 }
 

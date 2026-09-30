@@ -104,11 +104,11 @@
 
 .product-purchase__quantity-button:hover:not(:disabled) {
   background: var(--color-accent-soft, #f2e9e5);
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .product-purchase__quantity-button:active:not(:disabled) {
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
   color: #ffffff;
 }
 
@@ -149,9 +149,9 @@
 
   padding: 0 22px;
 
-  border: 1px solid var(--color-accent, #6f4b47);
+  border: 1px solid var(--color-clay);
 
-  background: var(--color-accent, #6f4b47);
+  background: var(--color-clay);
   color: #ffffff;
 
   font-family: var(--font-body, Arial, sans-serif);
@@ -368,7 +368,7 @@
 .product-purchase__quantity-button:focus-visible,
 .product-purchase__add-button:focus-visible,
 .product-purchase__buy-button:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: 3px;
 }
 

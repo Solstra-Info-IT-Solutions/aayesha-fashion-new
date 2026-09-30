@@ -51,7 +51,7 @@
     var(--color-border-dark, #b9a7a0);
 
   color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   background:
     var(--color-surface, #fbf8f5);
@@ -77,10 +77,10 @@
 .product-reviews:hover
   .product-reviews__icon {
   border-color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   background:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   color: #ffffff;
 
@@ -145,7 +145,7 @@
 
 .product-reviews:focus-within {
   border-color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 /* =========================================================

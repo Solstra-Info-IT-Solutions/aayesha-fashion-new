@@ -17,7 +17,7 @@
 }
 
 .cookie-settings-button:hover {
-  color: var(--color-accent, #6f4b47);
+  color: var(--color-clay);
 }
 
 .cookie-settings-button:active {
@@ -25,7 +25,7 @@
 }
 
 .cookie-settings-button:focus-visible {
-  outline: 2px solid var(--color-accent, #6f4b47);
+  outline: 2px solid var(--color-clay);
   outline-offset: 5px;
 }
 

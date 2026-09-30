@@ -69,7 +69,7 @@
 
 .product-accordion__trigger:hover {
   color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   background:
     rgba(111, 75, 71, 0.025);
@@ -171,10 +171,10 @@
 .product-accordion__trigger:hover
   .product-accordion__indicator {
   border-color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   background:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   transform: scale(1.04);
 }
@@ -188,7 +188,7 @@
   transform: rotate(180deg);
 
   color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 /* =========================================================
@@ -198,10 +198,10 @@
 .product-accordion--open
   .product-accordion__indicator {
   border-color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   background:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 }
 
 .product-accordion--open
@@ -215,7 +215,7 @@
 
 .product-accordion__trigger:focus-visible {
   outline: 2px solid
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   outline-offset: 4px;
 }
@@ -321,7 +321,7 @@
 
 .product-accordion__content a {
   color:
-    var(--color-accent, #6f4b47);
+    var(--color-clay);
 
   text-decoration: underline;
 
