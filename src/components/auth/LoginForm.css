@@ -8,7 +8,7 @@
   max-width: 500px;
   margin: 0 auto;
 
-  color: #2f2927;
+  color: var(--color-text);
 
   font-family:
     var(--font-body),
@@ -43,11 +43,11 @@
 
   flex-shrink: 0;
 
-  background: #9a5b52;
+  background: var(--color-clay);
 }
 
 .login-form__intro-text {
-  color: #8a5149;
+  color: var(--color-clay);
 
   font-size: 11px;
   font-weight: 700;
@@ -73,12 +73,12 @@
   margin: 0 0 20px;
   padding: 12px 14px;
 
-  border: 1px solid #cbd9c8;
-  border-radius: 7px;
+  border: 1px solid rgba(101, 116, 95, 0.35);
+  border-radius: 2px;
 
-  background: #f5f8f3;
+  background: rgba(101, 116, 95, 0.10);
 
-  color: #4b6146;
+  color: var(--color-success);
 }
 
 .login-form__success-mark {
@@ -91,7 +91,7 @@
 
   flex: 0 0 20px;
 
-  border: 1px solid #78906f;
+  border: 1px solid rgba(101, 116, 95, 0.55);
   border-radius: 50%;
 
   font-size: 11px;
@@ -101,7 +101,7 @@
 .login-form__success p {
   margin: 1px 0 0;
 
-  color: #4b6146;
+  color: var(--color-success);
 
   font-size: 12px;
   line-height: 1.5;
@@ -152,9 +152,9 @@
   margin: 0;
   padding: 0;
 
-  color: #302825;
+  color: var(--color-text);
 
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 650;
 
   line-height: 18px;
@@ -184,7 +184,7 @@
   margin: 0;
   padding: 0;
 
-  color: #885148;
+  color: var(--color-clay);
 
   font-size: 12px;
   font-weight: 600;
@@ -197,7 +197,7 @@
 }
 
 .login-form__forgot-link:hover {
-  color: #613d38;
+  color: var(--color-clay-deep);
 }
 
 
@@ -228,7 +228,7 @@
   width: 17px;
   height: 17px;
 
-  color: #776a65;
+  color: var(--color-text-secondary);
 
   pointer-events: none;
 
@@ -249,14 +249,14 @@
   margin: 0;
   padding: 0 15px;
 
-  border: 1px solid #cfc5c1 !important;
-  border-radius: 8px;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 2px;
 
   outline: none !important;
 
-  background: #ffffff !important;
+  background: var(--color-surface) !important;
 
-  color: #302825 !important;
+  color: var(--color-text) !important;
 
   font-family:
     var(--font-body),
@@ -273,7 +273,9 @@
 
   box-shadow: none !important;
 
-  transition: none;
+  transition:
+    border-color 160ms var(--ease-standard),
+    box-shadow 160ms var(--ease-standard);
 }
 
 
@@ -299,53 +301,16 @@
 ========================================================= */
 
 .login-form__input:hover {
-  border-color: #cfc5c1 !important;
+  border-color: var(--color-border) !important;
   box-shadow: none !important;
 }
-
-
 /* =========================================================
    INPUT FOCUS
 ========================================================= */
 
-/*
-   IMPORTANT:
-   Do NOT change the border when the user clicks
-   inside the field.
-
-   No colored focus border.
-   No glow.
-   No outline.
-*/
-
-.login-form__input:focus,
-.login-form__input:focus-visible,
-.login-form__input:active {
-  border: 1px solid #cfc5c1 !important;
-
-  outline: none !important;
-
-  box-shadow: none !important;
-
-  background: #ffffff !important;
-}
 
 
-/*
-   Also prevent the wrapper from producing
-   any focus styling.
-*/
 
-.login-form__input-wrap:focus-within {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.login-form__input-wrap:focus-within
-  .login-form__input {
-  border-color: #cfc5c1 !important;
-  box-shadow: none !important;
-}
 
 
 /* =========================================================
@@ -353,7 +318,7 @@
 ========================================================= */
 
 .login-form__input::placeholder {
-  color: #817773 !important;
+  color: var(--color-text-secondary) !important;
 
   opacity: 1;
 
@@ -369,14 +334,14 @@
 .login-form__input:-webkit-autofill:hover,
 .login-form__input:-webkit-autofill:focus,
 .login-form__input:-webkit-autofill:active {
-  -webkit-text-fill-color: #302825 !important;
+  -webkit-text-fill-color: var(--color-text) !important;
 
-  caret-color: #302825;
+  caret-color: var(--color-text);
 
   box-shadow:
-    0 0 0 1000px #ffffff inset !important;
+    0 0 0 1000px var(--color-surface) inset !important;
 
-  border: 1px solid #cfc5c1 !important;
+  border: 1px solid var(--color-border) !important;
 
   transition: background-color 9999s ease-out;
 }
@@ -403,13 +368,13 @@
   padding: 0;
 
   border: 0;
-  border-radius: 6px;
+  border-radius: 2px;
 
   outline: none;
 
   background: transparent;
 
-  color: #766965;
+  color: var(--color-text-secondary);
 
   cursor: pointer;
 
@@ -417,15 +382,9 @@
 }
 
 .login-form__password-toggle:hover {
-  background: #f3efed;
+  background: var(--color-surface-soft);
 
-  color: #5c4843;
-}
-
-.login-form__password-toggle:focus,
-.login-form__password-toggle:focus-visible {
-  outline: none;
-  box-shadow: none;
+  color: var(--color-clay);
 }
 
 .login-form__password-icon {
@@ -462,13 +421,13 @@
 
   flex: 0 0 16px;
 
-  accent-color: #92574f;
+  accent-color: var(--color-clay);
 
   cursor: pointer;
 }
 
 .login-form__remember-text {
-  color: #5d5551;
+  color: var(--color-text-secondary);
 
   font-size: 12px;
   font-weight: 500;
@@ -490,12 +449,12 @@
   margin: 14px 0 0;
   padding: 12px 14px;
 
-  border: 1px solid #e1c2bd;
-  border-radius: 7px;
+  border: 1px solid rgba(149, 92, 86, 0.35);
+  border-radius: 2px;
 
-  background: #fff7f6;
+  background: rgba(149, 92, 86, 0.07);
 
-  color: #7f4841;
+  color: var(--color-error);
 }
 
 .login-form__error-mark {
@@ -508,7 +467,7 @@
 
   flex: 0 0 20px;
 
-  border: 1px solid #a7655c;
+  border: 1px solid rgba(149, 92, 86, 0.6);
   border-radius: 50%;
 
   font-size: 11px;
@@ -518,7 +477,7 @@
 .login-form__error p {
   margin: 1px 0 0;
 
-  color: #7f4841;
+  color: var(--color-error);
 
   font-size: 12px;
   font-weight: 500;
@@ -542,12 +501,12 @@
   margin: 21px 0 0;
   padding: 0 6px 0 18px;
 
-  border: 1px solid #92584f;
-  border-radius: 8px;
+  border: 1px solid var(--color-clay);
+  border-radius: 2px;
 
   outline: none;
 
-  background: #92584f;
+  background: var(--color-clay);
 
   color: #ffffff;
 
@@ -565,20 +524,12 @@
 
   text-transform: uppercase;
 
-  box-shadow:
-    0 5px 15px rgba(83, 48, 43, 0.14);
+  box-shadow: none;
 }
 
 .login-form__submit:hover:not(:disabled) {
-  background: #7c4942;
-  border-color: #7c4942;
-}
-
-.login-form__submit:focus,
-.login-form__submit:focus-visible {
-  outline: none;
-  box-shadow:
-    0 5px 15px rgba(83, 48, 43, 0.14);
+  background: var(--color-clay-deep);
+  border-color: var(--color-clay-deep);
 }
 
 .login-form__submit:disabled {
@@ -615,7 +566,7 @@
 
   flex: 0 0 38px;
 
-  border-radius: 6px;
+  border-radius: 2px;
 
   background: rgba(255, 255, 255, 0.15);
 }
@@ -644,13 +595,13 @@
   margin: 18px 0 0;
   padding: 15px 16px;
 
-  border: 1px solid #ddd4d0;
-  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
 
-  background: #fbf9f8;
+  background: var(--color-surface);
 
   box-shadow:
-    0 2px 7px rgba(48, 36, 32, 0.03);
+    0 2px 7px rgba(63, 45, 42, 0.08);
 }
 
 
@@ -665,7 +616,7 @@
 .login-form__register-label {
   margin: 0 0 3px;
 
-  color: #706662;
+  color: var(--color-text-secondary);
 
   font-size: 11px;
   font-weight: 500;
@@ -676,7 +627,7 @@
 .login-form__register-title {
   margin: 0;
 
-  color: #352b28;
+  color: var(--color-text);
 
   font-family:
     var(--font-display),
@@ -701,20 +652,20 @@
 
   gap: 7px;
 
-  min-height: 40px;
+  min-height: 44px;
 
   padding: 0 14px;
 
   flex: 0 0 auto;
 
-  border: 1px solid #bca9a3;
-  border-radius: 7px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
 
   outline: none;
 
-  background: #ffffff;
+  background: var(--color-surface);
 
-  color: #784a43;
+  color: var(--color-clay);
 
   font-size: 11px;
   font-weight: 700;
@@ -726,15 +677,9 @@
 }
 
 .login-form__register-link:hover {
-  border-color: #8e554d;
-  background: #8e554d;
+  border-color: var(--color-clay);
+  background: var(--color-clay);
   color: #ffffff;
-}
-
-.login-form__register-link:focus,
-.login-form__register-link:focus-visible {
-  outline: none;
-  box-shadow: none;
 }
 
 .login-form__register-icon {
@@ -811,7 +756,7 @@
 
   .login-form__register-link {
     width: 100%;
-    min-height: 42px;
+    min-height: 44px;
   }
 }
 
@@ -845,20 +790,10 @@
     font-size: 17px;
   }
 }
-
-
 /* =========================================================
    ACCESSIBILITY / FOCUS RESET
 ========================================================= */
 
-.login-form input:focus,
-.login-form input:focus-visible,
-.login-form button:focus,
-.login-form button:focus-visible,
-.login-form a:focus,
-.login-form a:focus-visible {
-  outline: none !important;
-}
 
 
 /* =========================================================
@@ -867,4 +802,46 @@
 
 .login-form {
   overflow: visible;
+}
+
+/* =========================================================
+   INTERACTIVE STATES — IVORY / CLAY
+   Soft clay border + ring on fields; clay outline on
+   buttons and links. Replaces the old "no focus styling"
+   reset so keyboard users can see where they are.
+========================================================= */
+
+.login-form__input:hover {
+  border-color: var(--color-border-dark) !important;
+}
+
+.login-form__input:focus,
+.login-form__input:focus-visible,
+.login-form__input-wrap:focus-within .login-form__input {
+  border-color: var(--color-clay) !important;
+  box-shadow: var(--ring-focus) !important;
+  outline: none !important;
+}
+
+.login-form__submit:focus-visible, .login-form__register-link:focus-visible, .login-form__forgot-link:focus-visible, .login-form__password-toggle:focus-visible, .login-form__checkbox:focus-visible {
+  outline: 2px solid var(--color-clay);
+  outline-offset: 3px;
+}
+
+.login-form__submit:active:not(:disabled) {
+  background: var(--button-primary-bg-active);
+  border-color: var(--button-primary-bg-active);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-form * {
+    transition: none !important;
+  }
+}
+
+
+/* Duplicates the page title ("Welcome back") — hidden for a
+   cleaner heading hierarchy. Markup is unchanged. */
+.login-form__intro {
+  display: none;
 }

@@ -7,20 +7,21 @@
 .aayesha-header {
   --header-height: 72px;
 
-  --mf-black: #141615;
-  --mf-white: #FFFFFF;
-  --mf-surface: #FFF8F8;
-  --mf-surface-2: #FFF0F2;
-  --mf-border: #E8D6D7;
-  --mf-border-dark: #DCC7C9;
+  --mf-black: var(--color-text);
+  --mf-white: var(--color-canvas);
+  --mf-on-accent: #ffffff;
+  --mf-surface: var(--color-surface);
+  --mf-surface-2: var(--color-surface-soft);
+  --mf-border: var(--color-border);
+  --mf-border-dark: var(--color-border-dark);
 
-  --mf-text: #141615;
-  --mf-text-secondary: #4D4646;
-  --mf-text-muted: #817676;
+  --mf-text: var(--color-text);
+  --mf-text-secondary: var(--color-text-secondary);
+  --mf-text-muted: var(--color-text-muted);
 
-  --mf-accent: #E4B6B8;
-  --mf-accent-dark: #C98F93;
-  --mf-accent-soft: #FBE8E9;
+  --mf-accent: var(--color-secondary);
+  --mf-accent-dark: var(--color-clay-deep);
+  --mf-accent-soft: var(--color-accent-soft);
 
   position: fixed;
   top: 0;
@@ -38,11 +39,10 @@
 
   color: var(--mf-text);
 
-  box-shadow: 0 1px 0 rgba(20, 22, 21, 0.02);
+  box-shadow: 0 1px 0 rgba(63, 45, 42, 0.02);
 
   overflow: visible;
 }
-
 /* =========================================================
    TRANSPARENT STATE
 ========================================================= */
@@ -52,7 +52,6 @@
   border-bottom-color: transparent;
   box-shadow: none;
 }
-
 .aayesha-header--transparent
   .aayesha-header__logo-main,
 .aayesha-header--transparent
@@ -63,9 +62,8 @@
   .header-action-button,
 .aayesha-header--transparent
   .header-action-link {
-  color: var(--mf-white);
+  color: var(--mf-on-accent);
 }
-
 .aayesha-header--transparent
   .aayesha-header__nav-line,
 .aayesha-header--transparent
@@ -74,23 +72,19 @@
   .header-action-underline {
   background: var(--mf-white);
 }
-
 /* =========================================================
    SCROLLED STATE
 ========================================================= */
 
 .aayesha-header--scrolled {
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(247, 243, 237, 0.96);
 
   border-bottom-color: var(--mf-border);
 
   box-shadow:
-    0 4px 18px rgba(20, 22, 21, 0.06);
+    0 4px 18px rgba(63, 45, 42, 0.06);
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
-
 /* =========================================================
    HEADER INNER
 ========================================================= */
@@ -119,7 +113,6 @@
 
   overflow: visible;
 }
-
 /* =========================================================
    LOGO
 ========================================================= */
@@ -145,11 +138,9 @@
 
   outline: none;
 }
-
 .aayesha-header__logo:hover {
   opacity: 0.72;
 }
-
 .aayesha-header__logo-main {
   display: block;
 
@@ -170,7 +161,6 @@
 
   white-space: nowrap;
 }
-
 .aayesha-header__logo-sub {
   display: block;
 
@@ -181,7 +171,7 @@
     Arial,
     sans-serif;
 
-  font-size: 6px;
+  font-size: 8px;
 
   font-weight: 700;
 
@@ -195,7 +185,6 @@
 
   white-space: nowrap;
 }
-
 /* =========================================================
    DESKTOP NAVIGATION
 ========================================================= */
@@ -212,7 +201,6 @@
 
   white-space: nowrap;
 }
-
 .aayesha-header__nav-link {
   position: relative;
 
@@ -234,25 +222,25 @@
     Arial,
     sans-serif;
 
-  font-size: 13px;
+  font-size: 12px;
 
-  font-weight: 600;
+  font-weight: 500;
 
   line-height: 1.2;
 
-  letter-spacing: 0.015em;
+  letter-spacing: 0.1em;
 
-  border-radius: 7px;
+  text-transform: uppercase;
+
+  border-radius: 2px;
 
   outline: none;
 }
-
 .aayesha-header__nav-link:hover {
   color: var(--mf-accent-dark);
 
-  background: var(--mf-accent-soft);
+  background: transparent;
 }
-
 /* =========================================================
    NAV ACTIVE / HOVER INDICATOR
 ========================================================= */
@@ -273,12 +261,10 @@
 
   transform-origin: center;
 }
-
 .aayesha-header__nav-link:hover
   .aayesha-header__nav-line {
   transform: scaleX(1);
 }
-
 /* =========================================================
    ACTIONS WRAPPER
 ========================================================= */
@@ -300,7 +286,6 @@
 
   overflow: visible;
 }
-
 /* =========================================================
    HEADER ACTIONS INNER
 ========================================================= */
@@ -327,7 +312,6 @@
 
   overflow: visible;
 }
-
 /* =========================================================
    ACTION BUTTONS
 ========================================================= */
@@ -341,7 +325,7 @@
   flex: 0 0 auto;
 
   width: 40px;
-  height: 40px;
+  height: 44px;
 
   display: inline-flex;
 
@@ -354,7 +338,7 @@
 
   border: 1px solid transparent;
 
-  border-radius: 7px;
+  border-radius: 2px;
 
   text-decoration: none;
 
@@ -362,7 +346,6 @@
 
   outline: none;
 }
-
 .aayesha-header__actions
   .header-action-button:hover,
 .aayesha-header__actions
@@ -371,9 +354,8 @@
 
   background: var(--mf-accent-soft);
 
-  border-color: #F4D6D8;
+  border-color: var(--color-border);
 }
-
 /* =========================================================
    ACTION ICON
 ========================================================= */
@@ -390,7 +372,6 @@
 
   color: inherit;
 }
-
 .aayesha-header__actions
   .header-action-icon {
   display: block;
@@ -402,7 +383,6 @@
 
   color: inherit;
 }
-
 /* =========================================================
    ACTION UNDERLINE
 ========================================================= */
@@ -413,7 +393,6 @@
   .header-action-underline {
   display: none;
 }
-
 /* =========================================================
    ACCOUNT STATUS
 ========================================================= */
@@ -429,13 +408,12 @@
 
   border-radius: 50%;
 
-  background: #C98F93;
+  background: var(--color-clay);
 
   border: 2px solid var(--mf-white);
 
   box-sizing: content-box;
 }
-
 /* =========================================================
    WISHLIST / CART COUNTS
 ========================================================= */
@@ -449,8 +427,8 @@
   top: 3px;
   right: 2px;
 
-  min-width: 17px;
-  height: 17px;
+  min-width: 18px;
+  height: 18px;
 
   padding: 0 4px;
 
@@ -459,18 +437,18 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 999px;
+  border-radius: 2px;
 
   background: var(--mf-accent);
 
-  color: var(--mf-white);
+  color: var(--mf-on-accent);
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 7px;
+  font-size: 10px;
 
   font-weight: 700;
 
@@ -482,7 +460,6 @@
 
   z-index: 2;
 }
-
 /* =========================================================
    SEARCH BACKDROP
 ========================================================= */
@@ -496,14 +473,13 @@
 
   border: 0;
 
-  background: rgba(20, 22, 21, 0.35);
+  background: rgba(63, 45, 42, 0.35);
 
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 
   cursor: default;
 }
-
 /* =========================================================
    SEARCH PANEL
 ========================================================= */
@@ -523,9 +499,8 @@
   border-bottom: 1px solid var(--mf-border);
 
   box-shadow:
-    0 12px 32px rgba(20, 22, 21, 0.10);
+    0 12px 32px rgba(63, 45, 42, 0.10);
 }
-
 /* =========================================================
    SEARCH ACCENT
 ========================================================= */
@@ -539,7 +514,6 @@
 
   background: var(--mf-accent);
 }
-
 /* =========================================================
    SEARCH CONTAINER
 ========================================================= */
@@ -554,12 +528,10 @@
   padding:
     0 28px;
 }
-
 .header-search-content {
   padding:
     22px 0 20px;
 }
-
 .header-search-row {
   display: flex;
 
@@ -567,7 +539,6 @@
 
   gap: 14px;
 }
-
 /* =========================================================
    SEARCH FORM
 ========================================================= */
@@ -577,7 +548,6 @@
 
   flex: 1;
 }
-
 .header-search-input-row {
   display: flex;
 
@@ -594,14 +564,12 @@
 
   border: 1px solid var(--mf-border);
 
-  border-radius: 8px;
+  border-radius: 2px;
 }
-
 .header-search-input-row:focus-within {
   border-color: var(--mf-accent);
   background: var(--mf-white);
 }
-
 /* =========================================================
    SEARCH ICON
 ========================================================= */
@@ -616,7 +584,6 @@
 
   color: var(--mf-text-secondary);
 }
-
 /* =========================================================
    SEARCH INPUT
 ========================================================= */
@@ -649,13 +616,11 @@
 
   line-height: 1.4;
 }
-
 .header-search-input::placeholder {
   color: var(--mf-text-muted);
 
   opacity: 1;
 }
-
 /* =========================================================
    SEARCH SUBMIT
 ========================================================= */
@@ -675,20 +640,20 @@
   padding:
     0 13px;
 
-  border: 1px solid var(--mf-black);
+  border: 1px solid var(--mf-accent);
 
-  border-radius: 6px;
+  border-radius: 2px;
 
-  background: var(--mf-black);
+  background: var(--mf-accent);
 
-  color: var(--mf-white);
+  color: var(--mf-on-accent);
 
   font-family:
     var(--font-body),
     Arial,
     sans-serif;
 
-  font-size: 9px;
+  font-size: 10px;
 
   font-weight: 700;
 
@@ -698,13 +663,11 @@
 
   cursor: pointer;
 }
-
 .header-search-submit:hover {
   background: var(--mf-accent-dark);
 
   border-color: var(--mf-accent-dark);
 }
-
 /* =========================================================
    SEARCH LINE
 ========================================================= */
@@ -712,7 +675,6 @@
 .header-search-line {
   display: none;
 }
-
 /* =========================================================
    SEARCH CLOSE
 ========================================================= */
@@ -730,7 +692,7 @@
 
   border: 1px solid var(--mf-border);
 
-  border-radius: 7px;
+  border-radius: 2px;
 
   background: var(--mf-white);
 
@@ -740,15 +702,13 @@
 
   outline: none;
 }
-
 .header-search-close:hover {
-  background: var(--mf-black);
+  background: var(--mf-accent);
 
-  border-color: var(--mf-black);
+  border-color: var(--mf-accent);
 
-  color: var(--mf-white);
+  color: var(--mf-on-accent);
 }
-
 /* =========================================================
    SEARCH META
 ========================================================= */
@@ -768,7 +728,6 @@
 
   font-size: 11px;
 }
-
 /* =========================================================
    MOBILE MENU HOST
 ========================================================= */
@@ -784,7 +743,7 @@
 ========================================================= */
 
 @media (max-width: 1023px) {
-  .aayesha-header {
+.aayesha-header {
     --header-height: 68px;
 
     background: var(--mf-white);
@@ -792,21 +751,19 @@
     border-bottom-color: var(--mf-border);
 
     box-shadow:
-      0 3px 14px rgba(20, 22, 21, 0.055);
+      0 3px 14px rgba(63, 45, 42, 0.055);
 
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
-
-  .aayesha-header--transparent {
+.aayesha-header--transparent {
     background: transparent;
 
     border-bottom-color: transparent;
 
     box-shadow: none;
   }
-
-  .aayesha-header__inner {
+.aayesha-header__inner {
     display: grid;
 
     grid-template-columns:
@@ -821,8 +778,7 @@
 
     column-gap: 8px;
   }
-
-  /* -------------------------------------------------------
+/* -------------------------------------------------------
      MOBILE MENU
   ------------------------------------------------------- */
 
@@ -833,8 +789,7 @@
 
     justify-self: start;
   }
-
-  /* -------------------------------------------------------
+/* -------------------------------------------------------
      MOBILE LOGO
   ------------------------------------------------------- */
 
@@ -845,30 +800,26 @@
 
     z-index: 2;
   }
-
-  .aayesha-header__logo-main {
+.aayesha-header__logo-main {
     font-size: 19px;
 
     letter-spacing: 0.07em;
   }
-
-  .aayesha-header__logo-sub {
+.aayesha-header__logo-sub {
     margin-top: 3px;
 
-    font-size: 5px;
+    font-size: 7px;
 
     letter-spacing: 0.31em;
   }
-
-  /* -------------------------------------------------------
+/* -------------------------------------------------------
      HIDE DESKTOP NAV
   ------------------------------------------------------- */
 
   .aayesha-header__nav {
     display: none;
   }
-
-  /* -------------------------------------------------------
+/* -------------------------------------------------------
      MOBILE ACTIONS
   ------------------------------------------------------- */
 
@@ -885,63 +836,54 @@
 
     min-width: 0;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-actions {
     gap: 2px;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-action-button,
   .aayesha-header__actions
     .header-action-link {
     width: 38px;
-    height: 40px;
+    height: 44px;
 
-    border-radius: 7px;
+    border-radius: 2px;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-action-button:hover,
   .aayesha-header__actions
     .header-action-link:hover {
     background: var(--mf-accent-soft);
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-action-button svg,
   .aayesha-header__actions
     .header-action-link svg {
     width: 17px;
     height: 17px;
   }
-
-  /* -------------------------------------------------------
+/* -------------------------------------------------------
      SEARCH
   ------------------------------------------------------- */
 
   .header-search-panel {
     top: var(--header-height);
   }
-
-  .header-search-container {
+.header-search-container {
     padding:
       0 16px;
   }
-
-  .header-search-content {
+.header-search-content {
     padding:
       16px 0;
   }
-
-  .header-search-input-row {
+.header-search-input-row {
     min-height: 44px;
 
     padding:
       0 12px;
   }
-
-  .header-search-input {
+.header-search-input {
     height: 42px;
 
     font-size: 14px;
@@ -953,40 +895,35 @@
 ========================================================= */
 
 @media (max-width: 767px) {
-  .aayesha-header {
+.aayesha-header {
     --header-height: 64px;
   }
-
-  .aayesha-header__inner {
+.aayesha-header__inner {
     padding:
       0 12px;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-action-button,
   .aayesha-header__actions
     .header-action-link {
     width: 36px;
-    height: 38px;
+    height: 44px;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-action-button svg,
   .aayesha-header__actions
     .header-action-link svg {
     width: 17px;
     height: 17px;
   }
-
-  .header-account-status {
+.header-account-status {
     top: 6px;
     right: 5px;
 
     width: 5px;
     height: 5px;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .wishlist-count,
   .aayesha-header__actions
     .cart-count {
@@ -998,12 +935,11 @@
 
     padding: 0 3px;
 
-    font-size: 6px;
+    font-size: 10px;
 
     border-width: 1.5px;
   }
-
-  /* -------------------------------------------------------
+/* -------------------------------------------------------
      SEARCH MOBILE
   ------------------------------------------------------- */
 
@@ -1011,36 +947,31 @@
     padding:
       0 12px;
   }
-
-  .header-search-row {
+.header-search-row {
     gap: 8px;
   }
-
-  .header-search-input-row {
+.header-search-input-row {
     gap: 9px;
 
     min-height: 44px;
 
-    border-radius: 7px;
+    border-radius: 2px;
   }
-
-  .header-search-submit {
+.header-search-submit {
     min-height: 36px;
 
     padding:
       0 10px;
 
-    font-size: 8px;
+    font-size: 10px;
   }
-
-  .header-search-close {
+.header-search-close {
     width: 38px;
     height: 38px;
 
-    border-radius: 7px;
+    border-radius: 2px;
   }
-
-  .header-search-meta {
+.header-search-meta {
     display: none;
   }
 }
@@ -1050,51 +981,44 @@
 ========================================================= */
 
 @media (max-width: 639px) {
-  .aayesha-header {
+.aayesha-header {
     --header-height: 62px;
   }
-
-  .aayesha-header__inner {
+.aayesha-header__inner {
     padding:
       0 9px;
 
     column-gap: 4px;
   }
-
-  .aayesha-header__logo-main {
+.aayesha-header__logo-main {
     font-size: 18px;
 
     letter-spacing: 0.065em;
   }
-
-  .aayesha-header__logo-sub {
-    font-size: 4.5px;
+.aayesha-header__logo-sub {
+    font-size: 7px;
 
     letter-spacing: 0.30em;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-action-button,
   .aayesha-header__actions
     .header-action-link {
     width: 33px;
-    height: 37px;
+    height: 44px;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-action-button svg,
   .aayesha-header__actions
     .header-action-link svg {
     width: 16px;
     height: 16px;
   }
-
-  .header-search-content {
+.header-search-content {
     padding:
       13px 0;
   }
-
-  .header-search-submit {
+.header-search-submit {
     padding:
       0 9px;
   }
@@ -1105,61 +1029,51 @@
 ========================================================= */
 
 @media (max-width: 380px) {
-  .aayesha-header {
+.aayesha-header {
     --header-height: 60px;
   }
-
-  .aayesha-header__inner {
+.aayesha-header__inner {
     padding:
       0 6px;
   }
-
-  .aayesha-header__logo-main {
+.aayesha-header__logo-main {
     font-size: 17px;
   }
-
-  .aayesha-header__logo-sub {
-    font-size: 4px;
+.aayesha-header__logo-sub {
+    font-size: 7px;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-action-button,
   .aayesha-header__actions
     .header-action-link {
     width: 31px;
-    height: 36px;
+    height: 44px;
   }
-
-  .aayesha-header__actions
+.aayesha-header__actions
     .header-action-button svg,
   .aayesha-header__actions
     .header-action-link svg {
     width: 15px;
     height: 15px;
   }
-
-  .header-search-row {
+.header-search-row {
     gap: 6px;
   }
-
-  .header-search-input-row {
+.header-search-input-row {
     padding:
       0 9px;
   }
-
-  .header-search-submit {
+.header-search-submit {
     padding:
       0 7px;
 
-    font-size: 7px;
+    font-size: 10px;
   }
-
-  .header-search-close {
+.header-search-close {
     width: 35px;
     height: 35px;
   }
 }
-
 /* =========================================================
    FOCUS STATES
 ========================================================= */
@@ -1183,12 +1097,11 @@
 ========================================================= */
 
 @media (max-width: 1023px) {
-  .aayesha-header__inner,
+.aayesha-header__inner,
   .header-search-container {
     max-width: 100%;
   }
 }
-
 /* =========================================================
    NO HORIZONTAL OVERFLOW
 ========================================================= */
@@ -1204,7 +1117,7 @@
 ========================================================= */
 
 @media (hover: none) {
-  .aayesha-header__nav-link:hover,
+.aayesha-header__nav-link:hover,
   .aayesha-header__actions
     .header-action-button:hover,
   .aayesha-header__actions
@@ -1212,5 +1125,34 @@
   .header-search-submit:hover,
   .header-search-close:hover {
     background: initial;
+  }
+}
+/* The search field is wrapped by a bordered row that shows the
+   focus state, so the bare input must not draw its own. */
+.header-search-input:focus,
+.header-search-input:focus-visible {
+  border: 0;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Very narrow phones: the four action icons are wider than a
+   symmetric side column, so let the logo take the space that
+   is left instead of colliding with the search icon. */
+@media (max-width: 365px) {
+  .aayesha-header__inner {
+    grid-template-columns:
+      auto
+      minmax(0, 1fr)
+      auto;
+  }
+
+  .aayesha-header__logo-main {
+    font-size: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .aayesha-header__logo-sub {
+    letter-spacing: 0.24em;
   }
 }

@@ -8,8 +8,8 @@
   min-height: 100svh;
   width: 100%;
 
-  background: #f7f4f2;
-  color: #2d2725;
+  background: var(--color-canvas);
+  color: var(--color-text);
 
   overflow-x: hidden;
 }
@@ -39,18 +39,7 @@
 
   overflow: hidden;
 
-  background:
-    radial-gradient(
-      circle at 20% 15%,
-      rgba(255, 255, 255, 0.08),
-      transparent 32%
-    ),
-    linear-gradient(
-      145deg,
-      #362b29 0%,
-      #4b3834 52%,
-      #63443e 100%
-    );
+  background: var(--color-surface-dark);
 
   color: #ffffff;
 }
@@ -102,23 +91,7 @@
 
 
 .auth-shell__brand-pattern {
-  position: absolute;
-
-  inset: 0;
-
-  opacity: 0.18;
-
-  pointer-events: none;
-
-  background-image:
-    linear-gradient(
-      135deg,
-      transparent 48%,
-      rgba(255, 255, 255, 0.05) 49%,
-      transparent 50%
-    );
-
-  background-size: 34px 34px;
+  display: none;
 }
 
 
@@ -190,7 +163,7 @@
 
   border: 1px solid rgba(255, 255, 255, 0.16);
 
-  border-radius: 999px;
+  border-radius: 2px;
 
   background: rgba(255, 255, 255, 0.06);
 
@@ -203,7 +176,7 @@
       sans-serif
     );
 
-  font-size: 9px;
+  font-size: 10px;
 
   font-weight: 600;
 
@@ -246,11 +219,11 @@
   width: 30px;
   height: 1px;
 
-  background: #d6aaa1;
+  background: var(--color-accent);
 }
 
 .auth-shell__eyebrow-text {
-  color: #dfbbb4;
+  color: var(--color-accent-light);
 
   font-family:
     var(
@@ -283,12 +256,7 @@
   color: #ffffff;
 
   font-family:
-    var(
-      --font-serif,
-      "Cormorant Garamond",
-      Georgia,
-      serif
-    );
+    var(--font-display);
 
   font-size: clamp(
     48px,
@@ -373,7 +341,7 @@
 
   border-radius: 50%;
 
-  background: #d6aaa1;
+  background: var(--color-accent);
 }
 
 
@@ -397,7 +365,7 @@
       sans-serif
     );
 
-  font-size: 9px;
+  font-size: 10px;
 
   line-height: 1.4;
 
@@ -429,7 +397,7 @@
 
   min-width: 0;
 
-  background: #ffffff;
+  background: var(--color-canvas);
 }
 
 
@@ -461,7 +429,7 @@
 
   gap: 9px;
 
-  color: #665a55;
+  color: var(--color-text-secondary);
 
   font-family:
     var(
@@ -483,11 +451,11 @@
 }
 
 .auth-shell__back-link:hover {
-  color: #9c6259;
+  color: var(--color-clay);
 }
 
 .auth-shell__back-link:focus-visible {
-  outline: 2px solid #a86d63;
+  outline: 2px solid var(--color-clay);
 
   outline-offset: 4px;
 
@@ -507,11 +475,11 @@
   width: 32px;
   height: 32px;
 
-  border: 1px solid #e8e2df;
+  border: 1px solid var(--color-border-light);
 
-  border-radius: 50%;
+  border-radius: 2px;
 
-  background: #faf8f7;
+  background: var(--color-surface);
 
   transition:
     background-color 160ms ease,
@@ -521,9 +489,9 @@
 
 .auth-shell__back-link:hover
   .auth-shell__back-icon-wrapper {
-  background: #9c6259;
+  background: var(--color-clay);
 
-  border-color: #9c6259;
+  border-color: var(--color-clay);
 
   color: #ffffff;
 }
@@ -589,7 +557,7 @@
 
   margin-bottom: 14px;
 
-  color: #9a5f56;
+  color: var(--color-clay);
 
   font-family:
     var(
@@ -598,7 +566,7 @@
       sans-serif
     );
 
-  font-size: 9px;
+  font-size: 10px;
 
   font-weight: 700;
 
@@ -613,7 +581,7 @@
   width: 24px;
   height: 1px;
 
-  background: #c18b82;
+  background: var(--color-clay);
 }
 
 
@@ -624,15 +592,10 @@
 .auth-shell__title {
   margin: 0;
 
-  color: #2b2523;
+  color: var(--color-text);
 
   font-family:
-    var(
-      --font-serif,
-      "Cormorant Garamond",
-      Georgia,
-      serif
-    );
+    var(--font-display);
 
   font-size: clamp(
     38px,
@@ -657,7 +620,7 @@
 
   margin: 12px 0 0;
 
-  color: #766b67;
+  color: var(--color-text-secondary);
 
   font-family:
     var(
@@ -692,9 +655,9 @@
 
   padding-top: 20px;
 
-  border-top: 1px solid #eee9e6;
+  border-top: 1px solid var(--color-border-light);
 
-  color: #776c68;
+  color: var(--color-text-secondary);
 
   font-family:
     var(
@@ -711,7 +674,7 @@
 }
 
 .auth-shell__footer a {
-  color: #945a52;
+  color: var(--color-clay);
 
   font-weight: 650;
 
@@ -805,7 +768,7 @@
 
 @media (max-width: 600px) {
   .auth-shell {
-    background: #ffffff;
+    background: var(--color-canvas);
   }
 
   .auth-shell__content-panel {
@@ -818,7 +781,7 @@
     padding:
       16px 18px;
 
-    border-bottom: 1px solid #eee9e6;
+    border-bottom: 1px solid var(--color-border-light);
   }
 
   .auth-shell__back-link {
@@ -864,7 +827,7 @@
   .auth-shell__content-eyebrow {
     margin-bottom: 11px;
 
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .auth-shell__content-eyebrow-line {
@@ -940,7 +903,7 @@
   }
 
   .auth-shell__back-link {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .auth-shell__back-icon-wrapper {
@@ -977,7 +940,7 @@
 .auth-shell input:focus-visible,
 .auth-shell select:focus-visible,
 .auth-shell textarea:focus-visible {
-  outline: 2px solid #a86d63;
+  outline: 2px solid var(--color-clay);
 
   outline-offset: 3px;
 }

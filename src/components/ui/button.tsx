@@ -24,13 +24,14 @@ const buttonVariants = cva(
     "font-sans",
     "font-semibold",
     "uppercase",
-    "tracking-[0.16em]",
-    "transition-all",
-    "duration-300",
+    "tracking-[0.14em]",
+    "transition-[background-color,border-color,color,opacity]",
+    "duration-200",
     "focus-visible:outline-none",
     "focus-visible:ring-2",
-    "focus-visible:ring-[#9b7069]",
+    "focus-visible:ring-[#7a5650]",
     "focus-visible:ring-offset-2",
+    "focus-visible:ring-offset-[#f7f3ed]",
     "disabled:pointer-events-none",
   ],
   {
@@ -42,20 +43,20 @@ const buttonVariants = cva(
 
         primary: [
           "border",
-          "border-[#6f4b47]",
-          "bg-[#6f4b47]",
+          "border-[#7a5650]",
+          "bg-[#7a5650]",
           "text-white",
 
-          "hover:border-[#3f2d2a]",
-          "hover:bg-[#3f2d2a]",
+          "hover:border-[#543c38]",
+          "hover:bg-[#543c38]",
           "hover:text-white",
 
-          "active:border-[#7f5953]",
-          "active:bg-[#7f5953]",
+          "active:border-[#654944]",
+          "active:bg-[#654944]",
           "active:text-white",
 
-          "disabled:border-[#6f4b47]",
-          "disabled:bg-[#6f4b47]",
+          "disabled:border-[#7a5650]",
+          "disabled:bg-[#7a5650]",
           "disabled:text-white",
           "disabled:opacity-60",
         ],
@@ -66,16 +67,16 @@ const buttonVariants = cva(
 
         secondary: [
           "border",
-          "border-[#6f4b47]",
+          "border-[#b9aaa1]",
           "bg-transparent",
-          "text-[#6f4b47]",
+          "text-[#543c38]",
 
-          "hover:border-[#6f4b47]",
-          "hover:bg-[#6f4b47]",
+          "hover:border-[#7a5650]",
+          "hover:bg-[#7a5650]",
           "hover:text-white",
 
-          "active:bg-[#7f5953]",
-          "active:border-[#7f5953]",
+          "active:bg-[#654944]",
+          "active:border-[#654944]",
           "active:text-white",
 
           "disabled:opacity-60",
@@ -125,10 +126,10 @@ const buttonVariants = cva(
       },
 
       size: {
-        sm: "min-h-10 px-4 text-[8px]",
-        md: "min-h-12 px-5 text-[9px]",
-        lg: "min-h-14 px-7 text-[9px]",
-        xl: "min-h-16 px-8 text-[10px]",
+        sm: "min-h-10 px-4 text-[10px]",
+        md: "min-h-11 px-5 text-[10px]",
+        lg: "min-h-12 px-7 text-[11px]",
+        xl: "min-h-[50px] px-8 text-[11px]",
       },
 
       rounded: {
