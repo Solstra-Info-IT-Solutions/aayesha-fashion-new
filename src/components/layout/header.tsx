@@ -33,18 +33,6 @@ const navigation = [
     label: "Best Sellers",
     href: "/collections/best-sellers",
   },
-  {
-    label: "Garara",
-    href: "/collections/garara",
-  },
-  {
-    label: "Suits",
-    href: "/collections/suits",
-  },
-  {
-    label: "Festive Edit",
-    href: "/collections/festive",
-  },
 ];
 
 /* =========================================================
