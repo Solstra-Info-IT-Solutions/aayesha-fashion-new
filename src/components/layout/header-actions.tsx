@@ -25,6 +25,7 @@ import { CartCount } from "./cart-count";
 import { AccountPopup } from "./account-popup";
 
 import { useAuthStore } from "@/store/auth-store";
+import { addRecentSearch } from "@/lib/recent-searches/recent-searches";
 
 import "./HeaderActions.css";
 
@@ -190,6 +191,8 @@ export function HeaderActions() {
     }
 
     setSearchOpen(false);
+
+    addRecentSearch(trimmedQuery);
 
     router.push(
       `/search?q=${encodeURIComponent(

@@ -1156,21 +1156,3 @@
     letter-spacing: 0.24em;
   }
 }
-
-/* =========================================================
-   DESKTOP NAVIGATION — narrower desktops
-   Seven links need tighter spacing below 1280px.
-========================================================= */
-
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .aayesha-header__nav {
-    gap: 0;
-  }
-
-  .aayesha-header__nav-link {
-    padding: 0 8px;
-
-    font-size: 11px;
-    letter-spacing: 0.06em;
-  }
-}
