@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArrowUpRight } from "lucide-react";
 
 import { getFeaturedCollectionCampaign } from "@/services/marketing.service";
 
 import { Container } from "@/components/shared/container";
 
 import "./FeaturedCollectionCampaign.css";
+import "./HomeCta.css";
 
 export async function FeaturedCollectionCampaign() {
   const campaign =
@@ -93,18 +93,9 @@ export async function FeaturedCollectionCampaign() {
               <div className="featured-collection__cta">
                 <Link
                   href={data.ctaHref}
-                  className="featured-collection__cta-link"
+                  className="home-cta home-cta--light"
                 >
-                  <span>
-                    {data.ctaLabel}
-                  </span>
-
-                  <span className="featured-collection__cta-icon">
-                    <ArrowUpRight
-                      size={16}
-                      strokeWidth={1.3}
-                    />
-                  </span>
+                  {data.ctaLabel}
                 </Link>
               </div>
             </div>

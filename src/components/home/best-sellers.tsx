@@ -1,10 +1,10 @@
-import { ArrowUpRight } from "lucide-react";
 
 import { getProducts } from "@/services/product.service";
 import { ProductCarousel } from "@/components/product/product-carousel";
 import { Container } from "@/components/shared/container";
 
 import "./BestSellers.css";
+import "./HomeCta.css";
 
 export async function BestSellers() {
   /*
@@ -58,11 +58,6 @@ export async function BestSellers() {
               <span>.</span>
             </h2>
           </div>
-
-          <p className="best-sellers__intro">
-            Discover the pieces our customers return to
-            time and again.
-          </p>
         </header>
 
         {/* =========================================
@@ -113,26 +108,13 @@ export async function BestSellers() {
         ========================================= */}
 
         {bestSellers.length > 0 && (
-          <div className="best-sellers__footer">
-            <div className="best-sellers__footer-line" />
-
+          <div className="home-cta-row">
             <a
               href="/collections/best-sellers"
-              className="best-sellers__all-link"
+              className="home-cta"
             >
-              <span className="best-sellers__all-label">
-                View all best sellers
-              </span>
-
-              <span className="best-sellers__all-icon">
-                <ArrowUpRight
-                  size={15}
-                  strokeWidth={1.3}
-                />
-              </span>
+              View all best sellers
             </a>
-
-            <div className="best-sellers__footer-line" />
           </div>
         )}
 

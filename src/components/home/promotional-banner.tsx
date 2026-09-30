@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArrowUpRight } from "lucide-react";
 
 import { getPromotionalBanner } from "@/services/marketing.service";
 
 import { Container } from "@/components/shared/container";
 
 import "./PromotionalBanner.css";
+import "./HomeCta.css";
 
 export async function PromotionalBanner() {
   const campaign = await getPromotionalBanner();
@@ -52,18 +52,9 @@ export async function PromotionalBanner() {
             <div className="promotional-banner__content">
               <Link
                 href={data.href}
-                className="promotional-banner__button"
+                className="home-cta home-cta--light"
               >
-                <span>
-                  {data.ctaLabel}
-                </span>
-
-                <span className="promotional-banner__button-icon">
-                  <ArrowUpRight
-                    size={15}
-                    strokeWidth={1.3}
-                  />
-                </span>
+                {data.ctaLabel}
               </Link>
             </div>
           </Container>

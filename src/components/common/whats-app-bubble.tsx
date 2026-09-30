@@ -22,9 +22,6 @@ export function WhatsAppBubble() {
       aria-label="Chat with Aayesha Fashion on WhatsApp"
       className="whatsapp-bubble"
     >
-      <span className="whatsapp-bubble__label">
-        Need Help?
-      </span>
 
       <span
         aria-hidden="true"

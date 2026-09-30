@@ -334,157 +334,6 @@
 
 
 /* =========================================================
-   BOXED CTA
-========================================================= */
-
-.brand-story__cta {
-  display: flex;
-
-  justify-content: flex-start;
-
-  margin-top: 36px;
-}
-
-.brand-story__cta-link {
-  display: inline-flex;
-
-  align-items: stretch;
-  justify-content: center;
-
-  min-height: 50px;
-
-  border: 1px solid var(--color-border-dark);
-
-  background: var(--color-surface);
-
-  color: var(--color-text);
-
-  font-family: var(--font-body);
-
-  font-size: 10px;
-
-  font-weight: 600;
-
-  letter-spacing: 0.21em;
-
-  line-height: 1;
-
-  text-decoration: none;
-
-  text-transform: uppercase;
-
-  white-space: nowrap;
-
-  transition:
-    background-color 300ms ease,
-    color 300ms ease,
-    border-color 300ms ease;
-}
-
-
-/* =========================================================
-   CTA LABEL
-========================================================= */
-
-.brand-story__cta-label {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  padding: 0 25px;
-}
-
-
-/* =========================================================
-   CTA ARROW CELL
-========================================================= */
-
-.brand-story__cta-icon {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 50px;
-
-  min-width: 50px;
-
-  border-left: 1px solid var(--color-border-dark);
-
-  color: var(--color-secondary);
-
-  background: transparent;
-
-  transition:
-    background-color 300ms ease,
-    color 300ms ease,
-    border-color 300ms ease,
-    transform 350ms
-      cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-
-/* =========================================================
-   CTA HOVER
-========================================================= */
-
-.brand-story__cta-link:hover {
-  border-color: var(--color-secondary);
-
-  background: var(--color-secondary);
-
-  color: var(--color-surface);
-}
-
-.brand-story__cta-link:hover
-  .brand-story__cta-icon {
-  border-left-color:
-    rgba(250, 247, 244, 0.35);
-
-  color: var(--color-surface);
-
-  background: transparent;
-
-  transform: translate(2px, -2px);
-}
-
-
-/* =========================================================
-   CTA ACTIVE
-========================================================= */
-
-.brand-story__cta-link:active {
-  border-color: var(--color-secondary);
-
-  background: var(--color-secondary);
-
-  color: var(--color-surface);
-}
-
-.brand-story__cta-link:active
-  .brand-story__cta-icon {
-  border-left-color:
-    rgba(250, 247, 244, 0.35);
-
-  color: var(--color-surface);
-
-  transform: translate(1px, -1px);
-}
-
-
-/* =========================================================
-   CTA FOCUS
-========================================================= */
-
-.brand-story__cta-link:focus-visible {
-  outline: 2px solid var(--focus-ring);
-
-  outline-offset: 5px;
-}
-
-
-/* =========================================================
    TABLET
 ========================================================= */
 
@@ -600,33 +449,6 @@
 
     line-height: 1.45;
   }
-
-
-  /* =======================================================
-     MOBILE CTA
-  ======================================================= */
-
-  .brand-story__cta {
-    margin-top: 30px;
-  }
-
-  .brand-story__cta-link {
-    min-height: 46px;
-
-    font-size: 8px;
-
-    letter-spacing: 0.14em;
-  }
-
-  .brand-story__cta-label {
-    padding: 0 16px;
-  }
-
-  .brand-story__cta-icon {
-    width: 44px;
-
-    min-width: 44px;
-  }
 }
 
 
@@ -648,24 +470,6 @@
   .brand-story__description--lead {
     font-size: 16px;
   }
-
-  .brand-story__cta-link {
-    min-height: 44px;
-
-    font-size: 7.5px;
-
-    letter-spacing: 0.11em;
-  }
-
-  .brand-story__cta-label {
-    padding: 0 12px;
-  }
-
-  .brand-story__cta-icon {
-    width: 40px;
-
-    min-width: 40px;
-  }
 }
 
 
@@ -674,9 +478,10 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .brand-story__image,
-  .brand-story__cta-link,
-  .brand-story__cta-icon {
+  .brand-story__image{
     transition: none;
   }
+}
+.brand-story__cta {
+  margin-top: 28px;
 }

@@ -386,18 +386,7 @@ export function Footer() {
               className="site-footer__newsletter-link"
             >
 
-              <span>
-                Join the newsletter
-              </span>
-
-              <span className="site-footer__newsletter-icon">
-
-                <ArrowUpRight
-                  size={15}
-                  strokeWidth={1.5}
-                />
-
-              </span>
+              Join the newsletter
 
             </Link>
 

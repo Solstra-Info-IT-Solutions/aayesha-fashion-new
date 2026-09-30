@@ -866,3 +866,49 @@
     transition: none !important;
   }
 }
+/* =========================================================
+   DARK BROWN FOOTER
+   Scoped token overrides keep every rule above readable on
+   the espresso background.
+========================================================= */
+
+.site-footer {
+  --color-text: #f3ece4;
+  --color-text-secondary: #cfc2ba;
+  --color-secondary: #dcc3b8;
+  --color-border: rgba(243, 236, 228, 0.14);
+  --color-border-dark: rgba(243, 236, 228, 0.3);
+  --color-surface: #543c38;
+
+  border-top: 0;
+
+  background: var(--color-espresso);
+  color: var(--color-text);
+}
+
+.site-footer__social-link:hover {
+  color: var(--color-espresso);
+}
+
+/* =========================================================
+   MOBILE — Shop / Information / Policies stack vertically
+========================================================= */
+
+@media (max-width: 767px) {
+  .site-footer__columns {
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 28px;
+
+    margin-top: 26px;
+  }
+
+  .site-footer__column-heading {
+    min-height: 0;
+  }
+
+  .site-footer__column-title,
+  .site-footer__column-link {
+    font-size: 12px;
+  }
+}

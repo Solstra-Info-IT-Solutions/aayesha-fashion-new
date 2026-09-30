@@ -176,168 +176,11 @@
 }
 
 /* =========================================================
-   INTRO
-   ========================================================= */
-
-.new-arrivals__intro-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  width: 270px;
-
-  flex: 0 0 auto;
-}
-
-.new-arrivals__intro {
-  margin: 0;
-
-  font-family: var(
-    --font-body,
-    sans-serif
-  );
-
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 1.8;
-
-  color: var(
-    --color-text-secondary,
-    var(--color-text-secondary)
-  );
-}
-
-.new-arrivals__intro-mark {
-  display: block;
-
-  margin-top: 20px;
-
-  font-family: var(
-    --font-body,
-    sans-serif
-  );
-
-  font-size: 10px;
-  font-weight: 600;
-
-  letter-spacing: 0.18em;
-
-  color: var(
-    --color-text-muted,
-    var(--color-text-secondary)
-  );
-}
-
-/* =========================================================
    PRODUCTS
    ========================================================= */
 
 .new-arrivals__products {
   width: 100%;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.new-arrivals__footer {
-  display: flex;
-  align-items: center;
-
-  width: 100%;
-
-  margin-top: 48px;
-}
-
-.new-arrivals__footer-line {
-  flex: 1;
-
-  height: 1px;
-
-  background: var(
-    --color-border,
-    var(--color-surface-soft)
-  );
-}
-
-.new-arrivals__all-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-
-  margin: 0 22px;
-
-  color: var(
-    --color-text,
-    var(--color-text)
-  );
-
-  text-decoration: none;
-
-  transition:
-    color 180ms ease,
-    gap 220ms
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      );
-}
-
-.new-arrivals__all-label {
-  font-family: var(
-    --font-body,
-    sans-serif
-  );
-
-  font-size: 10px;
-  font-weight: 600;
-
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.new-arrivals__all-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 30px;
-  height: 30px;
-
-  border: 1px solid
-    var(--color-border-dark, var(--color-clay));
-  border-radius: 50%;
-
-  transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    border-color 180ms ease,
-    transform 220ms
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      );
-}
-
-.new-arrivals__all-link:hover {
-  color: var(--color-clay);
-
-  gap: 16px;
-}
-
-.new-arrivals__all-link:hover
-  .new-arrivals__all-icon {
-  border-color: var(--color-clay);
-
-  background: var(--color-clay);
-
-  color: #ffffff;
-
-  transform: rotate(45deg);
 }
 
 /* =========================================================
@@ -480,78 +323,6 @@
   margin-top: 30px;
 }
 
-.new-arrivals__empty-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-
-  color: var(
-    --color-text,
-    var(--color-text)
-  );
-
-  text-decoration: none;
-
-  transition:
-    color 180ms ease,
-    gap 220ms
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      );
-}
-
-.new-arrivals__empty-label {
-  font-family: var(
-    --font-body,
-    sans-serif
-  );
-
-  font-size: 10px;
-  font-weight: 600;
-
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.new-arrivals__empty-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 30px;
-  height: 30px;
-
-  border: 1px solid
-    var(--color-border-dark, var(--color-clay));
-  border-radius: 50%;
-
-  transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    border-color 180ms ease,
-    transform 220ms ease;
-}
-
-.new-arrivals__empty-link:hover {
-  gap: 16px;
-
-  color: var(--color-clay);
-}
-
-.new-arrivals__empty-link:hover
-  .new-arrivals__empty-icon {
-  border-color: var(--color-clay);
-
-  background: var(--color-clay);
-
-  color: #ffffff;
-
-  transform: rotate(45deg);
-}
-
 /* =========================================================
    LARGE TABLET
    ========================================================= */
@@ -563,10 +334,6 @@
 
   .new-arrivals__header {
     gap: 40px;
-  }
-
-  .new-arrivals__intro-wrap {
-    width: 240px;
   }
 
   .new-arrivals__title {
@@ -613,25 +380,6 @@
     );
   }
 
-  .new-arrivals__intro-wrap {
-    align-items: flex-start;
-
-    width: 100%;
-    max-width: 430px;
-  }
-
-  .new-arrivals__intro-mark {
-    margin-top: 12px;
-  }
-
-  .new-arrivals__footer {
-    margin-top: 36px;
-  }
-
-  .new-arrivals__all-link {
-    margin: 0 14px;
-  }
-
   .new-arrivals__empty {
     min-height: 420px;
   }
@@ -676,35 +424,6 @@
     line-height: 0.92;
   }
 
-  .new-arrivals__intro {
-    font-size: 10.5px;
-    line-height: 1.75;
-  }
-
-  .new-arrivals__intro-mark {
-    font-size: 10px;
-  }
-
-  .new-arrivals__footer {
-    margin-top: 30px;
-  }
-
-  .new-arrivals__all-link {
-    gap: 9px;
-
-    margin: 0 11px;
-  }
-
-  .new-arrivals__all-label {
-    font-size: 10px;
-    letter-spacing: 0.13em;
-  }
-
-  .new-arrivals__all-icon {
-    width: 27px;
-    height: 27px;
-  }
-
   .new-arrivals__empty {
     min-height: 390px;
   }
@@ -739,44 +458,34 @@
     font-size: 2.45rem;
   }
 
-  .new-arrivals__footer-line {
-    min-width: 20px;
-  }
-
-  .new-arrivals__all-link {
-    margin: 0 8px;
-  }
-
-  .new-arrivals__all-label {
-    font-size: 10px;
-  }
-
   .new-arrivals__empty {
     min-height: 360px;
   }
 }
 
 /* =========================================================
-   REDUCED MOTION
-   ========================================================= */
+   SINGLE-LINE HEADING
+   Title stays on one line and scales with the viewport.
+========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
-  .new-arrivals__all-link,
-  .new-arrivals__all-icon,
-  .new-arrivals__empty-link,
-  .new-arrivals__empty-icon {
-    transition: none;
-  }
+.new-arrivals__header {
+  justify-content: flex-start;
+}
 
-  .new-arrivals__all-link:hover,
-  .new-arrivals__empty-link:hover {
-    gap: 12px;
-  }
+.new-arrivals__heading {
+  width: 100%;
+  min-width: 0;
+}
 
-  .new-arrivals__all-link:hover
-    .new-arrivals__all-icon,
-  .new-arrivals__empty-link:hover
-    .new-arrivals__empty-icon {
-    transform: none;
-  }
+.new-arrivals__title {
+  max-width: none;
+
+  font-size: clamp(1.4rem, 6.6vw, 4.2rem);
+  line-height: 1.05;
+
+  white-space: nowrap;
+}
+
+.new-arrivals__title span {
+  display: inline;
 }

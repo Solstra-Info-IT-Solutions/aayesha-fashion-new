@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/shared/container";
 import type { HomepageBrandStory } from "@/types/homepage";
 
 import "./BrandStory.css";
+import "./HomeCta.css";
 
 interface BrandStoryProps {
   data: HomepageBrandStory;
@@ -134,18 +134,9 @@ export function BrandStory({
                   <div className="brand-story__cta">
                     <Link
                       href={data.ctaHref}
-                      className="brand-story__cta-link"
+                      className="home-cta"
                     >
-                      <span className="brand-story__cta-label">
-                        {data.ctaLabel}
-                      </span>
-
-                      <span className="brand-story__cta-icon">
-                        <ArrowUpRight
-                          size={15}
-                          strokeWidth={1.3}
-                        />
-                      </span>
+                      {data.ctaLabel}
                     </Link>
                   </div>
                 )}

@@ -6,6 +6,7 @@ import { Container } from "@/components/shared/container";
 import type { HomepageInstagram } from "@/types/homepage";
 
 import "./InstagramGallery.css";
+import "./HomeCta.css";
 
 interface InstagramGalleryProps {
   data: HomepageInstagram;
@@ -111,28 +112,15 @@ export function InstagramGallery({
           ========================================= */}
 
           {data.instagramUrl && (
-            <div className="instagram-gallery__footer">
-              <div className="instagram-gallery__footer-line" />
-
+            <div className="home-cta-row">
               <Link
                 href={data.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="instagram-gallery__cta"
+                className="home-cta"
               >
-                <span className="instagram-gallery__cta-label">
-                  {data.ctaLabel}
-                </span>
-
-                <span className="instagram-gallery__cta-icon">
-                  <ArrowUpRight
-                    size={15}
-                    strokeWidth={1.3}
-                  />
-                </span>
+                {data.ctaLabel}
               </Link>
-
-              <div className="instagram-gallery__footer-line" />
             </div>
           )}
 
