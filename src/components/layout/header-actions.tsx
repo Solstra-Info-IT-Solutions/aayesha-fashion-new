@@ -11,21 +11,17 @@ import {
 } from "lucide-react";
 
 import {
-  FormEvent,
   ReactNode,
   useEffect,
   useRef,
   useState,
 } from "react";
 
-import { useRouter } from "next/navigation";
-
 import { WishlistCount } from "./wishlist-count";
 import { CartCount } from "./cart-count";
 import { AccountPopup } from "./account-popup";
 
 import { useAuthStore } from "@/store/auth-store";
-import { addRecentSearch } from "@/lib/recent-searches/recent-searches";
 
 import "./HeaderActions.css";
 
@@ -34,8 +30,6 @@ import "./HeaderActions.css";
 ========================================================= */
 
 export function HeaderActions() {
-  const router = useRouter();
-
   /* =======================================================
      AUTH STATE
   ======================================================= */
@@ -61,45 +55,18 @@ export function HeaderActions() {
      LOCAL STATE
   ======================================================= */
 
-  const [searchOpen, setSearchOpen] =
-    useState(false);
-
   const [accountOpen, setAccountOpen] =
     useState(false);
 
-  const [query, setQuery] =
-    useState("");
-
-  const inputRef =
-    useRef<HTMLInputElement>(null);
-
   const accountWrapperRef =
     useRef<HTMLDivElement>(null);
-
-  /* =======================================================
-     SEARCH FOCUS
-  ======================================================= */
-
-  useEffect(() => {
-    if (!searchOpen) {
-      return;
-    }
-
-    const timer = window.setTimeout(() => {
-      inputRef.current?.focus();
-    }, 100);
-
-    return () => {
-      window.clearTimeout(timer);
-    };
-  }, [searchOpen]);
 
   /* =======================================================
      ESCAPE KEY
   ======================================================= */
 
   useEffect(() => {
-    if (!searchOpen && !accountOpen) {
+    if (!accountOpen) {
       return;
     }
 
@@ -110,7 +77,6 @@ export function HeaderActions() {
         return;
       }
 
-      setSearchOpen(false);
       setAccountOpen(false);
     };
 
@@ -125,7 +91,7 @@ export function HeaderActions() {
         handleKeyDown,
       );
     };
-  }, [searchOpen, accountOpen]);
+  }, [accountOpen]);
 
   /* =======================================================
      ACCOUNT OUTSIDE CLICK
@@ -166,42 +132,6 @@ export function HeaderActions() {
   }, [accountOpen]);
 
   /* =======================================================
-     SEARCH
-  ======================================================= */
-
-  const openSearch = () => {
-    setAccountOpen(false);
-    setSearchOpen(true);
-  };
-
-  const closeSearch = () => {
-    setSearchOpen(false);
-  };
-
-  const handleSearchSubmit = (
-    event: FormEvent<HTMLFormElement>,
-  ) => {
-    event.preventDefault();
-
-    const trimmedQuery =
-      query.trim();
-
-    if (!trimmedQuery) {
-      return;
-    }
-
-    setSearchOpen(false);
-
-    addRecentSearch(trimmedQuery);
-
-    router.push(
-      `/search?q=${encodeURIComponent(
-        trimmedQuery,
-      )}`,
-    );
-  };
-
-  /* =======================================================
      ACCOUNT
   ======================================================= */
 
@@ -209,8 +139,6 @@ export function HeaderActions() {
     if (!isInitialized) {
       return;
     }
-
-    setSearchOpen(false);
 
     setAccountOpen(
       (current) => !current,
@@ -228,7 +156,6 @@ export function HeaderActions() {
     if (isInitialized && !loggedIn) {
       event.preventDefault();
 
-      setSearchOpen(false);
       setAccountOpen(true);
 
       return;
@@ -262,17 +189,29 @@ export function HeaderActions() {
             SEARCH
         ================================================= */}
 
-        <HeaderActionButton
-          label="Search"
-          onClick={openSearch}
-          active={searchOpen}
-          className="header-action--search"
+        <Link
+          href="/search"
+          aria-label="Search"
+          onClick={() =>
+            setAccountOpen(false)
+          }
+          className="
+            header-action-link
+            header-action--search
+          "
         >
-          <Search
-            size={20}
-            strokeWidth={1.6}
+          <span className="header-action-link__icon">
+            <Search
+              size={20}
+              strokeWidth={1.6}
+            />
+          </span>
+
+          <span
+            aria-hidden="true"
+            className="header-action-link__underline"
           />
-        </HeaderActionButton>
+        </Link>
 
         {/* =================================================
             ACCOUNT
@@ -383,139 +322,6 @@ export function HeaderActions() {
           />
         </Link>
       </div>
-
-      {/* =====================================================
-          SEARCH PANEL
-      ===================================================== */}
-
-      {searchOpen && (
-        <>
-          {/* Backdrop */}
-
-          <button
-            type="button"
-            aria-label="Close search"
-            onClick={closeSearch}
-            className="header-search-backdrop"
-          />
-
-          {/* Search panel */}
-
-          <div
-            className="header-search-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Search"
-          >
-            <span
-              aria-hidden="true"
-              className="header-search-accent"
-            />
-
-            <div className="header-search-container">
-              <div className="header-search-content">
-
-                {/* Search heading */}
-
-                <div className="header-search-heading">
-                  <div>
-                    <span className="header-search-kicker">
-                      AAYESHA SEARCH
-                    </span>
-
-                    <h2 className="header-search-title">
-                      Find your style
-                    </h2>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={closeSearch}
-                    aria-label="Close search"
-                    className="header-search-close"
-                  >
-                    <X
-                      size={18}
-                      strokeWidth={1.6}
-                    />
-                  </button>
-                </div>
-
-                {/* Search row */}
-
-                <div className="header-search-row">
-                  <form
-                    onSubmit={
-                      handleSearchSubmit
-                    }
-                    className="header-search-form"
-                  >
-                    <div className="header-search-input-row">
-                      <span
-                        aria-hidden="true"
-                        className="header-search-icon"
-                      >
-                        <Search
-                          size={20}
-                          strokeWidth={1.6}
-                        />
-                      </span>
-
-                      <input
-                        ref={inputRef}
-                        type="search"
-                        value={query}
-                        onChange={(event) =>
-                          setQuery(
-                            event.target.value,
-                          )
-                        }
-                        placeholder="Search dresses, garara, suits..."
-                        aria-label="Search products"
-                        autoComplete="off"
-                        className="header-search-input"
-                      />
-
-                      {query.trim() && (
-                        <button
-                          type="submit"
-                          className="header-search-submit"
-                        >
-                          <span>
-                            Search
-                          </span>
-
-                          <ArrowUpRight
-                            size={16}
-                            strokeWidth={1.6}
-                          />
-                        </button>
-                      )}
-                    </div>
-
-                    <div
-                      aria-hidden="true"
-                      className="header-search-line"
-                    />
-                  </form>
-                </div>
-
-                {/* Search meta */}
-
-                <div className="header-search-meta">
-                  <p className="text-caption">
-                    Explore the latest Aayesha collections
-                  </p>
-
-                  <p className="text-caption">
-                    Press ESC to close
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
     </>
   );
 }

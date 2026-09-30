@@ -1,34 +1,106 @@
-import Link from "next/link";
-import {
-  ArrowRight,
-  ArrowUpRight,
-} from "lucide-react";
+import type { Metadata } from "next";
 
-import { getProducts } from "@/services/product.service";
-import type { Product } from "@/types/product";
-import { ProductCard } from "@/components/product/product-card";
-import "./CollectionsPage.css";
+import { getProducts } from "@/lib/api/products";
+import { getCategories } from "@/services/category.service";
+import {
+  getPrimaryProductMedia,
+  type Product,
+} from "@/types/product";
+import type { Category } from "@/types/category";
+
+import {
+  CollectionsIndex,
+  type CollectionSummary,
+} from "@/components/collections/collections-index";
+
+export const metadata: Metadata = {
+  title: "Collections",
+  description:
+    "Explore Aayesha Fashion collections — new arrivals, best sellers and curated edits for every occasion.",
+  alternates: {
+    canonical: "/collections",
+  },
+};
 
 /* =========================================================
-   COLLECTIONS
+   COLLECTION DEFINITIONS
+   New Arrivals and Best Sellers are always available. The
+   others exist only when the matching category does, so no
+   card ever links to a missing page.
 ========================================================= */
 
-const collectionLinks = [
+const fixedCollections = [
   {
+    slug: "new-arrivals",
     label: "New Arrivals",
     eyebrow: "Just introduced",
     description:
       "Discover the latest pieces added to the Aayesha Fashion collection.",
     href: "/collections/new-arrivals",
+    filter: { isNew: true },
   },
   {
+    slug: "best-sellers",
     label: "Best Sellers",
     eyebrow: "Most loved",
     description:
       "Explore the pieces our customers return to time and again.",
     href: "/collections/best-sellers",
+    filter: { isBestSeller: true },
   },
 ] as const;
+
+const categoryCollections = [
+  {
+    slug: "festive",
+    label: "Festive Edit",
+    eyebrow: "For celebrations",
+    description:
+      "Luminous colours and graceful silhouettes for ceremonies and evenings worth dressing for.",
+  },
+  {
+    slug: "ethnic",
+    label: "Ethnic Wear",
+    eyebrow: "Timeless",
+    description:
+      "Indian silhouettes, thoughtfully made and finished by hand.",
+  },
+  {
+    slug: "contemporary",
+    label: "Contemporary",
+    eyebrow: "Modern",
+    description:
+      "Fresh, easy takes on Indian womenswear for everyday.",
+  },
+] as const;
+
+function imageOf(product?: Product): string {
+  return (product && getPrimaryProductMedia(product)?.src) || "";
+}
+
+async function summarise(params: {
+  isNew?: boolean;
+  isBestSeller?: boolean;
+  categoryId?: string;
+}): Promise<{ image: string; count: number | null }> {
+  try {
+    const response = await getProducts({
+      page: 1,
+      limit: 1,
+      status: "active",
+      sort: "featured",
+      ...params,
+    });
+
+    return {
+      image: imageOf(response.products[0]),
+      count:
+        response.pagination?.total ?? response.products.length,
+    };
+  } catch {
+    return { image: "", count: null };
+  }
+}
 
 /* =========================================================
    PAGE
@@ -40,7 +112,7 @@ export default async function CollectionsPage() {
   try {
     const response = await getProducts({
       page: 1,
-      limit: 6,
+      limit: 12,
       isFeatured: true,
       status: "active",
       sort: "featured",
@@ -51,192 +123,58 @@ export default async function CollectionsPage() {
     featured = [];
   }
 
+  let categories: Category[] = [];
+
+  try {
+    categories = await getCategories();
+  } catch {
+    categories = [];
+  }
+
+  const fallbackImage = imageOf(featured[0]);
+
+  const collections: CollectionSummary[] = [];
+
+  for (const item of fixedCollections) {
+    const summary = await summarise(item.filter);
+
+    collections.push({
+      slug: item.slug,
+      label: item.label,
+      eyebrow: item.eyebrow,
+      description: item.description,
+      href: item.href,
+      image: summary.image || fallbackImage,
+      count: summary.count,
+    });
+  }
+
+  for (const item of categoryCollections) {
+    const category = categories.find(
+      (entry) => entry.slug === item.slug && entry.isActive,
+    );
+
+    if (!category) {
+      continue;
+    }
+
+    const summary = await summarise({ categoryId: category.id });
+
+    collections.push({
+      slug: item.slug,
+      label: item.label,
+      eyebrow: item.eyebrow,
+      description: item.description,
+      href: `/collections/${item.slug}`,
+      image: category.image || summary.image || fallbackImage,
+      count: summary.count,
+    });
+  }
+
   return (
-  <main className="collections-page">
-    {/* =====================================================
-        INTRO
-    ===================================================== */}
-
-    <section className="collections-page__intro">
-      <div className="collections-page__container">
-        <div className="collections-page__intro-content">
-          <div className="collections-page__eyebrow-row">
-            <span className="collections-page__eyebrow-line" />
-
-            <p className="collections-page__eyebrow">
-              Aayesha Fashion
-            </p>
-          </div>
-
-          <h1 className="collections-page__title">
-            Collections
-          </h1>
-
-          <p className="collections-page__description">
-            Explore the latest arrivals and the pieces loved
-            most by our customers.
-          </p>
-
-          <Link
-            href="/shop"
-            className="collections-page__text-link"
-          >
-            <span>Shop everything</span>
-
-            <ArrowRight
-              size={13}
-              strokeWidth={1.3}
-            />
-          </Link>
-        </div>
-      </div>
-    </section>
-
-    {/* =====================================================
-        COLLECTIONS
-    ===================================================== */}
-
-    <section className="collections-page__collection-section">
-      <div className="collections-page__container">
-        <div className="collections-page__section-header">
-          <div>
-            <p className="collections-page__section-eyebrow">
-              Explore
-            </p>
-
-            <h2 className="collections-page__section-title">
-              Shop by collection
-            </h2>
-          </div>
-
-          <span className="collections-page__section-count">
-            02 collections
-          </span>
-        </div>
-
-        <div className="collections-page__collection-grid">
-          {collectionLinks.map((collection, index) => (
-            <Link
-              key={collection.href}
-              href={collection.href}
-              className="collections-page__collection-card"
-            >
-              <div className="collections-page__collection-top">
-                <span className="collections-page__collection-number">
-                  0{index + 1}
-                </span>
-
-                <span className="collections-page__collection-icon">
-                  <ArrowUpRight
-                    size={13}
-                    strokeWidth={1.25}
-                  />
-                </span>
-              </div>
-
-              <div className="collections-page__collection-content">
-                <p className="collections-page__collection-eyebrow">
-                  {collection.eyebrow}
-                </p>
-
-                <h3 className="collections-page__collection-title">
-                  {collection.label}
-                </h3>
-
-                <p className="collections-page__collection-description">
-                  {collection.description}
-                </p>
-
-                <span className="collections-page__collection-link">
-                  <span>Explore</span>
-
-                  <ArrowRight
-                    size={12}
-                    strokeWidth={1.3}
-                  />
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* =====================================================
-        FEATURED PRODUCTS
-    ===================================================== */}
-
-    {featured.length > 0 && (
-      <section className="collections-page__featured">
-        <div className="collections-page__container">
-          <div className="collections-page__section-header">
-            <div>
-              <p className="collections-page__section-eyebrow">
-                The Aayesha edit
-              </p>
-
-              <h2 className="collections-page__section-title">
-                Featured pieces
-              </h2>
-            </div>
-
-            <Link
-              href="/shop"
-              className="collections-page__view-all"
-            >
-              <span>View all</span>
-
-              <ArrowUpRight
-                size={13}
-                strokeWidth={1.3}
-              />
-            </Link>
-          </div>
-
-          <p className="collections-page__featured-description">
-            A considered selection of pieces from the
-            Aayesha collection.
-          </p>
-
-          <div className="collections-page__product-grid">
-            {featured.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-    )}
-
-    {/* =====================================================
-        CLOSING
-    ===================================================== */}
-
-    <section className="collections-page__closing">
-      <div className="collections-page__closing-inner">
-        <p className="collections-page__closing-eyebrow">
-          Aayesha Fashion
-        </p>
-
-        <h2 className="collections-page__closing-title">
-          Style that feels distinctly yours.
-        </h2>
-
-        <Link
-          href="/shop"
-          className="collections-page__closing-button"
-        >
-          <span>Shop now</span>
-
-          <ArrowRight
-            size={13}
-            strokeWidth={1.3}
-          />
-        </Link>
-      </div>
-    </section>
-  </main>
-);
+    <CollectionsIndex
+      collections={collections}
+      featured={featured}
+    />
+  );
 }
