@@ -1,5 +1,6 @@
 "use client";
 
+import { SuccessSales } from "@/components/orders-sales/success-sales";
 import { PendingPaymentPanel } from "@/components/orders-sales/pending-payment-panel";
 import { trackPurchase } from "@/lib/analytics";
 import { Suspense, useEffect, useState } from "react";
@@ -716,6 +717,11 @@ function CheckoutSuccessContent() {
           </aside>
         </div>
       </section>
+
+      <SuccessSales
+        order={order}
+        isAuthenticated={isAuthenticated}
+      />
 
       {/* =====================================================
           CLOSING NOTE

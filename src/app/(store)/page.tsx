@@ -21,7 +21,6 @@ import { ReviewsShowcase } from "@/components/home-sales/reviews-showcase";
 import { ShopByNeed } from "@/components/home-sales/shop-by-need";
 import { StylistCta } from "@/components/home-sales/stylist-cta";
 import { RecentlyViewed } from "@/components/recently-viewed/recently-viewed";
-import { Reveal } from "@/components/common/reveal";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
 
 export const metadata: Metadata = {
@@ -88,14 +87,14 @@ export default async function HomePage() {
           Source: Category API
       =================================================== */}
 
-      <Reveal><FeaturedCategories /></Reveal>
+      <FeaturedCategories />
 
       {/* ===================================================
           NEW ARRIVALS
           Source: Product API
       =================================================== */}
 
-      <Reveal><NewArrivals /></Reveal>
+      <NewArrivals />
 
       <HomeOffers />
 
@@ -105,11 +104,9 @@ export default async function HomePage() {
       =================================================== */}
 
       {homepage.brandStory?.enabled && (
-        <Reveal>
-          <BrandStory
+        <BrandStory
             data={homepage.brandStory}
           />
-        </Reveal>
       )}
 
       {/* ===================================================
@@ -117,25 +114,23 @@ export default async function HomePage() {
           Source: Marketing API
       =================================================== */}
 
-      <Reveal><FeaturedCollectionCampaign /></Reveal>
+      <FeaturedCollectionCampaign />
 
       {/* ===================================================
           BEST SELLERS
           Source: Product API
       =================================================== */}
 
-      <Reveal><BestSellers /></Reveal>
+      <BestSellers />
 
-      <Reveal>
-        <ShopByNeed />
-      </Reveal>
+      <ShopByNeed />
 
       {/* ===================================================
           PROMOTIONAL BANNER
           Source: Marketing API
       =================================================== */}
 
-      <Reveal><PromotionalBanner /></Reveal>
+      <PromotionalBanner />
 
       {/* ===================================================
           WHY AYESHA
@@ -143,16 +138,12 @@ export default async function HomePage() {
       =================================================== */}
 
       {homepage.whyChooseUs?.enabled && (
-        <Reveal>
-          <WhyChooseUs
+        <WhyChooseUs
             data={homepage.whyChooseUs}
           />
-        </Reveal>
       )}
 
-      <Reveal>
-        <ReviewsShowcase />
-      </Reveal>
+      <ReviewsShowcase />
 
       {/* ===================================================
           TESTIMONIALS
@@ -162,11 +153,9 @@ export default async function HomePage() {
       {homepage.testimonials?.enabled &&
         homepage.testimonials.testimonials.length >
           0 && (
-          <Reveal>
-            <Testimonials
+          <Testimonials
               data={homepage.testimonials}
             />
-          </Reveal>
         )}
 
       {/* ===================================================
@@ -176,11 +165,9 @@ export default async function HomePage() {
 
       {homepage.instagram?.enabled &&
         homepage.instagram.posts.length > 0 && (
-          <Reveal>
-            <InstagramGallery
+          <InstagramGallery
               data={homepage.instagram}
             />
-          </Reveal>
         )}
 
       <RecentlyViewed
@@ -189,9 +176,7 @@ export default async function HomePage() {
         limit={4}
       />
 
-      <Reveal>
-        <StylistCta />
-      </Reveal>
+      <StylistCta />
 
       {/* ===================================================
           NEWSLETTER
@@ -199,11 +184,9 @@ export default async function HomePage() {
       =================================================== */}
 
       {homepage.newsletter?.enabled && (
-        <Reveal>
-          <Newsletter
+        <Newsletter
             data={homepage.newsletter}
           />
-        </Reveal>
       )}
     </>
   );

@@ -453,8 +453,6 @@ html {
 
   background: var(--color-canvas);
 
-  scroll-behavior: smooth;
-
   scrollbar-width: thin;
   scrollbar-color:
     var(--color-border-dark)
