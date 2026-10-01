@@ -6,6 +6,8 @@ import { getProducts } from "@/lib/api/products";
 const staticRoutes = [
   "/",
   "/shop",
+  "/categories",
+  "/collections",
   "/collections/new-arrivals",
   "/collections/best-sellers",
   "/collections/festive",

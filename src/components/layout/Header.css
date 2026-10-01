@@ -24,7 +24,7 @@
   --mf-accent-soft: var(--color-accent-soft);
 
   position: fixed;
-  top: 0;
+  top: var(--announce-offset, 0px);
   left: 0;
   right: 0;
 
@@ -487,7 +487,7 @@
 .header-search-panel {
   position: fixed;
 
-  top: var(--header-height);
+  top: calc(var(--header-height) + var(--announce-offset, 0px));
 
   left: 0;
   right: 0;
@@ -867,7 +867,7 @@
   ------------------------------------------------------- */
 
   .header-search-panel {
-    top: var(--header-height);
+    top: calc(var(--header-height) + var(--announce-offset, 0px));
   }
 .header-search-container {
     padding:

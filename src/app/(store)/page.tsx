@@ -15,6 +15,7 @@ import { WhyChooseUs } from "@/components/home/why-choose-us";
 import { Testimonials } from "@/components/home/testimonials";
 import { InstagramGallery } from "@/components/home/instagram-gallery";
 import { Newsletter } from "@/components/home/newsletter";
+import { Reveal } from "@/components/common/reveal";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
 
 export const metadata: Metadata = {
@@ -79,14 +80,14 @@ export default async function HomePage() {
           Source: Category API
       =================================================== */}
 
-      <FeaturedCategories />
+      <Reveal><FeaturedCategories /></Reveal>
 
       {/* ===================================================
           NEW ARRIVALS
           Source: Product API
       =================================================== */}
 
-      <NewArrivals />
+      <Reveal><NewArrivals /></Reveal>
 
       {/* ===================================================
           BRAND STORY
@@ -94,9 +95,11 @@ export default async function HomePage() {
       =================================================== */}
 
       {homepage.brandStory?.enabled && (
-        <BrandStory
-          data={homepage.brandStory}
-        />
+        <Reveal>
+          <BrandStory
+            data={homepage.brandStory}
+          />
+        </Reveal>
       )}
 
       {/* ===================================================
@@ -104,21 +107,21 @@ export default async function HomePage() {
           Source: Marketing API
       =================================================== */}
 
-      <FeaturedCollectionCampaign />
+      <Reveal><FeaturedCollectionCampaign /></Reveal>
 
       {/* ===================================================
           BEST SELLERS
           Source: Product API
       =================================================== */}
 
-      <BestSellers />
+      <Reveal><BestSellers /></Reveal>
 
       {/* ===================================================
           PROMOTIONAL BANNER
           Source: Marketing API
       =================================================== */}
 
-      <PromotionalBanner />
+      <Reveal><PromotionalBanner /></Reveal>
 
       {/* ===================================================
           WHY AYESHA
@@ -126,9 +129,11 @@ export default async function HomePage() {
       =================================================== */}
 
       {homepage.whyChooseUs?.enabled && (
-        <WhyChooseUs
-          data={homepage.whyChooseUs}
-        />
+        <Reveal>
+          <WhyChooseUs
+            data={homepage.whyChooseUs}
+          />
+        </Reveal>
       )}
 
       {/* ===================================================
@@ -139,9 +144,11 @@ export default async function HomePage() {
       {homepage.testimonials?.enabled &&
         homepage.testimonials.testimonials.length >
           0 && (
-          <Testimonials
-            data={homepage.testimonials}
-          />
+          <Reveal>
+            <Testimonials
+              data={homepage.testimonials}
+            />
+          </Reveal>
         )}
 
       {/* ===================================================
@@ -151,9 +158,11 @@ export default async function HomePage() {
 
       {homepage.instagram?.enabled &&
         homepage.instagram.posts.length > 0 && (
-          <InstagramGallery
-            data={homepage.instagram}
-          />
+          <Reveal>
+            <InstagramGallery
+              data={homepage.instagram}
+            />
+          </Reveal>
         )}
 
       {/* ===================================================
@@ -162,9 +171,11 @@ export default async function HomePage() {
       =================================================== */}
 
       {homepage.newsletter?.enabled && (
-        <Newsletter
-          data={homepage.newsletter}
-        />
+        <Reveal>
+          <Newsletter
+            data={homepage.newsletter}
+          />
+        </Reveal>
       )}
     </>
   );

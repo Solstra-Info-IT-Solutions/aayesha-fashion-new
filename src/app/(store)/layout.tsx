@@ -13,7 +13,7 @@ export default function StoreLayout({
 }>) {
   return (
     <div className="min-h-screen bg-[var(--color-canvas)] text-[var(--color-text)] antialiased">
-      {/* <AnnouncementBar /> */}
+      <AnnouncementBar />
 
       <Header />
 

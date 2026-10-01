@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { trackBeginCheckout } from "@/lib/analytics";
 import { getCheckoutCart } from "@/services/checkout-cart.service";
 import { useAuthStore } from "@/store/auth-store";
 
@@ -72,6 +73,17 @@ export function CheckoutPage() {
         }
 
         setHasItems(cart.items.length > 0);
+
+        if (cart.items.length > 0) {
+          trackBeginCheckout(
+            cart.items.map((item) => ({
+              id: item.productId,
+              name: item.product.name,
+              price: item.product.pricing.sellingPrice,
+              quantity: item.quantity,
+            })),
+          );
+        }
       } catch (error) {
         console.error(
           "CHECKOUT CART ERROR:",

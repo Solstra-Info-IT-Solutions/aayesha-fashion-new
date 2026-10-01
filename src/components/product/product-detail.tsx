@@ -56,6 +56,10 @@ import { ProductReviews } from "@/components/product/product-reviews";
 
 import "./ProductDetail.css";
 import "./ProductDetailRefresh.css";
+import {
+  trackAddToCart,
+  trackViewItem,
+} from "@/lib/analytics";
 import { useIsClient } from "@/hooks/use-is-client";
 
 interface ProductDetailProps {
@@ -175,6 +179,14 @@ export function ProductDetail({
    * Add to Bag button has scrolled out of view.
    */
   const purchaseRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    trackViewItem({
+      id: product._id,
+      name: product.name,
+      price: sellingPrice,
+    });
+  }, [product._id, product.name, sellingPrice]);
   const [stickyVisible, setStickyVisible] = useState(false);
 
   useEffect(() => {
@@ -349,6 +361,13 @@ const [loginAction, setLoginAction] =
     try {
       setAdding(true);
       await addToCart(productId, quantity);
+
+      trackAddToCart({
+        id: productId,
+        name: product.name,
+        price: sellingPrice,
+        quantity,
+      });
 
       toast.success(
         quantity > 1

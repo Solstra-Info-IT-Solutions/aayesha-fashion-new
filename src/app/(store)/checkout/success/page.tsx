@@ -1,5 +1,6 @@
 "use client";
 
+import { trackPurchase } from "@/lib/analytics";
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -228,6 +229,22 @@ function CheckoutSuccessContent() {
 
         setOrder(response.order);
         setPublicAccessToken(storedToken);
+
+        if (
+          response.order.paymentMethod === "cod" ||
+          response.order.paymentStatus === "paid"
+        ) {
+          trackPurchase(
+            response.order.orderNumber,
+            response.order.total,
+            response.order.items.map((item) => ({
+              id: item.productId,
+              name: item.name,
+              price: item.sellingPrice,
+              quantity: item.quantity,
+            })),
+          );
+        }
       } catch (requestError) {
         if (cancelled) {
           return;
