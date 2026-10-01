@@ -6,6 +6,10 @@
 
 "use client";
 
+import {
+  BUY_NOW_CHECKOUT_URL,
+  setBuyNowSelection,
+} from "@/lib/buy-now";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import Link from "next/link";
@@ -372,8 +376,8 @@ const [loginAction, setLoginAction] =
 
     try {
       setBuying(true);
-      await addToCart(productId, quantity);
-      router.push("/checkout");
+      setBuyNowSelection({ productId, quantity });
+      router.push(BUY_NOW_CHECKOUT_URL);
     } catch (error) {
       console.error("BUY NOW ERROR:", error);
 
