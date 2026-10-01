@@ -6,11 +6,14 @@ import { Star } from "lucide-react";
 import toast from "react-hot-toast";
 
 import { Stars } from "@/components/product/product-reviews";
+import { ReviewMediaGrid } from "@/components/product/review-media-grid";
+import { ReviewMediaPicker } from "@/components/product/review-media-picker";
 import {
   deleteReview,
   getMyReviews,
   updateReview,
   type OwnReview,
+  type OwnReviewMedia,
 } from "@/lib/api/reviews";
 import { useAuthStore } from "@/store/auth-store";
 
@@ -33,6 +36,7 @@ export function AccountReviews() {
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [media, setMedia] = useState<OwnReviewMedia[]>([]);
   const [busy, setBusy] = useState(false);
 
   const [reloadKey, setReloadKey] = useState(0);
@@ -63,6 +67,7 @@ export function AccountReviews() {
     setRating(review.rating);
     setTitle(review.title);
     setBody(review.body);
+    setMedia(review.media ?? []);
   }
 
   async function save(event: React.FormEvent) {
@@ -72,7 +77,7 @@ export function AccountReviews() {
 
     try {
       setBusy(true);
-      await updateReview(editingId, { rating, title, body }, accessToken);
+      await updateReview(editingId, { rating, title, body, media }, accessToken);
       toast.success("Review updated. It will be re-checked before publishing.");
       setEditingId("");
       setReloadKey((key) => key + 1);
@@ -180,6 +185,14 @@ export function AccountReviews() {
                     className="account-reviews__input"
                   />
 
+                  {accessToken ? (
+                    <ReviewMediaPicker
+                      value={media}
+                      onChange={setMedia}
+                      accessToken={accessToken}
+                    />
+                  ) : null}
+
                   <div className="account-reviews__actions">
                     <button type="submit" disabled={busy}>
                       Save changes
@@ -201,6 +214,8 @@ export function AccountReviews() {
                   ) : null}
 
                   <p className="account-reviews__body">{review.body}</p>
+
+                  <ReviewMediaGrid media={review.media ?? []} />
 
                   {review.status === "rejected" && review.adminNote ? (
                     <p className="account-reviews__note">

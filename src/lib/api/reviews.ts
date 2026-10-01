@@ -1,4 +1,18 @@
-import { apiFetch } from "@/lib/api";
+import { API_BASE_URL, ApiError, apiFetch } from "@/lib/api";
+
+export interface ReviewMedia {
+  type: "image" | "video";
+  url: string;
+}
+
+/** Media of an own review / fresh upload; publicId lets edits keep it. */
+export interface OwnReviewMedia extends ReviewMedia {
+  publicId: string;
+}
+
+export const MAX_REVIEW_MEDIA = 5;
+export const MAX_REVIEW_IMAGE_BYTES = 5 * 1024 * 1024;
+export const MAX_REVIEW_VIDEO_BYTES = 25 * 1024 * 1024;
 
 export interface PublicReview {
   id: string;
@@ -7,11 +21,13 @@ export interface PublicReview {
   title: string;
   body: string;
   verifiedPurchase: boolean;
+  media: ReviewMedia[];
   authorName: string;
   createdAt: string;
 }
 
-export interface OwnReview extends PublicReview {
+export interface OwnReview extends Omit<PublicReview, "media"> {
+  media: OwnReviewMedia[];
   productName: string;
   productSlug?: string;
   productImage?: string;
@@ -46,6 +62,7 @@ export interface ReviewInput {
   rating: number;
   title: string;
   body: string;
+  media: OwnReviewMedia[];
 }
 
 export function getProductReviews(
@@ -106,4 +123,42 @@ export function deleteReview(id: string, accessToken: string) {
 
 export function getMyReviews(accessToken: string) {
   return apiFetch<OwnReview[]>("/reviews/mine", { accessToken });
+}
+
+/** Multipart upload — apiFetch forces JSON headers, so use fetch directly. */
+export async function uploadReviewMedia(
+  file: File,
+  accessToken: string,
+): Promise<OwnReviewMedia> {
+  const form = new FormData();
+  form.append("file", file);
+
+  const response = await fetch(`${API_BASE_URL}/reviews/media`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${accessToken}` },
+    body: form,
+    credentials: "include",
+  });
+
+  let result: {
+    success?: boolean;
+    data?: OwnReviewMedia;
+    error?: { code?: string; message?: string };
+  } | null = null;
+
+  try {
+    result = await response.json();
+  } catch {
+    result = null;
+  }
+
+  if (!response.ok || !result?.success || !result.data) {
+    throw new ApiError(
+      result?.error?.message || "Upload failed. Please try again.",
+      response.status,
+      result?.error?.code || "UPLOAD_FAILED",
+    );
+  }
+
+  return result.data;
 }
