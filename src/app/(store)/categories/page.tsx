@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     canonical: "/categories",
   },
   openGraph: {
-    title: "Shop by Category | Aayesha Fashion",
+    title: "Shop by Category",
     description:
       "Explore the latest Aayesha Fashion styles by category.",
     url: "/categories",

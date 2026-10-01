@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Shop Women's Fashion | Aayesha Fashion",
+    title: "Shop Women's Fashion",
 
     description:
       "Explore elegant Indian fashion, festive silhouettes, and contemporary styles from Aayesha Fashion.",

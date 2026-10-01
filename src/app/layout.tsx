@@ -74,8 +74,8 @@ export const metadata: Metadata = {
   ),
 
   title: {
-    default: siteTitle,
-    template: `%s | ${siteConfig.name}`,
+    default: siteConfig.name,
+    template: `${siteConfig.name} | %s`,
   },
 
   description:
@@ -202,7 +202,14 @@ export const metadata: Metadata = {
         sizes: "32x32",
         type: "image/png",
       },
+      {
+        url: "/icon-192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
     ],
+
+    shortcut: ["/favicon.ico"],
 
     apple: [
       {

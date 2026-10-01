@@ -1,5 +1,5 @@
 import { AuthShell } from "@/components/auth/auth-shell";
-import { LoginForm } from "@/components/auth/login-form";
+import { LoginTabs } from "@/components/auth/login-tabs";
 
 import type { Metadata } from "next";
 
@@ -19,7 +19,7 @@ export default function LoginPage() {
       backHref="/"
       backLabel="Back to home"
     >
-      <LoginForm />
+      <LoginTabs />
     </AuthShell>
   );
 }

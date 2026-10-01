@@ -72,6 +72,18 @@ type AuthState = {
     rememberMe?: boolean,
   ) => Promise<void>;
 
+  requestLoginOtp: (
+    identifier: string,
+  ) => Promise<{
+    channel: "email" | "phone";
+    resendAfterSeconds: number;
+  }>;
+
+  verifyLoginOtp: (
+    identifier: string,
+    otp: string,
+  ) => Promise<void>;
+
   verifyEmail: (
     email: string,
     otp: string,
@@ -237,6 +249,74 @@ export const useAuthStore =
           accessToken: null,
 
           isAuthenticated: false,
+        });
+
+        throw error;
+      } finally {
+        set({
+          isLoading: false,
+        });
+      }
+    },
+
+    /* =======================================================
+       OTP LOGIN (email or mobile)
+    ======================================================= */
+
+    requestLoginOtp: async (identifier) => {
+      set({
+        error: null,
+      });
+
+      return apiFetch<{
+        channel: "email" | "phone";
+        resendAfterSeconds: number;
+      }>("/auth/otp/request", {
+        method: "POST",
+
+        body: JSON.stringify({
+          identifier,
+        }),
+      });
+    },
+
+    verifyLoginOtp: async (
+      identifier,
+      otp,
+    ) => {
+      set({
+        isLoading: true,
+        error: null,
+      });
+
+      try {
+        const result =
+          await apiFetch<LoginResponse>(
+            "/auth/otp/verify",
+            {
+              method: "POST",
+
+              body: JSON.stringify({
+                identifier,
+                otp,
+              }),
+            },
+          );
+
+        set({
+          user: result.user,
+
+          accessToken:
+            result.accessToken,
+
+          isAuthenticated: true,
+
+          error: null,
+        });
+      } catch (error) {
+        set({
+          error:
+            getAuthErrorMessage(error),
         });
 
         throw error;

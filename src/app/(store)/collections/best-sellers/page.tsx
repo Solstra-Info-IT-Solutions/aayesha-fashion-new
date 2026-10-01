@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     canonical: "/collections/best-sellers",
   },
   openGraph: {
-    title: "Best Sellers | Aayesha Fashion",
+    title: "Best Sellers",
     description:
       "Discover the pieces our customers love most.",
     url: "/collections/best-sellers",

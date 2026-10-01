@@ -20,6 +20,7 @@ import {
 import { WishlistCount } from "./wishlist-count";
 import { CartCount } from "./cart-count";
 import { AccountPopup } from "./account-popup";
+import { NotificationBell } from "./notification-bell";
 
 import { useAuthStore } from "@/store/auth-store";
 
@@ -263,6 +264,16 @@ export function HeaderActions() {
               />
             )}
         </div>
+
+        {/* =================================================
+            NOTIFICATIONS
+        ================================================= */}
+
+        <NotificationBell
+          onNavigate={() =>
+            setAccountOpen(false)
+          }
+        />
 
         {/* =================================================
             WISHLIST
