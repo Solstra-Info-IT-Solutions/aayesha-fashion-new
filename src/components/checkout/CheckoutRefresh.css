@@ -1,0 +1,174 @@
+/* =========================================================
+   CHECKOUT — REFRESH
+   Loaded after the per-section stylesheets so every step card
+   shares one look: rounded card, numbered header, calm body.
+========================================================= */
+
+/* ---------- Page ---------- */
+
+.checkout-page .checkout-page__container {
+  width: min(1240px, calc(100% - 96px));
+
+  padding-top: clamp(20px, 3vw, 36px);
+}
+
+.checkout-page .checkout-page__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 400;
+
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.checkout-page .checkout-page__secure {
+  border-radius: 999px;
+}
+
+.checkout-page .checkout-page__layout {
+  grid-template-columns: minmax(0, 1fr) 400px;
+
+  align-items: start;
+
+  gap: clamp(24px, 3vw, 44px);
+}
+
+/* ---------- Step cards ---------- */
+
+.checkout-page .checkout-contact,
+.checkout-page .checkout-address,
+.checkout-page .checkout-delivery,
+.checkout-page .checkout-payment,
+.checkout-page .checkout-coupon,
+.checkout-page .checkout-place-order {
+  overflow: hidden;
+
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+
+  background: var(--color-surface);
+
+  box-shadow: none;
+}
+
+.checkout-page .checkout-contact__header,
+.checkout-page .checkout-address__header,
+.checkout-page .checkout-delivery__header,
+.checkout-page .checkout-payment__header,
+.checkout-page .checkout-coupon__header,
+.checkout-page .checkout-place-order__header {
+  align-items: center;
+
+  background: transparent;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* One step bubble for every section */
+
+.checkout-page .checkout-contact__step,
+.checkout-page .checkout-address__step,
+.checkout-page .checkout-delivery__step,
+.checkout-page .checkout-payment__step,
+.checkout-page .checkout-coupon__step,
+.checkout-page .checkout-place-order__step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 40px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--color-clay);
+  color: var(--color-text-inverse);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+
+  box-shadow: none;
+}
+
+.checkout-page .checkout-contact__title,
+.checkout-page .checkout-address__title,
+.checkout-page .checkout-delivery__title,
+.checkout-page .checkout-payment__title,
+.checkout-page .checkout-coupon__title,
+.checkout-page .checkout-place-order__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+/* ---------- Inputs ---------- */
+
+.checkout-page input[type="text"],
+.checkout-page input[type="email"],
+.checkout-page input[type="tel"],
+.checkout-page select,
+.checkout-page textarea {
+  border-radius: 10px;
+}
+
+/* ---------- Primary actions ---------- */
+
+.checkout-page .checkout-place-order button[type="submit"],
+.checkout-page .checkout-page__primary-button {
+  border-radius: 12px;
+}
+
+/* ---------- Summary ---------- */
+
+.checkout-page .checkout-page__summary-sticky {
+  top: 100px;
+}
+
+.checkout-page .checkout-summary__card {
+  overflow: hidden;
+
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+
+  box-shadow: 0 18px 50px rgba(63, 45, 42, 0.07);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+  .checkout-page .checkout-page__container {
+    width: min(1240px, calc(100% - 64px));
+  }
+
+  .checkout-page .checkout-page__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .checkout-page .checkout-page__summary {
+    order: -1;
+  }
+
+  .checkout-page .checkout-page__summary-sticky {
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .checkout-page .checkout-page__container {
+    width: calc(100% - 32px);
+  }
+
+  .checkout-page .checkout-contact,
+  .checkout-page .checkout-address,
+  .checkout-page .checkout-delivery,
+  .checkout-page .checkout-payment,
+  .checkout-page .checkout-coupon,
+  .checkout-page .checkout-place-order,
+  .checkout-page .checkout-summary__card {
+    border-radius: 16px;
+  }
+}

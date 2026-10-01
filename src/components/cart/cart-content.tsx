@@ -21,6 +21,7 @@ import {
 } from "@/services/cart.service";
 
 import "./CartContent.css";
+import "./CartRefresh.css";
 
 export function CartContent() {
   const [cart, setCart] = useState<Cart | null>(null);

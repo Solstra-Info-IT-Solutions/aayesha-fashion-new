@@ -1,7 +1,23 @@
-import { ContentPage } from "@/components/content/content-page";
-import { siteConfig } from "@/config/site";
-
 import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  CreditCard,
+  Mail,
+  MessageCircle,
+  PackageSearch,
+  Phone,
+  RotateCcw,
+  Ruler,
+  Truck,
+  UserRound,
+} from "lucide-react";
+
+import { siteConfig } from "@/config/site";
+import { contentGroups } from "@/config/content-pages";
+
+import "@/components/home/HomeCta.css";
 import "./ContactPage.css";
 
 export const metadata: Metadata = {
@@ -13,157 +29,342 @@ export const metadata: Metadata = {
   },
 };
 
+/* =========================================================
+   TOPICS
+   Quick routes to the right place before writing in.
+========================================================= */
+
+const topics = [
+  {
+    icon: PackageSearch,
+    title: "Track an order",
+    description:
+      "See where your order is and what has happened so far.",
+    href: "/account/orders",
+  },
+  {
+    icon: Truck,
+    title: "Shipping & delivery",
+    description:
+      "Dispatch, tracking, delivery addresses and delays.",
+    href: "/shipping",
+  },
+  {
+    icon: RotateCcw,
+    title: "Returns & exchange",
+    description:
+      "How to raise a return or exchange, and what to expect.",
+    href: "/returns",
+  },
+  {
+    icon: CreditCard,
+    title: "Payments & refunds",
+    description:
+      "When refunds are issued and how they reach you.",
+    href: "/refund-policy",
+  },
+  {
+    icon: Ruler,
+    title: "Sizing & product help",
+    description:
+      "Ask about fit, measurements, fabric or styling.",
+    href: "mailto",
+  },
+  {
+    icon: UserRound,
+    title: "Your account",
+    description:
+      "Profile, saved addresses and sign-in help.",
+    href: "/account",
+  },
+] as const;
+
+const checklist = [
+  "Your order number, if the question is about an order",
+  "The email address or phone number used on the order",
+  "The product name, and the size or colour you chose",
+  "A clear photo, if you are reporting damage or a defect",
+];
+
+/* =========================================================
+   PAGE
+========================================================= */
+
 export default function ContactPage() {
+  const { phone, email } = siteConfig.contact;
+  const whatsapp = siteConfig.social.whatsapp;
+
+  const methods = [
+    phone
+      ? {
+          icon: Phone,
+          label: "Call us",
+          value: `+${phone}`,
+          href: `tel:+${phone}`,
+          action: "Call customer care",
+        }
+      : null,
+    whatsapp
+      ? {
+          icon: MessageCircle,
+          label: "WhatsApp",
+          value: "Chat with us",
+          href: whatsapp,
+          action: "Open WhatsApp",
+          external: true,
+        }
+      : null,
+    email
+      ? {
+          icon: Mail,
+          label: "Email",
+          value: email,
+          href: `mailto:${email}`,
+          action: "Send an enquiry",
+        }
+      : null,
+  ].filter(
+    (method): method is NonNullable<typeof method> =>
+      method !== null,
+  );
+
+  /* "Sizing & product help" writes to email when there is one,
+     otherwise it opens WhatsApp. */
+  const helpHref = email
+    ? `mailto:${email}?subject=Product%20question`
+    : whatsapp || "/shop";
+
   return (
-    <>
-      <ContentPage
-        group="information"
-        currentHref="/contact"
-        variant="info"
-        hideHelp
-        eyebrow="Customer Care"
-        title="Contact Us"
-        description="Whether you need help with an order, sizing, delivery, returns or finding the right piece, our customer care team is here to assist."
-        highlights={[
-          {
-            label: "Order support",
-            value: "Keep your order number ready",
-          },
-          {
-            label: "Product help",
-            value: "Ask us about sizing and details",
-          },
-          {
-            label: "General enquiries",
-            value: "We're happy to guide you",
-          },
-        ]}
-        sections={[
-          {
-            title: "A considered customer experience",
-            paragraphs: [
-              "Good service begins with clear information. We aim to make every stage of your shopping experience easy to understand, from product discovery and checkout through dispatch, delivery and after-sales support.",
-              "When contacting us, sharing your order number, registered email address and a clear description of your question helps us respond more efficiently.",
-            ],
-          },
-          {
-            title: "Order enquiries",
-            paragraphs: [
-              "For questions about order confirmation, dispatch, tracking, delivery status, product availability or an issue with an order, please contact customer care with the relevant order details.",
-            ],
-          },
-          {
-            title: "Product and sizing assistance",
-            paragraphs: [
-              "Before placing an order, you may contact us about product measurements, fit, styling or general product information. Where a product-specific size chart is available, we recommend checking those measurements before ordering.",
-            ],
-          },
-          {
-            title: "Returns and exchanges",
-            paragraphs: [
-              "For return or exchange assistance, please review the relevant policy first and contact customer care with your order number and request details. Our team will guide you through the applicable process.",
-            ],
-          },
-        ]}
-      />
+    <main className="contact">
+      {/* =====================================================
+          HERO
+      ===================================================== */}
 
-      <section className="contact-page__care">
-  <div className="contact-page__care-container">
-    <div className="contact-page__care-intro">
-      <div className="contact-page__care-eyebrow-row">
-        <span className="contact-page__care-line" />
+      <section className="contact__hero">
+        <div className="contact__container">
+          <nav
+            aria-label="Breadcrumb"
+            className="contact__crumbs"
+          >
+            <Link href="/">Home</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Contact Us</span>
+          </nav>
 
-        <p className="contact-page__care-eyebrow">
-          Customer Care
-        </p>
-      </div>
-
-      <h2 className="contact-page__care-title">
-        We&apos;re here to help.
-      </h2>
-
-      <p className="contact-page__care-description">
-        Have a question about an order, product or delivery?
-        Reach our customer care team directly.
-      </p>
-    </div>
-
-    <div className="contact-page__care-grid">
-      {siteConfig.contact.phone && (
-        <a
-          href={`tel:+${siteConfig.contact.phone}`}
-          className="contact-page__care-card"
-        >
-          <div className="contact-page__care-card-top">
-            <span className="contact-page__care-index">
-              01
-            </span>
-
-            <span className="contact-page__care-action">
-              Call
-            </span>
+          <div className="contact__eyebrow">
+            <span aria-hidden="true" />
+            Customer Care
           </div>
 
-          <div className="contact-page__care-card-body">
-            <p className="contact-page__care-label">
-              Phone
-            </p>
+          <h1 className="contact__title">
+            We&apos;re here <em>to help.</em>
+          </h1>
 
-            <p className="contact-page__care-value">
-              +{siteConfig.contact.phone}
-            </p>
+          <p className="contact__lead">
+            Whether it is an order, sizing, delivery, a return or
+            simply finding the right piece, our customer care
+            team is happy to guide you.
+          </p>
 
-            <span className="contact-page__care-link">
-              Call customer care
-              <span aria-hidden="true">↗</span>
-            </span>
+          <nav
+            aria-label={contentGroups.information.label}
+            className="contact__switcher"
+          >
+            {contentGroups.information.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={
+                  link.href === "/contact" ? "page" : undefined
+                }
+                className="contact__pill"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </section>
+
+      {/* =====================================================
+          CONTACT METHODS
+      ===================================================== */}
+
+      <section
+        className="contact__section"
+        aria-labelledby="contact-methods-title"
+      >
+        <div className="contact__container">
+          <header className="contact__section-head">
+            <h2
+              id="contact-methods-title"
+              className="contact__section-label"
+            >
+              Reach us directly
+            </h2>
+          </header>
+
+          <ul className="contact__methods">
+            {methods.map((method) => {
+              const Icon = method.icon;
+
+              return (
+                <li key={method.label}>
+                  <a
+                    href={method.href}
+                    {...("external" in method && method.external
+                      ? {
+                          target: "_blank",
+                          rel: "noopener noreferrer",
+                        }
+                      : {})}
+                    className="contact__method"
+                  >
+                    <span
+                      className="contact__method-icon"
+                      aria-hidden="true"
+                    >
+                      <Icon size={22} strokeWidth={1.5} />
+                    </span>
+
+                    <span className="contact__method-label">
+                      {method.label}
+                    </span>
+
+                    <span className="contact__method-value">
+                      {method.value}
+                    </span>
+
+                    <span className="contact__method-action">
+                      {method.action}
+                      <ArrowUpRight
+                        size={14}
+                        strokeWidth={1.6}
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
+      {/* =====================================================
+          TOPICS
+      ===================================================== */}
+
+      <section
+        className="contact__section"
+        aria-labelledby="contact-topics-title"
+      >
+        <div className="contact__container">
+          <header className="contact__section-head">
+            <h2
+              id="contact-topics-title"
+              className="contact__section-label"
+            >
+              What do you need help with?
+            </h2>
+          </header>
+
+          <ul className="contact__topics">
+            {topics.map((topic) => {
+              const Icon = topic.icon;
+
+              const href =
+                topic.href === "mailto" ? helpHref : topic.href;
+
+              return (
+                <li key={topic.title}>
+                  <Link href={href} className="contact__topic">
+                    <span
+                      className="contact__topic-icon"
+                      aria-hidden="true"
+                    >
+                      <Icon size={20} strokeWidth={1.5} />
+                    </span>
+
+                    <span className="contact__topic-copy">
+                      <strong>{topic.title}</strong>
+                      <span>{topic.description}</span>
+                    </span>
+
+                    <ArrowUpRight
+                      size={16}
+                      strokeWidth={1.5}
+                      aria-hidden="true"
+                      className="contact__topic-arrow"
+                    />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
+      {/* =====================================================
+          BEFORE YOU WRITE
+      ===================================================== */}
+
+      <section className="contact__section contact__section--last">
+        <div className="contact__container">
+          <div className="contact__prepare">
+            <div>
+              <p className="contact__eyebrow contact__eyebrow--plain">
+                Helps us help you
+              </p>
+
+              <h2 className="contact__prepare-title">
+                Before you get in touch
+              </h2>
+
+              <p className="contact__prepare-copy">
+                Good service starts with clear information. Having
+                these ready means we can answer faster.
+              </p>
+            </div>
+
+            <ul className="contact__checklist">
+              {checklist.map((item) => (
+                <li key={item}>
+                  <CheckCircle2
+                    size={18}
+                    strokeWidth={1.6}
+                    aria-hidden="true"
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
-        </a>
-      )}
+        </div>
+      </section>
 
-      {siteConfig.contact.email && (
-        <a
-          href={`mailto:${siteConfig.contact.email}`}
-          className="contact-page__care-card"
-        >
-          <div className="contact-page__care-card-top">
-            <span className="contact-page__care-index">
-              02
-            </span>
+      {/* =====================================================
+          CLOSING
+      ===================================================== */}
 
-            <span className="contact-page__care-action">
-              Email
-            </span>
-          </div>
+      <section className="contact__closing">
+        <div className="contact__container">
+          <p className="contact__closing-eyebrow">
+            Aayesha Fashion
+          </p>
 
-          <div className="contact-page__care-card-body">
-            <p className="contact-page__care-label">
-              Email
-            </p>
+          <h2 className="contact__closing-title">
+            Style that feels distinctly yours.
+          </h2>
 
-            <p className="contact-page__care-value contact-page__care-value--email">
-              {siteConfig.contact.email}
-            </p>
-
-            <span className="contact-page__care-link">
-              Send an enquiry
-              <span aria-hidden="true">↗</span>
-            </span>
-          </div>
-        </a>
-      )}
-    </div>
-
-    <div className="contact-page__care-note">
-      <span className="contact-page__care-note-mark" />
-
-      <p>
-        For order-related enquiries, please keep your
-        order number and registered email address ready.
-      </p>
-    </div>
-  </div>
-</section>
-    </>
+          <Link
+            href="/shop"
+            className="home-cta home-cta--light"
+          >
+            Shop all pieces
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

@@ -373,7 +373,7 @@ export function CheckoutCoupon() {
 
       <header className="checkout-coupon__header">
         <div className="checkout-coupon__step">
-          <span>04</span>
+          <span>05</span>
         </div>
 
         <div className="checkout-coupon__heading-content">

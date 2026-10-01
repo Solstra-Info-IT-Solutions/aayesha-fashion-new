@@ -774,7 +774,7 @@ export function CheckoutPlaceOrder() {
         <div className="checkout-place-order__heading">
 
           <div className="checkout-place-order__step">
-            05
+            06
           </div>
 
           <div className="checkout-place-order__heading-content">

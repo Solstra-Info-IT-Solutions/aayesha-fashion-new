@@ -1,0 +1,415 @@
+/* =========================================================
+   PRODUCT DETAIL — REFRESH
+   Loaded after ProductDetail.css. Gives the page a card-based
+   layout: framed gallery, a sticky purchase card, tidy trust
+   chips and card accordions. Selectors are prefixed with
+   .product-detail so they win over the base rules.
+========================================================= */
+
+/* ---------- Breadcrumb ---------- */
+
+.product-detail .product-detail__breadcrumb {
+  gap: 10px;
+
+  color: var(--color-text-secondary);
+
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.product-detail .product-detail__breadcrumb a:hover {
+  color: var(--color-clay);
+}
+
+.product-detail .product-detail__breadcrumb-current {
+  color: var(--color-text);
+
+  font-weight: 600;
+}
+
+/* ---------- Main grid ---------- */
+
+@media (min-width: 1024px) {
+  .product-detail .product-detail__grid {
+    grid-template-columns: minmax(0, 1.12fr) minmax(380px, 0.88fr);
+
+    align-items: start;
+
+    gap: clamp(32px, 4vw, 64px);
+  }
+
+  /* Purchase card stays in view while the gallery scrolls */
+
+  .product-detail .product-detail__info {
+    position: sticky;
+    top: 96px;
+
+    padding: 32px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+
+    background: var(--color-surface);
+
+    box-shadow: 0 18px 50px rgba(63, 45, 42, 0.06);
+  }
+}
+
+/* ---------- Gallery ---------- */
+
+.product-detail .product-detail__media-stage {
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: var(--color-surface-soft);
+}
+
+.product-detail .product-detail__thumbnail {
+  overflow: hidden;
+
+  border: 2px solid transparent;
+  border-radius: 12px;
+
+  opacity: 0.72;
+
+  transition:
+    opacity 180ms ease,
+    border-color 180ms ease;
+}
+
+.product-detail .product-detail__thumbnail:hover {
+  opacity: 1;
+}
+
+.product-detail .product-detail__thumbnail--active {
+  border-color: var(--color-clay);
+
+  opacity: 1;
+}
+
+.product-detail .product-detail__thumbnail-index {
+  display: none;
+}
+
+.product-detail .product-detail__media-badge {
+  top: 16px;
+  left: 16px;
+
+  padding: 7px 12px;
+
+  border-radius: 8px;
+
+  background: rgba(251, 249, 245, 0.95);
+  color: var(--color-text);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.product-detail .product-detail__media-count {
+  right: 16px;
+  bottom: 16px;
+
+  padding: 6px 12px;
+
+  border-radius: 8px;
+
+  background: rgba(251, 249, 245, 0.92);
+  color: var(--color-text);
+}
+
+.product-detail .product-detail__view-button {
+  inset: auto auto 16px 16px;
+
+  width: auto;
+  height: auto;
+
+  padding: 8px 14px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: rgba(251, 249, 245, 0.92);
+  color: var(--color-text);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.product-detail .product-detail__media-nav {
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(251, 249, 245, 0.94);
+  color: var(--color-text);
+
+  box-shadow: 0 6px 18px rgba(63, 45, 42, 0.14);
+}
+
+/* ---------- Purchase card ---------- */
+
+.product-detail .product-detail__brand-row {
+  margin-bottom: 10px;
+}
+
+.product-detail .product-detail__eyebrow {
+  color: var(--color-clay);
+
+  font-weight: 700;
+  letter-spacing: 0.24em;
+}
+
+.product-detail .product-detail__round-action {
+  border: 1px solid var(--color-border-dark);
+  border-radius: 50%;
+
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.product-detail .product-detail__round-action--active {
+  border-color: var(--color-clay);
+
+  background: var(--color-clay);
+  color: var(--color-text-inverse);
+}
+
+.product-detail .product-detail__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 400;
+
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.product-detail .product-detail__description {
+  color: var(--color-text-secondary);
+
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+
+.product-detail .product-detail__price-block {
+  padding: 18px 0;
+
+  border-block: 1px solid var(--color-border);
+}
+
+.product-detail .product-detail__price-row {
+  align-items: center;
+
+  gap: 8px 14px;
+}
+
+.product-detail .product-detail__price {
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  font-weight: 600;
+}
+
+.product-detail .product-detail__discount {
+  padding: 5px 10px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: var(--color-error-soft);
+  color: var(--color-clay);
+}
+
+.product-detail .product-detail__tax {
+  margin-top: 8px;
+}
+
+.product-detail .product-detail__stock {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 18px 0 4px;
+  padding: 7px 14px;
+
+  border-radius: 999px;
+
+  background: var(--color-success-soft);
+  color: var(--color-success);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+}
+
+.product-detail .product-detail__stock--low-stock {
+  background: var(--color-error-soft);
+  color: var(--color-clay);
+}
+
+.product-detail .product-detail__stock--out-of-stock {
+  background: var(--color-surface-soft);
+  color: var(--color-text-secondary);
+}
+
+.product-detail .product-detail__purchase {
+  padding-top: 18px;
+}
+
+.product-detail .product-detail__purchase-label-row span {
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+}
+
+.product-detail .product-detail__text-action {
+  color: var(--color-clay);
+}
+
+.product-detail .product-detail__quantity {
+  overflow: hidden;
+
+  border: 1px solid var(--color-border-dark);
+  border-radius: 12px;
+
+  background: var(--color-surface);
+}
+
+.product-detail .product-detail__add-button,
+.product-detail .product-detail__buy-button {
+  min-height: 52px;
+
+  border-radius: 12px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+}
+
+.product-detail .product-detail__add-button {
+  border: 1px solid var(--color-clay);
+
+  background: var(--color-clay);
+  color: var(--color-text-inverse);
+}
+
+.product-detail .product-detail__add-button:hover:not(:disabled) {
+  border-color: var(--color-clay-deep);
+
+  background: var(--color-clay-deep);
+}
+
+.product-detail .product-detail__buy-button {
+  border: 1px solid var(--color-clay);
+
+  background: transparent;
+  color: var(--color-clay);
+}
+
+.product-detail .product-detail__buy-button:hover:not(:disabled) {
+  background: var(--color-clay);
+  color: var(--color-text-inverse);
+}
+
+/* Delivery check */
+
+.product-detail .product-detail__delivery {
+  margin-top: 20px;
+  padding: 16px;
+
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+
+  background: var(--color-surface-soft);
+}
+
+.product-detail .product-detail__pincode input {
+  border-radius: 10px 0 0 10px;
+}
+
+.product-detail .product-detail__pincode button {
+  border-radius: 0 10px 10px 0;
+}
+
+/* Trust chips */
+
+.product-detail .product-detail__trust {
+  gap: 10px;
+
+  margin-top: 20px;
+
+  border: 0;
+}
+
+.product-detail .product-detail__trust-item {
+  padding: 14px;
+
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+
+  background: var(--color-surface);
+}
+
+/* ---------- Details band ---------- */
+
+.product-detail .product-detail__editorial {
+  margin-top: clamp(32px, 5vw, 64px);
+
+  border-block: 1px solid var(--color-border);
+
+  background: var(--color-surface-soft);
+}
+
+.product-detail .product-detail__editorial-mark {
+  display: none;
+}
+
+/* ---------- Accordions as cards ---------- */
+
+.product-detail .product-detail__accordions {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.product-detail .product-detail__accordion {
+  overflow: hidden;
+
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+
+  background: var(--color-surface);
+}
+
+.product-detail .product-detail__accordion-trigger {
+  min-height: 60px;
+
+  padding-inline: 20px;
+}
+
+.product-detail .product-detail__accordion-body {
+  padding-inline: 20px;
+}
+
+/* ---------- Recommendations ---------- */
+
+.product-detail .product-detail__recommendations-heading h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-detail .product-detail__thumbnail {
+    transition: none;
+  }
+}
