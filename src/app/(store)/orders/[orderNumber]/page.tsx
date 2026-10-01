@@ -21,6 +21,9 @@ import {
   type OrderDetails,
 } from "@/lib/api/orders";
 
+import { SuccessSales } from "@/components/orders-sales/success-sales";
+import { useAuthStore } from "@/store/auth-store";
+
 import "./PublicOrderPage.css";
 
 interface PublicOrderPageProps {
@@ -106,6 +109,10 @@ const getStatusTone = (
 export default function PublicOrderPage({
   params,
 }: PublicOrderPageProps) {
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated,
+  );
+
   const [orderNumber, setOrderNumber] =
     useState("");
 
@@ -839,6 +846,27 @@ export default function PublicOrderPage({
           </div>
         </div>
       </section>
+
+      {order.shippingInfo?.trackingUrl &&
+      ["shipped", "in_transit", "out_for_delivery"].includes(
+        order.status,
+      ) ? (
+        <div className="public-order-page__container">
+          <a
+            href={order.shippingInfo.trackingUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="order-track-link"
+          >
+            Track shipment with {order.shippingInfo.courierName || "courier"}
+          </a>
+        </div>
+      ) : null}
+
+      <SuccessSales
+        order={order}
+        isAuthenticated={isAuthenticated}
+      />
     </main>
   );
 }
