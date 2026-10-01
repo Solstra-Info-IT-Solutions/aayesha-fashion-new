@@ -1,5 +1,8 @@
 "use client";
 
+import { PendingPaymentPanel } from "@/components/orders-sales/pending-payment-panel";
+import { ProductStrip } from "@/components/orders-sales/product-strip";
+import { ReorderButton } from "@/components/orders-sales/reorder-button";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -212,6 +215,9 @@ export function OrderDetails({
   const [order, setOrder] =
     useState<OrderDetailsData | null>(null);
 
+  const [reloadKey, setReloadKey] =
+    useState(0);
+
   const [isLoading, setIsLoading] =
     useState(true);
 
@@ -281,6 +287,7 @@ export function OrderDetails({
     isAuthenticated,
     isInitialized,
     orderNumber,
+    reloadKey,
   ]);
 
   /* ==========================================================
@@ -548,6 +555,18 @@ export function OrderDetails({
         =================================================== */}
 
         <div className="order-details__main-column">
+          <PendingPaymentPanel
+            orderNumber={order.orderNumber}
+            paymentMethod={order.paymentMethod}
+            paymentStatus={order.paymentStatus}
+            status={order.status}
+            paymentExpiresAt={order.paymentExpiresAt}
+            paymentClaimedAt={order.paymentClaimedAt}
+            paymentWhatsapp={order.paymentWhatsapp}
+            authToken={accessToken}
+            onChanged={() => setReloadKey((key) => key + 1)}
+          />
+
           {/* =================================================
               ORDERED ITEMS
           ================================================= */}
@@ -656,6 +675,42 @@ export function OrderDetails({
               )}
             </div>
           </section>
+
+          {/* =================================================
+              BUY AGAIN + REVIEWS
+          ================================================= */}
+
+          {order.status !== "cancelled" || order.items.length > 0 ? (
+            <div style={{ display: "grid", gap: 12 }}>
+              <div>
+                <ReorderButton
+                  items={order.items.map((item) => ({
+                    productId: item.productId,
+                    quantity: item.quantity,
+                    name: item.name,
+                  }))}
+                />
+              </div>
+
+              {order.status === "delivered"
+                ? order.items.map((item) => (
+                    <div
+                      key={`review-${item.productId}`}
+                      className="review-prompt"
+                    >
+                      <span>
+                        How was <strong>{item.name}</strong>? Your review helps
+                        other shoppers.
+                      </span>
+
+                      <Link href={`/products/${item.productId}#reviews`}>
+                        Write a review
+                      </Link>
+                    </div>
+                  ))
+                : null}
+            </div>
+          ) : null}
 
           {/* =================================================
               ADDRESS + PAYMENT
@@ -1012,6 +1067,12 @@ export function OrderDetails({
           </Link>
         </aside>
       </div>
+
+      <ProductStrip
+        eyebrow="Keep exploring"
+        title="Customer favourites"
+        excludeIds={order.items.map((item) => item.productId)}
+      />
     </section>
   );
 }

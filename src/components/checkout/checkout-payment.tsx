@@ -1,6 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { siteConfig } from "@/config/site";
+import { useEffect, type ReactNode } from "react";
 
 import {
   Banknote,
@@ -23,8 +24,19 @@ export function CheckoutPayment() {
     (state) => state.setPayment,
   );
 
+  // A remembered "online" choice is not valid while the gateway is off.
+  useEffect(() => {
+    if (!siteConfig.features.onlinePayment && selected === "online") {
+      setPayment("bank_upi");
+    }
+  }, [selected, setPayment]);
+
   const paymentWhatsapp = useCheckoutStore(
     (state) => state.paymentWhatsapp,
+  );
+
+  const contactPhone = useCheckoutStore(
+    (state) => state.contact.phone,
   );
 
   const setPaymentWhatsapp = useCheckoutStore(
@@ -82,6 +94,7 @@ export function CheckoutPayment() {
             onClick={() => setPayment("cod")}
           />
 
+          {siteConfig.features.onlinePayment ? (
           <PaymentOption
             id="online"
             label="Online Payment"
@@ -91,15 +104,23 @@ export function CheckoutPayment() {
             active={selected === "online"}
             onClick={() => setPayment("online")}
           />
+          ) : null}
 
           <PaymentOption
             id="bank_upi"
-            label="Bank Transfer / UPI Pay"
-            description="Get the bill with payment details on WhatsApp and pay from your own app"
+            label="Pay via WhatsApp (UPI / Bank Transfer)"
+            description="We send your bill with a UPI QR code on WhatsApp. Pay within 30 minutes or the order is cancelled automatically."
             meta="Bill sent on WhatsApp"
             icon={<Smartphone />}
             active={selected === "bank_upi"}
-            onClick={() => setPayment("bank_upi")}
+            onClick={() => {
+              setPayment("bank_upi");
+
+              // The bill goes to the contact number unless changed.
+              if (!paymentWhatsapp && contactPhone) {
+                setPaymentWhatsapp(contactPhone);
+              }
+            }}
           />
         </div>
 
@@ -127,9 +148,10 @@ export function CheckoutPayment() {
 
             <p className="checkout-payment__whatsapp-note">
               We will send your bill with the UPI QR
-              code and bank details to this number.
-              Your order is confirmed once the payment
-              is received.
+              code to this WhatsApp number. Pay within
+              30 minutes: your order is confirmed once
+              the payment is received, otherwise it is
+              cancelled automatically.
             </p>
           </div>
         ) : null}

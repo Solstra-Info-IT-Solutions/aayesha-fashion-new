@@ -1,5 +1,6 @@
 "use client";
 
+import { PendingPaymentPanel } from "@/components/orders-sales/pending-payment-panel";
 import { trackPurchase } from "@/lib/analytics";
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
@@ -160,6 +161,9 @@ function CheckoutSuccessContent() {
   const [publicAccessToken, setPublicAccessToken] =
     useState("");
 
+  const [reloadKey, setReloadKey] =
+    useState(0);
+
   const [loading, setLoading] =
     useState(true);
 
@@ -274,7 +278,7 @@ function CheckoutSuccessContent() {
     return () => {
       cancelled = true;
     };
-  }, [orderNumber]);
+  }, [orderNumber, reloadKey]);
 
   if (loading) {
     return <CheckoutSuccessLoading />;
@@ -290,6 +294,11 @@ function CheckoutSuccessContent() {
 
   const isCod =
     order.paymentMethod === "cod";
+
+  const awaitingPayment =
+    order.paymentMethod === "bank_upi" &&
+    order.paymentStatus === "pending" &&
+    order.status !== "cancelled";
 
   const fullAddress = [
     order.shippingAddress.addressLine1,
@@ -329,16 +338,27 @@ function CheckoutSuccessContent() {
             </div>
 
             <p className="checkout-success__eyebrow">
-              Order Confirmed
+              {order.status === "cancelled"
+                ? "Order Cancelled"
+                : awaitingPayment
+                  ? "Order Received"
+                  : "Order Confirmed"}
             </p>
 
             <h1 className="checkout-success__hero-title">
-              Thank you for your order.
+              {order.status === "cancelled"
+                ? "This order was cancelled."
+                : awaitingPayment
+                  ? "Just one more step."
+                  : "Thank you for your order."}
             </h1>
 
             <p className="checkout-success__hero-description">
-              Your order has been received and is
-              now being prepared with care.
+              {order.status === "cancelled"
+                ? "Payment was not received in time, so the order was cancelled automatically. You can place a new order any time."
+                : awaitingPayment
+                  ? "We have sent your bill to WhatsApp. Pay within 30 minutes to confirm your order."
+                  : "Your order has been received and is now being prepared with care."}
             </p>
 
             <div className="checkout-success__order-meta">
@@ -369,6 +389,18 @@ function CheckoutSuccessContent() {
           {/* LEFT COLUMN */}
 
           <div className="checkout-success__main-column">
+            <PendingPaymentPanel
+              orderNumber={order.orderNumber}
+              paymentMethod={order.paymentMethod}
+              paymentStatus={order.paymentStatus}
+              status={order.status}
+              paymentExpiresAt={order.paymentExpiresAt}
+              paymentClaimedAt={order.paymentClaimedAt}
+              paymentWhatsapp={order.paymentWhatsapp}
+              publicAccessToken={publicAccessToken}
+              onChanged={() => setReloadKey((key) => key + 1)}
+            />
+
             {/* PAYMENT */}
 
             <div className="checkout-success__card checkout-success__payment-card">

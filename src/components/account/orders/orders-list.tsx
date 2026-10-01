@@ -1,5 +1,7 @@
 "use client";
 
+import { ProductStrip } from "@/components/orders-sales/product-strip";
+import { ReorderButton } from "@/components/orders-sales/reorder-button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
@@ -455,9 +457,13 @@ export function OrdersList() {
                       order.status,
                     )}`}
                   >
-                    {formatStatus(
-                      order.status,
-                    )}
+                    {order.paymentMethod === "bank_upi" &&
+                    order.paymentStatus === "pending" &&
+                    order.status !== "cancelled"
+                      ? "Awaiting payment"
+                      : formatStatus(
+                          order.status,
+                        )}
                   </span>
                 </div>
 
@@ -542,7 +548,14 @@ export function OrdersList() {
                       className="order-list-card__view"
                     >
                       <span>
-                        View Order
+                        {order.paymentMethod ===
+                          "bank_upi" &&
+                        order.paymentStatus ===
+                          "pending" &&
+                        order.status !==
+                          "cancelled"
+                          ? "Complete Payment"
+                          : "View Order"}
                       </span>
 
                       <ArrowRight
@@ -550,6 +563,23 @@ export function OrdersList() {
                         strokeWidth={1.6}
                       />
                     </Link>
+
+                    {order.status ===
+                      "delivered" ||
+                    order.status ===
+                      "cancelled" ? (
+                      <ReorderButton
+                        items={order.items.map(
+                          (item) => ({
+                            productId:
+                              item.productId,
+                            quantity:
+                              item.quantity,
+                            name: item.name,
+                          }),
+                        )}
+                      />
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -557,6 +587,16 @@ export function OrdersList() {
           );
         })}
       </div>
+
+      <ProductStrip
+        eyebrow="What's next"
+        title="Customer favourites"
+        excludeIds={orders.flatMap((order) =>
+          order.items.map(
+            (item) => item.productId,
+          ),
+        )}
+      />
     </section>
   );
 }
