@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/config/site";
 import { getProducts } from "@/lib/api/products";
+import { landingPages } from "@/config/landing-pages";
 
 const staticRoutes = [
   "/",
@@ -89,8 +90,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     productEntries = [];
   }
 
+  /*
+   * SEO landing pages: only those that currently have products,
+   * matching the noindex rule on the page itself.
+   */
+  const landingChecks = await Promise.all(
+    landingPages.map(async (page) => {
+      try {
+        const response = await getProducts({
+          page: 1,
+          limit: 1,
+          ...page.query,
+        });
+
+        return (response.products ?? []).length > 0 ? page : null;
+      } catch {
+        return null;
+      }
+    }),
+  );
+
+  const landingEntries: MetadataRoute.Sitemap = landingChecks
+    .filter((page): page is (typeof landingPages)[number] => Boolean(page))
+    .map((page) => ({
+      url: absoluteUrl(`/shop/${page.slug}`),
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+
   return [
     ...staticEntries,
+    ...landingEntries,
     ...productEntries,
   ];
 }

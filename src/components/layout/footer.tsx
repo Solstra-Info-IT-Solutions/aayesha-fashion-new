@@ -10,6 +10,7 @@ import {
 
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/shared/container";
+import { featuredLandingPages } from "@/config/landing-pages";
 
 import "./Footer.css";
 
@@ -31,6 +32,10 @@ const footerNavigation = {
       label: "Shop All",
       href: "/shop",
     },
+    ...featuredLandingPages.map((page) => ({
+      label: page.title,
+      href: `/shop/${page.slug}`,
+    })),
   ],
 
   information: [
