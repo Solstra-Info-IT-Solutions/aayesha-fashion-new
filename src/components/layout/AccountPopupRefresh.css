@@ -1,0 +1,131 @@
+/* =========================================================
+   ACCOUNT POPUP — REFRESH
+   Rounded panel, tinted identity header, clay call-to-action
+   and rounded navigation rows. Loaded after AccountPopup.css.
+========================================================= */
+
+.account-popup .account-popup__surface {
+  overflow: hidden;
+
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+
+  background: var(--color-surface);
+
+  box-shadow: 0 24px 70px rgba(63, 45, 42, 0.18);
+}
+
+.account-popup .account-popup__accent {
+  display: none;
+}
+
+.account-popup .account-popup__profile {
+  background: var(--color-surface-soft);
+}
+
+.account-popup .account-popup__avatar {
+  border-radius: 50%;
+
+  background: var(--color-clay);
+  box-shadow: none;
+}
+
+.account-popup .account-popup__avatar-glow {
+  display: none;
+}
+
+.account-popup .account-popup__initials {
+  color: var(--color-text-inverse);
+}
+
+.account-popup .account-popup__name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.account-popup .account-popup__close {
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.account-popup .account-popup__cta {
+  border: 0;
+  border-radius: 12px;
+
+  background: var(--color-clay);
+  color: var(--color-text-inverse);
+}
+
+.account-popup .account-popup__cta:hover {
+  background: var(--color-clay-deep);
+}
+
+.account-popup .account-popup__cta-label,
+.account-popup .account-popup__cta-text {
+  color: inherit;
+}
+
+.account-popup .account-popup__cta-icon {
+  background: rgba(251, 249, 245, 0.18);
+  color: var(--color-text-inverse);
+}
+
+.account-popup .account-popup__navigation {
+  padding: 10px;
+}
+
+.account-popup .account-popup__nav-item {
+  border-radius: 12px;
+}
+
+.account-popup .account-popup__nav-item:hover {
+  background: var(--color-surface-soft);
+}
+
+.account-popup .account-popup__nav-item--active {
+  background: var(--color-surface-soft);
+}
+
+.account-popup .account-popup__nav-icon {
+  border: 0;
+  border-radius: 10px;
+
+  background: var(--color-surface-soft);
+  color: var(--color-clay);
+}
+
+.account-popup .account-popup__nav-item--active .account-popup__nav-icon {
+  background: var(--color-clay);
+  color: var(--color-text-inverse);
+}
+
+.account-popup .account-popup__actions {
+  padding: 8px 10px 10px;
+
+  border-top: 1px solid var(--color-border);
+}
+
+.account-popup .account-popup__action {
+  border-radius: 12px;
+}
+
+.account-popup .account-popup__action-icon {
+  border: 0;
+  border-radius: 10px;
+
+  background: var(--color-surface-soft);
+}
+
+/* Six links no longer fit on short screens, so the panel scrolls */
+
+.account-popup .account-popup__surface {
+  max-height: calc(100vh - 110px);
+
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+}

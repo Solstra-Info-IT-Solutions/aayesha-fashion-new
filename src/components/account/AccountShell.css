@@ -1,0 +1,401 @@
+/* =========================================================
+   ACCOUNT SHELL
+   Sidebar (tabs on phones) + a content column that every
+   account page renders into. The page components keep their
+   own markup; the rules below make them sit in the shell:
+   same width, no duplicate back-bars, rounded cards.
+========================================================= */
+
+.account-shell {
+  min-height: 70vh;
+
+  background: var(--color-canvas);
+}
+
+.account-shell__container {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+
+  align-items: start;
+
+  gap: clamp(24px, 3.5vw, 56px);
+
+  width: min(1280px, calc(100% - 96px));
+
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 48px) 0 clamp(56px, 8vw, 100px);
+}
+
+/* ---------- Sidebar ---------- */
+
+.account-shell__side {
+  position: sticky;
+  top: 100px;
+
+  min-width: 0;
+
+  padding: 22px;
+
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+
+  background: var(--color-surface);
+}
+
+.account-shell__me {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.account-shell__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 52px;
+  height: 52px;
+
+  flex: 0 0 52px;
+
+  border-radius: 50%;
+
+  background: var(--color-clay);
+  color: var(--color-text-inverse);
+
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.account-shell__identity {
+  min-width: 0;
+}
+
+.account-shell__eyebrow {
+  margin: 0 0 4px;
+
+  color: var(--color-clay);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.account-shell__name {
+  margin: 0;
+
+  overflow: hidden;
+
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-shell__email {
+  margin: 2px 0 0;
+
+  overflow: hidden;
+
+  color: var(--color-text-secondary);
+
+  font-size: 12px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-shell__nav {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+
+  padding-top: 14px;
+}
+
+.account-shell__link {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  width: 100%;
+  min-height: 46px;
+
+  padding: 0 14px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: transparent;
+  color: var(--color-text);
+
+  cursor: pointer;
+
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+
+  text-align: left;
+  text-decoration: none;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.account-shell__link:hover {
+  background: var(--color-surface-soft);
+}
+
+.account-shell__link[aria-current="page"] {
+  background: var(--color-clay);
+  color: var(--color-text-inverse);
+}
+
+.account-shell__link--signout {
+  margin-top: 8px;
+
+  border-top: 1px solid var(--color-border);
+  border-radius: 0 0 12px 12px;
+
+  color: var(--color-text-secondary);
+}
+
+.account-shell__link:focus-visible {
+  outline: 2px solid var(--color-clay);
+  outline-offset: 2px;
+}
+
+/* ---------- Content column ---------- */
+
+.account-shell__content {
+  min-width: 0;
+}
+
+/* Pages size themselves to the column */
+
+.account-shell__content .profile-details__container,
+.account-shell__content .edit-account__container,
+.account-shell__content .account-coupons__container {
+  width: 100%;
+  max-width: none;
+
+  padding: 0;
+}
+
+.account-shell__content .orders-list,
+.account-shell__content .order-details,
+.account-shell__content .address-form {
+  max-width: none;
+
+  padding: 0;
+
+  background: transparent;
+}
+
+.account-shell__content .saved-addresses {
+  padding: 0;
+}
+
+.account-shell__content .saved-addresses__header,
+.account-shell__content .saved-addresses__grid,
+.account-shell__content .saved-addresses__feedback,
+.account-shell__content .saved-addresses__footer {
+  width: 100%;
+}
+
+/* The sidebar already offers these */
+
+.account-shell__content .profile-details__topbar,
+.account-shell__content .edit-account__back,
+.account-shell__content .address-form__back,
+.account-shell__content .saved-addresses__back-link,
+.account-shell__content .saved-addresses__footer {
+  display: none;
+}
+
+/* One heading style across the account pages */
+
+.account-shell__content .profile-details__title,
+.account-shell__content .orders-list__title,
+.account-shell__content .saved-addresses__title,
+.account-shell__content .edit-account__title,
+.account-shell__content .address-form__title,
+.account-shell__content .account-coupons__title,
+.account-shell__content .order-details__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4vw, 3.1rem);
+  font-weight: 400;
+
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+/* Rounded cards */
+
+.account-shell__content .profile-details__section,
+.account-shell__content .profile-details__summary,
+.account-shell__content .order-list-card,
+.account-shell__content .orders-list__state-card,
+.account-shell__content .order-details__panel,
+.account-shell__content .order-details__info-card,
+.account-shell__content .order-details__summary,
+.account-shell__content .order-details__error-card,
+.account-shell__content .saved-address-card,
+.account-shell__content .address-form__section,
+.account-shell__content .account-coupon {
+  overflow: hidden;
+
+  border-radius: 16px;
+}
+
+.account-shell__content .profile-details__button,
+.account-shell__content .orders-list__button,
+.account-shell__content .address-form__primary-action,
+.account-shell__content .address-form__secondary-action,
+.account-shell__content .address-form__save-action,
+.account-shell__content .edit-account__primary-button,
+.account-shell__content .edit-account__secondary-button {
+  border-radius: 12px;
+}
+
+.account-shell__content .order-list-card__status,
+.account-shell__content .address-default__badge {
+  border-radius: 999px;
+}
+
+/* ---------- Tablet and phone: sidebar becomes a tab bar ---------- */
+
+@media (max-width: 1023px) {
+  .account-shell__container {
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 20px;
+
+    width: min(1280px, calc(100% - 64px));
+  }
+
+  .account-shell__side {
+    position: static;
+
+    padding: 16px;
+  }
+
+  .account-shell__me {
+    padding-bottom: 14px;
+  }
+
+  .account-shell__nav {
+    flex-direction: row;
+
+    gap: 8px;
+
+    padding-top: 14px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+  .account-shell__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .account-shell__link {
+    flex: 0 0 auto;
+
+    width: auto;
+    min-height: 40px;
+
+    padding: 0 16px;
+
+    border: 1px solid var(--color-border-dark);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .account-shell__link[aria-current="page"] {
+    border-color: var(--color-clay);
+  }
+
+  .account-shell__link--signout {
+    margin-top: 0;
+
+    border-top: 1px solid var(--color-border-dark);
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .account-shell__container {
+    width: calc(100% - 40px);
+  }
+}
+
+@media (max-width: 479px) {
+  .account-shell__container {
+    width: calc(100% - 32px);
+  }
+}
+
+/* Profile page: the shell sidebar replaces its own side column */
+
+.account-shell__content .profile-details__layout {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.account-shell__content .profile-details__sidebar {
+  display: none;
+}
+
+/* Coupons: never clip the code */
+
+.account-shell__content .account-coupons__grid {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.account-shell__content .account-coupon__code strong {
+  max-width: none;
+
+  overflow: visible;
+
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.account-shell__content .account-coupon__footer {
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+/* Edit account and order hero cards */
+
+.account-shell__content .edit-account__profile,
+.account-shell__content .edit-account__form,
+.account-shell__content .edit-account__note,
+.account-shell__content .order-details__hero {
+  border-radius: 16px;
+}
+
+.account-shell__content .edit-account__form,
+.account-shell__content .edit-account__profile {
+  overflow: hidden;
+}
