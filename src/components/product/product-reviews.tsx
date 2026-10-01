@@ -12,6 +12,9 @@ import {
   type ProductReviewsResponse,
   type ReviewEligibility,
 } from "@/lib/api/reviews";
+import { ReviewMediaGrid } from "@/components/product/review-media-grid";
+import { ReviewMediaPicker } from "@/components/product/review-media-picker";
+import type { OwnReviewMedia } from "@/lib/api/reviews";
 import { useAuthStore } from "@/store/auth-store";
 import type { Product } from "@/types/product";
 
@@ -76,6 +79,7 @@ export function ProductReviews({ product }: ProductReviewsProps) {
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [media, setMedia] = useState<OwnReviewMedia[]>([]);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -135,7 +139,7 @@ export function ProductReviews({ product }: ProductReviewsProps) {
 
       const review = await createReview(
         productId,
-        { rating, title, body },
+        { rating, title, body, media },
         accessToken,
       );
 
@@ -149,6 +153,7 @@ export function ProductReviews({ product }: ProductReviewsProps) {
       setRating(0);
       setTitle("");
       setBody("");
+      setMedia([]);
 
       toast.success("Thank you! Your review will appear once approved.");
     } catch (error) {
@@ -290,6 +295,14 @@ export function ProductReviews({ product }: ProductReviewsProps) {
                       className="product-reviews__input"
                     />
 
+                    {accessToken ? (
+                      <ReviewMediaPicker
+                        value={media}
+                        onChange={setMedia}
+                        accessToken={accessToken}
+                      />
+                    ) : null}
+
                     <button
                       type="submit"
                       disabled={submitting}
@@ -345,6 +358,8 @@ export function ProductReviews({ product }: ProductReviewsProps) {
                         <p className="product-reviews__item-body">
                           {review.body}
                         </p>
+
+                        <ReviewMediaGrid media={review.media ?? []} />
 
                         <p className="product-reviews__author">
                           {review.authorName}
