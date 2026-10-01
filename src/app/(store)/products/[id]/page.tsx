@@ -260,7 +260,7 @@ export async function generateMetadata({
     if (!response) {
       return {
         title:
-          "Product Not Found | Aayesha Fashion",
+          "Product Not Found",
 
         description:
           "The requested product could not be found.",
@@ -396,7 +396,7 @@ export async function generateMetadata({
 
     return {
       title:
-        "Product Not Found | Aayesha Fashion",
+        "Product Not Found",
 
       description:
         "The requested product could not be found.",

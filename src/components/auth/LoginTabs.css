@@ -1,0 +1,30 @@
+.login-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 24px;
+  border: 1px solid var(--color-border);
+}
+
+.login-tabs__tab {
+  min-height: 46px;
+  border: 0;
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.login-tabs__tab[aria-selected="true"] {
+  background: var(--color-text);
+  color: var(--color-text-inverse, #fff);
+}
+
+.login-tabs__tab:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}

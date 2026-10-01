@@ -10,6 +10,7 @@ import {
   markNotificationRead,
   type CustomerNotification,
 } from "@/lib/api/notifications";
+import { NOTIFICATIONS_CHANGED_EVENT } from "@/components/layout/notification-bell";
 import { useAuthStore } from "@/store/auth-store";
 
 import "./AccountNotifications.css";
@@ -67,6 +68,7 @@ export function AccountNotifications() {
           : current,
       );
       setUnread((count) => Math.max(0, count - 1));
+      window.dispatchEvent(new Event(NOTIFICATIONS_CHANGED_EVENT));
     } catch {
       /* non-blocking */
     }
@@ -77,6 +79,7 @@ export function AccountNotifications() {
 
     try {
       await markAllNotificationsRead(accessToken);
+      window.dispatchEvent(new Event(NOTIFICATIONS_CHANGED_EVENT));
       setReloadKey((key) => key + 1);
     } catch {
       toast.error("Unable to mark notifications as read.");
