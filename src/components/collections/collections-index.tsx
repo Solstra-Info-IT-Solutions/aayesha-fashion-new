@@ -1,5 +1,6 @@
 "use client";
 
+import { ProductInsightsProvider } from "@/components/listing-sales/insights-context";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -224,14 +225,18 @@ export function CollectionsIndex({
               </Link>
             </header>
 
-            <div className="collections-index__products">
-              {visibleFeatured.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-            </div>
+            <ProductInsightsProvider
+              productIds={visibleFeatured.map((product) => product._id)}
+            >
+              <div className="collections-index__products">
+                {visibleFeatured.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                  />
+                ))}
+              </div>
+            </ProductInsightsProvider>
           </div>
         </section>
       )}

@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { ProductInsightsProvider } from "@/components/listing-sales/insights-context";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -193,15 +194,19 @@ export default async function LandingPageRoute({
                   {products.length} style{products.length === 1 ? "" : "s"}
                 </p>
 
-                <div className="landing__grid">
-                  {products.map((product, index) => (
-                    <ProductCard
-                      key={product._id}
-                      product={product}
-                      priority={index < 4}
-                    />
-                  ))}
-                </div>
+                <ProductInsightsProvider
+                  productIds={products.map((product) => product._id)}
+                >
+                  <div className="landing__grid">
+                    {products.map((product, index) => (
+                      <ProductCard
+                        key={product._id}
+                        product={product}
+                        priority={index < 4}
+                      />
+                    ))}
+                  </div>
+                </ProductInsightsProvider>
               </>
             ) : (
               <div className="landing__empty">

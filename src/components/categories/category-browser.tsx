@@ -1,5 +1,6 @@
 "use client";
 
+import { ProductInsightsProvider } from "@/components/listing-sales/insights-context";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -385,14 +386,18 @@ export function CategoryBrowser({
           )}
 
           {visibleProducts.length > 0 ? (
-            <div className="category-browser__product-grid">
-              {visibleProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-            </div>
+            <ProductInsightsProvider
+              productIds={visibleProducts.map((product) => product._id)}
+            >
+              <div className="category-browser__product-grid">
+                {visibleProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                  />
+                ))}
+              </div>
+            </ProductInsightsProvider>
           ) : products.length > 0 ? (
             <div className="category-browser__no-products">
               <p className="category-browser__no-products-eyebrow">

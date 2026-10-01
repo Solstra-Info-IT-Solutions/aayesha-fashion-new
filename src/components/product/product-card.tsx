@@ -1,6 +1,9 @@
 /* ProductCard.tsx */
 "use client";
 
+import { Stars } from "@/components/product/product-reviews";
+import { useProductInsight } from "@/components/listing-sales/insights-context";
+import "@/components/listing-sales/ListingSales.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Minus, Plus, ShoppingBag } from "lucide-react";
@@ -37,6 +40,7 @@ export function ProductCard({
   priority = false,
 }: ProductCardProps) {
   const availability = getProductAvailability(product);
+  const insight = useProductInsight(product._id);
   const primaryMedia = getPrimaryProductMedia(product);
 
   const secondaryMedia = (product.media ?? []).find(
@@ -317,6 +321,17 @@ export function ProductCard({
                   Few left
                 </span>
               )}
+
+            {!availability.isSoldOut &&
+              (insight?.soldLast7Days ?? 0) >= 5 &&
+              !(
+                availability.availableQuantity > 0 &&
+                availability.availableQuantity <= 5
+              ) && (
+                <span className="product-card__fast">
+                  Selling fast
+                </span>
+              )}
           </div>
 
           <Link
@@ -330,6 +345,15 @@ export function ProductCard({
               {product.name}
             </h3>
           </Link>
+
+          {insight && insight.reviews > 0 ? (
+            <p className="product-card__rating">
+              <Stars value={insight.rating} size={12} />
+              <span>
+                {insight.rating.toFixed(1)} ({insight.reviews})
+              </span>
+            </p>
+          ) : null}
 
           <div className="product-card__price">
             <ProductPrice product={product} />

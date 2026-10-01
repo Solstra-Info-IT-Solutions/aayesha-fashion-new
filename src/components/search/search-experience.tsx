@@ -1,5 +1,6 @@
 "use client";
 
+import { ProductInsightsProvider } from "@/components/listing-sales/insights-context";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -783,17 +784,21 @@ export function SearchExperience({
                 )}
 
                 {!loading && products.length > 0 && (
-                  <div
-                    className="search-atelier__grid"
-                    onClickCapture={() => remember(activeTerm)}
+                  <ProductInsightsProvider
+                    productIds={products.map((product) => product._id)}
                   >
-                    {products.map((product) => (
-                      <ProductCard
-                        key={product.id}
-                        product={product}
-                      />
-                    ))}
-                  </div>
+                    <div
+                      className="search-atelier__grid"
+                      onClickCapture={() => remember(activeTerm)}
+                    >
+                      {products.map((product) => (
+                        <ProductCard
+                          key={product.id}
+                          product={product}
+                        />
+                      ))}
+                    </div>
+                  </ProductInsightsProvider>
                 )}
 
                 {!loading &&
