@@ -1,7 +1,8 @@
 /* =========================================================
    AAYESHA FASHION — BRAND LOADER
-   CTA colour background, white text, and a soft glow
-   behind the wordmark.
+   Button-colour background, white text. Editorial frame that
+   draws itself, letters that rise in, a glow behind the
+   wordmark and a progress bar.
    ========================================================= */
 
 .aayesha-loader {
@@ -22,7 +23,7 @@
   color: #ffffff;
 
   opacity: 1;
-  transition: opacity 550ms ease;
+  transition: opacity 650ms ease;
 }
 
 .aayesha-loader--leaving {
@@ -31,9 +32,7 @@
 }
 
 /* ---------------------------------------------------------
-   GLOW BEHIND THE TEXT
-   Two layered lights that breathe and drift slightly, so the
-   wordmark appears to be lit from behind.
+   LIGHT BEHIND THE TEXT
 --------------------------------------------------------- */
 
 .aayesha-loader__halo {
@@ -42,39 +41,39 @@
   left: 50%;
   z-index: 0;
 
-  width: min(90vw, 980px);
-  height: min(60vw, 520px);
+  width: min(92vw, 980px);
+  height: min(70vw, 560px);
 
   border-radius: 50%;
   pointer-events: none;
 
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 255, 255, 0.34) 0%,
-    rgba(255, 255, 255, 0.16) 32%,
-    rgba(255, 255, 255, 0.05) 55%,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.14) 32%,
+    rgba(255, 255, 255, 0.04) 55%,
     transparent 72%
   );
 
   filter: blur(14px);
 
   transform: translate(-50%, -50%);
-  animation: aayesha-loader-halo 2.6s ease-in-out infinite;
+  animation: aayesha-loader-halo 2.8s ease-in-out infinite;
 }
 
 .aayesha-loader__halo--core {
-  width: min(60vw, 560px);
-  height: min(24vw, 200px);
+  width: min(64vw, 560px);
+  height: min(26vw, 210px);
 
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 255, 255, 0.5) 0%,
-    rgba(255, 255, 255, 0.2) 40%,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.18) 40%,
     transparent 72%
   );
 
   filter: blur(10px);
-  animation-duration: 2s;
+  animation-duration: 2.1s;
   animation-delay: -0.8s;
 }
 
@@ -92,7 +91,162 @@
 }
 
 /* ---------------------------------------------------------
-   CONTENT
+   EDITORIAL FRAME (fades + scales in) AND CORNERS (grow)
+--------------------------------------------------------- */
+
+.aayesha-loader__frame {
+  position: absolute;
+  inset: clamp(12px, 2.2vw, 28px);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+
+  opacity: 0;
+  transform: scale(1.015);
+  animation: aayesha-loader-frame 1s ease 0.1s forwards;
+}
+
+@keyframes aayesha-loader-frame {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.aayesha-loader__corner {
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  border: 0 solid rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+
+  animation: aayesha-loader-corner 0.7s ease 0.5s forwards;
+}
+
+.aayesha-loader__corner--tl {
+  top: clamp(12px, 2.2vw, 28px);
+  left: clamp(12px, 2.2vw, 28px);
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.aayesha-loader__corner--tr {
+  top: clamp(12px, 2.2vw, 28px);
+  right: clamp(12px, 2.2vw, 28px);
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+
+.aayesha-loader__corner--bl {
+  bottom: clamp(12px, 2.2vw, 28px);
+  left: clamp(12px, 2.2vw, 28px);
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
+.aayesha-loader__corner--br {
+  right: clamp(12px, 2.2vw, 28px);
+  bottom: clamp(12px, 2.2vw, 28px);
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+}
+
+@keyframes aayesha-loader-corner {
+  to {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* ---------------------------------------------------------
+   META ROW, SIDE LABELS, BOTTOM BRAND
+--------------------------------------------------------- */
+
+.aayesha-loader__meta {
+  position: absolute;
+  top: clamp(26px, 4.4vw, 52px);
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  opacity: 0;
+  animation: aayesha-loader-fade 0.9s ease 0.6s forwards;
+}
+
+.aayesha-loader__meta span:first-child {
+  color: #ffffff;
+}
+
+.aayesha-loader__side {
+  position: absolute;
+  top: 50%;
+
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  opacity: 0;
+  animation: aayesha-loader-fade 0.9s ease 0.9s forwards;
+}
+
+.aayesha-loader__side--left {
+  left: clamp(20px, 3.4vw, 44px);
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+}
+
+.aayesha-loader__side--right {
+  right: clamp(20px, 3.4vw, 44px);
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+}
+
+.aayesha-loader__brand {
+  position: absolute;
+  bottom: clamp(22px, 3.8vw, 46px);
+  left: 0;
+  right: 0;
+
+  margin: 0;
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  opacity: 0;
+  animation: aayesha-loader-fade 0.9s ease 1s forwards;
+}
+
+@keyframes aayesha-loader-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------
+   CENTRE
 --------------------------------------------------------- */
 
 .aayesha-loader__center {
@@ -101,21 +255,18 @@
 
   display: grid;
   justify-items: center;
-  gap: 18px;
+  gap: 16px;
 
-  padding: 0 24px;
+  width: min(92vw, 640px);
+  padding: 0 8px;
   text-align: center;
 }
 
-.aayesha-loader__eyebrow,
-.aayesha-loader__tagline,
-.aayesha-loader__wordmark {
-  opacity: 0;
-  transform: translate3d(0, 10px, 0);
-  animation: aayesha-loader-rise 0.8s ease forwards;
-}
-
 .aayesha-loader__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
   margin: 0;
 
   font-size: 10px;
@@ -123,45 +274,64 @@
   letter-spacing: 0.34em;
   text-transform: uppercase;
 
-  color: rgba(255, 255, 255, 0.78);
-  animation-delay: 0.15s;
+  color: rgba(255, 255, 255, 0.82);
+
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+  animation: aayesha-loader-rise 0.8s ease 0.25s forwards;
+}
+
+.aayesha-loader__eyebrow span {
+  width: 26px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
 }
 
 .aayesha-loader__wordmark {
   display: grid;
-  gap: 4px;
+  justify-items: center;
+  gap: 6px;
+
   margin: 0;
 
   font-family: var(--font-display, serif);
-  font-size: clamp(48px, 11vw, 104px);
   font-weight: 500;
   line-height: 0.95;
-  letter-spacing: 0.12em;
 
   color: #ffffff;
+
   text-shadow:
     0 0 14px rgba(255, 255, 255, 0.45),
-    0 0 42px rgba(255, 255, 255, 0.3),
-    0 0 90px rgba(255, 255, 255, 0.18);
-  animation-delay: 0.3s;
+    0 0 42px rgba(255, 255, 255, 0.28),
+    0 0 90px rgba(255, 255, 255, 0.16);
 }
 
-.aayesha-loader__wordmark span {
+.aayesha-loader__letters {
+  display: inline-flex;
+  font-size: clamp(44px, 13vw, 104px);
+  letter-spacing: 0.1em;
+  padding-left: 0.1em;
+}
+
+.aayesha-loader__letters span {
+  display: inline-block;
+
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  animation: aayesha-loader-rise 0.75s cubic-bezier(0.22, 0.61, 0.36, 1)
+    forwards;
+}
+
+.aayesha-loader__sub {
   font-family: var(--font-body, sans-serif);
-  font-size: clamp(11px, 1.6vw, 15px);
+  font-size: clamp(11px, 1.6vw, 14px);
   font-weight: 600;
   letter-spacing: 0.7em;
   text-indent: 0.7em;
-}
+  text-transform: uppercase;
 
-.aayesha-loader__tagline {
-  margin: 0;
-
-  font-size: 13px;
-  letter-spacing: 0.04em;
-
-  color: rgba(255, 255, 255, 0.85);
-  animation-delay: 0.5s;
+  opacity: 0;
+  animation: aayesha-loader-fade 0.9s ease 1s forwards;
 }
 
 @keyframes aayesha-loader-rise {
@@ -171,24 +341,108 @@
   }
 }
 
-.aayesha-loader__progress {
-  position: absolute;
-  right: clamp(20px, 4vw, 48px);
-  bottom: clamp(20px, 4vw, 40px);
-  z-index: 1;
+.aayesha-loader__rule {
+  display: block;
 
+  width: min(60%, 260px);
+  height: 1px;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.85),
+    transparent
+  );
+
+  transform: scaleX(0);
+  animation: aayesha-loader-rule 0.9s ease 1s forwards;
+}
+
+@keyframes aayesha-loader-rule {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.aayesha-loader__tagline {
   margin: 0;
 
   font-family: var(--font-display, serif);
-  font-size: clamp(22px, 3vw, 34px);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
+  font-size: clamp(15px, 2.2vw, 19px);
+  font-style: italic;
+  letter-spacing: 0.02em;
 
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.9);
+
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+  animation: aayesha-loader-rise 0.8s ease 1.15s forwards;
 }
 
 /* ---------------------------------------------------------
-   REDUCED MOTION — no sweep, content visible immediately
+   PROGRESS
+--------------------------------------------------------- */
+
+.aayesha-loader__loading {
+  width: 100%;
+  margin-top: 14px;
+
+  opacity: 0;
+  animation: aayesha-loader-fade 0.8s ease 1.2s forwards;
+}
+
+.aayesha-loader__loading-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 10px;
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.aayesha-loader__percent {
+  font-variant-numeric: tabular-nums;
+  color: #ffffff;
+}
+
+.aayesha-loader__track {
+  position: relative;
+
+  height: 2px;
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.aayesha-loader__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+
+  background: #ffffff;
+  box-shadow: 0 0 12px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* ---------------------------------------------------------
+   SMALL SCREENS
+--------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .aayesha-loader__meta {
+    gap: 10px;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+  }
+}
+
+/* ---------------------------------------------------------
+   REDUCED MOTION — everything visible immediately
 --------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -197,11 +451,36 @@
     opacity: 0.9;
   }
 
+  .aayesha-loader__frame,
+  .aayesha-loader__meta,
+  .aayesha-loader__side,
+  .aayesha-loader__brand,
   .aayesha-loader__eyebrow,
+  .aayesha-loader__letters span,
+  .aayesha-loader__sub,
   .aayesha-loader__tagline,
-  .aayesha-loader__wordmark {
+  .aayesha-loader__loading {
     opacity: 1;
     transform: none;
+    animation: none;
+  }
+
+  .aayesha-loader__side--left {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  .aayesha-loader__side--right {
+    transform: translateY(-50%);
+  }
+
+  .aayesha-loader__rule {
+    transform: none;
+    animation: none;
+  }
+
+  .aayesha-loader__corner {
+    width: 22px;
+    height: 22px;
     animation: none;
   }
 }
