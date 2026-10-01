@@ -1,0 +1,160 @@
+.account-reviews {
+  width: 100%;
+  color: var(--color-text);
+}
+
+.account-reviews__eyebrow {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-clay);
+}
+
+.account-reviews__title {
+  margin: 0 0 24px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.account-reviews__muted {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.account-reviews__list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.account-reviews__card {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.account-reviews__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.account-reviews__product {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.account-reviews__product:hover {
+  text-decoration: underline;
+}
+
+.account-reviews__status {
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.account-reviews__status--approved {
+  color: var(--color-success, #3a7d44);
+  border-color: currentColor;
+}
+
+.account-reviews__status--rejected {
+  color: var(--color-error, #b3261e);
+  border-color: currentColor;
+}
+
+.account-reviews__review-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.account-reviews__body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.account-reviews__note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-error, #b3261e);
+}
+
+.account-reviews__form {
+  display: grid;
+  gap: 12px;
+}
+
+.account-reviews__rate {
+  display: flex;
+  gap: 4px;
+}
+
+.account-reviews__rate button {
+  padding: 2px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.account-reviews__input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  outline: none;
+  resize: vertical;
+}
+
+.account-reviews__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.account-reviews__actions button {
+  min-height: 38px;
+  padding: 0 18px;
+  border: 1px solid var(--color-border-dark, var(--color-border));
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.account-reviews__actions button:first-child {
+  background: var(--color-text);
+  color: var(--color-text-inverse, #fff);
+}
+
+.account-reviews__actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -380,7 +380,7 @@ function CheckoutSuccessContent() {
                     ? "Please keep the payable amount ready when your order is delivered."
                     : order.paymentMethod === "bank_upi" &&
                         order.paymentStatus !== "paid"
-                      ? "We have sent your bill with the UPI QR code and bank details on WhatsApp. Please complete the payment and share the screenshot there. Your order is confirmed once we receive it."
+                      ? "We have sent your bill with the UPI QR code and bank details on WhatsApp. Please complete the payment within 30 minutes and share the screenshot there, otherwise the order is cancelled automatically."
                       : order.paymentStatus === "paid"
                         ? "Your payment has been recorded successfully."
                         : "We are confirming your payment. This page will show it as paid shortly."}

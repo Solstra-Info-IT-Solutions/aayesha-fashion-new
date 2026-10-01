@@ -5,12 +5,14 @@ import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import {
+  Bell,
   ChevronRight,
   Gift,
   Heart,
   LogOut,
   MapPin,
   ShoppingBag,
+  Star,
   Trash2,
   User,
   UserCog,
@@ -61,6 +63,18 @@ const accountLinks = [
     href: "/account/coupons",
     description: "Offers available to you",
     icon: Gift,
+  },
+  {
+    label: "My Reviews",
+    href: "/account/reviews",
+    description: "Reviews you have written",
+    icon: Star,
+  },
+  {
+    label: "Notifications",
+    href: "/account/notifications",
+    description: "Order, payment and review updates",
+    icon: Bell,
   },
   {
     label: "Wishlist",
