@@ -161,3 +161,46 @@ export async function openRazorpayCheckout(
     instance.open();
   });
 }
+
+/* ============================================================
+   BANK / UPI VIA WHATSAPP
+============================================================ */
+
+/**
+ * `publicAccessToken` is used right after checkout / for guests; a
+ * signed-in owner can pass only `authToken`.
+ */
+export function claimBankUpiPayment(input: {
+  orderNumber: string;
+  reference: string;
+  publicAccessToken?: string | null;
+  authToken?: string | null;
+}) {
+  return apiFetch<{ orderNumber: string; paymentClaimedAt: string }>(
+    "/payments/bank-upi/claim",
+    {
+      method: "POST",
+      ...(input.authToken ? { accessToken: input.authToken } : {}),
+      body: JSON.stringify({
+        orderNumber: input.orderNumber,
+        reference: input.reference,
+        accessToken: input.publicAccessToken ?? "",
+      }),
+    },
+  );
+}
+
+export function resendBankUpiBill(input: {
+  orderNumber: string;
+  publicAccessToken?: string | null;
+  authToken?: string | null;
+}) {
+  return apiFetch<{ sent: true }>("/payments/bank-upi/resend-bill", {
+    method: "POST",
+    ...(input.authToken ? { accessToken: input.authToken } : {}),
+    body: JSON.stringify({
+      orderNumber: input.orderNumber,
+      accessToken: input.publicAccessToken ?? "",
+    }),
+  });
+}

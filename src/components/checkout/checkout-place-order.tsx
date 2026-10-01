@@ -502,7 +502,7 @@ export function CheckoutPlaceOrder() {
     if (
       payment === "bank_upi" &&
       !/^\+?\d{10,15}$/.test(
-        paymentWhatsapp.trim(),
+        (paymentWhatsapp || contact.phone).trim(),
       )
     ) {
       toast.error(
@@ -615,8 +615,9 @@ export function CheckoutPlaceOrder() {
 
             ...(payment === "bank_upi"
               ? {
-                  paymentWhatsapp:
-                    paymentWhatsapp.trim(),
+                  paymentWhatsapp: (
+                    paymentWhatsapp || contact.phone
+                  ).trim(),
                 }
               : {}),
 

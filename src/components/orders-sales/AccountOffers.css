@@ -1,0 +1,89 @@
+.account-offers {
+  margin-top: 32px;
+  padding: 20px;
+
+  border: 1px dashed var(--color-accent, var(--color-border-dark));
+  background: var(--color-bg-subtle, transparent);
+}
+
+.account-offers__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.account-offers__head p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.account-offers__head a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 12px;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.account-offers ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.account-offers li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.account-offers li div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.account-offers li strong {
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.account-offers li span {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.account-offers li button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+
+  padding: 7px 12px;
+
+  border: 1px solid var(--color-border-dark, var(--color-border));
+  background: var(--color-surface);
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+  cursor: pointer;
+}

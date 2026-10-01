@@ -12,6 +12,16 @@ export const siteConfig = {
 
   currencySymbol: "₹",
 
+  /*
+   * Online (Razorpay) payments stay off unless explicitly enabled; the
+   * store currently takes payment through the WhatsApp bill (UPI /
+   * bank transfer) or Cash on Delivery.
+   */
+  features: {
+    onlinePayment:
+      process.env.NEXT_PUBLIC_ENABLE_ONLINE_PAYMENT === "true",
+  },
+
   contact: {
     email: "",
     phone: "918788158087",

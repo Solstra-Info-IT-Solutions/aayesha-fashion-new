@@ -71,6 +71,10 @@ export interface CreatedOrder {
   paymentMethod: string;
   paymentStatus: string;
 
+  paymentExpiresAt?: string | null;
+  paymentClaimedAt?: string | null;
+  paymentWhatsapp?: string;
+
   subtotal: number;
   shippingAmount: number;
   productDiscount: number;
@@ -167,6 +171,14 @@ export interface OrderDetails {
   currency: "INR";
 
   paymentMethod: "cod" | "online" | "bank_upi";
+
+  /** When an unpaid online / Bank-UPI order auto-cancels (ISO). */
+  paymentExpiresAt?: string | null;
+
+  /** Set once the customer reported a payment (awaiting verification). */
+  paymentClaimedAt?: string | null;
+
+  paymentWhatsapp?: string;
 
   paymentStatus:
     | "pending"
