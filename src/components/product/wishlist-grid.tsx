@@ -1,10 +1,7 @@
 "use client";
 
-import {
-  ArrowRight,
-  Heart,
-  ShoppingBag,
-} from "lucide-react";
+import Link from "next/link";
+import { Heart } from "lucide-react";
 
 import type { Product } from "@/types/product";
 
@@ -12,9 +9,8 @@ import { ProductCard } from "@/components/product/product-card";
 
 import { useWishlistStore } from "@/store/wishlist-store";
 
-import { LinkButton } from "@/components/ui/button";
-
 import "./WishlistGrid.css";
+import "@/components/home/HomeCta.css";
 
 type WishlistGridProps = {
   products: Product[];
@@ -61,19 +57,9 @@ export function WishlistGrid({
         </p>
 
         <div className="wishlist-grid__empty-action">
-          <LinkButton
-            href="/shop"
-            variant="primary"
-            size="md"
-            rounded="none"
-            icon={
-              <ShoppingBag
-                size={17}
-              />
-            }
-          >
-            Continue Shopping
-          </LinkButton>
+          <Link href="/shop" className="home-cta">
+            Continue shopping
+          </Link>
         </div>
       </div>
     );
@@ -112,19 +98,9 @@ export function WishlistGrid({
       </div>
 
       <div className="wishlist-grid__footer">
-        <LinkButton
-          href="/shop"
-          variant="darkOutline"
-          size="md"
-          rounded="none"
-          icon={
-            <ArrowRight
-              size={17}
-            />
-          }
-        >
-          Continue Shopping
-        </LinkButton>
+        <Link href="/shop" className="home-cta">
+          Continue shopping
+        </Link>
       </div>
     </div>
   );

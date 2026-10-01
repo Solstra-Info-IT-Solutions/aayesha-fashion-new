@@ -6,6 +6,8 @@ import { usePathname, useRouter } from "next/navigation";
 
 import {
   ChevronRight,
+  Gift,
+  Heart,
   LogOut,
   MapPin,
   ShoppingBag,
@@ -23,6 +25,7 @@ import { deleteCustomerAccount } from "@/lib/customer-api";
 import { AccountConfirmDialog } from "@/components/account/account-confirm-dialog";
 
 import "./AccountPopup.css";
+import "./AccountPopupRefresh.css";
 
 type AccountPopupProps = {
   isOpen: boolean;
@@ -36,22 +39,34 @@ type AccountPopupProps = {
 
 const accountLinks = [
   {
-    label: "Your Orders",
-    href: "/account/orders",
-    description: "View and track orders",
-    icon: ShoppingBag,
-  },
-  {
     label: "Profile Details",
     href: "/account",
     description: "Your personal information",
     icon: User,
   },
   {
+    label: "Your Orders",
+    href: "/account/orders",
+    description: "View and track orders",
+    icon: ShoppingBag,
+  },
+  {
     label: "Saved Addresses",
     href: "/account/addresses",
     description: "Manage delivery addresses",
     icon: MapPin,
+  },
+  {
+    label: "My Coupons",
+    href: "/account/coupons",
+    description: "Offers available to you",
+    icon: Gift,
+  },
+  {
+    label: "Wishlist",
+    href: "/wishlist",
+    description: "Pieces you have saved",
+    icon: Heart,
   },
   {
     label: "Edit Account",

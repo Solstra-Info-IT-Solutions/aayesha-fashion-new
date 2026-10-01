@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import type { Product } from "@/types/product";
 
 import { getProducts } from "@/lib/api/products";
@@ -24,76 +26,44 @@ export default async function WishlistPage() {
   return (
     <main className="wishlist-page">
       {/* =====================================================
-          WISHLIST HERO
+          HERO
       ===================================================== */}
 
       <section className="wishlist-page__hero">
         <div className="wishlist-page__container">
-          <div className="wishlist-page__hero-inner">
-            <div className="wishlist-page__hero-copy">
-              <div className="wishlist-page__eyebrow">
-                <span className="wishlist-page__eyebrow-line" />
+          <nav
+            aria-label="Breadcrumb"
+            className="wishlist-page__crumbs"
+          >
+            <Link href="/">Home</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Wishlist</span>
+          </nav>
 
-                <span>Saved Pieces</span>
-
-                <span className="wishlist-page__eyebrow-line" />
-              </div>
-
-              <h1 className="wishlist-page__title">
-                Your Wishlist
-              </h1>
-
-              <p className="wishlist-page__description">
-                A personal edit of the pieces you love.
-                Keep them close, revisit your favourites,
-                and return whenever you are ready.
-              </p>
-            </div>
-
-            <div className="wishlist-page__hero-note">
-              <span className="wishlist-page__hero-note-number">
-                01
-              </span>
-
-              <div>
-                <p className="wishlist-page__hero-note-title">
-                  Your Personal Edit
-                </p>
-
-                <p className="wishlist-page__hero-note-copy">
-                  Curate the pieces that speak to your
-                  style and keep your favourites within
-                  easy reach.
-                </p>
-              </div>
-            </div>
+          <div className="wishlist-page__eyebrow">
+            <span aria-hidden="true" />
+            Saved pieces
           </div>
+
+          <h1 className="wishlist-page__title">
+            Your <em>wishlist.</em>
+          </h1>
+
+          <p className="wishlist-page__description">
+            A personal edit of the pieces you love. Keep them
+            close, revisit your favourites, and return whenever
+            you are ready.
+          </p>
         </div>
       </section>
 
       {/* =====================================================
-          SAVED COLLECTION
+          SAVED PIECES
       ===================================================== */}
 
       <section className="wishlist-page__collection">
         <div className="wishlist-page__container">
-          <div className="wishlist-page__collection-header">
-            <div>
-              <p className="wishlist-page__collection-eyebrow">
-                The Edit
-              </p>
-
-              <h2 className="wishlist-page__collection-title">
-                Pieces Worth Keeping
-              </h2>
-            </div>
-
-            <div className="wishlist-page__collection-rule" />
-          </div>
-
-          <div className="wishlist-page__grid-wrapper">
-            <WishlistGrid products={products} />
-          </div>
+          <WishlistGrid products={products} />
         </div>
       </section>
     </main>
