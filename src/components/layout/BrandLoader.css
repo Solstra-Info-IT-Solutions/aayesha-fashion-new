@@ -1,8 +1,8 @@
 /* =========================================================
    AAYESHA FASHION — BRAND LOADER
-   Button-colour background, white text. Editorial frame that
-   draws itself, letters that rise in, a glow behind the
-   wordmark and a progress bar.
+   Button-colour background, white text (static). Editorial
+   frame that draws itself, a glow behind the wordmark and a
+   small progress bar.
    ========================================================= */
 
 .aayesha-loader {
@@ -182,9 +182,6 @@
   white-space: nowrap;
 
   color: rgba(255, 255, 255, 0.78);
-
-  opacity: 0;
-  animation: aayesha-loader-fade 0.9s ease 0.6s forwards;
 }
 
 .aayesha-loader__meta span:first-child {
@@ -202,9 +199,6 @@
   white-space: nowrap;
 
   color: rgba(255, 255, 255, 0.55);
-
-  opacity: 0;
-  animation: aayesha-loader-fade 0.9s ease 0.9s forwards;
 }
 
 .aayesha-loader__side--left {
@@ -234,15 +228,6 @@
   text-transform: uppercase;
 
   color: rgba(255, 255, 255, 0.7);
-
-  opacity: 0;
-  animation: aayesha-loader-fade 0.9s ease 1s forwards;
-}
-
-@keyframes aayesha-loader-fade {
-  to {
-    opacity: 1;
-  }
 }
 
 /* ---------------------------------------------------------
@@ -275,10 +260,6 @@
   text-transform: uppercase;
 
   color: rgba(255, 255, 255, 0.82);
-
-  opacity: 0;
-  transform: translate3d(0, 8px, 0);
-  animation: aayesha-loader-rise 0.8s ease 0.25s forwards;
 }
 
 .aayesha-loader__eyebrow span {
@@ -315,11 +296,6 @@
 
 .aayesha-loader__letters span {
   display: inline-block;
-
-  opacity: 0;
-  transform: translate3d(0, 26px, 0);
-  animation: aayesha-loader-rise 0.75s cubic-bezier(0.22, 0.61, 0.36, 1)
-    forwards;
 }
 
 .aayesha-loader__sub {
@@ -329,16 +305,6 @@
   letter-spacing: 0.7em;
   text-indent: 0.7em;
   text-transform: uppercase;
-
-  opacity: 0;
-  animation: aayesha-loader-fade 0.9s ease 1s forwards;
-}
-
-@keyframes aayesha-loader-rise {
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
 }
 
 .aayesha-loader__rule {
@@ -353,15 +319,6 @@
     rgba(255, 255, 255, 0.85),
     transparent
   );
-
-  transform: scaleX(0);
-  animation: aayesha-loader-rule 0.9s ease 1s forwards;
-}
-
-@keyframes aayesha-loader-rule {
-  to {
-    transform: scaleX(1);
-  }
 }
 
 .aayesha-loader__tagline {
@@ -373,10 +330,6 @@
   letter-spacing: 0.02em;
 
   color: rgba(255, 255, 255, 0.9);
-
-  opacity: 0;
-  transform: translate3d(0, 8px, 0);
-  animation: aayesha-loader-rise 0.8s ease 1.15s forwards;
 }
 
 /* ---------------------------------------------------------
@@ -384,11 +337,8 @@
 --------------------------------------------------------- */
 
 .aayesha-loader__loading {
-  width: 100%;
+  width: min(70%, 340px);
   margin-top: 14px;
-
-  opacity: 0;
-  animation: aayesha-loader-fade 0.8s ease 1.2s forwards;
 }
 
 .aayesha-loader__loading-top {
@@ -451,29 +401,8 @@
     opacity: 0.9;
   }
 
-  .aayesha-loader__frame,
-  .aayesha-loader__meta,
-  .aayesha-loader__side,
-  .aayesha-loader__brand,
-  .aayesha-loader__eyebrow,
-  .aayesha-loader__letters span,
-  .aayesha-loader__sub,
-  .aayesha-loader__tagline,
-  .aayesha-loader__loading {
+  .aayesha-loader__frame {
     opacity: 1;
-    transform: none;
-    animation: none;
-  }
-
-  .aayesha-loader__side--left {
-    transform: translateY(-50%) rotate(180deg);
-  }
-
-  .aayesha-loader__side--right {
-    transform: translateY(-50%);
-  }
-
-  .aayesha-loader__rule {
     transform: none;
     animation: none;
   }

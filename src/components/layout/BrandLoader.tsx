@@ -12,8 +12,6 @@ interface BrandLoaderProps {
 const EXIT_HOLD_MS = 450;
 const EXIT_FADE_MS = 650;
 
-const WORD = "AAYESHA".split("");
-
 export default function BrandLoader({
   minimumDuration = 2300,
 }: BrandLoaderProps) {
@@ -138,14 +136,7 @@ export default function BrandLoader({
 
         <h1 className="aayesha-loader__wordmark" aria-label="Aayesha Fashion">
           <span className="aayesha-loader__letters" aria-hidden="true">
-            {WORD.map((letter, index) => (
-              <span
-                key={index}
-                style={{ animationDelay: `${0.35 + index * 0.08}s` }}
-              >
-                {letter}
-              </span>
-            ))}
+            AAYESHA
           </span>
 
           <span className="aayesha-loader__sub" aria-hidden="true">
