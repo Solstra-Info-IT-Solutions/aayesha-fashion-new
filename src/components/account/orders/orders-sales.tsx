@@ -6,6 +6,7 @@ import { ArrowRight, Clock3 } from "lucide-react";
 import toast from "react-hot-toast";
 
 import type { OrderDetails } from "@/lib/api/orders";
+import { ApiError } from "@/lib/api";
 import { sendMyInvoice } from "@/lib/api/payments";
 
 import "./OrdersSales.css";
@@ -180,6 +181,9 @@ export function OrderTabs({
   );
 }
 
+/** Mirrors the backend default cooldown (INVOICE_RESEND_COOLDOWN_SECONDS). */
+const INVOICE_COOLDOWN_MS = 2 * 60_000;
+
 const saleOf = (order: OrderDetails) =>
   (order.productDiscount ?? 0) + (order.couponDiscount ?? 0);
 
@@ -192,11 +196,27 @@ export function OrderSalesExtras({
   authToken: string | null;
 }) {
   const [sending, setSending] = useState(false);
+  const [sentAt, setSentAt] = useState<number | null>(null);
+  const [needsLogin, setNeedsLogin] = useState(false);
+  const [now, setNow] = useState(() => Date.now());
+
+  // Re-enable the button once the local cooldown ends.
+  const cooldownLeft = sentAt
+    ? Math.max(0, Math.ceil((sentAt + INVOICE_COOLDOWN_MS - now) / 1000))
+    : 0;
+
+  useEffect(() => {
+    if (!sentAt || cooldownLeft <= 0) return;
+
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+
+    return () => window.clearInterval(timer);
+  }, [sentAt, cooldownLeft]);
 
   const saved = saleOf(order);
   const paid = order.paymentStatus === "paid";
   const cancelled = order.status === "cancelled";
-  const canInvoice = !cancelled && (paid || order.paymentMethod === "cod");
+  const canInvoice = !cancelled && paid;
 
   const shareText = encodeURIComponent(
     `I just ordered from AAYESHA FASHION! ${
@@ -205,17 +225,45 @@ export function OrderSalesExtras({
   );
 
   async function handleInvoice() {
-    if (!authToken || sending) return;
+    if (sending || cooldownLeft > 0) return;
+
+    if (!authToken) {
+      setNeedsLogin(true);
+      return;
+    }
 
     setSending(true);
+    setNeedsLogin(false);
 
     try {
       await sendMyInvoice(order.orderNumber, authToken);
+
+      setSentAt(Date.now());
+      setNow(Date.now());
       toast.success("Invoice sent to your WhatsApp.");
     } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : "Could not send the invoice.",
-      );
+      const code = error instanceof ApiError ? error.code : "";
+      const status = error instanceof ApiError ? error.status : 0;
+
+      if (status === 401 || code === "UNAUTHORIZED" || code === "INVALID_ACCESS_TOKEN") {
+        setNeedsLogin(true);
+        toast.error("Your session has expired. Please sign in again.");
+      } else if (code === "BILL_RATE_LIMITED" || status === 429) {
+        // Server-side cooldown: lock the button locally as well.
+        setSentAt(Date.now());
+        setNow(Date.now());
+        toast("The invoice was sent a moment ago. Please check WhatsApp.");
+      } else if (code === "PAYMENT_NOT_ALLOWED") {
+        toast.error("The invoice is available once the order is paid.");
+      } else if (code === "ORDER_NOT_FOUND") {
+        toast.error("We could not find this order.");
+      } else {
+        toast.error(
+          error instanceof ApiError && error.message
+            ? error.message
+            : "Could not send the invoice. Please try again.",
+        );
+      }
     } finally {
       setSending(false);
     }
@@ -236,11 +284,21 @@ export function OrderSalesExtras({
         </p>
       ) : null}
 
+      {needsLogin ? (
+        <p className="order-note">
+          Please <Link href="/login">sign in</Link> again to get your invoice.
+        </p>
+      ) : null}
+
       {canInvoice || !cancelled ? (
         <div className="order-extras">
           {canInvoice ? (
-            <button type="button" onClick={handleInvoice} disabled={sending}>
-              {sending ? "Sending…" : "Get invoice on WhatsApp"}
+            <button type="button" onClick={handleInvoice} disabled={sending || cooldownLeft > 0}>
+              {sending
+                ? "Sending…"
+                : cooldownLeft > 0
+                  ? "Invoice sent · check WhatsApp"
+                  : "Get invoice on WhatsApp"}
             </button>
           ) : null}
 
