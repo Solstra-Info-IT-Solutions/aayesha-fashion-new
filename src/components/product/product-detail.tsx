@@ -51,6 +51,8 @@ import {
   type LoginRequiredAction,
 } from "@/components/product/login-required-popup";
 import { ProductCard } from "@/components/product/product-card";
+import { ProductOffers } from "@/components/product/product-offers";
+import { ProductReviews } from "@/components/product/product-reviews";
 
 import "./ProductDetail.css";
 import "./ProductDetailRefresh.css";
@@ -816,6 +818,8 @@ const [loginAction, setLoginAction] =
               </div>
 
               {/* DELIVERY CHECK */}
+              <ProductOffers productId={product._id} />
+
               <div className="product-detail__delivery">
                 <div className="product-detail__delivery-icon">
                   <MapPin size={16} />
@@ -1017,6 +1021,11 @@ const [loginAction, setLoginAction] =
             })}
           </div>
         </section>
+
+        {/* =====================================================
+            REVIEWS
+        ===================================================== */}
+        <ProductReviews product={product} />
 
         {/* =====================================================
             RECOMMENDATIONS

@@ -5,11 +5,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import {
+  Bell,
   Gift,
   Heart,
   LogOut,
   MapPin,
   ShoppingBag,
+  Star,
   User,
   UserCog,
 } from "lucide-react";
@@ -23,6 +25,8 @@ const navigation = [
   { label: "Orders", href: "/account/orders", icon: ShoppingBag },
   { label: "Addresses", href: "/account/addresses", icon: MapPin },
   { label: "Coupons", href: "/account/coupons", icon: Gift },
+  { label: "My Reviews", href: "/account/reviews", icon: Star },
+  { label: "Notifications", href: "/account/notifications", icon: Bell },
   { label: "Wishlist", href: "/wishlist", icon: Heart },
   { label: "Edit account", href: "/account/edit", icon: UserCog },
 ] as const;
