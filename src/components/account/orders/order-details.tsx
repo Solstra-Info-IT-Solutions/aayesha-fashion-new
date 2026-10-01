@@ -1,5 +1,6 @@
 "use client";
 
+import { OrderSalesExtras } from "@/components/account/orders/orders-sales";
 import { PendingPaymentPanel } from "@/components/orders-sales/pending-payment-panel";
 import { ProductStrip } from "@/components/orders-sales/product-strip";
 import { ReorderButton } from "@/components/orders-sales/reorder-button";
@@ -691,6 +692,11 @@ export function OrderDetails({
                   }))}
                 />
               </div>
+
+              <OrderSalesExtras
+                order={order}
+                authToken={accessToken}
+              />
 
               {order.status === "delivered"
                 ? order.items.map((item) => (

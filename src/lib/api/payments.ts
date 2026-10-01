@@ -204,3 +204,11 @@ export function resendBankUpiBill(input: {
     }),
   });
 }
+
+/** Sends the invoice of a paid order to the customer's WhatsApp. */
+export function sendMyInvoice(orderNumber: string, authToken: string) {
+  return apiFetch<{ sent: true }>(
+    `/orders/my-orders/${encodeURIComponent(orderNumber)}/send-invoice`,
+    { method: "POST", accessToken: authToken },
+  );
+}

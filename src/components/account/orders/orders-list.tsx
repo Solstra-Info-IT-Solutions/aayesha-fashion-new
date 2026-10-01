@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  OrderTabs,
+  OrdersSummary,
+  UnpaidOrderAlert,
+  orderMatchesTab,
+  type OrderTab,
+} from "@/components/account/orders/orders-sales";
 import { ProductStrip } from "@/components/orders-sales/product-strip";
 import { ReorderButton } from "@/components/orders-sales/reorder-button";
 import Link from "next/link";
@@ -230,6 +237,9 @@ export function OrdersList() {
   const [orders, setOrders] =
     useState<OrderDetails[]>([]);
 
+  const [tab, setTab] =
+    useState<OrderTab>("all");
+
   const [isLoading, setIsLoading] =
     useState(true);
 
@@ -402,8 +412,22 @@ export function OrdersList() {
           ORDERS
       ===================================================== */}
 
+      <UnpaidOrderAlert orders={orders} />
+
+      <OrdersSummary orders={orders} />
+
+      <OrderTabs
+        orders={orders}
+        value={tab}
+        onChange={setTab}
+      />
+
       <div className="orders-list__items">
-        {orders.map((order) => {
+        {orders
+          .filter((order) =>
+            orderMatchesTab(order, tab),
+          )
+          .map((order) => {
           const firstItem =
             order.items[0];
 
@@ -563,6 +587,28 @@ export function OrdersList() {
                         strokeWidth={1.6}
                       />
                     </Link>
+
+                    {order.shippingInfo
+                      ?.trackingUrl &&
+                    [
+                      "shipped",
+                      "in_transit",
+                      "out_for_delivery",
+                    ].includes(
+                      order.status,
+                    ) ? (
+                      <a
+                        href={
+                          order.shippingInfo
+                            .trackingUrl
+                        }
+                        target="_blank"
+                        rel="noreferrer"
+                        className="order-track-link"
+                      >
+                        Track shipment
+                      </a>
+                    ) : null}
 
                     {order.status ===
                       "delivered" ||
