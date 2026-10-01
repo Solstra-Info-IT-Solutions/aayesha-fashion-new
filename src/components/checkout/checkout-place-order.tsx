@@ -19,7 +19,17 @@ import {
 
 import toast from "react-hot-toast";
 
-import { getCart } from "@/services/cart.service";
+import {
+  finishCheckoutCart,
+  getCheckoutCart,
+} from "@/services/checkout-cart.service";
+
+import {
+  cancelUnpaidOrder,
+  createRazorpayOrder,
+  openRazorpayCheckout,
+  verifyRazorpayPayment,
+} from "@/lib/api/payments";
 
 import {
   createOrder,
@@ -100,6 +110,10 @@ export function CheckoutPlaceOrder() {
     (state) => state.payment,
   );
 
+  const paymentWhatsapp = useCheckoutStore(
+    (state) => state.paymentWhatsapp,
+  );
+
   const couponCode = useCheckoutStore(
     (state) => state.couponCode,
   );
@@ -177,7 +191,7 @@ export function CheckoutPlaceOrder() {
       setLoadingCart(true);
 
       try {
-        const cart = await getCart();
+        const cart = await getCheckoutCart();
 
         if (cancelled) {
           return;
@@ -483,12 +497,14 @@ export function CheckoutPlaceOrder() {
       return false;
     }
 
-    /*
-     * Current backend supports COD only.
-     */
-    if (payment !== "cod") {
+    if (
+      payment === "bank_upi" &&
+      !/^\+?\d{10,15}$/.test(
+        paymentWhatsapp.trim(),
+      )
+    ) {
       toast.error(
-        "Online payment is not available yet. Please select Cash on Delivery.",
+        "Please enter a valid WhatsApp number to receive your bill.",
       );
 
       return false;
@@ -593,7 +609,14 @@ export function CheckoutPlaceOrder() {
                 : "standard",
 
             paymentMethod:
-              "cod",
+              payment,
+
+            ...(payment === "bank_upi"
+              ? {
+                  paymentWhatsapp:
+                    paymentWhatsapp.trim(),
+                }
+              : {}),
 
             couponCode:
               normalizedCoupon ||
@@ -676,49 +699,150 @@ export function CheckoutPlaceOrder() {
           );
         }
 
+        const successUrl = `/checkout/success?orderNumber=${encodeURIComponent(
+          order.orderNumber,
+        )}`;
+
+        const completeCheckout =
+          async () => {
+            try {
+              await finishCheckoutCart();
+            } catch (cartError) {
+              /*
+               * Order is already created. Do not show
+               * the customer an order failure because
+               * cart cleanup failed.
+               */
+              console.error(
+                "Clear checkout cart error:",
+                cartError,
+              );
+            }
+
+            idempotencyKeyRef.current =
+              null;
+          };
+
         /* ----------------------------------------------------
-           CLEAR BACKEND CART
+           ONLINE PAYMENT (RAZORPAY)
         ---------------------------------------------------- */
 
-        try {
-          const { clearCart } =
-            await import(
-              "@/services/cart.service"
+        if (payment === "online") {
+          const abandonOrder =
+            async (reason: string) => {
+              await cancelUnpaidOrder(
+                order.orderNumber,
+                publicAccessToken,
+                reason,
+              ).catch((cancelError) =>
+                console.error(
+                  "Cancel unpaid order error:",
+                  cancelError,
+                ),
+              );
+
+              idempotencyKeyRef.current =
+                null;
+
+              orderCreatedRef.current =
+                false;
+            };
+
+          let razorpayOrder;
+
+          try {
+            razorpayOrder =
+              await createRazorpayOrder(
+                order.orderNumber,
+                publicAccessToken,
+              );
+          } catch (startError) {
+            await abandonOrder(
+              "Payment could not be started.",
             );
 
-          await clearCart();
-        } catch (cartError) {
-          /*
-           * Order is already created. Do not show
-           * the customer an order failure because
-           * cart cleanup failed.
-           */
-          console.error(
-            "Clear backend cart error:",
-            cartError,
+            throw startError;
+          }
+
+          const result =
+            await openRazorpayCheckout(
+              razorpayOrder,
+            );
+
+          if (result.status !== "paid") {
+            await abandonOrder(
+              result.status ===
+                "dismissed"
+                ? "Payment window was closed."
+                : "Payment failed.",
+            );
+
+            toast.error(
+              result.status ===
+                "dismissed"
+                ? "Payment was cancelled. Your order was not placed and your bag is unchanged."
+                : result.message,
+            );
+
+            return;
+          }
+
+          try {
+            await verifyRazorpayPayment({
+              orderNumber:
+                order.orderNumber,
+              accessToken:
+                publicAccessToken,
+              razorpayOrderId:
+                result.response
+                  .razorpay_order_id,
+              razorpayPaymentId:
+                result.response
+                  .razorpay_payment_id,
+              razorpaySignature:
+                result.response
+                  .razorpay_signature,
+            });
+          } catch (verifyError) {
+            /*
+             * The customer was charged but we could not
+             * confirm it yet. The Razorpay webhook will
+             * still mark the order as paid.
+             */
+            console.error(
+              "Payment verification error:",
+              verifyError,
+            );
+
+            toast.error(
+              "We received your payment and are confirming it. You will get an update shortly.",
+            );
+          }
+
+          await completeCheckout();
+
+          toast.success(
+            "Payment successful. Your order is confirmed.",
           );
+
+          router.replace(successUrl);
+
+          return;
         }
 
-        idempotencyKeyRef.current =
-          null;
-
         /* ----------------------------------------------------
-           SUCCESS MESSAGE
+           COD / BANK-UPI
         ---------------------------------------------------- */
+
+        await completeCheckout();
 
         toast.success(
-          "Your order has been placed successfully.",
+          payment === "bank_upi"
+            ? "Order placed. We have sent your bill on WhatsApp."
+            : "Your order has been placed successfully.",
         );
 
-        /* ----------------------------------------------------
-           REDIRECT
-        ---------------------------------------------------- */
-
-        router.replace(
-          `/checkout/success?orderNumber=${encodeURIComponent(
-            order.orderNumber,
-          )}`,
-        );
+        router.replace(successUrl);
       } catch (error) {
         console.error(
           "Place order error:",
@@ -746,13 +870,14 @@ export function CheckoutPlaceOrder() {
   const isOrderDisabled =
     placingOrder ||
     loadingCart ||
-    !items.length ||
-    payment !== "cod";
+    !items.length;
 
   const paymentLabel =
     payment === "cod"
       ? "Cash on Delivery"
-      : "Online Payment";
+      : payment === "bank_upi"
+        ? "Bank Transfer / UPI Pay"
+        : "Online Payment (Razorpay)";
 
   const deliveryLabel =
     delivery === "express"
@@ -987,12 +1112,13 @@ export function CheckoutPlaceOrder() {
                   ? "Placing order..."
                   : payment === "cod"
                     ? "Place COD Order"
-                    : "Online Payment Unavailable"}
+                    : payment === "online"
+                      ? "Pay Now"
+                      : "Place Order & Get Bill on WhatsApp"}
             </span>
 
             {!loadingCart &&
-            !placingOrder &&
-            payment === "cod" ? (
+            !placingOrder ? (
               <span className="checkout-place-order__button-total">
                 ₹
                 {total.toLocaleString(

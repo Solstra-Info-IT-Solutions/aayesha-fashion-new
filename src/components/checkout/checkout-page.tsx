@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { getCart } from "@/services/cart.service";
+import { getCheckoutCart } from "@/services/checkout-cart.service";
 import { useAuthStore } from "@/store/auth-store";
 
 import { CheckoutContact } from "@/components/checkout/checkout-contact";
@@ -65,7 +65,7 @@ export function CheckoutPage() {
 
     async function loadCart() {
       try {
-        const cart = await getCart();
+        const cart = await getCheckoutCart();
 
         if (cancelled) {
           return;
