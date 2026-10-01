@@ -17,9 +17,16 @@ export const siteConfig = {
     phone: "918788158087",
   },
 
+  /*
+   * Social profiles. Each one appears as an icon in the footer as soon
+   * as it has a URL — set it here, or through the matching
+   * NEXT_PUBLIC_*_URL environment variable. Empty ones are skipped.
+   */
   social: {
-    instagram: "",
-    facebook: "",
+    instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "",
+    facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "",
+    youtube: process.env.NEXT_PUBLIC_YOUTUBE_URL ?? "",
+    twitter: process.env.NEXT_PUBLIC_TWITTER_URL ?? "",
     whatsapp: `https://wa.me/918788158087`,
   },
 } as const;
