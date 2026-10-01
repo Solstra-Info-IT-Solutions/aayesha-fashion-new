@@ -385,3 +385,137 @@
 
   color: #ffffff;
 }
+
+/* =========================================================
+   SALES: SUMMARY + BULK ACTIONS
+   ========================================================= */
+
+.wishlist-summary {
+  display: grid;
+  gap: 18px;
+
+  margin: 0 0 32px;
+  padding: 20px;
+
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.wishlist-summary__numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+}
+
+.wishlist-summary__numbers div {
+  display: grid;
+  gap: 4px;
+}
+
+.wishlist-summary__numbers span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.wishlist-summary__numbers strong {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.wishlist-summary__save {
+  color: var(--color-success, #3a7d44) !important;
+}
+
+.wishlist-summary__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.wishlist-summary__primary,
+.wishlist-summary__share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 48px;
+  padding: 0 24px;
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.wishlist-summary__primary {
+  border: 0;
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.wishlist-summary__primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wishlist-summary__share {
+  border: 1px solid var(--color-border-dark, var(--color-border));
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.wishlist-summary__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.wishlist-summary__sort select {
+  min-height: 40px;
+  padding: 0 10px;
+
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+
+  font: inherit;
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+.wishlist-item {
+  display: grid;
+  align-content: start;
+  gap: 0;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .wishlist-summary {
+    padding: 16px;
+  }
+
+  .wishlist-summary__primary,
+  .wishlist-summary__share {
+    flex: 1 1 100%;
+  }
+
+  .wishlist-summary__sort {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
