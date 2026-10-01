@@ -53,6 +53,15 @@ import {
 import { ProductCard } from "@/components/product/product-card";
 import { ProductOffers } from "@/components/product/product-offers";
 import { ProductReviews } from "@/components/product/product-reviews";
+import {
+  NotifyMeForm,
+  ProductAssurance,
+  ProductRatingSummary,
+  ProductSavings,
+  ProductSocialProof,
+} from "@/components/product/product-sales";
+import { RecentlyViewed } from "@/components/recently-viewed/recently-viewed";
+import { addRecentlyViewed } from "@/lib/recently-viewed/recently-viewed";
 
 import "./ProductDetail.css";
 import "./ProductDetailRefresh.css";
@@ -179,6 +188,10 @@ export function ProductDetail({
    * Add to Bag button has scrolled out of view.
    */
   const purchaseRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    addRecentlyViewed(product._id);
+  }, [product._id]);
 
   useEffect(() => {
     trackViewItem({
@@ -704,6 +717,8 @@ const [loginAction, setLoginAction] =
                 {product.name}
               </h1>
 
+              <ProductRatingSummary productId={product._id} />
+
               <p className="product-detail__description">
                 {product.content?.description ||
                   "A thoughtfully crafted piece from the Aayesha Fashion collection."}
@@ -732,6 +747,16 @@ const [loginAction, setLoginAction] =
                   Inclusive of applicable taxes
                 </p>
               </div>
+
+              {available && (
+                <ProductSavings
+                  mrp={mrp}
+                  price={sellingPrice}
+                  quantity={quantity}
+                />
+              )}
+
+              {available && <ProductSocialProof productId={product._id} />}
 
               <div
                 className={[
@@ -836,6 +861,8 @@ const [loginAction, setLoginAction] =
                 </button>
               </div>
 
+              {!available && <NotifyMeForm productId={product._id} />}
+
               {/* DELIVERY CHECK */}
               <ProductOffers productId={product._id} />
 
@@ -885,6 +912,11 @@ const [loginAction, setLoginAction] =
               </div>
 
               {/* TRUST */}
+              <ProductAssurance
+                productName={product.name}
+                productUrlPath={`/products/${product._id}`}
+              />
+
               <div className="product-detail__trust">
                 {trustItems.map((item, index) => {
                   const Icon = item.icon;
@@ -1082,6 +1114,11 @@ const [loginAction, setLoginAction] =
             </div>
           </section>
         )}
+
+        {/* =====================================================
+            RECENTLY VIEWED
+        ===================================================== */}
+        <RecentlyViewed currentProductId={product._id} limit={4} />
       </main>
 
       {/* =======================================================
