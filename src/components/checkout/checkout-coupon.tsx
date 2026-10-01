@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  couponOffer,
+  useAvailableCoupons,
+} from "@/components/commerce/use-available-coupons";
+import "@/components/commerce/CommerceSales.css";
 import { getCheckoutCart } from "@/services/checkout-cart.service";
 import {
   useEffect,
@@ -247,8 +252,8 @@ export function CheckoutCoupon() {
      APPLY COUPON
   ======================================================= */
 
-  const applyCoupon = async () => {
-    const code = input
+  const applyCoupon = async (override?: string) => {
+    const code = (override ?? input)
       .trim()
       .toUpperCase();
 
@@ -357,6 +362,28 @@ export function CheckoutCoupon() {
 
   const hasCoupon =
     Boolean(couponCode);
+
+  const availableCoupons =
+    useAvailableCoupons();
+
+  const suggestedCoupons =
+    availableCoupons
+      .filter(
+        (coupon) =>
+          coupon.minimumOrderValue <=
+            subtotal &&
+          (coupon.applicableProductIds
+            .length === 0 ||
+            coupon.applicableProductIds.some(
+              (id) =>
+                cartItems.some(
+                  (item) =>
+                    item.productId ===
+                    id,
+                ),
+            )),
+      )
+      .slice(0, 3);
 
   /* =======================================================
      RENDER
@@ -480,6 +507,45 @@ export function CheckoutCoupon() {
               : "Apply"}
           </button>
         </div>
+
+        {!hasCoupon &&
+        suggestedCoupons.length > 0 ? (
+          <div className="commerce-chips">
+            <p className="commerce-chips__label">
+              Offers you can use now
+            </p>
+
+            <div className="commerce-chips__row">
+              {suggestedCoupons.map(
+                (coupon) => (
+                  <button
+                    key={coupon.code}
+                    type="button"
+                    disabled={
+                      applying ||
+                      loadingCart
+                    }
+                    onClick={() => {
+                      setInput(
+                        coupon.code,
+                      );
+                      void applyCoupon(
+                        coupon.code,
+                      );
+                    }}
+                  >
+                    <strong>
+                      {coupon.code}
+                    </strong>
+                    {couponOffer(
+                      coupon,
+                    )}
+                  </button>
+                ),
+              )}
+            </div>
+          </div>
+        ) : null}
 
         {/* =================================================
             APPLIED COUPON

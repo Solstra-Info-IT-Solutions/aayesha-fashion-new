@@ -1,0 +1,352 @@
+/* Cart + checkout sales helpers */
+
+.commerce-meter {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  padding: 12px 14px;
+
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-subtle, transparent);
+
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.commerce-meter--unlocked {
+  border-color: var(--color-success, #3a7d44);
+  background: var(--color-success-soft, #edf1e9);
+  color: var(--color-text);
+}
+
+.commerce-meter svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.commerce-meter__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.commerce-meter__body p {
+  margin: 0 0 8px;
+}
+
+.commerce-meter strong {
+  color: var(--color-text);
+}
+
+.commerce-meter__bar {
+  display: block;
+  height: 4px;
+  background: var(--color-border-light, var(--color-border));
+}
+
+.commerce-meter__bar span {
+  display: block;
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 450ms ease;
+}
+
+.commerce-meter--unlocked .commerce-meter__bar span {
+  background: var(--color-success, #3a7d44);
+}
+
+/* Offers */
+
+.commerce-offers {
+  padding: 14px;
+
+  border: 1px dashed var(--color-accent, var(--color-border-dark));
+  background: var(--color-bg-subtle, transparent);
+}
+
+.commerce-offers__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: 0 0 12px;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.commerce-offers ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.commerce-offers li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.commerce-offers__text {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.commerce-offers__sub {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.commerce-offers button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 10px;
+
+  border: 1px solid var(--color-border-dark, var(--color-border));
+  background: var(--color-surface);
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.commerce-offers button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Trust */
+
+.commerce-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.commerce-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.commerce-trust svg {
+  color: var(--color-success, #3a7d44);
+}
+
+/* Upsell */
+
+.commerce-upsell {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-border-light, var(--color-border));
+}
+
+.commerce-upsell__eyebrow {
+  margin: 0 0 6px;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-clay);
+}
+
+.commerce-upsell__title {
+  margin: 0 0 18px;
+
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.commerce-upsell__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.commerce-upsell__card {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.commerce-upsell__image {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-surface-soft, #efe8df);
+}
+
+.commerce-upsell__image img {
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.commerce-upsell__card:hover .commerce-upsell__image img {
+  transform: scale(1.04);
+}
+
+.commerce-upsell__name {
+  margin: 4px 0 0;
+  overflow: hidden;
+
+  font-size: 13px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.commerce-upsell__price {
+  margin: 0;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.commerce-upsell__price s {
+  margin-left: 8px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.commerce-upsell__card button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  min-height: 38px;
+
+  border: 1px solid var(--color-border-dark, var(--color-border));
+  background: var(--color-surface);
+
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  cursor: pointer;
+
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.commerce-upsell__card button:hover:not(:disabled) {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.commerce-upsell__card button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+@media (max-width: 760px) {
+  .commerce-upsell__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Checkout coupon chips */
+
+.commerce-chips {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.commerce-chips__label {
+  margin: 0;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.commerce-chips__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.commerce-chips button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  min-height: 40px;
+  padding: 0 14px;
+
+  border: 1px dashed var(--color-accent, var(--color-border-dark));
+  background: var(--color-surface);
+
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.commerce-chips button strong {
+  letter-spacing: 0.1em;
+}
+
+.commerce-chips button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.commerce-help {
+  display: block;
+  margin-top: 14px;
+
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.commerce-help a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cart-summary .commerce-offers {
+  margin-top: 16px;
+}

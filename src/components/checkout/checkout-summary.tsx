@@ -1,5 +1,6 @@
 "use client";
 
+import { FreeShippingMeter } from "@/components/commerce/free-shipping-meter";
 import { getCheckoutCart } from "@/services/checkout-cart.service";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -261,6 +262,15 @@ export function CheckoutSummary() {
         {/* ===================================================
             TOTALS
         =================================================== */}
+
+        {delivery !== "express" && items.length > 0 ? (
+          <div style={{ margin: "0 0 16px" }}>
+            <FreeShippingMeter
+              subtotal={subtotal}
+              savings={productSavings}
+            />
+          </div>
+        ) : null}
 
         <div className="checkout-summary__totals">
           <SummaryRow
