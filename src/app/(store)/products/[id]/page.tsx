@@ -10,7 +10,11 @@ import { ApiError } from "@/lib/api";
 import { siteConfig } from "@/config/site";
 import { getCategories } from "@/services/category.service";
 
-import { ProductJsonLd } from "@/components/seo/product-json-ld";
+import {
+  ProductJsonLd,
+  type ProductReviewSeo,
+} from "@/components/seo/product-json-ld";
+import { getProductReviews } from "@/lib/api/reviews";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import ProductDetail from "@/components/product/product-detail";
 
@@ -539,6 +543,30 @@ export default async function ProductPage({
   }
 
   /* ----------------------------------------------------------
+     REVIEWS (structured data → star ratings in search results)
+  ---------------------------------------------------------- */
+
+  let reviewSeo: ProductReviewSeo | null = null;
+
+  try {
+    const result = await getProductReviews(product._id);
+
+    reviewSeo = {
+      average: result.summary.average,
+      total: result.summary.total,
+      items: result.reviews.slice(0, 5).map((review) => ({
+        author: review.authorName,
+        rating: review.rating,
+        title: review.title,
+        body: review.body,
+        createdAt: review.createdAt,
+      })),
+    };
+  } catch {
+    reviewSeo = null;
+  }
+
+  /* ----------------------------------------------------------
      SEO + PRODUCT DETAIL
   ---------------------------------------------------------- */
 
@@ -547,6 +575,7 @@ export default async function ProductPage({
       <ProductJsonLd
         product={product}
         categoryName={categoryName}
+        reviews={reviewSeo}
       />
 
       <BreadcrumbJsonLd

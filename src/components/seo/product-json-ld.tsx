@@ -6,9 +6,22 @@ import {
 } from "@/types/product";
 import { siteConfig } from "@/config/site";
 
+export interface ProductReviewSeo {
+  average: number;
+  total: number;
+  items: Array<{
+    author: string;
+    rating: number;
+    title: string;
+    body: string;
+    createdAt: string;
+  }>;
+}
+
 interface ProductJsonLdProps {
   product: Product;
   categoryName?: string;
+  reviews?: ProductReviewSeo | null;
 }
 
 function absoluteUrl(
@@ -146,6 +159,7 @@ function getOffer(
 export function ProductJsonLd({
   product,
   categoryName,
+  reviews,
 }: ProductJsonLdProps) {
   if (!product) {
     return null;
@@ -209,6 +223,31 @@ export function ProductJsonLd({
     offers:
       getOffer(product),
   };
+
+  /* Star ratings in search results — only with real approved reviews */
+  if (reviews && reviews.total > 0) {
+    productNode.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: reviews.average,
+      reviewCount: reviews.total,
+      bestRating: 5,
+      worstRating: 1,
+    };
+
+    productNode.review = reviews.items.map((item) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: item.author },
+      datePublished: item.createdAt,
+      ...(item.title ? { name: item.title } : {}),
+      reviewBody: item.body,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: item.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    }));
+  }
 
   if (availableStock >= 0) {
     productNode.inventoryLevel = {

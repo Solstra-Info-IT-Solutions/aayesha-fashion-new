@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
 import BrandLoader from "@/components/layout/BrandLoader";
+import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 
 import {
   Cormorant_Garamond,
@@ -241,6 +242,18 @@ export const metadata: Metadata = {
      OTHER
   ======================================================= */
 
+  /* Search Console / Bing verification (set in the environment) */
+  verification: {
+    google:
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? {
+          "msvalidate.01":
+            process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
+        }
+      : undefined,
+  },
+
   other: {
     "theme-color":
       "#f7f3ed",
@@ -270,6 +283,12 @@ export default function RootLayout({
         suppressHydrationWarning
         className="antialiased"
       >
+        <noscript>
+          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+
+        <AnalyticsScripts />
+
         <BrandLoader />
         <AuthProvider>
           {children}

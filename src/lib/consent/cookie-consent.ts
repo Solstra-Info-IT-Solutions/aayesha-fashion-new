@@ -1,6 +1,9 @@
 export const COOKIE_CONSENT_STORAGE_KEY =
   "aayesha-cookie-consent";
 
+export const COOKIE_CONSENT_CHANGED_EVENT =
+  "aayesha:consent-changed";
+
 export const COOKIE_CONSENT_VERSION =
   "1.0";
 
@@ -168,6 +171,12 @@ export function saveCookieConsent(
       // Storage can be unavailable
       // in private/restricted browsing.
     }
+
+    window.dispatchEvent(
+      new Event(
+        COOKIE_CONSENT_CHANGED_EVENT,
+      ),
+    );
   }
 
   return state;

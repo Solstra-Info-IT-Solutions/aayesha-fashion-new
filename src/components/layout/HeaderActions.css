@@ -363,7 +363,7 @@
 .header-search-panel {
   position: fixed;
 
-  top: var(--header-height, 72px);
+  top: calc(var(--header-height, 72px) + var(--announce-offset, 0px));
 
   left: 0;
   right: 0;
@@ -1252,7 +1252,7 @@
 
   .header-search-panel {
     top:
-      var(--header-height, 72px);
+      calc(var(--header-height, 72px) + var(--announce-offset, 0px));
   }
 
   .header-search-container {
@@ -1334,7 +1334,7 @@
 
   .header-search-panel {
     top:
-      var(--header-height, 68px);
+      calc(var(--header-height, 68px) + var(--announce-offset, 0px));
   }
 
   .header-search-container {
@@ -1420,7 +1420,7 @@
     position: fixed;
 
     top:
-      calc(var(--header-height, 64px) + 8px);
+      calc(calc(var(--header-height, 64px) + var(--announce-offset, 0px)) + 8px);
 
     left: 12px;
     right: 12px;
@@ -1479,7 +1479,7 @@
 
   .header-search-panel {
     top:
-      var(--header-height, 64px);
+      calc(var(--header-height, 64px) + var(--announce-offset, 0px));
   }
 
   .header-search-container {
@@ -1602,7 +1602,7 @@
 
   .guest-account-popup {
     top:
-      calc(var(--header-height, 60px) + 7px);
+      calc(calc(var(--header-height, 60px) + var(--announce-offset, 0px)) + 7px);
 
     left: 8px;
     right: 8px;

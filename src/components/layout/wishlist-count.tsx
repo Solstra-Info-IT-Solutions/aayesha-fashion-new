@@ -13,6 +13,7 @@ export function WishlistCount() {
 
   return (
     <span
+      key={count}
       aria-label={`${count} item${
         count === 1 ? "" : "s"
       } in wishlist`}

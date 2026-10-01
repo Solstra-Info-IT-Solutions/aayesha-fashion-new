@@ -78,16 +78,6 @@ export interface AvailableCustomerCoupon {
   applicableProductIds: string[];
 }
 
-interface CouponApiResponse {
-  success: boolean;
-  data: ValidateCustomerCouponResponse;
-}
-
-interface AvailableCouponsApiResponse {
-  success: boolean;
-  data: AvailableCustomerCoupon[];
-}
-
 /* =========================================================
    GET AVAILABLE CUSTOMER COUPONS
 ========================================================= */
@@ -96,21 +86,16 @@ export const getAvailableCustomerCoupons =
   async (): Promise<
     AvailableCustomerCoupon[]
   > => {
-    const response =
-      await apiFetch<AvailableCouponsApiResponse>(
-        "/coupons/available",
-        {
-          method: "GET",
-        },
-      );
-
-    if (!response.success) {
-      throw new Error(
-        "Unable to load available coupons.",
-      );
-    }
-
-    return response.data;
+    /*
+     * apiFetch already unwraps the { success, data } envelope
+     * and throws on failure, so the result is the coupon list.
+     */
+    return apiFetch<AvailableCustomerCoupon[]>(
+      "/coupons/available",
+      {
+        method: "GET",
+      },
+    );
   };
 
 /* =========================================================
@@ -121,8 +106,7 @@ export const validateCustomerCoupon =
   async (
     input: ValidateCustomerCouponInput,
   ): Promise<ValidateCustomerCouponResponse> => {
-    const response =
-      await apiFetch<CouponApiResponse>(
+    return apiFetch<ValidateCustomerCouponResponse>(
         "/coupons/validate",
         {
           method: "POST",
@@ -154,11 +138,4 @@ export const validateCustomerCoupon =
         },
       );
 
-    if (!response.success) {
-      throw new Error(
-        "Unable to validate coupon.",
-      );
-    }
-
-    return response.data;
   };
