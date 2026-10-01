@@ -1,3 +1,4 @@
+import { AccountOverview } from "@/components/account/account-overview";
 import { ProfileDetails } from "@/components/account/profile-details";
 import { AccountOffers } from "@/components/orders-sales/account-offers";
 import { ProductStrip } from "@/components/orders-sales/product-strip";
@@ -15,6 +16,8 @@ export const metadata: Metadata = {
 export default function AccountPage() {
   return (
     <>
+      <AccountOverview />
+
       <ProfileDetails />
 
       <AccountOffers />
