@@ -73,9 +73,14 @@ export default function BrandLoader({
       aria-live="polite"
       aria-label="Loading Aayesha Fashion"
     >
-      {/* Vertical glow line travelling left → right */}
+      {/* Light glowing behind the text */}
       <span
-        className="aayesha-loader__glow"
+        className="aayesha-loader__halo"
+        aria-hidden="true"
+      />
+
+      <span
+        className="aayesha-loader__halo aayesha-loader__halo--core"
         aria-hidden="true"
       />
 
