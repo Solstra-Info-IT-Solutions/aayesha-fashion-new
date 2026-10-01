@@ -9,11 +9,13 @@ interface BrandLoaderProps {
   minimumDuration?: number;
 }
 
-const EXIT_HOLD_MS = 350;
-const EXIT_FADE_MS = 550;
+const EXIT_HOLD_MS = 450;
+const EXIT_FADE_MS = 650;
+
+const WORD = "AAYESHA".split("");
 
 export default function BrandLoader({
-  minimumDuration = 1900,
+  minimumDuration = 2300,
 }: BrandLoaderProps) {
   const [progress, setProgress] = useState(1);
   const [leaving, setLeaving] = useState(false);
@@ -29,8 +31,11 @@ export default function BrandLoader({
     const tick = (time: number) => {
       const raw = Math.min((time - start) / minimumDuration, 1);
 
-      // ease-out so the counter settles smoothly at 100
-      const eased = 1 - Math.pow(1 - raw, 3);
+      // ease-in-out so the counter feels deliberate
+      const eased =
+        raw < 0.5
+          ? 2 * raw * raw
+          : 1 - Math.pow(-2 * raw + 2, 2) / 2;
 
       setProgress(Math.max(1, Math.round(eased * 100)));
 
@@ -73,37 +78,104 @@ export default function BrandLoader({
       aria-live="polite"
       aria-label="Loading Aayesha Fashion"
     >
-      {/* Light glowing behind the text */}
-      <span
-        className="aayesha-loader__halo"
-        aria-hidden="true"
-      />
+      {/* Soft light behind the text */}
+      <span className="aayesha-loader__halo" aria-hidden="true" />
 
       <span
         className="aayesha-loader__halo aayesha-loader__halo--core"
         aria-hidden="true"
       />
 
+      {/* Editorial frame that draws itself in */}
+      <span className="aayesha-loader__frame" aria-hidden="true" />
+
+      <span
+        className="aayesha-loader__corner aayesha-loader__corner--tl"
+        aria-hidden="true"
+      />
+      <span
+        className="aayesha-loader__corner aayesha-loader__corner--tr"
+        aria-hidden="true"
+      />
+      <span
+        className="aayesha-loader__corner aayesha-loader__corner--bl"
+        aria-hidden="true"
+      />
+      <span
+        className="aayesha-loader__corner aayesha-loader__corner--br"
+        aria-hidden="true"
+      />
+
+      {/* Top meta row */}
+      <header className="aayesha-loader__meta" aria-hidden="true">
+        <span>AA</span>
+        <span>Contemporary Indian Fashion</span>
+        <span>2026</span>
+      </header>
+
+      {/* Side labels */}
+      <span
+        className="aayesha-loader__side aayesha-loader__side--left"
+        aria-hidden="true"
+      >
+        AA / 01 Womenswear
+      </span>
+
+      <span
+        className="aayesha-loader__side aayesha-loader__side--right"
+        aria-hidden="true"
+      >
+        The Edit India
+      </span>
+
+      {/* Centre */}
       <div className="aayesha-loader__center">
         <p className="aayesha-loader__eyebrow">
-          Contemporary Indian Fashion
+          <span aria-hidden="true" />
+          The New Edit
+          <span aria-hidden="true" />
         </p>
 
-        <h1 className="aayesha-loader__wordmark">
-          AAYESHA
-          <span>FASHION</span>
+        <h1 className="aayesha-loader__wordmark" aria-label="Aayesha Fashion">
+          <span className="aayesha-loader__letters" aria-hidden="true">
+            {WORD.map((letter, index) => (
+              <span
+                key={index}
+                style={{ animationDelay: `${0.35 + index * 0.08}s` }}
+              >
+                {letter}
+              </span>
+            ))}
+          </span>
+
+          <span className="aayesha-loader__sub" aria-hidden="true">
+            Fashion
+          </span>
         </h1>
+
+        <span className="aayesha-loader__rule" aria-hidden="true" />
 
         <p className="aayesha-loader__tagline">
           Made for moments worth remembering.
         </p>
+
+        <div className="aayesha-loader__loading" aria-hidden="true">
+          <div className="aayesha-loader__loading-top">
+            <span>Curating the collection</span>
+            <span className="aayesha-loader__percent">{progress}%</span>
+          </div>
+
+          <div className="aayesha-loader__track">
+            <span
+              className="aayesha-loader__bar"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
       </div>
 
-      <p
-        className="aayesha-loader__progress"
-        aria-hidden="true"
-      >
-        {progress}%
+      <p className="aayesha-loader__brand" aria-hidden="true">
+        Aayesha Fashion
       </p>
     </div>
   );
