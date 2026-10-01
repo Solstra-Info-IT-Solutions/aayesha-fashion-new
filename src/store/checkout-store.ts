@@ -113,7 +113,7 @@ export const useCheckoutStore =
 
         delivery: "standard",
 
-        payment: "cod",
+        payment: "bank_upi",
 
         paymentWhatsapp: "",
 
@@ -246,7 +246,7 @@ export const useCheckoutStore =
 
             delivery: "standard",
 
-            payment: "cod",
+            payment: "bank_upi",
 
             paymentWhatsapp: "",
 

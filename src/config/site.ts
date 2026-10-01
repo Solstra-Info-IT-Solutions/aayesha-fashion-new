@@ -15,11 +15,15 @@ export const siteConfig = {
   /*
    * Online (Razorpay) payments stay off unless explicitly enabled; the
    * store currently takes payment through the WhatsApp bill (UPI /
-   * bank transfer) or Cash on Delivery.
+   * bank transfer).
    */
   features: {
     onlinePayment:
       process.env.NEXT_PUBLIC_ENABLE_ONLINE_PAYMENT === "true",
+
+    /* Cash on Delivery is off: payment is by the WhatsApp bill. */
+    cashOnDelivery:
+      process.env.NEXT_PUBLIC_ENABLE_COD === "true",
   },
 
   contact: {

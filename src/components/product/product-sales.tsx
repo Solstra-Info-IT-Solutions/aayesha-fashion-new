@@ -173,7 +173,7 @@ export function ProductAssurance({
       <p className="product-sales__pay">
         <ShieldCheck size={15} strokeWidth={1.5} />
         <span>
-          Pay by UPI, cards, netbanking or <strong>Cash on Delivery</strong>.
+          Pay by <strong>UPI or bank transfer</strong>: we send the bill on WhatsApp.
           Easy returns on eligible orders.
         </span>
       </p>

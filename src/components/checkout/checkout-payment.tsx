@@ -1,7 +1,7 @@
 "use client";
 
 import { siteConfig } from "@/config/site";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 import {
   Banknote,
@@ -24,12 +24,6 @@ export function CheckoutPayment() {
     (state) => state.setPayment,
   );
 
-  // A remembered "online" choice is not valid while the gateway is off.
-  useEffect(() => {
-    if (!siteConfig.features.onlinePayment && selected === "online") {
-      setPayment("bank_upi");
-    }
-  }, [selected, setPayment]);
 
   const paymentWhatsapp = useCheckoutStore(
     (state) => state.paymentWhatsapp,
@@ -42,6 +36,36 @@ export function CheckoutPayment() {
   const setPaymentWhatsapp = useCheckoutStore(
     (state) => state.setPaymentWhatsapp,
   );
+
+  const prefilled = useRef(false);
+
+  // A remembered choice is not valid while that method is switched off.
+  useEffect(() => {
+    if (
+      (!siteConfig.features.onlinePayment && selected === "online") ||
+      (!siteConfig.features.cashOnDelivery && selected === "cod")
+    ) {
+      setPayment("bank_upi");
+    }
+
+    // The bill goes to the contact number unless the customer changes it
+    // (prefilled once, so clearing the field to retype is not overridden).
+    if (
+      selected === "bank_upi" &&
+      !paymentWhatsapp &&
+      contactPhone &&
+      !prefilled.current
+    ) {
+      prefilled.current = true;
+      setPaymentWhatsapp(contactPhone);
+    }
+  }, [
+    selected,
+    setPayment,
+    paymentWhatsapp,
+    contactPhone,
+    setPaymentWhatsapp,
+  ]);
 
   return (
     <section className="checkout-payment">
@@ -84,6 +108,7 @@ export function CheckoutPayment() {
           role="group"
           aria-label="Payment methods"
         >
+          {siteConfig.features.cashOnDelivery ? (
           <PaymentOption
             id="cod"
             label="Cash on Delivery"
@@ -93,6 +118,7 @@ export function CheckoutPayment() {
             active={selected === "cod"}
             onClick={() => setPayment("cod")}
           />
+          ) : null}
 
           {siteConfig.features.onlinePayment ? (
           <PaymentOption

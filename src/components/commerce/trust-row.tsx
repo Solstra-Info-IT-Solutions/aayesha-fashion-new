@@ -13,7 +13,7 @@ export function TrustRow() {
 
       <li>
         <Banknote size={15} strokeWidth={1.5} />
-        Cash on Delivery
+        UPI / bank transfer
       </li>
 
       <li>

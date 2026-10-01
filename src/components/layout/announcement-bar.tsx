@@ -27,7 +27,7 @@ const STATIC_MESSAGES: Message[] = [
   },
   {
     id: "payments",
-    text: "Cash on Delivery & secure online payments available",
+    text: "Pay easily by UPI: your bill is sent straight to WhatsApp",
     href: "/shipping",
     icon: "shield",
   },
