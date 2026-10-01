@@ -177,7 +177,7 @@ export function CategoryBrowser({
   }
 
   return (
-    <main className="category-browser">
+    <div className="category-browser">
       {/* =====================================================
           HERO + SEARCH
       ===================================================== */}
@@ -581,6 +581,6 @@ export function CategoryBrowser({
           </div>
         </div>
       )}
-    </main>
+    </div>
   );
 }

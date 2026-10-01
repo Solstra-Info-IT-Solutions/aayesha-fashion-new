@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+
+import { SmartBackLink } from "@/components/navigation/smart-back-link";
 import { useEffect, useMemo, useState } from "react";
 import { useAuthStore } from "@/store/auth-store";
 import {
@@ -329,7 +331,7 @@ export function CartContent() {
   ========================================================= */
 
   return (
-    <main className="cart-page">
+    <div className="cart-page">
       <div className="cart-page__container">
 
         {/* ===================================================
@@ -337,12 +339,12 @@ export function CartContent() {
         =================================================== */}
 
         <header className="cart-header">
-          <Link
+          <SmartBackLink
             href="/shop"
             className="cart-header__back"
           >
             Continue Shopping
-          </Link>
+          </SmartBackLink>
 
           <div className="cart-header__main">
             <div>
@@ -786,7 +788,7 @@ export function CartContent() {
           </aside>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

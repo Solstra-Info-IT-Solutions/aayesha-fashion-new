@@ -7,6 +7,14 @@ import { WishlistGrid } from "@/components/product/wishlist-grid";
 
 import "./WishlistPage.css";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Wishlist",
+  robots: { index: false, follow: false },
+};
+
+
 export default async function WishlistPage() {
   let products: Product[] = [];
 
@@ -24,7 +32,7 @@ export default async function WishlistPage() {
   }
 
   return (
-    <main className="wishlist-page">
+    <div className="wishlist-page">
       {/* =====================================================
           HERO
       ===================================================== */}
@@ -66,6 +74,6 @@ export default async function WishlistPage() {
           <WishlistGrid products={products} />
         </div>
       </section>
-    </main>
+    </div>
   );
 }

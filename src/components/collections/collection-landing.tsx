@@ -135,7 +135,7 @@ export function CollectionLanding({
   const others = collections.filter((item) => item.slug !== slug);
 
   return (
-    <main className="collection-landing">
+    <div className="collection-landing">
       {/* =====================================================
           HERO
       ===================================================== */}
@@ -441,6 +441,6 @@ export function CollectionLanding({
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

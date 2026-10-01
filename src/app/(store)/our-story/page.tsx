@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function OurStoryPage() {
   return (
-    <main className="our-story-page">
+    <div className="our-story-page">
       {/* =====================================================
           HERO
       ===================================================== */}
@@ -539,6 +539,6 @@ export default function OurStoryPage() {
           </p>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

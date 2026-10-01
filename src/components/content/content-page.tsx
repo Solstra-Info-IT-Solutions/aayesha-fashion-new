@@ -76,7 +76,7 @@ export function ContentPage({
   const links = contentGroups[group].links;
 
   return (
-    <main
+    <div
       className={[
         "content-page",
         `content-page--${variant}`,
@@ -239,6 +239,6 @@ export function ContentPage({
           </div>
         </section>
       )}
-    </main>
+    </div>
   );
 }

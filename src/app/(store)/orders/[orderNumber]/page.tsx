@@ -210,7 +210,7 @@ export default function PublicOrderPage({
 
   if (loading) {
     return (
-      <main className="public-order-page public-order-page--state">
+      <div className="public-order-page public-order-page--state">
         <div className="public-order-page__state-wrapper">
           <div className="public-order-page__state-card">
             <div className="public-order-page__state-icon public-order-page__state-icon--loading">
@@ -234,7 +234,7 @@ export default function PublicOrderPage({
             </p>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -244,7 +244,7 @@ export default function PublicOrderPage({
 
   if (error || !order) {
     return (
-      <main className="public-order-page public-order-page--state">
+      <div className="public-order-page public-order-page--state">
         <div className="public-order-page__state-wrapper">
           <div className="public-order-page__state-card">
             <div className="public-order-page__state-icon public-order-page__state-icon--error">
@@ -288,7 +288,7 @@ export default function PublicOrderPage({
             </div>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -305,7 +305,7 @@ export default function PublicOrderPage({
     ].includes(order.status);
 
   return (
-    <main className="public-order-page">
+    <div className="public-order-page">
       {/* =====================================================
           HEADER
       ===================================================== */}
@@ -867,6 +867,6 @@ export default function PublicOrderPage({
         order={order}
         isAuthenticated={isAuthenticated}
       />
-    </main>
+    </div>
   );
 }
