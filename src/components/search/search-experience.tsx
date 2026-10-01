@@ -1,5 +1,15 @@
 "use client";
 
+import { ListingSalesBar } from "@/components/listing-sales/listing-sales-bar";
+import { ShopByNeed } from "@/components/home-sales/shop-by-need";
+import { ProductStrip } from "@/components/orders-sales/product-strip";
+import { RecentlyViewed } from "@/components/recently-viewed/recently-viewed";
+import {
+  SearchHelpCta,
+  SearchRefineBar,
+  useRefinedResults,
+} from "@/components/search/search-sales";
+import { trackSearch } from "@/lib/analytics";
 import { ProductInsightsProvider } from "@/components/listing-sales/insights-context";
 import Image from "next/image";
 import Link from "next/link";
@@ -183,6 +193,8 @@ export function SearchExperience({
         });
 
         if (!cancelled) {
+          trackSearch(activeTerm);
+
           setResult({
             term: activeTerm,
             products: response.products,
@@ -332,6 +344,8 @@ export function SearchExperience({
   const loading = hasTerm && result.term !== activeTerm;
 
   const products = hasTerm && !loading ? result.products : [];
+
+  const refine = useRefinedResults(products);
 
   const siteMatches = useMemo(
     () => (hasTerm ? searchSiteEntries(activeTerm) : []),
@@ -658,6 +672,27 @@ export function SearchExperience({
           </div>
         )}
 
+        {!hasTerm && (
+          <>
+            <ListingSalesBar />
+
+            <ProductStrip
+              eyebrow="Start with the best"
+              title="Customer favourites"
+            />
+
+            <ShopByNeed />
+
+            <RecentlyViewed
+              title="Pick up where you left off"
+              eyebrow="Recently viewed"
+              limit={4}
+            />
+
+            <SearchHelpCta term="" />
+          </>
+        )}
+
         {/* =====================================================
             RESULTS
         ===================================================== */}
@@ -784,21 +819,40 @@ export function SearchExperience({
                 )}
 
                 {!loading && products.length > 0 && (
-                  <ProductInsightsProvider
-                    productIds={products.map((product) => product._id)}
-                  >
-                    <div
-                      className="search-atelier__grid"
-                      onClickCapture={() => remember(activeTerm)}
-                    >
-                      {products.map((product) => (
-                        <ProductCard
-                          key={product.id}
-                          product={product}
-                        />
-                      ))}
-                    </div>
-                  </ProductInsightsProvider>
+                  <>
+                    <ListingSalesBar />
+
+                    <SearchRefineBar
+                      active={refine.active}
+                      toggle={refine.toggle}
+                      sort={refine.sort}
+                      setSort={refine.setSort}
+                      shown={refine.refined.length}
+                      total={products.length}
+                    />
+
+                    {refine.refined.length === 0 ? (
+                      <p className="search-atelier__muted">
+                        No pieces match these filters. Try removing one.
+                      </p>
+                    ) : (
+                      <ProductInsightsProvider
+                        productIds={products.map((product) => product._id)}
+                      >
+                        <div
+                          className="search-atelier__grid"
+                          onClickCapture={() => remember(activeTerm)}
+                        >
+                          {refine.refined.map((product) => (
+                            <ProductCard
+                              key={product.id}
+                              product={product}
+                            />
+                          ))}
+                        </div>
+                      </ProductInsightsProvider>
+                    )}
+                  </>
                 )}
 
                 {!loading &&
@@ -887,6 +941,20 @@ export function SearchExperience({
                 </Link>
               </section>
             )}
+
+            {/* Always offer help, and fresh ideas when results are thin */}
+
+            {!loading && (nothingFound || products.length < 4) ? (
+              <>
+                <SearchHelpCta term={activeTerm} />
+
+                <ProductStrip
+                  eyebrow="You may also like"
+                  title="Customer favourites"
+                  excludeIds={products.map((product) => product._id)}
+                />
+              </>
+            ) : null}
           </div>
         )}
       </div>
