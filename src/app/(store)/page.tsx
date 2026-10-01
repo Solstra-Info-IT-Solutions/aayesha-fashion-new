@@ -15,6 +15,12 @@ import { WhyChooseUs } from "@/components/home/why-choose-us";
 import { Testimonials } from "@/components/home/testimonials";
 import { InstagramGallery } from "@/components/home/instagram-gallery";
 import { Newsletter } from "@/components/home/newsletter";
+import { HomeTrustStrip } from "@/components/home-sales/trust-strip";
+import { HomeOffers } from "@/components/home-sales/home-offers";
+import { ReviewsShowcase } from "@/components/home-sales/reviews-showcase";
+import { ShopByNeed } from "@/components/home-sales/shop-by-need";
+import { StylistCta } from "@/components/home-sales/stylist-cta";
+import { RecentlyViewed } from "@/components/recently-viewed/recently-viewed";
 import { Reveal } from "@/components/common/reveal";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
 
@@ -75,6 +81,8 @@ export default async function HomePage() {
           />
         )}
 
+      <HomeTrustStrip />
+
       {/* ===================================================
           FEATURED CATEGORIES
           Source: Category API
@@ -88,6 +96,8 @@ export default async function HomePage() {
       =================================================== */}
 
       <Reveal><NewArrivals /></Reveal>
+
+      <HomeOffers />
 
       {/* ===================================================
           BRAND STORY
@@ -116,6 +126,10 @@ export default async function HomePage() {
 
       <Reveal><BestSellers /></Reveal>
 
+      <Reveal>
+        <ShopByNeed />
+      </Reveal>
+
       {/* ===================================================
           PROMOTIONAL BANNER
           Source: Marketing API
@@ -135,6 +149,10 @@ export default async function HomePage() {
           />
         </Reveal>
       )}
+
+      <Reveal>
+        <ReviewsShowcase />
+      </Reveal>
 
       {/* ===================================================
           TESTIMONIALS
@@ -164,6 +182,16 @@ export default async function HomePage() {
             />
           </Reveal>
         )}
+
+      <RecentlyViewed
+        title="Pick up where you left off"
+        eyebrow="Recently viewed"
+        limit={4}
+      />
+
+      <Reveal>
+        <StylistCta />
+      </Reveal>
 
       {/* ===================================================
           NEWSLETTER
