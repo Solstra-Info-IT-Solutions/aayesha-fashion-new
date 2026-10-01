@@ -1,5 +1,7 @@
 "use client";
 
+import { TrustRow } from "@/components/commerce/trust-row";
+import { siteConfig } from "@/config/site";
 import type { ReactNode } from "react";
 
 import {
@@ -1130,6 +1132,19 @@ export function CheckoutPlaceOrder() {
           </span>
 
         </button>
+
+        <TrustRow />
+
+        <p className="commerce-help">
+          Need help placing your order?{" "}
+          <a
+            href={`https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent("Hi Aayesha Fashion, I need help with my order.")}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Chat on WhatsApp
+          </a>
+        </p>
 
         {/* ====================================================
             TRUST LINE

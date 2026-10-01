@@ -20,6 +20,12 @@ import {
   type Cart,
 } from "@/services/cart.service";
 
+import { CartOffers } from "@/components/commerce/cart-offers";
+import { CartUpsell } from "@/components/commerce/cart-upsell";
+import { FreeShippingMeter } from "@/components/commerce/free-shipping-meter";
+import { TrustRow } from "@/components/commerce/trust-row";
+import { FREE_SHIPPING_THRESHOLD } from "@/components/product/product-sales";
+
 import "./CartContent.css";
 import "./CartRefresh.css";
 
@@ -643,6 +649,13 @@ export function CartContent() {
               })}
             </div>
 
+            <CartUpsell
+              cartProductIds={cartItems.map((item) => item.productId)}
+              onAdded={async () => {
+                setCart(await getCart());
+              }}
+            />
+
             {/* CLEAR */}
 
             <button
@@ -704,8 +717,23 @@ export function CartContent() {
 
                 <SummaryRow
                   label="Shipping"
-                  value="Calculated at checkout"
-                  valueClassName="cart-summary__value--muted"
+                  value={
+                    summary.subtotal >= FREE_SHIPPING_THRESHOLD
+                      ? "Free"
+                      : "₹99 · free above ₹2,999"
+                  }
+                  valueClassName={
+                    summary.subtotal >= FREE_SHIPPING_THRESHOLD
+                      ? "cart-summary__value--success"
+                      : "cart-summary__value--muted"
+                  }
+                />
+              </div>
+
+              <div style={{ margin: "16px 0" }}>
+                <FreeShippingMeter
+                  subtotal={summary.subtotal}
+                  savings={savings}
                 />
               </div>
 
@@ -730,11 +758,18 @@ export function CartContent() {
                 Proceed to Checkout
               </Link>
 
+              <TrustRow />
+
               <p className="cart-summary__secure">
                 Secure checkout · Payment and
                 delivery options available at checkout
               </p>
             </div>
+
+            <CartOffers
+              subtotal={summary.subtotal}
+              productIds={cartItems.map((item) => item.productId)}
+            />
 
             <div className="cart-care">
               <span className="cart-care__label">
