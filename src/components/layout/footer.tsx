@@ -4,6 +4,8 @@ import {
   Instagram,
   Facebook,
   MessageCircle,
+  Twitter,
+  Youtube,
 } from "lucide-react";
 
 import { siteConfig } from "@/config/site";
@@ -81,35 +83,32 @@ const legalLinks = [
 ============================================================ */
 
 const socialLinks = [
-  siteConfig.social.instagram
-    ? {
-        label: "Instagram",
-        href: siteConfig.social.instagram,
-        icon: Instagram,
-      }
-    : null,
-
-  siteConfig.social.facebook
-    ? {
-        label: "Facebook",
-        href: siteConfig.social.facebook,
-        icon: Facebook,
-      }
-    : null,
-
-  siteConfig.social.whatsapp
-    ? {
-        label: "WhatsApp",
-        href: siteConfig.social.whatsapp,
-        icon: MessageCircle,
-      }
-    : null,
-].filter(
-  (
-    social,
-  ): social is NonNullable<typeof social> =>
-    social !== null,
-);
+  {
+    label: "Instagram",
+    href: siteConfig.social.instagram,
+    icon: Instagram,
+  },
+  {
+    label: "Facebook",
+    href: siteConfig.social.facebook,
+    icon: Facebook,
+  },
+  {
+    label: "YouTube",
+    href: siteConfig.social.youtube,
+    icon: Youtube,
+  },
+  {
+    label: "X (Twitter)",
+    href: siteConfig.social.twitter,
+    icon: Twitter,
+  },
+  {
+    label: "WhatsApp",
+    href: siteConfig.social.whatsapp,
+    icon: MessageCircle,
+  },
+].filter((social) => Boolean(social.href));
 
 
 /* ============================================================

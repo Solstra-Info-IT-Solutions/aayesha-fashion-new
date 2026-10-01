@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { HeaderActions } from "./header-actions";
@@ -151,12 +152,28 @@ export default function Header({
             className="aayesha-header__logo"
             aria-label="Aayesha Fashion home"
           >
-            <span className="aayesha-header__logo-main">
-              AAYESHA
+            <span
+              className="aayesha-header__logo-mark"
+              aria-hidden="true"
+            >
+              <Image
+                src="/images/logo.png"
+                alt=""
+                width={64}
+                height={64}
+                priority
+                className="aayesha-header__logo-image"
+              />
             </span>
 
-            <span className="aayesha-header__logo-sub">
-              WOMENSWEAR
+            <span className="aayesha-header__logo-text">
+              <span className="aayesha-header__logo-main">
+                AAYESHA
+              </span>
+
+              <span className="aayesha-header__logo-sub">
+                WOMENSWEAR
+              </span>
             </span>
           </Link>
 

@@ -9,7 +9,7 @@
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
@@ -20,7 +20,7 @@ import {
   Copy,
   Heart,
   MapPin,
-  Minimize2,
+  Play,
   Minus,
   Plus,
   RotateCcw,
@@ -163,6 +163,34 @@ export function ProductDetail({
   const [loginOpen, setLoginOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  /*
+   * The sticky buy bar (phones) only appears once the main
+   * Add to Bag button has scrolled out of view.
+   */
+  const purchaseRef = useRef<HTMLDivElement>(null);
+  const [stickyVisible, setStickyVisible] = useState(false);
+
+  useEffect(() => {
+    const element = purchaseRef.current;
+
+    if (!element || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setStickyVisible(
+          !entry.isIntersecting && entry.boundingClientRect.top < 0,
+        );
+      },
+      { threshold: 0 },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
 const [loginAction, setLoginAction] =
   useState<LoginRequiredAction>("cart");
 
@@ -497,12 +525,30 @@ const [loginAction, setLoginAction] =
                         aria-label={`View product media ${index + 1}`}
                       >
                         {item.type === "video" ? (
-                          <video
-                            src={item.src}
-                            poster={item.poster}
-                            muted
-                            playsInline
-                          />
+                          <>
+                            {item.poster || item.thumbnail ? (
+                              <Image
+                                src={item.thumbnail || item.poster || ""}
+                                alt={item.alt || product.name}
+                                fill
+                                sizes="100px"
+                              />
+                            ) : (
+                              <video
+                                src={item.src}
+                                muted
+                                playsInline
+                                preload="metadata"
+                              />
+                            )}
+
+                            <span
+                              className="product-detail__thumbnail-play"
+                              aria-hidden="true"
+                            >
+                              <Play size={14} fill="currentColor" />
+                            </span>
+                          </>
                         ) : (
                           <Image
                             src={item.thumbnail || item.src}
@@ -531,11 +577,13 @@ const [loginAction, setLoginAction] =
 
                   {activeMedia?.type === "video" ? (
                     <video
+                      key={activeMedia.id || activeMedia.src}
                       src={activeMedia.src}
                       poster={activeMedia.poster}
                       controls
                       playsInline
-                      className="product-detail__media-element"
+                      preload="metadata"
+                      className="product-detail__media-element product-detail__media-element--video"
                     />
                   ) : activeMedia ? (
                     <Image
@@ -676,7 +724,7 @@ const [loginAction, setLoginAction] =
               </div>
 
               {/* PURCHASE */}
-              <div className="product-detail__purchase">
+              <div className="product-detail__purchase" ref={purchaseRef}>
                 <div className="product-detail__purchase-label-row">
                   <span>Quantity</span>
 
@@ -1007,7 +1055,14 @@ const [loginAction, setLoginAction] =
       {/* =======================================================
           MOBILE STICKY BUY BAR
       ======================================================= */}
-      <div className="product-detail__sticky-buy">
+      <div
+        className={[
+          "product-detail__sticky-buy",
+          stickyVisible ? "product-detail__sticky-buy--visible" : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
         <div className="product-detail__sticky-buy-inner">
           <div className="product-detail__sticky-product">
             <span>{product.name}</span>
@@ -1093,16 +1148,16 @@ const [loginAction, setLoginAction] =
           aria-modal="true"
           aria-label={`${product.name} fullscreen gallery`}
         >
-          <div className="product-detail__lightbox-actions">
-            <button
-              type="button"
-              onClick={() => setLightboxOpen(false)}
-              className="product-detail__lightbox-exit"
-              aria-label="Exit fullscreen gallery"
-            >
-              <Minimize2 size={15} strokeWidth={1.7} />
-              <span>Exit Fullscreen</span>
-            </button>
+          <div className="product-detail__lightbox-bar">
+            <div className="product-detail__lightbox-title">
+              <span>Aayesha / Product view</span>
+              <strong>{product.name}</strong>
+            </div>
+
+            <span className="product-detail__lightbox-count">
+              {String(activeIndex + 1).padStart(2, "0")} /{" "}
+              {String(media.length).padStart(2, "0")}
+            </span>
 
             <button
               type="button"
@@ -1110,23 +1165,22 @@ const [loginAction, setLoginAction] =
               className="product-detail__lightbox-close"
               aria-label="Close gallery"
             >
-              <X size={20} strokeWidth={1.7} />
+              <X size={22} strokeWidth={1.8} />
             </button>
-          </div>
-
-          <div className="product-detail__lightbox-top">
-            <span>AAYESHA / PRODUCT VIEW</span>
-            <strong>{product.name}</strong>
           </div>
 
           <div className="product-detail__lightbox-stage">
             {activeMedia.type === "video" ? (
               <video
+                key={activeMedia.id || activeMedia.src}
                 src={activeMedia.src}
                 poster={activeMedia.poster}
                 controls
                 autoPlay
+                muted
+                loop
                 playsInline
+                className="product-detail__lightbox-video"
               />
             ) : (
               <Image
@@ -1162,10 +1216,43 @@ const [loginAction, setLoginAction] =
             )}
           </div>
 
-          <div className="product-detail__lightbox-counter">
-            {String(activeIndex + 1).padStart(2, "0")} /{" "}
-            {String(media.length).padStart(2, "0")}
-          </div>
+          {media.length > 1 && (
+            <div className="product-detail__lightbox-strip">
+              {media.map((item, index) => (
+                <button
+                  key={item.id || `${item.src}-${index}`}
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
+                  aria-label={`Show ${
+                    item.type === "video" ? "video" : "image"
+                  } ${index + 1}`}
+                  aria-current={index === activeIndex}
+                  className="product-detail__lightbox-thumb"
+                >
+                  {item.type === "video" && !(item.poster || item.thumbnail) ? (
+                    <video src={item.src} muted playsInline preload="metadata" />
+                  ) : (
+                    <Image
+                      src={
+                        item.type === "video"
+                          ? item.thumbnail || item.poster || ""
+                          : item.thumbnail || item.src
+                      }
+                      alt=""
+                      fill
+                      sizes="72px"
+                    />
+                  )}
+
+                  {item.type === "video" && (
+                    <span aria-hidden="true">
+                      <Play size={13} fill="currentColor" />
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
             </div>,
             document.body,
           )
