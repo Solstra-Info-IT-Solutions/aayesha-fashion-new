@@ -404,7 +404,7 @@ export function SearchExperience({
   ======================================================= */
 
   return (
-    <main className="search-atelier">
+    <div className="search-atelier">
       {/* =====================================================
           FIELD
       ===================================================== */}
@@ -958,6 +958,6 @@ export function SearchExperience({
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }

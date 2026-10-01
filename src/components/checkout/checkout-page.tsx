@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { SmartBackLink } from "@/components/navigation/smart-back-link";
 import { trackBeginCheckout } from "@/lib/analytics";
 import { getCheckoutCart } from "@/services/checkout-cart.service";
 import { useAuthStore } from "@/store/auth-store";
@@ -113,7 +114,7 @@ export function CheckoutPage() {
 
   if (isLoading) {
     return (
-      <main className="checkout-page checkout-page--loading">
+      <div className="checkout-page checkout-page--loading">
         <div className="checkout-page__container">
           <div className="checkout-page__loading-header">
             <div className="checkout-page__skeleton checkout-page__skeleton--eyebrow" />
@@ -137,7 +138,7 @@ export function CheckoutPage() {
             <div className="checkout-page__skeleton checkout-page__skeleton--summary" />
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -147,7 +148,7 @@ export function CheckoutPage() {
 
   if (!hasItems) {
     return (
-      <main className="checkout-page checkout-page--empty">
+      <div className="checkout-page checkout-page--empty">
         <div className="checkout-page__empty">
           <div
             className="checkout-page__empty-icon"
@@ -179,7 +180,7 @@ export function CheckoutPage() {
             Continue Shopping
           </Link>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -188,7 +189,7 @@ export function CheckoutPage() {
   ======================================================= */
 
   return (
-    <main className="checkout-page">
+    <div className="checkout-page">
       <div className="checkout-page__container">
         {/* =================================================
             HEADER
@@ -196,7 +197,7 @@ export function CheckoutPage() {
 
         <header className="checkout-page__header">
           <div className="checkout-page__header-top">
-            <Link
+            <SmartBackLink
               href="/cart"
               className="checkout-page__back"
               aria-label="Back to shopping bag"
@@ -210,7 +211,7 @@ export function CheckoutPage() {
               </span>
 
               <span>Back to Bag</span>
-            </Link>
+            </SmartBackLink>
 
             <div className="checkout-page__secure">
               <span
@@ -286,6 +287,6 @@ export function CheckoutPage() {
           </aside>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

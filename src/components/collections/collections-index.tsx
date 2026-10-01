@@ -63,7 +63,7 @@ export function CollectionsIndex({
     visibleFeatured.length === 0;
 
   return (
-    <main className="collections-index">
+    <div className="collections-index">
       {/* =====================================================
           HERO + SEARCH
       ===================================================== */}
@@ -296,6 +296,6 @@ export function CollectionsIndex({
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

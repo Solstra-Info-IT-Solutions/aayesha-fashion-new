@@ -75,12 +75,12 @@ export default async function CategoriesPage({
   }
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg)]">
+    <div className="min-h-screen bg-[var(--color-bg)]">
       <CategoryBrowser
         categories={activeCategories}
         selectedCategoryId={selectedCategory?.id}
         products={products}
       />
-    </main>
+    </div>
   );
 }

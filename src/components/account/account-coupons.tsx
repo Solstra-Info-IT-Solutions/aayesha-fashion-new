@@ -171,7 +171,7 @@ export function AccountCoupons() {
   }
 
   return (
-    <main className="account-coupons">
+    <div className="account-coupons">
       <div className="account-coupons__container">
         {/* =================================================
             HEADER
@@ -534,6 +534,6 @@ export function AccountCoupons() {
             </>
           )}
       </div>
-    </main>
+    </div>
   );
 }

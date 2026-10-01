@@ -513,7 +513,7 @@ export function ProductDetail({
   ========================================================== */
 
   return (
-    <main className="product-detail">
+    <div className="product-detail">
 
       {/* =====================================================
           PRODUCT HERO
@@ -1705,6 +1705,6 @@ export function ProductDetail({
         }
       />
 
-    </main>
+    </div>
   );
 }

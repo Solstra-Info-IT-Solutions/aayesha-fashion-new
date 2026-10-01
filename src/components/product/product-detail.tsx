@@ -515,7 +515,7 @@ const [loginAction, setLoginAction] =
 
   return (
     <>
-      <main className="product-detail">
+      <div className="product-detail">
         {/* =====================================================
             BREADCRUMB
         ===================================================== */}
@@ -1119,7 +1119,7 @@ const [loginAction, setLoginAction] =
             RECENTLY VIEWED
         ===================================================== */}
         <RecentlyViewed currentProductId={product._id} limit={4} />
-      </main>
+      </div>
 
       {/* =======================================================
           MOBILE STICKY BUY BAR

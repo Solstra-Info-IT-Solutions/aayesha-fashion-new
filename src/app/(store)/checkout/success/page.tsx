@@ -49,7 +49,7 @@ const formatDate = (date: string) => {
 
 function CheckoutSuccessLoading() {
   return (
-    <main className="checkout-success checkout-success--loading">
+    <div className="checkout-success checkout-success--loading">
       <div className="checkout-success__loading-wrap">
         <div className="checkout-success__loading-card">
           <div className="checkout-success__loading-icon">
@@ -71,7 +71,7 @@ function CheckoutSuccessLoading() {
           <div className="checkout-success__loading-line" />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 
@@ -85,7 +85,7 @@ function CheckoutSuccessError({
   error: string | null;
 }) {
   return (
-    <main className="checkout-success checkout-success--error">
+    <div className="checkout-success checkout-success--error">
       <div className="checkout-success__error-wrap">
         <div className="checkout-success__error-card">
           <div className="checkout-success__error-icon">
@@ -130,7 +130,7 @@ function CheckoutSuccessError({
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 
@@ -321,7 +321,7 @@ function CheckoutSuccessContent() {
         )}`;
 
   return (
-    <main className="checkout-success">
+    <div className="checkout-success">
       {/* =====================================================
           CONFIRMATION HERO
       ===================================================== */}
@@ -745,7 +745,7 @@ function CheckoutSuccessContent() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 

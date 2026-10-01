@@ -135,7 +135,7 @@ export default function ContactPage() {
     : whatsapp || "/shop";
 
   return (
-    <main className="contact">
+    <div className="contact">
       {/* =====================================================
           HERO
       ===================================================== */}
@@ -365,6 +365,6 @@ export default function ContactPage() {
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

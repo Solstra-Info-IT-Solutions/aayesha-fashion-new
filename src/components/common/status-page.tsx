@@ -21,7 +21,7 @@ export function StatusPage({
   children,
 }: StatusPageProps) {
   return (
-    <main className="status-page">
+    <div className="status-page">
       <div className="status-page__inner">
         <p className="status-page__eyebrow">
           {eyebrow}
@@ -41,6 +41,6 @@ export function StatusPage({
           </div>
         ) : null}
       </div>
-    </main>
+    </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
 import BrandLoader from "@/components/layout/BrandLoader";
+import { NavigationTracker } from "@/components/navigation/navigation-tracker";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 
 import {
@@ -290,6 +291,7 @@ export default function RootLayout({
         <AnalyticsScripts />
 
         <BrandLoader />
+        <NavigationTracker />
         <AuthProvider>
           {children}
         </AuthProvider>
