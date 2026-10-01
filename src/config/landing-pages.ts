@@ -49,9 +49,9 @@ export interface LandingPage {
 /** Facts reused across pages (keep in sync with the policy pages). */
 const COMMON_FAQS = (what: string): LandingFaq[] => [
   {
-    question: "Do you offer Cash on Delivery?",
+    question: "How do I pay?",
     answer:
-      "Yes. You can pay by Cash on Delivery, online (UPI, cards, netbanking, wallets), or by bank / UPI transfer using the bill we send on WhatsApp.",
+      "After you place your order we send the bill, with a UPI QR code, straight to your WhatsApp. Pay by UPI or bank transfer within 30 minutes to confirm the order.",
   },
   {
     question: "Is shipping free?",
@@ -72,7 +72,7 @@ export const landingPages: LandingPage[] = [
     eyebrow: "Sharara Edit",
     metaTitle: "Sharara Sets for Women Online",
     metaDescription:
-      "Shop elegant sharara sets for weddings, festivals and celebrations. Hand finished Indian womenswear with free shipping above ₹2,999 and Cash on Delivery.",
+      "Shop elegant sharara sets for weddings, festivals and celebrations. Hand finished Indian womenswear with free shipping above ₹2,999.",
     keywords: ["sharara set online", "sharara suit for women", "festive sharara", "wedding sharara"],
     intro: [
       "A sharara set is the easiest way to look festive without feeling weighed down. The flared, flowing legs move beautifully, and paired with a fitted kurta and a light dupatta the whole look feels graceful and effortless.",
@@ -81,7 +81,7 @@ export const landingPages: LandingPage[] = [
     highlights: [
       "Flared silhouettes designed to move comfortably",
       "Pairs with a kurta and dupatta as a complete set",
-      "Pay by UPI, card, Cash on Delivery or bank transfer",
+      "Pay by UPI or bank transfer with a bill on WhatsApp",
     ],
     guide: [
       {
@@ -111,7 +111,7 @@ export const landingPages: LandingPage[] = [
     eyebrow: "Garara Edit",
     metaTitle: "Garara Suits for Women Online",
     metaDescription:
-      "Explore garara suits with graceful flare and fine finishing, made for weddings and festive days. Free shipping above ₹2,999. Cash on Delivery available.",
+      "Explore garara suits with graceful flare and fine finishing, made for weddings and festive days. Free shipping above ₹2,999.",
     keywords: ["garara suit online", "garara set for wedding", "gharara dress women"],
     intro: [
       "The garara is a classic for a reason: a fitted upper leg that opens into a generous flare gives a regal, old-world feel that still looks right today.",
@@ -159,7 +159,7 @@ export const landingPages: LandingPage[] = [
     highlights: [
       "Occasion-ready lehenga sets",
       "Clear product details and photos",
-      "Secure payment options including Cash on Delivery",
+      "Simple payment: UPI bill sent on WhatsApp",
     ],
     guide: [
       {
@@ -215,7 +215,7 @@ export const landingPages: LandingPage[] = [
     eyebrow: "Frock Suit Edit",
     metaTitle: "Frock Suits for Women Online",
     metaDescription:
-      "Shop flowing frock suits that combine comfort with festive charm. Aayesha Fashion: free shipping above ₹2,999 and Cash on Delivery.",
+      "Shop flowing frock suits that combine comfort with festive charm. Aayesha Fashion: free shipping above ₹2,999.",
     keywords: ["frock suit online", "anarkali frock suit", "long frock kurti set"],
     intro: [
       "A frock suit gives you the swing of an anarkali with an easy, wearable shape. It is a favourite for festivals, family functions and dinners.",
@@ -241,7 +241,7 @@ export const landingPages: LandingPage[] = [
     eyebrow: "Palazzo Edit",
     metaTitle: "Palazzo Suits for Women Online",
     metaDescription:
-      "Comfortable, elegant palazzo suits for festive days and everyday celebrations. Free shipping above ₹2,999, Cash on Delivery available.",
+      "Comfortable, elegant palazzo suits for festive days and everyday celebrations. Free shipping above ₹2,999.",
     keywords: ["palazzo suit online", "plazo suit for women", "kurta palazzo set"],
     intro: [
       "Palazzo suits are the sweet spot between ease and elegance. The wide leg is breezy to wear and looks polished from a family lunch to an evening function.",
@@ -249,7 +249,7 @@ export const landingPages: LandingPage[] = [
     highlights: [
       "Wide-leg comfort",
       "Complete sets with dupatta",
-      "Pay your way: UPI, cards, COD or bank transfer",
+      "Pay by UPI or bank transfer via WhatsApp bill",
     ],
     guide: [
       {
@@ -330,7 +330,7 @@ export const landingPages: LandingPage[] = [
     highlights: [
       "Hand-picked featured styles",
       "Delivered across India",
-      "Cash on Delivery and online payment available",
+      "Pay by UPI, bill sent on WhatsApp",
     ],
     guide: [
       {
@@ -407,7 +407,7 @@ export const landingPages: LandingPage[] = [
     eyebrow: "Under ₹3,000",
     metaTitle: "Ethnic Wear for Women Under ₹3,000",
     metaDescription:
-      "Beautiful ethnic wear under ₹3,000: suits and sets that look festive without stretching your budget. Aayesha Fashion, Cash on Delivery available.",
+      "Beautiful ethnic wear under ₹3,000: suits and sets that look festive without stretching your budget. Aayesha Fashion, free shipping above ₹2,999.",
     keywords: ["ethnic wear under 3000", "suits under 3000", "budget festive wear"],
     intro: [
       "Great style does not need a big budget. Here are our styles priced at ₹3,000 and below, sorted from the lowest price up.",
@@ -415,7 +415,7 @@ export const landingPages: LandingPage[] = [
     highlights: [
       "Lowest prices first",
       "Add a little more to reach free shipping above ₹2,999",
-      "Cash on Delivery available",
+      "Pay by UPI, bill sent on WhatsApp",
     ],
     guide: [
       {
@@ -441,7 +441,7 @@ export const landingPages: LandingPage[] = [
     highlights: [
       "Occasion-ready sets",
       "Free shipping on orders above ₹2,999",
-      "Multiple payment options",
+      "Simple UPI payment via WhatsApp bill",
     ],
     guide: [
       {
