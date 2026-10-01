@@ -1,5 +1,11 @@
 "use client";
 
+import { ListingSalesBar } from "@/components/listing-sales/listing-sales-bar";
+import { QuickFilters } from "@/components/listing-sales/quick-filters";
+import { ProductInsightsProvider } from "@/components/listing-sales/insights-context";
+import { ShopByNeed } from "@/components/home-sales/shop-by-need";
+import { RecentlyViewed } from "@/components/recently-viewed/recently-viewed";
+
 import { useMemo } from "react";
 
 import Link from "next/link";
@@ -193,7 +199,18 @@ export function ShopProductGrid({
         break;
     }
 
-    return result;
+    // Available pieces first; sold-out ones go to the end (stable).
+    const available = result.filter(
+      (product) =>
+        getInventoryStatus(product) !== "out-of-stock",
+    );
+
+    const soldOut = result.filter(
+      (product) =>
+        getInventoryStatus(product) === "out-of-stock",
+    );
+
+    return [...available, ...soldOut];
   }, [
     products,
     category,
@@ -211,7 +228,16 @@ export function ShopProductGrid({
         : "/shop";
 
   return (
+    <ProductInsightsProvider
+      productIds={filteredProducts.map(
+        (product) => product._id,
+      )}
+    >
     <section className="shop-product-grid">
+      <ListingSalesBar />
+
+      <QuickFilters />
+
       <div className="shop-product-grid__toolbar">
         <div className="shop-product-grid__collection">
           <p className="shop-product-grid__eyebrow">
@@ -253,7 +279,16 @@ export function ShopProductGrid({
           )}
         </div>
       )}
+
+      <ShopByNeed />
+
+      <RecentlyViewed
+        title="Pick up where you left off"
+        eyebrow="Recently viewed"
+        limit={4}
+      />
     </section>
+    </ProductInsightsProvider>
   );
 }
 
