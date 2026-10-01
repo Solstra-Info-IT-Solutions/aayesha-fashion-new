@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { SlidersHorizontal, X } from "lucide-react";
 
 import type { Product, ProductSort } from "@/types/product";
@@ -38,7 +42,23 @@ interface CollectionLandingProps {
   products: Product[];
   sort: ProductSort;
   categoryId?: string;
+
+  /* Breadcrumb parent. Defaults to Collections; pass null for none. */
+  parent?: { label: string; href: string } | null;
+
+  /* Pre-fills the in-page search (for example from ?search=). */
+  initialQuery?: string;
 }
+
+const sortOptions = [
+  { value: "relevance", label: "Relevance" },
+  { value: "newest", label: "Newest" },
+  { value: "best-selling", label: "Best selling" },
+  { value: "featured", label: "Featured" },
+  { value: "price-low", label: "Price: low to high" },
+  { value: "price-high", label: "Price: high to low" },
+  { value: "rating", label: "Top rated" },
+];
 
 export function CollectionLanding({
   slug,
@@ -51,11 +71,26 @@ export function CollectionLanding({
   products,
   sort,
   categoryId,
+  parent = { label: "Collections", href: "/collections" },
+  initialQuery = "",
 }: CollectionLandingProps) {
-  const [query, setQuery] = useState("");
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [query, setQuery] = useState(initialQuery);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   const searchParams = useSearchParams();
+
+  const handleSort = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("sort", value);
+
+    router.push(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
 
   const activeFilters = ["category", "minPrice", "availability"].filter(
     (key) => searchParams.get(key),
@@ -115,8 +150,12 @@ export function CollectionLanding({
               >
                 <Link href="/">Home</Link>
                 <span aria-hidden="true">/</span>
-                <Link href="/collections">Collections</Link>
-                <span aria-hidden="true">/</span>
+                {parent ? (
+                  <>
+                    <Link href={parent.href}>{parent.label}</Link>
+                    <span aria-hidden="true">/</span>
+                  </>
+                ) : null}
                 <span aria-current="page">{title}</span>
               </nav>
 
@@ -198,6 +237,25 @@ export function CollectionLanding({
               placeholder={`Search ${title}…`}
               status={status}
             />
+
+            <label className="collection-landing__sort">
+              <span className="collection-landing__sort-label">
+                Sort
+              </span>
+
+              <select
+                value={sort}
+                onChange={(event) => handleSort(event.target.value)}
+                aria-label="Sort pieces"
+                className="collection-landing__sort-select"
+              >
+                {sortOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
 
             <button
               type="button"

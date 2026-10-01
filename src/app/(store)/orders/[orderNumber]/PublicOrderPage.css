@@ -761,3 +761,11 @@
     transition-duration: 0.01ms !important;
   }
 }
+/* =========================================================
+   REFRESH — rounded cards and summary, matching checkout
+========================================================= */
+
+.public-order-page__card,
+.public-order-page__summary-inner {
+  border-radius: 20px;
+}

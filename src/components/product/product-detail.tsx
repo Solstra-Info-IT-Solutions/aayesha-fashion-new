@@ -49,6 +49,7 @@ import {
 import { ProductCard } from "@/components/product/product-card";
 
 import "./ProductDetail.css";
+import "./ProductDetailRefresh.css";
 import { useIsClient } from "@/hooks/use-is-client";
 
 interface ProductDetailProps {

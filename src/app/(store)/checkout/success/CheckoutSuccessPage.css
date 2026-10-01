@@ -875,3 +875,20 @@
     transition: none;
   }
 }
+/* =========================================================
+   REFRESH — rounded cards and buttons, matching checkout
+========================================================= */
+
+.checkout-success__card,
+.checkout-success__summary,
+.checkout-success__section {
+  border-radius: 20px;
+}
+
+.checkout-success__card-icon {
+  border-radius: 50%;
+}
+
+.checkout-success__button {
+  border-radius: 12px;
+}

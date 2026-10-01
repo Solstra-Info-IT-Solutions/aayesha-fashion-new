@@ -19,6 +19,7 @@ import { CheckoutSummary } from "@/components/checkout/checkout-summary";
 import { CheckoutPlaceOrder } from "@/components/checkout/checkout-place-order";
 
 import "./CheckoutPage.css";
+import "./CheckoutRefresh.css";
 
 /* =========================================================
    COMPONENT
