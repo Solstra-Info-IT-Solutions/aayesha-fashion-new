@@ -1,12 +1,13 @@
 /* =========================================================
    AAYESHA FASHION — BRAND LOADER
-   Warm ivory screen with a dark header strip, sand-gold
-   detail and a hairline editorial frame that draws itself in.
+   Mocha screen with a darker header strip, warm-cream type,
+   taupe-gold detail and a hairline editorial frame that
+   draws itself in.
 
    Palette
-     #F8F5EF background           #24211D text (also the strip)
-     #C8A97E primary (gold)       #8A8175 secondary (muted)
-     #E5D6BE accent (frame, track, glow)
+     #F7F2EB background (type)   #49352D primary (screen)
+     #806A5D secondary (frame)   #C2A78C accent
+     #28221F text (dark strip)
    ========================================================= */
 
 .aayesha-loader {
@@ -25,8 +26,8 @@
   overflow: hidden;
   isolation: isolate;
 
-  background: #f8f5ef;
-  color: #24211d;
+  background: #49352d;
+  color: #f7f2eb;
 
   opacity: 1;
   transition: opacity 650ms ease;
@@ -55,9 +56,9 @@
 
   background: radial-gradient(
     ellipse at center,
-    rgba(229, 214, 190, 0.7) 0%,
-    rgba(229, 214, 190, 0.32) 34%,
-    rgba(229, 214, 190, 0.08) 56%,
+    rgba(194, 167, 140, 0.22) 0%,
+    rgba(194, 167, 140, 0.09) 34%,
+    rgba(194, 167, 140, 0.02) 56%,
     transparent 72%
   );
 
@@ -73,8 +74,8 @@
 
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 255, 255, 0.85) 0%,
-    rgba(255, 255, 255, 0.4) 40%,
+    rgba(247, 242, 235, 0.1) 0%,
+    rgba(247, 242, 235, 0.04) 40%,
     transparent 72%
   );
 
@@ -104,7 +105,7 @@
   position: absolute;
   inset: calc(var(--loader-bar) + clamp(12px, 2.2vw, 28px)) clamp(12px, 2.2vw, 28px) clamp(12px, 2.2vw, 28px);
 
-  border: 1px solid #e5d6be;
+  border: 1px solid #806a5d;
   pointer-events: none;
 
   opacity: 0;
@@ -125,7 +126,7 @@
   width: 0;
   height: 0;
 
-  border: 0 solid #c8a97e;
+  border: 0 solid #c2a78c;
   pointer-events: none;
 
   animation: aayesha-loader-corner 0.7s ease 0.5s forwards;
@@ -190,13 +191,13 @@
   text-transform: uppercase;
   white-space: nowrap;
 
-  background: #24211d;
-  border-bottom: 1px solid #c8a97e;
-  color: #e5d6be;
+  background: #28221f;
+  border-bottom: 1px solid #806a5d;
+  color: #f7f2eb;
 }
 
 .aayesha-loader__meta span:first-child {
-  color: #c8a97e;
+  color: #c2a78c;
 }
 
 .aayesha-loader__side {
@@ -209,7 +210,8 @@
   text-transform: uppercase;
   white-space: nowrap;
 
-  color: #8a8175;
+  color: #f7f2eb;
+  opacity: 0.6;
 }
 
 .aayesha-loader__side--left {
@@ -238,7 +240,8 @@
   text-align: center;
   text-transform: uppercase;
 
-  color: #8a8175;
+  color: #f7f2eb;
+  opacity: 0.6;
 }
 
 /* ---------------------------------------------------------
@@ -270,13 +273,13 @@
   letter-spacing: 0.34em;
   text-transform: uppercase;
 
-  color: #8a8175;
+  color: #c2a78c;
 }
 
 .aayesha-loader__eyebrow span {
   width: 26px;
   height: 1px;
-  background: #c8a97e;
+  background: #c2a78c;
 }
 
 .aayesha-loader__wordmark {
@@ -290,7 +293,7 @@
   font-weight: 500;
   line-height: 0.95;
 
-  color: #24211d;
+  color: #f7f2eb;
 }
 
 .aayesha-loader__letters {
@@ -312,7 +315,7 @@
   text-indent: 0.7em;
   text-transform: uppercase;
 
-  color: #8a8175;
+  color: #c2a78c;
 }
 
 .aayesha-loader__rule {
@@ -324,7 +327,7 @@
   background: linear-gradient(
     to right,
     transparent,
-    #c8a97e,
+    #c2a78c,
     transparent
   );
 }
@@ -337,7 +340,7 @@
   font-style: italic;
   letter-spacing: 0.02em;
 
-  color: #8a8175;
+  color: #f7f2eb;
 }
 
 /* ---------------------------------------------------------
@@ -362,12 +365,12 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
 
-  color: #8a8175;
+  color: #f7f2eb;
 }
 
 .aayesha-loader__percent {
   font-variant-numeric: tabular-nums;
-  color: #24211d;
+  color: #f7f2eb;
 }
 
 .aayesha-loader__track {
@@ -376,15 +379,15 @@
   height: 2px;
   overflow: hidden;
 
-  background: #e5d6be;
+  background: #806a5d;
 }
 
 .aayesha-loader__bar {
   position: absolute;
   inset: 0 auto 0 0;
 
-  background: #c8a97e;
-  box-shadow: 0 0 12px 1px rgba(200, 169, 126, 0.55);
+  background: #c2a78c;
+  box-shadow: 0 0 12px 1px rgba(194, 167, 140, 0.5);
 }
 
 /* ---------------------------------------------------------
