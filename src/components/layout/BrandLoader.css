@@ -1,7 +1,7 @@
 /* =========================================================
    AAYESHA FASHION — BRAND LOADER
-   Ivory page with a dark header strip, gold accents and a
-   hairline editorial frame that draws itself in.
+   Full dark (#11100E) screen with ivory type, gold accents and
+   a hairline editorial frame that draws itself in.
 
    Palette
      #F5F1E8 main background      #11100E header / dark section
@@ -26,8 +26,8 @@
   overflow: hidden;
   isolation: isolate;
 
-  background: #f5f1e8;
-  color: #1c1916;
+  background: #11100e;
+  color: #f5f1e8;
 
   opacity: 1;
   transition: opacity 650ms ease;
@@ -56,8 +56,8 @@
 
   background: radial-gradient(
     ellipse at center,
-    rgba(184, 155, 98, 0.2) 0%,
-    rgba(184, 155, 98, 0.08) 34%,
+    rgba(184, 155, 98, 0.22) 0%,
+    rgba(184, 155, 98, 0.09) 34%,
     rgba(184, 155, 98, 0.02) 56%,
     transparent 72%
   );
@@ -74,8 +74,8 @@
 
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.55) 40%,
+    rgba(245, 241, 232, 0.12) 0%,
+    rgba(245, 241, 232, 0.05) 40%,
     transparent 72%
   );
 
@@ -105,7 +105,7 @@
   position: absolute;
   inset: calc(var(--loader-bar) + clamp(12px, 2.2vw, 28px)) clamp(12px, 2.2vw, 28px) clamp(12px, 2.2vw, 28px);
 
-  border: 1px solid #d8d0c2;
+  border: 1px solid rgba(216, 208, 194, 0.22);
   pointer-events: none;
 
   opacity: 0;
@@ -192,7 +192,8 @@
   white-space: nowrap;
 
   background: #11100e;
-  color: rgba(255, 255, 255, 0.78);
+  border-bottom: 1px solid rgba(184, 155, 98, 0.28);
+  color: #d8d0c2;
 }
 
 .aayesha-loader__meta span:first-child {
@@ -290,7 +291,7 @@
   font-weight: 500;
   line-height: 0.95;
 
-  color: #1c1916;
+  color: #f5f1e8;
 }
 
 .aayesha-loader__letters {
@@ -337,7 +338,7 @@
   font-style: italic;
   letter-spacing: 0.02em;
 
-  color: #777066;
+  color: #d8d0c2;
 }
 
 /* ---------------------------------------------------------
@@ -362,12 +363,12 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
 
-  color: #777066;
+  color: #d8d0c2;
 }
 
 .aayesha-loader__percent {
   font-variant-numeric: tabular-nums;
-  color: #1c1916;
+  color: #ffffff;
 }
 
 .aayesha-loader__track {
@@ -376,7 +377,7 @@
   height: 2px;
   overflow: hidden;
 
-  background: #d8d0c2;
+  background: rgba(216, 208, 194, 0.18);
 }
 
 .aayesha-loader__bar {
@@ -384,7 +385,7 @@
   inset: 0 auto 0 0;
 
   background: #b89b62;
-  box-shadow: 0 0 10px 1px rgba(184, 155, 98, 0.45);
+  box-shadow: 0 0 12px 1px rgba(184, 155, 98, 0.55);
 }
 
 /* ---------------------------------------------------------
