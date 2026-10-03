@@ -1,13 +1,12 @@
 /* =========================================================
    AAYESHA FASHION — BRAND LOADER
-   Burgundy screen deepening to a darker wine at the edges,
-   ivory type, antique-gold detail and a hairline editorial
-   frame that draws itself in.
+   Obsidian × Champagne: near-black screen, champagne type,
+   antique-gold detail and a hairline editorial frame that
+   draws itself in.
 
    Palette
-     #FAF7F1 background (type)   #4A1722 primary (screen)
-     #241014 dark (edges, strip) #B3945A accent
-     #E6D8CC soft                #292321 text (dark)
+     #0D0D0C obsidian (screen)    #F5F0E7 champagne (type)
+     #B99A63 gold accent          #292724 charcoal (frame, track)
    ========================================================= */
 
 .aayesha-loader {
@@ -26,13 +25,8 @@
   overflow: hidden;
   isolation: isolate;
 
-  background: radial-gradient(
-      ellipse at 50% 45%,
-      #4a1722 0%,
-      #3d121b 52%,
-      #241014 100%
-    );
-  color: #faf7f1;
+  background: #0d0d0c;
+  color: #f5f0e7;
 
   opacity: 1;
   transition: opacity 650ms ease;
@@ -61,9 +55,9 @@
 
   background: radial-gradient(
     ellipse at center,
-    rgba(179, 148, 90, 0.26) 0%,
-    rgba(179, 148, 90, 0.1) 34%,
-    rgba(179, 148, 90, 0.02) 56%,
+    rgba(185, 154, 99, 0.22) 0%,
+    rgba(185, 154, 99, 0.09) 34%,
+    rgba(185, 154, 99, 0.02) 56%,
     transparent 72%
   );
 
@@ -79,8 +73,8 @@
 
   background: radial-gradient(
     ellipse at center,
-    rgba(250, 247, 241, 0.14) 0%,
-    rgba(250, 247, 241, 0.05) 40%,
+    rgba(245, 240, 231, 0.1) 0%,
+    rgba(245, 240, 231, 0.04) 40%,
     transparent 72%
   );
 
@@ -110,7 +104,7 @@
   position: absolute;
   inset: calc(var(--loader-bar) + clamp(12px, 2.2vw, 28px)) clamp(12px, 2.2vw, 28px) clamp(12px, 2.2vw, 28px);
 
-  border: 1px solid rgba(230, 216, 204, 0.28);
+  border: 1px solid #292724;
   pointer-events: none;
 
   opacity: 0;
@@ -131,7 +125,7 @@
   width: 0;
   height: 0;
 
-  border: 0 solid #b3945a;
+  border: 0 solid #b99a63;
   pointer-events: none;
 
   animation: aayesha-loader-corner 0.7s ease 0.5s forwards;
@@ -196,13 +190,13 @@
   text-transform: uppercase;
   white-space: nowrap;
 
-  background: #241014;
-  border-bottom: 1px solid rgba(179, 148, 90, 0.4);
-  color: #e6d8cc;
+  background: #0d0d0c;
+  border-bottom: 1px solid #292724;
+  color: #f5f0e7;
 }
 
 .aayesha-loader__meta span:first-child {
-  color: #b3945a;
+  color: #b99a63;
 }
 
 .aayesha-loader__side {
@@ -215,7 +209,7 @@
   text-transform: uppercase;
   white-space: nowrap;
 
-  color: #e6d8cc;
+  color: #f5f0e7;
   opacity: 0.6;
 }
 
@@ -245,7 +239,7 @@
   text-align: center;
   text-transform: uppercase;
 
-  color: #e6d8cc;
+  color: #f5f0e7;
   opacity: 0.6;
 }
 
@@ -278,13 +272,13 @@
   letter-spacing: 0.34em;
   text-transform: uppercase;
 
-  color: #b3945a;
+  color: #b99a63;
 }
 
 .aayesha-loader__eyebrow span {
   width: 26px;
   height: 1px;
-  background: #b3945a;
+  background: #b99a63;
 }
 
 .aayesha-loader__wordmark {
@@ -298,7 +292,7 @@
   font-weight: 500;
   line-height: 0.95;
 
-  color: #faf7f1;
+  color: #f5f0e7;
 }
 
 .aayesha-loader__letters {
@@ -320,7 +314,7 @@
   text-indent: 0.7em;
   text-transform: uppercase;
 
-  color: #b3945a;
+  color: #b99a63;
 }
 
 .aayesha-loader__rule {
@@ -332,7 +326,7 @@
   background: linear-gradient(
     to right,
     transparent,
-    #b3945a,
+    #b99a63,
     transparent
   );
 }
@@ -345,7 +339,7 @@
   font-style: italic;
   letter-spacing: 0.02em;
 
-  color: #e6d8cc;
+  color: #f5f0e7;
 }
 
 /* ---------------------------------------------------------
@@ -370,12 +364,12 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
 
-  color: #e6d8cc;
+  color: #f5f0e7;
 }
 
 .aayesha-loader__percent {
   font-variant-numeric: tabular-nums;
-  color: #faf7f1;
+  color: #f5f0e7;
 }
 
 .aayesha-loader__track {
@@ -384,15 +378,15 @@
   height: 2px;
   overflow: hidden;
 
-  background: rgba(230, 216, 204, 0.2);
+  background: #292724;
 }
 
 .aayesha-loader__bar {
   position: absolute;
   inset: 0 auto 0 0;
 
-  background: #b3945a;
-  box-shadow: 0 0 12px 1px rgba(179, 148, 90, 0.55);
+  background: #b99a63;
+  box-shadow: 0 0 12px 1px rgba(185, 154, 99, 0.5);
 }
 
 /* ---------------------------------------------------------
