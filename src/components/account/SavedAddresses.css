@@ -130,7 +130,7 @@
 .saved-addresses__button--primary {
   border-color: var(--color-clay);
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 .saved-addresses__button--primary:hover {
   border-color: var(--color-accent-dark);

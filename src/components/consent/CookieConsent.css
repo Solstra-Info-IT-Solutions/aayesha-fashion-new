@@ -258,7 +258,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .cookie-consent__button--primary:hover {
@@ -266,7 +266,7 @@
 
   background: var(--color-clay-deep);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .cookie-consent__button--primary:active {
@@ -274,7 +274,7 @@
 
   background: var(--button-primary-bg-active);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 /* =========================================================

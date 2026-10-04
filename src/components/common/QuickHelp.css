@@ -157,10 +157,10 @@
 }
 
 .quick-help__close:hover {
-  border-color: var(--color-text);
+  border-color: var(--color-primary);
 
   background: var(--color-text);
-  color: #ffffff;
+  color: #111111;
 
   transform: rotate(3deg);
 }
@@ -246,7 +246,7 @@
   border-color: var(--color-clay);
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 
 /* =========================================================
@@ -394,7 +394,7 @@
   border-color: var(--color-clay);
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 
   transform: translateY(-2px);
 
@@ -626,7 +626,7 @@
   border-radius: 50%;
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 
 .quick-help__trigger:hover {

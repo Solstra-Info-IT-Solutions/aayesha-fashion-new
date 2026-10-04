@@ -235,7 +235,7 @@
 }
 .checkout-delivery__icon--active {
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 .checkout-delivery__option:hover
   .checkout-delivery__icon {
@@ -395,7 +395,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   transform: scale(1.03);
 }

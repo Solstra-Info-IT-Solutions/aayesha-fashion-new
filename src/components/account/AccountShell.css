@@ -66,7 +66,7 @@
   border-radius: 50%;
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 
   font-family: var(--font-display);
   font-size: 1.25rem;
@@ -161,7 +161,7 @@
 
 .account-shell__link[aria-current="page"] {
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 .account-shell__link--signout {

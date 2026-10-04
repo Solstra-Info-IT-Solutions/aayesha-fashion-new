@@ -141,7 +141,7 @@
   background: var(--color-surface);
 }
 .orders-list__button--secondary:hover {
-  color: var(--color-text-inverse);
+  color: #111111;
   border-color: var(--color-accent-dark);
   background: var(--color-accent-dark);
 }
@@ -150,12 +150,12 @@
   background: rgba(255, 255, 255, 0.08);
 }
 .orders-list__button--primary {
-  color: #ffffff;
+  color: #111111;
   border-color: var(--color-accent-dark);
   background: var(--color-accent-dark);
 }
 .orders-list__button--primary:hover {
-  color: #ffffff;
+  color: #111111;
   border-color: var(--color-clay-deep);
   background: var(--color-clay-deep);
 }
@@ -549,7 +549,7 @@
   transition: transform 180ms ease;
 }
 .order-list-card__view:hover {
-  color: var(--color-text-inverse);
+  color: #111111;
   border-color: var(--color-accent-dark);
   background: var(--color-accent-dark);
 }

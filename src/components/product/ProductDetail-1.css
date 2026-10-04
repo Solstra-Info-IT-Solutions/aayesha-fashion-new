@@ -5,7 +5,7 @@
    ========================================================= */
 
 .product-detail {
-  --pd-bg: var(--color-background, #f8f3f1);
+  --pd-bg: var(--color-canvas);
   --pd-surface: var(--color-surface, #fbf8f5);
   --pd-surface-soft: var(--color-surface-soft);
 
@@ -185,7 +185,7 @@
 
   border: 1px solid rgba(255, 255, 255, 0.6);
 
-  background: rgba(248, 243, 241, 0.88);
+  background: rgba(17, 17, 17, 0.88);
 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -224,7 +224,7 @@
 
   border: 1px solid rgba(255, 255, 255, 0.7);
 
-  background: rgba(248, 243, 241, 0.9);
+  background: rgba(17, 17, 17, 0.9);
 
   color: var(--pd-text);
 

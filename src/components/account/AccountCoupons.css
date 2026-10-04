@@ -123,7 +123,7 @@
 .account-coupons__shop-link:hover {
   border-color: var(--color-clay);
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 .account-coupons__shop-arrow {
   margin-left: 9px;
@@ -471,7 +471,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 .account-coupon__use:hover {
   border-color: var(--color-clay);
@@ -640,7 +640,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   font-family: var(--font-body, sans-serif);
   font-size: 11px;

@@ -97,7 +97,7 @@
   border-color: var(--color-clay);
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 
 .wishlist-button--active::before {
@@ -105,9 +105,9 @@
 }
 
 .wishlist-button--active:hover:not(:disabled) {
-  background: var(--color-text, var(--color-text));
+  background: var(--color-primary);
   border-color: var(--color-text, var(--color-text));
-  color: #ffffff;
+  color: #111111;
 }
 
 .wishlist-button--active

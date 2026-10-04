@@ -123,7 +123,7 @@
 
 .shop-filters__category--active {
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 .shop-filters__category--active:hover {
@@ -212,7 +212,7 @@
   border-color: var(--color-clay);
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 .shop-filters__chip[aria-current="true"]:hover,

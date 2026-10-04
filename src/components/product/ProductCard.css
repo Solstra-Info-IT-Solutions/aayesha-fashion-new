@@ -138,7 +138,7 @@
 
   border-radius: 8px;
 
-  background: rgba(248, 243, 241, 0.94);
+  background: rgba(17, 17, 17, 0.94);
   color: var(--color-text);
 
   font-family: var(--font-body);
@@ -178,7 +178,7 @@
 
   border-radius: 8px;
 
-  background: rgba(248, 243, 241, 0.95);
+  background: rgba(17, 17, 17, 0.95);
   color: var(--color-text);
 
   font-size: 11px;
@@ -360,7 +360,7 @@
   border-radius: 12px;
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 
   cursor: pointer;
 

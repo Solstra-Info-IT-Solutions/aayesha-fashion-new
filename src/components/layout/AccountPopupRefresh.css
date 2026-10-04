@@ -57,7 +57,7 @@
   border-radius: 12px;
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 .account-popup .account-popup__cta:hover {
@@ -100,7 +100,7 @@
 
 .account-popup .account-popup__nav-item--active .account-popup__nav-icon {
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 .account-popup .account-popup__actions {

@@ -159,7 +159,7 @@
 
   background: var(--color-primary);
 
-  color: var(--color-surface);
+  color: #111111;
 
   transform: translateY(-2px);
 }

@@ -128,7 +128,7 @@
 
 .product-sales__whatsapp:hover {
   background: var(--color-primary);
-  color: #ffffff;
+  color: #111111;
 }
 
 .product-sales__notify {
@@ -196,7 +196,7 @@
 
   border: 0;
   background: var(--color-primary);
-  color: #ffffff;
+  color: #111111;
 
   font-size: 10px;
   font-weight: 600;

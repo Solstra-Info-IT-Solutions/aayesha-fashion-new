@@ -28,7 +28,7 @@
 
   border: 1px solid rgba(17, 17, 17, 0.22);
 
-  background: rgba(248, 243, 241, 0.96);
+  background: rgba(17, 17, 17, 0.96);
   color: var(--color-text, var(--color-text));
 
   font-family: var(--font-body, Arial, sans-serif);
@@ -81,7 +81,7 @@
   border-color: var(--color-clay);
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 
   box-shadow:
     0 8px 22px rgba(17, 17, 17, 0.12);
@@ -267,7 +267,7 @@
   border-color: var(--color-clay);
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 
   transform: rotate(4deg);
 }
@@ -474,7 +474,7 @@
   border: 1px solid var(--color-clay);
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 
   font-family: var(--font-body, Arial, sans-serif);
   font-size: 10px;
@@ -518,7 +518,7 @@
 }
 
 .product-quick-add__submit:hover:not(:disabled) {
-  border-color: var(--color-accent-dark, var(--color-text));
+  border-color: var(--color-primary);
 
   background: var(--color-accent-dark, var(--color-text));
 

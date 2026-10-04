@@ -63,7 +63,7 @@
 .quick-filters button[aria-pressed="true"] {
   border-color: var(--color-primary);
   background: var(--color-primary);
-  color: #ffffff;
+  color: #111111;
 }
 
 /* Product card additions */

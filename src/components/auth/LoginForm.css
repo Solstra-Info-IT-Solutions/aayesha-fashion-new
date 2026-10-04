@@ -508,7 +508,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   cursor: pointer;
 
@@ -679,7 +679,7 @@
 .login-form__register-link:hover {
   border-color: var(--color-clay);
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 
 .login-form__register-icon {

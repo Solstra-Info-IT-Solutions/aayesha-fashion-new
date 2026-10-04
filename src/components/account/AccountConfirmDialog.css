@@ -510,14 +510,14 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 .account-dialog__button--confirm:hover:not(:disabled) {
   border-color: var(--color-clay-deep);
 
   background: var(--color-clay-deep);
 
-  color: #ffffff;
+  color: #111111;
 }
 /* =========================================================
    DELETE
@@ -528,14 +528,14 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 .account-dialog__button--delete:hover:not(:disabled) {
   border-color: var(--color-clay-deep);
 
   background: var(--color-clay-deep);
 
-  color: #ffffff;
+  color: #111111;
 }
 /* =========================================================
    DISABLED

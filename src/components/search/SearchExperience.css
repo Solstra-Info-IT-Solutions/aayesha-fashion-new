@@ -209,7 +209,7 @@
   border-radius: 10px;
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 
   cursor: pointer;
 
@@ -453,7 +453,7 @@
   border-color: var(--color-clay);
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 /* Quick links */
@@ -598,7 +598,7 @@
   border-color: var(--color-clay);
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 .search-atelier__filter[aria-pressed="true"] span {
@@ -833,7 +833,7 @@
   border-radius: 12px;
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 
   font-size: 11px;
   font-weight: 600;

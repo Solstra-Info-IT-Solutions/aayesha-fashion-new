@@ -227,7 +227,7 @@
   border-color: var(--color-clay);
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 /* =========================================================
@@ -301,7 +301,7 @@
   border-radius: 999px;
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 
   font-size: 11px;
   letter-spacing: 0;

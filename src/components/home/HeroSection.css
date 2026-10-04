@@ -8,7 +8,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: var(--color-text);
+  background: var(--color-surface-dark);
 }
 
 /* =========================================================
@@ -417,7 +417,7 @@
 
 .aayesha-hero__indicator:hover
   span {
-  background: rgba(248, 243, 241, 0.72);
+  background: rgba(17, 17, 17, 0.72);
 }
 
 .aayesha-hero__indicator--active

@@ -31,7 +31,7 @@ const buttonVariants = cva(
     "focus-visible:ring-2",
     "focus-visible:ring-[#b79a6a]",
     "focus-visible:ring-offset-2",
-    "focus-visible:ring-offset-[#f8f3f1]",
+    "focus-visible:ring-offset-[#111111]",
     "disabled:pointer-events-none",
   ],
   {
@@ -43,21 +43,21 @@ const buttonVariants = cva(
 
         primary: [
           "border",
-          "border-[#111111]",
-          "bg-[#111111]",
-          "text-white",
+          "border-[#b79a6a]",
+          "bg-[#b79a6a]",
+          "text-[#111111]",
 
-          "hover:border-[#2b2723]",
-          "hover:bg-[#2b2723]",
-          "hover:text-white",
+          "hover:border-[#c8ad7f]",
+          "hover:bg-[#c8ad7f]",
+          "hover:text-[#111111]",
 
-          "active:border-[#0a0a0a]",
-          "active:bg-[#0a0a0a]",
-          "active:text-white",
+          "active:border-[#a38756]",
+          "active:bg-[#a38756]",
+          "active:text-[#111111]",
 
-          "disabled:border-[#111111]",
-          "disabled:bg-[#111111]",
-          "disabled:text-white",
+          "disabled:border-[#b79a6a]",
+          "disabled:bg-[#b79a6a]",
+          "disabled:text-[#111111]",
           "disabled:opacity-60",
         ],
 
@@ -67,17 +67,17 @@ const buttonVariants = cva(
 
         secondary: [
           "border",
-          "border-[#bdb2a7]",
+          "border-[#4a443d]",
           "bg-transparent",
-          "text-[#111111]",
+          "text-[#f8f3f1]",
 
-          "hover:border-[#111111]",
-          "hover:bg-[#111111]",
-          "hover:text-white",
+          "hover:border-[#b79a6a]",
+          "hover:bg-[#b79a6a]",
+          "hover:text-[#111111]",
 
-          "active:bg-[#0a0a0a]",
-          "active:border-[#0a0a0a]",
-          "active:text-white",
+          "active:bg-[#a38756]",
+          "active:border-[#a38756]",
+          "active:text-[#111111]",
 
           "disabled:opacity-60",
         ],
@@ -113,12 +113,12 @@ const buttonVariants = cva(
           "bg-transparent",
           "text-white",
 
-          "hover:border-white",
-          "hover:bg-white",
+          "hover:border-[#b79a6a]",
+          "hover:bg-[#b79a6a]",
           "hover:text-[#111111]",
 
-          "active:border-white",
-          "active:bg-white",
+          "active:border-[#b79a6a]",
+          "active:bg-[#b79a6a]",
           "active:text-[#111111]",
 
           "disabled:opacity-60",

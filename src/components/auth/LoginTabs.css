@@ -20,8 +20,8 @@
 }
 
 .login-tabs__tab[aria-selected="true"] {
-  background: var(--color-text);
-  color: var(--color-text-inverse, #fff);
+  background: var(--color-primary);
+  color: #111111;
 }
 
 .login-tabs__tab:focus-visible {

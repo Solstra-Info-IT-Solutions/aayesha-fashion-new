@@ -731,7 +731,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 .edit-account__primary-button:hover:not(:disabled) {
   border-color: var(--color-accent-dark);

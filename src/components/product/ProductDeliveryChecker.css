@@ -79,7 +79,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   transform: translateY(-2px);
 }
@@ -213,7 +213,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   font-family: var(--font-body, sans-serif);
 
@@ -243,10 +243,7 @@
   position: absolute;
   inset: 0;
 
-  background: var(
-    --color-accent-dark,
-    var(--color-text)
-  );
+  background: var(--color-primary);
 
   transform: translateX(-101%);
 

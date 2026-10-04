@@ -43,8 +43,8 @@
   background:
     linear-gradient(
       145deg,
-      rgba(255, 253, 251, 0.99),
-      rgba(249, 244, 240, 0.99)
+      rgba(26, 24, 22, 0.99),
+      rgba(26, 24, 22, 0.99)
     );
 
   border: 1px solid
@@ -146,7 +146,7 @@
   background:
     var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   transform: rotate(8deg);
 }
@@ -207,7 +207,7 @@
   background:
     var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   box-shadow:
     0 7px 18px
@@ -582,7 +582,7 @@
   background:
     var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   box-shadow:
     0 7px 18px
@@ -597,7 +597,7 @@
   inset: 0;
 
   background:
-    var(--color-text, var(--color-text));
+    var(--color-primary);
 
   transform: translateY(101%);
 

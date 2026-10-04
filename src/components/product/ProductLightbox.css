@@ -17,7 +17,7 @@
 
   overflow: hidden;
 
-  background: var(--color-text);
+  background: var(--color-surface-dark);
 
   color: #ffffff;
 
@@ -294,7 +294,7 @@
 
   object-fit: contain;
 
-  background: var(--color-text);
+  background: var(--color-surface-dark);
 
   box-shadow:
     0 30px 90px
@@ -549,7 +549,7 @@
 
 @media (max-width: 639px) {
   .product-lightbox {
-    background: var(--color-text);
+    background: var(--color-surface-dark);
   }
 
   .product-lightbox__topbar {

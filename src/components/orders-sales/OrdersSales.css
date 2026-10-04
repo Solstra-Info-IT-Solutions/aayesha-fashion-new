@@ -13,12 +13,12 @@
 
 .pay-panel--urgent {
   border-color: var(--color-error, #b3261e);
-  background: var(--color-error-soft, #f5eae6);
+  background: var(--color-error-soft);
 }
 
 .pay-panel--claimed {
   border-color: var(--color-success, #3a7d44);
-  background: var(--color-success-soft, #edf1e9);
+  background: var(--color-success-soft);
 }
 
 .pay-panel__head {
@@ -107,7 +107,7 @@
 
   border: 0;
   background: var(--color-primary);
-  color: #ffffff;
+  color: #111111;
 
   font-size: 10px;
   font-weight: 600;
@@ -189,7 +189,7 @@
 
 .reorder-button:hover:not(:disabled) {
   background: var(--color-primary);
-  color: #ffffff;
+  color: #111111;
 }
 
 .reorder-button:disabled {
@@ -267,7 +267,7 @@
   display: block;
   aspect-ratio: 3 / 4;
   overflow: hidden;
-  background: var(--color-surface-soft, #f1ebe6);
+  background: var(--color-surface-soft);
 }
 
 .orders-strip__image img {
