@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import "./BrandIntro.css";
 
 interface BrandIntroProps {
-  /** Called once the intro has fully faded out (or was skipped). */
+  /** Called once the intro has fully faded out . */
   onDone: () => void;
   /** True when another full-screen step follows; skips the fade so the site never shows through. */
   handOff?: boolean;
@@ -116,14 +116,6 @@ export default function BrandIntro({
           Elegance in every detail
         </p>
       </div>
-
-      <button
-        type="button"
-        className="brand-intro__skip"
-        onClick={finish}
-      >
-        Skip
-      </button>
     </div>
   );
 }

@@ -1,0 +1,441 @@
+/* =========================================================
+   AAYESHA FASHION — SEARCH, "ATELIER" DESIGN
+   Editorial hero with photography, a large underlined field,
+   trending words, a three-collection showcase and refined
+   result groups. Loaded after SearchExperience.css so these
+   rules win.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   HERO
+--------------------------------------------------------- */
+
+.search-atelier .search-atelier__hero {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(460px, 62vh, 640px);
+  display: flex;
+  align-items: center;
+
+  padding: clamp(56px, 8vw, 110px) 0 clamp(48px, 6vw, 84px);
+
+  background:
+    radial-gradient(60% 80% at 0% 0%, rgba(183, 154, 106, 0.12), transparent 70%),
+    #111111;
+  border-bottom: 1px solid rgba(183, 154, 106, 0.28);
+}
+
+.search-atelier .search-atelier__hero::after {
+  display: none;
+}
+
+.search-atelier__art {
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: -1;
+  width: min(58%, 840px);
+}
+
+.search-atelier__art::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background:
+    linear-gradient(90deg, #111111 0%, rgba(17, 17, 17, 0.72) 22%, rgba(17, 17, 17, 0.1) 62%, rgba(17, 17, 17, 0.35) 100%),
+    linear-gradient(0deg, rgba(17, 17, 17, 0.85) 0%, transparent 38%);
+}
+
+.search-atelier__art-image {
+  object-fit: cover;
+  object-position: 62% 30%;
+  filter: saturate(0.92) contrast(1.02);
+}
+
+.search-atelier .search-atelier__hero .search-atelier__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.search-atelier .search-atelier__eyebrow {
+  margin-bottom: 22px;
+  color: #b79a6a;
+  font-size: 11px;
+  letter-spacing: 0.34em;
+}
+
+.search-atelier .search-atelier__eyebrow span {
+  width: 44px;
+  background: #b79a6a;
+}
+
+.search-atelier .search-atelier__title {
+  max-width: 11ch;
+  margin-bottom: clamp(28px, 4vw, 44px);
+  font-size: clamp(2.8rem, 6.4vw, 5.6rem);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  color: #f8f3f1;
+}
+
+.search-atelier .search-atelier__title em {
+  color: #d9c7a3;
+}
+
+/* Field: one line, one champagne rule — no box */
+
+.search-atelier .search-atelier__form {
+  max-width: 720px;
+  min-height: 74px;
+  gap: 14px;
+  padding: 0 0 0 4px;
+
+  border: 0;
+  border-bottom: 1px solid rgba(183, 154, 106, 0.7);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.search-atelier .search-atelier__form:focus-within {
+  border-bottom-color: #d9c7a3;
+  box-shadow: 0 14px 30px -22px rgba(183, 154, 106, 0.9);
+}
+
+.search-atelier .search-atelier__form-icon {
+  color: #b79a6a;
+}
+
+.search-atelier .search-atelier__input {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: #f8f3f1;
+}
+
+.search-atelier .search-atelier__input::placeholder {
+  color: rgba(248, 243, 241, 0.42);
+  font-style: italic;
+}
+
+.search-atelier .search-atelier__submit {
+  min-height: 46px;
+  padding: 0 26px;
+  border: 1px solid #b79a6a;
+  border-radius: 999px;
+  background: #b79a6a;
+  color: #111111;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.search-atelier .search-atelier__submit:hover {
+  background: transparent;
+  color: #d9c7a3;
+}
+
+.search-atelier .search-atelier__hint {
+  margin-top: 16px;
+  color: rgba(248, 243, 241, 0.55);
+}
+
+.search-atelier__trending {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  margin-top: 26px;
+  max-width: 720px;
+}
+
+.search-atelier__trending span {
+  margin-right: 6px;
+  color: #b79a6a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.search-atelier__trending button {
+  padding: 8px 16px;
+  border: 1px solid rgba(248, 243, 241, 0.2);
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.45);
+  color: #f8f3f1;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+}
+
+.search-atelier__trending button:hover,
+.search-atelier__trending button:focus-visible {
+  border-color: #b79a6a;
+  background: #b79a6a;
+  color: #111111;
+  outline: none;
+}
+
+/* ---------------------------------------------------------
+   SHOWCASE — three editorial collection cards
+--------------------------------------------------------- */
+
+.search-atelier__showcase {
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(8px, 2vw, 24px);
+}
+
+.search-atelier__showcase-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: clamp(24px, 3vw, 38px);
+}
+
+.search-atelier__showcase-head p {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  color: #b79a6a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.search-atelier__showcase-head p::before {
+  width: 36px;
+  height: 1px;
+  background: #b79a6a;
+  content: "";
+}
+
+.search-atelier__showcase-head h2 {
+  margin: 0;
+  color: #f8f3f1;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.search-atelier__showcase-head em {
+  color: #d9c7a3;
+}
+
+.search-atelier__showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 20px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.search-atelier__showcase-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(183, 154, 106, 0.18);
+  background: #1a1816;
+  color: #f8f3f1;
+  text-decoration: none;
+}
+
+.search-atelier__showcase-image {
+  object-fit: cover;
+  object-position: 50% 25%;
+  filter: saturate(0.88) brightness(0.86);
+  transition: transform 1100ms cubic-bezier(0.22, 0.8, 0.2, 1), filter 600ms ease;
+}
+
+.search-atelier__showcase-card:hover .search-atelier__showcase-image,
+.search-atelier__showcase-card:focus-visible .search-atelier__showcase-image {
+  transform: scale(1.06);
+  filter: saturate(1.05) brightness(1);
+}
+
+.search-atelier__showcase-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(0deg, rgba(17, 17, 17, 0.92) 0%, rgba(17, 17, 17, 0.12) 52%, rgba(17, 17, 17, 0.3) 100%);
+}
+
+.search-atelier__showcase-index {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  z-index: 2;
+  color: #d9c7a3;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+}
+
+.search-atelier__showcase-copy {
+  position: absolute;
+  left: clamp(18px, 2vw, 28px);
+  right: 20px;
+  bottom: clamp(18px, 2.4vw, 30px);
+  z-index: 2;
+  display: grid;
+  gap: 6px;
+}
+
+.search-atelier__showcase-copy small {
+  color: #d9c7a3;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.search-atelier__showcase-copy strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.search-atelier__showcase-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  color: #b79a6a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  transition: gap 220ms ease, color 220ms ease;
+}
+
+.search-atelier__showcase-card:hover .search-atelier__showcase-cta {
+  gap: 14px;
+  color: #f8f3f1;
+}
+
+/* ---------------------------------------------------------
+   START BLOCKS
+--------------------------------------------------------- */
+
+.search-atelier .search-atelier__block-head h2 {
+  color: #f8f3f1;
+  letter-spacing: 0.26em;
+}
+
+.search-atelier .search-atelier__chip {
+  border-radius: 999px;
+  border-color: rgba(183, 154, 106, 0.35);
+  background: transparent;
+}
+
+.search-atelier .search-atelier__chip:hover {
+  border-color: #b79a6a;
+  background: #b79a6a;
+  color: #111111;
+}
+
+.search-atelier .search-atelier__tile {
+  border: 1px solid rgba(183, 154, 106, 0.2);
+}
+
+/* ---------------------------------------------------------
+   RESULTS
+--------------------------------------------------------- */
+
+.search-atelier .search-atelier__filters {
+  gap: 8px;
+}
+
+.search-atelier .search-atelier__filter {
+  border-radius: 999px;
+}
+
+.search-atelier .search-atelier__group-head h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .search-atelier__art {
+    width: 100%;
+    opacity: 0.55;
+  }
+
+  .search-atelier__art::before {
+    background:
+      linear-gradient(0deg, #111111 0%, rgba(17, 17, 17, 0.55) 55%, rgba(17, 17, 17, 0.85) 100%);
+  }
+
+  .search-atelier .search-atelier__hero {
+    min-height: 0;
+  }
+
+  .search-atelier .search-atelier__title {
+    max-width: none;
+  }
+
+  .search-atelier__showcase-grid {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .search-atelier__showcase-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .search-atelier__showcase-grid > li {
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 599px) {
+  .search-atelier .search-atelier__form {
+    min-height: 62px;
+    gap: 10px;
+  }
+
+  .search-atelier .search-atelier__submit {
+    min-height: 42px;
+    padding: 0 16px;
+  }
+
+  .search-atelier__trending button {
+    padding: 7px 13px;
+  }
+}
+
+/* Results view: a slimmer hero so the products come first */
+
+.search-atelier .search-atelier__hero--compact {
+  min-height: 0;
+  padding: clamp(36px, 5vw, 64px) 0 clamp(28px, 4vw, 44px);
+}
+
+.search-atelier .search-atelier__hero--compact .search-atelier__title {
+  max-width: none;
+  margin-bottom: clamp(18px, 2.4vw, 28px);
+  font-size: clamp(2.1rem, 4.4vw, 3.6rem);
+}
+
+.search-atelier .search-atelier__hero--compact .search-atelier__art {
+  opacity: 0.55;
+}

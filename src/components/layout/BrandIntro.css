@@ -160,46 +160,6 @@
   transform: none;
 }
 
-/* ---------------------------------------------------------
-   SKIP
---------------------------------------------------------- */
-
-.brand-intro__skip {
-  position: absolute;
-  top: max(18px, env(safe-area-inset-top));
-  right: max(18px, env(safe-area-inset-right));
-  z-index: 3;
-
-  min-height: 40px;
-  padding: 0 18px;
-
-  font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-
-  color: rgba(248, 243, 241, 0.82);
-  background: rgba(17, 17, 17, 0.35);
-  border: 1px solid rgba(248, 243, 241, 0.28);
-  cursor: pointer;
-
-  transition:
-    color 200ms ease,
-    border-color 200ms ease,
-    background 200ms ease;
-}
-
-.brand-intro__skip:hover {
-  color: #f8f3f1;
-  border-color: #b79a6a;
-}
-
-.brand-intro__skip:focus-visible {
-  outline: 2px solid #b79a6a;
-  outline-offset: 3px;
-}
-
 @media (max-width: 480px) {
   .brand-intro__name {
     font-size: clamp(26px, 8vw, 44px);
