@@ -196,7 +196,7 @@
   max-width: 680px;
   margin: 0;
 
-  color: var(--color-surface);
+  color: var(--color-text);
 
   font-family: var(--font-display);
   font-size: clamp(
@@ -458,7 +458,7 @@
 
   background: rgba(17, 17, 17, 0.2);
 
-  color: var(--color-surface);
+  color: var(--color-text);
 
   cursor: pointer;
 

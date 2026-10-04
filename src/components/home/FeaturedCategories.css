@@ -402,7 +402,7 @@
 
   margin: 0;
 
-  color: var(--color-surface);
+  color: var(--color-text);
 
   font-family: var(--font-display);
   font-size: clamp(1.45rem, 2vw, 2rem);
@@ -536,7 +536,7 @@
 
   transform: translateY(0);
 
-  color: var(--color-surface);
+  color: var(--color-text);
 
   border-color:
     rgba(183, 154, 106, 0.72);

@@ -547,8 +547,9 @@
 
 .checkout-success__status {
   padding: 28px 30px;
-  background: var(--color-clay);
-  color: #111111;
+  border: 1px solid var(--color-clay);
+  background: var(--color-surface-soft);
+  color: var(--color-text);
 }
 .checkout-success__status-eyebrow {
   color: rgba(255, 255, 255, 0.45);
@@ -616,19 +617,19 @@
 .checkout-success__action--primary,
 .checkout-success__button--primary {
   background: var(--success-accent);
-  color: #ffffff;
+  color: #111111;
 }
 .checkout-success__action--primary:hover,
 .checkout-success__button--primary:hover {
   border-color: var(--success-accent-dark);
   background: var(--success-accent-dark);
-  color: #ffffff;
+  color: #111111;
 }
 .checkout-success__action--primary:active,
 .checkout-success__button--primary:active {
   border-color: var(--success-accent-rose);
   background: var(--success-accent-rose);
-  color: #ffffff;
+  color: #111111;
 }
 .checkout-success__action--secondary,
 .checkout-success__button--secondary {
