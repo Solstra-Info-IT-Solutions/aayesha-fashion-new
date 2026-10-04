@@ -374,7 +374,7 @@
       var(--color-clay)
     );
 
-  color: #fff;
+  color: #111111;
 
   cursor: pointer;
 
@@ -424,7 +424,7 @@
 
   border-radius: 4px;
 
-  background: rgba(255, 255, 255, 0.13);
+  background: rgba(17, 17, 17, 0.13);
 }
 .checkout-place-order__button-copy {
   min-width: 0;
@@ -456,7 +456,7 @@
   height: 17px;
 
   border: 2px solid rgba(255, 255, 255, 0.28);
-  border-top-color: #fff;
+  border-top-color: #111111;
   border-radius: 50%;
 
   animation:
