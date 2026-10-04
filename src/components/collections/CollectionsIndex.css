@@ -377,7 +377,7 @@
   padding: clamp(48px, 7vw, 90px) 0;
 
   background: var(--color-espresso);
-  color: var(--color-text-inverse);
+  color: var(--color-text);
 
   text-align: center;
 }

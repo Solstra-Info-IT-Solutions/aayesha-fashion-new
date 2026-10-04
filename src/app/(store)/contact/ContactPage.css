@@ -495,7 +495,7 @@
   padding: clamp(48px, 7vw, 90px) 0;
 
   background: var(--color-espresso);
-  color: var(--color-text-inverse);
+  color: var(--color-text);
 
   text-align: center;
 }
@@ -583,11 +583,14 @@
   }
 }
 
-.contact__closing-title,
-.contact__closing .home-cta {
-  color: var(--color-text-inverse);
+.contact__closing-title {
+  color: var(--color-text);
 }
 
 .contact__closing .home-cta--light {
-  color: var(--color-espresso);
+  color: var(--color-text);
+}
+
+.contact__closing .home-cta--light:hover {
+  color: #111111;
 }
