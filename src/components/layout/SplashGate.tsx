@@ -64,7 +64,7 @@ export default function SplashGate() {
   }, []);
 
   if (choice === "intro") {
-    // On the home page the film leads into "What are you dressing for?"; on any other page
+    // On the home page the film leads into the "Where would you like to begin?" cards; on any other page
     // (a shared product link, say) it simply fades out into the page that was asked for.
     const onHome = window.location.pathname === "/";
 
