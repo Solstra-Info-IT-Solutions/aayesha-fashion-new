@@ -9,7 +9,7 @@
 
   --mf-black: var(--color-text);
   --mf-white: var(--color-canvas);
-  --mf-on-accent: #ffffff;
+  --mf-on-accent: #f8f3f1;
   --mf-surface: var(--color-surface);
   --mf-surface-2: var(--color-surface-soft);
   --mf-border: var(--color-border);
@@ -19,8 +19,8 @@
   --mf-text-secondary: var(--color-text-secondary);
   --mf-text-muted: var(--color-text-muted);
 
-  --mf-accent: var(--color-secondary);
-  --mf-accent-dark: var(--color-clay-deep);
+  --mf-accent: var(--color-primary);
+  --mf-accent-dark: var(--color-primary);
   --mf-accent-soft: var(--color-accent-soft);
 
   position: fixed;
@@ -77,7 +77,7 @@
 ========================================================= */
 
 .aayesha-header--scrolled {
-  background: rgba(247, 243, 237, 0.96);
+  background: rgba(248, 243, 241, 0.96);
 
   border-bottom-color: var(--mf-border);
 

@@ -24,8 +24,8 @@
   --mm-border: var(--color-border);
   --mm-border-strong: var(--color-border-dark);
 
-  --mm-accent: var(--color-secondary);
-  --mm-accent-dark: var(--color-clay-deep);
+  --mm-accent: var(--color-primary);
+  --mm-accent-dark: var(--color-primary);
   --mm-accent-soft: var(--color-accent-soft);
   --mm-accent-light: var(--color-surface-soft);
 
