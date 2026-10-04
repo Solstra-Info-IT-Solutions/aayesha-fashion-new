@@ -47,6 +47,7 @@ import type { Category } from "@/types/category";
 import type { Product } from "@/types/product";
 
 import "./SearchExperience.css";
+import "./SearchAtelier.css";
 
 /* =========================================================
    TYPES
@@ -409,7 +410,24 @@ export function SearchExperience({
           FIELD
       ===================================================== */}
 
-      <section className="search-atelier__hero">
+      <section
+        className={
+          hasTerm
+            ? "search-atelier__hero search-atelier__hero--compact"
+            : "search-atelier__hero"
+        }
+      >
+        <div className="search-atelier__art" aria-hidden="true">
+          <Image
+            src="/images/home/featured-collection-campaign.jpg"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 55vw"
+            className="search-atelier__art-image"
+          />
+        </div>
+
         <div className="search-atelier__inner">
           <div className="search-atelier__eyebrow">
             <span aria-hidden="true" />
@@ -499,8 +517,97 @@ export function SearchExperience({
               </span>
             )}
           </p>
+
+          {!hasTerm && (
+            <div className="search-atelier__trending">
+              <span>Trending</span>
+
+              {popularSearches.slice(0, 5).map((query) => (
+                <button
+                  key={query}
+                  type="button"
+                  onClick={() => runSearch(query)}
+                >
+                  {query}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
+
+      {!hasTerm && (
+        <section
+          className="search-atelier__inner search-atelier__showcase"
+          aria-labelledby="search-showcase-title"
+        >
+          <header className="search-atelier__showcase-head">
+            <p>The edit</p>
+
+            <h2 id="search-showcase-title">
+              Begin with a <em>collection</em>
+            </h2>
+          </header>
+
+          <ul className="search-atelier__showcase-grid">
+            {[
+              {
+                label: "New Arrivals",
+                note: "Just introduced",
+                href: "/collections/new-arrivals",
+                image: "/images/choose/new-arrivals.jpg",
+              },
+              {
+                label: "Best Sellers",
+                note: "Most loved",
+                href: "/collections/best-sellers",
+                image: "/images/choose/best-sellers.jpg",
+              },
+              {
+                label: "Festive Edit",
+                note: "For celebrations",
+                href: "/collections/festive",
+                image: "/images/choose/festive.jpg",
+              },
+            ].map((item, index) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="search-atelier__showcase-card"
+                >
+                  <Image
+                    src={item.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 767px) 100vw, 33vw"
+                    className="search-atelier__showcase-image"
+                  />
+
+                  <span className="search-atelier__showcase-shade" aria-hidden="true" />
+
+                  <span className="search-atelier__showcase-index">
+                    0{index + 1}
+                  </span>
+
+                  <span className="search-atelier__showcase-copy">
+                    <small>{item.note}</small>
+                    <strong>{item.label}</strong>
+
+                    <span className="search-atelier__showcase-cta">
+                      Explore
+                      <ArrowUpRight
+                        size={14}
+                        strokeWidth={1.5}
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <div className="search-atelier__inner search-atelier__body">
         {/* =====================================================
