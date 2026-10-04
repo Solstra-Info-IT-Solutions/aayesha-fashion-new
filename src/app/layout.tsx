@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
-import BrandLoader from "@/components/layout/BrandLoader";
+import SplashGate from "@/components/layout/SplashGate";
 import { NavigationTracker } from "@/components/navigation/navigation-tracker";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 
@@ -285,12 +285,12 @@ export default function RootLayout({
         className="antialiased"
       >
         <noscript>
-          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
+          <style>{`.reveal{opacity:1!important;transform:none!important}.splash-gate{display:none!important}`}</style>
         </noscript>
 
         <AnalyticsScripts />
 
-        <BrandLoader />
+        <SplashGate />
         <NavigationTracker />
         <AuthProvider>
           {children}
