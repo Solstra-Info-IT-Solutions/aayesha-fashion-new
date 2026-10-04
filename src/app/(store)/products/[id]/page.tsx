@@ -306,6 +306,7 @@ export async function generateMetadata({
       );
 
     const shouldIndex =
+      siteConfig.allowIndexing &&
       product.seo?.noIndex !== true &&
       product.status === "active";
 

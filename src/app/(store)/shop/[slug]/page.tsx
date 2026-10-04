@@ -76,7 +76,7 @@ export async function generateMetadata({
     alternates: { canonical: path },
     // A page with nothing to sell is thin content: keep it out of Google.
     robots:
-      products.length === 0
+      products.length === 0 || !siteConfig.allowIndexing
         ? { index: false, follow: true }
         : { index: true, follow: true },
     openGraph: {
