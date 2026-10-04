@@ -1,3 +1,4 @@
+import { ApiError } from "@/lib/api";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -57,8 +58,14 @@ export default async function EthnicPage({
 
   try {
     category = await getCategoryBySlug("ethnic");
-  } catch {
-    notFound();
+  } catch (error) {
+    // Only a genuinely missing category is a 404. An unreachable API must not look like a
+    // deleted page (search engines would drop it): let the error page handle it.
+    if (error instanceof ApiError && error.status === 404) {
+      notFound();
+    }
+
+    throw error;
   }
 
   const response = await getProducts({
