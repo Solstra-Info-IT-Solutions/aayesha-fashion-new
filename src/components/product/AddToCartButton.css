@@ -25,7 +25,7 @@
   background:
     var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   cursor: pointer;
 
@@ -43,7 +43,7 @@
 
   box-shadow:
     0 7px 18px
-      rgba(111, 75, 71, 0.12);
+      rgba(17, 17, 17, 0.12);
 
   transition:
     background-color 300ms ease,
@@ -69,10 +69,7 @@
   z-index: 0;
 
   background:
-    var(
-      --color-accent-dark,
-      var(--color-text)
-    );
+    var(--color-primary);
 
   transform: translateY(101%);
 
@@ -330,7 +327,7 @@
 
 .add-to-cart-button--added {
   border-color:
-    var(--color-accent-dark, var(--color-text));
+    var(--color-primary);
 
   background:
     var(--color-accent-dark, var(--color-text));

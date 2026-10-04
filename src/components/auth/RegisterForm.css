@@ -669,7 +669,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   cursor: pointer;
 
@@ -1004,7 +1004,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .register-form__login-icon {

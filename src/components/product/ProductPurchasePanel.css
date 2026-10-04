@@ -109,7 +109,7 @@
 
 .product-purchase__quantity-button:active:not(:disabled) {
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 
 .product-purchase__quantity-button:disabled {
@@ -152,7 +152,7 @@
   border: 1px solid var(--color-clay);
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 
   font-family: var(--font-body, Arial, sans-serif);
   font-size: 10px;
@@ -196,7 +196,7 @@
 }
 
 .product-purchase__add-button:hover:not(:disabled) {
-  border-color: var(--color-accent-dark, var(--color-text));
+  border-color: var(--color-primary);
 
   background: var(--color-accent-dark, var(--color-text));
 
@@ -267,10 +267,10 @@
 }
 
 .product-purchase__buy-button:hover:not(:disabled) {
-  border-color: var(--color-text, var(--color-text));
+  border-color: var(--color-primary);
 
   background: var(--color-text, var(--color-text));
-  color: #ffffff;
+  color: #111111;
 }
 
 .product-purchase__buy-button:active:not(:disabled) {

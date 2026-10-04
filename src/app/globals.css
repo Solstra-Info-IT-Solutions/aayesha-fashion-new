@@ -10,16 +10,16 @@
 
 :root {
   /* =======================================================
-     BRAND COLORS — OBSIDIAN × IVORY × CHAMPAGNE
-     Ivory pages, obsidian type and buttons, champagne accents.
+     BRAND COLORS — OBSIDIAN × CHAMPAGNE (loader palette)
+     Obsidian screens, soft light type, champagne fills and accents.
      ======================================================= */
 
-  --color-primary: #111111;
-  --color-primary-hover: #2b2723;
-  --color-primary-active: #000000;
+  --color-primary: #b79a6a;
+  --color-primary-hover: #c8ad7f;
+  --color-primary-active: #a38756;
 
-  --color-secondary: #5f5852;
-  --color-secondary-light: #8f867c;
+  --color-secondary: #cfc7bb;
+  --color-secondary-light: #9a9185;
 
   --color-accent: #b79a6a;
   --color-accent-light: #d9c7a3;
@@ -27,48 +27,48 @@
   /* Clay accent: deep clay for text/borders, soft tint for
      focus rings and subtle fills. (Previously referenced by
      ~65 rules but never defined.) */
-  --color-accent-dark: #111111;
-  --color-accent-soft: #efe6d6;
+  --color-accent-dark: #b79a6a;
+  --color-accent-soft: #2a241b;
 
-  --color-rose: #9a5a66;
-  --color-clay: #111111;
-  --color-clay-deep: #2b2723;
-  --color-burgundy: #2b2723;
-  --color-espresso: #171516;
+  --color-rose: #d9a0a8;
+  --color-clay: #b79a6a;
+  --color-clay-deep: #c8ad7f;
+  --color-burgundy: #c8ad7f;
+  --color-espresso: #0b0b0b;
 
   /* Main surfaces */
 
-  --color-canvas: #f8f3f1;
-  --color-surface: #fdfaf8;
-  --color-surface-soft: #f1ebe6;
-  --color-surface-muted: #e9e1da;
+  --color-canvas: #111111;
+  --color-surface: #1a1816;
+  --color-surface-soft: #211e1b;
+  --color-surface-muted: #2a2622;
 
   /* Dark surfaces (use sparingly — footer / overlays only) */
 
-  --color-surface-dark: #111111;
-  --color-surface-dark-soft: #1c1916;
+  --color-surface-dark: #0b0b0b;
+  --color-surface-dark-soft: #161412;
 
   /* Text */
 
-  --color-text: #171516;
-  --color-text-secondary: #5f5852;
-  --color-text-muted: #8c847d;
-  --color-text-light: #d8d0c2;
-  --color-text-inverse: #f8f3f1;
+  --color-text: #f8f3f1;
+  --color-text-secondary: #cfc7bb;
+  --color-text-muted: #9a9185;
+  --color-text-light: #7b7368;
+  --color-text-inverse: #111111;
 
   /* Borders */
 
-  --color-border: #ddd3ca;
-  --color-border-light: #e9e1d9;
-  --color-border-dark: #bdb2a7;
+  --color-border: #2e2a26;
+  --color-border-light: #26231f;
+  --color-border-dark: #4a443d;
 
   /* States */
 
-  --color-success: #65745f;
-  --color-warning: #8a6a48;
-  --color-error: #955c56;
-  --color-error-soft: #f5eae6;
-  --color-success-soft: #edf1e9;
+  --color-success: #8fb08a;
+  --color-warning: #d0a566;
+  --color-error: #e08b84;
+  --color-error-soft: #2b1a18;
+  --color-success-soft: #1a2419;
 
   /* =======================================================
      COMPATIBILITY ALIASES
@@ -92,30 +92,30 @@
      BUTTON COLORS
      ======================================================= */
 
-  --button-primary-bg: #111111;
-  --button-primary-bg-hover: #2b2723;
-  --button-primary-bg-active: #000000;
-  --button-primary-text: #f8f3f1;
+  --button-primary-bg: #b79a6a;
+  --button-primary-bg-hover: #c8ad7f;
+  --button-primary-bg-active: #a38756;
+  --button-primary-text: #111111;
 
   --button-secondary-bg: transparent;
-  --button-secondary-bg-hover: #111111;
-  --button-secondary-bg-active: #2b2723;
+  --button-secondary-bg-hover: #b79a6a;
+  --button-secondary-bg-active: #a38756;
 
-  --button-secondary-text: #111111;
-  --button-secondary-text-hover: #f8f3f1;
+  --button-secondary-text: #f8f3f1;
+  --button-secondary-text-hover: #111111;
 
-  --button-secondary-border: #bdb2a7;
+  --button-secondary-border: #4a443d;
 
   --button-soft-bg: var(--color-surface-soft);
-  --button-soft-bg-hover: #111111;
+  --button-soft-bg-hover: #b79a6a;
 
-  --button-soft-text: #111111;
-  --button-soft-text-hover: #f8f3f1;
+  --button-soft-text: #f8f3f1;
+  --button-soft-text-hover: #111111;
 
-  --button-ghost-bg-hover: rgba(17, 17, 17, 0.06);
+  --button-ghost-bg-hover: rgba(183, 154, 106, 0.12);
 
   --focus-ring: rgba(183, 154, 106, 0.75);
-  --ring-focus: 0 0 0 3px rgba(183, 154, 106, 0.28);
+  --ring-focus: 0 0 0 3px rgba(183, 154, 106, 0.3);
 
   /* Form controls */
 
@@ -288,16 +288,16 @@
      ======================================================= */
 
   --shadow-xs:
-    0 1px 3px rgba(17, 17, 17, 0.04);
+    0 1px 3px rgba(0, 0, 0, 0.3);
 
   --shadow-sm:
-    0 4px 16px rgba(17, 17, 17, 0.06);
+    0 4px 16px rgba(0, 0, 0, 0.35);
 
   --shadow-md:
-    0 12px 32px rgba(17, 17, 17, 0.09);
+    0 12px 32px rgba(0, 0, 0, 0.45);
 
   --shadow-lg:
-    0 24px 60px rgba(17, 17, 17, 0.13);
+    0 24px 60px rgba(0, 0, 0, 0.55);
 
 
   /* =======================================================
@@ -358,7 +358,7 @@
     rgba(17, 17, 17, 0.62);
 
   --overlay-light:
-    rgba(247, 243, 237, 0.88);
+    rgba(26, 24, 22, 0.88);
 
 
   /* =======================================================
@@ -445,7 +445,7 @@
 }
 
 html {
-  color-scheme: light;
+  color-scheme: dark;
 
   width: 100%;
   min-height: 100%;
@@ -637,7 +637,7 @@ p {
 
 ::selection {
   background: var(--color-primary);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 
@@ -1230,7 +1230,7 @@ p {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-secondary);
+  background: var(--color-primary);
 }
 
 

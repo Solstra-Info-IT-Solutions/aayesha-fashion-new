@@ -222,9 +222,9 @@
 .testimonials__arrow:hover {
   border-color: var(--color-secondary);
 
-  background: var(--color-secondary);
+  background: var(--color-primary);
 
-  color: var(--color-surface);
+  color: #111111;
 
   transform: translateY(-1px);
 }
@@ -271,7 +271,7 @@
 }
 
 .testimonials__pagination-line.is-active {
-  background: var(--color-secondary);
+  background: var(--color-primary);
 
   transform: scaleY(2);
 }

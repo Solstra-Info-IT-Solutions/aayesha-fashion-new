@@ -165,7 +165,7 @@
   align-items: center;
   justify-content: center;
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 .checkout-success__hero-title {
   margin: 15px 0 0;
@@ -548,7 +548,7 @@
 .checkout-success__status {
   padding: 28px 30px;
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 .checkout-success__status-eyebrow {
   color: rgba(255, 255, 255, 0.45);

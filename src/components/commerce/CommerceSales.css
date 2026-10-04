@@ -17,7 +17,7 @@
 
 .commerce-meter--unlocked {
   border-color: var(--color-success, #3a7d44);
-  background: var(--color-success-soft, #edf1e9);
+  background: var(--color-success-soft);
   color: var(--color-text);
 }
 
@@ -206,7 +206,7 @@
   display: block;
   aspect-ratio: 3 / 4;
   overflow: hidden;
-  background: var(--color-surface-soft, #f1ebe6);
+  background: var(--color-surface-soft);
 }
 
 .commerce-upsell__image img {
@@ -267,7 +267,7 @@
 
 .commerce-upsell__card button:hover:not(:disabled) {
   background: var(--color-primary);
-  color: #ffffff;
+  color: #111111;
 }
 
 .commerce-upsell__card button:disabled {

@@ -52,7 +52,7 @@
 
   border-radius: 50%;
 
-  background: rgba(210, 190, 160, 0.08);
+  background: rgba(183, 154, 106, 0.08);
 
   filter: blur(50px);
 
@@ -247,10 +247,10 @@
   background:
     linear-gradient(
       to top,
-      rgba(39, 27, 25, 0.9) 0%,
-      rgba(39, 27, 25, 0.54) 25%,
-      rgba(39, 27, 25, 0.14) 60%,
-      rgba(39, 27, 25, 0.04) 100%
+      rgba(17, 17, 17, 0.9) 0%,
+      rgba(17, 17, 17, 0.54) 25%,
+      rgba(17, 17, 17, 0.14) 60%,
+      rgba(17, 17, 17, 0.04) 100%
     );
 
   opacity: 0.82;
@@ -278,7 +278,7 @@
     linear-gradient(
       90deg,
       transparent,
-      rgba(255, 247, 234, 0.18),
+      rgba(248, 243, 241, 0.18),
       transparent
     );
 
@@ -329,11 +329,11 @@
   padding: 0 7px;
 
   border: 1px solid
-    rgba(250, 247, 244, 0.34);
+    rgba(248, 243, 241, 0.34);
 
   background: rgba(17, 17, 17, 0.13);
 
-  color: rgba(250, 247, 244, 0.84);
+  color: rgba(248, 243, 241, 0.84);
 
   font-family: var(--font-body);
   font-size: 10px;
@@ -375,7 +375,7 @@
 
   margin-bottom: 8px;
 
-  color: rgba(250, 247, 244, 0.68);
+  color: rgba(248, 243, 241, 0.68);
 
   font-family: var(--font-body);
   font-size: 10px;
@@ -436,9 +436,9 @@
   padding-bottom: 5px;
 
   border-bottom: 1px solid
-    rgba(250, 247, 244, 0.38);
+    rgba(248, 243, 241, 0.38);
 
-  color: rgba(250, 247, 244, 0.84);
+  color: rgba(248, 243, 241, 0.84);
 
   font-family: var(--font-body);
   font-size: 10px;
@@ -479,7 +479,7 @@
     0 20px 42px
       rgba(17, 17, 17, 0.17),
     0 0 0 1px
-      rgba(167, 137, 105, 0.14);
+      rgba(183, 154, 106, 0.14);
 }
 
 .category-card:hover
@@ -506,7 +506,7 @@
 .category-card:hover
   .category-card__number {
   border-color:
-    rgba(250, 247, 244, 0.72);
+    rgba(248, 243, 241, 0.72);
 
   background:
     rgba(17, 17, 17, 0.34);
@@ -539,7 +539,7 @@
   color: var(--color-surface);
 
   border-color:
-    rgba(210, 190, 160, 0.72);
+    rgba(183, 154, 106, 0.72);
 }
 
 .category-card:hover
@@ -609,7 +609,7 @@
   background:
     radial-gradient(
       circle at 50% 0%,
-      rgba(210, 190, 160, 0.22),
+      rgba(183, 154, 106, 0.22),
       transparent 55%
     ),
     var(--color-surface-soft);
@@ -652,7 +652,7 @@
   margin: 0 auto 19px;
 
   border: 1px solid
-    rgba(167, 137, 105, 0.4);
+    rgba(183, 154, 106, 0.4);
 
   border-radius: 50%;
 

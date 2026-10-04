@@ -155,7 +155,7 @@
 
   background: var(--mm-accent);
 
-  color: #FFFFFF;
+  color: #111111;
 }
 
 .mobile-menu-trigger:focus-visible {
@@ -386,7 +386,7 @@
 
   background: var(--mm-accent);
 
-  color: #FFFFFF;
+  color: #111111;
 }
 
 .mobile-menu__brand-copy {
@@ -478,7 +478,7 @@
 
   background: var(--mm-accent);
 
-  color: #FFFFFF;
+  color: #111111;
 }
 
 .mobile-menu__close:focus-visible {
@@ -702,7 +702,7 @@
 
   background: var(--mm-accent);
 
-  color: #FFFFFF;
+  color: #111111;
 }
 
 
@@ -1245,7 +1245,7 @@
 
   background: var(--mm-accent);
 
-  color: #FFFFFF;
+  color: #111111;
 }
 
 
@@ -1671,7 +1671,7 @@
 
   background: var(--mm-accent);
 
-  color: #FFFFFF;
+  color: #111111;
 }
 
 .mobile-menu__footer-action:focus-visible {

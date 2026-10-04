@@ -477,7 +477,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 .address-default__content {
   min-width: 0;
@@ -604,7 +604,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 .address-form__save-action:hover:not(:disabled) {
   border-color: var(--color-clay);
@@ -634,7 +634,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   font-family:
     var(--font-body),
@@ -704,7 +704,7 @@
     linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.5),
+      rgba(26, 24, 22, 0.5),
       transparent
     );
 

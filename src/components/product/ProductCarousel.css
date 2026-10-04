@@ -276,10 +276,7 @@
 }
 
 .product-carousel__button:active::before {
-  background: var(
-    --color-accent-dark,
-    var(--color-text)
-  );
+  background: var(--color-primary);
 }
 
 /* =========================================================

@@ -177,7 +177,7 @@
   border-radius: 0;
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 
   font-family: var(--font-body);
   font-size: 10px;
@@ -195,7 +195,7 @@
 }
 
 .shop-product-grid__empty-button:hover {
-  border-color: var(--color-text);
+  border-color: var(--color-primary);
   background: var(--color-text);
 }
 

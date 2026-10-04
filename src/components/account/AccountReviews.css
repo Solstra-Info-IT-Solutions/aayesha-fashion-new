@@ -150,8 +150,8 @@
 }
 
 .account-reviews__actions button:first-child {
-  background: var(--color-text);
-  color: var(--color-text-inverse, #fff);
+  background: var(--color-primary);
+  color: #111111;
 }
 
 .account-reviews__actions button:disabled {

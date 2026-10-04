@@ -14,7 +14,7 @@
   background:
     linear-gradient(
       135deg,
-      rgba(111, 75, 71, 0.035),
+      rgba(17, 17, 17, 0.035),
       rgba(255, 255, 255, 0.35)
     );
 
@@ -79,7 +79,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   transform: translateY(-2px);
 }
@@ -150,7 +150,7 @@
   border-color: var(--color-clay);
 
   box-shadow:
-    0 0 0 3px rgba(111, 75, 71, 0.08);
+    0 0 0 3px rgba(17, 17, 17, 0.08);
 }
 
 /* =========================================================
@@ -213,7 +213,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   font-family: var(--font-body, sans-serif);
 
@@ -243,10 +243,7 @@
   position: absolute;
   inset: 0;
 
-  background: var(
-    --color-accent-dark,
-    var(--color-text)
-  );
+  background: var(--color-primary);
 
   transform: translateX(-101%);
 
@@ -339,13 +336,13 @@
   padding: 13px 14px;
 
   border: 1px solid
-    rgba(111, 75, 71, 0.18);
+    rgba(17, 17, 17, 0.18);
 
   background:
     linear-gradient(
       90deg,
-      rgba(111, 75, 71, 0.065),
-      rgba(111, 75, 71, 0.025)
+      rgba(17, 17, 17, 0.065),
+      rgba(17, 17, 17, 0.025)
     );
 
   animation:
@@ -522,7 +519,7 @@
     background:
       linear-gradient(
         135deg,
-        rgba(111, 75, 71, 0.035),
+        rgba(17, 17, 17, 0.035),
         rgba(255, 255, 255, 0.2)
       );
   }

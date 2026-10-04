@@ -51,7 +51,7 @@
 
 .quantity-selector__button:active:not(:disabled) {
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 }
 
 .quantity-selector__button:disabled {

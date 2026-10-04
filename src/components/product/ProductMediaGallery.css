@@ -134,7 +134,7 @@
 
   border: 1px solid rgba(255, 255, 255, 0.55);
 
-  background: rgba(251, 248, 245, 0.82);
+  background: rgba(17, 17, 17, 0.82);
 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -180,7 +180,7 @@
 
   border: 1px solid rgba(255, 255, 255, 0.65);
 
-  background: rgba(251, 248, 245, 0.86);
+  background: rgba(17, 17, 17, 0.86);
 
   color: var(--gallery-text);
 
@@ -221,7 +221,7 @@
 
   border: 1px solid rgba(255, 255, 255, 0.55);
 
-  background: rgba(251, 248, 245, 0.82);
+  background: rgba(17, 17, 17, 0.82);
 
   color: var(--gallery-text);
 
@@ -268,7 +268,7 @@
 
   border: 1px solid rgba(255, 255, 255, 0.7);
 
-  background: rgba(251, 248, 245, 0.86);
+  background: rgba(17, 17, 17, 0.86);
 
   color: var(--gallery-text);
 
@@ -503,7 +503,7 @@
 
   padding: 0 5px;
 
-  background: rgba(251, 248, 245, 0.88);
+  background: rgba(17, 17, 17, 0.88);
 
   color: var(--gallery-text);
 

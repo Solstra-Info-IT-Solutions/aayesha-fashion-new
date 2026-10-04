@@ -118,12 +118,12 @@
   padding: 0;
 
   border: 1px solid
-    rgba(80, 54, 47, 0.1);
+    rgba(17, 17, 17, 0.1);
 
   border-radius: 50%;
 
   background:
-    rgba(255, 255, 255, 0.72);
+    rgba(17, 17, 17, 0.72);
 
   color: var(--color-clay-deep);
 
@@ -141,7 +141,7 @@
   background: var(--color-surface);
 
   border-color:
-    rgba(80, 54, 47, 0.2);
+    rgba(17, 17, 17, 0.2);
 }
 
 /* =========================================================
@@ -166,7 +166,7 @@
   background:
     radial-gradient(
       circle at 50% 45%,
-      rgba(255, 255, 255, 0.96),
+      rgba(26, 24, 22, 0.96),
       rgba(244, 228, 221, 0.7) 45%,
       rgba(235, 211, 201, 0.5) 100%
     );
@@ -187,7 +187,7 @@
   background:
     radial-gradient(
       circle,
-      rgba(255, 255, 255, 0.95) 0%,
+      rgba(26, 24, 22, 0.95) 0%,
       rgba(239, 211, 201, 0.28) 55%,
       transparent 72%
     );
@@ -215,8 +215,8 @@
   background:
     linear-gradient(
       145deg,
-      rgba(255, 255, 255, 0.96),
-      rgba(250, 239, 234, 0.88)
+      rgba(26, 24, 22, 0.96),
+      rgba(26, 24, 22, 0.88)
     );
 
   border: 1px solid
@@ -248,7 +248,7 @@
   color: var(--color-clay);
 
   background:
-    rgba(255, 255, 255, 0.88);
+    rgba(17, 17, 17, 0.88);
 
   border: 1px solid
     rgba(143, 99, 86, 0.12);
@@ -478,7 +478,7 @@
   min-height: 44px;
 
   border: 1px solid
-    rgba(80, 54, 47, 0.13);
+    rgba(17, 17, 17, 0.13);
 
   border-radius: 4px;
 
@@ -508,7 +508,7 @@
   background: var(--color-surface);
 
   border-color:
-    rgba(80, 54, 47, 0.22);
+    rgba(17, 17, 17, 0.22);
 }
 
 /* =========================================================
@@ -530,7 +530,7 @@
   height: 1px;
 
   background:
-    rgba(80, 54, 47, 0.08);
+    rgba(17, 17, 17, 0.08);
 }
 
 .login-required-popup__footer p {

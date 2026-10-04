@@ -132,7 +132,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .recently-viewed__view-all:active {
@@ -140,7 +140,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .recently-viewed__view-all:focus-visible {

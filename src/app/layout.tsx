@@ -257,10 +257,10 @@ export const metadata: Metadata = {
 
   other: {
     "theme-color":
-      "#f8f3f1",
+      "#111111",
 
     "color-scheme":
-      "light",
+      "dark",
   },
 };
 
@@ -303,9 +303,9 @@ export default function RootLayout({
 
             style: {
               background:
-                "#171516",
+                "#1c1916",
 
-              color: "#f8f3f1",
+              color: "#111111",
 
               borderRadius: "0",
 

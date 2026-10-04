@@ -514,7 +514,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   cursor: pointer;
 
@@ -710,7 +710,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .verify-email-form__resend-button:disabled {
@@ -816,7 +816,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .verify-email-form__register-link:active {
@@ -824,7 +824,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 

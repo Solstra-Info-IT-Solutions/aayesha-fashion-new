@@ -383,7 +383,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 /* =========================================================
@@ -460,7 +460,7 @@
 .wishlist-summary__primary {
   border: 0;
   background: var(--color-primary);
-  color: #ffffff;
+  color: #111111;
 }
 
 .wishlist-summary__primary:disabled {

@@ -187,7 +187,7 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 .profile-details__button--primary:hover:not(:disabled) {
   border-color: var(--color-accent-dark);
@@ -983,14 +983,14 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 .profile-details__preference-option--selected:hover:not(:disabled) {
   border-color: var(--color-accent-dark);
 
   background: var(--color-accent-dark);
 
-  color: #ffffff;
+  color: #111111;
 }
 .profile-details__preference-option:disabled {
   cursor: default;

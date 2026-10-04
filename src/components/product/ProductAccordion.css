@@ -22,7 +22,7 @@
 
 .product-accordion--open {
   background:
-    rgba(111, 75, 71, 0.018);
+    rgba(17, 17, 17, 0.018);
 }
 
 /* =========================================================
@@ -72,7 +72,7 @@
     var(--color-clay);
 
   background:
-    rgba(111, 75, 71, 0.025);
+    rgba(17, 17, 17, 0.025);
 
   padding-left: 8px;
   padding-right: 8px;

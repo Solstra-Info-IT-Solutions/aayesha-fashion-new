@@ -540,15 +540,15 @@
 
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .cookie-preferences__button--primary:hover {
-  border-color: var(--color-text);
+  border-color: var(--color-primary);
 
   background: var(--color-text);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .cookie-preferences__button--primary:active {
@@ -556,7 +556,7 @@
 
   background: var(--color-clay-deep);
 
-  color: #ffffff;
+  color: #111111;
 
   transform: translateY(1px);
 }

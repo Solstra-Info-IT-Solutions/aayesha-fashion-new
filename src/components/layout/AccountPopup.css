@@ -125,11 +125,11 @@
 }
 
 .account-popup__close:hover {
-  background: var(--color-text);
+  background: var(--color-primary);
 
   border-color: var(--color-text);
 
-  color: #ffffff;
+  color: #111111;
 
   transform: rotate(4deg);
 }
@@ -329,11 +329,11 @@
 }
 
 .account-popup__cta:hover {
-  background: var(--color-text);
+  background: var(--color-primary);
 
   border-color: var(--color-text);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .account-popup__cta:focus-visible {
@@ -419,7 +419,7 @@
 
   border-color: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 
   transform: translateX(2px);
 }
@@ -569,7 +569,7 @@
 
   border-color: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 

@@ -262,13 +262,13 @@
 .recent-searches__remove:hover {
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .recent-searches__remove:active {
   background: var(--color-clay);
 
-  color: #ffffff;
+  color: #111111;
 }
 
 .recent-searches__remove:focus-visible {

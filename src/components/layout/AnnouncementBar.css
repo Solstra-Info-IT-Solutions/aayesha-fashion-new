@@ -16,8 +16,7 @@
   overflow: hidden;
 
   background: var(--color-primary);
-  color: #f8f3f1;
-  border-bottom: 1px solid rgba(183, 154, 106, 0.35);
+  color: #111111;
 }
 
 .announcement-bar__link {

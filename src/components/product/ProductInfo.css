@@ -186,8 +186,8 @@
   background:
     linear-gradient(
       90deg,
-      rgba(111, 75, 71, 0.055),
-      rgba(111, 75, 71, 0)
+      rgba(17, 17, 17, 0.055),
+      rgba(17, 17, 17, 0)
     );
 }
 
@@ -490,8 +490,8 @@
     background:
       linear-gradient(
         90deg,
-        rgba(111, 75, 71, 0.08),
-        rgba(111, 75, 71, 0)
+        rgba(17, 17, 17, 0.08),
+        rgba(17, 17, 17, 0)
       );
 
     transform: translateX(2px);

@@ -80,7 +80,7 @@
   border: 1px solid var(--checkout-border);
   border-radius: 2px;
 
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(26, 24, 22, 0.72);
 
   color: var(--checkout-text-soft);
 
@@ -206,7 +206,7 @@
     linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.55),
+      rgba(26, 24, 22, 0.55),
       transparent
     );
 
@@ -315,7 +315,7 @@
   border-radius: 4px;
 
   background: var(--color-clay);
-  color: #ffffff;
+  color: #111111;
 
   text-decoration: none;
 

@@ -626,7 +626,7 @@
   border-radius: 999px;
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 
   font-size: 11px;
   letter-spacing: 0;
@@ -654,7 +654,7 @@
   padding: 0;
   border: 0;
 
-  background: rgba(40, 28, 26, 0.5);
+  background: rgba(17, 17, 17, 0.5);
 
   cursor: default;
 }
@@ -673,7 +673,7 @@
 
   background: var(--color-canvas);
 
-  box-shadow: 0 -20px 60px rgba(40, 28, 26, 0.25);
+  box-shadow: 0 -20px 60px rgba(17, 17, 17, 0.25);
 }
 
 .category-browser__sheet-header {

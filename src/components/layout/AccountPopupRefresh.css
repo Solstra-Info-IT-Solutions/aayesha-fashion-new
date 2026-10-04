@@ -57,7 +57,7 @@
   border-radius: 12px;
 
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 .account-popup .account-popup__cta:hover {
@@ -70,7 +70,7 @@
 }
 
 .account-popup .account-popup__cta-icon {
-  background: rgba(251, 249, 245, 0.18);
+  background: rgba(248, 243, 241, 0.18);
   color: var(--color-text-inverse);
 }
 
@@ -100,7 +100,7 @@
 
 .account-popup .account-popup__nav-item--active .account-popup__nav-icon {
   background: var(--color-clay);
-  color: var(--color-text-inverse);
+  color: #111111;
 }
 
 .account-popup .account-popup__actions {
