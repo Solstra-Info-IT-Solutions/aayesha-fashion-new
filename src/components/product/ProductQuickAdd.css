@@ -26,7 +26,7 @@
 
   padding: 0 14px;
 
-  border: 1px solid rgba(63, 45, 42, 0.22);
+  border: 1px solid rgba(17, 17, 17, 0.22);
 
   background: rgba(251, 248, 245, 0.96);
   color: var(--color-text, var(--color-text));
@@ -84,7 +84,7 @@
   color: #ffffff;
 
   box-shadow:
-    0 8px 22px rgba(63, 45, 42, 0.12);
+    0 8px 22px rgba(17, 17, 17, 0.12);
 }
 
 .product-quick-add__trigger:active:not(:disabled) {
@@ -159,8 +159,8 @@
   background: var(--color-surface, var(--color-surface));
 
   box-shadow:
-    0 18px 45px rgba(63, 45, 42, 0.12),
-    0 4px 12px rgba(63, 45, 42, 0.05);
+    0 18px 45px rgba(17, 17, 17, 0.12),
+    0 4px 12px rgba(17, 17, 17, 0.05);
 
   animation:
     product-quick-add-panel-in
@@ -523,7 +523,7 @@
   background: var(--color-accent-dark, var(--color-text));
 
   box-shadow:
-    0 10px 28px rgba(63, 45, 42, 0.18);
+    0 10px 28px rgba(17, 17, 17, 0.18);
 }
 
 .product-quick-add__submit:active:not(:disabled) {
@@ -613,7 +613,7 @@
 
   .product-quick-add__panel {
     box-shadow:
-      0 14px 34px rgba(63, 45, 42, 0.12);
+      0 14px 34px rgba(17, 17, 17, 0.12);
   }
 
   .product-quick-add__heading {
@@ -652,7 +652,7 @@
 
   .product-quick-add__panel {
     box-shadow:
-      0 12px 30px rgba(63, 45, 42, 0.1);
+      0 12px 30px rgba(17, 17, 17, 0.1);
   }
 
   .product-quick-add__header {

@@ -218,7 +218,7 @@
 
   box-shadow:
     0 13px 28px
-      rgba(63, 45, 42, 0.18);
+      rgba(17, 17, 17, 0.18);
 }
 
 .add-to-cart-button:hover:not(:disabled)::before {
@@ -264,7 +264,7 @@
 
   box-shadow:
     0 5px 12px
-      rgba(63, 45, 42, 0.13);
+      rgba(17, 17, 17, 0.13);
 }
 
 .add-to-cart-button:active:not(:disabled)
@@ -337,7 +337,7 @@
 
   box-shadow:
     0 10px 24px
-      rgba(63, 45, 42, 0.17);
+      rgba(17, 17, 17, 0.17);
 }
 
 .add-to-cart-button--added::before {

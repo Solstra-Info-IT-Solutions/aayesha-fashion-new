@@ -6,7 +6,7 @@
 
 :root {
   --toast-bg: var(--color-text);
-  --toast-text: #f7f3ed;
+  --toast-text: #f8f3f1;
   --toast-border: var(--color-clay-deep);
   --toast-success: var(--color-success);
   --toast-error: var(--color-error);
@@ -50,7 +50,7 @@ div[style*="z-index"] > div[role="status"] {
   color: var(--toast-text) !important;
 
   box-shadow:
-    0 10px 30px rgba(63, 45, 42, 0.18) !important;
+    0 10px 30px rgba(17, 17, 17, 0.18) !important;
 }
 
 /* =========================================================

@@ -267,7 +267,7 @@
   display: block;
   aspect-ratio: 3 / 4;
   overflow: hidden;
-  background: var(--color-surface-soft, #efe8df);
+  background: var(--color-surface-soft, #f1ebe6);
 }
 
 .orders-strip__image img {

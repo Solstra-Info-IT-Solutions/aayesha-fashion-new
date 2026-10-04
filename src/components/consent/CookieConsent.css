@@ -20,7 +20,7 @@
   border-top: 1px solid var(--color-border-dark);
 
   box-shadow:
-    0 -14px 40px rgba(63, 45, 42, 0.08);
+    0 -14px 40px rgba(17, 17, 17, 0.08);
 
 
   animation: cookie-consent-enter 420ms

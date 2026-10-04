@@ -51,8 +51,8 @@
     var(--color-border, var(--color-border));
 
   box-shadow:
-    0 30px 90px rgba(63, 45, 42, 0.22),
-    0 10px 30px rgba(63, 45, 42, 0.10);
+    0 30px 90px rgba(17, 17, 17, 0.22),
+    0 10px 30px rgba(17, 17, 17, 0.10);
 
   animation:
     add-to-bag-dialog-in
@@ -333,7 +333,7 @@
 
   box-shadow:
     0 5px 16px
-      rgba(63, 45, 42, 0.08);
+      rgba(17, 17, 17, 0.08);
 }
 
 .add-to-bag-popup__image::after {
@@ -558,7 +558,7 @@
 
   box-shadow:
     0 9px 20px
-      rgba(63, 45, 42, 0.10);
+      rgba(17, 17, 17, 0.10);
 }
 
 .add-to-bag-popup__continue:hover::before {
@@ -622,7 +622,7 @@
 
   box-shadow:
     0 13px 28px
-      rgba(63, 45, 42, 0.18);
+      rgba(17, 17, 17, 0.18);
 }
 
 .add-to-bag-popup__view-bag:hover::before {
@@ -724,7 +724,7 @@
 
     box-shadow:
       0 -20px 65px
-        rgba(63, 45, 42, 0.18);
+        rgba(17, 17, 17, 0.18);
 
     animation-name:
       add-to-bag-sheet-in;

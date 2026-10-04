@@ -257,7 +257,7 @@ export const metadata: Metadata = {
 
   other: {
     "theme-color":
-      "#f7f3ed",
+      "#f8f3f1",
 
     "color-scheme":
       "light",
@@ -303,14 +303,14 @@ export default function RootLayout({
 
             style: {
               background:
-                "#3f2d2a",
+                "#171516",
 
-              color: "#f7f3ed",
+              color: "#f8f3f1",
 
               borderRadius: "0",
 
               borderLeft:
-                "2px solid #b39a79",
+                "2px solid #b79a6a",
 
               fontSize: "12px",
 

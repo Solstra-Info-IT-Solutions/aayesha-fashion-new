@@ -201,7 +201,7 @@
   background: var(--color-accent-dark, var(--color-text));
 
   box-shadow:
-    0 10px 28px rgba(63, 45, 42, 0.16);
+    0 10px 28px rgba(17, 17, 17, 0.16);
 }
 
 .product-purchase__add-button:active:not(:disabled) {

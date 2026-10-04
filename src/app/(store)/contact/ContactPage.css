@@ -37,7 +37,7 @@
   width: 540px;
   height: 540px;
 
-  border: 1px solid rgba(122, 86, 80, 0.12);
+  border: 1px solid rgba(183, 154, 106, 0.12);
   border-radius: 50%;
 
   content: "";
@@ -266,7 +266,7 @@
 .contact__method:hover {
   border-color: var(--color-clay);
 
-  box-shadow: 0 16px 36px rgba(63, 45, 42, 0.08);
+  box-shadow: 0 16px 36px rgba(17, 17, 17, 0.08);
 
   transform: translateY(-3px);
 }

@@ -5,18 +5,18 @@
    ========================================================= */
 
 .product-detail {
-  --pd-bg: var(--color-background, #f8f5f2);
+  --pd-bg: var(--color-background, #f8f3f1);
   --pd-surface: var(--color-surface, #fbf8f5);
   --pd-surface-soft: var(--color-surface-soft);
 
-  --pd-text: var(--color-text, #3f2d2a);
-  --pd-text-secondary: var(--color-text-secondary, #6f625d);
+  --pd-text: var(--color-text, #171516);
+  --pd-text-secondary: var(--color-text-secondary, #5f5852);
   --pd-text-muted: var(--color-text-muted, #8d817b);
 
   --pd-accent: var(--color-clay);
-  --pd-accent-dark: var(--color-accent-dark, #3f2d2a);
+  --pd-accent-dark: var(--color-accent-dark, #171516);
 
-  --pd-border: var(--color-border, #d9cbc5);
+  --pd-border: var(--color-border, #ddd3ca);
   --pd-border-dark: var(--color-border-dark, #b9a7a0);
 
   width: 100%;
@@ -1335,7 +1335,7 @@
 @media (hover: hover) and (pointer: fine) {
   .product-detail__gallery-main:hover {
     box-shadow:
-      0 18px 50px rgba(63, 45, 42, 0.08);
+      0 18px 50px rgba(17, 17, 17, 0.08);
   }
 
   .product-detail__related-link:hover svg {

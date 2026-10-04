@@ -158,7 +158,7 @@
 
   background: var(--color-surface-muted);
 
-  box-shadow: 0 24px 60px rgba(63, 45, 42, 0.16);
+  box-shadow: 0 24px 60px rgba(17, 17, 17, 0.16);
 }
 
 .collection-landing__media-image {

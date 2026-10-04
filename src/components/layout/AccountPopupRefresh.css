@@ -12,7 +12,7 @@
 
   background: var(--color-surface);
 
-  box-shadow: 0 24px 70px rgba(63, 45, 42, 0.18);
+  box-shadow: 0 24px 70px rgba(17, 17, 17, 0.18);
 }
 
 .account-popup .account-popup__accent {
