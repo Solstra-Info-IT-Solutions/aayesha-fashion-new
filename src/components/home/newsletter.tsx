@@ -1,8 +1,8 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { Check } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
+import { siteConfig } from "@/config/site";
 import { Container } from "@/components/shared/container";
 import type { HomepageNewsletter } from "@/types/homepage";
 
@@ -16,23 +16,13 @@ interface NewsletterProps {
 export function Newsletter({
   data,
 }: NewsletterProps) {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(
-    event: FormEvent<HTMLFormElement>
-  ) {
-    event.preventDefault();
-
-    const trimmedEmail = email.trim();
-
-    if (!trimmedEmail) {
-      return;
-    }
-
-    setSubmitted(true);
-    setEmail("");
-  }
+  /*
+   * Updates are delivered over WhatsApp: the visitor sends us a message, which is a real,
+   * verifiable opt-in. (The previous email box did not send the address anywhere.)
+   */
+  const joinHref = `${siteConfig.social.whatsapp}?text=${encodeURIComponent(
+    "Hi Aayesha Fashion, please add me to your Private Edit updates (new collections and offers).",
+  )}`;
 
   return (
     <section
@@ -68,70 +58,23 @@ export function Newsletter({
           ========================================= */}
 
           <div className="newsletter__form-wrapper">
-            {submitted ? (
-              <div className="newsletter__success">
-                <span className="newsletter__success-icon">
-                  <Check
-                    size={16}
-                    strokeWidth={1.5}
-                    aria-hidden="true"
-                  />
-                </span>
+            <a
+              href={joinHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="newsletter__button newsletter__button--link"
+            >
+              <MessageCircle
+                size={16}
+                strokeWidth={1.5}
+                aria-hidden="true"
+              />
+              Join on WhatsApp
+            </a>
 
-                <div>
-                  <p className="newsletter__success-title">
-                    Welcome to the Private Edit.
-                  </p>
-
-                  <p className="newsletter__success-description">
-                    You&apos;re now part of Ayesha Fashion.
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <>
-                <form
-                  onSubmit={handleSubmit}
-                  className="newsletter__form"
-                >
-                  <div className="newsletter__field">
-                    <label
-                      htmlFor="newsletter-email"
-                      className="newsletter__label"
-                    >
-                      Email Address
-                    </label>
-
-                    <input
-                      id="newsletter-email"
-                      name="email"
-                      type="email"
-                      value={email}
-                      onChange={(event) =>
-                        setEmail(event.target.value)
-                      }
-                      placeholder={
-                        data.inputPlaceholder
-                      }
-                      autoComplete="email"
-                      required
-                      className="newsletter__input"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="newsletter__button"
-                  >
-                    {data.buttonLabel}
-                  </button>
-                </form>
-
-                <p className="newsletter__disclaimer">
-                  {data.disclaimer}
-                </p>
-              </>
-            )}
+            <p className="newsletter__disclaimer">
+              {data.disclaimer}
+            </p>
           </div>
 
           {/* =========================================

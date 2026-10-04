@@ -645,7 +645,7 @@
 .content-page__help-eyebrow {
   margin: 0 0 12px;
 
-  color: var(--color-text-light);
+  color: var(--color-accent-light);
 
   font-size: 10px;
   font-weight: 700;

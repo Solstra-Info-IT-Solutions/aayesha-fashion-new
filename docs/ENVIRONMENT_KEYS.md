@@ -13,9 +13,10 @@ Companion document for the admin panel and the backend keys: `aayesha-fashion-ad
 | --- | --- | --- | --- | --- |
 | `NEXT_PUBLIC_API_BASE_URL` | **Yes (production)** | `src/lib/api.ts` — base URL of every API call | Falls back to `http://localhost:5000/api`, so the live site cannot reach the backend | Implemented |
 | `BACKEND_URL` | Local dev only | `next.config.mjs` — target of the `/api/*` rewrite | Defaults to `http://localhost:4000` | Implemented |
-| `NEXT_PUBLIC_SITE_URL` | Recommended | Product page canonical URL / JSON-LD | Falls back to `https://aayeshafashion.in` | Implemented |
+| `NEXT_PUBLIC_SITE_URL` | **Yes at go-live** | `config/site.ts`: canonical, sitemap, Open Graph, product JSON-LD | Falls back to `https://aayeshafashion.in` | Implemented |
 | `NEXT_PUBLIC_ENABLE_ONLINE_PAYMENT` | No | `src/config/site.ts` — shows the Razorpay option at checkout when `"true"` | Option hidden (store currently takes payment through the WhatsApp bill) | UI implemented; **not tested with real Razorpay keys** |
 | `NEXT_PUBLIC_ENABLE_COD` | No | `src/config/site.ts` — shows Cash on Delivery when `"true"` | Option hidden. The backend must also have `COD_ENABLED=true` or it rejects COD orders | Implemented |
+| `NEXT_PUBLIC_ALLOW_INDEXING` | **Yes at go-live** | `src/config/site.ts`, `robots.ts`, metadata — `"true"` lets search engines index the site | Site sends `noindex` and `Disallow: /` (safe default for staging / previews) | Implemented; **turn on only for the live domain** |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | No | `analytics-scripts.tsx` — Google Analytics 4 | No GA script loaded | Implemented (consent-gated); **ID not set** |
 | `NEXT_PUBLIC_META_PIXEL_ID` | No | `analytics-scripts.tsx` — Meta Pixel | No pixel loaded | Implemented (consent-gated); **ID not set** |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | No | `app/layout.tsx` meta tag | Tag omitted | Implemented; **token not set** |

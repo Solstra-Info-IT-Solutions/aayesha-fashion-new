@@ -2,6 +2,9 @@ const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ||
   "http://localhost:5000/api";
 
+/** Longest we wait for the API before giving up (a cold-starting server can take a while). */
+const REQUEST_TIMEOUT_MS = 30_000;
+
 /* =========================================================
    TYPES
 ========================================================= */
@@ -85,22 +88,69 @@ async function apiFetch<T>(
     );
   }
 
-  const response = await fetch(
-    `${API_BASE_URL}${endpoint}`,
-    {
-      ...fetchOptions,
+  /*
+   * Never wait forever: a sleeping or unreachable API must end in a clear message, not a page
+   * that spins until the platform gives up.
+   */
+  const controller = new AbortController();
 
-      headers,
-
-      /*
-       * Required for the HTTP-only refresh-token
-       * cookie created by the backend.
-       */
-      credentials: "include",
-
-      cache: "no-store",
-    },
+  const timeout = setTimeout(
+    () => controller.abort(),
+    REQUEST_TIMEOUT_MS,
   );
+
+  const callerSignal = fetchOptions.signal;
+
+  if (callerSignal) {
+    if (callerSignal.aborted) {
+      controller.abort();
+    } else {
+      callerSignal.addEventListener(
+        "abort",
+        () => controller.abort(),
+        { once: true },
+      );
+    }
+  }
+
+  let response: Response;
+
+  try {
+    response = await fetch(
+      `${API_BASE_URL}${endpoint}`,
+      {
+        ...fetchOptions,
+
+        headers,
+
+        signal: controller.signal,
+
+        /*
+         * Required for the HTTP-only refresh-token
+         * cookie created by the backend.
+         */
+        credentials: "include",
+
+        cache: "no-store",
+      },
+    );
+  } catch (error) {
+    if (callerSignal?.aborted) {
+      throw error;
+    }
+
+    throw new ApiError(
+      controller.signal.aborted
+        ? "The store is taking too long to respond. Please try again in a moment."
+        : "We could not reach the store. Please check your connection and try again.",
+      0,
+      controller.signal.aborted
+        ? "REQUEST_TIMEOUT"
+        : "NETWORK_ERROR",
+    );
+  } finally {
+    clearTimeout(timeout);
+  }
 
   /* =======================================================
      RESPONSE PARSING

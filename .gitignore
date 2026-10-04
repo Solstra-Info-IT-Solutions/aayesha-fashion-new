@@ -11,3 +11,7 @@ out/
 
 # Historical Prisma files are not used by the MongoDB/Express application.
 prisma/
+
+# Playwright
+test-results/
+playwright-report/

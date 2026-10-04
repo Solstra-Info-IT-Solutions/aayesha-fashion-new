@@ -122,9 +122,16 @@ export interface PromotionalBannerCampaign {
 export async function getFeaturedCollectionCampaign(): Promise<
   FeaturedCollectionCampaign | null
 > {
-  return apiFetch<FeaturedCollectionCampaign | null>(
-    "/marketing/featured-collection",
-  );
+  try {
+    return await apiFetch<FeaturedCollectionCampaign | null>(
+      "/marketing/featured-collection",
+    );
+  } catch (error) {
+    // A missing banner must never take the whole home page (or a deployment build) down.
+    console.error("FEATURED COLLECTION API ERROR:", error);
+
+    return null;
+  }
 }
 
 /* =========================================================
@@ -134,7 +141,13 @@ export async function getFeaturedCollectionCampaign(): Promise<
 export async function getPromotionalBanner(): Promise<
   PromotionalBannerCampaign | null
 > {
-  return apiFetch<PromotionalBannerCampaign | null>(
-    "/marketing/promotional-banner",
-  );
+  try {
+    return await apiFetch<PromotionalBannerCampaign | null>(
+      "/marketing/promotional-banner",
+    );
+  } catch (error) {
+    console.error("PROMOTIONAL BANNER API ERROR:", error);
+
+    return null;
+  }
 }

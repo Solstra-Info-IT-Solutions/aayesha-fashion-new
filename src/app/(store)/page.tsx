@@ -24,6 +24,7 @@ import { RecentlyViewed } from "@/components/recently-viewed/recently-viewed";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
 
 export const metadata: Metadata = {
+  title: "Contemporary Indian Womenswear",
   alternates: {
     canonical: "/",
     languages: {

@@ -1296,13 +1296,10 @@ export function ProductDetail({
                         ?.description ? (
                         <div
                           className="product-detail__description"
-                          dangerouslySetInnerHTML={{
-                            __html:
-                              safeProduct
-                                .content
-                                .description,
-                          }}
-                        />
+                          style={{ whiteSpace: "pre-line" }}
+                        >
+                          {safeProduct.content.description}
+                        </div>
                       ) : (
                         <p className="product-detail__empty-copy">
                           Description will be
