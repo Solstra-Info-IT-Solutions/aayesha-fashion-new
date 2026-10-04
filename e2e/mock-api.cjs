@@ -1,3 +1,5 @@
+/* eslint-disable */
+/* Throw-away API stand-in for the end-to-end tests. Never deployed. */
 const http=require('http');
 const imgs=['Farshi-Shalwar-Suit/IMG-20260824-WA0055.jpg','Frock-Suit/IMG-20260824-WA0019.jpg','Garara-Suit/IMG-20260824-WA0003.jpg','Gown/IMG-20260824-WA0015.jpg','Lehnga/IMG-20260824-WA0004.jpg','Pant-Suit/IMG-20260824-WA0021.jpg','Plazo-Suit/IMG-20260824-WA0017.jpg','Sharara-Suit/IMG-20260824-WA0016.jpg'];
 const names=['Ivory Noor Kurta Set','Rosewater Frock Suit','Champagne Garara Set','Dusk Embroidered Gown','Clay Lehenga Set','Sand Pant Suit','Mulmul Plazo Suit','Sharara With Dupatta'];
