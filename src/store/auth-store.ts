@@ -31,7 +31,7 @@ export type AuthUser = {
 
 type RegisterResponse = {
   user: AuthUser;
-  requiresEmailVerification: true;
+  requiresEmailVerification: false;
 };
 
 type LoginResponse = {

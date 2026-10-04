@@ -64,7 +64,7 @@ export function OtpLoginForm() {
       setInfo(
         result.channel === "email"
           ? "We have emailed a 6-digit OTP to you."
-          : "If this number is registered, a 6-digit OTP has been sent by SMS.",
+          : "If this number is registered, a 6-digit OTP has been sent to its WhatsApp.",
       );
     } catch (requestError) {
       setError(
@@ -220,8 +220,8 @@ export function OtpLoginForm() {
       </button>
 
       <p className="otp-login__hint">
-        New here? Enter your email and we will create your account when you
-        verify the OTP.
+        Mobile OTPs are sent to your WhatsApp. New here? Enter your email and we
+        will create your account when you verify the OTP.
       </p>
     </form>
   );

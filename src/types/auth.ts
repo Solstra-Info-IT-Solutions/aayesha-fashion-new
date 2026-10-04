@@ -45,7 +45,7 @@ export type RegisterPayload = {
 export type RegisterResponse = {
   user: AuthUser;
 
-  requiresEmailVerification: true;
+  requiresEmailVerification: false;
 };
 
 /* =========================================================

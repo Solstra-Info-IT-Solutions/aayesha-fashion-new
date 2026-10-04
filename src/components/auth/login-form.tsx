@@ -17,7 +17,6 @@ import {
   Mail,
 } from "lucide-react";
 
-import { ApiError } from "@/lib/api";
 import { useAuthStore } from "@/store/auth-store";
 
 import "./LoginForm.css";
@@ -123,19 +122,10 @@ export function LoginForm() {
         top: 0,
         behavior: "auto",
       });
-    } catch (error) {
-      if (
-        error instanceof ApiError &&
-        error.code === "EMAIL_NOT_VERIFIED"
-      ) {
-        router.replace(
-          `/verify-email?email=${encodeURIComponent(
-            email.trim(),
-          )}`,
-        );
-
-        return;
-      }
+    } catch {
+      /*
+       * The auth store already holds the API error.
+       */
     }
   };
 

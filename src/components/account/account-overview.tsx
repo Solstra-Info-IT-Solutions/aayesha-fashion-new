@@ -217,8 +217,9 @@ export function AccountOverview() {
     {
       id: "email",
       done: user.emailVerified,
-      label: "Verify your email",
+      label: "Verify your email (optional)",
       benefit: "Secure account and order emails",
+      href: "/account",
     },
     {
       id: "phone",

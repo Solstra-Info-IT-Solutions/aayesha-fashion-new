@@ -61,6 +61,22 @@ test.describe("critical journeys", () => {
     await expect(page.getByText(/AF-1001/).first()).toBeVisible();
   });
 
+  test("an unverified customer can use the account and verify the email from the profile", async ({ page }) => {
+    await page.goto("/account");
+    await expect(page.getByText("Aisha Khan").first()).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText(/email not verified \(optional\)/i)).toBeVisible();
+    await page.getByRole("button", { name: /verify email/i }).click();
+    await page.getByLabel(/enter the code sent to/i).fill("123456");
+    await page.getByRole("button", { name: /^confirm$/i }).click();
+    await expect(page.getByText(/your email is verified/i).first()).toBeVisible();
+  });
+
+  test("OTP login explains that mobile codes arrive on WhatsApp", async ({ page }) => {
+    await page.goto("/login");
+    await page.getByRole("tab", { name: /otp/i }).click().catch(() => undefined);
+    await expect(page.getByText(/sent to your whatsapp/i)).toBeVisible();
+  });
+
   test("login form rejects an invalid email without calling the server", async ({ page }) => {
     await page.goto("/login?x=1");
     await page.getByLabel(/email address/i).first().fill("not-an-email");
