@@ -21,8 +21,8 @@
   --ha-border: var(--color-border);
   --ha-border-strong: var(--color-border-dark);
 
-  --ha-accent: var(--color-secondary);
-  --ha-accent-dark: var(--color-clay-deep);
+  --ha-accent: var(--color-primary);
+  --ha-accent-dark: var(--color-primary);
   --ha-accent-soft: var(--color-accent-soft);
 
   --ha-shadow-sm:
@@ -200,7 +200,7 @@
 
   border-radius: 2px;
 
-  background: var(--ha-accent);
+  background: var(--color-accent);
 
   opacity: 0;
 
