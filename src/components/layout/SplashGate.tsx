@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import BrandIntro from "./BrandIntro";
 import BrandLoader from "./BrandLoader";
+import OccasionChooser from "./OccasionChooser";
 
 import "./SplashGate.css";
 
@@ -16,7 +17,7 @@ import "./SplashGate.css";
  * standard loader instead. Add ?intro=0 to the address to skip the film (handy while developing).
  */
 
-type Choice = "pending" | "intro" | "loader" | "none";
+type Choice = "pending" | "intro" | "occasion" | "loader" | "none";
 
 function decide(): Choice {
   try {
@@ -63,7 +64,20 @@ export default function SplashGate() {
   }, []);
 
   if (choice === "intro") {
-    return <BrandIntro onDone={() => setChoice("none")} />;
+    // On the home page the film leads into "What are you dressing for?"; on any other page
+    // (a shared product link, say) it simply fades out into the page that was asked for.
+    const onHome = window.location.pathname === "/";
+
+    return (
+      <BrandIntro
+        onDone={() => setChoice(onHome ? "occasion" : "none")}
+        handOff={onHome}
+      />
+    );
+  }
+
+  if (choice === "occasion") {
+    return <OccasionChooser onDone={() => setChoice("none")} />;
   }
 
   if (choice === "loader") {

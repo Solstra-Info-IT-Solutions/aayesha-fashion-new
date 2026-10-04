@@ -1,0 +1,374 @@
+/* =========================================================
+   OCCASION CHOOSER — "What are you dressing for?"
+   Obsidian screen, ivory type, champagne accents.
+   ========================================================= */
+
+.occasion {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  height: 100dvh;
+  padding: clamp(20px, 4vh, 44px) clamp(16px, 4vw, 56px) clamp(16px, 3vh, 32px);
+  gap: clamp(14px, 3vh, 32px);
+
+  overflow: hidden;
+  background: #111111;
+  color: #f8f3f1;
+
+  opacity: 1;
+  transition: opacity 800ms ease;
+}
+
+.occasion--leaving {
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: 700ms;
+}
+
+.occasion__header {
+  text-align: center;
+  flex: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 900ms ease, transform 900ms ease;
+}
+
+.occasion--ready .occasion__header {
+  opacity: 1;
+  transform: none;
+}
+
+.occasion__eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.68rem;
+  letter-spacing: 0.42em;
+  color: #b79a6a;
+}
+
+.occasion__title {
+  margin: 0;
+  font-family: var(--font-display, "Cormorant Garamond", serif);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3.6vw, 3rem);
+  letter-spacing: 0.02em;
+  color: #f8f3f1;
+}
+
+/* ---------------------------------------------------------
+   CARDS
+--------------------------------------------------------- */
+
+.occasion__cards {
+  flex: 1;
+  min-height: 0;
+  width: min(1280px, 100%);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  display: flex;
+  gap: clamp(8px, 1.2vw, 16px);
+}
+
+.occasion__item {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    flex-grow 900ms cubic-bezier(0.22, 0.8, 0.2, 1),
+    opacity 700ms ease,
+    transform 800ms cubic-bezier(0.22, 0.8, 0.2, 1);
+  transition-delay: 0ms, calc(var(--i) * 120ms + 150ms), calc(var(--i) * 120ms + 150ms);
+}
+
+.occasion--ready .occasion__item {
+  opacity: 1;
+  transform: none;
+}
+
+.occasion__card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  background: #1c1916;
+  isolation: isolate;
+}
+
+.occasion__card:focus-visible {
+  outline: 1px solid #b79a6a;
+  outline-offset: 3px;
+}
+
+.occasion__image {
+  position: absolute;
+  inset: -4%;
+  z-index: 0;
+  background-size: cover;
+  background-position: 50% 30%;
+  transform: scale(1);
+  transition:
+    transform 1400ms cubic-bezier(0.22, 0.8, 0.2, 1),
+    filter 700ms ease;
+  filter: saturate(0.85) brightness(0.82);
+}
+
+/* a slow drifting light across the cloth */
+.occasion__sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(248, 243, 241, 0.18) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+}
+
+.occasion__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(17, 17, 17, 0.88) 0%,
+    rgba(17, 17, 17, 0.1) 55%,
+    rgba(17, 17, 17, 0.25) 100%
+  );
+}
+
+.occasion__text {
+  position: absolute;
+  left: clamp(16px, 2vw, 28px);
+  right: clamp(16px, 2vw, 28px);
+  bottom: clamp(16px, 3vh, 30px);
+  z-index: 3;
+
+  display: grid;
+  gap: 6px;
+}
+
+.occasion__index {
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  color: #b79a6a;
+}
+
+.occasion__label {
+  font-family: var(--font-display, "Cormorant Garamond", serif);
+  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  transition:
+    letter-spacing 800ms cubic-bezier(0.22, 0.8, 0.2, 1),
+    font-style 0ms,
+    font-size 800ms ease,
+    color 600ms ease;
+}
+
+.occasion__note,
+.occasion__cta {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(8px);
+  transition:
+    max-height 700ms ease,
+    opacity 600ms ease,
+    transform 700ms ease;
+}
+
+.occasion__note {
+  font-size: 0.86rem;
+  color: #d8d0c2;
+}
+
+.occasion__cta {
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #b79a6a;
+}
+
+/* ---------------------------------------------------------
+   HOVER — the card becomes dominant, the others recede
+--------------------------------------------------------- */
+
+@media (hover: hover) and (min-width: 721px) {
+  .occasion__cards:not(.occasion__cards--chosen):has(.occasion__item:hover) .occasion__item:not(:hover),
+  .occasion__cards:not(.occasion__cards--chosen):has(.occasion__card:focus-visible) .occasion__item:not(:has(.occasion__card:focus-visible)) {
+    opacity: 0.4;
+    filter: saturate(0.6);
+  }
+
+  .occasion__cards:not(.occasion__cards--chosen):has(.occasion__item:hover) .occasion__item:not(:hover) .occasion__label {
+    letter-spacing: 0.1em;
+    font-size: 1.3rem;
+  }
+
+  .occasion__cards:not(.occasion__cards--chosen) .occasion__item:hover,
+  .occasion__cards:not(.occasion__cards--chosen) .occasion__item:has(.occasion__card:focus-visible) {
+    flex-grow: 2.6;
+    opacity: 1;
+    filter: none;
+  }
+}
+
+.occasion__card:hover .occasion__image,
+.occasion__card:focus-visible .occasion__image {
+  transform: scale(1.09) translate3d(-1.2%, -1%, 0);
+  filter: saturate(1.05) brightness(1);
+}
+
+.occasion__card:hover .occasion__sheen,
+.occasion__card:focus-visible .occasion__sheen {
+  animation: occasion-sheen 2600ms ease-in-out infinite;
+}
+
+.occasion__card:hover .occasion__label,
+.occasion__card:focus-visible .occasion__label {
+  letter-spacing: 0.12em;
+  font-style: italic;
+  text-transform: none;
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  color: #f8f3f1;
+}
+
+.occasion__card:hover .occasion__note,
+.occasion__card:hover .occasion__cta,
+.occasion__card:focus-visible .occasion__note,
+.occasion__card:focus-visible .occasion__cta {
+  max-height: 3em;
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes occasion-sheen {
+  0% { transform: translateX(-120%); }
+  60%, 100% { transform: translateX(120%); }
+}
+
+/* Touch / small screens: stacked rows, copy always visible */
+@media (max-width: 720px), (hover: none) {
+  .occasion__cards {
+    flex-direction: column;
+  }
+
+  .occasion__note {
+    max-height: 3em;
+    opacity: 1;
+    transform: none;
+  }
+
+  .occasion__label {
+    font-size: clamp(1.4rem, 6vw, 1.9rem);
+  }
+}
+
+/* ---------------------------------------------------------
+   SKIP
+--------------------------------------------------------- */
+
+.occasion__skip {
+  flex: none;
+  padding: 8px 14px;
+  border: 0;
+  background: transparent;
+  color: #d8d0c2;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: color 300ms ease, opacity 300ms ease;
+}
+
+.occasion__skip:hover,
+.occasion__skip:focus-visible {
+  color: #b79a6a;
+  opacity: 1;
+  outline: none;
+}
+
+/* ---------------------------------------------------------
+   TAKEOVER — the chosen picture grows to fill the screen
+--------------------------------------------------------- */
+
+.occasion__takeover {
+  position: fixed;
+  z-index: 5;
+  overflow: hidden;
+  background: #111111;
+  transition:
+    top 900ms cubic-bezier(0.7, 0, 0.2, 1),
+    left 900ms cubic-bezier(0.7, 0, 0.2, 1),
+    width 900ms cubic-bezier(0.7, 0, 0.2, 1),
+    height 900ms cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.occasion__takeover--full {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+}
+
+.occasion__takeover-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: 50% 30%;
+  transform: scale(1.04);
+}
+
+.occasion__takeover--full .occasion__takeover-image {
+  transform: scale(1.12);
+  transition: transform 3000ms ease-out;
+}
+
+.occasion__takeover-label {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  font-family: var(--font-display, "Cormorant Garamond", serif);
+  font-style: italic;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  letter-spacing: 0.1em;
+  color: #f8f3f1;
+  text-shadow: 0 2px 30px rgba(17, 17, 17, 0.6);
+  opacity: 0;
+  transition: opacity 600ms ease 400ms;
+}
+
+.occasion__takeover--full .occasion__takeover-label {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .occasion *,
+  .occasion {
+    transition-duration: 1ms !important;
+    animation: none !important;
+  }
+}

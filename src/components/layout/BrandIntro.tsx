@@ -7,6 +7,8 @@ import "./BrandIntro.css";
 interface BrandIntroProps {
   /** Called once the intro has fully faded out (or was skipped). */
   onDone: () => void;
+  /** True when another full-screen step follows; skips the fade so the site never shows through. */
+  handOff?: boolean;
 }
 
 /*
@@ -26,7 +28,7 @@ const EXIT_FADE_MS = 900;
 /** If the film has not started playing by then, skip straight to the brand reveal. */
 const FILM_START_TIMEOUT = 3500;
 
-export default function BrandIntro({ onDone }: BrandIntroProps) {
+export default function BrandIntro({ onDone, handOff = false }: BrandIntroProps) {
   const [phase, setPhase] = useState<"film" | "brand" | "tagline">("film");
   const [filmFaded, setFilmFaded] = useState(false);
   const [leaving, setLeaving] = useState(false);
@@ -46,10 +48,17 @@ export default function BrandIntro({ onDone }: BrandIntroProps) {
 
     finished.current = true;
     clearTimers();
+
+    if (handOff) {
+      onDone();
+
+      return;
+    }
+
     setLeaving(true);
 
     timers.current.push(setTimeout(onDone, EXIT_FADE_MS));
-  }, [onDone]);
+  }, [onDone, handOff]);
 
   /** Starts the timeline. `withFilm` is false when the film could not play. */
   const run = useCallback(
