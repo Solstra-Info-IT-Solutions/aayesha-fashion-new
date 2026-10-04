@@ -424,3 +424,12 @@
     transition: none;
   }
 }
+/* WhatsApp opt-in button (replaces the email box) */
+
+.newsletter__button--link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+}
