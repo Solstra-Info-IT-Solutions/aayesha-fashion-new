@@ -39,7 +39,7 @@
 
   color: var(--mf-text);
 
-  box-shadow: 0 1px 0 rgba(63, 45, 42, 0.02);
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.02);
 
   overflow: visible;
 }
@@ -82,7 +82,7 @@
   border-bottom-color: var(--mf-border);
 
   box-shadow:
-    0 4px 18px rgba(63, 45, 42, 0.06);
+    0 4px 18px rgba(17, 17, 17, 0.06);
 
 }
 /* =========================================================
@@ -473,7 +473,7 @@
 
   border: 0;
 
-  background: rgba(63, 45, 42, 0.35);
+  background: rgba(17, 17, 17, 0.35);
 
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
@@ -499,7 +499,7 @@
   border-bottom: 1px solid var(--mf-border);
 
   box-shadow:
-    0 12px 32px rgba(63, 45, 42, 0.10);
+    0 12px 32px rgba(17, 17, 17, 0.10);
 }
 /* =========================================================
    SEARCH ACCENT
@@ -751,7 +751,7 @@
     border-bottom-color: var(--mf-border);
 
     box-shadow:
-      0 3px 14px rgba(63, 45, 42, 0.055);
+      0 3px 14px rgba(17, 17, 17, 0.055);
 
     backdrop-filter: none;
     -webkit-backdrop-filter: none;

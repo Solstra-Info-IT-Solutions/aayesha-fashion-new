@@ -37,7 +37,7 @@
 
   background: var(--color-surface);
 
-  box-shadow: 0 10px 30px rgba(63, 45, 42, 0.07);
+  box-shadow: 0 10px 30px rgba(17, 17, 17, 0.07);
 
   transition:
     border-color 200ms ease,
@@ -48,8 +48,8 @@
   border-color: var(--color-clay);
 
   box-shadow:
-    0 0 0 3px rgba(122, 86, 80, 0.14),
-    0 10px 30px rgba(63, 45, 42, 0.07);
+    0 0 0 3px rgba(183, 154, 106, 0.14),
+    0 10px 30px rgba(17, 17, 17, 0.07);
 }
 
 .page-search__icon {

@@ -409,7 +409,7 @@
 
   box-shadow:
     0 0 0 1px var(--gallery-accent),
-    0 7px 20px rgba(63, 45, 42, 0.09);
+    0 7px 20px rgba(17, 17, 17, 0.09);
 }
 
 .product-media-gallery__thumbnail-image {
@@ -439,7 +439,7 @@
   position: absolute;
   inset: 0;
 
-  background: rgba(63, 45, 42, 0.08);
+  background: rgba(17, 17, 17, 0.08);
 
   opacity: 0;
 
@@ -475,7 +475,7 @@
 
   border: 1px solid rgba(255, 255, 255, 0.8);
 
-  background: rgba(63, 45, 42, 0.68);
+  background: rgba(17, 17, 17, 0.68);
 
   color: #ffffff;
 

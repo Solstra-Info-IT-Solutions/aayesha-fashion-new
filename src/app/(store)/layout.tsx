@@ -47,16 +47,16 @@ export default function StoreLayout({
         toastOptions={{
           duration: 3200,
           style: {
-            background: "#3f2d2a",
-            color: "#f7f3ed",
-            border: "1px solid #543c38",
+            background: "#171516",
+            color: "#f8f3f1",
+            border: "1px solid #2b2723",
             borderRadius: "2px",
             padding: "12px 16px",
             fontFamily: "var(--font-body, sans-serif)",
             fontSize: "12px",
             fontWeight: 500,
             lineHeight: "1.4",
-            boxShadow: "0 8px 24px rgba(63, 45, 42, 0.16)",
+            boxShadow: "0 8px 24px rgba(17, 17, 17, 0.16)",
           },
         }}
       />

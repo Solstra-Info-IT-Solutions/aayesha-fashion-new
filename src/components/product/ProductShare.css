@@ -147,9 +147,9 @@
 
   box-shadow:
     0 30px 90px
-      rgba(63, 45, 42, 0.22),
+      rgba(17, 17, 17, 0.22),
     0 8px 28px
-      rgba(63, 45, 42, 0.1);
+      rgba(17, 17, 17, 0.1);
 
   transform:
     translate(-50%, -50%);

@@ -5,9 +5,9 @@
    draws itself in.
 
    Palette
-     #F7F2EB background (type)   #49352D primary (screen)
-     #806A5D secondary (frame)   #C2A78C accent
-     #28221F text (dark strip)
+     #F8F3F1 background (type)   #111111 primary (screen)
+     #5D5548 secondary (frame)   #B79A6A accent
+     #1C1916 text (dark strip)
    ========================================================= */
 
 .aayesha-loader {
@@ -26,8 +26,8 @@
   overflow: hidden;
   isolation: isolate;
 
-  background: #49352d;
-  color: #f7f2eb;
+  background: #111111;
+  color: #f8f3f1;
 
   opacity: 1;
   transition: opacity 650ms ease;
@@ -105,7 +105,7 @@
   position: absolute;
   inset: calc(var(--loader-bar) + clamp(12px, 2.2vw, 28px)) clamp(12px, 2.2vw, 28px) clamp(12px, 2.2vw, 28px);
 
-  border: 1px solid #806a5d;
+  border: 1px solid #5d5548;
   pointer-events: none;
 
   opacity: 0;
@@ -126,7 +126,7 @@
   width: 0;
   height: 0;
 
-  border: 0 solid #c2a78c;
+  border: 0 solid #b79a6a;
   pointer-events: none;
 
   animation: aayesha-loader-corner 0.7s ease 0.5s forwards;
@@ -191,13 +191,13 @@
   text-transform: uppercase;
   white-space: nowrap;
 
-  background: #28221f;
-  border-bottom: 1px solid #806a5d;
-  color: #f7f2eb;
+  background: #1c1916;
+  border-bottom: 1px solid #5d5548;
+  color: #f8f3f1;
 }
 
 .aayesha-loader__meta span:first-child {
-  color: #c2a78c;
+  color: #b79a6a;
 }
 
 .aayesha-loader__side {
@@ -210,7 +210,7 @@
   text-transform: uppercase;
   white-space: nowrap;
 
-  color: #f7f2eb;
+  color: #f8f3f1;
   opacity: 0.6;
 }
 
@@ -240,7 +240,7 @@
   text-align: center;
   text-transform: uppercase;
 
-  color: #f7f2eb;
+  color: #f8f3f1;
   opacity: 0.6;
 }
 
@@ -273,13 +273,13 @@
   letter-spacing: 0.34em;
   text-transform: uppercase;
 
-  color: #c2a78c;
+  color: #b79a6a;
 }
 
 .aayesha-loader__eyebrow span {
   width: 26px;
   height: 1px;
-  background: #c2a78c;
+  background: #b79a6a;
 }
 
 .aayesha-loader__wordmark {
@@ -293,7 +293,7 @@
   font-weight: 500;
   line-height: 0.95;
 
-  color: #f7f2eb;
+  color: #f8f3f1;
 }
 
 .aayesha-loader__letters {
@@ -315,7 +315,7 @@
   text-indent: 0.7em;
   text-transform: uppercase;
 
-  color: #c2a78c;
+  color: #b79a6a;
 }
 
 .aayesha-loader__rule {
@@ -327,7 +327,7 @@
   background: linear-gradient(
     to right,
     transparent,
-    #c2a78c,
+    #b79a6a,
     transparent
   );
 }
@@ -340,7 +340,7 @@
   font-style: italic;
   letter-spacing: 0.02em;
 
-  color: #f7f2eb;
+  color: #f8f3f1;
 }
 
 /* ---------------------------------------------------------
@@ -365,12 +365,12 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
 
-  color: #f7f2eb;
+  color: #f8f3f1;
 }
 
 .aayesha-loader__percent {
   font-variant-numeric: tabular-nums;
-  color: #f7f2eb;
+  color: #f8f3f1;
 }
 
 .aayesha-loader__track {
@@ -379,14 +379,14 @@
   height: 2px;
   overflow: hidden;
 
-  background: #806a5d;
+  background: #5d5548;
 }
 
 .aayesha-loader__bar {
   position: absolute;
   inset: 0 auto 0 0;
 
-  background: #c2a78c;
+  background: #b79a6a;
   box-shadow: 0 0 12px 1px rgba(194, 167, 140, 0.5);
 }
 

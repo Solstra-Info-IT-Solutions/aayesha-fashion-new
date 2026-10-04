@@ -873,12 +873,12 @@
 ========================================================= */
 
 .site-footer {
-  --color-text: #f3ece4;
+  --color-text: #f8f3f1;
   --color-text-secondary: #cfc2ba;
-  --color-secondary: #dcc3b8;
+  --color-secondary: #d9c7a3;
   --color-border: rgba(243, 236, 228, 0.14);
   --color-border-dark: rgba(243, 236, 228, 0.3);
-  --color-surface: #543c38;
+  --color-surface: #1c1916;
 
   border-top: 0;
 

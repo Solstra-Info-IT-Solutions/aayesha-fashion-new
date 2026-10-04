@@ -29,9 +29,9 @@ const buttonVariants = cva(
     "duration-200",
     "focus-visible:outline-none",
     "focus-visible:ring-2",
-    "focus-visible:ring-[#7a5650]",
+    "focus-visible:ring-[#b79a6a]",
     "focus-visible:ring-offset-2",
-    "focus-visible:ring-offset-[#f7f3ed]",
+    "focus-visible:ring-offset-[#f8f3f1]",
     "disabled:pointer-events-none",
   ],
   {
@@ -43,20 +43,20 @@ const buttonVariants = cva(
 
         primary: [
           "border",
-          "border-[#7a5650]",
-          "bg-[#7a5650]",
+          "border-[#111111]",
+          "bg-[#111111]",
           "text-white",
 
-          "hover:border-[#543c38]",
-          "hover:bg-[#543c38]",
+          "hover:border-[#2b2723]",
+          "hover:bg-[#2b2723]",
           "hover:text-white",
 
-          "active:border-[#654944]",
-          "active:bg-[#654944]",
+          "active:border-[#0a0a0a]",
+          "active:bg-[#0a0a0a]",
           "active:text-white",
 
-          "disabled:border-[#7a5650]",
-          "disabled:bg-[#7a5650]",
+          "disabled:border-[#111111]",
+          "disabled:bg-[#111111]",
           "disabled:text-white",
           "disabled:opacity-60",
         ],
@@ -67,16 +67,16 @@ const buttonVariants = cva(
 
         secondary: [
           "border",
-          "border-[#b9aaa1]",
+          "border-[#bdb2a7]",
           "bg-transparent",
-          "text-[#543c38]",
+          "text-[#111111]",
 
-          "hover:border-[#7a5650]",
-          "hover:bg-[#7a5650]",
+          "hover:border-[#111111]",
+          "hover:bg-[#111111]",
           "hover:text-white",
 
-          "active:bg-[#654944]",
-          "active:border-[#654944]",
+          "active:bg-[#0a0a0a]",
+          "active:border-[#0a0a0a]",
           "active:text-white",
 
           "disabled:opacity-60",
@@ -88,17 +88,17 @@ const buttonVariants = cva(
 
         rose: [
           "border",
-          "border-[#b98279]",
-          "bg-[#b98279]",
-          "text-white",
+          "border-[#b79a6a]",
+          "bg-[#b79a6a]",
+          "text-[#111111]",
 
-          "hover:border-[#95645e]",
-          "hover:bg-[#95645e]",
-          "hover:text-white",
+          "hover:border-[#a58859]",
+          "hover:bg-[#a58859]",
+          "hover:text-[#111111]",
 
-          "active:border-[#7f5953]",
-          "active:bg-[#7f5953]",
-          "active:text-white",
+          "active:border-[#8a7142]",
+          "active:bg-[#8a7142]",
+          "active:text-[#111111]",
 
           "disabled:opacity-60",
         ],
@@ -115,11 +115,11 @@ const buttonVariants = cva(
 
           "hover:border-white",
           "hover:bg-white",
-          "hover:text-[#3f2d2a]",
+          "hover:text-[#111111]",
 
           "active:border-white",
           "active:bg-white",
-          "active:text-[#3f2d2a]",
+          "active:text-[#111111]",
 
           "disabled:opacity-60",
         ],

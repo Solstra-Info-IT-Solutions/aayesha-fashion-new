@@ -66,13 +66,13 @@
   background:
     linear-gradient(
       90deg,
-      rgba(63, 45, 42, 0.42) 0%,
-      rgba(63, 45, 42, 0.12) 45%,
-      rgba(63, 45, 42, 0.18) 100%
+      rgba(17, 17, 17, 0.42) 0%,
+      rgba(17, 17, 17, 0.12) 45%,
+      rgba(17, 17, 17, 0.18) 100%
     ),
     linear-gradient(
       to top,
-      rgba(63, 45, 42, 0.3),
+      rgba(17, 17, 17, 0.3),
       transparent 45%
     );
 }
@@ -180,9 +180,9 @@
     background:
       linear-gradient(
         180deg,
-        rgba(63, 45, 42, 0.04),
-        rgba(63, 45, 42, 0.18) 48%,
-        rgba(63, 45, 42, 0.5) 100%
+        rgba(17, 17, 17, 0.04),
+        rgba(17, 17, 17, 0.18) 48%,
+        rgba(17, 17, 17, 0.5) 100%
       );
   }
 

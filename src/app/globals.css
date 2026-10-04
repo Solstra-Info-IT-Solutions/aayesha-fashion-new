@@ -5,63 +5,62 @@
 /* =========================================================
    AAYESHA — GLOBAL DESIGN SYSTEM
    Contemporary Indian Fashion
-   Theme: Dusty Rose / Clay / Espresso / Champagne
+   Theme: Obsidian / Ivory / Champagne
    ========================================================= */
 
 :root {
   /* =======================================================
-     BRAND COLORS — QUIET IVORY
-     Ivory + espresso + clay. Rose and champagne are accents
-     only, never dominant.
+     BRAND COLORS — OBSIDIAN × IVORY × CHAMPAGNE
+     Ivory pages, obsidian type and buttons, champagne accents.
      ======================================================= */
 
-  --color-primary: #3f2d2a;
-  --color-primary-hover: #543c38;
-  --color-primary-active: #2f211f;
+  --color-primary: #111111;
+  --color-primary-hover: #2b2723;
+  --color-primary-active: #000000;
 
-  --color-secondary: #7a5650;
-  --color-secondary-light: #a98282;
+  --color-secondary: #5f5852;
+  --color-secondary-light: #8f867c;
 
-  --color-accent: #b39a79;
-  --color-accent-light: #d2bea0;
+  --color-accent: #b79a6a;
+  --color-accent-light: #d9c7a3;
 
   /* Clay accent: deep clay for text/borders, soft tint for
      focus rings and subtle fills. (Previously referenced by
      ~65 rules but never defined.) */
-  --color-accent-dark: #7a5650;
-  --color-accent-soft: #e9dcd7;
+  --color-accent-dark: #111111;
+  --color-accent-soft: #efe6d6;
 
-  --color-rose: #a98282;
-  --color-clay: #7a5650;
-  --color-clay-deep: #543c38;
-  --color-burgundy: #543c38;
-  --color-espresso: #3f2d2a;
+  --color-rose: #9a5a66;
+  --color-clay: #111111;
+  --color-clay-deep: #2b2723;
+  --color-burgundy: #2b2723;
+  --color-espresso: #171516;
 
   /* Main surfaces */
 
-  --color-canvas: #f7f3ed;
-  --color-surface: #fbf9f5;
-  --color-surface-soft: #efe8df;
-  --color-surface-muted: #e8dfd4;
+  --color-canvas: #f8f3f1;
+  --color-surface: #fdfaf8;
+  --color-surface-soft: #f1ebe6;
+  --color-surface-muted: #e9e1da;
 
   /* Dark surfaces (use sparingly — footer / overlays only) */
 
-  --color-surface-dark: #3f2d2a;
-  --color-surface-dark-soft: #543c38;
+  --color-surface-dark: #111111;
+  --color-surface-dark-soft: #1c1916;
 
   /* Text */
 
-  --color-text: #3f2d2a;
-  --color-text-secondary: #70635d;
-  --color-text-muted: #958781;
-  --color-text-light: #c9bdb8;
-  --color-text-inverse: #fbf9f5;
+  --color-text: #171516;
+  --color-text-secondary: #5f5852;
+  --color-text-muted: #8c847d;
+  --color-text-light: #d8d0c2;
+  --color-text-inverse: #f8f3f1;
 
   /* Borders */
 
-  --color-border: #d8cec5;
-  --color-border-light: #e6ddd4;
-  --color-border-dark: #b9aaa1;
+  --color-border: #ddd3ca;
+  --color-border-light: #e9e1d9;
+  --color-border-dark: #bdb2a7;
 
   /* States */
 
@@ -93,30 +92,30 @@
      BUTTON COLORS
      ======================================================= */
 
-  --button-primary-bg: #7a5650;
-  --button-primary-bg-hover: #543c38;
-  --button-primary-bg-active: #654944;
-  --button-primary-text: #ffffff;
+  --button-primary-bg: #111111;
+  --button-primary-bg-hover: #2b2723;
+  --button-primary-bg-active: #000000;
+  --button-primary-text: #f8f3f1;
 
   --button-secondary-bg: transparent;
-  --button-secondary-bg-hover: #7a5650;
-  --button-secondary-bg-active: #654944;
+  --button-secondary-bg-hover: #111111;
+  --button-secondary-bg-active: #2b2723;
 
-  --button-secondary-text: #543c38;
-  --button-secondary-text-hover: #ffffff;
+  --button-secondary-text: #111111;
+  --button-secondary-text-hover: #f8f3f1;
 
-  --button-secondary-border: #b9aaa1;
+  --button-secondary-border: #bdb2a7;
 
   --button-soft-bg: var(--color-surface-soft);
-  --button-soft-bg-hover: #7a5650;
+  --button-soft-bg-hover: #111111;
 
-  --button-soft-text: #543c38;
-  --button-soft-text-hover: #ffffff;
+  --button-soft-text: #111111;
+  --button-soft-text-hover: #f8f3f1;
 
-  --button-ghost-bg-hover: rgba(122, 86, 80, 0.08);
+  --button-ghost-bg-hover: rgba(17, 17, 17, 0.06);
 
-  --focus-ring: rgba(122, 86, 80, 0.5);
-  --ring-focus: 0 0 0 3px rgba(122, 86, 80, 0.12);
+  --focus-ring: rgba(183, 154, 106, 0.75);
+  --ring-focus: 0 0 0 3px rgba(183, 154, 106, 0.28);
 
   /* Form controls */
 
@@ -289,16 +288,16 @@
      ======================================================= */
 
   --shadow-xs:
-    0 1px 3px rgba(63, 45, 42, 0.04);
+    0 1px 3px rgba(17, 17, 17, 0.04);
 
   --shadow-sm:
-    0 4px 16px rgba(63, 45, 42, 0.06);
+    0 4px 16px rgba(17, 17, 17, 0.06);
 
   --shadow-md:
-    0 12px 32px rgba(63, 45, 42, 0.09);
+    0 12px 32px rgba(17, 17, 17, 0.09);
 
   --shadow-lg:
-    0 24px 60px rgba(63, 45, 42, 0.13);
+    0 24px 60px rgba(17, 17, 17, 0.13);
 
 
   /* =======================================================
@@ -353,10 +352,10 @@
      ======================================================= */
 
   --overlay-dark:
-    rgba(63, 45, 42, 0.38);
+    rgba(17, 17, 17, 0.38);
 
   --overlay-dark-heavy:
-    rgba(63, 45, 42, 0.62);
+    rgba(17, 17, 17, 0.62);
 
   --overlay-light:
     rgba(247, 243, 237, 0.88);
