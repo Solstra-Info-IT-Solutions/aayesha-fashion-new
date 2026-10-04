@@ -4,7 +4,20 @@ export const siteConfig = {
   description:
     "Discover timeless fashion designed for elegance, confidence, and everyday beauty.",
 
-  url: "https://aayeshafashion.in",
+  /*
+   * Public address of the live store. Set NEXT_PUBLIC_SITE_URL once the real domain is
+   * attached; until then canonical / sitemap / Open Graph URLs use the default below.
+   */
+  url: (
+    process.env.NEXT_PUBLIC_SITE_URL || "https://aayeshafashion.in"
+  ).replace(/\/+$/, ""),
+
+  /*
+   * Search engines are told to stay away unless NEXT_PUBLIC_ALLOW_INDEXING=true is set on the
+   * production deployment. Preview / staging / default *.vercel.app deployments therefore
+   * can never be indexed by accident. Flip it on at go-live.
+   */
+  allowIndexing: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
 
   locale: "en_IN",
 

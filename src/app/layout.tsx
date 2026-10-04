@@ -126,12 +126,12 @@ export const metadata: Metadata = {
   ======================================================= */
 
   robots: {
-    index: true,
-    follow: true,
+    index: siteConfig.allowIndexing,
+    follow: siteConfig.allowIndexing,
 
     googleBot: {
-      index: true,
-      follow: true,
+      index: siteConfig.allowIndexing,
+      follow: siteConfig.allowIndexing,
       "max-image-preview": "large",
       "max-video-preview": -1,
       "max-snippet": -1,
@@ -297,24 +297,20 @@ export default function RootLayout({
         </AuthProvider>
 
         <Toaster
-          position="top-right"
+          position="bottom-center"
           toastOptions={{
-            duration: 2200,
-
+            duration: 3200,
             style: {
-              background:
-                "#1c1916",
-
-              color: "#111111",
-
-              borderRadius: "0",
-
-              borderLeft:
-                "2px solid #b79a6a",
-
+              background: "#1c1916",
+              color: "#f8f3f1",
+              border: "1px solid #4a443d",
+              borderRadius: "2px",
+              padding: "12px 16px",
+              fontFamily: "var(--font-body, sans-serif)",
               fontSize: "12px",
-
-              fontWeight: "600",
+              fontWeight: 500,
+              lineHeight: "1.4",
+              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.5)",
             },
           }}
         />
