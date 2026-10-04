@@ -232,3 +232,15 @@ Generated from the live route table of the backend (`npm test` boots the real Ex
 | GET | `/api/reviews/mine` | AUTH required | 401 | 500 |  |
 | GET | `/api/reviews/product/:productId` | PUBLIC | 500 | 500 |  |
 | GET | `/api/reviews/product/:productId/eligibility` | AUTH required | 401 | 500 |  |
+---
+## Narrative findings
+
+**Method:** the real Express app was booted without a database; mount paths were recovered by patching `Router.use`; each route was called anonymously and with a forged customer JWT (verification is stateless). Rate limiting, JSON/size errors and validation were exercised directly.
+
+**Verified:** 142 admin routes → 401 anonymous / 403 customer. Ownership filters on address, review, notification and order services. Razorpay verification uses `timingSafeEqual` and a webhook HMAC over the raw body; `markOrderPaid` is idempotent. Server recomputes prices, totals and coupons. Search input is regex-escaped. Production 500s hide details.
+
+**Fixed:** public `GET /orders/internal/:id` removed (P0); limiters on create-order, coupons, stock-alert, returns, payment, verify-email; order input validation; JSON/413 mapping; upload signature check; JWT algorithm pinned; crypto-random order suffix; debug logs removed.
+
+**Not verifiable here (BLOCKED — PRODUCTION CREDENTIALS REQUIRED):** live payment capture and refunds, webhook delivery, SMTP, WhatsApp, Cloudinary production behaviour, live DB indexes and data.
+
+**Open (low):** duplicate `expiresAt` index on Otp; reserved `isNew` key on Product; order validation is hand-written rather than zod; per-IP in-memory limiter resets on restart and is per-instance (acceptable on a single Render instance).
