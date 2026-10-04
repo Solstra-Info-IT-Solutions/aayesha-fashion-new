@@ -12,25 +12,25 @@ interface OccasionChooserProps {
 
 const OCCASIONS = [
   {
-    key: "wedding",
-    label: "Wedding",
-    note: "Heirloom embroidery for the big day",
-    href: "/shop/wedding-guest-outfits",
-    image: "/images/occasion/wedding.jpg",
+    key: "new-arrivals",
+    label: "New Arrivals",
+    note: "Just introduced to the collection",
+    href: "/collections/new-arrivals",
+    image: "/images/choose/new-arrivals.jpg",
+  },
+  {
+    key: "best-sellers",
+    label: "Best Sellers",
+    note: "The pieces our customers love most",
+    href: "/collections/best-sellers",
+    image: "/images/choose/best-sellers.jpg",
   },
   {
     key: "festive",
-    label: "Festive",
-    note: "Evenings made for celebration",
+    label: "Festive Edit",
+    note: "Our top category, made for celebration",
     href: "/collections/festive",
-    image: "/images/occasion/festive.jpg",
-  },
-  {
-    key: "everyday",
-    label: "Everyday",
-    note: "Quiet elegance, worn often",
-    href: "/collections/contemporary",
-    image: "/images/occasion/everyday.jpg",
+    image: "/images/choose/festive.jpg",
   },
 ] as const;
 
@@ -142,11 +142,11 @@ export default function OccasionChooser({ onDone }: OccasionChooserProps) {
       }
       role="dialog"
       aria-modal="true"
-      aria-label="Choose what you are dressing for"
+      aria-label="Choose where to begin"
     >
       <header className="occasion__header">
         <p className="occasion__eyebrow">AAYESHA FASHION</p>
-        <h2 className="occasion__title">What are you dressing for?</h2>
+        <h2 className="occasion__title">Where would you like to begin?</h2>
       </header>
 
       <ul
