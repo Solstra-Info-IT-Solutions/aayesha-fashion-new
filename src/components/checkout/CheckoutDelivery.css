@@ -7,14 +7,14 @@
   margin-top: 20px;
   padding: 26px;
 
-  border: 1px solid rgba(35, 30, 26, 0.08);
+  border: 1px solid rgba(17, 17, 17, 0.08);
   border-radius: 4px;
 
   background: var(--color-surface);
 
   box-shadow:
-    0 8px 30px rgba(35, 30, 26, 0.045),
-    0 2px 8px rgba(35, 30, 26, 0.025);
+    0 8px 30px rgba(17, 17, 17, 0.045),
+    0 2px 8px rgba(17, 17, 17, 0.025);
 }
 /* =========================================================
    HEADER
@@ -27,7 +27,7 @@
 
   padding-bottom: 22px;
 
-  border-bottom: 1px solid rgba(35, 30, 26, 0.07);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.07);
 }
 .checkout-delivery__step {
   width: 38px;
@@ -38,7 +38,7 @@
   align-items: center;
   justify-content: center;
 
-  border: 1px solid rgba(35, 30, 26, 0.1);
+  border: 1px solid rgba(17, 17, 17, 0.1);
   border-radius: 4px;
 
   background: var(--color-surface);
@@ -156,7 +156,7 @@
 
   padding: 17px;
 
-  border: 1px solid rgba(35, 30, 26, 0.09);
+  border: 1px solid rgba(17, 17, 17, 0.09);
   border-radius: 4px;
 
   background: var(--color-surface);
@@ -174,12 +174,12 @@
     transform 180ms ease;
 }
 .checkout-delivery__option:hover {
-  border-color: rgba(126, 101, 82, 0.24);
+  border-color: rgba(183, 154, 106, 0.24);
 
   background: var(--color-surface);
 
   box-shadow:
-    0 7px 20px rgba(35, 30, 26, 0.055);
+    0 7px 20px rgba(17, 17, 17, 0.055);
 
   transform: translateY(-1px);
 }
@@ -187,16 +187,16 @@
   transform: translateY(0);
 }
 .checkout-delivery__option--active {
-  border-color: rgba(126, 101, 82, 0.34);
+  border-color: rgba(183, 154, 106, 0.34);
 
   background: var(--color-surface);
 
   box-shadow:
-    0 0 0 3px rgba(126, 101, 82, 0.065),
-    0 8px 22px rgba(35, 30, 26, 0.055);
+    0 0 0 3px rgba(183, 154, 106, 0.065),
+    0 8px 22px rgba(17, 17, 17, 0.055);
 }
 .checkout-delivery__option--active:hover {
-  border-color: rgba(126, 101, 82, 0.42);
+  border-color: rgba(183, 154, 106, 0.42);
 }
 /* =========================================================
    OPTION MAIN
@@ -377,7 +377,7 @@
   align-items: center;
   justify-content: center;
 
-  border: 1px solid rgba(35, 30, 26, 0.16);
+  border: 1px solid rgba(17, 17, 17, 0.16);
   border-radius: 50%;
 
   background: var(--color-surface);
@@ -411,7 +411,7 @@
   margin-top: 14px;
   padding: 12px 13px;
 
-  border: 1px solid rgba(35, 30, 26, 0.055);
+  border: 1px solid rgba(17, 17, 17, 0.055);
   border-radius: 4px;
 
   background: var(--color-surface);
@@ -446,7 +446,7 @@
 ========================================================= */
 
 .checkout-delivery__option:focus-visible {
-  outline: 2px solid rgba(126, 101, 82, 0.45);
+  outline: 2px solid rgba(183, 154, 106, 0.45);
   outline-offset: 3px;
 }
 

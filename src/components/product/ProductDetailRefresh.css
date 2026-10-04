@@ -101,7 +101,7 @@
 
   border-radius: 8px;
 
-  background: rgba(251, 249, 245, 0.95);
+  background: rgba(248, 243, 241, 0.95);
   color: var(--color-text);
 
   font-size: 10px;
@@ -118,7 +118,7 @@
 
   border-radius: 8px;
 
-  background: rgba(251, 249, 245, 0.92);
+  background: rgba(248, 243, 241, 0.92);
   color: var(--color-text);
 }
 
@@ -133,7 +133,7 @@
   border: 0;
   border-radius: 8px;
 
-  background: rgba(251, 249, 245, 0.92);
+  background: rgba(248, 243, 241, 0.92);
   color: var(--color-text);
 
   font-size: 10px;
@@ -146,7 +146,7 @@
   border: 0;
   border-radius: 50%;
 
-  background: rgba(251, 249, 245, 0.94);
+  background: rgba(248, 243, 241, 0.94);
   color: var(--color-text);
 
   box-shadow: 0 6px 18px rgba(17, 17, 17, 0.14);
@@ -453,7 +453,7 @@
 
   border-radius: 50%;
 
-  background: rgba(40, 28, 26, 0.72);
+  background: rgba(17, 17, 17, 0.72);
   color: #ffffff;
 }
 

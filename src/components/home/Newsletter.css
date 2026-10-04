@@ -201,7 +201,7 @@
 
   border-radius: 0;
 
-  background: var(--color-secondary);
+  background: var(--color-primary);
   color: var(--color-surface);
 
   font-family: var(--font-body);

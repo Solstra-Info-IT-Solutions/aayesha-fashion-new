@@ -6,12 +6,12 @@
   width: 100%;
   margin-top: 20px;
   padding: 26px;
-  border: 1px solid rgba(35, 30, 26, 0.08);
+  border: 1px solid rgba(17, 17, 17, 0.08);
   border-radius: 4px;
   background: var(--color-surface);
   box-shadow:
-    0 8px 30px rgba(35, 30, 26, 0.045),
-    0 2px 8px rgba(35, 30, 26, 0.025);
+    0 8px 30px rgba(17, 17, 17, 0.045),
+    0 2px 8px rgba(17, 17, 17, 0.025);
 }
 /* =========================================================
    HEADER
@@ -22,7 +22,7 @@
   align-items: flex-start;
   gap: 16px;
   padding-bottom: 22px;
-  border-bottom: 1px solid rgba(35, 30, 26, 0.07);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.07);
 }
 .checkout-coupon__step {
   flex: 0 0 38px;
@@ -33,7 +33,7 @@
   align-items: center;
   justify-content: center;
 
-  border: 1px solid rgba(35, 30, 26, 0.1);
+  border: 1px solid rgba(17, 17, 17, 0.1);
   border-radius: 4px;
 
   background: var(--color-surface);
@@ -134,7 +134,7 @@
   min-height: 68px;
   padding: 10px 10px 10px 15px;
 
-  border: 1px solid rgba(35, 30, 26, 0.1);
+  border: 1px solid rgba(17, 17, 17, 0.1);
   border-radius: 4px;
 
   background: var(--color-surface);
@@ -145,12 +145,12 @@
     background-color 180ms ease;
 }
 .checkout-coupon__input-card:focus-within {
-  border-color: rgba(126, 101, 82, 0.4);
+  border-color: rgba(183, 154, 106, 0.4);
 
   background: var(--color-surface);
 
   box-shadow:
-    0 0 0 3px rgba(126, 101, 82, 0.07);
+    0 0 0 3px rgba(183, 154, 106, 0.07);
 }
 .checkout-coupon__input-card--applied {
   border-color: rgba(83, 115, 86, 0.25);
@@ -281,7 +281,7 @@
   background: var(--color-clay-deep);
 
   box-shadow:
-    0 6px 15px rgba(35, 30, 26, 0.14);
+    0 6px 15px rgba(17, 17, 17, 0.14);
 }
 .checkout-coupon__apply:active:not(:disabled) {
   transform: translateY(0);
@@ -413,7 +413,7 @@
 
   padding: 0;
 
-  border: 1px solid rgba(35, 30, 26, 0.08);
+  border: 1px solid rgba(17, 17, 17, 0.08);
   border-radius: 2px;
 
   background: var(--color-surface);
@@ -427,7 +427,7 @@
     background-color 160ms ease;
 }
 .checkout-coupon__remove:hover:not(:disabled) {
-  border-color: rgba(126, 101, 82, 0.2);
+  border-color: rgba(183, 154, 106, 0.2);
   background: var(--color-canvas);
   color: var(--color-text);
 }
@@ -447,7 +447,7 @@
   margin-top: 14px;
   padding: 12px 13px;
 
-  border: 1px solid rgba(35, 30, 26, 0.055);
+  border: 1px solid rgba(17, 17, 17, 0.055);
   border-radius: 4px;
 
   background: var(--color-surface);
@@ -484,7 +484,7 @@
 .checkout-coupon__apply:focus-visible,
 .checkout-coupon__remove:focus-visible,
 .checkout-coupon__input:focus-visible {
-  outline: 2px solid rgba(126, 101, 82, 0.45);
+  outline: 2px solid rgba(183, 154, 106, 0.45);
   outline-offset: 2px;
 }
 

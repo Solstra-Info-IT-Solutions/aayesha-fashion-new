@@ -135,8 +135,8 @@
   background:
     linear-gradient(
       to top,
-      rgba(51, 37, 34, 0.3),
-      rgba(51, 37, 34, 0) 45%
+      rgba(17, 17, 17, 0.3),
+      rgba(17, 17, 17, 0) 45%
     );
 }
 
@@ -146,7 +146,7 @@
   top: 20px;
   left: 20px;
 
-  color: rgba(250, 247, 244, 0.75);
+  color: rgba(248, 243, 241, 0.75);
 
   font-family: var(--font-body);
 
@@ -163,7 +163,7 @@
   right: 20px;
   bottom: 20px;
 
-  color: rgba(250, 247, 244, 0.8);
+  color: rgba(248, 243, 241, 0.8);
 
   font-family: var(--font-body);
 

@@ -146,7 +146,7 @@
   right: 6px;
   bottom: 6px;
   padding: 4px 6px;
-  background: rgba(251, 249, 245, 0.85);
+  background: rgba(248, 243, 241, 0.85);
   color: var(--pdp-ink);
   font-size: 10px;
   letter-spacing: 0.12em;
@@ -184,7 +184,7 @@
   z-index: 4;
   padding: 8px 11px;
   border: 1px solid rgba(17, 17, 17, 0.08);
-  background: rgba(251, 249, 245, 0.88);
+  background: rgba(248, 243, 241, 0.88);
   backdrop-filter: blur(12px);
   color: var(--pdp-ink);
   font-size: 10px;
@@ -211,7 +211,7 @@
   z-index: 4;
   padding: 9px 12px;
   border: 1px solid rgba(17, 17, 17, 0.1);
-  background: rgba(251, 249, 245, 0.9);
+  background: rgba(248, 243, 241, 0.9);
   color: var(--pdp-ink);
   font-size: 10px;
   font-weight: 700;
@@ -236,7 +236,7 @@
   place-items: center;
   border: 1px solid rgba(17, 17, 17, 0.1);
   border-radius: 50%;
-  background: rgba(251, 249, 245, 0.9);
+  background: rgba(248, 243, 241, 0.9);
   color: var(--pdp-ink);
   transform: translateY(-50%);
   transition: 0.22s ease;
@@ -1579,7 +1579,7 @@
 
     border-top: 1px solid rgba(17, 17, 17, 0.1);
 
-    background: rgba(251, 249, 245, 0.94);
+    background: rgba(248, 243, 241, 0.94);
 
     box-shadow:
       0 -12px 35px rgba(17, 17, 17, 0.08);

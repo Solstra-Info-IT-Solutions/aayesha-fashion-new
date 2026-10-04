@@ -106,8 +106,8 @@
 
   background: linear-gradient(
     to top,
-    rgba(40, 28, 26, 0.14),
-    rgba(40, 28, 26, 0)
+    rgba(17, 17, 17, 0.14),
+    rgba(17, 17, 17, 0)
   );
 
   pointer-events: none;
@@ -138,7 +138,7 @@
 
   border-radius: 8px;
 
-  background: rgba(251, 249, 245, 0.94);
+  background: rgba(248, 243, 241, 0.94);
   color: var(--color-text);
 
   font-family: var(--font-body);
@@ -178,7 +178,7 @@
 
   border-radius: 8px;
 
-  background: rgba(251, 249, 245, 0.95);
+  background: rgba(248, 243, 241, 0.95);
   color: var(--color-text);
 
   font-size: 11px;

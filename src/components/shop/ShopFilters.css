@@ -156,7 +156,7 @@
 }
 
 .shop-filters__category--active .shop-filters__count {
-  background: rgba(251, 249, 245, 0.2);
+  background: rgba(248, 243, 241, 0.2);
   color: var(--color-text-inverse);
 }
 

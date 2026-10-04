@@ -157,7 +157,7 @@
 .why-choose-us__value:hover .why-choose-us__icon {
   border-color: var(--color-secondary);
 
-  background: var(--color-secondary);
+  background: var(--color-primary);
 
   color: var(--color-surface);
 

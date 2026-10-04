@@ -5,12 +5,12 @@
 .checkout-contact {
   width: 100%;
   background: var(--color-surface);
-  border: 1px solid rgba(35, 30, 27, 0.09);
+  border: 1px solid rgba(17, 17, 17, 0.09);
   border-radius: 4px;
   overflow: hidden;
   box-shadow:
-    0 8px 30px rgba(35, 30, 27, 0.045),
-    0 2px 8px rgba(35, 30, 27, 0.025);
+    0 8px 30px rgba(17, 17, 17, 0.045),
+    0 2px 8px rgba(17, 17, 17, 0.025);
 }
 /* =========================================================
    HEADER
@@ -27,7 +27,7 @@
       rgba(250, 247, 243, 0.96),
       rgba(255, 255, 255, 1)
     );
-  border-bottom: 1px solid rgba(35, 30, 27, 0.07);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.07);
 }
 /* =========================================================
    STEP
@@ -348,7 +348,7 @@
 .checkout-contact {
     border-radius: 4px;
     box-shadow:
-      0 5px 20px rgba(35, 30, 27, 0.04);
+      0 5px 20px rgba(17, 17, 17, 0.04);
   }
 .checkout-contact__header {
     padding: 20px 16px 19px;
