@@ -56,8 +56,8 @@
 }
 
 .home-cta:active {
-  background: var(--color-espresso);
-  border-color: var(--color-espresso);
+  background: var(--color-primary-active);
+  border-color: var(--color-primary-active);
 }
 
 .home-cta:focus-visible {
@@ -65,26 +65,26 @@
   outline-offset: 3px;
 }
 
-/* Ivory variant — for CTAs that sit on imagery or dark bands */
+/* Outline variant — for CTAs that sit on imagery or dark bands */
 
 .home-cta--light {
-  border-color: var(--color-surface);
+  border-color: var(--color-clay);
 
-  background: var(--color-surface);
+  background: rgba(17, 17, 17, 0.55);
 
-  color: var(--color-espresso);
+  color: var(--color-text);
 }
 
 .home-cta--light:hover {
-  border-color: var(--color-surface-soft);
+  border-color: var(--color-clay);
 
-  background: var(--color-surface-soft);
+  background: var(--color-clay);
 
-  color: var(--color-espresso);
+  color: #111111;
 }
 
 .home-cta--light:focus-visible {
-  outline-color: var(--color-surface);
+  outline-color: var(--color-clay);
 }
 
 @media (max-width: 480px) {

@@ -639,7 +639,7 @@
   border-radius: 18px;
 
   background: var(--color-espresso);
-  color: var(--color-text-inverse);
+  color: var(--color-text);
 }
 
 .content-page__help-eyebrow {
@@ -683,7 +683,7 @@
 
   max-width: 100%;
 
-  color: var(--color-text-inverse);
+  color: var(--color-text);
 
   font-size: 13px;
   overflow-wrap: anywhere;

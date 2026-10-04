@@ -392,8 +392,8 @@
 }
 
 .product-card__cart-button:active:not(:disabled) {
-  background: var(--color-espresso);
-  border-color: var(--color-espresso);
+  background: var(--color-primary-active);
+  border-color: var(--color-primary-active);
 }
 
 .product-card__cart-button:focus-visible,
