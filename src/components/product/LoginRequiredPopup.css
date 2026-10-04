@@ -404,7 +404,7 @@
       var(--color-clay)
     );
 
-  color: #fff;
+  color: #111111;
 
   font-family:
     var(--font-body, sans-serif);
@@ -453,7 +453,7 @@
   border-radius: 50%;
 
   background:
-    rgba(255, 255, 255, 0.13);
+    rgba(17, 17, 17, 0.13);
 }
 
 .login-required-popup__primary-arrow {
