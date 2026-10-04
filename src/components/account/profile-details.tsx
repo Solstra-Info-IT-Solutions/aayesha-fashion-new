@@ -29,6 +29,7 @@ import {
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import "./ProfileDetails.css";
+import { EmailVerification } from "./email-verification";
 
 import {
   getCustomerProfile,
@@ -974,6 +975,13 @@ export function ProfileDetails() {
                         : "Unverified"
                     }
                     help="Email address is managed separately from profile editing."
+                    extra={
+                      <EmailVerification
+                        email={profile.user.email}
+                        verified={profile.user.emailVerified}
+                        onVerified={() => void loadProfile()}
+                      />
+                    }
                   />
 
                   <ProfileField
@@ -1369,6 +1377,7 @@ function SectionHeader({
   title: string;
   description?: string;
   icon?: React.ReactNode;
+  extra?: React.ReactNode;
 }) {
   return (
     <div className="profile-details__section-header">
@@ -1410,6 +1419,7 @@ function ProfileField({
   help,
   status = false,
   icon,
+  extra,
 }: {
   label: string;
   value: string;
@@ -1419,6 +1429,7 @@ function ProfileField({
   help?: string;
   status?: boolean;
   icon?: React.ReactNode;
+  extra?: React.ReactNode;
 }) {
   return (
     <div className="profile-details__field">
@@ -1459,6 +1470,10 @@ function ProfileField({
         <p className="profile-details__field-help">
           {help}
         </p>
+      ) : null}
+
+      {extra ? (
+        <div className="profile-details__field-extra">{extra}</div>
       ) : null}
     </div>
   );

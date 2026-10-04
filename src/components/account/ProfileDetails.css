@@ -1720,3 +1720,6 @@ to {
     transition-duration: 0.01ms !important;
   }
 }
+.profile-details__field-extra {
+  margin-top: 12px;
+}

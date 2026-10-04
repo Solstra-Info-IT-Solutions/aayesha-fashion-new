@@ -6,6 +6,7 @@ import {
 } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import {
   ArrowRight,
@@ -278,6 +279,12 @@ export function RegisterForm() {
     (state) => state.register,
   );
 
+  const login = useAuthStore(
+    (state) => state.login,
+  );
+
+  const router = useRouter();
+
   const storeError = useAuthStore(
     (state) => state.error,
   );
@@ -408,10 +415,18 @@ export function RegisterForm() {
         confirmPassword,
       );
 
-      window.location.href =
-        `/verify-email?email=${encodeURIComponent(
-          email.trim(),
-        )}`;
+      /*
+       * Email verification is optional, so sign the new customer
+       * straight in. If that fails for any reason the account still
+       * exists and they can sign in manually.
+       */
+      try {
+        await login(email.trim(), password);
+
+        router.replace("/");
+      } catch {
+        router.replace("/login");
+      }
     } catch {
       /*
        * Auth store already stores
