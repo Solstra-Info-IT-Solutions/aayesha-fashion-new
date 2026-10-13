@@ -10,8 +10,23 @@ The backend decides the mode (`GET /api/auth/mobile/config`):
 - Outside production it is **on by default**: any valid mobile number logs in with `123456`, no SMS is sent.
 - On Render (`NODE_ENV=production`) set `MOBILE_AUTH_TEST_MODE=true` to test. **Turn it off (remove the variable or set `false`) before launch** — while it is on, anyone can log in to any customer's account with `123456`.
 
-## Real SMS OTP with Firebase (to be set up by the client's Google account)
-A Firebase project could not be created from this environment; it needs the client's Google account.
+## Real SMS OTP with Firebase
+The Firebase project **`aayesha-fashion`** exists. Its web config was checked against Google: it is valid, and the authorized domains are `localhost`, `aayesha-fashion.firebaseapp.com`, `aayesha-fashion.web.app` and `aayesha-fashion-new.vercel.app`. **Add `aayeshafashion.in` (and `www.`) once the domain is attached.** Whether the **Phone** sign-in provider is switched on could not be confirmed from here — check it in the console (step 2 below).
+
+Values to set (the API key is a public web key, but it is kept out of the repo; copy it from Firebase → Project settings → Your apps):
+
+| Where | Variable | Value |
+|---|---|---|
+| Vercel (storefront) | `NEXT_PUBLIC_FIREBASE_API_KEY` | the web `apiKey` |
+| Vercel | `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` | `aayesha-fashion.firebaseapp.com` |
+| Vercel | `NEXT_PUBLIC_FIREBASE_PROJECT_ID` | `aayesha-fashion` |
+| Vercel | `NEXT_PUBLIC_FIREBASE_APP_ID` | `1:365198237786:web:b347500170e39fdca3b863` |
+| Render (backend) | `FIREBASE_PROJECT_ID` | `aayesha-fashion` |
+| Render | `MOBILE_AUTH_TEST_MODE` | `false` (real SMS) or `true` (OTP 123456) |
+
+Restrict the API key in Google Cloud Console → APIs & Services → Credentials → HTTP referrers (the Vercel and live domains) so it cannot be used from other sites.
+
+Setup steps, if the project is ever recreated:
 1. https://console.firebase.google.com → Add project → (e.g. `aayesha-fashion`).
 2. Build → **Authentication** → Get started → Sign-in method → enable **Phone**.
 3. Authentication → Settings → **Authorized domains**: add the storefront domains (the Vercel domain and `aayeshafashion.in`).
