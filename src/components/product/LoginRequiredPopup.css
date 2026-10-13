@@ -478,14 +478,14 @@
   min-height: 44px;
 
   border: 1px solid
-    rgba(17, 17, 17, 0.13);
+    rgba(248, 243, 241, 0.34);
 
   border-radius: 4px;
 
   background:
-    rgba(255, 255, 255, 0.58);
+    transparent;
 
-  color: var(--color-clay);
+  color: var(--color-text);
 
   font-family:
     var(--font-body, sans-serif);
@@ -505,10 +505,11 @@
 }
 
 .login-required-popup__secondary:hover {
-  background: var(--color-surface);
+  background: rgba(183, 154, 106, 0.16);
 
-  border-color:
-    rgba(17, 17, 17, 0.22);
+  border-color: var(--color-primary);
+
+  color: var(--color-text);
 }
 
 /* =========================================================

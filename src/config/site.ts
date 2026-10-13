@@ -1,3 +1,6 @@
+/** Client WhatsApp / contact number (India, 91 + 10 digits). */
+const CLIENT_WHATSAPP_NUMBER = "918237423742";
+
 export const siteConfig = {
   name: "Aayesha Fashion",
 
@@ -41,7 +44,7 @@ export const siteConfig = {
 
   contact: {
     email: "",
-    phone: "918788158087",
+    phone: CLIENT_WHATSAPP_NUMBER,
   },
 
   /*
@@ -54,6 +57,6 @@ export const siteConfig = {
     facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "",
     youtube: process.env.NEXT_PUBLIC_YOUTUBE_URL ?? "",
     twitter: process.env.NEXT_PUBLIC_TWITTER_URL ?? "",
-    whatsapp: `https://wa.me/918788158087`,
+    whatsapp: `https://wa.me/${CLIENT_WHATSAPP_NUMBER}`,
   },
 } as const;

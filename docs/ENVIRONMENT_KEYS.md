@@ -34,7 +34,7 @@ These were listed but nothing in the code reads them, and one was a secret:
 Change these in `src/config/site.ts` if they are wrong:
 
 * Site URL `https://aayeshafashion.in`
-* Contact phone / WhatsApp number `918788158087` and `https://wa.me/918788158087`
+* Contact phone / WhatsApp number `918237423742` and `https://wa.me/918237423742`
 * Contact e-mail is empty in config — set `contact.email` if you want one shown wherever the site uses it
 
 ## 3. Backend keys the storefront depends on (set on Render, not here)

@@ -57,7 +57,7 @@ export type CustomerProfileResponse = {
 
 export type UpdateCustomerProfilePayload = {
   name?: string;
-  phone?: string;
+  email?: string;
   avatarUrl?: string;
   dateOfBirth?: string | null;
   gender?: CustomerGender;

@@ -11,7 +11,9 @@ import {
   Save,
   UserRound,
 } from "lucide-react";
+import { Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -37,6 +39,7 @@ import type {
 
 type FormState = {
   name: string;
+  email: string;
   phone: string;
   avatarUrl: string;
   dateOfBirth: string;
@@ -69,6 +72,7 @@ function createInitialForm(
 
   return {
     name: profile.user.name ?? "",
+    email: profile.user.email ?? "",
     phone:
       profile.user.phone ||
       profile.customer.phone ||
@@ -105,7 +109,19 @@ function getInitials(name: string) {
    COMPONENT
 ========================================================= */
 
+/** `useSearchParams` needs a Suspense boundary so the page can still be prerendered. */
 export function EditAccountForm() {
+  return (
+    <Suspense fallback={null}>
+      <EditAccountFormInner />
+    </Suspense>
+  );
+}
+
+function EditAccountFormInner() {
+  const isWelcome =
+    useSearchParams().get("welcome") === "1";
+
   const accessToken = useAuthStore(
     (state) => state.accessToken,
   );
@@ -223,7 +239,6 @@ export function EditAccountForm() {
     }
 
     const name = form.name.trim();
-    const phone = form.phone.trim();
 
     setErrorMessage("");
 
@@ -235,13 +250,14 @@ export function EditAccountForm() {
       return;
     }
 
+    const email = form.email.trim();
+
     if (
-      !/^(?:\+91|91)?[6-9]\d{9}$/.test(
-        phone,
-      )
+      email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     ) {
       setErrorMessage(
-        "Please enter a valid Indian phone number.",
+        "Please enter a valid email address.",
       );
 
       return;
@@ -252,7 +268,10 @@ export function EditAccountForm() {
     const payload: UpdateCustomerProfilePayload =
       {
         name,
-        phone,
+        ...(email &&
+        email !== profile?.user.email
+          ? { email }
+          : {}),
         avatarUrl:
           form.avatarUrl.trim(),
         dateOfBirth:
@@ -522,6 +541,18 @@ export function EditAccountForm() {
               </div>
             </div>
 
+            {isWelcome ? (
+              <p
+                role="status"
+                className="edit-account__welcome"
+              >
+                Welcome to Aayesha Fashion! You are
+                logged in. Add your name and any other
+                details below. They are optional and you
+                can skip them for now.
+              </p>
+            ) : null}
+
             <div className="edit-account__fields">
               {/* =================================================
                   FULL NAME
@@ -571,7 +602,7 @@ export function EditAccountForm() {
                   Email Address
                 </label>
 
-                <div className="edit-account__input-wrap edit-account__input-wrap--readonly">
+                <div className="edit-account__input-wrap">
                   <Mail
                     size={16}
                     strokeWidth={1.7}
@@ -580,18 +611,25 @@ export function EditAccountForm() {
 
                   <input
                     id="account-email"
+                    name="email"
                     type="email"
-                    value={
-                      profile.user.email
-                    }
-                    readOnly
-                    className="edit-account__input edit-account__input--readonly"
+                    value={form.email}
+                    onChange={(event) => {
+                      updateField(
+                        "email",
+                        event.target.value,
+                      );
+                    }}
+                    autoComplete="email"
+                    placeholder="you@example.com"
+                    className="edit-account__input"
                   />
                 </div>
 
                 <p className="edit-account__help">
-                  Email changes require a separate
-                  verification flow.
+                  Optional. Used for order updates and
+                  offers. You can verify it from your
+                  profile.
                 </p>
               </div>
 
@@ -607,7 +645,7 @@ export function EditAccountForm() {
                   Phone Number
                 </label>
 
-                <div className="edit-account__input-wrap">
+                <div className="edit-account__input-wrap edit-account__input-wrap--readonly">
                   <Phone
                     size={16}
                     strokeWidth={1.7}
@@ -619,18 +657,15 @@ export function EditAccountForm() {
                     name="phone"
                     type="tel"
                     value={form.phone}
-                    onChange={(event) => {
-                      updateField(
-                        "phone",
-                        event.target.value,
-                      );
-                    }}
-                    inputMode="tel"
-                    autoComplete="tel"
-                    placeholder="+91 9876543210"
-                    className="edit-account__input"
+                    readOnly
+                    className="edit-account__input edit-account__input--readonly"
                   />
                 </div>
+
+                <p className="edit-account__help">
+                  Your mobile number is your login and
+                  cannot be changed here.
+                </p>
               </div>
 
               {/* =================================================

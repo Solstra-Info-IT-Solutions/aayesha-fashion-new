@@ -104,8 +104,8 @@ export function LoginRequiredPopup({
     : "Continue with your shopping";
 
   const description = isWishlist
-    ? "Sign in to save this beautiful piece to your personal wishlist and find it easily later."
-    : "Sign in to your Aayesha Fashion account to add this piece to your shopping bag.";
+    ? "Log in with your mobile number to save this beautiful piece to your personal wishlist and find it easily later."
+    : "Log in with your mobile number to add this piece to your shopping bag.";
 
   const eyebrow = isWishlist
     ? "Your personal collection"

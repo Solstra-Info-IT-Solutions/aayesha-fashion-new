@@ -77,6 +77,7 @@ const availableColors = [
 
 type FormState = {
   name: string;
+  email: string;
   phone: string;
   avatarUrl: string;
   dateOfBirth: string;
@@ -108,6 +109,7 @@ function createFormState(
 
   return {
     name: profile.user.name ?? "",
+    email: profile.user.email ?? "",
     phone:
       profile.user.phone ||
       profile.customer.phone ||
@@ -369,8 +371,6 @@ export function ProfileDetails() {
     setShowSuccess(false);
 
     const name = form.name.trim();
-    const phone = form.phone.trim();
-
     if (name.length < 2) {
       setErrorMessage(
         "Please enter your full name.",
@@ -378,13 +378,14 @@ export function ProfileDetails() {
       return;
     }
 
+    const email = form.email.trim();
+
     if (
-      !/^(?:\+91|91)?[6-9]\d{9}$/.test(
-        phone,
-      )
+      email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     ) {
       setErrorMessage(
-        "Please enter a valid Indian phone number.",
+        "Please enter a valid email address.",
       );
       return;
     }
@@ -394,7 +395,9 @@ export function ProfileDetails() {
     const payload: UpdateCustomerProfilePayload =
       {
         name,
-        phone,
+        ...(email && email !== profile.user.email
+          ? { email }
+          : {}),
         avatarUrl:
           form.avatarUrl.trim(),
         dateOfBirth:
@@ -968,43 +971,49 @@ export function ProfileDetails() {
 
                   <ProfileField
                     label="Email Address"
-                    value={profile.user.email}
+                    editing={isEditing}
+                    value={profile.user.email || "Not added"}
                     suffix={
-                      profile.user.emailVerified
-                        ? "Verified"
-                        : "Unverified"
+                      profile.user.email
+                        ? profile.user.emailVerified
+                          ? "Verified"
+                          : "Unverified"
+                        : undefined
                     }
-                    help="Email address is managed separately from profile editing."
-                    extra={
-                      <EmailVerification
-                        email={profile.user.email}
-                        verified={profile.user.emailVerified}
-                        onVerified={() => void loadProfile()}
+                    input={
+                      <input
+                        type="email"
+                        value={form.email}
+                        placeholder="you@example.com"
+                        onChange={(event) =>
+                          updateForm(
+                            "email",
+                            event.target.value,
+                          )
+                        }
+                        autoComplete="email"
                       />
+                    }
+                    help="Optional. Used for order updates and offers."
+                    extra={
+                      profile.user.email ? (
+                        <EmailVerification
+                          email={profile.user.email}
+                          verified={profile.user.emailVerified}
+                          onVerified={() => void loadProfile()}
+                        />
+                      ) : undefined
                     }
                   />
 
                   <ProfileField
                     label="Phone Number"
-                    editing={isEditing}
                     value={
                       profile.user.phone ||
                       profile.customer.phone ||
                       "Not added"
                     }
-                    input={
-                      <input
-                        value={form.phone}
-                        onChange={(event) =>
-                          updateForm(
-                            "phone",
-                            event.target.value,
-                          )
-                        }
-                        inputMode="tel"
-                        autoComplete="tel"
-                      />
-                    }
+                    help="Your mobile number is your login and cannot be changed here."
                   />
 
                   <ProfileField
