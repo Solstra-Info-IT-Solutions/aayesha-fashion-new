@@ -1087,3 +1087,12 @@ to {
     transition-duration: 0.01ms !important;
   }
 }
+.edit-account__welcome {
+  margin: 0 0 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-primary);
+  background: rgba(183, 154, 106, 0.1);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text);
+}

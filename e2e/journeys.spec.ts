@@ -71,17 +71,110 @@ test.describe("critical journeys", () => {
     await expect(page.getByText(/your email is verified/i).first()).toBeVisible();
   });
 
-  test("OTP login explains that mobile codes arrive on WhatsApp", async ({ page }) => {
-    await page.goto("/login");
-    await page.getByRole("tab", { name: /otp/i }).click().catch(() => undefined);
-    await expect(page.getByText(/sent to your whatsapp/i)).toBeVisible();
+});
+
+test.describe("mobile-number login", () => {
+  test.beforeEach(async ({ context }) => {
+    await context.addCookies([{ name: "mock_guest", value: "1", url: "http://localhost:3111" }]);
   });
 
-  test("login form rejects an invalid email without calling the server", async ({ page }) => {
-    await page.goto("/login?x=1");
-    await page.getByLabel(/email address/i).first().fill("not-an-email");
-    await page.getByRole("button", { name: /sign in/i }).click();
-    await expect(page.getByText(/valid email/i)).toBeVisible();
+  test("an existing customer logs in with the test OTP and lands on the store", async ({ page }) => {
+    await page.goto("/login");
+    await page.getByLabel(/mobile number/i).fill("98765 43210");
+    await page.getByRole("button", { name: /send otp/i }).click();
+    await expect(page.getByText(/test mode/i)).toBeVisible();
+    await page.getByLabel(/one-time password/i).fill("123456");
+    await page.getByRole("button", { name: /verify & log in/i }).click();
+    await expect(page).toHaveURL(/localhost:3111\/?$/);
+  });
+
+  test("a wrong OTP is refused and keeps the customer on the login screen", async ({ page }) => {
+    await page.goto("/login");
+    await page.getByLabel(/mobile number/i).fill("9876543210");
+    await page.getByRole("button", { name: /send otp/i }).click();
+    await page.getByLabel(/one-time password/i).fill("000000");
+    await page.getByRole("button", { name: /verify & log in/i }).click();
+    await expect(page.locator(".login-form__error")).toContainText(/invalid or has expired/i);
+    await expect(page).toHaveURL(/\/login/);
+  });
+
+  test("an invalid number is rejected before any OTP is requested", async ({ page }) => {
+    await page.goto("/login");
+    await page.getByLabel(/mobile number/i).fill("12345");
+    await page.getByRole("button", { name: /send otp/i }).click();
+    await expect(page.locator(".login-form__error")).toContainText(/valid 10-digit mobile number/i);
+  });
+
+  test("a first-time customer is taken to Edit account to fill in the rest", async ({ page }) => {
+    await page.goto("/login");
+    await page.getByLabel(/mobile number/i).fill("9000000001");
+    await page.getByRole("button", { name: /send otp/i }).click();
+    await page.getByLabel(/one-time password/i).fill("123456");
+    await page.getByRole("button", { name: /verify & log in/i }).click();
+    await expect(page).toHaveURL(/\/account\/edit\?welcome=1/);
+    await expect(page.getByText(/you are\s+logged in/i)).toBeVisible();
+    await expect(page.getByLabel(/email address/i)).toBeEditable();
+    await expect(page.getByLabel(/phone number/i)).not.toBeEditable();
+  });
+
+  test("there is no sign-up or password screen", async ({ page }) => {
+    for (const path of ["/register", "/forgot-password", "/verify-email", "/reset-password"]) {
+      await page.goto(path);
+      await expect(page).toHaveURL(/\/login$/);
+    }
+
+    await expect(page.getByText(/sign up|create account|forgot password/i)).toHaveCount(0);
+    await expect(page.getByLabel(/password/i)).toHaveCount(0);
+  });
+
+  test("the login prompt shown when adding to the bag as a guest has two readable buttons", async ({ page }) => {
+    await page.goto("/collections/festive");
+    await page.waitForSelector('a[href^="/products/"]', { timeout: 20_000 });
+    await page.locator('a[href^="/products/"]').first().click();
+    await page.locator(".product-detail__title").waitFor();
+    await page.getByRole("button", { name: /add to bag/i }).first().click();
+
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+
+    await expect(dialog.getByRole("button", { name: /login to continue/i })).toBeVisible();
+
+    // The second button once had a light, translucent fill that hid its text.
+    const button = dialog.getByRole("button", { name: /continue shopping/i });
+    await expect(button).toBeVisible();
+
+    const ratio = await button.evaluate((element) => {
+      const channels = (value: string) => (value.match(/[\d.]+/g) ?? []).map(Number);
+
+      const luminance = ([r = 0, g = 0, b = 0]: number[]) => {
+        const f = (c: number) => {
+          const v = c / 255;
+          return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+        };
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+      };
+
+      const layers: number[][] = [];
+
+      for (let node: Element | null = element; node; node = node.parentElement) {
+        const [r = 0, g = 0, b = 0, a = 1] = channels(getComputedStyle(node).backgroundColor);
+        if (a > 0) layers.push([r, g, b, a]);
+        if (a === 1) break;
+      }
+
+      let background = [0, 0, 0];
+
+      for (const [r = 0, g = 0, b = 0, a = 1] of layers.reverse()) {
+        background = [r * a + background[0]! * (1 - a), g * a + background[1]! * (1 - a), b * a + background[2]! * (1 - a)];
+      }
+
+      const l1 = luminance(channels(getComputedStyle(element).color));
+      const l2 = luminance(background);
+
+      return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+    });
+
+    expect(ratio).toBeGreaterThanOrEqual(4.5);
   });
 });
 

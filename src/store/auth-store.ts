@@ -84,6 +84,13 @@ type AuthState = {
     otp: string,
   ) => Promise<void>;
 
+  /** Mobile OTP login: a Firebase ID token, or the test OTP when the backend is in test mode. */
+  loginWithMobile: (input: {
+    phone?: string;
+    otp?: string;
+    idToken?: string;
+  }) => Promise<{ isNewUser: boolean }>;
+
   verifyEmail: (
     email: string,
     otp: string,
@@ -313,6 +320,56 @@ export const useAuthStore =
 
           error: null,
         });
+      } catch (error) {
+        set({
+          error:
+            getAuthErrorMessage(error),
+        });
+
+        throw error;
+      } finally {
+        set({
+          isLoading: false,
+        });
+      }
+    },
+
+    /* =======================================================
+       MOBILE LOGIN
+    ======================================================= */
+
+    loginWithMobile: async (input) => {
+      set({
+        isLoading: true,
+        error: null,
+      });
+
+      try {
+        const result =
+          await apiFetch<
+            LoginResponse & {
+              isNewUser: boolean;
+            }
+          >("/auth/mobile/login", {
+            method: "POST",
+
+            body: JSON.stringify(input),
+          });
+
+        set({
+          user: result.user,
+
+          accessToken:
+            result.accessToken,
+
+          isAuthenticated: true,
+
+          error: null,
+        });
+
+        return {
+          isNewUser: result.isNewUser,
+        };
       } catch (error) {
         set({
           error:

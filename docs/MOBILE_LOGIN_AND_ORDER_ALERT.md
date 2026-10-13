@@ -1,0 +1,48 @@
+# Mobile-number login and the store order alert
+
+## What changed
+- The only way to log in is **mobile number + OTP**. There is no sign-up, password, forgot-password or email-verification screen (those URLs redirect to `/login`).
+- The first successful login creates the account. Name, email, birthday and so on are added later in **Edit account** (new customers are sent there after their first login). The mobile number is the login, so it cannot be edited; the email is optional and can be verified from the profile.
+- Admin login (email + password) in the admin panel is unchanged.
+
+## Test mode (OTP 123456)
+The backend decides the mode (`GET /api/auth/mobile/config`):
+- Outside production it is **on by default**: any valid mobile number logs in with `123456`, no SMS is sent.
+- On Render (`NODE_ENV=production`) set `MOBILE_AUTH_TEST_MODE=true` to test. **Turn it off (remove the variable or set `false`) before launch** — while it is on, anyone can log in to any customer's account with `123456`.
+
+## Real SMS OTP with Firebase (to be set up by the client's Google account)
+A Firebase project could not be created from this environment; it needs the client's Google account.
+1. https://console.firebase.google.com → Add project → (e.g. `aayesha-fashion`).
+2. Build → **Authentication** → Get started → Sign-in method → enable **Phone**.
+3. Authentication → Settings → **Authorized domains**: add the storefront domains (the Vercel domain and `aayeshafashion.in`).
+4. Project settings → Your apps → add a **Web app** → copy `apiKey`, `authDomain`, `projectId`, `appId`.
+5. Vercel (storefront) env: `NEXT_PUBLIC_FIREBASE_API_KEY`, `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, `NEXT_PUBLIC_FIREBASE_PROJECT_ID`, `NEXT_PUBLIC_FIREBASE_APP_ID`. Redeploy.
+6. Render (backend) env: `FIREBASE_PROJECT_ID=<projectId>` and `MOBILE_AUTH_TEST_MODE=false`. No service-account key is needed: the backend verifies Firebase's signed tokens against Google's public certificates.
+7. Sending SMS to Indian numbers can need Firebase's pay-as-you-go (Blaze) plan; check the console for the current terms. Firebase also lets you list **test phone numbers with fixed codes** (Authentication → Sign-in method → Phone) if you want to test the real flow without sending SMS.
+
+## Order alert on WhatsApp (testing)
+Every new order sends its full details (order number, time, payment method and status, customer name/phone/email, delivery address, every item with SKU, quantity and price, discounts, shipping, total) to **8237423742** (`ORDER_ALERT_WHATSAPP_NUMBER`, default `918237423742`). It is sent once per order and never delays or fails the customer's order; failures are only logged.
+
+It needs the WhatsApp Cloud API credentials on Render (`WHATSAPP_ACCESS_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`). Without them the alert is skipped and a warning is logged.
+
+WhatsApp only delivers a plain text message if that number messaged the business number in the last 24 hours. To reach it at any time, create this **Utility** template in Meta WhatsApp Manager (language `en`) and set `WHATSAPP_ORDER_ALERT_TEMPLATE_NAME` to its name:
+
+```
+New order {{1}} received.
+
+Customer: {{2}}
+Phone: {{3}}
+Email: {{4}}
+
+Delivery address: {{5}}
+
+Items: {{6}}
+
+Payment: {{7}}
+Amount: {{8}}
+```
+
+Variables are filled in this order: 1 order number, 2 customer name, 3 customer phone, 4 customer email, 5 delivery address, 6 items, 7 payment method and status, 8 subtotal / discounts / shipping / total.
+
+## Not verified yet
+Real Firebase SMS and the real WhatsApp delivery could not be exercised without the client's Firebase project and Meta credentials. Both paths are covered by automated tests with the external services mocked.

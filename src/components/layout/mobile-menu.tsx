@@ -456,24 +456,12 @@ export function MobileMenu({
                       mobile-guest-account__button
                     "
                   >
-                    <span>Sign In</span>
+                    <span>Log In</span>
 
                     <ArrowUpRight
                       size={14}
                       strokeWidth={1.6}
                     />
-                  </Link>
-
-                  <Link
-                    href="/register"
-                    onClick={onClose}
-                    className="
-                      button
-                      button-secondary
-                      mobile-guest-account__button
-                    "
-                  >
-                    Create Account
                   </Link>
                 </div>
               </div>

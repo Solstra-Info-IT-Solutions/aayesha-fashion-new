@@ -1,5 +1,5 @@
 import { AuthShell } from "@/components/auth/auth-shell";
-import { LoginTabs } from "@/components/auth/login-tabs";
+import { MobileLoginForm } from "@/components/auth/mobile-login-form";
 
 import type { Metadata } from "next";
 
@@ -14,12 +14,12 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <AuthShell
-      title="Welcome back"
-      subtitle="Sign in to continue your Aayesha Fashion journey and manage your orders, wishlist, and account."
+      title="Log in"
+      subtitle="Enter your mobile number to continue with Aayesha Fashion. We will send you a one-time password."
       backHref="/"
       backLabel="Back to home"
     >
-      <LoginTabs />
+      <MobileLoginForm />
     </AuthShell>
   );
 }

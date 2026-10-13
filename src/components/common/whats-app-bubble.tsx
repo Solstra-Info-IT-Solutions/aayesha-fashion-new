@@ -2,9 +2,11 @@
 
 import { MessageCircle } from "lucide-react";
 
+import { siteConfig } from "@/config/site";
+
 import "./WhatsAppBubble.css";
 
-const WHATSAPP_NUMBER = "919999999999";
+const WHATSAPP_NUMBER = siteConfig.contact.phone;
 
 const WHATSAPP_MESSAGE =
   "Hello Aayesha Fashion, I need help with a product.";

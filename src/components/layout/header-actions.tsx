@@ -442,7 +442,7 @@ function GuestAccountPopup({
           </div>
 
           <p className="guest-account-popup__description">
-            Sign in or create an account
+            Log in with your mobile number
             to manage your orders,
             wishlist and details.
           </p>
@@ -464,25 +464,13 @@ function GuestAccountPopup({
               "
             >
               <span>
-                Sign In
+                Log In
               </span>
 
               <ArrowUpRight
                 size={15}
                 strokeWidth={1.6}
               />
-            </Link>
-
-            <Link
-              href="/register"
-              onClick={onClose}
-              className="
-                button
-                button-secondary
-                guest-account-popup__button
-              "
-            >
-              Sign Up
             </Link>
 
           </div>

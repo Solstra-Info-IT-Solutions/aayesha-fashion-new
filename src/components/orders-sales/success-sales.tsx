@@ -107,7 +107,7 @@ export function SuccessSales({
           ) : null}
 
           {!isAuthenticated ? (
-            <Link href="/register">Create an account to track orders</Link>
+            <Link href="/login">Log in with your mobile number to track orders</Link>
           ) : null}
         </div>
       </div>
