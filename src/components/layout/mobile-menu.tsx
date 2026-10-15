@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -342,16 +341,6 @@ export function MobileMenu({
             className="mobile-menu__brand"
             aria-label="Aayesha Fashion home"
           >
-            <span className="mobile-menu__brand-mark">
-              <Image
-                src="/images/logo.png"
-                alt=""
-                width={56}
-                height={56}
-                className="mobile-menu__brand-logo"
-              />
-            </span>
-
             <span className="mobile-menu__brand-copy">
               <span className="mobile-menu__brand-name">
                 Aayesha
