@@ -53,10 +53,14 @@ html body .aayesha-header__logo-main {
   margin-right: -0.36em;
 }
 
+/* Scales with the screen so it never outgrows its row (login screen). */
 html body .brand-logo__name {
-  font-size: 30px;
-  letter-spacing: 0.3em;
-  margin-right: -0.3em;
+  font-size: clamp(17px, 5vw, 30px);
+  letter-spacing: 0.24em;
+  /* Balances the trailing letter-space so the name stays centred without
+     pushing past the edge of a right-aligned row. */
+  padding-left: 0.24em;
+  margin-right: 0;
 }
 
 html body .site-footer__brand-name {
@@ -98,7 +102,12 @@ html body .aayesha-header__logo-sub {
   margin-right: -0.52em;
 }
 
-html body .brand-logo__tagline,
+html body .brand-logo__tagline {
+  font-size: clamp(6.5px, 1.9vw, 9px);
+  letter-spacing: 0.38em;
+  gap: clamp(6px, 1.8vw, 10px);
+}
+
 html body .site-footer__brand-tagline {
   font-size: 9px;
   letter-spacing: 0.46em;
@@ -107,6 +116,11 @@ html body .site-footer__brand-tagline {
 html body .mobile-menu__brand-subline {
   font-size: 8px;
   letter-spacing: 0.3em;
+}
+
+html body .brand-logo .brand-logo__tagline::before,
+html body .brand-logo .brand-logo__tagline::after {
+  width: clamp(10px, 3vw, 20px);
 }
 
 html body .aayesha-header__logo-sub::before,
@@ -136,11 +150,19 @@ html body .brand-logo__accent {
 
 html body .aayesha-header__logo:hover .aayesha-header__logo-sub::before,
 html body .aayesha-header__logo:hover .aayesha-header__logo-sub::after,
-html body .brand-logo:hover .brand-logo__tagline::before,
-html body .brand-logo:hover .brand-logo__tagline::after,
 html body .site-footer__brand:hover .site-footer__brand-tagline::before,
 html body .site-footer__brand:hover .site-footer__brand-tagline::after {
   width: 30px;
+}
+
+html body .brand-logo:hover .brand-logo__tagline::before,
+html body .brand-logo:hover .brand-logo__tagline::after {
+  width: clamp(14px, 4.4vw, 30px);
+}
+
+html body .brand-logo {
+  max-width: 100%;
+  min-width: 0;
 }
 
 /* ---------------------------------------------------------
@@ -204,23 +226,6 @@ html body .site-footer__brand {
     width: 8px;
   }
 
-  html body .brand-logo__name {
-    font-size: 19px;
-    letter-spacing: 0.22em;
-    margin-right: -0.22em;
-  }
-
-  html body .brand-logo__tagline {
-    font-size: 7px;
-    letter-spacing: 0.36em;
-    gap: 7px;
-  }
-
-  html body .brand-logo__tagline::before,
-  html body .brand-logo__tagline::after {
-    width: 12px;
-  }
-
   html body .site-footer__brand-name {
     font-size: 25px;
   }
@@ -238,4 +243,9 @@ html body .site-footer__brand {
   html body .aayesha-header__logo-sub::after {
     transition: none;
   }
+}
+
+/* The login header used to cap this box for the round logo image; the name sizes itself now. */
+html body .auth-shell__mobile-logo {
+  max-width: none;
 }
