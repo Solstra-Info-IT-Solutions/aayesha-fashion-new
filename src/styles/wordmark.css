@@ -1,0 +1,241 @@
+/* =========================================================
+   AAYESHA WORDMARK
+   One refined lockup used in the header, mobile menu, footer
+   and login screen: Cormorant capitals in a champagne sheen,
+   a spaced tagline between two fine gold rules, and a slow
+   shimmer that crosses the name on hover.
+========================================================= */
+
+:root {
+  --wm-sheen: linear-gradient(
+    100deg,
+    #f8f3f1 0%,
+    #e9d6aa 32%,
+    #b79a6a 52%,
+    #f1e2bd 74%,
+    #f8f3f1 100%
+  );
+  --wm-gold: #b79a6a;
+}
+
+/* ---------------------------------------------------------
+   Name
+--------------------------------------------------------- */
+
+html body .aayesha-header__logo-main,
+html body .brand-logo__name,
+html body .site-footer__brand-name,
+html body .mobile-menu__brand-name {
+  font-family: var(--font-display, serif);
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: transparent;
+  background-image: var(--wm-sheen);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+html body .aayesha-header__logo:hover .aayesha-header__logo-main,
+html body .brand-logo:hover .brand-logo__name,
+html body .site-footer__brand:hover .site-footer__brand-name,
+html body .mobile-menu__brand:hover .mobile-menu__brand-name {
+  background-position: 0% 0;
+}
+
+html body .aayesha-header__logo-main {
+  font-size: 27px;
+  letter-spacing: 0.36em;
+  margin-right: -0.36em;
+}
+
+html body .brand-logo__name {
+  font-size: 30px;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+}
+
+html body .site-footer__brand-name {
+  font-size: 30px;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+}
+
+html body .mobile-menu__brand-name {
+  font-size: 24px;
+  letter-spacing: 0.3em;
+}
+
+/* ---------------------------------------------------------
+   Tagline between two fine rules
+--------------------------------------------------------- */
+
+html body .aayesha-header__logo-sub,
+html body .brand-logo__tagline,
+html body .site-footer__brand-tagline,
+html body .mobile-menu__brand-subline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 7px;
+  font-family: var(--font-body, sans-serif);
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--wm-gold);
+  opacity: 1;
+  transition: letter-spacing 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+html body .aayesha-header__logo-sub {
+  font-size: 8.5px;
+  letter-spacing: 0.52em;
+  margin-right: -0.52em;
+}
+
+html body .brand-logo__tagline,
+html body .site-footer__brand-tagline {
+  font-size: 9px;
+  letter-spacing: 0.46em;
+}
+
+html body .mobile-menu__brand-subline {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+}
+
+html body .aayesha-header__logo-sub::before,
+html body .aayesha-header__logo-sub::after,
+html body .brand-logo__tagline::before,
+html body .brand-logo__tagline::after,
+html body .site-footer__brand-tagline::before,
+html body .site-footer__brand-tagline::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--wm-gold));
+  transition: width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+html body .aayesha-header__logo-sub::after,
+html body .brand-logo__tagline::after,
+html body .site-footer__brand-tagline::after {
+  background: linear-gradient(90deg, var(--wm-gold), transparent);
+}
+
+/* The old single dash after "Fashion" is replaced by the two rules. */
+html body .brand-logo__accent {
+  display: none;
+}
+
+html body .aayesha-header__logo:hover .aayesha-header__logo-sub::before,
+html body .aayesha-header__logo:hover .aayesha-header__logo-sub::after,
+html body .brand-logo:hover .brand-logo__tagline::before,
+html body .brand-logo:hover .brand-logo__tagline::after,
+html body .site-footer__brand:hover .site-footer__brand-tagline::before,
+html body .site-footer__brand:hover .site-footer__brand-tagline::after {
+  width: 30px;
+}
+
+/* ---------------------------------------------------------
+   Layout: centred stack
+--------------------------------------------------------- */
+
+html body .aayesha-header__logo-text,
+html body .brand-logo__wordmark {
+  align-items: center;
+  text-align: center;
+}
+
+html body .brand-logo,
+html body .site-footer__brand {
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ---------------------------------------------------------
+   Smaller screens
+--------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  html body .aayesha-header__logo-main {
+    font-size: 20px;
+    letter-spacing: 0.3em;
+    margin-right: -0.3em;
+  }
+
+  html body .aayesha-header__logo-sub {
+    font-size: 7px;
+    letter-spacing: 0.42em;
+    margin-right: -0.42em;
+    gap: 7px;
+    margin-top: 5px;
+  }
+
+  html body .aayesha-header__logo-sub::before,
+  html body .aayesha-header__logo-sub::after {
+    width: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  html body .aayesha-header__logo-main {
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    margin-right: -0.2em;
+  }
+
+  html body .aayesha-header__logo-sub {
+    font-size: 6px;
+    letter-spacing: 0.3em;
+    margin-right: -0.3em;
+    gap: 5px;
+  }
+
+  html body .aayesha-header__logo-sub::before,
+  html body .aayesha-header__logo-sub::after {
+    width: 8px;
+  }
+
+  html body .brand-logo__name {
+    font-size: 19px;
+    letter-spacing: 0.22em;
+    margin-right: -0.22em;
+  }
+
+  html body .brand-logo__tagline {
+    font-size: 7px;
+    letter-spacing: 0.36em;
+    gap: 7px;
+  }
+
+  html body .brand-logo__tagline::before,
+  html body .brand-logo__tagline::after {
+    width: 12px;
+  }
+
+  html body .site-footer__brand-name {
+    font-size: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .aayesha-header__logo-main,
+  html body .brand-logo__name,
+  html body .site-footer__brand-name,
+  html body .mobile-menu__brand-name,
+  html body .aayesha-header__logo-sub,
+  html body .brand-logo__tagline,
+  html body .site-footer__brand-tagline,
+  html body .aayesha-header__logo-sub::before,
+  html body .aayesha-header__logo-sub::after {
+    transition: none;
+  }
+}

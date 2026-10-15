@@ -10,6 +10,7 @@ import {
 } from "next/font/google";
 
 import "./globals.css";
+import "@/styles/wordmark.css";
 
 import { Toaster } from "react-hot-toast";
 
