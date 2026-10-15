@@ -170,15 +170,6 @@ export function Footer() {
                 aria-label={`${siteConfig.name} home`}
                 className="site-footer__brand"
               >
-
-                <span className="site-footer__brand-image-wrap">
-                  <img
-                    src="/images/logo.png"
-                    alt="Aayesha Fashion"
-                    className="site-footer__brand-image"
-                  />
-                </span>
-
                 <span className="site-footer__brand-name">
                   {siteConfig.name.split(" ")[0]}
                 </span>
