@@ -1,5 +1,7 @@
 # Mobile-number login and the store order alert
 
+> **WhatsApp is now the main OTP channel.** Set it up with the backend guide `docs/WHATSAPP_META_SETUP.md` (aayesha-fashion-backend): Meta keys, templates, webhook callback URL and env vars. The login screen picks the mode from the backend: test OTP → WhatsApp → Firebase SMS.
+
 ## What changed
 - The only way to log in is **mobile number + OTP**. There is no sign-up, password, forgot-password or email-verification screen (those URLs redirect to `/login`).
 - The first successful login creates the account. Name, email, birthday and so on are added later in **Edit account** (new customers are sent there after their first login). The mobile number is the login, so it cannot be edited; the email is optional and can be verified from the profile.

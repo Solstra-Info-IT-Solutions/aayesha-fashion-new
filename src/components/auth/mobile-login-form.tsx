@@ -23,7 +23,7 @@ const RECAPTCHA_ID = "mobile-login-recaptcha";
 const RESEND_SECONDS = 30;
 const TEST_OTP_HINT = "123456";
 
-type Mode = "loading" | "test" | "firebase" | "unavailable";
+type Mode = "loading" | "test" | "whatsapp" | "firebase" | "unavailable";
 
 const safeRedirect = (value: string | null) =>
   value && value.startsWith("/") && !value.startsWith("//") ? value : "/";
@@ -53,7 +53,7 @@ export function MobileLoginForm() {
   useEffect(() => {
     let active = true;
 
-    apiFetch<{ mode: "test" | "firebase" }>("/auth/mobile/config")
+    apiFetch<{ mode: Exclude<Mode, "loading"> }>("/auth/mobile/config")
       .then((config) => {
         if (active) setMode(config.mode);
       })
@@ -90,10 +90,28 @@ export function MobileLoginForm() {
       return;
     }
 
-    if (mode === "test") {
-      setSent(true);
-      setOtp("");
-      setCooldown(RESEND_SECONDS);
+    // Test mode (nothing is sent) and WhatsApp: the backend issues the OTP.
+    if (mode === "test" || mode === "whatsapp") {
+      try {
+        setSending(true);
+
+        const result = await apiFetch<{ resendAfterSeconds: number }>(
+          "/auth/mobile/otp/request",
+          { method: "POST", body: JSON.stringify({ phone: digits }) },
+        );
+
+        setSent(true);
+        setOtp("");
+        setCooldown(result.resendAfterSeconds || RESEND_SECONDS);
+      } catch (cause) {
+        setError(
+          cause instanceof Error
+            ? cause.message
+            : "We could not send the OTP. Please try again.",
+        );
+      } finally {
+        setSending(false);
+      }
 
       return;
     }
@@ -134,7 +152,7 @@ export function MobileLoginForm() {
     try {
       let result: { isNewUser: boolean };
 
-      if (mode === "test") {
+      if (mode === "test" || mode === "whatsapp") {
         result = await loginWithMobile({ phone: digits, otp });
       } else {
         if (!confirmation.current) {
@@ -254,7 +272,11 @@ export function MobileLoginForm() {
 
           {mode === "test" ? (
             <p role="status" className="otp-login__info">
-              Test mode: no SMS is sent. Enter {TEST_OTP_HINT}.
+              Test mode: nothing is sent. Enter {TEST_OTP_HINT}.
+            </p>
+          ) : mode === "whatsapp" ? (
+            <p role="status" className="otp-login__info">
+              We have sent a 6-digit OTP to your WhatsApp on +91 {digits}.
             </p>
           ) : (
             <p role="status" className="otp-login__info">
