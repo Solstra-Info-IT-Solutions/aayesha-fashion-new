@@ -163,10 +163,10 @@
   width: 100%;
   height: 52px;
 
-  border: 1px solid rgba(45, 39, 35, 0.13);
+  border: 1px solid rgba(248, 243, 241, 0.34);
   border-radius: 4px;
 
-  background: var(--color-surface);
+  background: var(--color-surface-soft, #221f1c);
 
   overflow: hidden;
 
@@ -176,7 +176,7 @@
     background 180ms ease;
 }
 .checkout-contact__field-control:hover {
-  border-color: rgba(45, 39, 35, 0.22);
+  border-color: rgba(248, 243, 241, 0.5);
 }
 .checkout-contact__field-control:focus-within {
   border-color: var(--color-clay);
@@ -184,7 +184,7 @@
   background: var(--color-surface);
 
   box-shadow:
-    0 0 0 3px rgba(167, 123, 99, 0.09);
+    0 0 0 3px rgba(183, 154, 106, 0.22);
 }
 /* =========================================================
    FIELD ICON

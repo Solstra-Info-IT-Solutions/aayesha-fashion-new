@@ -88,6 +88,15 @@ test.describe("mobile-number login", () => {
     await expect(page).toHaveURL(/localhost:3111\/?$/);
   });
 
+  test("when OTP delivery is on WhatsApp the customer is told where the code went", async ({ page, context }) => {
+    await context.addCookies([{ name: "mock_mode", value: "whatsapp", url: "http://localhost:3111" }]);
+    await page.goto("/login");
+    await page.getByLabel(/mobile number/i).fill("9876543210");
+    await page.getByRole("button", { name: /send otp/i }).click();
+    await expect(page.getByText(/sent a 6-digit otp to your whatsapp on \+91 9876543210/i)).toBeVisible();
+    await expect(page.getByText(/test mode/i)).toHaveCount(0);
+  });
+
   test("a wrong OTP is refused and keeps the customer on the login screen", async ({ page }) => {
     await page.goto("/login");
     await page.getByLabel(/mobile number/i).fill("9876543210");
@@ -175,6 +184,29 @@ test.describe("mobile-number login", () => {
     });
 
     expect(ratio).toBeGreaterThanOrEqual(4.5);
+  });
+});
+
+test.describe("forms look like forms", () => {
+  test("the payment reference box is tall and clearly bordered", async ({ page }) => {
+    await page.goto("/account/orders/AF-1002");
+    const box = page.locator(".pay-panel__form input");
+    await expect(box).toBeVisible({ timeout: 20_000 });
+    const height = await box.evaluate((e) => e.getBoundingClientRect().height);
+    expect(height).toBeGreaterThanOrEqual(48);
+    const border = await box.evaluate((e) => getComputedStyle(e).borderTopColor);
+    expect(border).not.toMatch(/rgba\(\d+, \d+, \d+, 0\)/);
+  });
+
+  test("checkout email and phone are drawn as bordered input boxes", async ({ page }) => {
+    await page.goto("/checkout");
+    const control = page.locator(".checkout-contact__field-control").first();
+    await expect(control).toBeVisible({ timeout: 20_000 });
+    const [width, color] = await control.evaluate((e) => [getComputedStyle(e).borderTopWidth, getComputedStyle(e).borderTopColor]);
+    expect(width).toBe("1px");
+    // The old border was a dark brown that vanished on the dark page; it must now be light enough to see.
+    const [r = 0, g = 0, b = 0] = (color.match(/[\d.]+/g) ?? []).map(Number);
+    expect(r + g + b).toBeGreaterThan(300);
   });
 });
 
