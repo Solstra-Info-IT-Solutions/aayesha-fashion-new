@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import { getOrder } from "@/lib/api/orders";
+import { orderWhatsAppUrl } from "@/lib/order-whatsapp";
 import type { OrderDetails } from "@/lib/api/orders";
 
 import { useAuthStore } from "@/store/auth-store";
@@ -706,6 +707,15 @@ function CheckoutSuccessContent() {
                   />
                 </Link>
               ) : null}
+
+              <a
+                href={orderWhatsAppUrl(order)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="checkout-success__action checkout-success__action--secondary"
+              >
+                Send order details on WhatsApp
+              </a>
 
               <Link
                 href="/shop"

@@ -1,6 +1,15 @@
 /** Client WhatsApp / contact number (India, 91 + 10 digits). */
 const CLIENT_WHATSAPP_NUMBER = "918237423742";
 
+/**
+ * WhatsApp number that receives the full details of every new order (the WhatsApp message
+ * is prepared when the customer places the order). Testing number for now; change it with
+ * NEXT_PUBLIC_ORDER_WHATSAPP_NUMBER (91 + 10 digits).
+ */
+const ORDER_WHATSAPP_NUMBER =
+  (process.env.NEXT_PUBLIC_ORDER_WHATSAPP_NUMBER ?? "").replace(/\D/g, "") ||
+  "919001638396";
+
 export const siteConfig = {
   name: "Aayesha Fashion",
 
@@ -40,6 +49,11 @@ export const siteConfig = {
     /* Cash on Delivery is off: payment is by the WhatsApp bill. */
     cashOnDelivery:
       process.env.NEXT_PUBLIC_ENABLE_COD === "true",
+  },
+
+  /** Receives the details of every new order on WhatsApp. */
+  orderWhatsapp: {
+    number: ORDER_WHATSAPP_NUMBER,
   },
 
   contact: {

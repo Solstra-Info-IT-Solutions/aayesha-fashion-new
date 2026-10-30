@@ -97,6 +97,15 @@ test.describe("mobile-number login", () => {
     await expect(page.getByText(/test mode/i)).toHaveCount(0);
   });
 
+  test("when OTP delivery is by SMS the customer is told it came by SMS and how long it lasts", async ({ page, context }) => {
+    await context.addCookies([{ name: "mock_mode", value: "sms", url: "http://localhost:3111" }]);
+    await page.goto("/login");
+    await page.getByLabel(/mobile number/i).fill("9876543210");
+    await page.getByRole("button", { name: /send otp/i }).click();
+    await expect(page.getByText(/by sms to \+91 9876543210.*valid for 5 minutes/i)).toBeVisible();
+    await expect(page.getByText(/test mode/i)).toHaveCount(0);
+  });
+
   test("a wrong OTP is refused and keeps the customer on the login screen", async ({ page }) => {
     await page.goto("/login");
     await page.getByLabel(/mobile number/i).fill("9876543210");
@@ -184,6 +193,31 @@ test.describe("mobile-number login", () => {
     });
 
     expect(ratio).toBeGreaterThanOrEqual(4.5);
+  });
+});
+
+test.describe("placing an order", () => {
+  test("Place Order opens WhatsApp on the testing number with every order detail, then shows the confirmation", async ({ page, context }) => {
+    // The WhatsApp page itself is external; answer it locally so the test can read what was sent.
+    await context.route("https://wa.me/**", (route) => route.fulfill({ status: 200, contentType: "text/html", body: "<title>WhatsApp</title>" }));
+
+    await page.goto("/checkout");
+    await page.getByLabel(/email address/i).fill("aisha@example.com");
+
+    const popupPromise = context.waitForEvent("page");
+    await page.getByRole("button", { name: /place order/i }).click();
+
+    const popup = await popupPromise;
+    await popup.waitForURL(/wa\.me\/919001638396\?text=/, { timeout: 20_000 });
+
+    const text = decodeURIComponent(popup.url().split("?text=")[1]!);
+
+    for (const expected of ["NEW ORDER - Aayesha Fashion", "Order No:", "AF-1001", "CUSTOMER", "Aisha Khan", "9876543210", "aisha@example.com", "DELIVERY ADDRESS", "12 Rose Lane", "Delhi", "ITEMS (", "Image: http", "BILL", "TOTAL: ₹"]) {
+      expect(text, `missing: ${expected}`).toContain(expected);
+    }
+
+    await expect(page).toHaveURL(/\/checkout\/success/, { timeout: 20_000 });
+    await expect(page.getByRole("link", { name: /send order details on whatsapp/i })).toHaveAttribute("href", /wa\.me\/919001638396\?text=/);
   });
 });
 

@@ -34,6 +34,7 @@ import {
 } from "@/lib/api/payments";
 
 import {
+  getOrder,
   createOrder,
   type CreateOrderPayload,
 } from "@/lib/api/orders";
@@ -42,6 +43,8 @@ import {
   createCustomerAddress,
   getCustomerAddresses,
 } from "@/lib/customer-api";
+
+import { orderWhatsAppUrl, type OrderWhatsAppInput } from "@/lib/order-whatsapp";
 
 import { useAuthStore } from "@/store/auth-store";
 
@@ -58,7 +61,32 @@ import "./CheckoutPlaceOrder.css";
 type CheckoutCartItem = {
   productId: string;
   quantity: number;
+  /** For the WhatsApp order message only; never sent to the order API. */
+  name?: string;
+  sku?: string;
+  unitPrice?: number;
 };
+
+/**
+ * Opens the WhatsApp tab straight from the click, before any await, so the browser does not
+ * treat it as a pop-up. It is pointed at WhatsApp once the order exists.
+ */
+function openWhatsAppTab(): Window | null {
+  try {
+    const tab = window.open("", "_blank");
+
+    if (tab) {
+      tab.document.title = "Aayesha Fashion";
+      tab.document.body.style.cssText =
+        "margin:0;display:grid;place-items:center;min-height:100vh;background:#111;color:#f8f3f1;font:16px system-ui,sans-serif";
+      tab.document.body.textContent = "Placing your order…";
+    }
+
+    return tab;
+  } catch {
+    return null;
+  }
+}
 
 /* ==========================================================
    ORDER ACCESS TOKEN STORAGE
@@ -206,6 +234,16 @@ export function CheckoutPlaceOrder() {
                 item.productId,
               quantity:
                 item.quantity,
+              name: item.product.name,
+              sku: (
+                item.product as {
+                  sku?: string;
+                }
+              ).sku,
+              unitPrice: Number(
+                item.product.pricing
+                  .sellingPrice,
+              ),
             }),
           );
 
@@ -535,6 +573,16 @@ export function CheckoutPlaceOrder() {
 
       setPlacingOrder(true);
 
+      const whatsappTab = openWhatsAppTab();
+
+      const closeWhatsAppTab = () => {
+        try {
+          whatsappTab?.close();
+        } catch {
+          /* already closed */
+        }
+      };
+
       try {
         /* ----------------------------------------------------
            SAVE ADDRESS
@@ -726,6 +774,94 @@ export function CheckoutPlaceOrder() {
               null;
           };
 
+        /*
+         * Sends the full order details to the store's WhatsApp number (testing number for now).
+         * The message is built from the saved order so it matches exactly what was recorded;
+         * if that read fails it is built from what the customer just submitted.
+         */
+        const sendOrderOnWhatsApp =
+          async () => {
+            let summary: OrderWhatsAppInput;
+
+            try {
+              summary = (
+                await getOrder(
+                  order.orderNumber,
+                  publicAccessToken,
+                )
+              ).order;
+            } catch {
+              summary = {
+                orderNumber:
+                  order.orderNumber,
+                createdAt:
+                  order.createdAt,
+                customerName:
+                  orderPayload.customerName,
+                customerEmail:
+                  orderPayload.customerEmail,
+                customerPhone:
+                  orderPayload.customerPhone,
+                shippingAddress: {
+                  ...orderPayload.shippingAddress,
+                },
+                deliveryMethod:
+                  orderPayload.deliveryMethod,
+                paymentMethod:
+                  order.paymentMethod,
+                paymentStatus:
+                  order.paymentStatus,
+                items: items.map(
+                  (item) => ({
+                    name:
+                      item.name ||
+                      "Item",
+                    ...(item.sku
+                      ? {
+                          sku: item.sku,
+                        }
+                      : {}),
+                    quantity:
+                      item.quantity,
+                    sellingPrice:
+                      item.unitPrice ??
+                      0,
+                    lineTotal:
+                      (item.unitPrice ??
+                        0) *
+                      item.quantity,
+                  }),
+                ),
+                subtotal:
+                  order.subtotal,
+                productDiscount:
+                  order.productDiscount,
+                ...(normalizedCoupon
+                  ? {
+                      couponCode:
+                        normalizedCoupon,
+                    }
+                  : {}),
+                couponDiscount:
+                  order.couponDiscount,
+                shippingAmount:
+                  order.shippingAmount,
+                total: order.total,
+              };
+            }
+
+            const url =
+              orderWhatsAppUrl(summary);
+
+            if (
+              whatsappTab &&
+              !whatsappTab.closed
+            ) {
+              whatsappTab.location.href =
+                url;
+            }
+          };
+
         /* ----------------------------------------------------
            ONLINE PAYMENT (RAZORPAY)
         ---------------------------------------------------- */
@@ -780,6 +916,8 @@ export function CheckoutPlaceOrder() {
                 : "Payment failed.",
             );
 
+            closeWhatsAppTab();
+
             toast.error(
               result.status ===
                 "dismissed"
@@ -824,6 +962,8 @@ export function CheckoutPlaceOrder() {
 
           await completeCheckout();
 
+          await sendOrderOnWhatsApp();
+
           toast.success(
             "Payment successful. Your order is confirmed.",
           );
@@ -839,6 +979,8 @@ export function CheckoutPlaceOrder() {
 
         await completeCheckout();
 
+        await sendOrderOnWhatsApp();
+
         toast.success(
           payment === "bank_upi"
             ? "Order placed. We have sent your bill on WhatsApp."
@@ -851,6 +993,8 @@ export function CheckoutPlaceOrder() {
           "Place order error:",
           error,
         );
+
+        closeWhatsAppTab();
 
         toast.error(
           error instanceof Error
