@@ -197,7 +197,7 @@ test.describe("mobile-number login", () => {
 });
 
 test.describe("placing an order", () => {
-  test("Place Order opens WhatsApp on the testing number with every order detail, then shows the confirmation", async ({ page, context }) => {
+  test("Place Order opens WhatsApp on the client's number with every order detail, then shows the confirmation", async ({ page, context }) => {
     // The WhatsApp page itself is external; answer it locally so the test can read what was sent.
     await context.route("https://wa.me/**", (route) => route.fulfill({ status: 200, contentType: "text/html", body: "<title>WhatsApp</title>" }));
 
@@ -208,7 +208,7 @@ test.describe("placing an order", () => {
     await page.getByRole("button", { name: /place order/i }).click();
 
     const popup = await popupPromise;
-    await popup.waitForURL(/wa\.me\/919001638396\?text=/, { timeout: 20_000 });
+    await popup.waitForURL(/wa\.me\/918237423742\?text=/, { timeout: 20_000 });
 
     const text = decodeURIComponent(popup.url().split("?text=")[1]!);
 
@@ -217,7 +217,7 @@ test.describe("placing an order", () => {
     }
 
     await expect(page).toHaveURL(/\/checkout\/success/, { timeout: 20_000 });
-    await expect(page.getByRole("link", { name: /send order details on whatsapp/i })).toHaveAttribute("href", /wa\.me\/919001638396\?text=/);
+    await expect(page.getByRole("link", { name: /send order details on whatsapp/i })).toHaveAttribute("href", /wa\.me\/918237423742\?text=/);
   });
 });
 

@@ -3,12 +3,12 @@ const CLIENT_WHATSAPP_NUMBER = "918237423742";
 
 /**
  * WhatsApp number that receives the full details of every new order (the WhatsApp message
- * is prepared when the customer places the order). Testing number for now; change it with
- * NEXT_PUBLIC_ORDER_WHATSAPP_NUMBER (91 + 10 digits).
+ * is prepared when the customer places the order). It is the client's own number; it can be
+ * overridden with NEXT_PUBLIC_ORDER_WHATSAPP_NUMBER (91 + 10 digits).
  */
 const ORDER_WHATSAPP_NUMBER =
   (process.env.NEXT_PUBLIC_ORDER_WHATSAPP_NUMBER ?? "").replace(/\D/g, "") ||
-  "919001638396";
+  CLIENT_WHATSAPP_NUMBER;
 
 export const siteConfig = {
   name: "Aayesha Fashion",

@@ -73,11 +73,11 @@ test.describe("order details on WhatsApp", () => {
     }
   });
 
-  test("the link opens WhatsApp on the testing number with the message encoded", () => {
+  test("the link opens WhatsApp on the client's number with the message encoded", () => {
     const url = orderWhatsAppUrl(order);
     const [base, query] = url.split("?text=");
 
-    expect(base).toBe("https://wa.me/919001638396");
+    expect(base).toBe("https://wa.me/918237423742");
     expect(decodeURIComponent(query!)).toBe(buildOrderWhatsAppMessage(order));
     expect(query).not.toContain("\n");
   });
@@ -90,9 +90,9 @@ test.describe("order details on WhatsApp", () => {
   });
 
   test("numbers are normalised to 91 + 10 digits", () => {
-    expect(normalizeWhatsAppNumber("9001638396")).toBe("919001638396");
-    expect(normalizeWhatsAppNumber("+91 90016 38396")).toBe("919001638396");
-    expect(normalizeWhatsAppNumber("919001638396")).toBe("919001638396");
+    expect(normalizeWhatsAppNumber("8237423742")).toBe("918237423742");
+    expect(normalizeWhatsAppNumber("+91 82374 23742")).toBe("918237423742");
+    expect(normalizeWhatsAppNumber("918237423742")).toBe("918237423742");
   });
 
   test("a very long cart is trimmed but the totals are kept", () => {

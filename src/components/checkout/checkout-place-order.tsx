@@ -775,7 +775,7 @@ export function CheckoutPlaceOrder() {
           };
 
         /*
-         * Sends the full order details to the store's WhatsApp number (testing number for now).
+         * Sends the full order details to the store's WhatsApp number.
          * The message is built from the saved order so it matches exactly what was recorded;
          * if that read fails it is built from what the customer just submitted.
          */
