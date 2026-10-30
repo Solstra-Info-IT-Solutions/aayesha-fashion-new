@@ -23,7 +23,7 @@ const RECAPTCHA_ID = "mobile-login-recaptcha";
 const RESEND_SECONDS = 30;
 const TEST_OTP_HINT = "123456";
 
-type Mode = "loading" | "test" | "whatsapp" | "firebase" | "unavailable";
+type Mode = "loading" | "test" | "sms" | "whatsapp" | "firebase" | "unavailable";
 
 const safeRedirect = (value: string | null) =>
   value && value.startsWith("/") && !value.startsWith("//") ? value : "/";
@@ -90,8 +90,8 @@ export function MobileLoginForm() {
       return;
     }
 
-    // Test mode (nothing is sent) and WhatsApp: the backend issues the OTP.
-    if (mode === "test" || mode === "whatsapp") {
+    // Test mode (nothing is sent), SMS and WhatsApp: the backend issues the OTP.
+    if (mode === "test" || mode === "sms" || mode === "whatsapp") {
       try {
         setSending(true);
 
@@ -152,7 +152,7 @@ export function MobileLoginForm() {
     try {
       let result: { isNewUser: boolean };
 
-      if (mode === "test" || mode === "whatsapp") {
+      if (mode === "test" || mode === "sms" || mode === "whatsapp") {
         result = await loginWithMobile({ phone: digits, otp });
       } else {
         if (!confirmation.current) {
@@ -273,6 +273,10 @@ export function MobileLoginForm() {
           {mode === "test" ? (
             <p role="status" className="otp-login__info">
               Test mode: nothing is sent. Enter {TEST_OTP_HINT}.
+            </p>
+          ) : mode === "sms" ? (
+            <p role="status" className="otp-login__info">
+              We have sent a 6-digit OTP by SMS to +91 {digits}. It is valid for 5 minutes.
             </p>
           ) : mode === "whatsapp" ? (
             <p role="status" className="otp-login__info">

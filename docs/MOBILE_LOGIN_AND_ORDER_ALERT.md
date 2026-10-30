@@ -1,5 +1,9 @@
 # Mobile-number login and the store order alert
 
+> **Login OTP by SMS (Pearl SMS)** is now the first real channel: when `PEARLSMS_API_KEY` is set on the backend the customer gets a 6-digit OTP by SMS (valid 5 minutes). See `docs/SMS_OTP_PEARLSMS.md` in the backend repo. Mode order: test OTP > SMS > WhatsApp > Firebase.
+>
+> **Order details on WhatsApp (testing):** when the customer presses *Place Order*, a WhatsApp tab opens on **9001638396** with the full order (order no., payment, customer, address, every item with SKU/qty/price, discounts, shipping, total) already typed in; the success page also has a *Send order details on WhatsApp* button. Change the number with `NEXT_PUBLIC_ORDER_WHATSAPP_NUMBER` (91 + 10 digits). This is a click-to-chat link, so the message is sent from the customer's own WhatsApp when they press send; automatic sending needs the WhatsApp Cloud API (see `WHATSAPP_META_SETUP.md`).
+
 > **WhatsApp is now the main OTP channel.** Set it up with the backend guide `docs/WHATSAPP_META_SETUP.md` (aayesha-fashion-backend): Meta keys, templates, webhook callback URL and env vars. The login screen picks the mode from the backend: test OTP → WhatsApp → Firebase SMS.
 
 ## What changed
