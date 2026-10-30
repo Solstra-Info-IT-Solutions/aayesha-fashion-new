@@ -28,8 +28,8 @@ const order: OrderWhatsAppInput = {
   paymentMethod: "bank_upi",
   paymentStatus: "pending",
   items: [
-    { name: "Ivory Noor Kurta Set", sku: "AF-KS-01", quantity: 2, sellingPrice: 4999, lineTotal: 9998 },
-    { name: "Festive Dupatta", sku: "AF-DP-07", quantity: 1, sellingPrice: 1499, lineTotal: 1499 },
+    { name: "Ivory Noor Kurta Set", sku: "AF-KS-01", image: "https://res.cloudinary.com/demo/image/upload/v1/kurta-set.jpg", quantity: 2, sellingPrice: 4999, lineTotal: 9998 },
+    { name: "Festive Dupatta", sku: "AF-DP-07", image: "/images/products/dupatta.jpg", quantity: 1, sellingPrice: 1499, lineTotal: 1499 },
   ],
   subtotal: 11497,
   productDiscount: 500,
@@ -60,6 +60,8 @@ test.describe("order details on WhatsApp", () => {
       "*ITEMS (2)*",
       "1. Ivory Noor Kurta Set (SKU: AF-KS-01)",
       "2 x ₹4,999 = ₹9,998",
+      "Image: https://res.cloudinary.com/demo/image/upload/v1/kurta-set.jpg",
+      "Image: https://aayeshafashion.in/images/products/dupatta.jpg",
       "2. Festive Dupatta (SKU: AF-DP-07)",
       "Subtotal: ₹11,497",
       "Product discount: -₹500",
@@ -78,6 +80,13 @@ test.describe("order details on WhatsApp", () => {
     expect(base).toBe("https://wa.me/919001638396");
     expect(decodeURIComponent(query!)).toBe(buildOrderWhatsAppMessage(order));
     expect(query).not.toContain("\n");
+  });
+
+  test("an item without a picture simply has no image line", () => {
+    const text = buildOrderWhatsAppMessage({ ...order, items: [{ name: "Plain", quantity: 1, sellingPrice: 100, lineTotal: 100 }] });
+
+    expect(text).toContain("1. Plain");
+    expect(text).not.toContain("Image:");
   });
 
   test("numbers are normalised to 91 + 10 digits", () => {

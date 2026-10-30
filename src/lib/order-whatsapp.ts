@@ -24,6 +24,8 @@ export interface OrderWhatsAppInput {
   items: Array<{
     name: string;
     sku?: string;
+    /** Product image (absolute URL, or a path on this site). */
+    image?: string;
     quantity: number;
     sellingPrice: number;
     lineTotal: number;
@@ -56,6 +58,20 @@ const rupees = (value: number) =>
   `₹${Number(value || 0).toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
 
 const clean = (value: unknown) => String(value ?? "").trim();
+
+/**
+ * click-to-chat cannot attach a picture, so each item carries a link to its image: it opens
+ * on tap and WhatsApp previews the first link.
+ */
+export function absoluteImageUrl(image: string | undefined): string {
+  const value = clean(image);
+
+  if (!value) return "";
+  if (/^https?:\/\//i.test(value)) return value;
+  if (value.startsWith("//")) return `https:${value}`;
+
+  return `${siteConfig.url}${value.startsWith("/") ? "" : "/"}${value}`;
+}
 
 /** 91 + 10 digits, from however the number was written. */
 export function normalizeWhatsAppNumber(raw: string): string {
@@ -90,10 +106,15 @@ export function buildOrderWhatsAppMessage(order: OrderWhatsAppInput): string {
 
   const listed = order.items.slice(0, MAX_ITEMS_LISTED);
 
-  const itemLines = listed.flatMap((item, index) => [
-    `${index + 1}. ${clean(item.name)}${item.sku ? ` (SKU: ${clean(item.sku)})` : ""}`,
-    `    ${item.quantity} x ${rupees(item.sellingPrice)} = ${rupees(item.lineTotal)}`,
-  ]);
+  const itemLines = listed.flatMap((item, index) => {
+    const image = absoluteImageUrl(item.image);
+
+    return [
+      `${index + 1}. ${clean(item.name)}${item.sku ? ` (SKU: ${clean(item.sku)})` : ""}`,
+      `    ${item.quantity} x ${rupees(item.sellingPrice)} = ${rupees(item.lineTotal)}`,
+      ...(image ? [`    Image: ${image}`] : []),
+    ];
+  });
 
   if (order.items.length > listed.length) {
     itemLines.push(`+ ${order.items.length - listed.length} more item(s)`);

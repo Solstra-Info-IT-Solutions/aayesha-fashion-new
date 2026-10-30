@@ -212,7 +212,7 @@ test.describe("placing an order", () => {
 
     const text = decodeURIComponent(popup.url().split("?text=")[1]!);
 
-    for (const expected of ["NEW ORDER - Aayesha Fashion", "Order No:", "AF-1001", "CUSTOMER", "Aisha Khan", "9876543210", "aisha@example.com", "DELIVERY ADDRESS", "12 Rose Lane", "Delhi", "ITEMS (", "BILL", "TOTAL: ₹"]) {
+    for (const expected of ["NEW ORDER - Aayesha Fashion", "Order No:", "AF-1001", "CUSTOMER", "Aisha Khan", "9876543210", "aisha@example.com", "DELIVERY ADDRESS", "12 Rose Lane", "Delhi", "ITEMS (", "Image: http", "BILL", "TOTAL: ₹"]) {
       expect(text, `missing: ${expected}`).toContain(expected);
     }
 
